@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 		params: { slug: post.slug.toString() }
 	}));
 
-	return { paths, fallback: true }
+	return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
