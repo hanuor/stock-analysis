@@ -1,10 +1,10 @@
-import Page from "@/components/Article";
+import LayoutArticle from "@/Layout/LayoutArticle";
 
 function OutputArticle(props) {
 	return (
-		<Page title={props.single.title.rendered}>
+		<LayoutArticle title={props.single.title.rendered}>
 			<div dangerouslySetInnerHTML={{ __html: props.single.content.rendered }} />
-		</Page>
+		</LayoutArticle>
 	)
 }
 
