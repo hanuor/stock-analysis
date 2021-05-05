@@ -9,7 +9,12 @@ export default function Header() {
 					<Link href="/"><a><HeaderLogo /></a></Link>
 				</div>
 				<div>
-					Stocks | ETFs | IPOs
+					<nav>
+						<ul className="flex space-x-3">
+							<li><Link href="/about/">About</Link></li>
+							<li><Link href="/stocks/">Stocks</Link></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</header>

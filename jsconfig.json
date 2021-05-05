@@ -4,6 +4,12 @@
 		"paths": {
 			"@/components/*": [
 				"components/*"
+			],
+			"@/Layout/*": [
+				"components/Layout/*"
+			],
+			"@/Styles/*": [
+				"styles/*"
 			]
 		}
 	}

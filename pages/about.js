@@ -1,9 +1,8 @@
-// import Layout from "@/components/Layout";
-import Page from "@/components/Page";
+import LayoutArticle from "@/Layout/LayoutArticle";
 
 export default function About() {
 	return (
-		<Page title="About">
+		<LayoutArticle title="About" type="article">
 			<p>Welcome to Stock Analysis &#8212; a site that aims to be the internet&#8217;s best source of free stock data and information for regular investors.</p>
 			<p><strong>The mission is simple:</strong></p>
 			<ul>
@@ -31,6 +30,6 @@ export default function About() {
 			<p>You are encouraged to read the <a href="https://stockanalysis.com/terms-of-use/">terms of use</a> and <a href="https://stockanalysis.com/privacy-policy/">privacy policy</a>.</p>
 			<h2>Contact</h2>
 			<p>If you have any suggestions about how to improve this site, or if you&#8217;ve found accuracies in the data or simply want to get in touch, then please send an email via the <a href="https://stockanalysis.com/contact/">contact form</a>.</p>
-		</Page>
+		</LayoutArticle>
 	)
 }

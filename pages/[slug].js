@@ -1,6 +1,6 @@
-import Page from "@/components/Page";
+import Page from "@/components/Article";
 
-function Article(props) {
+function OutputArticle(props) {
 	return (
 		<Page title={props.single.title.rendered}>
 			<div dangerouslySetInnerHTML={{ __html: props.single.content.rendered }} />
@@ -9,10 +9,10 @@ function Article(props) {
 }
 
 export async function getStaticPaths() {
-	const res = await fetch("https://stockanalysis.com/wp-json/wp/v2/posts?per_page=100")
+	const res = await fetch(process.env.API_URL_POSTS + "/posts?per_page=100");
 	const posts = await res.json();
 
-	// console.log(posts);
+	console.log(posts);
 
 	const paths = posts.map((post) => ({
 		params: { slug: post.slug.toString() }
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const res = await fetch(`https://stockanalysis.com/wp-json/wp/v2/posts?slug=${params.slug}`);
+	const res = await fetch(process.env.API_URL_POSTS + `/posts?slug=${params.slug}`);
 	const post = await res.json();
 	const single = post[0];
 
@@ -33,4 +33,4 @@ export async function getStaticProps({ params }) {
 	}
 }
 
-export default Article;
+export default OutputArticle;
