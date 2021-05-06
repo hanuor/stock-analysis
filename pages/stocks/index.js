@@ -1,29 +1,28 @@
 import LayoutSidebar from "@/Layout/LayoutSidebar";
-import Table from "@/components/Table";
+import Table from "@/Tables/TablePaginated";
 
 export default function StocksIndexPage({ stocks }) {
 
+	const columnHeaders = [
+		{
+			Header: "Stock Symbol",
+			accessor: "symbol"
+		},
+		{
+			Header: "Company Name",
+			accessor: "company"
+		}
+	]
+
 	return (
 		<LayoutSidebar title="All Stocks">
-			{/* <ul>
-				{Object.keys(stocks).map((key, index) => {
-					return <li key={index}>{`${key} - ${stocks[key]['n']}`}</li>
-				})}
-			</ul> */}
 
-			<Table>
-
-				{Object.keys(stocks).map((key, index) => {
-					return (
-						<tr className="shadow-sm" key={index}>
-							<td>{key}</td>
-							<td>{stocks[key]['n']}</td>
-						</tr>);
-				})}
-
+			<Table columnHeaders={columnHeaders}>
+				{stocks}
 			</Table>
+
 		</LayoutSidebar>
-	)
+	);
 }
 
 

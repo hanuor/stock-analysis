@@ -6,11 +6,11 @@ function LayoutFullWidth(props) {
 	return (
 		<>
 			<Meta title={props.title}></Meta>
-			<Header />
 			<div className="h-screen flex flex-col">
+				<Header />
 				<main>{props.children}</main>
+				<Footer />
 			</div>
-			<Footer />
 		</>
 	);
 }

@@ -1,7 +1,19 @@
-.tableGray {
-	background-color: #f6f7f8!important;
+.table {
+
 }
 
-.tableGray tr td {
-	background-color: #f6f7f8!important;
+.table tr td {
+	padding: 4px 8px;
 }
+
+.table_striped {
+
+}
+
+.table_striped th {
+	background-color: #f6f7f8;
+}
+
+.table_striped tr:nth-child(even) {
+	background-color: #f6f7f8;
+ }
