@@ -3,8 +3,7 @@ import GlobalContext from "@/components/GlobalContext";
 
 export default function HeaderLogin() {
 
-	const { status } = useContext(GlobalContext)
-	console.log(status.loggedIn);
+	const { status } = useContext(GlobalContext);
 
 	return (
 		<>

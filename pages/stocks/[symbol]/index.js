@@ -15,8 +15,7 @@ export default function SymbolOverview(props) {
 export async function getStaticPaths() {
 
 	const paths = [
-		{ params: { symbol: 'googl' } },
-		{ params: { symbol: 'aapl' } },
+		{ params: { symbol: 'aapl' } }
 	];
 
 	return {
