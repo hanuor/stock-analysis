@@ -2,7 +2,7 @@ import Meta from "@/components/Meta";
 import Header from "@/Layout/Header";
 import Footer from "@/Layout/Footer";
 
-function LayoutFullWidth(props) {
+export default function LayoutArticle(props) {
 	return (
 		<>
 			<Meta title={props.title}></Meta>
@@ -20,5 +20,3 @@ function LayoutFullWidth(props) {
 		</>
 	);
 }
-
-export default LayoutFullWidth;

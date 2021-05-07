@@ -2,6 +2,7 @@ import Link from "next/link";
 import HeaderLogo from "@/Layout/Header/HeaderLogo";
 import HeaderSearch from "@/Layout/Header/HeaderSearch";
 import HeaderNavigation from "@/Layout/Header/HeaderNavigation";
+import HeaderLogin from "@/Layout/Header/HeaderLogin";
 
 export default function Header() {
 	return (
@@ -15,6 +16,9 @@ export default function Header() {
 				</div>
 				<div>
 					<HeaderNavigation />
+				</div>
+				<div>
+					<HeaderLogin />
 				</div>
 			</div>
 		</header>
