@@ -1,22 +1,20 @@
 import Symbol from "@/components/Symbols/Symbol";
 
-export default function SymbolOverview(props) {
+export default function SymbolOverview({ data }) {
 
-	if (!props.data) { return <h1>Loading...</h1>; }
+	if (!data) { return <h1>Loading...</h1>; }
 
 	return (
-		<Symbol props={props}>
-			<h2 className="text-xl">This is the overview page for {props.ticker}</h2>
+		<Symbol props={data}>
+			<h2 className="text-xl">This is the overview page for {data.symbol.toUpperCase()}</h2>
 		</Symbol>
 	);
 }
 
+import { getStockPaths, getStockProperties } from "@/Functions/fetchStockInfo";
 
 export async function getStaticPaths() {
-
-	const paths = [
-		{ params: { symbol: 'aapl' } }
-	];
+	const paths = getStockPaths();
 
 	return {
 		paths,
@@ -24,18 +22,12 @@ export async function getStaticPaths() {
 	}
 }
 
-
 export async function getStaticProps({ params }) {
-
-	const fetched = await fetch(process.env.API_URL + `/symbol?type=stock&symbol=${params.symbol}`);
-
-	const data = await fetched.json();
-	const ticker = params.symbol.toUpperCase();
+	const data = await getStockProperties({ params })
 
 	return {
 		props: {
-			data: data,
-			ticker: ticker
+			data
 		}
 	}
 }

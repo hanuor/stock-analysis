@@ -8,11 +8,11 @@ export default function Symbol({ props, children }) {
 
 	return (
 		<>
-			<Meta title={props.ticker}></Meta>
+			<Meta title={props.symbol.toUpperCase()}></Meta>
 			<Header />
 			<div className="container max-w-screen-xl py-10">
 				<main>
-					<SymbolHeading ticker={props.ticker} name={props.data.name_full} quote={props.data.quote} />
+					<SymbolHeading ticker={props.symbol} name={props.data.name_full} quote={props.data.quote} />
 					{children}
 				</main>
 			</div>
