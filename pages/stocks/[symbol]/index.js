@@ -1,12 +1,20 @@
-import Symbol from "@/components/Symbols/Symbol";
+import Symbol from "@/components/Layout/LayoutSymbol";
+import InfoTable from "@/components/Symbols/Overview/InfoTable";
+import QuoteTable from "@/components/Symbols/Overview/QuoteTable";
+import PriceChart from "@/components/Symbols/Overview/PriceChart";
 
 export default function SymbolOverview({ data }) {
-
-	if (!data) { return <h1>Loading...</h1>; }
+	if (!data) {
+		return <h1>Loading...</h1>;
+	}
 
 	return (
 		<Symbol props={data}>
-			<h2 className="text-xl">This is the overview page for {data.symbol.toUpperCase()}</h2>
+			<div className="grid grid-cols-overview gap-4">
+				<InfoTable />
+				<QuoteTable />
+				<PriceChart />
+			</div>
 		</Symbol>
 	);
 }
@@ -18,16 +26,16 @@ export async function getStaticPaths() {
 
 	return {
 		paths,
-		fallback: true
-	}
+		fallback: true,
+	};
 }
 
 export async function getStaticProps({ params }) {
-	const data = await getStockProperties({ params })
+	const data = await getStockProperties({ params });
 
 	return {
 		props: {
-			data
-		}
-	}
+			data,
+		},
+	};
 }

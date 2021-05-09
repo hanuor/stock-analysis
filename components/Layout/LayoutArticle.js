@@ -1,6 +1,7 @@
 import Meta from "@/components/Meta";
 import Header from "@/Layout/Header";
 import Footer from "@/Layout/Footer";
+import Sidebar from "@/Layout/Sidebar";
 
 export default function LayoutArticle(props) {
 	return (
@@ -14,7 +15,7 @@ export default function LayoutArticle(props) {
 						{props.children}
 					</article>
 				</main>
-				<aside className="bg-red-100">Sidebar</aside>
+				<Sidebar />
 			</div>
 			<Footer />
 		</>

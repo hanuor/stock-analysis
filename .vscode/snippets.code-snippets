@@ -24,5 +24,62 @@
 		"prefix": "i",
 		"body": ["import $1 from \"$2\";"],
 		"description": "Import"
+	},
+	"Import next/router": {
+		"prefix": "inrouter",
+		"body": ["import { useRouter } from \"next/router\";"],
+		"description": "Import next/router"
+	},
+	"Function": {
+		"prefix": "f",
+		"body": ["function ${1:Name}($2) {", "  $3", "}"],
+		"description": "Function"
+	},
+	"Function (Export Default)": {
+		"prefix": "fe",
+		"body": [
+			"export default function ${1:Name}(${2:Props}) {",
+			"  ${3:code}",
+			"}"
+		],
+		"description": "Function (Export Default)"
+	},
+	"Component": {
+		"prefix": "com",
+		"body": [
+			"function ${1:Component}(${2:props}) {",
+			"\treturn (",
+			"\t\t<${3:div}>${4:// Code goes here.}</div>",
+			"\t);",
+			"}"
+		],
+		"description": "Component"
+	},
+	"Component (Export)": {
+		"prefix": "come",
+		"body": [
+			"export function ${1:Component}(${2:props}) {",
+			"\treturn (",
+			"\t\t<${3:div}>${4:// Code goes here.}</div>",
+			"\t);",
+			"}"
+		],
+		"description": "Component"
+	},
+	"Component (Export Default)": {
+		"prefix": "comed",
+		"body": [
+			"export default function ${1:Component}(${2:props}) {",
+			"\treturn (",
+			"\t\t<${3:div}>${4:// Code goes here.}</div>",
+			"\t);",
+			"}"
+		],
+		"description": "Component"
+	},
+	"className": {
+		"prefix": "cn",
+		"body": ["className=\"$1\""],
+		"description": "className"
 	}
 }

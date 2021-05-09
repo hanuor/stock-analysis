@@ -16,10 +16,15 @@ module.exports = {
 		},
 		extend: {
 			gridTemplateColumns: {
-				sidebar: "1fr 300px",
+				sidebar: "1fr 336px",
+				overview: "1fr 1fr 3fr",
 			},
-		},
+		} /* ,
+		fontSize: {
+			small: ".95rem",
+		}, */,
 	},
+
 	variants: {
 		extend: {},
 	},
