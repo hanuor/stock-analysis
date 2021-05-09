@@ -41,7 +41,7 @@ export default function InfoTable() {
 						<td className={css_cell_right}>$0.82 (0.63%)</td>
 					</tr>
 					<tr className={css_rows}>
-						<td className={css_cell_left}>Ex-Dividend Date</td>
+						<td className={css_cell_left}>Est. Ex-Dividend</td>
 						<td className={css_cell_right}>Jun 1, 2021</td>
 					</tr>
 				</tbody>
