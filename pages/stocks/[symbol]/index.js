@@ -13,7 +13,7 @@ export default function SymbolOverview({ data }) {
 			<div className="grid grid-cols-overview gap-4">
 				<InfoTable />
 				<QuoteTable />
-				<PriceChart />
+				<PriceChart id={data.data.id} />
 			</div>
 		</Symbol>
 	);
