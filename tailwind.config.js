@@ -5,7 +5,13 @@ module.exports = {
 			"./components/**/*.{js,ts,jsx,tsx}",
 		],
 		options: {
-			safelist: ["border-gray-300", "bg-blue-400", "max-w-md", "my-20"],
+			safelist: [
+				"border-gray-300",
+				"bg-blue-400",
+				"max-w-md",
+				"my-20",
+				"gap-3",
+			],
 		},
 	},
 	darkMode: false, // or 'media' or 'class'
