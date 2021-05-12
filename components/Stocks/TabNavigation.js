@@ -2,14 +2,17 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function TabNavigation({ symbol }) {
+export default function TabNavigation() {
+	const [symbol, setSymbol] = useState();
 	const [tab, setTab] = useState("overview");
 	const router = useRouter();
 
 	useEffect(() => {
 		let path = router.asPath;
 		let split = path.split("/");
+		let symbol = split[2] || null;
 		let tab = split[3] || "overview";
+		setSymbol(symbol);
 		setTab(tab);
 	}, []);
 

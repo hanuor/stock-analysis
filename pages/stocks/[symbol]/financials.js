@@ -1,23 +1,29 @@
-import Symbol from "@/components/Layout/LayoutSymbol";
+import Stock from "@/components/Layout/LayoutStock";
+import PageContext from "@/components/Context/PageContext";
 
-export default function SymbolFinancials({ data }) {
-	if (!data) {
+export default function SymbolStatistics(props) {
+	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
-
 	return (
-		<Symbol props={data}>
-			<h2 className="text-xl">
-				This is the financials page for {data.symbol.toUpperCase()}
-			</h2>
-		</Symbol>
+		<Stock props={props.info}>
+			<PageContext.Provider value={props.data}>
+				<h2 className="text-2xl font-bold my-8">
+					This is the financials page for {props.info.ticker}
+				</h2>
+			</PageContext.Provider>
+		</Stock>
 	);
 }
 
-import { getStockPaths, getStockProperties } from "@/Functions/fetchStockInfo";
+import {
+	getStockUrls,
+	getPageData,
+	getStockInfo,
+} from "@/Functions/fetchStockInfo";
 
 export async function getStaticPaths() {
-	const paths = getStockPaths();
+	const paths = getStockUrls();
 
 	return {
 		paths,
@@ -26,10 +32,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const data = await getStockProperties({ params });
+	const info = await getStockInfo({ params });
+	const data = await getPageData({ params }, "overview");
 
 	return {
 		props: {
+			info,
 			data,
 		},
 	};
