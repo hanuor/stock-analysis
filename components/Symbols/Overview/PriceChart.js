@@ -1,27 +1,16 @@
 import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import "chartjs-adapter-luxon"; // Needed to use timeseries with chart.js
+import "chartjs-adapter-luxon";
 import Axios from "axios";
 
-interface IProps {
-	id: number;
-}
+export default function PriceChart({ id }) {
+	const [chartData, setChartData] = useState();
+	const [isLoading, setIsLoading] = useState(true);
 
-interface ChartDataPoint {
-	t: string;
-	c: number;
-	o?: number;
-}
-
-const PriceChart: React.FC<IProps> = ({ id }) => {
-	const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-
-	// Fetch chart data before rendering the component
 	useEffect(() => {
 		async function fetchChartData() {
 			try {
-				const response = await Axios.get(`/api/chart/${id}/?m=1`); // m stands for minimal, fetching closing prices only
+				const response = await Axios.get(`/api/chart/${id}/?m=1`);
 				setChartData(response.data);
 				setIsLoading(false);
 			} catch (e) {
@@ -36,19 +25,17 @@ const PriceChart: React.FC<IProps> = ({ id }) => {
 		return <div className="border border-gray-300 bg-gray-50"></div>;
 	}
 
-	// Turn the chart data into arrays before feeding into chart.js
-	const timeAxis = chartData.map((item: ChartDataPoint) => {
+	const timeAxis = chartData.map((item) => {
 		return item.t;
 	});
 
-	const priceAxis = chartData.map((item: ChartDataPoint) => {
+	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
 
 	return (
 		<div className="border-l border-gray-300 pl-2">
-			<Line // The chart.js chart
-				type="line"
+			<Line
 				data={{
 					labels: timeAxis,
 					datasets: [
@@ -82,5 +69,4 @@ const PriceChart: React.FC<IProps> = ({ id }) => {
 			/>
 		</div>
 	);
-};
-export default PriceChart;
+}
