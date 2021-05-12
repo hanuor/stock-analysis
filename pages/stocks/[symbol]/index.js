@@ -1,6 +1,5 @@
 import Symbol from "@/components/Layout/LayoutSymbol";
-import InfoTable from "@/components/Symbols/Overview/InfoTable";
-import QuoteTable from "@/components/Symbols/Overview/QuoteTable";
+import { InfoTable, QuoteTable } from "@/components/Symbols/Overview/TopTables";
 import PriceChart from "@/components/Symbols/Overview/PriceChart";
 
 export default function SymbolOverview({ data }) {
