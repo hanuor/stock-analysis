@@ -2,7 +2,6 @@ import {
 	getStockUrls,
 	getPageData,
 	getStockInfo,
-	getStockNews,
 } from "@/Functions/fetchStockInfo";
 import Stock from "@/components/Layout/LayoutStock";
 import { InfoTable, QuoteTable } from "@/components/Stocks/Overview/TopTables";
@@ -12,6 +11,7 @@ import Profile from "@/components/Stocks/Overview/ProfileWidget";
 import NewsFeed from "@/components/Stocks/Overview/StockNews";
 import FinancialsWidget from "@/components/Stocks/Overview/FinancialsWidget";
 import AnalystWidget from "@/components/Stocks/Overview/AnalystWidget";
+import Axios from "axios";
 
 export default function StockOverview(props) {
 	if (!props.info) {
@@ -54,7 +54,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
 	const data = await getPageData(info.id, "overview");
-	const news = await getStockNews(info.id);
+	const newsdata = await Axios.get(`${process.env.API_URL}/news?i=${info.id}`);
+	const news = await newsdata.data;
 
 	return {
 		props: {
