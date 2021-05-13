@@ -1,3 +1,4 @@
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying to production
 import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
@@ -5,7 +6,7 @@ import Axios from "axios";
 import { useContext } from "react";
 import StockContext from "@/components/Context/StockContext";
 
-export default function PriceChart({ id }) {
+export default function PriceChart() {
 	const stock = useContext(StockContext);
 	const [chartData, setChartData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +14,7 @@ export default function PriceChart({ id }) {
 	useEffect(() => {
 		async function fetchChartData() {
 			try {
-				const response = await Axios.get(`/api/chart/${stock.id}/?m=1`);
+				const response = await Axios.get(`/api/chart?i=${stock.id}&m=1`);
 				setChartData(response.data);
 				setIsLoading(false);
 			} catch (e) {
@@ -37,7 +38,7 @@ export default function PriceChart({ id }) {
 	});
 
 	return (
-		<div className="border-l border-gray-300 pl-2">
+		<div className="border-l border-gray-300 pl-3 lg:order-3 min-w-0">
 			<Line
 				data={{
 					labels: timeAxis,
@@ -52,6 +53,7 @@ export default function PriceChart({ id }) {
 					],
 				}}
 				options={{
+					maintainAspectRatio: false,
 					scales: {
 						x: {
 							type: "timeseries",

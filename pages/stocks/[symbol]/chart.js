@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
-	const data = await getPageData({ params }, "overview");
+	const data = await getPageData(info.id, "overview");
 
 	return {
 		props: {

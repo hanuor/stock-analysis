@@ -1,4 +1,5 @@
 module.exports = {
+	mode: "jit",
 	purge: {
 		content: [
 			"./pages/**/*.{js,ts,jsx,tsx}",
@@ -24,6 +25,7 @@ module.exports = {
 			gridTemplateColumns: {
 				sidebar: "1fr 336px",
 				overview: "1fr 1fr 3fr",
+				news: "1fr 2fr",
 			},
 		} /* ,
 		fontSize: {

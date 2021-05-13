@@ -10,7 +10,7 @@ export function InfoTable() {
 	const data = useContext(PageContext);
 
 	return (
-		<div>
+		<div className="lg:order-1">
 			<table className={css_table}>
 				<tbody>
 					<tr className={css_rows}>
@@ -59,7 +59,7 @@ export function QuoteTable() {
 	const data = useContext(PageContext);
 
 	return (
-		<div>
+		<div className="lg:order-2">
 			<table className={css_table}>
 				<tbody>
 					<tr className={css_rows}>

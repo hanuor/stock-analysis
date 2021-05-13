@@ -33,7 +33,7 @@ const Regular = ({ quote }) => {
 
 // Extended price
 const Extended = ({ quote, market }) => {
-	const color = changeColor(quote.change);
+	const color = changeColor(quote.extC);
 
 	return (
 		<div>

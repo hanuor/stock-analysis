@@ -1,9 +1,9 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying to production
 const axios = require("axios");
 
 export default async (req, res) => {
 	if (req.method === "GET") {
-		const id = req.query.id;
+		const id = req.query.i;
 		const minimal = req.query.m ? true : false;
 
 		const url = `${process.env.API_CHARTS}?i=${id}${minimal && "&m=1"}`;

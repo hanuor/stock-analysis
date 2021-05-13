@@ -1,3 +1,4 @@
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying to production
 import Axios from "axios";
 
 export function getStockUrls() {
@@ -20,7 +21,7 @@ export function getStockUrls() {
 
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
-	const infoApi = process.env.API_URL + `/symbol?type=stock&symbol=${symbol}`;
+	const infoApi = process.env.API_URL + `/symbol?symbol=${symbol}`;
 
 	const response = await Axios.get(infoApi);
 	const info = response.data;
@@ -28,12 +29,20 @@ export async function getStockInfo({ params }) {
 	return info;
 }
 
-export async function getPageData({ params }, page) {
-	const symbol = params.symbol;
-	const pageApi = process.env.API_URL + `/${page}?symbol=${symbol}`;
+export async function getPageData(id, page) {
+	const pageApi = process.env.API_URL + `/${page}?i=${id}`;
 
 	const response = await Axios.get(pageApi);
 	const data = response.data;
 
 	return data;
+}
+
+export async function getStockNews(id) {
+	const newsApi = `${process.env.VERCEL_URL}/api/news?i=${id}`;
+
+	const response = await Axios.get(newsApi);
+	const news = response.data;
+
+	return news;
 }

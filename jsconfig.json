@@ -2,21 +2,11 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@/components/*": [
-				"components/*"
-			],
-			"@/Layout/*": [
-				"components/Layout/*"
-			],
-			"@/Tables/*": [
-				"components/Tables/*"
-			],
-			"@/Styles/*": [
-				"styles/*"
-			],
-			"@/Functions/*": [
-				"functions/*"
-			]
+			"@/components/*": ["components/*"],
+			"@/Layout/*": ["components/Layout/*"],
+			"@/Tables/*": ["components/Tables/*"],
+			"@/Styles/*": ["styles/*"],
+			"@/Functions/*": ["functions/*"]
 		}
 	}
 }
