@@ -39,7 +39,7 @@ export async function getPageData(id, page) {
 }
 
 export async function getStockNews(id) {
-	const newsApi = `${process.env.VERCEL_URL}/api/news?i=${id}`;
+	const newsApi = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/news?i=${id}`;
 
 	const response = await Axios.get(newsApi);
 	const news = response.data;
