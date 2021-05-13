@@ -22,7 +22,7 @@ export default function FinancialsWidget() {
 	return (
 		<div>
 			<h2 className="text-2xl font-bold mb-2">Financial Performance</h2>
-			{data.financialIntro && <p>{data.financialIntro}</p>}
+			{data.financialIntro && <p className="mb-3">{data.financialIntro}</p>}
 			<div className="h-60 border border-gray-200 p-2">
 				<Bar
 					data={{
