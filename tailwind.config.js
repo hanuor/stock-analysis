@@ -1,3 +1,5 @@
+/* const defaultTheme = require("tailwindcss/defaultTheme"); */
+
 module.exports = {
 	mode: "jit",
 	purge: {
@@ -26,6 +28,10 @@ module.exports = {
 				sidebar: "1fr 336px",
 				overview: "1fr 1fr 3fr",
 				news: "1fr 2fr",
+			},
+			fontFamily: {
+				/* sans: ["Roboto", ...defaultTheme.fontFamily.sans], */
+				/* sans: ["Inter", ...defaultTheme.fontFamily.sans], */
 			},
 		} /* ,
 		fontSize: {

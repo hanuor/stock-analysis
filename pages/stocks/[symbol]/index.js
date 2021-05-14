@@ -12,6 +12,7 @@ import NewsFeed from "@/components/Stocks/Overview/StockNews";
 import FinancialsWidget from "@/components/Stocks/Overview/FinancialsWidget";
 import AnalystWidget from "@/components/Stocks/Overview/AnalystWidget";
 import Axios from "axios";
+import styles from "@/Styles/TopGrid.module.css";
 
 export default function StockOverview(props) {
 	if (!props.info) {
@@ -22,7 +23,7 @@ export default function StockOverview(props) {
 	return (
 		<Stock props={props.info}>
 			<PageContext.Provider value={props.data}>
-				<div className="grid lg:grid-cols-overview gap-3">
+				<div className={styles.tg}>
 					<PriceChart />
 					<InfoTable />
 					<QuoteTable />
