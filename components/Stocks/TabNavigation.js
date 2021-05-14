@@ -17,7 +17,7 @@ export default function TabNavigation() {
 	}, []);
 
 	const inactive =
-		"py-2 px-5 block text-blue-500 hover:text-black hover:bg-gray-100";
+		"py-2 px-0 block text-blue-500 hover:text-black hover:bg-gray-100";
 	const active = "py-2 px-5 block text-black bg-gray-100";
 
 	return (
