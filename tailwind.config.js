@@ -1,4 +1,4 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+/* const defaultTheme = require("tailwindcss/defaultTheme"); */
 
 module.exports = {
 	mode: "jit",
@@ -31,7 +31,7 @@ module.exports = {
 			},
 			fontFamily: {
 				/* sans: ["Roboto", ...defaultTheme.fontFamily.sans], */
-				sans: ["Inter", ...defaultTheme.fontFamily.sans],
+				/* sans: ["Inter", ...defaultTheme.fontFamily.sans], */
 			},
 		} /* ,
 		fontSize: {
