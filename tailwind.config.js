@@ -14,6 +14,8 @@ module.exports = {
 				"max-w-md",
 				"my-20",
 				"gap-3",
+				"block",
+				"hidden",
 			],
 		},
 	},
