@@ -10,7 +10,6 @@ const changeColor = (change) => {
 	} else {
 		return "text-gray-800";
 	}
-	return;
 };
 
 // Regular price if market open or no extended price available

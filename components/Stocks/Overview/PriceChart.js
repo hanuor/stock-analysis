@@ -5,6 +5,7 @@ import "chartjs-adapter-luxon";
 import Axios from "axios";
 import { useContext } from "react";
 import StockContext from "@/components/Context/StockContext";
+import styles from "@/Styles/PriceChart.module.css";
 
 export default function PriceChart() {
 	const stock = useContext(StockContext);
@@ -38,8 +39,9 @@ export default function PriceChart() {
 	});
 
 	return (
-		<div className="border-l border-gray-300 pl-3 lg:order-3 min-w-0">
+		<div className={styles.priceChart}>
 			<Line
+				className="border-l border-gray-300 pl-4 min-w-0"
 				data={{
 					labels: timeAxis,
 					datasets: [

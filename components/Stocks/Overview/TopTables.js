@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import PageContext from "@/components/Context/PageContext";
+import styles from "@/Styles/TopTables.module.css";
 
 const css_table = "text-sm w-full";
 const css_rows = "border-b border-gray-200";
@@ -10,7 +11,7 @@ export function InfoTable() {
 	const data = useContext(PageContext);
 
 	return (
-		<div className="lg:order-1">
+		<div className={styles.info}>
 			<table className={css_table}>
 				<tbody>
 					<tr className={css_rows}>
@@ -59,7 +60,7 @@ export function QuoteTable() {
 	const data = useContext(PageContext);
 
 	return (
-		<div className="lg:order-2">
+		<div className={styles.quote}>
 			<table className={css_table}>
 				<tbody>
 					<tr className={css_rows}>

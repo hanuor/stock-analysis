@@ -1,0 +1,7 @@
+@media screen and (min-width: 1024px) {
+	.stock-chart {
+		-ms-grid-row: 1;
+		-ms-grid-column: 5;
+		grid-area: chart;
+	}
+}
