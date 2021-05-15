@@ -1,9 +1,15 @@
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import HeaderLogo from "@/components/Layout/Header/HeaderLogo";
 import HeaderLogoFull from "@/components/Layout/Header/HeaderLogoFull";
 import HeaderSearch from "@/Layout/Header/HeaderSearch";
-import HeaderNavigation from "@/Layout/Header/HeaderNavigation";
-import { useEffect, useState, useRef } from "react";
+
+import {
+	HeaderNavigation,
+	HamburgerIcon,
+	CloseIcon,
+	LoginNav,
+} from "@/Layout/Header/HeaderNavigation";
 
 export default function Header() {
 	const node = useRef();
@@ -27,7 +33,7 @@ export default function Header() {
 	useEffect(
 		function () {
 			if (open) {
-				setMenu("block bg-white shadow-xl absolute top-0 right-0");
+				setMenu("block bg-white shadow-xl absolute w-full");
 				document.addEventListener("mousedown", clickOutside);
 			} else {
 				setMenu("hidden");
@@ -42,8 +48,8 @@ export default function Header() {
 	);
 
 	return (
-		<header className="bg-white lg:shadow-md lg:py-2 sticky top-0">
-			<div className="shadow-md py-2 lg:shadow-none lg:py-0 container max-w-screen-xl flex items-center mx-auto px-3 lg:px-4 space-x-4 lg:space-x-6">
+		<header className="bg-white shadow-md sticky top-0 z-50">
+			<div className="mx-auto px-3 lg:px-4 flex items-center py-2 space-x-4 lg:space-x-8 xl:max-w-screen-xl">
 				<div>
 					<Link href="/" className="flex">
 						<a>
@@ -55,32 +61,33 @@ export default function Header() {
 				<div className="flex-grow">
 					<HeaderSearch />
 				</div>
-				<button
-					id="menu-toggle"
-					className="flex flex-col items-center lg:hidden"
-					onClick={clickMenu}>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor">
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth={2}
-							d="M4 6h16M4 12h16M4 18h16"
-						/>
-					</svg>
-					<span className="text-xs">Menu</span>
-				</button>
+				<div className="lg:hidden">
+					<button
+						type="button"
+						id="menu-toggle"
+						className={`flex flex-col items-center focus:outline-none focus-visible:outline-none ${
+							open && "text-blue-800"
+						}`}
+						onClick={clickMenu}>
+						{open ? <CloseIcon /> : <HamburgerIcon />}
+						<span className="text-xs">{open ? "Close" : "Menu"}</span>
+					</button>
+				</div>
 				<div className="hidden lg:flex">
 					<HeaderNavigation device="desktop" />
+				</div>
+				<div className="hidden lg:flex">
+					<LoginNav />
 				</div>
 			</div>
 			<div className="relative lg:hidden">
 				<div ref={node} className={menu}>
-					{open && <HeaderNavigation device="mobile" />}
+					{open && (
+						<>
+							<HeaderNavigation device="mobile" />
+							<LoginNav />
+						</>
+					)}
 				</div>
 			</div>
 		</header>
