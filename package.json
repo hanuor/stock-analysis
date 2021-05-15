@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "next dev -p 3001",
 		"build": "next build",
-		"start": "next start -p 3002"
+		"start": "next start -p 3002",
+		"lint": "eslint ./"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
@@ -23,6 +24,8 @@
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.4.0",
 		"autoprefixer": "^10.2.5",
+		"eslint": "^7.26.0",
+		"eslint-plugin-react": "^7.23.2",
 		"postcss-flexbugs-fixes": "^5.0.2",
 		"postcss-import": "^14.0.1",
 		"postcss-preset-env": "^6.7.0",

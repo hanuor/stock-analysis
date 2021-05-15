@@ -44,7 +44,10 @@ function NewsArticle({ content, num }) {
 			className={`sm:grid sm:grid-cols-news gap-4 px-4 lg:px-0 ${
 				num == 0 ? "pt-2 md:pt-2 pb-4 md:pb-6" : "py-4 md:py-6"
 			}`}>
-			<a href={content.url} target="_blank" rel="nofollow noopener">
+			<a
+				href={content.url}
+				target="_blank"
+				rel="nofollow noopener noreferrer">
 				<Image src={content.image} width={640} height={360} />
 			</a>
 
@@ -53,7 +56,7 @@ function NewsArticle({ content, num }) {
 					<a
 						href={content.url}
 						target="_blank"
-						rel="nofollow noopener"
+						rel="nofollow noopener noreferrer"
 						className="hover:text-blue-500">
 						{content.type == "Video" && <span>Video: </span>}
 						{content.title}
@@ -103,6 +106,6 @@ function SingleTicker({ ticker }) {
 	);
 }
 
-function NewsVideo({ content }) {
+/* function NewsVideo({ content }) {
 	return <a>Boo</a>;
-}
+} */
