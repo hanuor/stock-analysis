@@ -4,7 +4,7 @@ import TabNavigation from "@/components/Stocks/TabNavigation";
 
 export default function StockHeading() {
 	return (
-		<div>
+		<div className="mx-auto px-4 lg:px-6">
 			<Title />
 			<StockPrice />
 			<TabNavigation />

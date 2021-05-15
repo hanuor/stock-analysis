@@ -23,13 +23,13 @@ export default function StockOverview(props) {
 	return (
 		<Stock props={props.info}>
 			<PageContext.Provider value={props.data}>
-				<div className={styles.tg}>
+				<div className={"px-4 lg:px-6 " + styles.tg}>
 					<PriceChart />
 					<InfoTable />
 					<QuoteTable />
 				</div>
-				<div className="mt-6 grid lg:grid-cols-sidebar gap-10">
-					<div className="lg:order-2 space-y-6">
+				<div className="px-0 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar gap-10">
+					<div className="px-4 lg:px-0 lg:order-2 space-y-6">
 						<Profile />
 						<FinancialsWidget />
 						<AnalystWidget />

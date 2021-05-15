@@ -8,7 +8,7 @@ export default function LayoutArticle(props) {
 		<>
 			<Meta title={props.title}></Meta>
 			<Header />
-			<div className="container max-w-screen-xl grid lg:grid-cols-sidebar py-10 gap-x-10">
+			<div className="mx-auto px-3 lg:px-4 grid lg:grid-cols-sidebar py-10 gap-x-10 xl: max-w-screen-xl">
 				<main>
 					<article className="prose prose-lg max-w-none px-12">
 						<h1>{props.title}</h1>

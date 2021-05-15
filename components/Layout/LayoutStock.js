@@ -10,7 +10,7 @@ export default function Stock({ props, children }) {
 			<StockContext.Provider value={props}>
 				<Meta title={props.ticker}></Meta>
 				<Header />
-				<div className="container max-w-screen-xl py-8">
+				<div className="mx-auto py-5 sm:py-6 xl:max-w-screen-xl">
 					<main>
 						<StockHeading />
 						{children}

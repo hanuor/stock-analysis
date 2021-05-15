@@ -35,8 +35,13 @@
 		"body": ["function ${1:Name}($2) {", "  $3", "}"],
 		"description": "Function"
 	},
-	"Function (Export Default)": {
+	"Function (Export)": {
 		"prefix": "fe",
+		"body": ["export function ${1:Name}(${2:Props}) {", "  ${3:code}", "}"],
+		"description": "Function (Export)"
+	},
+	"Function (Export Default)": {
+		"prefix": "fed",
 		"body": [
 			"export default function ${1:Name}(${2:Props}) {",
 			"  ${3:code}",

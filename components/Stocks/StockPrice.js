@@ -37,13 +37,16 @@ const Extended = ({ quote, market }) => {
 	return (
 		<div>
 			<span className="text-4xl font-bold">{quote.extP}</span>{" "}
-			<span className={`text-2xl ${color} font-semibold`}>
+			<span className={`block sm:inline text-2xl font-semibold ${color}`}>
 				{quote.extC} ({quote.extCP})
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
 				{market == "preMarket" ? <IconSun /> : <IconMoon />}
 				<span className="ml-1">
-					<span className="font-semibold">{quote.extS}:</span> {quote.extT}
+					<span className="block sm:inline font-semibold">
+						{quote.extS}:
+					</span>{" "}
+					{quote.extT}
 				</span>
 			</div>
 		</div>
@@ -56,14 +59,16 @@ const ExtendedClose = ({ quote }) => {
 
 	return (
 		<div>
-			<span className="text-3xl font-semibold text-gray-800">
+			<span className="text-3xl font-semibold text-gray-700">
 				{quote.price}
 			</span>{" "}
-			<span className={`text-xl ${color}`}>
+			<span className={`block sm:inline text-xl ${color}`}>
 				{quote.change} ({quote.changePc})
 			</span>
-			<div className="text-sm text-gray-700 flex items-center mt-1">
-				<span className="font-semibold mr-1">At close:</span>{" "}
+			<div className="text-sm text-gray-700 mt-1">
+				<span className="block sm:inline font-semibold mr-1">
+					At close:
+				</span>{" "}
 				{quote.timestamp}
 			</div>
 		</div>
@@ -81,7 +86,7 @@ export default function StockPrice() {
 	return (
 		<>
 			{extendedHours ? (
-				<section className="mb-5 flex flex-row items-end space-x-4">
+				<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
 					<Extended quote={quote} market={extendedType} />
 					<ExtendedClose quote={quote} />
 				</section>
