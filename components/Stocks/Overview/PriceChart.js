@@ -65,7 +65,7 @@ export default function PriceChart() {
 
 	return (
 		<div className={styles.stockChart}>
-			<div className="h-full lg:border-l lg:border-gray-300 lg:pl-4">
+			<div className="h-64 sm:h-80 lg:h-full lg:border-l lg:border-gray-300 lg:pl-4">
 				<Line
 					data={{
 						labels: timeAxis,

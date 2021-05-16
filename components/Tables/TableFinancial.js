@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useTable } from "react-table";
 import styles from "@/Styles/Table.module.css";
 
-export default function Table(props) {
+export default function FinancialTable(props) {
 	// A react table needs "columns" and "data"
 	// The useMemo stores the function output in memory so that it is only re-computed when the dependencies change
 	const columns = useMemo(() => props.columns, []);

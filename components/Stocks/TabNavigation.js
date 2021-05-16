@@ -17,12 +17,12 @@ export default function TabNavigation() {
 	}, []);
 
 	const inactive =
-		"block text-blue-500 hover:text-black hover:bg-gray-100 py-2 px-1 lg:px-5";
-	const active = "block text-black bg-gray-100 py-2 px-1 lg:px-5";
+		"block text-blue-500 hover:text-black hover:bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
+	const active = "block text-black bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
 
 	return (
 		<nav className="mb-4 border-b-2 border-gray-300 w-full">
-			<ul className="flex flex-row w-full">
+			<ul className="flex flex-row w-full overflow-auto">
 				<li>
 					<Link
 						href={`/stocks/${symbol}/`}
