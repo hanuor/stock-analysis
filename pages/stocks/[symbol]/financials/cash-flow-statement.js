@@ -7,10 +7,10 @@ export default function SymbolStatistics(props) {
 		return <h1>Loading...</h1>;
 	}
 
-	const income = props.data.income; // The income statement
+	const cashFlow = props.data.cashFlow; // The cashFlow statement
 
 	// Map the header row data
-	const columns = income[0].data.map(function (item, index) {
+	const columns = cashFlow[0].data.map(function (item, index) {
 		return {
 			Header: item,
 			accessor: `col${index}`,
@@ -19,19 +19,19 @@ export default function SymbolStatistics(props) {
 
 	// Add title column to front of array
 	columns.unshift({
-		Header: income[0].title,
+		Header: cashFlow[0].title,
 		accessor: "titlecolumn",
 	});
 
 	// Map the data rows
 	const data = [];
-	let count = income.length;
+	let count = cashFlow.length;
 	for (let i = 1; i < count; i++) {
 		let data_row = {};
 
-		data_row["titlecolumn"] = income[i].title;
+		data_row["titlecolumn"] = cashFlow[i].title;
 
-		income[i].data.map(function (item, index) {
+		cashFlow[i].data.map(function (item, index) {
 			let col = `col${index}`;
 			data_row[col] = item;
 		});
@@ -43,7 +43,7 @@ export default function SymbolStatistics(props) {
 		<Stock props={props.info}>
 			<PageContext.Provider value={props.data}>
 				<div className="px-4 lg:px-6 mx-auto">
-					<h1 className="text-2xl font-bold">Income Statement</h1>
+					<h1 className="text-2xl font-bold">Cash Flow Statement</h1>
 					<div className="overflow-x-auto">
 						<FinancialTable columns={columns}>{data}</FinancialTable>
 					</div>
