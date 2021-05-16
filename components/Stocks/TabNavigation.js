@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 export default function TabNavigation() {
 	const router = useRouter();
-	const [isLoading, setIsLoading] = useState(true);
 
 	const [path, setPath] = useState({
 		type: "",
@@ -27,13 +26,7 @@ export default function TabNavigation() {
 			page,
 			subpage,
 		});
-
-		setIsLoading(false);
 	}, []);
-
-	if (isLoading) {
-		return <h1>Loading...</h1>;
-	}
 
 	const inactive =
 		"block text-blue-500 hover:text-black hover:bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
