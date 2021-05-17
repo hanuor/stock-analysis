@@ -1,5 +1,40 @@
 import Stock from "@/components/Layout/LayoutStock";
 import PageContext from "@/components/Context/PageContext";
+import {
+	getStockUrls,
+	getPageData,
+	getStockInfo,
+} from "@/Functions/fetchStockInfo";
+
+import React from "react";
+import ReactDOM from "react-dom";
+import { format } from "d3-format";
+import { timeFormat } from "d3-time-format";
+import {
+	elderRay,
+	ema,
+	discontinuousTimeScaleProviderBuilder,
+	Chart,
+	ChartCanvas,
+	CurrentCoordinate,
+	BarSeries,
+	CandlestickSeries,
+	ElderRaySeries,
+	LineSeries,
+	MovingAverageTooltip,
+	OHLCTooltip,
+	SingleValueTooltip,
+	lastVisibleItemBasedZoomAnchor,
+	XAxis,
+	YAxis,
+	CrossHairCursor,
+	EdgeIndicator,
+	MouseCoordinateX,
+	MouseCoordinateY,
+	ZoomButtons,
+	withDeviceRatio,
+	withSize,
+} from "react-financial-charts";
 
 export default function SymbolStatistics(props) {
 	if (!props.info) {
@@ -15,12 +50,6 @@ export default function SymbolStatistics(props) {
 		</Stock>
 	);
 }
-
-import {
-	getStockUrls,
-	getPageData,
-	getStockInfo,
-} from "@/Functions/fetchStockInfo";
 
 export async function getStaticPaths() {
 	const paths = getStockUrls();
