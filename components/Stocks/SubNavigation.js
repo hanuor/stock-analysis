@@ -64,32 +64,42 @@ const Statement = ({ path }) => {
 };
 
 const Period = ({ path }) => {
-	// range is the state
-	// period is the value in the URL (?period=trailing)
 	const range = financialsState((state) => state.range);
 	const setRange = financialsState((state) => state.setRange);
 
-	// Set the range selected if it is set in the URL via the ?period query params
-	const router = useRouter();
+	// Check for period in URL
 	useEffect(() => {
-		let { period } = router.query;
-		if (period === "quarterly" || period === "trailing") {
-			setRange(period);
+		if (typeof window !== "undefined") {
+			let url = new URL(window.location.href);
+			let params = url.searchParams;
+			const period = params.get("period");
+			if (period === "quarterly" || period === "trailing") {
+				if (period !== range) {
+					setRange(period);
+				}
+			}
 		}
 	}, []);
 
-	// Dynamically add ?period=quarterly||trailing to the URL when the range changes
+	const router = useRouter();
 	useEffect(() => {
+		let subpage =
+			path.subpage === "balance-sheet" ||
+			path.subpage === "cash-flow-statement" ||
+			path.subpage === "ratios"
+				? `${path.subpage}/`
+				: "";
+
 		if (range === "quarterly" || range === "trailing") {
 			router.push(
-				`/stocks/[symbol]/financials/?period=${range}`,
-				`/stocks/${path.symbol}/financials/?period=${range}`,
+				`/stocks/[symbol]/financials/${subpage}?period=${range}`,
+				`/stocks/${path.symbol}/financials/${subpage}?period=${range}`,
 				{ shallow: true }
 			);
 		} else {
 			router.push(
-				`/stocks/[symbol]/financials/`,
-				`/stocks/${path.symbol}/financials/`,
+				`/stocks/[symbol]/financials/${subpage}`,
+				`/stocks/${path.symbol}/financials/${subpage}`,
 				{ shallow: true }
 			);
 		}
@@ -111,7 +121,9 @@ const Period = ({ path }) => {
 					<span
 						className={range == "quarterly" ? active : inactive}
 						onClick={function () {
-							setRange("quarterly");
+							if (range !== "quarterly") {
+								setRange("quarterly");
+							}
 						}}>
 						Quarterly
 					</span>

@@ -1,69 +1,58 @@
 import Stock from "@/components/Layout/StockLayout";
 import PageContext from "@/components/Context/PageContext";
 import FinancialTable from "@/components/Tables/TableFinancial";
+import { formatNumber } from "@/Functions/formatNumber";
+import { financialsState } from "@State/financialsState";
+import {
+	getStockUrls,
+	getPageData,
+	getStockInfo,
+} from "@/Functions/fetchStockInfo";
+import mapData from "@Data/balance_sheet"; // varies by page
 
-export default function SymbolStatistics(props) {
+const data_name = "balance_sheet"; // varies by page
+const title = "Balance Sheet"; // varies by page
+
+export default function FinancialsPage(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
 
-	const newincome = props.data.newincome; // The newincome statement
+	const range = financialsState((state) => state.range);
+	const rawdata = props.data[data_name][range]; // The financial data
+	const data_map = mapData(); // Defines how to map and format the data rows
+	const count = rawdata.datekey.length; // How many data columns
+	const divider = "thousands"; // Can change to millions and raw dynamically
 
-	// Map the header row data
-	const columns = newincome.datekey.map(function (item, index) {
-		return {
+	// Columns (header row)
+	const columns = [];
+	for (let i = 0; i < count; i++) {
+		let item = rawdata.datekey[i];
+
+		columns[i] = {
 			Header: item,
-			accessor: `${index}`,
+			accessor: `${i}`,
 		};
-	});
+	}
+	let dateRowTitle = range == "annual" ? "Year" : "Quarter Ended";
+	columns.unshift({ Header: dateRowTitle, accessor: "title" });
 
-	// Add title column to front of array
-	columns.unshift({
-		Header: "Year",
-		accessor: "title",
-	});
-
-	const DATA_MAP = [
-		{
-			id: "revenue",
-			data: "revenue",
-			title: "Revenue",
-			frmt: function (value) {
-				return value / 1000;
-			},
-		},
-		{
-			id: "revenueGrowth",
-			data: "revenue",
-			title: "Revenue Growth",
-			frmt: function (current, previous) {
-				return current / previous;
-			},
-		},
-		{
-			id: "gp",
-			data: "gp",
-			title: "Gross Profit",
-			frmt: function (value) {
-				return value / 1000;
-			},
-		},
-	];
-
+	// Data rows
 	const data = [];
-
-	DATA_MAP.map(function (row) {
+	data_map.map(function (row) {
 		const data_row = {};
 		data_row["title"] = row.title;
 
-		let count = newincome[row.data].length;
-
 		for (let i = 0; i < count; i++) {
-			let item = newincome[row.data][i];
-			let prev = newincome[row.data][i + 1];
+			let item = rawdata[row.data][i];
+			let prev = rawdata[row.data][i + 1];
 
-			data_row[i] = row.frmt(item, prev);
-			// console.log(newincome[row.data][i]);
+			data_row[i] = formatNumber({
+				type: row.format,
+				current: item,
+				previous: prev,
+				divider,
+			});
 		}
 
 		data.push(data_row);
@@ -73,7 +62,9 @@ export default function SymbolStatistics(props) {
 		<Stock props={props.info}>
 			<PageContext.Provider value={props.data}>
 				<div className="px-4 lg:px-6 mx-auto">
-					<h1 className="text-2xl font-bold">Balance Sheet</h1>
+					<h1 className="text-2xl font-bold">
+						{title} ({range.charAt(0).toUpperCase() + range.slice(1)})
+					</h1>
 					<div className="overflow-x-auto">
 						<FinancialTable columns={columns}>{data}</FinancialTable>
 					</div>
@@ -82,12 +73,6 @@ export default function SymbolStatistics(props) {
 		</Stock>
 	);
 }
-
-import {
-	getStockUrls,
-	getPageData,
-	getStockInfo,
-} from "@/Functions/fetchStockInfo";
 
 export async function getStaticPaths() {
 	const paths = getStockUrls();

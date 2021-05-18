@@ -1,4 +1,4 @@
-export function INCOME_ANNUAL() {
+export default function income_statement() {
 	const MAP = [
 		{
 			id: "revenue",

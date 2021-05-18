@@ -18,7 +18,11 @@ export default function FinancialTable(props) {
 	return (
 		<table
 			{...getTableProps()}
-			className={[styles.table, styles.table_striped].join(" ")}>
+			className={[
+				styles.table,
+				styles.table_striped,
+				styles.table_financial,
+			].join(" ")}>
 			<thead>
 				{headerGroups.map((headerGroup) => (
 					<tr {...headerGroup.getHeaderGroupProps()}>
