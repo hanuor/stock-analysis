@@ -3,7 +3,7 @@ import {
 	getPageData,
 	getStockInfo,
 } from "@/Functions/fetchStockInfo";
-import Stock from "@/components/Layout/LayoutStock";
+import Stock from "@/components/Layout/StockLayout";
 import { InfoTable, QuoteTable } from "@/components/Stocks/Overview/TopTables";
 import PriceChart from "@/components/Stocks/Overview/PriceChart";
 import PageContext from "@/components/Context/PageContext";

@@ -19,7 +19,8 @@
 		"react-chartjs-2": "^3.0.3",
 		"react-dom": "17.0.2",
 		"react-table": "^7.7.0",
-		"use-immer": "^0.5.1"
+		"use-immer": "^0.5.1",
+		"zustand": "^3.5.1"
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.4.0",

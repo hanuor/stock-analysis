@@ -1,49 +1,62 @@
-import Stock from "@/components/Layout/LayoutStock";
+import Stock from "@/components/Layout/StockLayout";
 import PageContext from "@/components/Context/PageContext";
 import FinancialTable from "@/components/Tables/TableFinancial";
+import { INCOME_ANNUAL } from "@Data/income_statement";
+import { formatNumber } from "@/Functions/formatNumber";
+import { financialsState } from "@State/financialsState";
 
-export default function SymbolStatistics(props) {
+export default function IncomeStatement(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
 
-	const income = props.data.income; // The income statement
+	const range = financialsState((state) => state.range);
+	console.log(range);
+	const income = props.data.income[range]; // The financial data
+	const data_map = INCOME_ANNUAL(); // Defines how to map and format the data rows
+	const count = income.datekey.length; // How many data columns
+	const divider = "thousands"; // Can change to millions and raw dynamically
 
-	// Map the header row data
-	const columns = income[0].data.map(function (item, index) {
-		return {
+	// Columns (header row)
+	const columns = [];
+	for (let i = 0; i < count; i++) {
+		let item = income.datekey[i];
+
+		columns[i] = {
 			Header: item,
-			accessor: `col${index}`,
+			accessor: `${i}`,
 		};
-	});
+	}
+	columns.unshift({ Header: "Year", accessor: "title" });
 
-	// Add title column to front of array
-	columns.unshift({
-		Header: income[0].title,
-		accessor: "titlecolumn",
-	});
-
-	// Map the data rows
+	// Data rows
 	const data = [];
-	let count = income.length;
-	for (let i = 1; i < count; i++) {
-		let data_row = {};
+	data_map.map(function (row) {
+		const data_row = {};
+		data_row["title"] = row.title;
 
-		data_row["titlecolumn"] = income[i].title;
+		for (let i = 0; i < count; i++) {
+			let item = income[row.data][i];
+			let prev = income[row.data][i + 1];
 
-		income[i].data.map(function (item, index) {
-			let col = `col${index}`;
-			data_row[col] = item;
-		});
+			data_row[i] = formatNumber({
+				type: row.format,
+				current: item,
+				previous: prev,
+				divider,
+			});
+		}
 
 		data.push(data_row);
-	}
+	});
 
 	return (
 		<Stock props={props.info}>
 			<PageContext.Provider value={props.data}>
 				<div className="px-4 lg:px-6 mx-auto">
-					<h1 className="text-2xl font-bold">Income Statement</h1>
+					<h1 className="text-2xl font-bold">
+						Income Statement ({range})
+					</h1>
 					<div className="overflow-x-auto">
 						<FinancialTable columns={columns}>{data}</FinancialTable>
 					</div>

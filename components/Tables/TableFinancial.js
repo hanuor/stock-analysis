@@ -1,12 +1,14 @@
 import { useMemo } from "react";
 import { useTable } from "react-table";
 import styles from "@/Styles/Table.module.css";
+import { financialsState } from "@State/financialsState";
 
 export default function FinancialTable(props) {
+	const range = financialsState((state) => state.range);
 	// A react table needs "columns" and "data"
 	// The useMemo stores the function output in memory so that it is only re-computed when the dependencies change
-	const columns = useMemo(() => props.columns, []);
-	const data = useMemo(() => props.children, []);
+	const columns = useMemo(() => props.columns, [range]);
+	const data = useMemo(() => props.children, [range]);
 
 	const tableInstance = useTable({ columns, data });
 

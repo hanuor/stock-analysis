@@ -1,4 +1,4 @@
-import Stock from "@/components/Layout/LayoutStock";
+import Stock from "@/components/Layout/StockLayout";
 import PageContext from "@/components/Context/PageContext";
 import FinancialTable from "@/components/Tables/TableFinancial";
 

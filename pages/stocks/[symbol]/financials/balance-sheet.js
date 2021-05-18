@@ -1,4 +1,4 @@
-import Stock from "@/components/Layout/LayoutStock";
+import Stock from "@/components/Layout/StockLayout";
 import PageContext from "@/components/Context/PageContext";
 import FinancialTable from "@/components/Tables/TableFinancial";
 
@@ -7,37 +7,67 @@ export default function SymbolStatistics(props) {
 		return <h1>Loading...</h1>;
 	}
 
-	const balanceSheet = props.data.balanceSheet; // The balanceSheet statement
+	const newincome = props.data.newincome; // The newincome statement
 
 	// Map the header row data
-	const columns = balanceSheet[0].data.map(function (item, index) {
+	const columns = newincome.datekey.map(function (item, index) {
 		return {
 			Header: item,
-			accessor: `col${index}`,
+			accessor: `${index}`,
 		};
 	});
 
 	// Add title column to front of array
 	columns.unshift({
-		Header: balanceSheet[0].title,
-		accessor: "titlecolumn",
+		Header: "Year",
+		accessor: "title",
 	});
 
-	// Map the data rows
+	const DATA_MAP = [
+		{
+			id: "revenue",
+			data: "revenue",
+			title: "Revenue",
+			frmt: function (value) {
+				return value / 1000;
+			},
+		},
+		{
+			id: "revenueGrowth",
+			data: "revenue",
+			title: "Revenue Growth",
+			frmt: function (current, previous) {
+				return current / previous;
+			},
+		},
+		{
+			id: "gp",
+			data: "gp",
+			title: "Gross Profit",
+			frmt: function (value) {
+				return value / 1000;
+			},
+		},
+	];
+
 	const data = [];
-	let count = balanceSheet.length;
-	for (let i = 1; i < count; i++) {
-		let data_row = {};
 
-		data_row["titlecolumn"] = balanceSheet[i].title;
+	DATA_MAP.map(function (row) {
+		const data_row = {};
+		data_row["title"] = row.title;
 
-		balanceSheet[i].data.map(function (item, index) {
-			let col = `col${index}`;
-			data_row[col] = item;
-		});
+		let count = newincome[row.data].length;
+
+		for (let i = 0; i < count; i++) {
+			let item = newincome[row.data][i];
+			let prev = newincome[row.data][i + 1];
+
+			data_row[i] = row.frmt(item, prev);
+			// console.log(newincome[row.data][i]);
+		}
 
 		data.push(data_row);
-	}
+	});
 
 	return (
 		<Stock props={props.info}>

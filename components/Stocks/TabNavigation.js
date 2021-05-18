@@ -1,41 +1,27 @@
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import SubNavigation from "@/components/Stocks/SubNavigation";
 
 export default function TabNavigation() {
 	const router = useRouter();
 
-	const [path, setPath] = useState({
-		type: "",
-		symbol: "",
-		page: "",
-		subpage: "",
-	});
+	let route = router.asPath;
+	let split = route.split("/");
+	let type = split[1] || null;
+	let symbol = split[2] || null;
+	let page = split[3] || "overview";
+	let subpage = split[4] || "";
+	const path = {
+		type,
+		symbol,
+		page,
+		subpage,
+	};
 
-	useEffect(() => {
-		let route = router.asPath;
-		let split = route.split("/");
-		let type = split[1] || null;
-		let symbol = split[2] || null;
-		let page = split[3] || "overview";
-		let subpage = split[4] || "none";
-
-		setPath({
-			type,
-			symbol,
-			page,
-			subpage,
-		});
-	}, []);
-
+	const common = "block py-1 sm:py-2 px-2 sm:px-5";
 	const inactive =
-		"block text-blue-500 hover:text-black hover:bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
-	const active = "block text-black bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
-
-	const inactive_sub =
-		"block text-sm text-blue-500 hover:text-black hover:bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
-	const active_sub =
-		"block text-sm text-black bg-gray-100 py-1 sm:py-2 px-2 sm:px-5";
+		common + " text-blue-500 hover:text-black hover:bg-gray-100";
+	const active = common + " text-black bg-gray-100";
 
 	return (
 		<>
@@ -84,60 +70,7 @@ export default function TabNavigation() {
 					</li>
 				</ul>
 			</nav>
-			{path.page == "financials" && (
-				<nav className="mb-4">
-					<ul className="flex flex-row w-full overflow-auto">
-						<li>
-							<Link href={`/stocks/${path.symbol}/financials/`}>
-								<a
-									className={
-										path.subpage == "none" ? active_sub : inactive_sub
-									}>
-									Income
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link
-								href={`/stocks/${path.symbol}/financials/balance-sheet`}>
-								<a
-									className={
-										path.subpage == "balance-sheet"
-											? active_sub
-											: inactive_sub
-									}>
-									Balance Sheet
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link
-								href={`/stocks/${path.symbol}/financials/cash-flow-statement/`}>
-								<a
-									className={
-										path.subpage == "cash-flow-statement"
-											? active_sub
-											: inactive_sub
-									}>
-									Cash Flow
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href={`/stocks/${path.symbol}/financials/ratios/`}>
-								<a
-									className={
-										path.subpage == "ratios"
-											? active_sub
-											: inactive_sub
-									}>
-									Ratios
-								</a>
-							</Link>
-						</li>
-					</ul>
-				</nav>
-			)}
+			{path.page == "financials" && <SubNavigation path={path} />}
 		</>
 	);
 }
