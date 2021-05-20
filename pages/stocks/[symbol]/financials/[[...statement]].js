@@ -51,19 +51,7 @@ export default function FinancialsPage(props) {
 }
 
 export async function getStaticPaths() {
-	const paths = [
-		{
-			params: {
-				symbol: "aapl",
-				statement: [], // ["", "balance-sheet", "cash-flow-statement", "ratios"],
-			},
-		},
-	];
-
-	return {
-		paths,
-		fallback: true,
-	};
+	return { paths: [], fallback: true };
 }
 
 export async function getStaticProps({ params }) {
