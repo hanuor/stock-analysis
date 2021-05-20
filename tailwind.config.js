@@ -1,4 +1,4 @@
-/* const defaultTheme = require("tailwindcss/defaultTheme"); */
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
 	mode: "jit",
@@ -30,8 +30,10 @@ module.exports = {
 				news: "1fr 2fr",
 			},
 			fontFamily: {
+				/* sans: ["Open Sans", ...defaultTheme.fontFamily.sans], */
 				/* sans: ["Roboto", ...defaultTheme.fontFamily.sans], */
 				/* sans: ["Inter", ...defaultTheme.fontFamily.sans], */
+				/* sans: ["Source Sans Pro", ...defaultTheme.fontFamily.sans], */
 			},
 		} /* ,
 		fontSize: {
