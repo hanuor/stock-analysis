@@ -26,10 +26,32 @@
 	padding: 6px 10px;
 }
 
-.table_financial tr *:first-child {
+.table_financial td:first-child,
+.table_financial th:first-child {
 	text-align: left;
 }
 
-.table_financial tr *:not(:first-child) {
+.table_financial td:not(:first-child),
+.table_financial th:not(:first-child) {
 	text-align: right;
+}
+
+.title_financial h1 {
+	font-weight: 700;
+	font-size: 1.5rem;
+	line-height: 2rem;
+	margin-bottom: 0.75rem;
+}
+
+.table_financial svg {
+	stroke: #777;
+	width: 20px;
+	height: 20px;
+	margin-left: 1rem;
+}
+
+.table_financial svg:hover {
+	stroke: #2c6288;
+	width: 20px;
+	height: 20px;
 }

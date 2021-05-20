@@ -23,7 +23,14 @@ const Statement = ({ path }) => {
 			<ul className="flex flex-row w-full overflow-auto">
 				<li>
 					<Link href={`/stocks/${path.symbol}/financials/`}>
-						<a className={path.subpage == "none" ? active : inactive}>
+						<a
+							className={
+								path.subpage !== "balance-sheet" &&
+								path.subpage !== "cash-flow-statement" &&
+								path.subpage !== "ratios"
+									? active
+									: inactive
+							}>
 							Income
 						</a>
 					</Link>
