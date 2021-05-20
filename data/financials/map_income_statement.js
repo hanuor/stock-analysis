@@ -2,9 +2,7 @@ export default function income_statement() {
 	const MAP = [
 		{
 			id: "revenue",
-			data: "revenue",
 			title: "Revenue",
-			format: "standard",
 		},
 		{
 			id: "revenueGrowth",
@@ -14,99 +12,114 @@ export default function income_statement() {
 		},
 		{
 			id: "cor",
-			data: "cor",
 			title: "Cost of Revenue",
-			format: "standard",
 		},
 		{
 			id: "gp",
-			data: "gp",
 			title: "Gross Profit",
-			format: "standard",
 		},
 		{
 			id: "sgna",
-			data: "sgna",
 			title: "Selling, General & Admin",
-			format: "standard",
+		},
+		{
+			id: "rnd",
+			title: "Research & Development",
+		},
+		{
+			id: "otheropex",
+			title: "Other Operating Expenses",
 		},
 		{
 			id: "opex",
-			data: "opex",
 			title: "Operating Expenses",
-			format: "standard",
 		},
 		{
 			id: "opinc",
-			data: "opinc",
 			title: "Operating Income",
-			format: "standard",
 		},
 		{
 			id: "intexp",
-			data: "intexp",
 			title: "Interest Expense / Income",
-			format: "standard",
+		},
+		{
+			id: "otherincome",
+			title: "Other Expense / Income",
+		},
+		{
+			id: "pretax",
+			title: "Pretax Income",
 		},
 		{
 			id: "taxexp",
-			data: "taxexp",
 			title: "Income Tax",
-			format: "standard",
 		},
 		{
 			id: "netinc",
-			data: "netinc",
 			title: "Net Income",
-			format: "standard",
+		},
+
+		{
+			id: "netinccmn",
+			title: "Net Income Common",
+		},
+		{
+			id: "prefdivis",
+			title: "Preferred Dividends",
 		},
 		{
 			id: "netincgrowth",
-			data: "netinc",
+			data: "netinccmn",
 			title: "Net Income Growth",
 			format: "growth",
 		},
 		{
-			id: "prefdivis",
-			data: "prefdivis",
-			title: "Preferred Dividends",
-			format: "standard",
-		},
-		{
-			id: "netinccmn",
-			data: "netinccmn",
-			title: "Net Income Common",
-			format: "standard",
-		},
-		{
 			id: "shareswa",
-			data: "shareswa",
 			title: "Shares Outstanding (Basic)",
-			format: "standard",
+			format: "reduce_precision",
 		},
 		{
 			id: "shareswadil",
-			data: "shareswadil",
 			title: "Shares Outstanding (Diluted)",
-			format: "standard",
+			format: "reduce_precision",
+		},
+		{
+			id: "shareschange",
+			data: "shareswadil",
+			title: "Shares Change",
+			format: "growth",
 		},
 		{
 			id: "eps",
-			data: "eps",
 			title: "EPS (Basic)",
 			format: "pershare",
 		},
 		{
 			id: "epsdil",
-			data: "epsdil",
 			title: "EPS (Diluted)",
 			format: "pershare",
 		},
 		{
+			id: "epsgrowth",
+			data: "epsdil",
+			title: "EPS Growth",
+			format: "growth",
+		},
+		{
+			id: "fcfps",
+			title: "Free Cash Flow Per Share",
+			format: "pershare",
+		},
+		{
 			id: "dps",
-			data: "dps",
 			title: "Dividend Per Share",
 			format: "pershare",
+		},
+		{
+			id: "dpsgrowth",
+			data: "dps",
+			title: "Dividend Growth",
+			format: "growth",
 		},
 		{
 			id: "grossmargin",
@@ -115,16 +128,31 @@ export default function income_statement() {
 			format: "margin",
 		},
 		{
+			id: "operatingmargin",
+			data: "opinc",
+			title: "Operating Margin",
+			format: "margin",
+		},
+		{
 			id: "netmargin",
-			data: "netmargin",
+			data: "netinc",
 			title: "Profit Margin",
+			format: "margin",
+		},
+		{
+			id: "fcfmargin",
+			data: "fcf",
+			title: "Free Cash Flow Margin",
+			format: "margin",
+		},
+		{
+			id: "taxrate",
+			title: "Effective Tax Rate",
 			format: "percentage",
 		},
 		{
 			id: "ebitda",
-			data: "ebitda",
 			title: "EBITDA",
-			format: "standard",
 		},
 		{
 			id: "ebitdamargin",
@@ -134,9 +162,7 @@ export default function income_statement() {
 		},
 		{
 			id: "ebit",
-			data: "ebit",
 			title: "EBIT",
-			format: "standard",
 		},
 		{
 			id: "ebitmargin",

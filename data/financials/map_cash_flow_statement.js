@@ -2,27 +2,88 @@ export default function cash_flow_statement() {
 	const MAP = [
 		{
 			id: "netinc",
-			data: "netinc",
 			title: "Net Income",
-			format: "standard",
 		},
 		{
 			id: "depamor",
-			data: "depamor",
 			title: "Depreciation & Amortization",
-			format: "standard",
 		},
 		{
 			id: "sbcomp",
-			data: "sbcomp",
 			title: "Share-Based Compensation",
-			format: "standard",
+		},
+		{
+			id: "otheroperating",
+			title: "Other Operating Activities",
 		},
 		{
 			id: "ncfo",
-			data: "ncfo",
 			title: "Operating Cash Flow",
-			format: "standard",
+		},
+		{
+			id: "capex",
+			title: "Capital Expenditures",
+		},
+		{
+			id: "ncfbus",
+			title: "Acquisitions",
+		},
+		{
+			id: "ncfinv",
+			title: "Change in Investments",
+		},
+		{
+			id: "otherinvesting",
+			title: "Other Investing Activities",
+		},
+		{
+			id: "ncfi",
+			title: "Investing Cash Flow",
+		},
+		{
+			id: "ncfdiv",
+			title: "Dividends Paid",
+		},
+		{
+			id: "ncfcommon",
+			title: "Share Issuance / Repurchase",
+		},
+		{
+			id: "ncfdebt",
+			title: "Debt Issued / Paid",
+		},
+		{
+			id: "otherfinancing",
+			title: "Other Financing Activities",
+		},
+		{
+			id: "ncff",
+			title: "Financing Cash Flow",
+		},
+		{
+			id: "ncf",
+			title: "Net Cash Flow",
+		},
+		{
+			id: "fcf",
+			title: "Free Cash Flow",
+		},
+		{
+			id: "fcfgrowth",
+			data: "fcf",
+			title: "Free Cash Flow Growth",
+			format: "growth",
+		},
+		{
+			id: "fcfmargin",
+			data: "fcf",
+			title: "Free Cash Flow Margin",
+			format: "margin",
+		},
+		{
+			id: "fcfps",
+			title: "Free Cash Flow Per Share",
+			format: "pershare",
 		},
 	];
 

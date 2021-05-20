@@ -8,7 +8,7 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 
 		case "reduce_precision": {
 			if (current) {
-				let num = (current / 1000).toFixed(0) * 1000;
+				let num = (current / numbersIn).toFixed(0) * numbersIn;
 				return new Intl.NumberFormat("en-US").format(num / numbersIn);
 			}
 			return "-";
@@ -38,8 +38,12 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 			return "-";
 		}
 
-		case "ratio":
-			return current.toFixed(2);
+		case "ratio": {
+			if (current) {
+				return current.toFixed(2);
+			}
+			return "-";
+		}
 
 		default:
 			break;

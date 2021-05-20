@@ -28,7 +28,7 @@ export default function FinancialTable() {
 		!appState.isLoggedIn && statementData.datekey.length > 15
 			? 15
 			: statementData.datekey.length; // How many data columns
-	const divider = "thousands"; // Can change to millions and raw dynamically
+	const divider = "millions"; // Can change to millions and raw dynamically
 	const data_map = mapData(statement);
 
 	const columns = useMemo(() => {
@@ -75,7 +75,9 @@ export default function FinancialTable() {
 			data_row["title"] = row.title;
 
 			for (let i = 0; i < count; i++) {
-				let item = statementData[row.data][i];
+				let item = row.data
+					? statementData[row.data][i]
+					: statementData[row.id][i];
 				let prev =
 					row.format === "growth"
 						? statementData[row.data][i + offset]
@@ -84,7 +86,7 @@ export default function FinancialTable() {
 					row.format === "margin" ? statementData["revenue"][i] : null;
 
 				data_row[i] = formatNumber({
-					type: row.format,
+					type: row.format || "standard",
 					current: item,
 					previous: prev,
 					revenue: revenue,
@@ -94,9 +96,9 @@ export default function FinancialTable() {
 				total = total + item;
 			}
 
-			if (total !== 0 || row.title === "revenue") {
-				dataArray.push(data_row);
-			}
+			// if (total !== 0 || row.title === "revenue") {
+			dataArray.push(data_row);
+			// }
 		});
 
 		return dataArray;
