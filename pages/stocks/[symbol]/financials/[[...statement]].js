@@ -55,7 +55,7 @@ export async function getStaticPaths() {
 		{
 			params: {
 				symbol: "aapl",
-				statement: ["", "balance-sheet", "cash-flow-statement", "ratios"],
+				statement: [], // ["", "balance-sheet", "cash-flow-statement", "ratios"],
 			},
 		},
 	];
