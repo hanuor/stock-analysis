@@ -9,11 +9,6 @@ export function getStockUrls() {
 				symbol: "aapl",
 			},
 		},
-		{
-			params: {
-				symbol: "msft",
-			},
-		},
 	];
 
 	return paths;

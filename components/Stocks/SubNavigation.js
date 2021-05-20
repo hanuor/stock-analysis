@@ -18,6 +18,15 @@ export default function TabNavigation({ path }) {
 }
 
 const Statement = ({ path }) => {
+	const statement = financialsState((state) => state.statement);
+	const setStatement = financialsState((state) => state.setStatement);
+
+	const changePage = (oldPage, newPage) => {
+		if (oldPage !== newPage) {
+			setStatement(newPage);
+		}
+	};
+
 	return (
 		<nav className="mb-4">
 			<ul className="flex flex-row w-full overflow-auto">
@@ -25,12 +34,9 @@ const Statement = ({ path }) => {
 					<Link href={`/stocks/${path.symbol}/financials/`}>
 						<a
 							className={
-								path.subpage !== "balance-sheet" &&
-								path.subpage !== "cash-flow-statement" &&
-								path.subpage !== "ratios"
-									? active
-									: inactive
-							}>
+								statement == "income_statement" ? active : inactive
+							}
+							onClick={() => changePage(statement, "income_statement")}>
 							Income
 						</a>
 					</Link>
@@ -39,8 +45,9 @@ const Statement = ({ path }) => {
 					<Link href={`/stocks/${path.symbol}/financials/balance-sheet`}>
 						<a
 							className={
-								path.subpage == "balance-sheet" ? active : inactive
-							}>
+								statement == "balance_sheet" ? active : inactive
+							}
+							onClick={() => changePage(statement, "balance_sheet")}>
 							Balance Sheet
 						</a>
 					</Link>
@@ -50,9 +57,10 @@ const Statement = ({ path }) => {
 						href={`/stocks/${path.symbol}/financials/cash-flow-statement/`}>
 						<a
 							className={
-								path.subpage == "cash-flow-statement"
-									? active
-									: inactive
+								statement == "cash_flow_statement" ? active : inactive
+							}
+							onClick={() =>
+								changePage(statement, "cash_flow_statement")
 							}>
 							Cash Flow
 						</a>
@@ -60,7 +68,9 @@ const Statement = ({ path }) => {
 				</li>
 				<li>
 					<Link href={`/stocks/${path.symbol}/financials/ratios/`}>
-						<a className={path.subpage == "ratios" ? active : inactive}>
+						<a
+							className={statement == "ratios" ? active : inactive}
+							onClick={() => changePage(statement, "ratios")}>
 							Ratios
 						</a>
 					</Link>

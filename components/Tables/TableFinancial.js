@@ -17,24 +17,25 @@ import { HoverChartIcon } from "@/components/Icons";
 import styles from "@/Styles/Table.module.css";
 import mapData from "@Data/financials_data_map";
 
-export default function FinancialTable({ type, title }) {
+export default function FinancialTable() {
 	const range = financialsState((state) => state.range);
-	const appState = useContext(StateContext); // The data
-	const raw = useContext(PageContext); // The data
+	const statement = financialsState((state) => state.statement);
+	const appState = useContext(StateContext);
+	const fullData = useContext(PageContext);
 
-	const statement = raw[type][range]; // The data for the selected financial state
+	const statementData = fullData[statement][range]; // The data for the selected financial statement
 	const count =
-		!appState.isLoggedIn && statement.datekey.length > 15
+		!appState.isLoggedIn && statementData.datekey.length > 15
 			? 15
-			: statement.datekey.length; // How many data columns
+			: statementData.datekey.length; // How many data columns
 	const divider = "thousands"; // Can change to millions and raw dynamically
-	const data_map = mapData(type);
+	const data_map = mapData(statement);
 
 	const columns = useMemo(() => {
 		const columnArray = [];
 
 		for (let i = 0; i < count; i++) {
-			const rawDate = statement.datekey[i];
+			const rawDate = statementData.datekey[i];
 			let formattedDate = range === "annual" ? formatDate(rawDate) : rawDate;
 
 			columnArray[i] = {
@@ -63,7 +64,7 @@ export default function FinancialTable({ type, title }) {
 		});
 
 		return columnArray;
-	}, [range]);
+	}, [range, statement]);
 
 	const data = useMemo(() => {
 		const dataArray = [];
@@ -74,11 +75,13 @@ export default function FinancialTable({ type, title }) {
 			data_row["title"] = row.title;
 
 			for (let i = 0; i < count; i++) {
-				let item = statement[row.data][i];
+				let item = statementData[row.data][i];
 				let prev =
-					row.format === "growth" ? statement[row.data][i + offset] : null;
+					row.format === "growth"
+						? statementData[row.data][i + offset]
+						: null;
 				let revenue =
-					row.format === "margin" ? statement["revenue"][i] : null;
+					row.format === "margin" ? statementData["revenue"][i] : null;
 
 				data_row[i] = formatNumber({
 					type: row.format,
@@ -97,7 +100,7 @@ export default function FinancialTable({ type, title }) {
 		});
 
 		return dataArray;
-	}, [range]);
+	}, [range, statement]);
 
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		useTable({ columns, data });
@@ -117,10 +120,28 @@ export default function FinancialTable({ type, title }) {
 		},
 	});
 
+	const getTitle = (statement, range) => {
+		let rangeTitle = range.charAt(0).toUpperCase() + range.slice(1);
+
+		switch (statement) {
+			case "balance_sheet":
+				return `Balance Sheet (${rangeTitle})`;
+
+			case "cash_flow_statement":
+				return `Cash Flow Statement (${rangeTitle})`;
+
+			case "ratios":
+				return `Ratios and Metrics (${rangeTitle})`;
+
+			default:
+				return `Income Statement (${rangeTitle})`;
+		}
+	};
+
 	return (
 		<div className="px-4 lg:px-6 mx-auto">
 			<h1 className="text-2xl font-bold mb-3">
-				{title} ({range.charAt(0).toUpperCase() + range.slice(1)})
+				{getTitle(statement, range)}
 			</h1>
 			<div className="overflow-x-auto">
 				<table
