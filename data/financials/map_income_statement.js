@@ -5,7 +5,7 @@ export default function income_statement() {
 			title: "Revenue",
 		},
 		{
-			id: "revenueGrowth",
+			id: "revenuegrowth",
 			data: "revenue",
 			title: "Revenue Growth",
 			format: "growth",

@@ -1,18 +1,18 @@
 /* eslint-disable react/display-name */
-// todo: Add all the data rows
 // todo: Hover charts
-// todo: Tooltips
+// todo: Tooltips and titles
 // todo: Export functionality
 // todo: Left/right switch
+// todo: Add more metrics
 // ? Add a menu that allows formatting by millions/thousands/raw
 
-import { useContext, useMemo } from "react";
-import { useTable } from "react-table";
+import { useContext, useState } from "react";
 import { financialsState } from "@State/financialsState";
 import PageContext from "@/components/Context/PageContext";
 import StateContext from "@/components/Context/StateContext";
 import { formatNumber, formatDate } from "@/Functions/formatNumber";
-import { redOrGreen, setBorder } from "@/Functions/formatFinancialCells";
+import { redOrGreen, getTitle } from "@/Functions/financials.functions";
+import HoverChart from "@/Functions/hoverCharts";
 import { HoverChartIcon } from "@/components/Icons";
 import styles from "@/Styles/Table.module.css";
 import mapData from "@Data/financials_data_map";
@@ -22,122 +22,93 @@ export default function FinancialTable() {
 	const statement = financialsState((state) => state.statement);
 	const appState = useContext(StateContext);
 	const fullData = useContext(PageContext);
+	const [hoverChartActive, setHoverChartActive] = useState(false);
+	const [hoverChartRow, setHoverChartRow] = useState();
 
-	const statementData = fullData[statement][range]; // The data for the selected financial statement
+	const data = fullData[statement][range]; // The data for the selected financial statement
 	const count =
-		!appState.isLoggedIn && statementData.datekey.length > 15
+		!appState.isLoggedIn && data.datekey.length > 15
 			? 15
-			: statementData.datekey.length; // How many data columns
+			: data.datekey.length; // How many data columns
 	const divider = "millions"; // Can change to millions and raw dynamically
 	const data_map = mapData(statement);
 
-	const columns = useMemo(() => {
-		const columnArray = [];
-
-		for (let i = 0; i < count; i++) {
-			const rawDate = statementData.datekey[i];
-			let formattedDate = range === "annual" ? formatDate(rawDate) : rawDate;
-
-			columnArray[i] = {
-				Header: formattedDate,
-				accessor: `${i}`,
-				Cell: (row) => (
-					<div>
-						<span title={row.column.id}>{row.value}</span>
-					</div>
-				),
-			};
-		}
-		let dateRowTitle = range == "annual" ? "Year" : "Quarter Ended";
-
-		columnArray.unshift({
-			Header: dateRowTitle,
-			accessor: "title",
-			Cell: (row) => (
-				<div
-					title={row.column.id}
-					className="flex flex-row justify-between">
-					<span>{row.value}</span>
-					<span className="text-right">{HoverChartIcon()}</span>
-				</div>
-			),
+	const HeaderRow = () => {
+		return data.datekey.map((cell, index) => {
+			if (index > count) {
+				return;
+			}
+			return (
+				<th key={index}>{range === "annual" ? formatDate(cell) : cell}</th>
+			);
 		});
+	};
 
-		return columnArray;
-	}, [range, statement]);
+	const BodyRow = ({ row }) => {
+		let id = row.id;
+		let dataid = row.data || row.id;
+		let title = row.title;
+		let format = row.format || "standard";
+		let rowdata = data[dataid];
 
-	const data = useMemo(() => {
-		const dataArray = [];
-		const offset = range === "annual" ? 1 : 4;
-		data_map.map(function (row) {
-			const data_row = {};
-			let total = 0; // if all the rows are 0, then skip the row
-			data_row["title"] = row.title;
-
-			for (let i = 0; i < count; i++) {
-				let item = row.data
-					? statementData[row.data][i]
-					: statementData[row.id][i];
-				let prev =
-					row.format === "growth"
-						? statementData[row.data][i + offset]
-						: null;
-				let revenue =
-					row.format === "margin" ? statementData["revenue"][i] : null;
-
-				data_row[i] = formatNumber({
-					type: row.format || "standard",
-					current: item,
-					previous: prev,
-					revenue: revenue,
-					divider,
-				});
-
-				total = total + item;
+		let dataRows = rowdata.map((cell, index) => {
+			if (index > count) {
+				return;
 			}
 
-			// if (total !== 0 || row.title === "revenue") {
-			dataArray.push(data_row);
-			// }
+			let prev = format === "growth" ? data[dataid][index + 1] : null;
+			let rev = format === "margin" ? data.revenue[index] : null;
+
+			let titleTag = formatNumber({
+				type: row.format || "standard",
+				current: cell,
+				previous: prev,
+				revenue: rev,
+				divider: "raw",
+			});
+
+			let cellContent = formatNumber({
+				type: row.format || "standard",
+				current: cell,
+				previous: prev,
+				revenue: rev,
+				divider,
+			});
+
+			let cellClass = () => {
+				if (format === "growth") {
+					return redOrGreen(cellContent, id);
+				}
+			};
+
+			return (
+				<td key={index} title={titleTag} className={cellClass()}>
+					{cellContent}
+				</td>
+			);
 		});
 
-		return dataArray;
-	}, [range, statement]);
-
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		useTable({ columns, data });
-
-	const getColumnProps = () => ({});
-
-	const getRowProps = (row) => ({
-		style: {
-			borderBottom: setBorder(row.cells[0].value),
-		},
-	});
-
-	const getCellProps = (cellInfo) => ({
-		onClick: () => console.log(cellInfo),
-		style: {
-			color: redOrGreen(cellInfo.row.cells[0].value, cellInfo.value),
-		},
-	});
-
-	const getTitle = (statement, range) => {
-		let rangeTitle = range.charAt(0).toUpperCase() + range.slice(1);
-
-		switch (statement) {
-			case "balance_sheet":
-				return `Balance Sheet (${rangeTitle})`;
-
-			case "cash_flow_statement":
-				return `Cash Flow Statement (${rangeTitle})`;
-
-			case "ratios":
-				return `Ratios and Metrics (${rangeTitle})`;
-
-			default:
-				return `Income Statement (${rangeTitle})`;
-		}
+		return (
+			<tr>
+				<td>{title}</td>
+				<td>
+					<span
+						onMouseEnter={() => {
+							console.log("enter");
+							setHoverChartActive(true);
+							setHoverChartRow(row);
+						}}
+						onMouseLeave={() => {
+							console.log("leave");
+							setHoverChartActive(false);
+							setHoverChartRow(null);
+						}}>
+						<HoverChartIcon />
+					</span>
+				</td>
+				{dataRows}
+			</tr>
+		);
 	};
 
 	return (
@@ -145,45 +116,26 @@ export default function FinancialTable() {
 			<h1 className="text-2xl font-bold mb-3">
 				{getTitle(statement, range)}
 			</h1>
+			<div className="hover-chart">
+				{hoverChartActive && <HoverChart row={hoverChartRow} />}
+			</div>
 			<div className="overflow-x-auto">
 				<table
-					{...getTableProps()}
 					className={[
 						styles.table,
 						styles.table_striped,
 						styles.table_financial,
 					].join(" ")}>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
-									<th
-										{...column.getHeaderProps([
-											getColumnProps(column),
-										])}>
-										{column.render("Header")}
-									</th>
-								))}
-							</tr>
-						))}
+						<tr>
+							<th>Period</th>
+							<th></th>
+							<HeaderRow />
+						</tr>
 					</thead>
-					<tbody {...getTableBodyProps()}>
-						{rows.map((row) => {
-							prepareRow(row);
-							return (
-								<tr {...row.getRowProps(getRowProps(row))}>
-									{row.cells.map((cell) => {
-										return (
-											<td
-												{...cell.getCellProps([
-													getCellProps(cell),
-												])}>
-												{cell.render("Cell")}
-											</td>
-										);
-									})}
-								</tr>
-							);
+					<tbody>
+						{data_map.map((row, index) => {
+							return <BodyRow row={row} key={index} />;
 						})}
 					</tbody>
 				</table>

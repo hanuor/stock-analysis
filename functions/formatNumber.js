@@ -16,7 +16,8 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 
 		case "growth": {
 			if (previous) {
-				return ((current / previous - 1) * 100).toFixed(2) + "%";
+				let decimals = divider === "raw" ? 3 : 2;
+				return ((current / previous - 1) * 100).toFixed(decimals) + "%";
 			}
 			return "-";
 		}
@@ -28,8 +29,10 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 			return "-";
 		}
 
-		case "percentage":
-			return (current * 100).toFixed(2) + "%";
+		case "percentage": {
+			let decimals = divider === "raw" ? 3 : 2;
+			return (current * 100).toFixed(decimals) + "%";
+		}
 
 		case "pershare": {
 			if (current) {
