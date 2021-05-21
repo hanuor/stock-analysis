@@ -6,13 +6,12 @@
 // todo: Add more metrics
 // ? Add a menu that allows formatting by millions/thousands/raw
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { financialsState } from "@State/financialsState";
 import PageContext from "@/components/Context/PageContext";
 import StateContext from "@/components/Context/StateContext";
 import { formatNumber, formatDate } from "@/Functions/formatNumber";
 import { redOrGreen, getTitle } from "@/Functions/financials.functions";
-import HoverChart from "@/Functions/hoverCharts";
 import { HoverChartIcon } from "@/components/Icons";
 import styles from "@/Styles/Table.module.css";
 import mapData from "@Data/financials_data_map";
@@ -22,8 +21,6 @@ export default function FinancialTable() {
 	const statement = financialsState((state) => state.statement);
 	const appState = useContext(StateContext);
 	const fullData = useContext(PageContext);
-	const [hoverChartActive, setHoverChartActive] = useState(false);
-	const [hoverChartRow, setHoverChartRow] = useState();
 
 	const data = fullData[statement][range]; // The data for the selected financial statement
 	const count =
@@ -92,19 +89,7 @@ export default function FinancialTable() {
 			<tr>
 				<td>{title}</td>
 				<td>
-					<span
-						onMouseEnter={() => {
-							console.log("enter");
-							setHoverChartActive(true);
-							setHoverChartRow(row);
-						}}
-						onMouseLeave={() => {
-							console.log("leave");
-							setHoverChartActive(false);
-							setHoverChartRow(null);
-						}}>
-						<HoverChartIcon />
-					</span>
+					<HoverChartIcon />
 				</td>
 				{dataRows}
 			</tr>
@@ -116,9 +101,6 @@ export default function FinancialTable() {
 			<h1 className="text-2xl font-bold mb-3">
 				{getTitle(statement, range)}
 			</h1>
-			<div className="hover-chart">
-				{hoverChartActive && <HoverChart row={hoverChartRow} />}
-			</div>
 			<div className="overflow-x-auto">
 				<table
 					className={[

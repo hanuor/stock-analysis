@@ -43,7 +43,7 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 
 		case "ratio": {
 			if (current) {
-				return current.toFixed(2);
+				return parseFloat(current).toFixed(2);
 			}
 			return "-";
 		}
