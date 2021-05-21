@@ -35,6 +35,16 @@ export const setBorder = (rowname) => {
 	return rowname.includes("Growth") && "1px solid #CCC";
 };
 
-export const makeHoverChart = (row) => {
-	console.log("Making hover chart for: " + row.title);
+// Format the Y axis on hover charts
+export const formatY = (value, format) => {
+	if (!format && value > 10000000) {
+		return new Intl.NumberFormat("en-US").format(value / 1000000);
+	}
+	if (format === "growth" || format === "margin") {
+		return value.toFixed(0) + "%";
+	}
+	if (format === "ratio" || format === "pershare") {
+		return value.toFixed(2);
+	}
+	return value;
 };

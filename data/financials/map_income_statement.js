@@ -3,20 +3,28 @@ export default function income_statement() {
 		{
 			id: "revenue",
 			title: "Revenue",
+			tooltip:
+				"Revenue is the amount of money a company receives from its main business activities, such as sales of products or services. Revenue is also called sales.",
 		},
 		{
 			id: "revenuegrowth",
 			data: "revenue",
 			title: "Revenue Growth",
 			format: "growth",
+			tooltip:
+				"Revenue growth is how much a company's revenue has increased compared to a previous time period, expressed as a percentage.",
 		},
 		{
 			id: "cor",
 			title: "Cost of Revenue",
+			tooltip:
+				"Cost of revenue is also called cost of goods sold (COGS). It is the variable cost related to the company's production of products and services.",
 		},
 		{
 			id: "gp",
 			title: "Gross Profit",
+			tooltip:
+				"Gross profit is a company’s profit after subtracting the costs directly linked to making and delivering its products and services.",
 		},
 		{
 			id: "sgna",

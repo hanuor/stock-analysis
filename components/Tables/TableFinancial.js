@@ -6,7 +6,7 @@
 // todo: Add more metrics
 // ? Add a menu that allows formatting by millions/thousands/raw
 
-import { useContext } from "react";
+import { useContext, forwardRef } from "react";
 import { financialsState } from "@State/financialsState";
 import PageContext from "@/components/Context/PageContext";
 import StateContext from "@/components/Context/StateContext";
@@ -15,17 +15,24 @@ import { redOrGreen, getTitle } from "@/Functions/financials.functions";
 import { HoverChartIcon } from "@/components/Icons";
 import styles from "@/Styles/Table.module.css";
 import mapData from "@Data/financials_data_map";
+import Tippy from "@tippyjs/react";
+import HeadlessTippy from "@tippyjs/react/headless";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
+import HoverChart from "@/components/Stocks/HoverChart";
 
-export default function FinancialTable() {
+export default function FinancialTable({ props }) {
 	const range = financialsState((state) => state.range);
 	const statement = financialsState((state) => state.statement);
 	const appState = useContext(StateContext);
 	const fullData = useContext(PageContext);
 
 	const data = fullData[statement][range]; // The data for the selected financial statement
+
+	let paywall = range === "annual" ? 15 : 40;
 	const count =
-		!appState.isLoggedIn && data.datekey.length > 15
-			? 15
+		!appState.isLoggedIn && data.datekey.length > paywall
+			? paywall
 			: data.datekey.length; // How many data columns
 	const divider = "millions"; // Can change to millions and raw dynamically
 	const data_map = mapData(statement);
@@ -41,10 +48,21 @@ export default function FinancialTable() {
 		});
 	};
 
+	const RowTitle = forwardRef((props, ref) => {
+		return <span ref={ref}>{props.title}</span>;
+	});
+
+	const ChartIcon = forwardRef((props, ref) => {
+		return (
+			<span ref={ref} className="z-50">
+				<HoverChartIcon />
+			</span>
+		);
+	});
+
 	const BodyRow = ({ row }) => {
 		let id = row.id;
 		let dataid = row.data || row.id;
-		let title = row.title;
 		let format = row.format || "standard";
 		let rowdata = data[dataid];
 
@@ -87,9 +105,37 @@ export default function FinancialTable() {
 
 		return (
 			<tr>
-				<td>{title}</td>
 				<td>
-					<HoverChartIcon />
+					<Tippy content={row.tooltip}>
+						<RowTitle title={row.title} />
+					</Tippy>
+				</td>
+				<td>
+					<HeadlessTippy
+						render={(attrs) => (
+							<div
+								className="bg-white border border-gray-200 p-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+								tabIndex="-1"
+								{...attrs}>
+								<HoverChart
+									data={data}
+									count={count}
+									row={row}
+									range={range}
+									ticker={props.ticker}
+								/>
+							</div>
+						)}
+						delay={100}
+						interactive="true"
+						offset={[150, -1]}
+						popperOptions={{
+							modifiers: [{ name: "flip", enabled: false }],
+						}}
+						trigger="mouseenter focus click"
+						zIndex={30}>
+						<ChartIcon />
+					</HeadlessTippy>
 				</td>
 				{dataRows}
 			</tr>

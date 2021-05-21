@@ -9,6 +9,7 @@
 		"lint": "eslint ./"
 	},
 	"dependencies": {
+		"@tippyjs/react": "^4.2.5",
 		"axios": "^0.21.1",
 		"chart.js": "^3.2.1",
 		"chartjs-adapter-luxon": "^1.0.0",

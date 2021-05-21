@@ -45,13 +45,16 @@
 
 .table_financial svg {
 	stroke: #777;
-	width: 20px;
-	height: 20px;
+	transition-delay: 0.1s;
+	width: 23px;
+	height: 23px;
 	margin-left: 1rem;
 }
 
 .table_financial svg:hover {
 	stroke: #2c6288;
-	width: 20px;
-	height: 20px;
+}
+
+.table_financial svg:focus {
+	stroke: #2c6288;
 }

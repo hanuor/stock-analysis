@@ -1,6 +1,7 @@
 export const HoverChartIcon = () => {
 	return (
 		<svg
+			className="border border-t-0 delay-100 border-transparent hover:border-gray-300 hover:bg-white relative z-10 hover:z-50"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 24 24"
 			strokeWidth="1.5"

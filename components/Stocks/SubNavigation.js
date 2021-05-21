@@ -10,7 +10,7 @@ const active = common + " text-black bg-gray-100";
 
 export default function TabNavigation({ path }) {
 	return (
-		<div className="flex flex-row justify-between">
+		<div className="flex flex-col sm:flex-row justify-between">
 			<Statement path={path} />
 			<Period path={path} />
 		</div>

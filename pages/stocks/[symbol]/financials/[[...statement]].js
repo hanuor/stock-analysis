@@ -44,7 +44,7 @@ export default function FinancialsPage(props) {
 	return (
 		<Stock props={props.info}>
 			<PageContext.Provider value={props.data}>
-				<FinancialTable />
+				<FinancialTable props={props.info} />
 			</PageContext.Provider>
 		</Stock>
 	);
