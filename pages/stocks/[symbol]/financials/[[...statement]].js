@@ -1,16 +1,21 @@
-/* eslint-disable react/display-name */
 import Stock from "@/components/Layout/StockLayout";
-import PageContext from "@/components/Context/PageContext";
-import FinancialTable from "@/components/Tables/TableFinancial";
+import FinancialTable from "@/components/Tables/FinancialTable";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { stockState } from "@State/stockState";
 import { financialsState } from "@State/financialsState";
 
 export default function FinancialsPage(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
+
+	const setInfo = stockState((state) => state.setInfo);
+	const setFinancialData = financialsState((state) => state.setFinancialData);
+
+	setInfo(props.info);
+	setFinancialData(props.data);
 
 	const statement = financialsState((state) => state.statement);
 	const setStatement = financialsState((state) => state.setStatement);
@@ -42,16 +47,14 @@ export default function FinancialsPage(props) {
 	}, []);
 
 	return (
-		<Stock props={props.info}>
-			<PageContext.Provider value={props.data}>
-				<FinancialTable props={props.info} />
-			</PageContext.Provider>
+		<Stock>
+			<FinancialTable />
 		</Stock>
 	);
 }
 
 export async function getStaticPaths() {
-	return { paths: [], fallback: true };
+	return { paths: [], fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {

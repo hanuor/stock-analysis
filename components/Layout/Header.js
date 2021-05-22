@@ -3,12 +3,12 @@ import Link from "next/link";
 import HeaderLogo from "@/components/Layout/Header/HeaderLogo";
 import HeaderLogoFull from "@/components/Layout/Header/HeaderLogoFull";
 import HeaderSearch from "@/Layout/Header/HeaderSearch";
+import HeaderLogin from "@/Layout/Header/HeaderLogin";
 
 import {
 	HeaderNavigation,
 	HamburgerIcon,
 	CloseIcon,
-	LoginNav,
 } from "@/Layout/Header/HeaderNavigation";
 
 export default function Header() {
@@ -77,7 +77,7 @@ export default function Header() {
 					<HeaderNavigation device="desktop" />
 				</div>
 				<div className="hidden lg:flex">
-					<LoginNav />
+					<HeaderLogin />
 				</div>
 			</div>
 			<div className="relative lg:hidden">
@@ -85,7 +85,7 @@ export default function Header() {
 					{open && (
 						<>
 							<HeaderNavigation device="mobile" />
-							<LoginNav />
+							<HeaderLogin />
 						</>
 					)}
 				</div>

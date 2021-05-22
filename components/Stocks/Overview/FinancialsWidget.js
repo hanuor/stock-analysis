@@ -1,12 +1,10 @@
-import PageContext from "@/components/Context/PageContext";
-import StockContext from "@/components/Context/StockContext";
 import Link from "next/link";
-import { useContext } from "react";
 import { Bar } from "react-chartjs-2";
+import { stockState } from "@State/stockState";
 
 export default function FinancialsWidget() {
-	const info = useContext(StockContext);
-	const data = useContext(PageContext);
+	const info = stockState((state) => state.info);
+	const data = stockState((state) => state.data);
 
 	const earnings = data.financialChart[2];
 	const colors = [];
@@ -56,7 +54,7 @@ export default function FinancialsWidget() {
 								position: "right",
 								ticks: {
 									beginAtZero: true,
-									callback: function (value, index, values) {
+									callback: function (value) {
 										let newvalue = value / 1000000;
 										return newvalue
 											.toString()

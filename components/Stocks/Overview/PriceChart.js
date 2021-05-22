@@ -3,19 +3,18 @@ import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import Axios from "axios";
-import { useContext } from "react";
-import StockContext from "@/components/Context/StockContext";
+import { stockState } from "@State/stockState";
 import styles from "@/Styles/PriceChart.module.css";
 
 export default function PriceChart() {
-	const stock = useContext(StockContext);
+	const info = stockState((state) => state.info);
 	const [chartData, setChartData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		async function fetchChartData() {
 			try {
-				const response = await Axios.get(`/api/chart?i=${stock.id}&m=1`, {
+				const response = await Axios.get(`/api/chart?i=${info.id}&m=1`, {
 					timeout: 5000,
 				});
 

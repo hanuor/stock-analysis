@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import PageContext from "@/components/Context/PageContext";
 import styles from "@/Styles/TopTables.module.css";
+import { stockState } from "@State/stockState";
 
 const css_table = "text-sm w-full";
 const css_rows = "border-b border-gray-200";
@@ -8,7 +7,7 @@ const css_cell_left = "py-2 px-1 border-b-1 border-gray-900 whitespace-nowrap";
 const css_cell_right = "py-2 px-1 text-right font-semibold whitespace-nowrap";
 
 export function InfoTable() {
-	const data = useContext(PageContext);
+	const data = stockState((state) => state.data);
 
 	return (
 		<div className={styles.info}>
@@ -57,7 +56,7 @@ export function InfoTable() {
 }
 
 export function QuoteTable() {
-	const data = useContext(PageContext);
+	const data = stockState((state) => state.data);
 
 	return (
 		<div className={styles.quote}>
@@ -76,7 +75,7 @@ export function QuoteTable() {
 						<td className={css_cell_right}>{data.close}</td>
 					</tr>
 					<tr className={css_rows}>
-						<td className={css_cell_left}>Day's Range</td>
+						<td className={css_cell_left}>Day&apos;s Range</td>
 						<td className={css_cell_right}>{data.rangeDay}</td>
 					</tr>
 					<tr className={css_rows}>

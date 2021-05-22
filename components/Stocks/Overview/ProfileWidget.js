@@ -1,11 +1,9 @@
-import PageContext from "@/components/Context/PageContext";
-import StockContext from "@/components/Context/StockContext";
 import Link from "next/link";
-import { useContext } from "react";
+import { stockState } from "@State/stockState";
 
 export default function Profile() {
-	const info = useContext(StockContext);
-	const data = useContext(PageContext);
+	const info = stockState((state) => state.info);
+	const data = stockState((state) => state.data);
 
 	return (
 		<div>

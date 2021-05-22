@@ -1,40 +1,57 @@
 /* eslint-disable react/display-name */
-// todo: Hover charts
-// todo: Tooltips and titles
+// xtodo: Hover charts
+// xtodo: Tooltips and titles
 // todo: Export functionality
 // todo: Left/right switch
 // todo: Add more metrics
+// todo: Optimize styling
 // ? Add a menu that allows formatting by millions/thousands/raw
+// ? Add an option to show "current/ttm"
+// ? Add data disclaimers
+// ! Make sure to optimize numbers for stocks that do not report in USD, such as BABA
+// ! Remove growth numbers if either is negative
+// ! Ratios: get rid of empty columns (first two usually)
+// todo: Enable export and left-right functionality @AZID
 
-import { useContext, forwardRef } from "react";
+import { forwardRef } from "react";
 import { financialsState } from "@State/financialsState";
-import PageContext from "@/components/Context/PageContext";
-import StateContext from "@/components/Context/StateContext";
-import { formatNumber, formatDate } from "@/Functions/formatNumber";
-import { redOrGreen, getTitle } from "@/Functions/financials.functions";
+import { stockState } from "@State/stockState";
+import userState from "@State/userState";
+import {
+	formatNumber,
+	formatYear,
+	redOrGreen,
+	getPeriodLabel,
+	getPeriodTooltip,
+} from "@/Functions/financials.functions";
 import { HoverChartIcon } from "@/components/Icons";
 import styles from "@/Styles/Table.module.css";
 import mapData from "@Data/financials_data_map";
+import HoverChart from "@/components/Stocks/HoverChart";
 import Tippy from "@tippyjs/react";
 import HeadlessTippy from "@tippyjs/react/headless";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import HoverChart from "@/components/Stocks/HoverChart";
+import TableTitle from "./FinancialTable/TableTitle";
 
-export default function FinancialTable({ props }) {
+export default function FinancialTable() {
 	const range = financialsState((state) => state.range);
 	const statement = financialsState((state) => state.statement);
-	const appState = useContext(StateContext);
-	const fullData = useContext(PageContext);
+	const divider = financialsState((state) => state.divider);
+	const financialData = financialsState((state) => state.financialData);
+	const info = stockState((state) => state.info);
+	const isLoggedIn = userState((state) => state.isLoggedIn);
 
-	const data = fullData[statement][range]; // The data for the selected financial statement
+	const data =
+		statement === "ratios" && range === "quarterly"
+			? financialData.ratios.trailing
+			: financialData[statement][range]; // The data for the selected financial statement
 
 	let paywall = range === "annual" ? 15 : 40;
 	const count =
-		!appState.isLoggedIn && data.datekey.length > paywall
+		!isLoggedIn && data.datekey.length > paywall
 			? paywall
 			: data.datekey.length; // How many data columns
-	const divider = "millions"; // Can change to millions and raw dynamically
 	const data_map = mapData(statement);
 
 	const HeaderRow = () => {
@@ -43,20 +60,40 @@ export default function FinancialTable({ props }) {
 				return;
 			}
 			return (
-				<th key={index}>{range === "annual" ? formatDate(cell) : cell}</th>
+				<th key={index} title={cell}>
+					{range === "annual" ? formatYear(cell) : cell}
+				</th>
 			);
 		});
 	};
 
 	const RowTitle = forwardRef((props, ref) => {
-		return <span ref={ref}>{props.title}</span>;
+		return (
+			<span ref={ref} className="cursor-help">
+				{props.title}
+			</span>
+		);
 	});
+
+	const IndicatorTooltip = ({ row }) => {
+		return (
+			<div>
+				<h4 className="text-xl font-semibold mb-2">{row.title}</h4>
+				<div className="border-t border-gray-300 pt-2">{row.tooltip}</div>
+				{row.formula && (
+					<div className="text-sm border-t border-gray-300 mt-3 pt-2">
+						{row.formula}
+					</div>
+				)}
+			</div>
+		);
+	};
 
 	const ChartIcon = forwardRef((props, ref) => {
 		return (
-			<span ref={ref} className="z-50">
+			<div ref={ref} className={styles.iconcelldiv} tabIndex={0}>
 				<HoverChartIcon />
-			</span>
+			</div>
 		);
 	});
 
@@ -65,13 +102,15 @@ export default function FinancialTable({ props }) {
 		let dataid = row.data || row.id;
 		let format = row.format || "standard";
 		let rowdata = data[dataid];
+		let offset = range === "annual" ? 1 : 4;
+		let total = 0;
 
 		let dataRows = rowdata.map((cell, index) => {
 			if (index > count) {
 				return;
 			}
 
-			let prev = format === "growth" ? data[dataid][index + 1] : null;
+			let prev = format === "growth" ? data[dataid][index + offset] : null;
 			let rev = format === "margin" ? data.revenue[index] : null;
 
 			let titleTag = formatNumber({
@@ -96,6 +135,10 @@ export default function FinancialTable({ props }) {
 				}
 			};
 
+			if (cell != 0 && cellContent != "-") {
+				total++;
+			}
+
 			return (
 				<td key={index} title={titleTag} className={cellClass()}>
 					{cellContent}
@@ -103,18 +146,25 @@ export default function FinancialTable({ props }) {
 			);
 		});
 
+		if (total == 0) {
+			return null;
+		}
 		return (
 			<tr>
 				<td>
-					<Tippy content={row.tooltip}>
+					<Tippy
+						content={<IndicatorTooltip row={row} />}
+						theme="light"
+						delay={100}
+						className={styles.bigTooltipText}>
 						<RowTitle title={row.title} />
 					</Tippy>
 				</td>
-				<td>
+				<td className={styles.iconcell}>
 					<HeadlessTippy
 						render={(attrs) => (
 							<div
-								className="bg-white border border-gray-200 p-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+								className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
 								tabIndex="-1"
 								{...attrs}>
 								<HoverChart
@@ -122,7 +172,8 @@ export default function FinancialTable({ props }) {
 									count={count}
 									row={row}
 									range={range}
-									ticker={props.ticker}
+									ticker={info.ticker}
+									divider={divider}
 								/>
 							</div>
 						)}
@@ -144,9 +195,7 @@ export default function FinancialTable({ props }) {
 
 	return (
 		<div className="px-4 lg:px-6 mx-auto">
-			<h1 className="text-2xl font-bold mb-3">
-				{getTitle(statement, range)}
-			</h1>
+			<TableTitle />
 			<div className="overflow-x-auto">
 				<table
 					className={[
@@ -156,7 +205,15 @@ export default function FinancialTable({ props }) {
 					].join(" ")}>
 					<thead>
 						<tr>
-							<th>Period</th>
+							<th>
+								<Tippy
+									content={getPeriodTooltip(range)}
+									theme="light"
+									delay={100}
+									className={styles.bigTooltipText}>
+									<RowTitle title={getPeriodLabel(range)} />
+								</Tippy>
+							</th>
 							<th></th>
 							<HeaderRow />
 						</tr>

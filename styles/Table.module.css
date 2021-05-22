@@ -46,12 +46,40 @@
 .table_financial svg {
 	stroke: #777;
 	transition-delay: 0.1s;
-	width: 23px;
-	height: 23px;
-	margin-left: 1rem;
+	width: 22px;
+	height: 22px;
+	margin: 0 5px;
 }
 
-.table_financial svg:hover {
+.bigTooltipText {
+	font-size: 1rem !important;
+	padding: 0.3rem;
+}
+
+.iconcell {
+	padding: 0 !important;
+}
+
+.iconcelldiv {
+	padding: 3px;
+	border: 1px solid;
+	border-color: transparent;
+	border-top: none;
+	transition-delay: 0.1s;
+	z-index: 10;
+	position: relative;
+}
+
+/* border border-t-0 delay-100 border-transparent hover:border-gray-300 hover:bg-white relative z-10 hover:z-50; */
+
+.iconcelldiv:hover,
+.iconcelldiv:focus {
+	background-color: white;
+	border-color: rgba(229, 231, 235, 1);
+	z-index: 9999;
+}
+
+.iconcelldiv:hover svg {
 	stroke: #2c6288;
 }
 

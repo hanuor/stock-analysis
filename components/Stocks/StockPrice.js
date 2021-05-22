@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import StockContext from "@/components/Context/StockContext";
+import { stockState } from "@State/stockState";
 import { IconMoon, IconSun } from "@/components/Stocks/PriceIcons";
 
 const changeColor = (change) => {
@@ -76,8 +75,8 @@ const ExtendedClose = ({ quote }) => {
 };
 
 export default function StockPrice() {
-	const stock = useContext(StockContext);
-	const quote = stock.quote;
+	const info = stockState((state) => state.info);
+	const quote = info.quote;
 
 	// Check if extended hours trading
 	const extendedHours = quote.ext ? true : false;

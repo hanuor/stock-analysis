@@ -86,5 +86,21 @@
 		"prefix": "cn",
 		"body": ["className=\"$1\""],
 		"description": "className"
+	},
+	"Get State From Zustand": {
+		"prefix": "st",
+		"body": [
+			"const ${1:ItemName} = ${2:StoreName}State(state => state.${1:ItemName});"
+		],
+		"description": "Get State From Zustand"
+	},
+	"Create useEffect": {
+		"prefix": "usee",
+		"body": [
+			"useEffect(() => {",
+			"${1:CodeToExecute}",
+			"}, [${2:Dependencies}]);"
+		],
+		"description": "Create useEffect"
 	}
 }
