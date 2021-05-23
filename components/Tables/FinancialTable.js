@@ -158,7 +158,7 @@ export default function FinancialTable() {
 		}
 		return (
 			<tr>
-				<td>
+				<td className="flex flex-row justify-between items-center">
 					<Tippy
 						content={<IndicatorTooltip row={row} />}
 						theme="light"
@@ -166,8 +166,6 @@ export default function FinancialTable() {
 						className={styles.bigTooltipText}>
 						<RowTitle title={row.title} />
 					</Tippy>
-				</td>
-				<td className={styles.iconcell}>
 					<HeadlessTippy
 						render={(attrs) => (
 							<div
