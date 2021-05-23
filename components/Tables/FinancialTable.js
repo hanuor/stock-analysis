@@ -8,6 +8,12 @@
 // ? Add a menu that allows formatting by millions/thousands/raw
 // ? Add an option to show "current/ttm"
 // ? Add data disclaimers
+// ? Add link to 10K/10Q?
+// ? Link to financial statement definitions?
+// ? Add easy symbol switch
+// ? Include formats in export: csv, plain text, pdf
+// ? Add print button?
+// ? Make left column sticky
 // ! Make sure to optimize numbers for stocks that do not report in USD, such as BABA
 // ! Remove growth numbers if either is negative
 // ! Ratios: get rid of empty columns (first two usually)
@@ -33,6 +39,7 @@ import HeadlessTippy from "@tippyjs/react/headless";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import TableTitle from "./FinancialTable/TableTitle";
+import TableControls from "./FinancialTable/TableControls";
 
 export default function FinancialTable() {
 	const range = financialsState((state) => state.range);
@@ -195,7 +202,10 @@ export default function FinancialTable() {
 
 	return (
 		<div className="px-4 lg:px-6 mx-auto">
-			<TableTitle />
+			<div className="flex flex-row justify-between items-end">
+				<TableTitle />
+				<TableControls />
+			</div>
 			<div className="overflow-x-auto">
 				<table
 					className={[

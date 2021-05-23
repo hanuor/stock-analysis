@@ -35,6 +35,11 @@
 		"body": ["function ${1:Name}($2) {", "  $3", "}"],
 		"description": "Function"
 	},
+	"Function (arrow)": {
+		"prefix": "fa",
+		"body": ["const ${1:Name} = ($2) => {", "  ${3:// Code goes here}", "}"],
+		"description": "Function"
+	},
 	"Function (Export)": {
 		"prefix": "fe",
 		"body": ["export function ${1:Name}(${2:Props}) {", "  ${3:code}", "}"],
@@ -102,5 +107,14 @@
 			"}, [${2:Dependencies}]);"
 		],
 		"description": "Create useEffect"
+	},
+	"Export arrow function const": {
+		"prefix": "exp",
+		"body": [
+			"export const ${1:FunctionName} = (${2}) => {",
+			"${3:CodeToExecute}",
+			"}"
+		],
+		"description": "Export arrow function const"
 	}
 }

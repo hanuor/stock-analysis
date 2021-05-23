@@ -45,7 +45,10 @@ module.exports = {
 	},
 
 	variants: {
-		extend: {},
+		extend: {
+			opacity: ["focus-within"],
+			backgroundColor: ["focus-within"],
+		},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };

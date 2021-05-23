@@ -1,3 +1,4 @@
+// todo: Add the "persist" middleware to remember logged in state
 import create from "zustand";
 
 const userState = create((set) => ({
