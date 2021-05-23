@@ -166,31 +166,25 @@ export default function StockChart(props) {
 							<EdgeIndicator
 								itemType="last"
 								rectWidth={margin.right - 20}
-								rectHeight={10}
-								hideLine={true}
-								fill="#FFFFFF"
-								dx={1}
+								rectHeight={15}
+								fill={ma2color}
 								orient="right"
 								edgeAt="right"
 								fontSize="11"
-								fontFamily="-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
 								lineStroke={ma2color}
 								displayFormat={pricesDisplayFormat}
 								yAccessor={ema26.accessor()}
-								textFill={ma2color}
 							/>
 							<EdgeIndicator
-								fontFamily="-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
 								itemType="last"
 								rectWidth={margin.right - 20}
-								rectHeight={10}
+								rectHeight={15}
 								hideLine={true}
-								fill="#FFFFFF"
+								fill={ma1color}
 								orient="right"
 								edgeAt="right"
 								fontSize="11"
 								lineStroke={ma1color}
-								textFill={ma1color}
 								displayFormat={pricesDisplayFormat}
 								yAccessor={ema12.accessor()}
 							/>
@@ -201,8 +195,7 @@ export default function StockChart(props) {
 								lineStroke={openCloseColor}
 								displayFormat={pricesDisplayFormat}
 								yAccessor={yEdgeIndicator}
-								fontSize="bold 13"
-								fontFamily="-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
+								fontSize="13"
 							/>
 							<MovingAverageTooltip
 								origin={[8, 24]}
@@ -236,6 +229,8 @@ export default function StockChart(props) {
 								gridLinesStrokeWidth={0}
 								tickFormat={format(".2s")}
 								showDomain={false}
+								tickStrokeOpacity={0}
+								innerTickSize={0}
 							/>
 							<BarSeries
 								clip="false"
@@ -247,18 +242,14 @@ export default function StockChart(props) {
 							<EdgeIndicator
 								itemType="last"
 								rectWidth={margin.right - 20}
-								rectHeight={10}
-								fill="#FFFFFF"
-								dx={3}
-								hideLine={true}
+								rectHeight={15}
+								fill={volumeColor}
 								orient="right"
 								edgeAt="right"
 								fontSize="11"
-								fontFamily="-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
 								lineStroke={openCloseColor}
 								displayFormat={format(".4s")}
 								yAccessor={volumeSeries}
-								textFill="#006400"
 								yAxisPad={0}
 							/>
 						</Chart>
