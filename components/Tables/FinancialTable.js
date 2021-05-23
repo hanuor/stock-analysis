@@ -1,8 +1,8 @@
 /* eslint-disable react/display-name */
 // xtodo: Hover charts
 // xtodo: Tooltips and titles
-// todo: Export functionality
-// todo: Left/right switch
+// xtodo: Export functionality
+// xtodo: Left/right switch
 // todo: Add more metrics
 // todo: Optimize styling
 // ? Add a menu that allows formatting by millions/thousands/raw
@@ -17,7 +17,6 @@
 // ! Make sure to optimize numbers for stocks that do not report in USD, such as BABA
 // ! Remove growth numbers if either is negative
 // ! Ratios: get rid of empty columns (first two usually)
-// todo: Enable export and left-right functionality @AZID
 
 import { forwardRef } from "react";
 import { financialsState } from "@State/financialsState";
@@ -46,6 +45,7 @@ export default function FinancialTable() {
 	const statement = financialsState((state) => state.statement);
 	const divider = financialsState((state) => state.divider);
 	const financialData = financialsState((state) => state.financialData);
+	const leftRight = financialsState((state) => state.leftRight);
 	const info = stockState((state) => state.info);
 	const isLoggedIn = userState((state) => state.isLoggedIn);
 
@@ -55,17 +55,20 @@ export default function FinancialTable() {
 			: financialData[statement][range]; // The data for the selected financial statement
 
 	let paywall = range === "annual" ? 15 : 40;
-	const count =
-		!isLoggedIn && data.datekey.length > paywall
-			? paywall
-			: data.datekey.length; // How many data columns
+	const fullcount = data.datekey.length;
+	const showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
 	const data_map = mapData(statement);
 
 	const HeaderRow = () => {
-		return data.datekey.map((cell, index) => {
-			if (index > count) {
-				return;
-			}
+		let headerdata = data.datekey;
+		if (fullcount > showcount) {
+			headerdata = headerdata.slice(0, showcount);
+		}
+		if (leftRight) {
+			headerdata = headerdata.reverse();
+		}
+
+		return headerdata.map((cell, index) => {
 			return (
 				<th key={index} title={cell}>
 					{range === "annual" ? formatYear(cell) : cell}
@@ -108,17 +111,25 @@ export default function FinancialTable() {
 		let id = row.id;
 		let dataid = row.data || row.id;
 		let format = row.format || "standard";
-		let rowdata = data[dataid];
 		let offset = range === "annual" ? 1 : 4;
 		let total = 0;
 
-		let dataRows = rowdata.map((cell, index) => {
-			if (index > count) {
-				return;
-			}
+		let rowdata = data[dataid];
+		let revenuedata = data.revenue;
+		if (fullcount > showcount) {
+			revenuedata = revenuedata.slice(0, showcount);
+			rowdata = rowdata.slice(0, showcount);
+		}
 
-			let prev = format === "growth" ? data[dataid][index + offset] : null;
-			let rev = format === "margin" ? data.revenue[index] : null;
+		if (leftRight) {
+			offset = -offset;
+			revenuedata = revenuedata.reverse(0);
+			rowdata = rowdata.reverse();
+		}
+
+		let dataRows = rowdata.map((cell, index) => {
+			let prev = format === "growth" ? rowdata[index + offset] : null;
+			let rev = format === "margin" ? revenuedata[index] : null;
 
 			let titleTag = formatNumber({
 				type: row.format || "standard",
@@ -174,7 +185,7 @@ export default function FinancialTable() {
 								{...attrs}>
 								<HoverChart
 									data={data}
-									count={count}
+									count={showcount}
 									row={row}
 									range={range}
 									ticker={info.ticker}
@@ -222,7 +233,6 @@ export default function FinancialTable() {
 									<RowTitle title={getPeriodLabel(range)} />
 								</Tippy>
 							</th>
-							<th></th>
 							<HeaderRow />
 						</tr>
 					</thead>
