@@ -1,6 +1,7 @@
 import Stock from "@/components/Layout/StockLayout";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
 import { stockState } from "@State/stockState";
+import { useEffect } from "react";
 
 export default function SymbolStatistics(props) {
 	if (!props.info) {
@@ -9,8 +10,11 @@ export default function SymbolStatistics(props) {
 
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
-	setInfo(props.info);
-	setData(props.data);
+
+	useEffect(() => {
+		setInfo(props.info);
+		setData(props.data);
+	}, []);
 
 	return (
 		<Stock>

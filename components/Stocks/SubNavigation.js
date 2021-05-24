@@ -2,11 +2,15 @@ import Link from "next/link";
 import { financialsState } from "@State/financialsState";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import styles from "@/Styles/TabMenu.module.css";
 
 // styles
-const common = "block text-sm py-1 sm:py-2 px-2 sm:px-5 cursor-pointer";
-const inactive = common + " text-blue-500 hover:text-black hover:bg-gray-100";
-const active = common + " text-black bg-gray-100";
+const common =
+	"text-[15px] sm:text-base block py-2 sm:py-2 px-2.5 sm:px-5 cursor-pointer whitespace-nowrap";
+const inactive =
+	common +
+	" text-blue-500 hover:text-black hover:bg-gray-100  hover:font-semibold";
+const active = common + " text-black bg-gray-100 font-semibold";
 
 export default function TabNavigation({ path }) {
 	return (
@@ -19,24 +23,17 @@ export default function TabNavigation({ path }) {
 
 const Statement = ({ path }) => {
 	const statement = financialsState((state) => state.statement);
-	const setStatement = financialsState((state) => state.setStatement);
-
-	const changePage = (oldPage, newPage) => {
-		if (oldPage !== newPage) {
-			setStatement(newPage);
-		}
-	};
 
 	return (
-		<nav className="mb-4">
-			<ul className="flex flex-row w-full overflow-auto">
+		<nav className="mb-2">
+			<ul className={"flex flex-row w-full overflow-auto " + styles.navmenu}>
 				<li>
 					<Link href={`/stocks/${path.symbol}/financials/`}>
 						<a
 							className={
 								statement == "income_statement" ? active : inactive
 							}
-							onClick={() => changePage(statement, "income_statement")}>
+							data-title="Income">
 							Income
 						</a>
 					</Link>
@@ -47,7 +44,7 @@ const Statement = ({ path }) => {
 							className={
 								statement == "balance_sheet" ? active : inactive
 							}
-							onClick={() => changePage(statement, "balance_sheet")}>
+							data-title="Balance Sheet">
 							Balance Sheet
 						</a>
 					</Link>
@@ -59,9 +56,7 @@ const Statement = ({ path }) => {
 							className={
 								statement == "cash_flow_statement" ? active : inactive
 							}
-							onClick={() =>
-								changePage(statement, "cash_flow_statement")
-							}>
+							data-title="Cash Flow">
 							Cash Flow
 						</a>
 					</Link>
@@ -70,7 +65,7 @@ const Statement = ({ path }) => {
 					<Link href={`/stocks/${path.symbol}/financials/ratios/`}>
 						<a
 							className={statement == "ratios" ? active : inactive}
-							onClick={() => changePage(statement, "ratios")}>
+							data-title="Ratios">
 							Ratios
 						</a>
 					</Link>
@@ -123,14 +118,15 @@ const Period = ({ path }) => {
 	}, [range]);
 
 	return (
-		<nav className="mb-4">
-			<ul className="flex flex-row w-full overflow-auto">
+		<nav className="sm:mb-2">
+			<ul className={"flex flex-row w-full overflow-auto " + styles.navmenu}>
 				<li>
 					<span
 						className={range == "annual" ? active : inactive}
 						onClick={function () {
 							setRange("annual");
-						}}>
+						}}
+						data-title="Annual">
 						Annual
 					</span>
 				</li>
@@ -141,7 +137,8 @@ const Period = ({ path }) => {
 							if (range !== "quarterly") {
 								setRange("quarterly");
 							}
-						}}>
+						}}
+						data-title="Quarterly">
 						Quarterly
 					</span>
 				</li>
@@ -150,7 +147,8 @@ const Period = ({ path }) => {
 						className={range == "trailing" ? active : inactive}
 						onClick={function () {
 							setRange("trailing");
-						}}>
+						}}
+						data-title="Trailing">
 						Trailing
 					</span>
 				</li>

@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-// todo: Format dates for tooltips on quarterly/trailing
+// xtodo: Format dates for tooltips on quarterly/trailing
 // todo: Add y-axis data tags @AZID
+// ! Skip zero values at the beginning
 import { Bar, defaults } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import {

@@ -9,6 +9,7 @@ import AnalystWidget from "@/components/Stocks/Overview/AnalystWidget";
 import Axios from "axios";
 import styles from "@/Styles/TopGrid.module.css";
 import { stockState } from "@State/stockState";
+import { useEffect } from "react";
 
 export default function StockOverview(props) {
 	if (!props.info) {
@@ -17,8 +18,10 @@ export default function StockOverview(props) {
 
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
-	setInfo(props.info);
-	setData(props.data);
+	useEffect(() => {
+		setInfo(props.info);
+		setData(props.data);
+	}, []);
 
 	return (
 		<Stock>

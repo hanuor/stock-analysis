@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function StockNews({ props }) {
@@ -48,7 +47,7 @@ function NewsArticle({ content, num }) {
 				href={content.url}
 				target="_blank"
 				rel="nofollow noopener noreferrer">
-				<Image src={content.image} width={640} height={360} />
+				<img src={content.image} width={640} height={360} alt="" />
 			</a>
 
 			<div>

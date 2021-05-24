@@ -7,6 +7,7 @@ export default function ratios() {
 			tooltip:
 				"Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
 			formula: "Market Cap = Shares Outstanding * Stock Price",
+			bold: true,
 		},
 		{
 			id: "marketcapgrowth",
@@ -67,6 +68,7 @@ export default function ratios() {
 			tooltip:
 				"The price to operating cash flow (P/OCF) ratio measures the price of a stock relative to operating cash flow.",
 			formula: "P/OCF Ratio = Market Capitalization / Operating Cash Flow",
+			border: true,
 		},
 		{
 			id: "evrevenue",
@@ -99,7 +101,9 @@ export default function ratios() {
 			tooltip:
 				"The enterprise value to free cash flow (EV/FCF) ratio is similar to the price to free cash flow ratio, except the price is adjusted for the company's cash and debt.",
 			formula: "EV/FCF Ratio = Enterprise Value / Free Cash Flow",
+			border: true,
 		},
+
 		{
 			id: "debtequity",
 			title: "Debt / Equity Ratio",
@@ -109,12 +113,29 @@ export default function ratios() {
 			formula: "Debt / Equity Ratio = Total Debt / Shareholders' Equity",
 		},
 		{
+			id: "debtebitda",
+			title: "Debt / EBITDA Ratio",
+			format: "ratio",
+			tooltip:
+				"The debt-to-EBITDA ratio is a company's debt levels relative to its trailing twelve-month EBITDA. A high ratio implies that debt is high relative to the company's earnings.",
+			formula: "Debt / EBITDA Ratio = Total Debt / EBITDA (ttm)",
+		},
+		{
+			id: "debtfcf",
+			title: "Debt / FCF Ratio",
+			format: "ratio",
+			tooltip:
+				"The debt-to-FCF ratio measures the debt levels relative to a company's free cash flow over the previous twelve months. If the ratio is high, it means that the company will need to spend a lot of the cash it generates on paying back debt.",
+			formula: "Debt / FCF Ratio = Total Debt / Free Cash Flow (ttm)",
+		},
+		{
 			id: "currentratio",
 			title: "Current Ratio",
 			format: "ratio",
 			tooltip:
 				"The current ratio is used to measure a company's short-term liquidity. A low number can indicate that a company will have trouble paying its upcoming liabilities.",
 			formula: "Current Ratio = Current Assets / Current Liabilities",
+			border: true,
 		},
 		{
 			id: "assetturnover",
@@ -147,6 +168,7 @@ export default function ratios() {
 			tooltip:
 				"Return on invested capital (ROIC) measures how effective a company is at investing its capital in order to increase profits. It is calculated by dividing the NOPAT (Net Operating Income After Tax) by the average invested capital in the previous year.",
 			formula: "ROIC = (NOPAT / Average Invested Capital) * 100%",
+			border: true,
 		},
 		{
 			id: "earningsyield",
@@ -171,7 +193,7 @@ export default function ratios() {
 			tooltip:
 				"The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.",
 			formula:
-				"Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%",
+				"Dividend Yield = (Annual Dividends Per Share / (Market Cap / Shares Outstanding)) * 100%",
 		},
 		{
 			id: "payoutratio",
@@ -181,6 +203,23 @@ export default function ratios() {
 				"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
 			formula:
 				"Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%",
+		},
+		{
+			id: "buybackyield",
+			title: "Buyback Yield / Dilution",
+			format: "percentage",
+			tooltip:
+				"The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.",
+			formula:
+				"Buyback Yield = - (Share Issuance and Repurchase / Market Cap) * 100%",
+		},
+		{
+			id: "totalreturn",
+			title: "Total Shareholder Return",
+			format: "percentage",
+			tooltip:
+				"The total shareholder return is how much the company is returning to shareholders via dividends and share buybacks combined. It is calculated by adding up the dividend yield and buyback yield",
+			formula: "Total Shareholder Return = Dividend Yield + Buyback Yield",
 		},
 	];
 

@@ -44,7 +44,7 @@ export default function TableControls() {
 	};
 
 	return (
-		<div className="flex flex-row space-x-2 pb-2">
+		<div className="hidden sm:flex sm:flex-row sm:space-x-2 pb-2">
 			<div className="w-46 relative dropdown">
 				<button
 					id="expxlxs"

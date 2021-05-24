@@ -6,6 +6,10 @@ export default function FinancialsWidget() {
 	const info = stockState((state) => state.info);
 	const data = stockState((state) => state.data);
 
+	if (!data.financialChart) {
+		return <h1>Loading...</h1>;
+	}
+
 	const earnings = data.financialChart[2];
 	const colors = [];
 

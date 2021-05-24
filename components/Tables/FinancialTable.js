@@ -3,7 +3,7 @@
 // xtodo: Tooltips and titles
 // xtodo: Export functionality
 // xtodo: Left/right switch
-// todo: Add more metrics
+// xtodo: Add more metrics
 // todo: Optimize styling
 // ? Add a menu that allows formatting by millions/thousands/raw
 // ? Add an option to show "current/ttm"
@@ -30,7 +30,7 @@ import {
 	getPeriodTooltip,
 } from "@/Functions/financials.functions";
 import { HoverChartIcon } from "@/components/Icons";
-import styles from "@/Styles/Table.module.css";
+import styles from "@/Styles/FinancialTable.module.css";
 import mapData from "@Data/financials_data_map";
 import HoverChart from "@/components/Stocks/HoverChart";
 import Tippy from "@tippyjs/react";
@@ -40,11 +40,10 @@ import "tippy.js/themes/light.css";
 import TableTitle from "./FinancialTable/TableTitle";
 import TableControls from "./FinancialTable/TableControls";
 
-export default function FinancialTable() {
+export default function FinancialTable({ financialData }) {
 	const range = financialsState((state) => state.range);
 	const statement = financialsState((state) => state.statement);
 	const divider = financialsState((state) => state.divider);
-	const financialData = financialsState((state) => state.financialData);
 	const leftRight = financialsState((state) => state.leftRight);
 	const info = stockState((state) => state.info);
 	const isLoggedIn = userState((state) => state.isLoggedIn);
@@ -78,8 +77,10 @@ export default function FinancialTable() {
 	};
 
 	const RowTitle = forwardRef((props, ref) => {
+		let margin = props.indent ? " ml-3" : "";
+
 		return (
-			<span ref={ref} className="cursor-help">
+			<span ref={ref} className={"cursor-help" + margin}>
 				{props.title}
 			</span>
 		);
@@ -117,13 +118,17 @@ export default function FinancialTable() {
 		let rowdata = data[dataid];
 		let revenuedata = data.revenue;
 		if (fullcount > showcount) {
-			revenuedata = revenuedata.slice(0, showcount);
+			if (statement === "income_statement") {
+				revenuedata = revenuedata.slice(0, showcount);
+			}
 			rowdata = rowdata.slice(0, showcount);
 		}
 
 		if (leftRight) {
 			offset = -offset;
-			revenuedata = revenuedata.reverse(0);
+			if (statement === "income_statement") {
+				revenuedata = revenuedata.reverse(0);
+			}
 			rowdata = rowdata.reverse();
 		}
 
@@ -164,48 +169,68 @@ export default function FinancialTable() {
 			);
 		});
 
+		const getRowStyles = () => {
+			let styles = [];
+			if (row.format === "growth" || row.border) {
+				styles.push("border-b-2 border-gray-300 text-[0.95rem]");
+			}
+			if (row.bold) {
+				styles.push("font-semibold text-gray-800");
+			}
+			if (row.extrabold) {
+				styles.push("font-bold text-gray-700");
+			}
+
+			return styles.join(" ");
+		};
+
 		if (total == 0) {
 			return null;
 		}
 		return (
-			<tr>
-				<td className="flex flex-row justify-between items-center">
-					<Tippy
-						content={<IndicatorTooltip row={row} />}
-						theme="light"
-						delay={100}
-						className={styles.bigTooltipText}>
-						<RowTitle title={row.title} />
-					</Tippy>
-					<HeadlessTippy
-						render={(attrs) => (
-							<div
-								className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
-								tabIndex="-1"
-								{...attrs}>
-								<HoverChart
-									data={data}
-									count={showcount}
-									row={row}
-									range={range}
-									ticker={info.ticker}
-									divider={divider}
-								/>
-							</div>
-						)}
-						delay={100}
-						interactive="true"
-						offset={[150, -1]}
-						popperOptions={{
-							modifiers: [{ name: "flip", enabled: false }],
-						}}
-						trigger="mouseenter focus click"
-						zIndex={30}>
-						<ChartIcon />
-					</HeadlessTippy>
-				</td>
-				{dataRows}
-			</tr>
+			<>
+				<tr className={getRowStyles()}>
+					<td className="flex flex-row justify-between items-center">
+						<Tippy
+							content={<IndicatorTooltip row={row} />}
+							theme="light"
+							delay={100}
+							className={styles.bigTooltipText}>
+							<RowTitle
+								title={row.title}
+								indent={row.format === "growth" || row.indent}
+							/>
+						</Tippy>
+						<HeadlessTippy
+							render={(attrs) => (
+								<div
+									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+									tabIndex="-1"
+									{...attrs}>
+									<HoverChart
+										data={data}
+										count={showcount}
+										row={row}
+										range={range}
+										ticker={info.ticker}
+										divider={divider}
+									/>
+								</div>
+							)}
+							delay={100}
+							interactive="true"
+							offset={[150, -1]}
+							popperOptions={{
+								modifiers: [{ name: "flip", enabled: false }],
+							}}
+							trigger="mouseenter focus click"
+							zIndex={30}>
+							<ChartIcon />
+						</HeadlessTippy>
+					</td>
+					{dataRows}
+				</tr>
+			</>
 		);
 	};
 
@@ -215,16 +240,11 @@ export default function FinancialTable() {
 				<TableTitle />
 				<TableControls />
 			</div>
-			<div className="overflow-x-auto">
-				<table
-					className={[
-						styles.table,
-						styles.table_striped,
-						styles.table_financial,
-					].join(" ")}>
+			<div className="overflow-x-auto border border-gray-300">
+				<table className={[styles.table, styles.table_financial].join(" ")}>
 					<thead>
-						<tr>
-							<th>
+						<tr className="border-b-2 border-gray-300">
+							<th className="flex flex-row justify-between items-center">
 								<Tippy
 									content={getPeriodTooltip(range)}
 									theme="light"

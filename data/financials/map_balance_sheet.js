@@ -19,6 +19,7 @@ export default function balance_sheet() {
 				'Cash and cash equivalents is the sum of "Cash & Equivalents" and "Short-Term Investments." This is the amount of money that a company has quick access to, assuming that the cash equivalents and short-term investments can be sold at a short notice.',
 			formula:
 				"Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments",
+			bold: true,
 		},
 		{
 			id: "cashgrowth",
@@ -52,6 +53,8 @@ export default function balance_sheet() {
 			title: "Total Current Assets",
 			tooltip:
 				"Total current assets includes all current assets, including cash and equivalents, short-term investments, receivables, inventory and others. Current assets are things that easily be sold for cash or will be used within one year.",
+			bold: true,
+			border: true,
 		},
 		{
 			id: "ppnenet",
@@ -82,12 +85,15 @@ export default function balance_sheet() {
 			title: "Total Long-Term Assets",
 			tooltip:
 				"Total long-term assets includes all long-term assets, including PP&E, goodwill, intangibles and others. Long-term (non-current) assets are things that can not be sold for cash easily or are considered to last for more than one year.",
+			bold: true,
 		},
 		{
 			id: "assets",
 			title: "Total Assets",
 			tooltip:
 				"Total assets is the sum of all current and non-current assets on the balance sheet. Assets are everything that the company owns.",
+			extrabold: true,
+			border: true,
 		},
 		{
 			id: "payables",
@@ -118,6 +124,8 @@ export default function balance_sheet() {
 			title: "Total Current Liabilities",
 			tooltip:
 				"Total current liabilities are all financial obligations that the company owes and are due within one year. This includes accounts payable, deferred revenue, current debt and others.",
+			bold: true,
+			border: true,
 		},
 		{
 			id: "debtnc",
@@ -136,6 +144,7 @@ export default function balance_sheet() {
 			title: "Total Long-Term Liabilities",
 			tooltip:
 				"Total long-term liabilities are all long-term (non-current) financial obligations of the company, including long-term debt and others.",
+			bold: true,
 		},
 		{
 			id: "liabilities",
@@ -144,6 +153,8 @@ export default function balance_sheet() {
 				"Total liabilities are all financial obligations of the company, including both current and long-term (non-current) liabilities. Liabilities are everything that the company owes.",
 			formula:
 				"Total Liabilities = Current Liabilities + Long-Term Liabilities",
+			extrabold: true,
+			border: true,
 		},
 		{
 			id: "debt",
@@ -151,6 +162,7 @@ export default function balance_sheet() {
 			tooltip:
 				'Total debt is the total amount of liabilities categorized as "debt" on the balance sheet. It includes both current and long-term (non-current) debt.',
 			formula: "Total Debt = Current Debt + Long-Term Debt",
+			bold: true,
 		},
 		{
 			id: "debtgrowth",
@@ -186,12 +198,15 @@ export default function balance_sheet() {
 			tooltip:
 				"Shareholders’ equity is also called book value or net worth. It can be seen as the amount of money held by investors inside the company. It is calculated by subtracting all liabilities from all assets.",
 			formula: "Shareholders' Equity = Total Assets - Total Liabilities",
+			extrabold: true,
+			border: true,
 		},
 		{
 			id: "liabilitiesequity",
 			title: "Total Liabilities and Equity",
 			tooltip:
 				"Total liabilities and equity are calculated by adding up total liabilities and shareholders' equity. This number is identical to total assets.",
+			bold: true,
 		},
 		{
 			id: "netcash",

@@ -45,10 +45,13 @@ export const setBorder = (rowname) => {
 
 // Format the Y axis on hover charts
 export const formatY = (value, format) => {
-	if (!format && value > 10000000) {
+	if (!format && (value > 10000000 || value < -10000000)) {
 		return new Intl.NumberFormat("en-US").format(value / 1000000);
 	}
-	if (format === "reduce_precision" && value > 10000000) {
+	if (
+		format === "reduce_precision" &&
+		(value > 10000000 || value < -10000000)
+	) {
 		return new Intl.NumberFormat("en-US").format(value / 1000000);
 	}
 	if (format === "growth" || format === "margin") {

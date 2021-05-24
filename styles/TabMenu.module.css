@@ -1,0 +1,9 @@
+.navmenu a::before,
+.navmenu li span::before {
+	display: block;
+	content: attr(data-title);
+	font-weight: 600;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}

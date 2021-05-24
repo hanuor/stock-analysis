@@ -7,6 +7,7 @@ module.exports = {
 			"./pages/**/*.{js,ts,jsx,tsx}",
 			"./components/**/*.{js,ts,jsx,tsx}",
 			"./functions/**/*.{js,ts,jsx,tsx}",
+			"./data/**/*.{js,ts,jsx,tsx}",
 		],
 		options: {
 			safelist: [

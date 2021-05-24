@@ -12,10 +12,10 @@ export default function FinancialsPage(props) {
 	}
 
 	const setInfo = stockState((state) => state.setInfo);
-	const setFinancialData = financialsState((state) => state.setFinancialData);
 
-	setInfo(props.info);
-	setFinancialData(props.data);
+	useEffect(() => {
+		setInfo(props.info);
+	}, []);
 
 	const statement = financialsState((state) => state.statement);
 	const setStatement = financialsState((state) => state.setStatement);
@@ -28,6 +28,11 @@ export default function FinancialsPage(props) {
 
 		if (subpage !== statement) {
 			switch (subpage) {
+				case "income-statement": {
+					setStatement("income_statement");
+					break;
+				}
+
 				case "balance-sheet": {
 					setStatement("balance_sheet");
 					break;
@@ -44,11 +49,11 @@ export default function FinancialsPage(props) {
 				}
 			}
 		}
-	}, []);
+	});
 
 	return (
 		<Stock>
-			<FinancialTable />
+			<FinancialTable financialData={props.data} />
 		</Stock>
 	);
 }

@@ -28,7 +28,7 @@ export default function PriceChart() {
 		fetchChartData();
 	}, []);
 
-	if (isLoading) {
+	if (isLoading || !chartData) {
 		return (
 			<div className="w-full h-full">
 				<div className="flex justify-center items-center h-full bg-gray-50 border border-gray-200">

@@ -76,6 +76,11 @@ const ExtendedClose = ({ quote }) => {
 
 export default function StockPrice() {
 	const info = stockState((state) => state.info);
+
+	if (!info.quote) {
+		return <h1>Loading...</h1>;
+	}
+
 	const quote = info.quote;
 
 	// Check if extended hours trading
