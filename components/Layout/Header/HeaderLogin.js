@@ -1,28 +1,56 @@
-import { useContext } from "react";
-import DispatchContext from "@/components/Context/DispatchContext";
-import StateContext from "@/components/Context/StateContext";
 import { useRouter } from "next/router";
+import userState from "@State/userState";
+import Link from "next/link";
 
 export default function HeaderLogin() {
-	const state = useContext(StateContext);
-	const dispatch = useContext(DispatchContext);
+	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const setIsLoggedIn = userState((state) => state.setIsLoggedIn);
 	const router = useRouter();
 
-	return (
-		<>
-			{state.isLoggedIn ? (
-				<button
-					onClick={() => dispatch({ type: "logout" })}
-					className="w-24 bg-blue-500 py-2 px-3 text-white">
+	const LogInOut = () => {
+		if (!isLoggedIn) {
+			return (
+				<Link href="/login/">
+					<a>Log In</a>
+				</Link>
+			);
+		} else {
+			return (
+				<span
+					onClick={() => setIsLoggedIn(false)}
+					className="cursor-pointer">
 					Log Out
-				</button>
-			) : (
-				<button
-					onClick={() => router.push("/login/")}
-					className="w-24 bg-blue-500 py-2 px-3 text-white">
-					Log In
-				</button>
-			)}
-		</>
+				</span>
+			);
+		}
+	};
+
+	const TrialOrAccount = () => {
+		if (!isLoggedIn) {
+			return (
+				<Link href="/pro/">
+					<a>Free Trial</a>
+				</Link>
+			);
+		} else {
+			return (
+				<span
+					onClick={() => router.push("/pro/my-account/")}
+					className="cursor-pointer">
+					My Account
+				</span>
+			);
+		}
+	};
+
+	return (
+		<div className="flex flex-row text-center font-semibold lg:block lg:space-x-1 text-lg">
+			<span className="flex-1 py-2 px-3 text-white bg-gray-500 lg:flex-none lg:bg-white lg:text-black lg:font-normal hover:text-blue-700">
+				<LogInOut />
+			</span>
+			<span className="flex-1 py-2 px-4 bg-blue-500 lg:py-[0.4rem] lg:flex-none lg:px-3 text-white lg:rounded-sm lg:font-normal hover:bg-blue-600">
+				<TrialOrAccount />
+			</span>
+		</div>
 	);
 }

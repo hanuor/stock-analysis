@@ -1,18 +1,15 @@
-import { useContext } from "react";
-import StockContext from "@/components/Context/StockContext";
+import { stockState } from "@State/stockState";
 
 export default function Title() {
-	const stock = useContext(StockContext);
-	// console.log(stock);
+	const info = stockState((state) => state.info);
 
 	return (
 		<div className="mb-4">
 			<h1 className="text-2xl font-bold">
-				{stock.name_full} ({stock.ticker})
+				{info.name_full} ({info.ticker})
 			</h1>
 			<div className="text-xs text-gray-600">
-				{stock.exchange}: {stock.ticker} &#183; IEX Real-Time Price &#183;
-				USD
+				{info.exchange}: {info.ticker} &#183; IEX Real-Time Price &#183; USD
 			</div>
 		</div>
 	);

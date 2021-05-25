@@ -35,23 +35,6 @@ export function HeaderNavigation({ device }) {
 	);
 }
 
-export function LoginNav() {
-	return (
-		<div className="flex flex-row text-center font-semibold lg:block lg:space-x-1 text-lg">
-			<span className="flex-1 py-2 px-3 text-white bg-gray-500 lg:flex-none lg:bg-white lg:text-black lg:font-normal hover:text-blue-700">
-				<Link href="/login/">
-					<a>Log In</a>
-				</Link>
-			</span>
-			<span className="flex-1 py-2 px-4 bg-blue-500 lg:py-[0.4rem] lg:flex-none lg:px-3 text-white lg:rounded-sm lg:font-normal hover:bg-blue-600">
-				<Link href="/news/">
-					<a>Free Trial</a>
-				</Link>
-			</span>
-		</div>
-	);
-}
-
 export function HamburgerIcon() {
 	return (
 		<svg

@@ -1,4 +1,4 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+// const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
 	mode: "jit",
@@ -6,6 +6,8 @@ module.exports = {
 		content: [
 			"./pages/**/*.{js,ts,jsx,tsx}",
 			"./components/**/*.{js,ts,jsx,tsx}",
+			"./functions/**/*.{js,ts,jsx,tsx}",
+			"./data/**/*.{js,ts,jsx,tsx}",
 		],
 		options: {
 			safelist: [
@@ -25,6 +27,14 @@ module.exports = {
 			center: true,
 			padding: "1.5rem",
 		},
+		screens: {
+			xs: "350px",
+			sm: "640px",
+			md: "768px",
+			lg: "1024px",
+			xl: "1280px",
+			"2xl": "1536px",
+		},
 		extend: {
 			gridTemplateColumns: {
 				sidebar: "1fr 336px",
@@ -41,10 +51,6 @@ module.exports = {
 		fontSize: {
 			small: ".95rem",
 		}, */,
-	},
-
-	variants: {
-		extend: {},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };

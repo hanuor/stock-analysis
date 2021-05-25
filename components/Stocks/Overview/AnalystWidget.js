@@ -1,6 +1,5 @@
-import PageContext from "@/components/Context/PageContext";
-import { useContext } from "react";
 import { Bar } from "react-chartjs-2";
+import { stockState } from "@State/stockState";
 
 function PriceTarget({ target }) {
 	let priceTarget = target[0];
@@ -44,7 +43,12 @@ function AnalystConsensus({ consensus }) {
 }
 
 export default function AnalystWidget() {
-	const data = useContext(PageContext);
+	const data = stockState((state) => state.data);
+
+	if (!data.analystChart) {
+		return <h1>Loading...</h1>;
+	}
+
 	const ratings = data.analystChart;
 
 	return (

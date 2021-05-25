@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import StateContext from "@/components/Context/StateContext";
-import DispatchContext from "@/components/Context/DispatchContext";
+import { useState } from "react";
+import userState from "@State/userState";
 
-async function login({ email, password }) {
+async function login(email, password) {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			if (email === "kris" && password === "password") {
@@ -15,22 +14,38 @@ async function login({ email, password }) {
 }
 
 const LoginForm = () => {
-	const state = useContext(StateContext);
-	const dispatch = useContext(DispatchContext);
+	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const setIsLoggedIn = userState((state) => state.setIsLoggedIn);
+	const email = userState((state) => state.email);
+	const setEmail = userState((state) => state.setEmail);
 
-	const { email, password, isLoading, error, isLoggedIn } = state;
+	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
+	const [inputEmail, setInputEmail] = useState("");
+	const [inputPassword, setInputPassword] = useState("");
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		dispatch({ type: "login" });
+		setError("");
+		setLoading(true);
 
 		try {
-			await login({ email, password });
-			dispatch({ type: "success" });
+			await login(inputEmail, inputPassword);
+			setIsLoggedIn(true);
+			setEmail(inputEmail);
+			setLoading(false);
+			setInputEmail("");
+			setInputPassword("");
 		} catch (error) {
-			dispatch({ type: "error" });
+			setError("Incorrect username or password");
+			setLoading(false);
 		}
+	};
+
+	const logOut = () => {
+		setEmail("");
+		setIsLoggedIn(false);
 	};
 
 	return (
@@ -39,7 +54,7 @@ const LoginForm = () => {
 				<>
 					<h1 className="text-xl font-bold mb-5">Hello {email}!</h1>
 					<button
-						onClick={() => dispatch({ type: "logout" })}
+						onClick={() => logOut()}
 						className="bg-blue-500 text-white font-bold py-2">
 						Log Out
 					</button>
@@ -58,14 +73,8 @@ const LoginForm = () => {
 						name="email"
 						className="mb-4 p-2 border shadow-sm"
 						placeholder="Email"
-						value={email}
-						onChange={(e) =>
-							dispatch({
-								type: "field",
-								field: "email",
-								value: e.currentTarget.value,
-							})
-						}
+						value={inputEmail}
+						onChange={(e) => setInputEmail(e.target.value)}
 					/>
 					<label htmlFor="password">Password</label>
 					<input
@@ -73,20 +82,14 @@ const LoginForm = () => {
 						name="password"
 						className="mb-4 p-2 border shadow-sm"
 						placeholder="Password"
-						value={password}
-						onChange={(e) =>
-							dispatch({
-								type: "field",
-								field: "password",
-								value: e.currentTarget.value,
-							})
-						}
+						value={inputPassword}
+						onChange={(e) => setInputPassword(e.target.value)}
 					/>
 					<button
 						className="bg-blue-500 text-white font-bold py-2"
 						type="submit"
-						disabled={isLoading}>
-						{isLoading ? "Logging in..." : "Log In"}
+						disabled={loading}>
+						{loading ? "Logging in..." : "Log In"}
 					</button>
 				</form>
 			)}

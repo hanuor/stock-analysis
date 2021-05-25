@@ -1,34 +1,31 @@
-import Stock from "@/components/Layout/LayoutStock";
-import PageContext from "@/components/Context/PageContext";
+import Stock from "@/components/Layout/StockLayout";
+import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
+import { stockState } from "@State/stockState";
+import { useEffect } from "react";
 
 export default function SymbolStatistics(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
+
+	const setInfo = stockState((state) => state.setInfo);
+	const setData = stockState((state) => state.setData);
+	useEffect(() => {
+		setInfo(props.info);
+		setData(props.data);
+	}, []);
+
 	return (
-		<Stock props={props.info}>
-			<PageContext.Provider value={props.data}>
-				<h2 className="text-2xl font-bold my-8">
-					This is the statistics page for {props.info.ticker}
-				</h2>
-			</PageContext.Provider>
+		<Stock>
+			<h2 className="text-2xl font-bold my-8">
+				This is the statistics page for {props.info.ticker}
+			</h2>
 		</Stock>
 	);
 }
 
-import {
-	getStockUrls,
-	getPageData,
-	getStockInfo,
-} from "@/Functions/fetchStockInfo";
-
 export async function getStaticPaths() {
-	const paths = getStockUrls();
-
-	return {
-		paths,
-		fallback: true,
-	};
+	return { paths: [], fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {

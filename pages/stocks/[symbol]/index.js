@@ -1,55 +1,51 @@
-import {
-	getStockUrls,
-	getPageData,
-	getStockInfo,
-} from "@/Functions/fetchStockInfo";
-import Stock from "@/components/Layout/LayoutStock";
+import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
+import Stock from "@/components/Layout/StockLayout";
 import { InfoTable, QuoteTable } from "@/components/Stocks/Overview/TopTables";
 import PriceChart from "@/components/Stocks/Overview/PriceChart";
-import PageContext from "@/components/Context/PageContext";
 import Profile from "@/components/Stocks/Overview/ProfileWidget";
 import NewsFeed from "@/components/Stocks/Overview/StockNews";
 import FinancialsWidget from "@/components/Stocks/Overview/FinancialsWidget";
 import AnalystWidget from "@/components/Stocks/Overview/AnalystWidget";
 import Axios from "axios";
 import styles from "@/Styles/TopGrid.module.css";
+import { stockState } from "@State/stockState";
+import { useEffect } from "react";
 
 export default function StockOverview(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
-	// console.log(props.data);
+
+	const setInfo = stockState((state) => state.setInfo);
+	const setData = stockState((state) => state.setData);
+	useEffect(() => {
+		setInfo(props.info);
+		setData(props.data);
+	}, []);
 
 	return (
-		<Stock props={props.info}>
-			<PageContext.Provider value={props.data}>
-				<div className={"px-4 lg:px-6 " + styles.tg}>
-					<PriceChart />
-					<InfoTable />
-					<QuoteTable />
+		<Stock>
+			<div className={"px-4 lg:px-6 " + styles.tg}>
+				<PriceChart />
+				<InfoTable />
+				<QuoteTable />
+			</div>
+			<div className="px-0 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar gap-10">
+				<div className="px-4 lg:px-0 lg:order-2 space-y-6">
+					<Profile />
+					<FinancialsWidget />
+					<AnalystWidget />
 				</div>
-				<div className="px-0 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar gap-10">
-					<div className="px-4 lg:px-0 lg:order-2 space-y-6">
-						<Profile />
-						<FinancialsWidget />
-						<AnalystWidget />
-					</div>
-					<div className="lg:order-1">
-						<NewsFeed props={props.news} />
-					</div>
+				<div className="lg:order-1">
+					<NewsFeed props={props.news} />
 				</div>
-			</PageContext.Provider>
+			</div>
 		</Stock>
 	);
 }
 
 export async function getStaticPaths() {
-	const paths = getStockUrls();
-
-	return {
-		paths,
-		fallback: true,
-	};
+	return { paths: [], fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
