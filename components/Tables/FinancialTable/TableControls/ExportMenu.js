@@ -25,8 +25,7 @@ export const ExportMenu = () => {
 
 		let paywall = range === "annual" ? 15 : 40;
 		const fullcount = rawdata.datekey.length;
-		const showcount =
-			!isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
+		let showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
 		const data_map = mapData(statement);
 
 		// Map the columns

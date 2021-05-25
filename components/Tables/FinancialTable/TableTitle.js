@@ -46,7 +46,7 @@ function TableInfo() {
 	const divider = financialsState((state) => state.divider);
 
 	return (
-		<div>
+		<div className="text-sm pb-1 text-gray-600">
 			Numbers in {divider} {info.currency}. Fiscal year is {info.fiscal_year}
 			.
 		</div>

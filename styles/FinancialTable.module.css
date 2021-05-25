@@ -91,3 +91,18 @@
 .table_financial svg:focus {
 	stroke: #2c6288;
 }
+
+@media screen and (max-width: 639px) {
+	.table_financial {
+		font-size: 0.875rem;
+	}
+
+	.table_financial tr th {
+		padding: 6px 8px;
+	}
+
+	.table_financial tr td {
+		min-width: 80px;
+		padding: 4px 8px;
+	}
+}

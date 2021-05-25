@@ -12,9 +12,11 @@ export default function FinancialsPage(props) {
 	}
 
 	const setInfo = stockState((state) => state.setInfo);
+	const setFinancialData = financialsState((state) => state.setFinancialData);
 
 	useEffect(() => {
 		setInfo(props.info);
+		setFinancialData(props.data);
 	}, []);
 
 	const statement = financialsState((state) => state.statement);
@@ -53,7 +55,7 @@ export default function FinancialsPage(props) {
 
 	return (
 		<Stock>
-			<FinancialTable financialData={props.data} />
+			<FinancialTable />
 		</Stock>
 	);
 }

@@ -1,7 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-// xtodo: Format dates for tooltips on quarterly/trailing
 // todo: Add y-axis data tags @AZID
-// ! Skip zero values at the beginning
 import { Bar, defaults } from "react-chartjs-2";
 import "chartjs-adapter-luxon";
 import {
@@ -36,11 +34,29 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 		return parseFloat(cellContent);
 	});
 
-	const xdata = data.datekey.slice(0, count);
-	const xaxis = xdata.reverse();
-
+	// Format dates as years if annual
+	let xdatadraft = data.datekey.slice(0, count);
+	if (range === "annual") {
+		xdatadraft = xdatadraft.map((item) => {
+			return formatYear(item);
+		});
+	}
+	const xdata = xdatadraft;
 	const ydata = y.slice(0, count);
-	const yaxis = ydata.reverse();
+
+	let xaxis = xdata.reverse();
+	let yaxis = ydata.reverse();
+
+	// Cut zero values from start of data array
+	let ylength = yaxis.length;
+	for (let i = 0; i < ylength; i++) {
+		if (!yaxis[0]) {
+			yaxis.shift();
+			xaxis.shift();
+		} else {
+			break;
+		}
+	}
 
 	const chartType = type === "ratio" || type === "percentage" ? "line" : "bar";
 	const bgColor =
@@ -69,7 +85,6 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 				maintainAspectRatio: false,
 				scales: {
 					x: {
-						type: "timeseries",
 						ticks: {
 							color: "#323232",
 							font: {
@@ -136,11 +151,6 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 						bodyFontStyle: 400,
 						padding: 10,
 						displayColors: false,
-						callbacks: {
-							title: function (context) {
-								return formatYear(context[0].label);
-							},
-						},
 					},
 				},
 			}}

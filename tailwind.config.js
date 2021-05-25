@@ -27,6 +27,14 @@ module.exports = {
 			center: true,
 			padding: "1.5rem",
 		},
+		screens: {
+			xs: "350px",
+			sm: "640px",
+			md: "768px",
+			lg: "1024px",
+			xl: "1280px",
+			"2xl": "1536px",
+		},
 		extend: {
 			gridTemplateColumns: {
 				sidebar: "1fr 336px",
@@ -43,13 +51,6 @@ module.exports = {
 		fontSize: {
 			small: ".95rem",
 		}, */,
-	},
-
-	variants: {
-		extend: {
-			opacity: ["focus-within"],
-			backgroundColor: ["focus-within"],
-		},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };

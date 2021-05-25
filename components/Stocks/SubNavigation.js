@@ -6,10 +6,8 @@ import styles from "@/Styles/TabMenu.module.css";
 
 // styles
 const common =
-	"text-[15px] sm:text-base block py-2 sm:py-2 px-2.5 sm:px-5 cursor-pointer whitespace-nowrap";
-const inactive =
-	common +
-	" text-blue-500 hover:text-black hover:bg-gray-100  hover:font-semibold";
+	"text-[15px] sm:text-base block py-2 sm:py-2 px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap";
+const inactive = common + " text-blue-500 hover:text-black hover:bg-gray-100";
 const active = common + " text-black bg-gray-100 font-semibold";
 
 export default function TabNavigation({ path }) {

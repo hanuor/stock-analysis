@@ -4,7 +4,7 @@
 // xtodo: Export functionality
 // xtodo: Left/right switch
 // xtodo: Add more metrics
-// todo: Optimize styling
+// xtodo: Optimize styling
 // ? Add a menu that allows formatting by millions/thousands/raw
 // ? Add an option to show "current/ttm"
 // ? Add data disclaimers
@@ -15,7 +15,7 @@
 // ? Add print button?
 // ? Make left column sticky
 // ! Make sure to optimize numbers for stocks that do not report in USD, such as BABA
-// ! Remove growth numbers if either is negative
+// x! Remove growth numbers if either is negative
 // ! Ratios: get rid of empty columns (first two usually)
 
 import { forwardRef } from "react";
@@ -40,13 +40,18 @@ import "tippy.js/themes/light.css";
 import TableTitle from "./FinancialTable/TableTitle";
 import TableControls from "./FinancialTable/TableControls";
 
-export default function FinancialTable({ financialData }) {
+export default function FinancialTable() {
 	const range = financialsState((state) => state.range);
 	const statement = financialsState((state) => state.statement);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
+	const financialData = financialsState((state) => state.financialData);
 	const info = stockState((state) => state.info);
 	const isLoggedIn = userState((state) => state.isLoggedIn);
+
+	if (!financialData[statement]) {
+		return <h1>Loading...</h1>;
+	}
 
 	const data =
 		statement === "ratios" && range === "quarterly"
@@ -55,8 +60,17 @@ export default function FinancialTable({ financialData }) {
 
 	let paywall = range === "annual" ? 15 : 40;
 	const fullcount = data.datekey.length;
-	const showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
+	let showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
 	const data_map = mapData(statement);
+
+	// Remove initial empty columns in ratios statement
+	if (statement === "ratios") {
+		let marketCapData = data.marketcap;
+		let marketCapValid = marketCapData.filter((item) => item != null).length;
+		if (marketCapValid < showcount) {
+			showcount = marketCapValid;
+		}
+	}
 
 	const HeaderRow = () => {
 		let headerdata = data.datekey;
@@ -172,7 +186,9 @@ export default function FinancialTable({ financialData }) {
 		const getRowStyles = () => {
 			let styles = [];
 			if (row.format === "growth" || row.border) {
-				styles.push("border-b-2 border-gray-300 text-[0.95rem]");
+				styles.push(
+					"border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]"
+				);
 			}
 			if (row.bold) {
 				styles.push("font-semibold text-gray-800");

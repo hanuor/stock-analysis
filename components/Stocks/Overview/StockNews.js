@@ -47,7 +47,13 @@ function NewsArticle({ content, num }) {
 				href={content.url}
 				target="_blank"
 				rel="nofollow noopener noreferrer">
-				<img src={content.image} width={640} height={360} alt="" />
+				<img
+					loading="lazy"
+					src={content.image}
+					width={640}
+					height={360}
+					alt=""
+				/>
 			</a>
 
 			<div>
