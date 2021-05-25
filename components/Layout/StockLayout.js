@@ -2,22 +2,24 @@ import Meta from "@/components/Meta";
 import Header from "@/Layout/Header";
 import Footer from "@/Layout/Footer";
 import StockHeading from "@/components/Stocks/StockHeading";
-import StockContext from "@/components/Context/StockContext";
+import stockState from "@State/stockState";
 
-export default function Stock({ props, children }) {
+export default function Stock({ children }) {
+	const info = stockState((state) => state.info);
+
 	return (
 		<>
-			<StockContext.Provider value={props}>
-				<Meta title={props.ticker}></Meta>
+			<Meta title={info.ticker}></Meta>
+			<div className="flex flex-col h-screen">
 				<Header />
-				<div className="container max-w-screen-xl py-8">
+				<div className="mx-auto py-5 sm:py-6 w-full xl:max-w-screen-xl">
 					<main>
 						<StockHeading />
 						{children}
 					</main>
 				</div>
 				<Footer />
-			</StockContext.Provider>
+			</div>
 		</>
 	);
 }

@@ -1,3 +1,6 @@
+// todo: Make table paginated, sortable and filterable
+// todo: Add more columns, such as industry and market cap
+
 import Link from "next/link";
 import LayoutSidebar from "@/Layout/LayoutSidebar";
 import Table from "@/Tables/TablePaginated";
@@ -7,9 +10,9 @@ export default function StocksIndexPage({ stocks }) {
 		{
 			Header: "Stock Symbol",
 			accessor: "symbol",
-			Cell: ({ cell: { value } }) => (
-				<Link href={`/stocks/${value.toLowerCase()}`}>{value}</Link>
-			),
+			Cell: function SymbolCell({ cell: { value } }) {
+				return <Link href={`/stocks/${value.toLowerCase()}`}>{value}</Link>;
+			},
 		},
 		{
 			Header: "Company Name",

@@ -6,7 +6,9 @@
 			"@/Layout/*": ["components/Layout/*"],
 			"@/Tables/*": ["components/Tables/*"],
 			"@/Styles/*": ["styles/*"],
-			"@/Functions/*": ["functions/*"]
+			"@/Functions/*": ["functions/*"],
+			"@Data/*": ["data/*"],
+			"@State/*": ["state/*"]
 		}
 	}
 }

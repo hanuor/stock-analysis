@@ -1,11 +1,9 @@
-import Stock from "@/components/Layout/LayoutStock";
+import Stock from "@/components/Layout/StockLayout";
+import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
+import { stockState } from "@State/stockState";
+import { useEffect, useState } from "react";
 import { initialData } from "@/components/datatemp";
-import PageContext from "@/components/Context/PageContext";
-import {
-	getStockUrls,
-	getPageData,
-	getStockInfo,
-} from "@/Functions/fetchStockInfo";
+import Axios from "axios";
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -116,158 +114,180 @@ export default function StockChart(props) {
 		return data.close > data.open ? "#185a37" : "#B90E0A";
 	};
 
+	const setInfo = stockState((state) => state.setInfo);
+	const setData = stockState((state) => state.setData);
+
+	useEffect(() => {
+		setInfo(props.info);
+		setData(props.data);
+	}, []);
+
+	const [chartData, setChartData] = useState();
+	const [isLoading, setIsLoading] = useState(true);
+
+	const info = stockState((state) => state.info);
+	console.log(info.id);
+	const axios = require("axios");
+
+	useEffect(() => {
+		async function fetchChartData() {
+			try {
+				const response = await Axios.get(`/api/chart?i=${info.id}&m=1`, {
+					timeout: 5000,
+				});
+
+				setChartData(response.data);
+				setIsLoading(false);
+				console.log(response);
+			} catch (e) {
+				console.log("There was a problem.");
+			}
+		}
+
+		fetchChartData();
+	}, []);
+
+	console.log(chartData);
 	return (
 		<Stock props={props.info}>
-			<PageContext.Provider value={props.data}>
-				<h2 className="text-2xl font-bold my-8">
-					<ChartCanvas
-						height={height}
-						ratio={2}
-						width={width}
-						margin={margin}
-						data={data}
-						displayXAccessor={displayXAccessor}
-						seriesName="Data"
-						xScale={xScale}
-						xAccessor={xAccessor}
-						xExtents={xExtents}
-						zoomAnchor={lastVisibleItemBasedZoomAnchor}>
-						<Chart
-							id={3}
-							height={chartHeight}
-							yExtents={candleChartExtents}>
-							<XAxis showTickLabel={true} />
-							<YAxis
-								showGridLines={true}
-								tickFormat={pricesDisplayFormat}
-							/>
-							<CandlestickSeries />
-							<LineSeries
-								yAccessor={ema26.accessor()}
-								strokeStyle={ema26.stroke()}
-							/>
-							<CurrentCoordinate
-								yAccessor={ema26.accessor()}
-								fillStyle={ema26.stroke()}
-							/>
-							<LineSeries
-								yAccessor={ema12.accessor()}
-								strokeStyle={ema12.stroke()}
-							/>
-							<CurrentCoordinate
-								yAccessor={ema12.accessor()}
-								fillStyle={ema12.stroke()}
-							/>
-							<MouseCoordinateY
-								rectWidth={margin.right}
-								displayFormat={pricesDisplayFormat}
-							/>
+			<h2 className="text-2xl font-bold my-8">
+				<ChartCanvas
+					height={height}
+					ratio={2}
+					width={width}
+					margin={margin}
+					data={data}
+					displayXAccessor={displayXAccessor}
+					seriesName="Data"
+					xScale={xScale}
+					xAccessor={xAccessor}
+					xExtents={xExtents}
+					zoomAnchor={lastVisibleItemBasedZoomAnchor}>
+					<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
+						<XAxis showTickLabel={true} />
+						<YAxis
+							showGridLines={true}
+							tickFormat={pricesDisplayFormat}
+						/>
+						<CandlestickSeries />
+						<LineSeries
+							yAccessor={ema26.accessor()}
+							strokeStyle={ema26.stroke()}
+						/>
+						<CurrentCoordinate
+							yAccessor={ema26.accessor()}
+							fillStyle={ema26.stroke()}
+						/>
+						<LineSeries
+							yAccessor={ema12.accessor()}
+							strokeStyle={ema12.stroke()}
+						/>
+						<CurrentCoordinate
+							yAccessor={ema12.accessor()}
+							fillStyle={ema12.stroke()}
+						/>
+						<MouseCoordinateY
+							rectWidth={margin.right}
+							displayFormat={pricesDisplayFormat}
+						/>
 
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right - 20}
-								rectHeight={15}
-								fill={ma2color}
-								orient="right"
-								edgeAt="right"
-								fontSize="11"
-								lineStroke={ma2color}
-								displayFormat={pricesDisplayFormat}
-								yAccessor={ema26.accessor()}
-							/>
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right - 20}
-								rectHeight={15}
-								hideLine={true}
-								fill={ma1color}
-								orient="right"
-								edgeAt="right"
-								fontSize="11"
-								lineStroke={ma1color}
-								displayFormat={pricesDisplayFormat}
-								yAccessor={ema12.accessor()}
-							/>
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right - 15}
-								fill={openCloseColor}
-								lineStroke={openCloseColor}
-								displayFormat={pricesDisplayFormat}
-								yAccessor={yEdgeIndicator}
-								fontSize="13"
-							/>
-							<MovingAverageTooltip
-								origin={[8, 24]}
-								options={[
-									{
-										yAccessor: ema26.accessor(),
-										type: "EMA",
-										stroke: ema26.stroke(),
-										windowSize: ema26.options().windowSize,
-									},
-									{
-										yAccessor: ema12.accessor(),
-										type: "EMA",
-										stroke: ema12.stroke(),
-										windowSize: ema12.options().windowSize,
-									},
-								]}
-							/>
-							<ZoomButtons />
-							<OHLCTooltip origin={[8, 16]} />
-						</Chart>
-						<Chart
-							id={4}
-							height={100}
-							origin={(w, h) => [0, h - 200]}
-							yExtents={(d) => d.volume}>
-							<YAxis
-								axisAt="left"
-								orient="left"
-								ticks={5}
-								gridLinesStrokeWidth={0}
-								tickFormat={format(".2s")}
-								showDomain={false}
-								tickStrokeOpacity={0}
-								innerTickSize={0}
-							/>
-							<BarSeries
-								clip="false"
-								yAccessor={(d) => d.volume}
-								fillStyle={(d) =>
-									d.close > d.open ? "#6BA583" : "red"
-								}
-							/>
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right - 20}
-								rectHeight={15}
-								fill={volumeColor}
-								orient="right"
-								edgeAt="right"
-								fontSize="11"
-								lineStroke={openCloseColor}
-								displayFormat={format(".4s")}
-								yAccessor={volumeSeries}
-								yAxisPad={0}
-							/>
-						</Chart>
-						<CrossHairCursor />
-					</ChartCanvas>
-				</h2>
-			</PageContext.Provider>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right - 20}
+							rectHeight={15}
+							fill={ma2color}
+							orient="right"
+							edgeAt="right"
+							fontSize="11"
+							lineStroke={ma2color}
+							displayFormat={pricesDisplayFormat}
+							yAccessor={ema26.accessor()}
+						/>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right - 20}
+							rectHeight={15}
+							hideLine={true}
+							fill={ma1color}
+							orient="right"
+							edgeAt="right"
+							fontSize="11"
+							lineStroke={ma1color}
+							displayFormat={pricesDisplayFormat}
+							yAccessor={ema12.accessor()}
+						/>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right - 15}
+							fill={openCloseColor}
+							lineStroke={openCloseColor}
+							displayFormat={pricesDisplayFormat}
+							yAccessor={yEdgeIndicator}
+							fontSize="13"
+						/>
+						<MovingAverageTooltip
+							origin={[8, 24]}
+							options={[
+								{
+									yAccessor: ema26.accessor(),
+									type: "EMA",
+									stroke: ema26.stroke(),
+									windowSize: ema26.options().windowSize,
+								},
+								{
+									yAccessor: ema12.accessor(),
+									type: "EMA",
+									stroke: ema12.stroke(),
+									windowSize: ema12.options().windowSize,
+								},
+							]}
+						/>
+						<ZoomButtons />
+						<OHLCTooltip origin={[8, 16]} />
+					</Chart>
+					<Chart
+						id={4}
+						height={100}
+						origin={(w, h) => [0, h - 200]}
+						yExtents={(d) => d.volume}>
+						<YAxis
+							axisAt="left"
+							orient="left"
+							ticks={5}
+							gridLinesStrokeWidth={0}
+							tickFormat={format(".2s")}
+							showDomain={false}
+							tickStrokeOpacity={0}
+							innerTickSize={0}
+						/>
+						<BarSeries
+							clip="false"
+							yAccessor={(d) => d.volume}
+							fillStyle={(d) => (d.close > d.open ? "#6BA583" : "red")}
+						/>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right - 20}
+							rectHeight={15}
+							fill={volumeColor}
+							orient="right"
+							edgeAt="right"
+							fontSize="11"
+							lineStroke={openCloseColor}
+							displayFormat={format(".4s")}
+							yAccessor={volumeSeries}
+							yAxisPad={0}
+						/>
+					</Chart>
+					<CrossHairCursor />
+				</ChartCanvas>
+			</h2>
 		</Stock>
 	);
 }
 
 export async function getStaticPaths() {
-	const paths = getStockUrls();
-
-	return {
-		paths,
-		fallback: true,
-	};
+	return { paths: [], fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {

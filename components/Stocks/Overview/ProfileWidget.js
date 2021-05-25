@@ -1,11 +1,9 @@
-import PageContext from "@/components/Context/PageContext";
-import StockContext from "@/components/Context/StockContext";
 import Link from "next/link";
-import { useContext } from "react";
+import { stockState } from "@State/stockState";
 
 export default function Profile() {
-	const info = useContext(StockContext);
-	const data = useContext(PageContext);
+	const info = stockState((state) => state.info);
+	const data = stockState((state) => state.data);
 
 	return (
 		<div>
@@ -18,16 +16,17 @@ export default function Profile() {
 			</p>
 
 			<div className="mt-2 grid grid-cols-2">
-				{Object.keys(data.infoTable).map(function (number, index) {
-					return (
-						<div className="my-[0.4rem]" key={index}>
-							<span className="font-bold block">
-								{data.infoTable[number][0]}
-							</span>
-							<span>{data.infoTable[number][1]}</span>
-						</div>
-					);
-				})}
+				{data.infoTable &&
+					Object.keys(data.infoTable).map(function (number, index) {
+						return (
+							<div className="my-[0.4rem]" key={index}>
+								<span className="font-bold block">
+									{data.infoTable[number][0]}
+								</span>
+								<span>{data.infoTable[number][1]}</span>
+							</div>
+						);
+					})}
 			</div>
 
 			<button className="w-full bg-blue-500 my-3 py-2 px-3 text-xl text-white font-semibold">

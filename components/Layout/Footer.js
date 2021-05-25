@@ -6,8 +6,12 @@ export default function Footer() {
 			<div className="container max-w-screen-xl text-center text-white">
 				<nav>
 					<ul className="flex justify-center space-x-4">
-						<li><Link href="/">Home</Link></li>
-						<li><Link href="/about/">About</Link></li>
+						<li>
+							<Link href="/">Home</Link>
+						</li>
+						<li>
+							<Link href="/about/">About</Link>
+						</li>
 					</ul>
 				</nav>
 			</div>

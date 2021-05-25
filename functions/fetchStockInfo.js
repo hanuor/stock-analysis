@@ -1,4 +1,4 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying to production
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before going live
 import Axios from "axios";
 
 export function getStockUrls() {
@@ -7,11 +7,6 @@ export function getStockUrls() {
 		{
 			params: {
 				symbol: "aapl",
-			},
-		},
-		{
-			params: {
-				symbol: "msft",
 			},
 		},
 	];

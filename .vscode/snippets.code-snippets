@@ -35,8 +35,18 @@
 		"body": ["function ${1:Name}($2) {", "  $3", "}"],
 		"description": "Function"
 	},
-	"Function (Export Default)": {
+	"Function (arrow)": {
+		"prefix": "fa",
+		"body": ["const ${1:Name} = ($2) => {", "  ${3:// Code goes here}", "}"],
+		"description": "Function"
+	},
+	"Function (Export)": {
 		"prefix": "fe",
+		"body": ["export function ${1:Name}(${2:Props}) {", "  ${3:code}", "}"],
+		"description": "Function (Export)"
+	},
+	"Function (Export Default)": {
+		"prefix": "fed",
 		"body": [
 			"export default function ${1:Name}(${2:Props}) {",
 			"  ${3:code}",
@@ -81,5 +91,30 @@
 		"prefix": "cn",
 		"body": ["className=\"$1\""],
 		"description": "className"
+	},
+	"Get State From Zustand": {
+		"prefix": "st",
+		"body": [
+			"const ${1:ItemName} = ${2:StoreName}State(state => state.${1:ItemName});"
+		],
+		"description": "Get State From Zustand"
+	},
+	"Create useEffect": {
+		"prefix": "usee",
+		"body": [
+			"useEffect(() => {",
+			"${1:CodeToExecute}",
+			"}, [${2:Dependencies}]);"
+		],
+		"description": "Create useEffect"
+	},
+	"Export arrow function const": {
+		"prefix": "exp",
+		"body": [
+			"export const ${1:FunctionName} = (${2}) => {",
+			"${3:CodeToExecute}",
+			"}"
+		],
+		"description": "Export arrow function const"
 	}
 }
