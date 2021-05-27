@@ -2,7 +2,7 @@ import Stock from "@/components/Layout/StockLayout";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
 import { stockState } from "@State/stockState";
 import { useEffect, useState } from "react";
-import { initialData } from "@/components/datatemp";
+import { initialData, secondaryData } from "@/components/datatemp";
 import Axios from "axios";
 
 import React from "react";
@@ -39,6 +39,12 @@ export default function StockChart(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
+	const [period, setPeriod] = useState("d");
+	const [time, setTime] = useState("1Y");
+
+	const info = stockState((state) => state.info);
+	const setInfo = stockState((state) => state.setInfo);
+	const setData = stockState((state) => state.setData);
 
 	const ScaleProvider =
 		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
@@ -67,7 +73,7 @@ export default function StockChart(props) {
 	const elder = elderRay();
 
 	const calculatedData = elder(ema26(ema12(initialData)));
-	const { data, xScale, xAccessor, displayXAccessor } =
+	var { data, xScale, xAccessor, displayXAccessor } =
 		ScaleProvider(initialData);
 	const pricesDisplayFormat = format(".2f");
 	const max = xAccessor(data[data.length - 1]);
@@ -114,43 +120,67 @@ export default function StockChart(props) {
 		return data.close > data.open ? "#185a37" : "#B90E0A";
 	};
 
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
 	useEffect(() => {
 		setInfo(props.info);
 		setData(props.data);
 	}, []);
 
+	function handleDataChange(e) {
+		const ScaleProvider =
+			discontinuousTimeScaleProviderBuilder().inputDateAccessor(
+				(d) => new Date(d.date)
+			);
+		var { newdata, newxScale, newxAccessor, newdisplayXAccessor } =
+			ScaleProvider(secondaryData);
+		console.log(data);
+		console.log(newdata);
+		data = newdata;
+		console.log(data);
+		xScale = newxScale;
+		xAccessor = newxAccessor;
+		displayXAccessor = newdisplayXAccessor;
+
+		console.log("yes");
+		if (e.key === "y") {
+			alert("The sky is your starting point!");
+		} else if (e.key === "n") {
+			alert("The sky is your limit👀");
+		}
+	}
+
 	const [chartData, setChartData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 
-	const info = stockState((state) => state.info);
 	console.log(info.id);
 	const axios = require("axios");
 
 	useEffect(() => {
 		async function fetchChartData() {
 			try {
-				const response = await Axios.get(`/api/chart?i=${info.id}&m=1`, {
-					timeout: 5000,
-				});
+				console.log(info.id);
+				const response = await Axios.get(
+					`/api/chart?i=${info.id}&p=${period}&t=${time}`,
+					{
+						timeout: 5000,
+					}
+				);
 
 				setChartData(response.data);
 				setIsLoading(false);
 				console.log(response);
 			} catch (e) {
-				console.log("There was a problem.");
+				console.log(e);
 			}
 		}
 
 		fetchChartData();
 	}, []);
 
-	console.log(chartData);
 	return (
 		<Stock props={props.info}>
 			<h2 className="text-2xl font-bold my-8">
+				<input type="text" onChange={handleDataChange}></input>
+				Yes
 				<ChartCanvas
 					height={height}
 					ratio={2}

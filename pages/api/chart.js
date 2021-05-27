@@ -5,8 +5,19 @@ export default async (req, res) => {
 	if (req.method === "GET") {
 		const id = req.query.i;
 		const minimal = req.query.m ? true : false;
+		var period = req.query.p;
+		var time = req.query.t;
 
-		const url = `${process.env.API_CHARTS}?i=${id}${minimal && "&m=1"}`;
+		if (!period) {
+			period = "";
+		}
+		if (!time) {
+			time = "";
+		}
+
+		console.log(time + period + minimal + id);
+		const url = `${process.env.API_CHARTS}?i=${id}${period && "&r=" + period}
+		${time && "&p=" + time}${minimal && "&m=1"}`;
 
 		await axios
 			.get(url)
