@@ -1,12 +1,12 @@
-import { Bar } from "react-chartjs-2";
-import { stockState } from "@State/stockState";
+import { Bar } from 'react-chartjs-2';
+import { stockState } from '@State/stockState';
 
 function PriceTarget({ target }) {
 	let priceTarget = target[0];
 	let difference = target[1];
 	let updown = target[2];
 
-	if (updown === "upside") {
+	if (updown === 'upside') {
 		return (
 			<>
 				<div className="text-green-700 text-4xl text-center font-semibold mb-1">
@@ -17,24 +17,26 @@ function PriceTarget({ target }) {
 				</div>
 			</>
 		);
-	} else if (updown === "downside") {
-		<>
-			<div className="text-red-600">{priceTarget}</div>
-			<div>({difference} downside)</div>
-		</>;
+	} else if (updown === 'downside') {
+		return (
+			<>
+				<div className="text-red-600">{priceTarget}</div>
+				<div>({difference} downside)</div>
+			</>
+		);
 	} else {
-		<div className="text-gray-800">{priceTarget}</div>;
+		return <div className="text-gray-800">{priceTarget}</div>;
 	}
 }
 
 function AnalystConsensus({ consensus }) {
 	switch (consensus) {
-		case "Buy":
-		case "Strong Buy":
+		case 'Buy':
+		case 'Strong Buy':
 			return <span className="text-green-700 font-bold">{consensus}</span>;
 
-		case "Underweight":
-		case "Sell":
+		case 'Underweight':
+		case 'Sell':
 			return <span className="text-red-600 font-bold">{consensus}</span>;
 
 		default:
@@ -69,15 +71,15 @@ export default function AnalystWidget() {
 					<Bar
 						data={{
 							labels: [
-								"Sell",
-								"Underweight",
-								"Hold",
-								"Buy",
-								"Strong Buy",
+								'Sell',
+								'Underweight',
+								'Hold',
+								'Buy',
+								'Strong Buy',
 							],
 							datasets: [
 								{
-									label: "Analysts",
+									label: 'Analysts',
 									data: [
 										ratings.strongsell,
 										ratings.sell,
@@ -86,11 +88,11 @@ export default function AnalystWidget() {
 										ratings.strongbuy,
 									],
 									backgroundColor: [
-										"#FF3333",
-										"#FF3333",
-										"#323232",
-										"#0B610B",
-										"#0B610B",
+										'#FF3333',
+										'#FF3333',
+										'#323232',
+										'#0B610B',
+										'#0B610B',
 									],
 								},
 							],
@@ -104,7 +106,7 @@ export default function AnalystWidget() {
 									},
 								},
 								y: {
-									position: "right",
+									position: 'right',
 								},
 							},
 							plugins: {
