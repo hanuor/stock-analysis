@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import userState from "@State/userState";
-import Link from "next/link";
+import { useRouter } from 'next/router';
+import userState from '@State/userState';
+import Link from 'next/link';
 
 export default function HeaderLogin() {
 	const isLoggedIn = userState((state) => state.isLoggedIn);
@@ -28,14 +28,14 @@ export default function HeaderLogin() {
 	const TrialOrAccount = () => {
 		if (!isLoggedIn) {
 			return (
-				<Link href="/pro/">
+				<Link href="/pro/" prefetch={false}>
 					<a>Free Trial</a>
 				</Link>
 			);
 		} else {
 			return (
 				<span
-					onClick={() => router.push("/pro/my-account/")}
+					onClick={() => router.push('/pro/my-account/')}
 					className="cursor-pointer">
 					My Account
 				</span>

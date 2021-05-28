@@ -1,31 +1,31 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export function HeaderNavigation({ device }) {
-	const menuDesktop = "flex flex-row space-x-5 text-lg";
+	const menuDesktop = 'flex flex-row space-x-5 text-lg';
 	const menuMobile =
-		"flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200";
+		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200';
 
 	return (
 		<>
 			<nav>
-				<ul className={device == "desktop" ? menuDesktop : menuMobile}>
+				<ul className={device == 'desktop' ? menuDesktop : menuMobile}>
 					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
-						<Link href="/stocks/">
+						<Link href="/stocks/" prefetch={false}>
 							<a>Stocks</a>
 						</Link>
 					</li>
 					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
-						<Link href="/blog/">
+						<Link href="/blog/" prefetch={false}>
 							<a>IPOs</a>
 						</Link>
 					</li>
 					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
-						<Link href="/about/">
+						<Link href="/about/" prefetch={false}>
 							<a>ETFs</a>
 						</Link>
 					</li>
 					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
-						<Link href="/news/">
+						<Link href="/news/" prefetch={false}>
 							<a>News</a>
 						</Link>
 					</li>
