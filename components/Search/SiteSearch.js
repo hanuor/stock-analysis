@@ -21,7 +21,9 @@ export default function SiteSearch() {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
-				const indexJSON = await Axios.get(`${process.env.API_URL}/search`);
+				const indexJSON = await Axios.get(
+					`${process.env.NEXT_PUBLIC_API_URL}/search`
+				);
 				setIndex(indexJSON.data);
 			} catch (e) {
 				console.log('There was a problem');
