@@ -16,14 +16,12 @@ export default function SiteSearch() {
 	const [resultsCount, setResultsCount] = useState();
 	let num = 1;
 
-	const url = 'https://stockanalysis26may.local/wp-json/sa/search';
-
 	// Fetch the site index
 	async function fetchIndex() {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
-				const indexJSON = await Axios.get(url);
+				const indexJSON = await Axios.get(`${process.env.API_URL}/search`);
 				setIndex(indexJSON.data);
 			} catch (e) {
 				console.log('There was a problem');
