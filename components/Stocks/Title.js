@@ -1,4 +1,4 @@
-import { stockState } from "@State/stockState";
+import { stockState } from '@State/stockState';
 
 export default function Title() {
 	const info = stockState((state) => state.info);

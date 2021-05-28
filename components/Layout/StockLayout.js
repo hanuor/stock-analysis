@@ -1,8 +1,8 @@
-import Meta from "@/components/Meta";
-import Header from "@/Layout/Header";
-import Footer from "@/Layout/Footer";
-import StockHeading from "@/components/Stocks/StockHeading";
-import stockState from "@State/stockState";
+import Meta from '@/components/Meta';
+import Header from '@/Layout/Header';
+import Footer from '@/Layout/Footer';
+import StockHeading from '@/components/Stocks/StockHeading';
+import stockState from '@State/stockState';
 
 export default function Stock({ children }) {
 	const info = stockState((state) => state.info);

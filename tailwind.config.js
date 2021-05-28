@@ -1,23 +1,23 @@
 // const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-	mode: "jit",
+	mode: 'jit',
 	purge: {
 		content: [
-			"./pages/**/*.{js,ts,jsx,tsx}",
-			"./components/**/*.{js,ts,jsx,tsx}",
-			"./functions/**/*.{js,ts,jsx,tsx}",
-			"./data/**/*.{js,ts,jsx,tsx}",
+			'./pages/**/*.{js,ts,jsx,tsx}',
+			'./components/**/*.{js,ts,jsx,tsx}',
+			'./functions/**/*.{js,ts,jsx,tsx}',
+			'./data/**/*.{js,ts,jsx,tsx}',
 		],
 		options: {
 			safelist: [
-				"border-gray-300",
-				"bg-blue-400",
-				"max-w-md",
-				"my-20",
-				"gap-3",
-				"block",
-				"hidden",
+				'border-gray-300',
+				'bg-blue-400',
+				'max-w-md',
+				'my-20',
+				'gap-3',
+				'block',
+				'hidden',
 			],
 		},
 	},
@@ -25,21 +25,21 @@ module.exports = {
 	theme: {
 		container: {
 			center: true,
-			padding: "1.5rem",
+			padding: '1.5rem',
 		},
 		screens: {
-			xs: "350px",
-			sm: "640px",
-			md: "768px",
-			lg: "1024px",
-			xl: "1280px",
-			"2xl": "1536px",
+			xs: '350px',
+			sm: '640px',
+			md: '768px',
+			lg: '1024px',
+			xl: '1280px',
+			'2xl': '1536px',
 		},
 		extend: {
 			gridTemplateColumns: {
-				sidebar: "1fr 336px",
-				overview: "1fr 1fr 3fr",
-				news: "1fr 2fr",
+				sidebar: '1fr 336px',
+				overview: '1fr 1fr 3fr',
+				news: '1fr 2fr',
 			},
 			fontFamily: {
 				/* sans: ["Open Sans", ...defaultTheme.fontFamily.sans], */
@@ -52,5 +52,5 @@ module.exports = {
 			small: ".95rem",
 		}, */,
 	},
-	plugins: [require("@tailwindcss/typography")],
+	plugins: [require('@tailwindcss/typography')],
 };
