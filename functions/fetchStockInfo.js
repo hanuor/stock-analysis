@@ -1,12 +1,12 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before going live
-import Axios from "axios";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before going live
+import Axios from 'axios';
 
 export function getStockUrls() {
 	// Array of objects with the params key and the slugname-value key value pair.
 	const paths = [
 		{
 			params: {
-				symbol: "aapl",
+				symbol: 'aapl',
 			},
 		},
 	];
