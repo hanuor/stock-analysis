@@ -1,4 +1,4 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Remove before going live
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Remove before going live
 import Axios from 'axios';
 
 export function getStockUrls() {
@@ -40,4 +40,13 @@ export async function getStockNews(id) {
 	const news = response.data;
 
 	return news;
+}
+
+export async function getHomePageData() {
+	const api = process.env.API_URL + `/homepage`;
+
+	const response = await Axios.get(api);
+	const data = response.data;
+
+	return data;
 }

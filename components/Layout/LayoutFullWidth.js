@@ -1,6 +1,6 @@
-import Meta from "@/components/Meta";
-import Header from "@/Layout/Header";
-import Footer from "@/Layout/Footer";
+import Meta from '@/components/Meta';
+import Header from '@/Layout/Header';
+import Footer from '@/Layout/Footer';
 
 function LayoutFullWidth(props) {
 	return (

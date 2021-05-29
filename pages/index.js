@@ -1,31 +1,31 @@
-import Link from 'next/link';
 import LayoutFullWidth from '@/Layout/LayoutFullWidth';
-import SiteSearch from '@/components/Search/SiteSearch';
+import Hero from '@/components/HomePage/Hero';
+import Movers from '@/components/HomePage/Movers';
+import LatestNews from '@/components/HomePage/LatestNews';
+import IPOwidgets from '@/components/HomePage/IPOwidgets';
+import { getHomePageData } from '@/Functions/fetchStockInfo';
 
-export default function FrontPage() {
+export default function FrontPage(props) {
 	return (
-		<LayoutFullWidth title="About Us">
-			<section className="bg-gray-100 py-20">
-				<div className="container max-w-screen-md text-center">
-					<h1 className="text-4xl font-bold mb-4">
-						Search for a stock to start your analysis
-					</h1>
-					<p className="text-xl mb-3">
-						Detailed information on 6000+ stocks, including all the
-						companies in the S&P500 index. See stock price quotes, news,
-						financial statements and more.
-					</p>
-					<div className="flex relative mx-auto text-left mb-3 max-w-md">
-						<SiteSearch />
-					</div>
-					<p className="text-lg">
-						Example searches: <Link href="/stocks/aapl/">Apple</Link>,{' '}
-						<Link href="/stocks/tsla/">Tesla</Link>,{' '}
-						<Link href="/stocks/msft/">MSFT</Link>,{' '}
-						<Link href="/stocks/amzn/">AMZN</Link>
-					</p>
-				</div>
-			</section>
+		<LayoutFullWidth title="Home Page">
+			<Hero />
+			<Movers data={props.data} />
+			<LatestNews news={props.data.news} />
+			<IPOwidgets
+				recent={props.data.recentIpos}
+				upcoming={props.data.ipoCalendar}
+			/>
 		</LayoutFullWidth>
 	);
+}
+
+export async function getStaticProps() {
+	const data = await getHomePageData();
+
+	return {
+		props: {
+			data,
+		},
+		revalidate: 180,
+	};
 }

@@ -4,18 +4,17 @@ import SingleResult from './SingleResult';
 import Axios from 'axios';
 import { useRouter } from 'next/router';
 
-export default function SiteSearch() {
+export default function SiteSearch({ nav }) {
 	const router = useRouter();
 	const inputRef = useRef();
 	const [query, setQuery] = useState('');
 	const [fetched, setFetched] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [index, setIndex] = useState([]);
-	const [trending, setTrending] = useState([]);
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [wait, setWait] = useState();
-	const [resultsCount, setResultsCount] = useState();
+	const [trending, setTrending] = useState([]);
 	let num = 1;
 
 	// Fetch the site index
@@ -72,13 +71,11 @@ export default function SiteSearch() {
 					});
 
 					const allResults = exact.concat(matches);
-					setResultsCount(allResults.length);
 					setResults(allResults);
 					setOpen(true);
 				}, 200)
 			);
 		} else if (fetched) {
-			setResultsCount(trending.length);
 			setResults(trending);
 			setOpen(true);
 		}
@@ -105,7 +102,7 @@ export default function SiteSearch() {
 			case 'ArrowDown':
 				{
 					e.preventDefault();
-					if (num < resultsCount) {
+					if (num < results.length) {
 						if (active) {
 							active.classList.remove('activeresult');
 						}
@@ -113,6 +110,8 @@ export default function SiteSearch() {
 						let next = document.querySelector('[data-num="' + num + '"]');
 						if (next) {
 							next.classList.add('activeresult');
+							next.focus();
+							inputRef.current.focus();
 						}
 					}
 				}
@@ -129,6 +128,8 @@ export default function SiteSearch() {
 						let next = document.querySelector('[data-num="' + num + '"]');
 						if (next) {
 							next.classList.add('activeresult');
+							next.focus();
+							inputRef.current.focus();
 						}
 					}
 				}
@@ -173,13 +174,18 @@ export default function SiteSearch() {
 			document.removeEventListener('keydown', keyClick);
 			document.removeEventListener('mousedown', mouseClick);
 		};
-	}, [open]);
+	}, [open, results]);
+
+	const grayBg = nav ? ' bg-gray-50 focus:bg-white' : '';
 
 	return (
 		<>
 			<SearchIcon />
 			<input
-				className="border bg-gray-50 border-gray-200 placeholder-gray-700 py-2 pl-10 flex-grow focus:outline-none focus:bg-white focus:shadow-lg transition"
+				className={
+					'border border-gray-200 placeholder-gray-700 py-2 pl-10 flex-grow focus:outline-none focus:bg-white focus:shadow-lg transition' +
+					grayBg
+				}
 				name="q"
 				type="text"
 				spellCheck="false"
@@ -223,7 +229,7 @@ export default function SiteSearch() {
 					</div>
 					<style global jsx>{`
 						.activeresult {
-							background-color: #f2f9ff;
+							background-color: #f3f4f6;
 						}
 					`}</style>
 				</>

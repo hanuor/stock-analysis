@@ -47,6 +47,12 @@ module.exports = {
 				/* sans: ["Inter", ...defaultTheme.fontFamily.sans], */
 				/* sans: ["Source Sans Pro", ...defaultTheme.fontFamily.sans], */
 			},
+			colors: {
+				blue: {
+					brand: 'rgba(59, 130, 220, 1)',
+					sharp: 'rgba(1, 90, 210, 1)',
+				},
+			},
 		} /* ,
 		fontSize: {
 			small: ".95rem",

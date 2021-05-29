@@ -49,7 +49,9 @@
 		"prefix": "fed",
 		"body": [
 			"export default function ${1:Name}(${2:Props}) {",
-			"  ${3:code}",
+			"\treturn (",
+			"\t\t${3:code}",
+			"\t);",
 			"}"
 		],
 		"description": "Function (Export Default)"
