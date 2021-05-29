@@ -29,6 +29,11 @@ export function HeaderNavigation({ device }) {
 							<a>News</a>
 						</Link>
 					</li>
+					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
+						<Link href="/actions/" prefetch={false}>
+							<a>Actions</a>
+						</Link>
+					</li>
 				</ul>
 			</nav>
 		</>

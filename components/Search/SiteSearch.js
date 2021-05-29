@@ -8,8 +8,10 @@ export default function SiteSearch() {
 	const router = useRouter();
 	const inputRef = useRef();
 	const [query, setQuery] = useState('');
+	const [fetched, setFetched] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [index, setIndex] = useState([]);
+	const [trending, setTrending] = useState([]);
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [wait, setWait] = useState();
@@ -18,9 +20,12 @@ export default function SiteSearch() {
 
 	// Fetch the site index
 	async function fetchIndex() {
+		setFetched(true);
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
+				const trendingJSON = await Axios.get('/api/trending/');
+				setTrending(trendingJSON.data);
 				const indexJSON = await Axios.get('/api/search/');
 				setIndex(indexJSON.data);
 			} catch (e) {
@@ -70,11 +75,12 @@ export default function SiteSearch() {
 					setResultsCount(allResults.length);
 					setResults(allResults);
 					setOpen(true);
-				}, 300)
+				}, 200)
 			);
-		} else {
-			setResults([]);
-			setOpen(false);
+		} else if (fetched) {
+			setResultsCount(trending.length);
+			setResults(trending);
+			setOpen(true);
 		}
 
 		return () => {
@@ -91,6 +97,7 @@ export default function SiteSearch() {
 					if (inputRef) {
 						e.preventDefault();
 						inputRef.current.blur();
+						setOpen(false);
 					}
 				}
 				break;
@@ -172,7 +179,7 @@ export default function SiteSearch() {
 		<>
 			<SearchIcon />
 			<input
-				className="border border-gray-200 placeholder-gray-700 py-2 pl-10 flex-grow focus:outline-none"
+				className="border bg-gray-50 border-gray-200 placeholder-gray-700 py-2 pl-10 flex-grow focus:outline-none focus:bg-white focus:shadow-lg transition"
 				name="q"
 				type="text"
 				spellCheck="false"
@@ -185,6 +192,9 @@ export default function SiteSearch() {
 				onClick={() => fetchIndex()}
 				onChange={(e) => setQuery(e.target.value)}
 				onFocus={() => {
+					if (!fetched) {
+						fetchIndex();
+					}
 					if (results.length) {
 						setOpen(true);
 					}
@@ -192,7 +202,12 @@ export default function SiteSearch() {
 			/>
 			{open && (
 				<>
-					<div className="max-h-60 w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto searchresults">
+					<div className="max-h-60 w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg searchresults">
+						{query.length === 0 && (
+							<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+								Trending
+							</h4>
+						)}
 						<ul>
 							{results.map((item, index) => (
 								<SingleResult

@@ -20,13 +20,13 @@ export default function SingleResult({ index, symbol, name, type, setOpen }) {
 	}
 
 	let searchResultStyles =
-		'flex flex-row items-center gap-x-1 sm:gap-x-2 py-1.5 px-2 sm:px-3 hover:bg-gray-100';
+		'flex flex-row items-center gap-x-1 sm:gap-x-2 py-1.5 px-2 sm:px-3 hover:bg-gray-100 transition duration-100';
 	if (index === 0) {
 		searchResultStyles += ' activeresult';
 	}
 
 	return (
-		<li className="border-b border-gray-200">
+		<li className="first:border-t border-b last:border-none border-gray-200">
 			<Link href={url}>
 				<a
 					data-num={index + 1}

@@ -1,4 +1,4 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before going live
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Remove before going live
 import Axios from 'axios';
 
 export function getStockUrls() {
