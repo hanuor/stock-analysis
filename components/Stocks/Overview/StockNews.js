@@ -41,7 +41,7 @@ function NewsArticle({ content, num }) {
 	return (
 		<div
 			className={`sm:grid sm:grid-cols-news gap-4 px-4 lg:px-0 ${
-				num == 0 ? 'pt-2 md:pt-2 pb-4 md:pb-6' : 'py-4 md:py-6'
+				num == 0 ? 'pt-2 md:pt-2 pb-4 md:pb-6' : 'py-4 md:py-7'
 			}`}>
 			<a
 				href={content.url}
