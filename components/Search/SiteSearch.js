@@ -183,7 +183,7 @@ export default function SiteSearch({ nav }) {
 			<SearchIcon />
 			<input
 				className={
-					'border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:outline-none focus:bg-white focus:shadow-lg transition' +
+					'border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none focus:bg-white focus:shadow-lg transition' +
 					grayBg
 				}
 				name="q"
