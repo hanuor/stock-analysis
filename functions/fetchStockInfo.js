@@ -41,3 +41,12 @@ export async function getStockNews(id) {
 
 	return news;
 }
+
+export async function getHomePageData() {
+	const api = process.env.API_URL + `/homepage`;
+
+	const response = await Axios.get(api);
+	const data = response.data;
+
+	return data;
+}

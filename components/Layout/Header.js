@@ -1,20 +1,20 @@
-import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
-import HeaderLogo from "@/components/Layout/Header/HeaderLogo";
-import HeaderLogoFull from "@/components/Layout/Header/HeaderLogoFull";
-import HeaderSearch from "@/Layout/Header/HeaderSearch";
-import HeaderLogin from "@/Layout/Header/HeaderLogin";
+import { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
+import HeaderLogo from '@/components/Layout/Header/HeaderLogo';
+import HeaderLogoFull from '@/components/Layout/Header/HeaderLogoFull';
+import HeaderSearch from '@/Layout/Header/HeaderSearch';
+import HeaderLogin from '@/Layout/Header/HeaderLogin';
 
 import {
 	HeaderNavigation,
 	HamburgerIcon,
 	CloseIcon,
-} from "@/Layout/Header/HeaderNavigation";
+} from '@/Layout/Header/HeaderNavigation';
 
 export default function Header() {
 	const node = useRef();
 	const [open, setOpen] = useState(false);
-	const [menu, setMenu] = useState("hidden lg:flex");
+	const [menu, setMenu] = useState('hidden lg:flex');
 
 	function clickMenu() {
 		setOpen((open) => !open);
@@ -23,7 +23,7 @@ export default function Header() {
 	function clickOutside(e) {
 		if (
 			node.current.contains(e.target) ||
-			document.querySelector("#menu-toggle").contains(e.target)
+			document.querySelector('#menu-toggle').contains(e.target)
 		) {
 			return;
 		}
@@ -33,15 +33,15 @@ export default function Header() {
 	useEffect(
 		function () {
 			if (open) {
-				setMenu("block bg-white shadow-xl absolute w-full");
-				document.addEventListener("mousedown", clickOutside);
+				setMenu('block bg-white shadow-xl absolute w-full');
+				document.addEventListener('mousedown', clickOutside);
 			} else {
-				setMenu("hidden");
-				document.removeEventListener("mousedown", clickOutside);
+				setMenu('hidden');
+				document.removeEventListener('mousedown', clickOutside);
 			}
 
 			return function () {
-				document.removeEventListener("mousedown", clickOutside);
+				document.removeEventListener('mousedown', clickOutside);
 			};
 		},
 		[open]
@@ -66,11 +66,11 @@ export default function Header() {
 						type="button"
 						id="menu-toggle"
 						className={`flex flex-col items-center focus:outline-none focus-visible:outline-none ${
-							open && "text-blue-800"
+							open && 'text-blue-800'
 						}`}
 						onClick={clickMenu}>
 						{open ? <CloseIcon /> : <HamburgerIcon />}
-						<span className="text-xs">{open ? "Close" : "Menu"}</span>
+						<span className="text-xs">{open ? 'Close' : 'Menu'}</span>
 					</button>
 				</div>
 				<div className="hidden lg:flex">

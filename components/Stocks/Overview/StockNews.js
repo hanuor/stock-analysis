@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function StockNews({ props }) {
 	return (
@@ -7,13 +7,13 @@ export default function StockNews({ props }) {
 			<div>
 				<ul className="px-3 lg:px-0 space-x-5 mb-3">
 					<li className="inline">All</li>
-					<li className="inline text-blue-700 hover:text-black cursor-pointer">
+					<li className="inline text-blue-brand hover:text-black cursor-pointer">
 						Videos
 					</li>
-					<li className="inline text-blue-700 hover:text-black cursor-pointer">
+					<li className="inline text-blue-brand hover:text-black cursor-pointer">
 						Press Releases
 					</li>
-					<li className="inline text-blue-700 hover:text-black cursor-pointer">
+					<li className="inline text-blue-brand hover:text-black cursor-pointer">
 						Conversation
 					</li>
 				</ul>
@@ -29,9 +29,9 @@ export default function StockNews({ props }) {
 }
 
 function NewsItem({ content, num }) {
-	const type = content["type"];
+	const type = content['type'];
 
-	if (type === "Video") {
+	if (type === 'Video') {
 		return <NewsArticle content={content} num={num} />;
 	}
 	return <NewsArticle content={content} num={num} />;
@@ -41,7 +41,7 @@ function NewsArticle({ content, num }) {
 	return (
 		<div
 			className={`sm:grid sm:grid-cols-news gap-4 px-4 lg:px-0 ${
-				num == 0 ? "pt-2 md:pt-2 pb-4 md:pb-6" : "py-4 md:py-6"
+				num == 0 ? 'pt-2 md:pt-2 pb-4 md:pb-6' : 'py-4 md:py-6'
 			}`}>
 			<a
 				href={content.url}
@@ -63,7 +63,7 @@ function NewsArticle({ content, num }) {
 						target="_blank"
 						rel="nofollow noopener noreferrer"
 						className="hover:text-blue-500">
-						{content.type == "Video" && <span>Video: </span>}
+						{content.type == 'Video' && <span>Video: </span>}
 						{content.title}
 					</a>
 				</h3>
@@ -88,7 +88,7 @@ function NewsTickers({ tickers }) {
 
 		return (
 			<div className="mb-1">
-				Other tickers mentioned:{" "}
+				Other tickers mentioned:{' '}
 				<span className="space-x-2 my-1">
 					{tickers.map(function (ticker, index) {
 						return <SingleTicker ticker={ticker} key={index} />;
@@ -104,7 +104,7 @@ function SingleTicker({ ticker }) {
 
 	return (
 		<Link href={`/stocks/${symbol}/`}>
-			<a className="border border-gray-200 bor px-1 text-sm rounded-md text-blue-600 hover:text-black">
+			<a className="border border-gray-200 bor px-1 text-sm rounded-md text-blue-sharp hover:text-black">
 				{ticker}
 			</a>
 		</Link>

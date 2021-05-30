@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { stockState } from "@State/stockState";
+import Link from 'next/link';
+import { stockState } from '@State/stockState';
 
 export default function Profile() {
 	const info = stockState((state) => state.info);
@@ -9,9 +9,11 @@ export default function Profile() {
 		<div>
 			<h2 className="text-2xl font-bold mb-3">About {info.ticker}</h2>
 			<p>
-				{data.description}{" "}
+				{data.description}{' '}
 				<Link href={`/stocks/${info.symbol}/company/`}>
-					<a className="text-blue-500 hover:text-black">[Read more...]</a>
+					<a className="text-blue-sharp hover:text-black">
+						[Read more...]
+					</a>
 				</Link>
 			</p>
 
@@ -29,7 +31,7 @@ export default function Profile() {
 					})}
 			</div>
 
-			<button className="w-full bg-blue-500 my-3 py-2 px-3 text-xl text-white font-semibold">
+			<button className="w-full bg-blue-brand my-3 py-2 px-3 text-xl text-white font-semibold">
 				<Link href={`/stocks/${info.symbol}/company/`}>
 					<a>Full Company Profile</a>
 				</Link>

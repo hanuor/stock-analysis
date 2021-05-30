@@ -30,6 +30,11 @@
 		"body": ["import { useRouter } from \"next/router\";"],
 		"description": "Import next/router"
 	},
+	"Import next/link": {
+		"prefix": "inlink",
+		"body": ["import Link from \"next/link\";"],
+		"description": "Import next/link"
+	},
 	"Function": {
 		"prefix": "f",
 		"body": ["function ${1:Name}($2) {", "  $3", "}"],
@@ -49,7 +54,9 @@
 		"prefix": "fed",
 		"body": [
 			"export default function ${1:Name}(${2:Props}) {",
-			"  ${3:code}",
+			"\treturn (",
+			"\t\t${3:code}",
+			"\t);",
 			"}"
 		],
 		"description": "Function (Export Default)"
@@ -108,13 +115,18 @@
 		],
 		"description": "Create useEffect"
 	},
-	"Export arrow function const": {
-		"prefix": "exp",
+	"Arrow function const export": {
+		"prefix": "arex",
 		"body": [
 			"export const ${1:FunctionName} = (${2}) => {",
 			"${3:CodeToExecute}",
 			"}"
 		],
 		"description": "Export arrow function const"
+	},
+	"Add a link": {
+		"prefix": "lin",
+		"body": ["<Link href=\"${1:href}\"><a>${2:Anchor Tag}</a></Link>"],
+		"description": "Add a link"
 	}
 }

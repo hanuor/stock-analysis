@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Bar } from "react-chartjs-2";
-import { stockState } from "@State/stockState";
+import Link from 'next/link';
+import { Bar } from 'react-chartjs-2';
+import { stockState } from '@State/stockState';
 
 export default function FinancialsWidget() {
 	const info = stockState((state) => state.info);
@@ -15,9 +15,9 @@ export default function FinancialsWidget() {
 
 	earnings.map(function (item) {
 		if (item < 0) {
-			colors.push("#CD5C5C");
+			colors.push('#CD5C5C');
 		} else {
-			colors.push("#00853E");
+			colors.push('#00853E');
 		}
 	});
 
@@ -31,14 +31,14 @@ export default function FinancialsWidget() {
 						labels: data.financialChart[0],
 						datasets: [
 							{
-								label: "Revenue",
-								backgroundColor: "#2C6288",
+								label: 'Revenue',
+								backgroundColor: '#2C6288',
 								data: data.financialChart[1],
 								categoryPercentage: 0.8,
 								barPercentage: 0.85,
 							},
 							{
-								label: "Net Income",
+								label: 'Net Income',
 								backgroundColor: colors,
 								data: data.financialChart[2],
 								categoryPercentage: 0.8,
@@ -55,14 +55,14 @@ export default function FinancialsWidget() {
 								},
 							},
 							y: {
-								position: "right",
+								position: 'right',
 								ticks: {
 									beginAtZero: true,
 									callback: function (value) {
 										let newvalue = value / 1000000;
 										return newvalue
 											.toString()
-											.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+											.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 									},
 								},
 							},
@@ -73,7 +73,7 @@ export default function FinancialsWidget() {
 					}}
 				/>
 			</div>
-			<button className="w-full bg-blue-500 my-3 py-2 px-3 text-xl text-white font-semibold">
+			<button className="w-full bg-blue-brand my-3 py-2 px-3 text-xl text-white font-semibold">
 				<Link href={`/stocks/${info.symbol}/financials/`}>
 					<a>Financial Statements</a>
 				</Link>

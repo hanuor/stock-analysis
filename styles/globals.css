@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-	a {
-		@apply hover:text-blue-600;
+	.link {
+		@apply text-blue-link hover:text-black;
 	}
 }

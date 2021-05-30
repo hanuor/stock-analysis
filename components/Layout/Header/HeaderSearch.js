@@ -3,7 +3,7 @@ import SiteSearch from '@/components/Search/SiteSearch';
 export default function HeaderSearch() {
 	return (
 		<div className="flex relative">
-			<SiteSearch />
+			<SiteSearch nav={true} />
 		</div>
 	);
 }
