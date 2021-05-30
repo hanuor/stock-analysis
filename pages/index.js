@@ -10,11 +10,13 @@ export default function FrontPage(props) {
 		<LayoutFullWidth title="Home Page">
 			<Hero />
 			<Movers data={props.data} />
-			<LatestNews news={props.data.news} />
-			<IPOwidgets
-				recent={props.data.recentIpos}
-				upcoming={props.data.ipoCalendar}
-			/>
+			<div className="mx-auto flex flex-col space-y-6 pb-12 lg:max-w-screen-xl lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-6">
+				<LatestNews news={props.data.news} />
+				<IPOwidgets
+					recent={props.data.recentIpos}
+					upcoming={props.data.ipoCalendar}
+				/>
+			</div>
 		</LayoutFullWidth>
 	);
 }
@@ -26,6 +28,6 @@ export async function getStaticProps() {
 		props: {
 			data,
 		},
-		revalidate: 180,
+		revalidate: 300,
 	};
 }
