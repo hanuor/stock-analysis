@@ -67,11 +67,11 @@ function NewsArticle({ content, num }) {
 						{content.title}
 					</a>
 				</h3>
-				<p className="mb-1">{content.text}</p>
+				<p className="mb-1 font-system">{content.text}</p>
 				{content.tickers.length > 0 && (
 					<NewsTickers tickers={content.tickers} />
 				)}
-				<div className="text-sm text-gray-600">
+				<div className="text-sm text-gray-600 font-system">
 					<span title={content.timeFull}>{content.timeAgo}</span>
 					<span> - {content.source}</span>
 				</div>
@@ -87,7 +87,7 @@ function NewsTickers({ tickers }) {
 		}
 
 		return (
-			<div className="mb-1">
+			<div className="mb-1 font-system">
 				Other tickers mentioned:{' '}
 				<span className="space-x-2 my-1">
 					{tickers.map(function (ticker, index) {

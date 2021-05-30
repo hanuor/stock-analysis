@@ -44,7 +44,9 @@ module.exports = {
 			fontFamily: {
 				/* sans: ["Open Sans", ...defaultTheme.fontFamily.sans], */
 				/* sans: ["Roboto", ...defaultTheme.fontFamily.sans], */
+				system: [...defaultTheme.fontFamily.sans],
 				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+
 				/* sans: ["Source Sans Pro", ...defaultTheme.fontFamily.sans], */
 			},
 			colors: {

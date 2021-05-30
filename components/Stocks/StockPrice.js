@@ -1,13 +1,13 @@
-import { stockState } from "@State/stockState";
-import { IconMoon, IconSun } from "@/components/Stocks/PriceIcons";
+import { stockState } from '@State/stockState';
+import { IconMoon, IconSun } from '@/components/Stocks/PriceIcons';
 
 const changeColor = (change) => {
 	if (change > 0) {
-		return "text-green-700";
+		return 'text-green-700';
 	} else if (change < 0) {
-		return "text-red-600";
+		return 'text-red-600';
 	} else {
-		return "text-gray-800";
+		return 'text-gray-800';
 	}
 };
 
@@ -17,13 +17,13 @@ const Regular = ({ quote }) => {
 
 	return (
 		<div>
-			<span className="text-4xl font-bold">{quote.price}</span>{" "}
+			<span className="text-4xl font-bold">{quote.price}</span>{' '}
 			<span className={`text-2xl ${color} font-semibold`}>
 				{quote.change} ({quote.changePc})
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
-				{quote.timestamp} -{" "}
-				{quote.market == "open" ? <>Market open</> : <>Market closed</>}
+				{quote.timestamp} -{' '}
+				{quote.market == 'open' ? <>Market open</> : <>Market closed</>}
 			</div>
 		</div>
 	);
@@ -35,16 +35,16 @@ const Extended = ({ quote, market }) => {
 
 	return (
 		<div>
-			<span className="text-4xl font-bold">{quote.extP}</span>{" "}
+			<span className="text-4xl font-bold">{quote.extP}</span>{' '}
 			<span className={`block sm:inline text-2xl font-semibold ${color}`}>
 				{quote.extC} ({quote.extCP})
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
-				{market == "preMarket" ? <IconSun /> : <IconMoon />}
-				<span className="ml-1">
+				{market == 'preMarket' ? <IconSun /> : <IconMoon />}
+				<span className="ml-1 font-system">
 					<span className="block sm:inline font-semibold">
 						{quote.extS}:
-					</span>{" "}
+					</span>{' '}
 					{quote.extT}
 				</span>
 			</div>
@@ -60,14 +60,14 @@ const ExtendedClose = ({ quote }) => {
 		<div>
 			<span className="text-3xl font-semibold text-gray-700">
 				{quote.price}
-			</span>{" "}
+			</span>{' '}
 			<span className={`block sm:inline text-xl ${color}`}>
 				{quote.change} ({quote.changePc})
 			</span>
-			<div className="text-sm text-gray-700 mt-1">
+			<div className="text-sm text-gray-700 mt-1 font-system">
 				<span className="block sm:inline font-semibold mr-1">
 					At close:
-				</span>{" "}
+				</span>{' '}
 				{quote.timestamp}
 			</div>
 		</div>
@@ -85,7 +85,7 @@ export default function StockPrice() {
 
 	// Check if extended hours trading
 	const extendedHours = quote.ext ? true : false;
-	const extendedType = quote.extS == "Pre-market" ? "preMarket" : "afterHours";
+	const extendedType = quote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
 
 	return (
 		<>

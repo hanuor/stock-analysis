@@ -8,7 +8,7 @@ export default function Title() {
 			<h1 className="text-2xl font-bold">
 				{info.name_full} ({info.ticker})
 			</h1>
-			<div className="text-xs text-gray-600">
+			<div className="text-xs text-gray-600 font-system">
 				{info.exchange}: {info.ticker} &#183; IEX Real-Time Price &#183; USD
 			</div>
 		</div>
