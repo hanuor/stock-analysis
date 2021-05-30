@@ -1,4 +1,4 @@
-// const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	mode: 'jit',
@@ -44,7 +44,7 @@ module.exports = {
 			fontFamily: {
 				/* sans: ["Open Sans", ...defaultTheme.fontFamily.sans], */
 				/* sans: ["Roboto", ...defaultTheme.fontFamily.sans], */
-				/* sans: ["Inter", ...defaultTheme.fontFamily.sans], */
+				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
 				/* sans: ["Source Sans Pro", ...defaultTheme.fontFamily.sans], */
 			},
 			colors: {
@@ -59,5 +59,5 @@ module.exports = {
 			small: ".95rem",
 		}, */,
 	},
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };
