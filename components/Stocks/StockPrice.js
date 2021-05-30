@@ -41,7 +41,7 @@ const Extended = ({ quote, market }) => {
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
 				{market == 'preMarket' ? <IconSun /> : <IconMoon />}
-				<span className="ml-1 font-system">
+				<span className="ml-1">
 					<span className="block sm:inline font-semibold">
 						{quote.extS}:
 					</span>{' '}
@@ -64,7 +64,7 @@ const ExtendedClose = ({ quote }) => {
 			<span className={`block sm:inline text-xl ${color}`}>
 				{quote.change} ({quote.changePc})
 			</span>
-			<div className="text-sm text-gray-700 mt-1 font-system">
+			<div className="text-sm text-gray-700 mt-1">
 				<span className="block sm:inline font-semibold mr-1">
 					At close:
 				</span>{' '}
