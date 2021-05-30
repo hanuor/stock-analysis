@@ -9,7 +9,9 @@ export default function LatestNews({ news }) {
 					<tbody>
 						{news.map((item, index) => {
 							return (
-								<tr key={index} className="border-b border-gray-200">
+								<tr
+									key={index}
+									className="border-b border-gray-200 hover:bg-gray-50">
 									<td className="pr-1 pt-2 align-top text-gray-600">
 										{item.d}
 									</td>
@@ -26,7 +28,7 @@ export default function LatestNews({ news }) {
 								</tr>
 							);
 						})}
-						<tr className="border-b border-gray-200">
+						<tr className="border-b border-gray-200 hover:bg-gray-50">
 							<td
 								colSpan="2"
 								className="pl-2 py-2 text-lg font-semibold">

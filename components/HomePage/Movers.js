@@ -74,7 +74,7 @@ export default function Movers({ data }) {
 
 	return (
 		<>
-			<section className="mx-auto flex flex-col lg:flex-row lg:justify-evenly space-y-7 px-3 xs:px-4 sm:px-5 py-7 lg:py-12 lg:max-w-screen-xl lg:space-y-0 lg:space-x-14">
+			<section className="mx-auto flex flex-col lg:flex-row lg:justify-evenly space-y-7 px-3 xs:px-4 sm:px-5 py-7 lg:py-12 lg:max-w-[1200px] lg:space-y-0 lg:space-x-14">
 				<Table movers={gainers} type="Gainers" />
 				<Table movers={losers} type="Losers" />
 			</section>

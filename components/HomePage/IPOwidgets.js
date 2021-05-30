@@ -18,7 +18,9 @@ export default function IPOwidgets({ recent, upcoming }) {
 				<tbody>
 					{ipos.map((item, index) => {
 						return (
-							<tr key={index} className="border-b border-gray-200">
+							<tr
+								key={index}
+								className="border-b border-gray-200 hover:bg-gray-50">
 								<td className="py-1.5 px-2 border-r border-gray-200">
 									{item.d}
 								</td>
