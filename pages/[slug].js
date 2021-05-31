@@ -1,32 +1,40 @@
-import LayoutArticle from "@/Layout/LayoutArticle";
+import fs from 'fs';
+import path from 'path';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
+import { allPostPaths, POST_PATHS } from '@/Functions/markdown.functions.js';
+import LayoutArticle from '@/components/Layout/LayoutArticle';
 
-function OutputArticle(props) {
+export default function Page({ source }) {
 	return (
-		<LayoutArticle title={props.single.title.rendered}>
-			<div dangerouslySetInnerHTML={{ __html: props.single.content.rendered }} />
+		<LayoutArticle>
+			<div>
+				<MDXRemote {...source} />
+			</div>
 		</LayoutArticle>
-	)
-}
-
-export async function getStaticPaths() {
-	const res = await fetch(process.env.API_URL_POSTS + "/posts?per_page=100");
-	const posts = await res.json();
-
-	const paths = posts.map((post) => ({
-		params: { slug: post.slug.toString() }
-	}));
-
-	return { paths, fallback: false }
+	);
 }
 
 export async function getStaticProps({ params }) {
-	const res = await fetch(process.env.API_URL_POSTS + `/posts?slug=${params.slug}`);
-	const post = await res.json();
-	const single = post[0];
+	const postFile = path.join(POST_PATHS, `${params.slug}.mdx`);
+	const source = fs.readFileSync(postFile);
+
+	const mdxSource = await serialize(source);
 
 	return {
-		props: { single }
-	}
+		props: {
+			source: mdxSource,
+		},
+	};
 }
 
-export default OutputArticle;
+export async function getStaticPaths() {
+	const paths = allPostPaths
+		.map((path) => path.replace(/\.mdx?$/, ''))
+		.map((slug) => ({ params: { slug } }));
+
+	return {
+		paths,
+		fallback: false,
+	};
+}
