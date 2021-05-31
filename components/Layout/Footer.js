@@ -1,46 +1,31 @@
 /* eslint-disable react/display-name */
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
-*/
+import Link from 'next/link';
 const navigation = {
 	sections: [
-		{ name: 'Stocks', href: '#' },
-		{ name: 'IPOs', href: '#' },
-		{ name: 'ETFs', href: '#' },
-		{ name: 'Market News', href: '#' },
+		{ name: 'Stocks', href: '/stocks/' },
+		{ name: 'IPOs', href: '/ipos/' },
+		{ name: 'ETFs', href: '/etf/' },
+		{ name: 'Market News', href: '/news/' },
 	],
 	support: [
-		{ name: 'Contact', href: '#' },
-		{ name: 'Sign Up', href: '#' },
-		{ name: 'My Account', href: '#' },
-		{ name: 'Data Disclaimer', href: '#' },
+		{ name: 'Contact', href: '/contact/' },
+		{ name: 'Log In', href: '/login/' },
+		{ name: 'Free Trial', href: '/pro/' },
 	],
 	company: [
-		{ name: 'About', href: '#' },
-		{ name: 'Blog', href: '#' },
-		{ name: 'Sitemap', href: '#' },
+		{ name: 'About', href: '/about/' },
+		{ name: 'Blog', href: '/blog/' },
+		{ name: 'Sitemap', href: '/sitemap/' },
 	],
 	legal: [
-		{ name: 'Privacy Policy', href: '#' },
-		{ name: 'Terms of Use', href: '#' },
+		{ name: 'Privacy Policy', href: '/privacy-policy/' },
+		{ name: 'Terms of Use', href: '/terms-of-use/' },
+		{ name: 'Data Disclaimer', href: '/data-disclaimer/' },
 	],
 	social: [
 		{
 			name: 'Facebook',
-			href: '#',
+			href: 'https://www.facebook.com/stockanalysisoff/',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path
@@ -53,7 +38,7 @@ const navigation = {
 		},
 		{
 			name: 'Twitter',
-			href: '#',
+			href: 'https://twitter.com/stock_analysisx',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -62,7 +47,7 @@ const navigation = {
 		},
 		{
 			name: 'GitHub',
-			href: '#',
+			href: 'https://github.com/stockanalysisdev',
 			icon: (props) => (
 				<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 					<path
@@ -82,7 +67,7 @@ export default function Example() {
 			<h2 id="footerHeading" className="sr-only">
 				Footer
 			</h2>
-			<div className="max-w-7xl mx-auto pt-12 px-4 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
+			<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
 				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 					<div className="grid grid-cols-2 gap-8 xl:col-span-2">
 						<div className="md:grid md:grid-cols-2 md:gap-8">
@@ -93,11 +78,11 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.sections.map((item) => (
 										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-base text-gray-300 hover:text-white">
-												{item.name}
-											</a>
+											<Link href={item.href}>
+												<a className="text-base text-gray-300 hover:text-white">
+													{item.name}
+												</a>
+											</Link>
 										</li>
 									))}
 								</ul>
@@ -109,11 +94,11 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.support.map((item) => (
 										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-base text-gray-300 hover:text-white">
-												{item.name}
-											</a>
+											<Link href={item.href}>
+												<a className="text-base text-gray-300 hover:text-white">
+													{item.name}
+												</a>
+											</Link>
 										</li>
 									))}
 								</ul>
@@ -127,11 +112,11 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.company.map((item) => (
 										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-base text-gray-300 hover:text-white">
-												{item.name}
-											</a>
+											<Link href={item.href}>
+												<a className="text-base text-gray-300 hover:text-white">
+													{item.name}
+												</a>
+											</Link>
 										</li>
 									))}
 								</ul>
@@ -143,11 +128,11 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.legal.map((item) => (
 										<li key={item.name}>
-											<a
-												href={item.href}
-												className="text-base text-gray-300 hover:text-white">
-												{item.name}
-											</a>
+											<Link href={item.href}>
+												<a className="text-base text-gray-300 hover:text-white">
+													{item.name}
+												</a>
+											</Link>
 										</li>
 									))}
 								</ul>
@@ -190,9 +175,11 @@ export default function Example() {
 							<a
 								key={item.name}
 								href={item.href}
+								target="_blank"
+								rel="noopener noreferrer"
 								className="text-gray-400 hover:text-gray-300">
 								<span className="sr-only">{item.name}</span>
-								<item.icon className="h-6 w-6" aria-hidden="true" />
+								<item.icon className="h-8 w-8" aria-hidden="true" />
 							</a>
 						))}
 					</div>
@@ -200,7 +187,7 @@ export default function Example() {
 						&copy; 2021 Stock Analysis. All rights reserved.
 					</p>
 				</div>
-				<div className="mt-8 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+				<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
 					Real-time quotes provided by IEX Cloud. Other market data is
 					delayed by at least 15 minutes.
 				</div>

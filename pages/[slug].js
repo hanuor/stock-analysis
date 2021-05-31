@@ -2,16 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
+import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from '@/Functions/markdown.functions.js';
-import LayoutArticle from '@/components/Layout/LayoutArticle';
+import PageLayout from '@/components/Layout/PageLayout';
 
-export default function Page({ source }) {
+export default function Page({ content, meta }) {
 	return (
-		<LayoutArticle>
+		<PageLayout meta={meta}>
 			<div>
-				<MDXRemote {...source} />
+				<MDXRemote {...content} />
 			</div>
-		</LayoutArticle>
+		</PageLayout>
 	);
 }
 
@@ -19,11 +20,16 @@ export async function getStaticProps({ params }) {
 	const postFile = path.join(POST_PATHS, `${params.slug}.mdx`);
 	const source = fs.readFileSync(postFile);
 
-	const mdxSource = await serialize(source);
+	const { content, data } = matter(source);
+
+	const mdxSource = await serialize(content, {
+		scope: data,
+	});
 
 	return {
 		props: {
-			source: mdxSource,
+			content: mdxSource,
+			meta: data,
 		},
 	};
 }
