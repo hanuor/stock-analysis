@@ -5,12 +5,15 @@ import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from '@/Functions/markdown.functions.js';
 import PageLayout from '@/components/Layout/PageLayout';
+import Image from 'next/image';
+
+const components = { Image };
 
 export default function Page({ content, meta }) {
 	return (
 		<PageLayout meta={meta}>
 			<div>
-				<MDXRemote {...content} />
+				<MDXRemote {...content} components={components} />
 			</div>
 		</PageLayout>
 	);
