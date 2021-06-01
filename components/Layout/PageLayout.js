@@ -8,9 +8,9 @@ export default function PageLayout({ meta, children }) {
 		<>
 			<Meta title={meta.title}></Meta>
 			<Header />
-			<div className="mx-auto lg:max-w-[1100px] py-6 lg:py-8 px-4 lg:px-6 lg:grid lg:grid-cols-sidebar lg:gap-10">
+			<div className="mx-auto lg:max-w-[1150px] py-6 lg:py-8 px-4 lg:px-6 lg:grid lg:grid-cols-sidebar lg:gap-12">
 				<main>
-					<article className="text-page lg:px-4">
+					<article className="text-page lg:px-6">
 						<h1>{meta.heading}</h1>
 						{children}
 					</article>

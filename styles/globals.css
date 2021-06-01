@@ -33,7 +33,7 @@
 
 	.text-page ul {
 		list-style: disc;
-		@apply ml-6 mb-5;
+		@apply ml-8 md:ml-10 mb-5;
 	}
 
 	.text-page ol {
@@ -45,7 +45,23 @@
 		@apply mb-3;
 	}
 
-	.right-image {
+	.text-page .right-image {
 		@apply max-w-[140px] sm:max-w-none float-right ml-5 mb-4 mr-1;
+	}
+
+	.text-page table {
+		@apply mb-6 w-full;
+	}
+
+	.text-page table tr {
+		@apply border-b first:border-t border-gray-200;
+	}
+
+	.text-page table tr th {
+		@apply py-2 sm:px-3;
+	}
+
+	.text-page table tr td {
+		@apply py-2 sm:px-3;
 	}
 }
