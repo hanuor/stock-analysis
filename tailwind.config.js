@@ -8,6 +8,7 @@ module.exports = {
 			'./components/**/*.{js,ts,jsx,tsx}',
 			'./functions/**/*.{js,ts,jsx,tsx}',
 			'./data/**/*.{js,ts,jsx,tsx}',
+			'./content/**/*.{js,ts,jsx,tsx,mdx}',
 		],
 		options: {
 			safelist: [
@@ -37,7 +38,7 @@ module.exports = {
 		},
 		extend: {
 			gridTemplateColumns: {
-				sidebar: '1fr 336px',
+				sidebar: '1fr 300px',
 				overview: '1fr 1fr 3fr',
 				news: '1fr 2fr',
 			},

@@ -30,7 +30,7 @@ export default function Movers({ data }) {
 					{item.n}
 				</td>
 
-				<td className={cellStyles + ' text-right border-r'}>{item.p}</td>
+				<td className={cellStyles + ' text-right border-r'}>${item.p}</td>
 				<td className={cellStyles + ' text-right ' + redOrGreen}>
 					{item.c}
 				</td>

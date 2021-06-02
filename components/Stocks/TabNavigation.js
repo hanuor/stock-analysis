@@ -33,7 +33,7 @@ export default function TabNavigation() {
 						'flex flex-row w-full overflow-auto ' + styles.navmenu
 					}>
 					<li>
-						<Link href={`/stocks/${path.symbol}/`}>
+						<Link href={`/stocks/${path.symbol}/`} scroll={false}>
 							<a
 								className={path.page == 'overview' ? active : inactive}
 								data-title="Overview">
@@ -42,7 +42,9 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.symbol}/financials/`}>
+						<Link
+							href={`/stocks/${path.symbol}/financials/`}
+							scroll={false}>
 							<a
 								className={
 									path.page == 'financials' ? active : inactive
@@ -53,7 +55,9 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.symbol}/statistics/`}>
+						<Link
+							href={`/stocks/${path.symbol}/statistics/`}
+							scroll={false}>
 							<a
 								className={
 									path.page == 'statistics' ? active : inactive
@@ -64,7 +68,7 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.symbol}/company/`}>
+						<Link href={`/stocks/${path.symbol}/company/`} scroll={false}>
 							<a
 								className={path.page == 'company' ? active : inactive}
 								data-title="Profile">
@@ -73,7 +77,7 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.symbol}/chart/`}>
+						<Link href={`/stocks/${path.symbol}/chart/`} scroll={false}>
 							<a
 								className={path.page == 'chart' ? active : inactive}
 								data-title="Chart">

@@ -1,7 +1,7 @@
-import Meta from "@/components/Meta";
-import Header from "@/Layout/Header";
-import Footer from "@/Layout/Footer";
-import Sidebar from "@/Layout/Sidebar";
+import Meta from '@/components/Meta';
+import Header from '@/Layout/Header';
+import Footer from '@/Layout/Footer';
+import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 
 function LayoutSidebar(props) {
 	return (

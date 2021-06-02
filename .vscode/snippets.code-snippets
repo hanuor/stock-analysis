@@ -61,6 +61,16 @@
 		],
 		"description": "Function (Export Default)"
 	},
+	"Get static paths/props": {
+		"prefix": "feastatic",
+		"body": [
+			"export async function getStaticProps() {",
+			"}",
+			"export async function getStaticPaths() {",
+			"}"
+		],
+		"description": "getStaticProps/Paths"
+	},
 	"Component": {
 		"prefix": "com",
 		"body": [

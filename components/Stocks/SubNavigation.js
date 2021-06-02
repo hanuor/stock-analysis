@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { financialsState } from "@State/financialsState";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import styles from "@/Styles/TabMenu.module.css";
+import Link from 'next/link';
+import { financialsState } from '@State/financialsState';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import styles from '@/Styles/TabMenu.module.css';
 
 // styles
 const common =
-	"text-[15px] sm:text-base block py-2 sm:py-2 px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap";
-const inactive = common + " text-blue-500 hover:text-black hover:bg-gray-100";
-const active = common + " text-black bg-gray-100 font-semibold";
+	'text-[15px] sm:text-base block py-2 sm:py-2 px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap';
+const inactive = common + ' text-blue-500 hover:text-black hover:bg-gray-100';
+const active = common + ' text-black bg-gray-100 font-semibold';
 
 export default function TabNavigation({ path }) {
 	return (
@@ -24,12 +24,12 @@ const Statement = ({ path }) => {
 
 	return (
 		<nav className="mb-2">
-			<ul className={"flex flex-row w-full overflow-auto " + styles.navmenu}>
+			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
-					<Link href={`/stocks/${path.symbol}/financials/`}>
+					<Link href={`/stocks/${path.symbol}/financials/`} scroll={false}>
 						<a
 							className={
-								statement == "income_statement" ? active : inactive
+								statement == 'income_statement' ? active : inactive
 							}
 							data-title="Income">
 							Income
@@ -37,10 +37,12 @@ const Statement = ({ path }) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/stocks/${path.symbol}/financials/balance-sheet`}>
+					<Link
+						href={`/stocks/${path.symbol}/financials/balance-sheet`}
+						scroll={false}>
 						<a
 							className={
-								statement == "balance_sheet" ? active : inactive
+								statement == 'balance_sheet' ? active : inactive
 							}
 							data-title="Balance Sheet">
 							Balance Sheet
@@ -49,10 +51,11 @@ const Statement = ({ path }) => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${path.symbol}/financials/cash-flow-statement/`}>
+						href={`/stocks/${path.symbol}/financials/cash-flow-statement/`}
+						scroll={false}>
 						<a
 							className={
-								statement == "cash_flow_statement" ? active : inactive
+								statement == 'cash_flow_statement' ? active : inactive
 							}
 							data-title="Cash Flow">
 							Cash Flow
@@ -60,9 +63,11 @@ const Statement = ({ path }) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/stocks/${path.symbol}/financials/ratios/`}>
+					<Link
+						href={`/stocks/${path.symbol}/financials/ratios/`}
+						scroll={false}>
 						<a
-							className={statement == "ratios" ? active : inactive}
+							className={statement == 'ratios' ? active : inactive}
 							data-title="Ratios">
 							Ratios
 						</a>
@@ -79,11 +84,11 @@ const Period = ({ path }) => {
 
 	// Check for period in URL
 	useEffect(() => {
-		if (typeof window !== "undefined") {
+		if (typeof window !== 'undefined') {
 			let url = new URL(window.location.href);
 			let params = url.searchParams;
-			const period = params.get("period");
-			if (period === "quarterly" || period === "trailing") {
+			const period = params.get('period');
+			if (period === 'quarterly' || period === 'trailing') {
 				if (period !== range) {
 					setRange(period);
 				}
@@ -94,13 +99,13 @@ const Period = ({ path }) => {
 	const router = useRouter();
 	useEffect(() => {
 		let subpage =
-			path.subpage === "balance-sheet" ||
-			path.subpage === "cash-flow-statement" ||
-			path.subpage === "ratios"
+			path.subpage === 'balance-sheet' ||
+			path.subpage === 'cash-flow-statement' ||
+			path.subpage === 'ratios'
 				? `${path.subpage}/`
-				: "";
+				: '';
 
-		if (range === "quarterly" || range === "trailing") {
+		if (range === 'quarterly' || range === 'trailing') {
 			router.push(
 				`/stocks/[symbol]/financials/${subpage}?period=${range}`,
 				`/stocks/${path.symbol}/financials/${subpage}?period=${range}`,
@@ -117,12 +122,12 @@ const Period = ({ path }) => {
 
 	return (
 		<nav className="sm:mb-2">
-			<ul className={"flex flex-row w-full overflow-auto " + styles.navmenu}>
+			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
 					<span
-						className={range == "annual" ? active : inactive}
+						className={range == 'annual' ? active : inactive}
 						onClick={function () {
-							setRange("annual");
+							setRange('annual');
 						}}
 						data-title="Annual">
 						Annual
@@ -130,10 +135,10 @@ const Period = ({ path }) => {
 				</li>
 				<li>
 					<span
-						className={range == "quarterly" ? active : inactive}
+						className={range == 'quarterly' ? active : inactive}
 						onClick={function () {
-							if (range !== "quarterly") {
-								setRange("quarterly");
+							if (range !== 'quarterly') {
+								setRange('quarterly');
 							}
 						}}
 						data-title="Quarterly">
@@ -142,9 +147,9 @@ const Period = ({ path }) => {
 				</li>
 				<li>
 					<span
-						className={range == "trailing" ? active : inactive}
+						className={range == 'trailing' ? active : inactive}
 						onClick={function () {
-							setRange("trailing");
+							setRange('trailing');
 						}}
 						data-title="Trailing">
 						Trailing
