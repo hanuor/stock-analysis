@@ -9,13 +9,16 @@ import AnalystWidget from '@/components/Stocks/Overview/AnalystWidget';
 import Axios from 'axios';
 import styles from '@/Styles/TopGrid.module.css';
 import { stockState } from '@State/stockState';
+import { useEffect } from 'react';
 
-export default function StockOverview(props) {
+export default function StockOverview({ info, data, news }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
-	setInfo(props.info);
-	setData(props.data);
+	useEffect(() => {
+		setInfo(info);
+		setData(data);
+	}, [data, info, setData, setInfo]);
 
 	return (
 		<Stock>
@@ -31,15 +34,11 @@ export default function StockOverview(props) {
 					<AnalystWidget />
 				</div>
 				<div className="lg:order-1">
-					<NewsFeed props={props.news} />
+					<NewsFeed props={news} />
 				</div>
 			</div>
 		</Stock>
 	);
-}
-
-export async function getStaticPaths() {
-	return { paths: [], fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
@@ -54,5 +53,10 @@ export async function getStaticProps({ params }) {
 			data,
 			news,
 		},
+		revalidate: 300,
 	};
+}
+
+export async function getStaticPaths() {
+	return { paths: [], fallback: 'blocking' };
 }

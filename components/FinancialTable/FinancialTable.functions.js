@@ -1,63 +1,63 @@
 export const getPeriodLabel = (range) => {
 	switch (range) {
-		case "annual":
-			return "Year";
+		case 'annual':
+			return 'Year';
 
-		case "quarterly":
-			return "Quarter Ended";
+		case 'quarterly':
+			return 'Quarter Ended';
 
-		case "trailing":
-			return "Period Ended";
+		case 'trailing':
+			return 'Period Ended';
 	}
 };
 
 export const getPeriodTooltip = (range) => {
 	switch (range) {
-		case "annual":
+		case 'annual':
 			return "The company's fiscal year, which is a 12-month financial reporting period. The fiscal year does not always match the calendar year.";
 
-		case "quarterly":
-			return "The end date of the fiscal quarter, which is a 3-month financial reporting period.";
+		case 'quarterly':
+			return 'The end date of the fiscal quarter, which is a 3-month financial reporting period.';
 
-		case "trailing":
-			return "The end date of the preceding trailing twelve-month period.";
+		case 'trailing':
+			return 'The end date of the preceding trailing twelve-month period.';
 	}
 };
 
 export const redOrGreen = (value, id) => {
 	let change = parseFloat(value);
-	if (id === "shareschange") {
+	if (id === 'shareschange') {
 		change = change * -1;
 	} // Inverse colors
 
 	if (change > 0) {
-		return "text-green-600";
+		return 'text-green-600';
 	} else if (change < 0) {
-		return "text-red-500";
+		return 'text-red-500';
 	} else {
-		return "inherit";
+		return 'inherit';
 	}
 };
 
 export const setBorder = (rowname) => {
-	return rowname.includes("Growth") && "1px solid #CCC";
+	return rowname.includes('Growth') && '1px solid #CCC';
 };
 
 // Format the Y axis on hover charts
 export const formatY = (value, format) => {
 	if (!format && (value > 10000000 || value < -10000000)) {
-		return new Intl.NumberFormat("en-US").format(value / 1000000);
+		return new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
 	if (
-		format === "reduce_precision" &&
+		format === 'reduce_precision' &&
 		(value > 10000000 || value < -10000000)
 	) {
-		return new Intl.NumberFormat("en-US").format(value / 1000000);
+		return new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
-	if (format === "growth" || format === "margin") {
-		return value.toFixed(0) + "%";
+	if (format === 'growth' || format === 'margin') {
+		return value.toFixed(0) + '%';
 	}
-	if (format === "ratio" || format === "pershare") {
+	if (format === 'ratio' || format === 'pershare') {
 		return value.toFixed(2);
 	}
 	return value;
@@ -66,50 +66,54 @@ export const formatY = (value, format) => {
 // Format the number in the cells
 export function formatNumber({ type, current, previous, revenue, divider }) {
 	const numbersIn = getDivider(divider);
-	const decimals = divider === "raw" ? 3 : 2;
+	const decimals = divider === 'raw' ? 3 : 2;
 
 	switch (type) {
-		case "standard":
-			return new Intl.NumberFormat("en-US").format(current / numbersIn);
+		case 'standard':
+			return new Intl.NumberFormat('en-US', {
+				maximumFractionDigits: 2,
+			}).format(current / numbersIn);
 
-		case "reduce_precision": {
+		case 'reduce_precision': {
 			if (current) {
 				let num = (current / numbersIn).toFixed(0) * numbersIn;
-				return new Intl.NumberFormat("en-US").format(num / numbersIn);
+				return new Intl.NumberFormat('en-US', {
+					maximumFractionDigits: 2,
+				}).format(num / numbersIn);
 			}
-			return "-";
+			return '-';
 		}
 
-		case "growth": {
+		case 'growth': {
 			if (current && previous && current > 0 && previous > 0) {
-				return ((current / previous - 1) * 100).toFixed(decimals) + "%";
+				return ((current / previous - 1) * 100).toFixed(decimals) + '%';
 			}
-			return "-";
+			return '-';
 		}
 
-		case "margin": {
+		case 'margin': {
 			if (current && revenue) {
-				return ((current / revenue) * 100).toFixed(2) + "%";
+				return ((current / revenue) * 100).toFixed(2) + '%';
 			}
-			return "-";
+			return '-';
 		}
 
-		case "percentage": {
-			return (current * 100).toFixed(decimals) + "%";
+		case 'percentage': {
+			return (current * 100).toFixed(decimals) + '%';
 		}
 
-		case "pershare": {
+		case 'pershare': {
 			if (current) {
 				return current.toFixed(decimals);
 			}
-			return "-";
+			return '-';
 		}
 
-		case "ratio": {
+		case 'ratio': {
 			if (current) {
 				return parseFloat(current).toFixed(decimals);
 			}
-			return "-";
+			return '-';
 		}
 
 		default:
@@ -132,13 +136,13 @@ export function formatYear(date) {
 // Show numbers in thousands, millions or raw
 function getDivider(divider) {
 	switch (divider) {
-		case "thousands":
+		case 'thousands':
 			return 1000;
 
-		case "millions":
+		case 'millions':
 			return 1000000;
 
-		case "raw":
+		case 'raw':
 			return 1;
 	}
 	return 1000;

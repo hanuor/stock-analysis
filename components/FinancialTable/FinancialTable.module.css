@@ -7,6 +7,7 @@
 
 .table_financial {
 	white-space: nowrap;
+	width: 100%;
 }
 
 .table_financial th {
