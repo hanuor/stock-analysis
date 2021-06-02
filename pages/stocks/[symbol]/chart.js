@@ -1,5 +1,8 @@
 import Stock from "@/components/Layout/StockLayout";
 import StockTest from "@/components/Chart/StockTest";
+import Select from "@/components/Chart/SelectUI";
+import Buttons from "@/components/Chart/ButtonsUI";
+import { useImmerReducer } from "use-immer";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
 import { stockState } from "@State/stockState";
 import { useEffect, useState } from "react";
@@ -38,36 +41,51 @@ import {
 	withSize,
 } from "react-financial-charts";
 
-export default function SymbolStatistics(props) {
+export default function CandleStickStockChart(props) {
 	if (!props.info) {
 		return <h1>Loading...</h1>;
 	}
-	var data = initialData;
+
+	const initialState = {
+		period: "day",
+		time: "1 Year",
+		loading: false,
+	};
+
+	function ourReducer(draft, action) {
+		switch (action.type) {
+			case "periodChange":
+				draft.period = action.value;
+				draft.loading = true;
+				console.log(action.value);
+				return;
+			case "timeChange":
+				draft.time = action.value;
+				draft.loading = true;
+				console.log(action.value);
+				return;
+		}
+	}
+
+	const [state, dispatch] = useImmerReducer(ourReducer, initialState);
+
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
-	var changer = 0;
+
 	useEffect(() => {
 		setInfo(props.info);
 		setData(props.data);
 	}, []);
 
-	function onChangeFunc() {
-		if (changer == 0) {
-			data = secondaryData;
-			changer = 1;
-		} else {
-			data = initialData;
-			changer = 0;
-		}
-		console.log(data);
-	}
-
 	return (
 		<Stock>
 			<h2 className="text-2xl font-bold my-8">
-				<input type="text" name="name" onChange={onChangeFunc} />
 				<div>
-					<StockTest data={data} width={900} height={600} />
+					<div>
+						<Select dispatcher={dispatch} />
+						<Buttons dispatcher={dispatch} />
+					</div>
+					<StockTest />
 				</div>
 			</h2>
 		</Stock>

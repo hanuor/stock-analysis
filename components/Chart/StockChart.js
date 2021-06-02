@@ -97,7 +97,7 @@ class StockChart extends React.Component {
 		return (
 			<ChartCanvas
 				height={height}
-				ratio={2}
+				ratio={ratio}
 				width={width}
 				margin={margin}
 				data={data}
@@ -107,9 +107,22 @@ class StockChart extends React.Component {
 				xAccessor={xAccessor}
 				xExtents={xExtents}
 				zoomAnchor={lastVisibleItemBasedZoomAnchor}>
-				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
-					<XAxis showTickLabel={true} />
-					<YAxis showGridLines={true} tickFormat={pricesDisplayFormat} />
+				<Chart
+					id={2}
+					height={barChartHeight}
+					origin={barChartOrigin}
+					yExtents={this.barChartExtents}>
+					<BarSeries
+						fillStyle={this.volumeColor}
+						yAccessor={this.volumeSeries}
+					/>
+				</Chart>
+				<Chart
+					id={3}
+					height={chartHeight}
+					yExtents={this.candleChartExtents}>
+					<XAxis showGridLines showTicks={false} showTickLabel={false} />
+					<YAxis showGridLines tickFormat={this.pricesDisplayFormat} />
 					<CandlestickSeries />
 					<LineSeries
 						yAccessor={ema26.accessor()}
@@ -129,42 +142,15 @@ class StockChart extends React.Component {
 					/>
 					<MouseCoordinateY
 						rectWidth={margin.right}
-						displayFormat={pricesDisplayFormat}
-					/>
-
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 20}
-						rectHeight={15}
-						fill={ma2color}
-						orient="right"
-						edgeAt="right"
-						fontSize="11"
-						lineStroke={ma2color}
-						displayFormat={pricesDisplayFormat}
-						yAccessor={ema26.accessor()}
+						displayFormat={this.pricesDisplayFormat}
 					/>
 					<EdgeIndicator
 						itemType="last"
-						rectWidth={margin.right - 20}
-						rectHeight={15}
-						hideLine={true}
-						fill={ma1color}
-						orient="right"
-						edgeAt="right"
-						fontSize="11"
-						lineStroke={ma1color}
-						displayFormat={pricesDisplayFormat}
-						yAccessor={ema12.accessor()}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 15}
-						fill={openCloseColor}
-						lineStroke={openCloseColor}
-						displayFormat={pricesDisplayFormat}
-						yAccessor={yEdgeIndicator}
-						fontSize="13"
+						rectWidth={margin.right}
+						fill={this.openCloseColor}
+						lineStroke={this.openCloseColor}
+						displayFormat={this.pricesDisplayFormat}
+						yAccessor={this.yEdgeIndicator}
 					/>
 					<MovingAverageTooltip
 						origin={[8, 24]}
@@ -183,42 +169,26 @@ class StockChart extends React.Component {
 							},
 						]}
 					/>
+
 					<ZoomButtons />
 					<OHLCTooltip origin={[8, 16]} />
 				</Chart>
 				<Chart
 					id={4}
-					height={100}
-					origin={(w, h) => [0, h - 200]}
-					yExtents={(d) => d.volume}>
-					<YAxis
-						axisAt="left"
-						orient="left"
-						ticks={5}
-						gridLinesStrokeWidth={0}
-						tickFormat={format(".2s")}
-						showDomain={false}
-						tickStrokeOpacity={0}
-						innerTickSize={0}
+					height={elderRayHeight}
+					yExtents={[0, elder.accessor()]}
+					origin={elderRayOrigin}
+					padding={{ top: 8, bottom: 8 }}>
+					<XAxis showGridLines gridLinesStrokeStyle="#e0e3eb" />
+					<YAxis ticks={4} tickFormat={this.pricesDisplayFormat} />
+
+					<MouseCoordinateX displayFormat={timeDisplayFormat} />
+					<MouseCoordinateY
+						rectWidth={margin.right}
+						displayFormat={this.pricesDisplayFormat}
 					/>
-					<BarSeries
-						clip="false"
-						yAccessor={(d) => d.volume}
-						fillStyle={(d) => (d.close > d.open ? "#6BA583" : "red")}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 20}
-						rectHeight={15}
-						fill={volumeColor}
-						orient="right"
-						edgeAt="right"
-						fontSize="11"
-						lineStroke={openCloseColor}
-						displayFormat={format(".4s")}
-						yAccessor={volumeSeries}
-						yAxisPad={0}
-					/>
+
+					<ElderRaySeries yAccessor={elder.accessor()} />
 				</Chart>
 				<CrossHairCursor />
 			</ChartCanvas>

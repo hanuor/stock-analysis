@@ -52,5 +52,5 @@ module.exports = {
 			small: ".95rem",
 		}, */,
 	},
-	plugins: [require("@tailwindcss/typography")],
+	plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };

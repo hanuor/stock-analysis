@@ -72,7 +72,7 @@ export default function CandleStickChartCustom(props) {
 		})
 		.accessor((d) => d.ema26);
 
-	const elder = elderRay();
+	
 
 	const calculatedData = elder(ema26(ema12(initialData)));
 	var { data, xScale, xAccessor, displayXAccessor } =
@@ -127,29 +127,7 @@ export default function CandleStickChartCustom(props) {
 		setData(props.data);
 	}, []);
 
-	function handleDataChange(e) {
-		const ScaleProvider =
-			discontinuousTimeScaleProviderBuilder().inputDateAccessor(
-				(d) => new Date(d.date)
-			);
-		var { newdata, newxScale, newxAccessor, newdisplayXAccessor } =
-			ScaleProvider(secondaryData);
-		console.log(data);
-		console.log(newdata);
-		data = newdata;
-		console.log(data);
-		xScale = newxScale;
-		xAccessor = newxAccessor;
-		displayXAccessor = newdisplayXAccessor;
-
-		console.log("yes");
-		if (e.key === "y") {
-			alert("The sky is your starting point!");
-		} else if (e.key === "n") {
-			alert("The sky is your limit👀");
-		}
-	}
-
+	
 	const [chartData, setChartData] = useState();
 	const [isLoading, setIsLoading] = useState(true);
 
