@@ -18,6 +18,7 @@ module.exports = withTM({
 	future: {
 		webpack5: false, // you want to keep using Webpack 4
 	},
+
 	trailingSlash: true,
 	images: {
 		domains: ["cdn.snapi.dev"],

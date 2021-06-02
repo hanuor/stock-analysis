@@ -9,14 +9,14 @@ export default function StocksIndexPage({ stocks }) {
 	const columnHeaders = [
 		{
 			Header: "Stock Symbol",
-			accessor: "symbol",
+			accessor: "s",
 			Cell: function SymbolCell({ cell: { value } }) {
 				return <Link href={`/stocks/${value.toLowerCase()}`}>{value}</Link>;
 			},
 		},
 		{
 			Header: "Company Name",
-			accessor: "company",
+			accessor: "n",
 		},
 	];
 
