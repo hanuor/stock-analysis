@@ -11,3 +11,5 @@ export const External = ({ url, text }) => (
 		{text}
 	</a>
 );
+
+export default CustomLink;
