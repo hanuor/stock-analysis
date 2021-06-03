@@ -16,8 +16,8 @@ export function getStockUrls() {
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
 	const infoApi =
-		process.env.API_URL ||
-		'https://stockanalysis.com/wp-json/sa' + `/symbol?symbol=${symbol}`;
+		(process.env.API_URL || 'https://stockanalysis.com/wp-json/sa') +
+		`/symbol?symbol=${symbol}`;
 
 	const response = await Axios.get(infoApi);
 	const info = response.data;
@@ -27,8 +27,8 @@ export async function getStockInfo({ params }) {
 
 export async function getPageData(id, page) {
 	const pageApi =
-		process.env.API_URL ||
-		'https://stockanalysis.com/wp-json/sa' + `/${page}?i=${id}`;
+		(process.env.API_URL || 'https://stockanalysis.com/wp-json/sa') +
+		`/${page}?i=${id}`;
 
 	const response = await Axios.get(pageApi);
 	const data = response.data;
@@ -50,8 +50,8 @@ export async function getStockNews(id) {
 
 export async function getHomePageData() {
 	const api =
-		process.env.API_URL ||
-		'https://stockanalysis.com/wp-json/sa' + `/homepage`;
+		(process.env.API_URL || 'https://stockanalysis.com/wp-json/sa') +
+		'/homepage';
 
 	const response = await Axios.get(api);
 	const data = response.data;
