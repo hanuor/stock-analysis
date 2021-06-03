@@ -68,9 +68,9 @@ function NewsArticle({ content, num }) {
 					</a>
 				</h3>
 				<p className="mb-1">{content.text}</p>
-				{content.tickers.length > 0 && (
+				{content.tickers && content.tickers.length > 0 ? (
 					<NewsTickers tickers={content.tickers} />
-				)}
+				) : null}
 				<div className="text-sm text-gray-600">
 					<span title={content.timeFull}>{content.timeAgo}</span>
 					<span> - {content.source}</span>

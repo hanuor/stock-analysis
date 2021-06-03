@@ -1,12 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 // todo: Add y-axis data tags @AZID
-import { Bar, defaults } from "react-chartjs-2";
-import "chartjs-adapter-luxon";
-import {
-	formatY,
-	formatNumber,
-	formatYear,
-} from "@/Functions/financials.functions";
+import { Bar, defaults } from 'react-chartjs-2';
+import 'chartjs-adapter-luxon';
+import { formatY, formatNumber, formatYear } from './FinancialTable.functions';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
@@ -18,11 +14,11 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 	let type = row.format;
 
 	const y = rowdata.map((current, index) => {
-		let previous = row.format === "growth" ? data[dataid][index + 1] : null;
-		let revenue = row.format === "margin" ? data.revenue[index] : null;
+		let previous = row.format === 'growth' ? data[dataid][index + 1] : null;
+		let revenue = row.format === 'margin' ? data.revenue[index] : null;
 
 		let cellContent =
-			type && type !== "reduce_precision"
+			type && type !== 'reduce_precision'
 				? formatNumber({
 						type,
 						current,
@@ -36,7 +32,7 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 
 	// Format dates as years if annual
 	let xdatadraft = data.datekey.slice(0, count);
-	if (range === "annual") {
+	if (range === 'annual') {
 		xdatadraft = xdatadraft.map((item) => {
 			return formatYear(item);
 		});
@@ -58,11 +54,11 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 		}
 	}
 
-	const chartType = type === "ratio" || type === "percentage" ? "line" : "bar";
+	const chartType = type === 'ratio' || type === 'percentage' ? 'line' : 'bar';
 	const bgColor =
-		type === "ratio" || type === "percentage"
-			? "rgba(44, 98, 136, 0.4)"
-			: "rgba(44, 98, 136, 1)";
+		type === 'ratio' || type === 'percentage'
+			? 'rgba(44, 98, 136, 0.4)'
+			: 'rgba(44, 98, 136, 1)';
 
 	return (
 		<Bar
@@ -73,7 +69,7 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 						type: chartType,
 						data: yaxis,
 						backgroundColor: bgColor,
-						borderColor: "rgba(44, 98, 136, 1)",
+						borderColor: 'rgba(44, 98, 136, 1)',
 						fill: true,
 						pointRadius: 0,
 						pointHoverRadius: 5,
@@ -86,7 +82,7 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 				scales: {
 					x: {
 						ticks: {
-							color: "#323232",
+							color: '#323232',
 							font: {
 								size: 13,
 							},
@@ -96,9 +92,9 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 						},
 					},
 					y: {
-						position: "right",
+						position: 'right',
 						ticks: {
-							color: "#323232",
+							color: '#323232',
 							font: {
 								size: 13,
 							},
@@ -124,7 +120,7 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 						font: {
 							size: 18,
 						},
-						color: "#333",
+						color: '#333',
 						padding: {
 							top: 4,
 							right: 0,
@@ -133,20 +129,20 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 						},
 					},
 					tooltip: {
-						backgroundColor: "#f6f7f8",
-						borderColor: "#ccc",
+						backgroundColor: '#f6f7f8',
+						borderColor: '#ccc',
 						borderWidth: 1,
-						titleColor: "#323232",
-						bodyColor: "#323232",
+						titleColor: '#323232',
+						bodyColor: '#323232',
 						titleFont: {
 							size: 17,
-							weight: "600",
+							weight: '600',
 						},
 						bodyFont: {
 							size: 14,
-							weight: "400",
+							weight: '400',
 						},
-						bodyFontColor: "#333",
+						bodyFontColor: '#333',
 						bodyFontSize: 14,
 						bodyFontStyle: 400,
 						padding: 10,

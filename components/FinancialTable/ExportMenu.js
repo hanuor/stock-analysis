@@ -1,11 +1,11 @@
-import exportFromJSON from "export-from-json";
-import financialsState from "@State/financialsState";
-import mapData from "@Data/financials_data_map";
-import userState from "@State/userState";
-import { stockState } from "@State/stockState";
-import { formatNumber } from "@/Functions/financials.functions";
+import exportFromJSON from 'export-from-json';
+import financialsState from '@State/financialsState';
+import mapData from '@Data/financials_data_map';
+import userState from '@State/userState';
+import { stockState } from '@State/stockState';
+import { formatNumber } from './FinancialTable.functions';
 
-const menuBtn = "shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100";
+const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
 export const ExportMenu = () => {
 	const range = financialsState((state) => state.range);
@@ -19,17 +19,17 @@ export const ExportMenu = () => {
 	const Export = (type) => {
 		// Get the info required to map the data
 		const rawdata =
-			statement === "ratios" && range === "quarterly"
+			statement === 'ratios' && range === 'quarterly'
 				? financialData.ratios.trailing
 				: financialData[statement][range];
 
-		let paywall = range === "annual" ? 15 : 40;
+		let paywall = range === 'annual' ? 15 : 40;
 		const fullcount = rawdata.datekey.length;
 		let showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
 		const data_map = mapData(statement);
 
 		// Map the columns
-		let dataColumns = leftRight ? [] : ["Indicator"];
+		let dataColumns = leftRight ? [] : ['Indicator'];
 		rawdata.datekey.map((cell) => {
 			dataColumns.push(cell);
 		});
@@ -40,7 +40,7 @@ export const ExportMenu = () => {
 		}
 
 		if (leftRight) {
-			dataColumns.push("Indicator");
+			dataColumns.push('Indicator');
 			dataColumns = dataColumns.reverse();
 		}
 
@@ -51,22 +51,22 @@ export const ExportMenu = () => {
 		data_map.map((row) => {
 			let newRow = leftRight ? [] : [row.title];
 			let dataid = row.data || row.id;
-			let format = row.format || "standard";
-			let offset = range === "annual" ? 1 : 4;
+			let format = row.format || 'standard';
+			let offset = range === 'annual' ? 1 : 4;
 
 			let rowdata = rawdata[dataid];
 			let revenuedata = rawdata.revenue;
 
 			rowdata.map((item, index) => {
-				let prev = format === "growth" ? rowdata[index + offset] : null;
-				let rev = format === "margin" ? revenuedata[index] : null;
+				let prev = format === 'growth' ? rowdata[index + offset] : null;
+				let rev = format === 'margin' ? revenuedata[index] : null;
 				newRow.push(
 					formatNumber({
-						type: row.format || "standard",
+						type: row.format || 'standard',
 						current: item,
 						previous: prev,
 						revenue: rev,
-						divider: "raw",
+						divider: 'raw',
 					})
 				);
 			});
@@ -90,23 +90,23 @@ export const ExportMenu = () => {
 		});
 
 		const data = newArray;
-		const fileName = info.symbol + "-" + statement + "-" + range;
+		const fileName = info.symbol + '-' + statement + '-' + range;
 		const exportType = type;
 		exportFromJSON({ data, fileName, exportType });
 	};
 
 	return (
 		<div className="absolute right-0 flex flex-col w-full shadow-lg border border-gray-200 rounded-md dropdown-menu">
-			<button className={menuBtn} onClick={() => Export("xls")}>
+			<button className={menuBtn} onClick={() => Export('xls')}>
 				Export to Excel
 			</button>
-			<button className={menuBtn} onClick={() => Export("csv")}>
+			<button className={menuBtn} onClick={() => Export('csv')}>
 				Export to CSV
 			</button>
-			<button className={menuBtn} onClick={() => Export("txt")}>
+			<button className={menuBtn} onClick={() => Export('txt')}>
 				Export to Text
 			</button>
-			<button className={menuBtn} onClick={() => Export("json")}>
+			<button className={menuBtn} onClick={() => Export('json')}>
 				Export to JSON
 			</button>
 		</div>

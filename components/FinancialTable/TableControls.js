@@ -1,11 +1,11 @@
-import { LeftRightSwitch, MenuDropDown } from "@/components/Icons";
-import { ExportMenu } from "./TableControls/ExportMenu";
-import { financialsState } from "@State/financialsState";
+import { LeftRightSwitch, MenuDropDown } from '@/components/Icons';
+import { ExportMenu } from './ExportMenu';
+import { financialsState } from '@State/financialsState';
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from 'react';
 
 const btnStyles =
-	"bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md";
+	'bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md';
 
 export default function TableControls() {
 	const dropdownNode = useRef();
@@ -20,7 +20,7 @@ export default function TableControls() {
 	const clickOutside = (e) => {
 		if (
 			dropdownNode.current.contains(e.target) ||
-			document.querySelector(".dropdown").contains(e.target)
+			document.querySelector('.dropdown').contains(e.target)
 		) {
 			return;
 		}
@@ -29,13 +29,13 @@ export default function TableControls() {
 
 	useEffect(() => {
 		if (exportOpen) {
-			document.addEventListener("mousedown", clickOutside);
+			document.addEventListener('mousedown', clickOutside);
 		} else {
-			document.removeEventListener("mousedown", clickOutside);
+			document.removeEventListener('mousedown', clickOutside);
 		}
 
 		return () => {
-			document.removeEventListener("mousedown", clickOutside);
+			document.removeEventListener('mousedown', clickOutside);
 		};
 	}, [exportOpen]);
 
@@ -51,7 +51,7 @@ export default function TableControls() {
 					onClick={() => clickExport()}
 					className={
 						btnStyles +
-						" flex flex-row items-center py-1 px-4 font-semibold"
+						' flex flex-row items-center py-1 px-4 font-semibold'
 					}>
 					Export Financials
 					<MenuDropDown classes="w-6 h-6 ml-2 -mr-1" />
@@ -60,7 +60,7 @@ export default function TableControls() {
 			</div>
 			<div>
 				<button
-					className={btnStyles + " px-3"}
+					className={btnStyles + ' px-3'}
 					onClick={() => clickLeftRight()}>
 					<LeftRightSwitch classes="h-9 w-9" />
 				</button>
