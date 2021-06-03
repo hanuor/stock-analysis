@@ -1,4 +1,3 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying to production
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-luxon';

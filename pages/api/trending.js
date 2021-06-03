@@ -1,9 +1,10 @@
-//process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const axios = require('axios');
 
 export default async (req, res) => {
 	if (req.method === 'GET') {
-		const url = `${process.env.API_URL}/trending/`;
+		const url = `${
+			process.env.API_URL || 'https://stockanalysis.com/wp-json/sa'
+		}/trending/`;
 
 		await axios
 			.get(url)

@@ -1,4 +1,3 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Remove before going live
 import Axios from 'axios';
 
 export function getStockUrls() {
@@ -16,7 +15,9 @@ export function getStockUrls() {
 
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
-	const infoApi = process.env.API_URL + `/symbol?symbol=${symbol}`;
+	const infoApi =
+		process.env.API_URL ||
+		'https://stockanalysis.com/wp-json/sa' + `/symbol?symbol=${symbol}`;
 
 	const response = await Axios.get(infoApi);
 	const info = response.data;
@@ -25,7 +26,9 @@ export async function getStockInfo({ params }) {
 }
 
 export async function getPageData(id, page) {
-	const pageApi = process.env.API_URL + `/${page}?i=${id}`;
+	const pageApi =
+		process.env.API_URL ||
+		'https://stockanalysis.com/wp-json/sa' + `/${page}?i=${id}`;
 
 	const response = await Axios.get(pageApi);
 	const data = response.data;
@@ -34,7 +37,10 @@ export async function getPageData(id, page) {
 }
 
 export async function getStockNews(id) {
-	const newsApi = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/news?i=${id}`;
+	const newsApi = `${
+		process.env.NEXT_PUBLIC_VERCEL_URL ||
+		'https://stockanalysis.com/wp-json/sa'
+	}/api/news?i=${id}`;
 
 	const response = await Axios.get(newsApi);
 	const news = response.data;
@@ -43,7 +49,9 @@ export async function getStockNews(id) {
 }
 
 export async function getHomePageData() {
-	const api = process.env.API_URL + `/homepage`;
+	const api =
+		process.env.API_URL ||
+		'https://stockanalysis.com/wp-json/sa' + `/homepage`;
 
 	const response = await Axios.get(api);
 	const data = response.data;

@@ -45,7 +45,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
 	const data = await getPageData(info.id, 'overview');
-	const newsdata = await Axios.get(`${process.env.API_URL}/news?i=${info.id}`);
+	const newsdata = await Axios.get(
+		`https://stockanalysis.com/wp-json/sa/news?i=${info.id}`
+	);
 	const news = await newsdata.data;
 
 	return {
