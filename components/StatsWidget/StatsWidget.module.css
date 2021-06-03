@@ -1,0 +1,25 @@
+.bigTooltipText {
+	font-size: 1rem !important;
+	padding: 0.3rem;
+}
+
+.statstable {
+	width: 100%;
+	margin-bottom: 1.5rem;
+}
+
+.statstable tr {
+	border-bottom: 1px solid #ddd;
+}
+
+.statstable tr:first-child {
+	border-top: 1px solid #ddd;
+}
+
+.statstable tr td {
+	padding: 6px 2px;
+}
+
+.statstable tr td:last-child {
+	text-align: right;
+}
