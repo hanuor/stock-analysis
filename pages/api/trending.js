@@ -2,9 +2,8 @@ const axios = require('axios');
 
 export default async (req, res) => {
 	if (req.method === 'GET') {
-		const url = `${
-			process.env.API_URL || 'https://stockanalysis.com/wp-json/sa'
-		}/trending/`;
+		let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+		const url = API + '/trending/';
 
 		await axios
 			.get(url)

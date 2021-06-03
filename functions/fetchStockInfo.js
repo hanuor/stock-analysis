@@ -15,45 +15,37 @@ export function getStockUrls() {
 
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
-	const infoApi =
-		(process.env.API_URL || 'https://stockanalysis.com/wp-json/sa') +
-		`/symbol?symbol=${symbol}`;
 
-	const response = await Axios.get(infoApi);
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+
+	const response = await Axios.get(API + `/symbol?symbol=${symbol}`);
 	const info = response.data;
 
 	return info;
 }
 
 export async function getPageData(id, page) {
-	const pageApi =
-		(process.env.API_URL || 'https://stockanalysis.com/wp-json/sa') +
-		`/${page}?i=${id}`;
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
-	const response = await Axios.get(pageApi);
+	const response = await Axios.get(API + `/${page}?i=${id}`);
 	const data = response.data;
 
 	return data;
 }
 
 export async function getStockNews(id) {
-	const newsApi = `${
-		process.env.NEXT_PUBLIC_VERCEL_URL ||
-		'https://stockanalysis.com/wp-json/sa'
-	}/api/news?i=${id}`;
+	let API = process.env.API_URL || 'localhost:3001';
 
-	const response = await Axios.get(newsApi);
+	const response = await Axios.get(API + `/api/news?i=${id}`);
 	const news = response.data;
 
 	return news;
 }
 
 export async function getHomePageData() {
-	const api =
-		(process.env.API_URL || 'https://stockanalysis.com/wp-json/sa') +
-		'/homepage';
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
-	const response = await Axios.get(api);
+	const response = await Axios.get(API + '/homepage');
 	const data = response.data;
 
 	return data;

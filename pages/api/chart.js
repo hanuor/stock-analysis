@@ -1,4 +1,3 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Remove before deploying to production
 const axios = require('axios');
 
 export default async (req, res) => {
@@ -6,9 +5,8 @@ export default async (req, res) => {
 		const id = req.query.i;
 		const minimal = req.query.m ? true : false;
 
-		const url = `${
-			process.env.API_CHARTS || 'https://stockanalysis.com/wp-json/sa/cch'
-		}?i=${id}${minimal && '&m=1'}`;
+		let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa/';
+		const url = API + `cch/?i=${id}${minimal && '&m=1'}`;
 
 		await axios
 			.get(url)
