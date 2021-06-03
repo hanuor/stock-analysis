@@ -6,11 +6,12 @@ import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from '@/Functions/markdown.functions.js';
 import PageLayout from '@/components/Layout/PageLayout';
 import Image from 'next/image';
-import CustomLink from '@/components/CustomLink';
+import { CustomLink, External } from '@/components/CustomLink';
 
 const components = {
 	a: CustomLink,
 	Image,
+	External,
 };
 
 export default function Page({ content, meta }) {
