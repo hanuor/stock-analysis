@@ -1,11 +1,15 @@
 import Link from 'next/link';
 
-export default function CustomLink({ as, href, ...otherProps }) {
-	return (
-		<>
-			<Link as={as} href={href}>
-				<a data-test="boo" {...otherProps} />
-			</Link>
-		</>
-	);
-}
+export const CustomLink = ({ as, href, ...otherProps }) => (
+	<Link as={as} href={href}>
+		<a {...otherProps} />
+	</Link>
+);
+
+export const External = ({ url, text }) => (
+	<a href={url} target="_blank" rel="noopener noreferrer">
+		{text}
+	</a>
+);
+
+export default CustomLink;
