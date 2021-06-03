@@ -14,7 +14,7 @@ export default function PriceChart() {
 		async function fetchChartData() {
 			try {
 				setIsLoading(false);
-				const response = await Axios.get(`/api/chart?i=${info.id}&m=1`, {
+				const response = await Axios.get(`/api/chart/?i=${info.id}&m=1`, {
 					timeout: 5000,
 				});
 
