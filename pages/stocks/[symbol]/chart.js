@@ -47,8 +47,8 @@ export default function CandleStickStockChart(props) {
 	}
 
 	const initialState = {
-		period: "day",
-		time: "1 Year",
+		period: "d",
+		time: "1Y",
 		loading: false,
 	};
 
@@ -85,7 +85,11 @@ export default function CandleStickStockChart(props) {
 						<Select dispatcher={dispatch} />
 						<Buttons dispatcher={dispatch} />
 					</div>
-					<StockTest />
+					<StockTest
+						stockId={props.info.id}
+						period={state.period}
+						time={state.time}
+					/>
 				</div>
 			</h2>
 		</Stock>

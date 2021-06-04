@@ -15,10 +15,10 @@ export default async (req, res) => {
 			time = "";
 		}
 
-		console.log(time + period + minimal + id);
-		const url = `${process.env.API_CHARTS}?i=${id}${period && "&r=" + period}
-		${time && "&p=" + time}${minimal && "&m=1"}`;
-
+		const url = `${process.env.API_CHARTS}?i=${id}${time && "&r=" + time}${
+			period && "&p=" + period
+		}`;
+		console.log(url);
 		await axios
 			.get(url)
 			.then((response) => {

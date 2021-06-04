@@ -40,7 +40,6 @@ interface StockChartProps {
 class StockChart extends React.Component<StockChartProps> {
 	private readonly margin = { left: 35, right: 62, top: 0, bottom: 24 };
 	private readonly pricesDisplayFormat = format(".2f");
-
 	private readonly xScaleProvider =
 		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
 			(d: IOHLCData) => d.date
@@ -254,42 +253,13 @@ class StockChart extends React.Component<StockChartProps> {
 			</ChartCanvas>
 		);
 	}
-
-	private readonly barChartExtents = (data: IOHLCData) => {
-		return data.volume;
-	};
-
-	private readonly candleChartExtents = (data: IOHLCData) => {
-		return [data.high, data.low];
-	};
-
-	private readonly yEdgeIndicator = (data: IOHLCData) => {
-		return data.close;
-	};
-
-	private readonly volumeColor = (data: IOHLCData) => {
-		return data.close > data.open
-			? "rgba(38, 166, 154, 0.3)"
-			: "rgba(239, 83, 80, 0.3)";
-	};
-
-	private readonly volumeSeries = (data: IOHLCData) => {
-		return data.volume;
-	};
-
-	private readonly openCloseColor = (data: IOHLCData) => {
-		return data.close > data.open ? "#26a69a" : "#ef5350";
-	};
 }
-
 export default withOHLCData()(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );
-
 export const MinutesStockChart = withOHLCData("MINUTES")(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );
-
 export const SecondsStockChart = withOHLCData("SECONDS")(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );

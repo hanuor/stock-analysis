@@ -4,7 +4,7 @@ export default function Buttons(props) {
 		<span className="relative z-0 inline-flex shadow-sm rounded-md">
 			<button
 				onClick={() =>
-					props.dispatcher({ type: "timeChange", value: "1 Month" })
+					props.dispatcher({ type: "timeChange", value: "1M" })
 				}
 				type="button"
 				className="relative inline-flex items-center px-4 py-2 rounded-l-md
@@ -15,7 +15,7 @@ export default function Buttons(props) {
 			</button>
 			<button
 				onClick={() =>
-					props.dispatcher({ type: "timeChange", value: "6 Months" })
+					props.dispatcher({ type: "timeChange", value: "6M" })
 				}
 				type="button"
 				className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
@@ -31,7 +31,7 @@ export default function Buttons(props) {
 			</button>
 			<button
 				onClick={() =>
-					props.dispatcher({ type: "timeChange", value: "1 Year" })
+					props.dispatcher({ type: "timeChange", value: "1Y" })
 				}
 				type="button"
 				className="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
@@ -39,7 +39,7 @@ export default function Buttons(props) {
 			</button>
 			<button
 				onClick={() =>
-					props.dispatcher({ type: "timeChange", value: "3 Years" })
+					props.dispatcher({ type: "timeChange", value: "3Y" })
 				}
 				type="button"
 				className="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
@@ -47,7 +47,7 @@ export default function Buttons(props) {
 			</button>
 			<button
 				onClick={() =>
-					props.dispatcher({ type: "timeChange", value: "5 Years" })
+					props.dispatcher({ type: "timeChange", value: "5Y" })
 				}
 				type="button"
 				className="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">

@@ -2,6 +2,7 @@ import { tsvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import * as React from "react";
 import { IOHLCData } from "./iOHLCData";
+import Axios from "axios";
 
 const parseDate = timeParse("%Y-%m-%d");
 
@@ -24,6 +25,18 @@ const parseData = () => {
 	};
 };
 
+function fixDataHeaders(obj) {
+	var newObj = {
+		open: obj.o,
+		close: obj.c,
+		high: obj.h,
+		low: obj.l,
+		volume: obj.v,
+		date: obj.t,
+	};
+	return newObj;
+}
+
 interface WithOHLCDataProps {
 	readonly data: IOHLCData[];
 }
@@ -31,6 +44,8 @@ interface WithOHLCDataProps {
 interface WithOHLCState {
 	data?: IOHLCData[];
 	message: string;
+	period: string;
+	time: string;
 }
 
 export function withOHLCData(dataSet = "DAILY") {
@@ -46,33 +61,49 @@ export function withOHLCData(dataSet = "DAILY") {
 
 				this.state = {
 					message: `Loading ${dataSet} data...`,
+					period: "",
+					time: "",
 				};
 			}
 
 			public componentDidMount() {
-				fetch(
-					`https://raw.githubusercontent.com/reactivemarkets/react-financial-charts/master/packages/stories/src/data/${dataSet}.tsv`
-				)
-					.then((response) => response.text())
-					.then((data) => tsvParse(data, parseData()))
-					.then((data) => {
-						this.setState({
-							data,
-						});
-					})
-					.catch(() => {
-						this.setState({
-							message: `Failed to fetch data.`,
-						});
-					});
+				console.log(this.props["stockId"]);
+				Axios.get(
+					`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
+				).then((res) => {
+					const forDateParse = res.data.map(fixDataHeaders);
+					const data = forDateParse.map(parseData());
+					const period = this.props["period"];
+					this.setState({ period });
+					const time = this.props["time"];
+					this.setState({ time });
+					this.setState({ data });
+					console.log(data);
+				});
 			}
 
 			public render() {
 				const { data, message } = this.state;
+				const { time, period } = this.state;
+
+				if (time != this.props["time"]) {
+					Axios.get(
+						`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
+					).then((res) => {
+						console.log(res.data);
+						const forDateParse = res.data.map(fixDataHeaders);
+						const data = forDateParse.map(parseData());
+						const period = this.props["period"];
+						this.setState({ period });
+						const time = this.props["time"];
+						this.setState({ time });
+						this.setState({ data });
+						console.log(data);
+					});
+				}
 				if (data === undefined) {
 					return <div className="center">{message}</div>;
 				}
-				console.log(data);
 
 				return (
 					<OriginalComponent
