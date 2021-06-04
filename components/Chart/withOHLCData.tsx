@@ -86,7 +86,7 @@ export function withOHLCData(dataSet = "DAILY") {
 				const { data, message } = this.state;
 				const { time, period } = this.state;
 
-				if (time != this.props["time"]) {
+				if (time != this.props["time"] || period != this.props["period"]) {
 					Axios.get(
 						`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
 					).then((res) => {
