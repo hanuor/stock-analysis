@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+	.contain {
+		@apply px-3 xs:px-4 lg:px-6 mx-auto;
+	}
+
 	.link {
 		@apply text-blue-link hover:text-black;
 	}

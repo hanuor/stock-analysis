@@ -5,7 +5,6 @@
 
 .statstable {
 	width: 100%;
-	margin-bottom: 1.5rem;
 }
 
 .statstable tr {
@@ -17,9 +16,20 @@
 }
 
 .statstable tr td {
-	padding: 6px 2px;
+	padding: 8px 10px;
 }
 
 .statstable tr td:last-child {
 	text-align: right;
+	font-weight: 600;
+}
+
+.statstable tr:nth-child(odd) {
+	background-color: rgba(249, 250, 251, 1);
+}
+
+@media screen and (max-width: 350px) {
+	.statstable tr td {
+		padding: 6px 5px;
+	}
 }

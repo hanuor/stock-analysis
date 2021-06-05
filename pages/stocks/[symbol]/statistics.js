@@ -4,10 +4,11 @@ import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 import StatsWidget from '@/components/StatsWidget/_StatsWidget';
 import { fullMap } from '@Data/financials_data_map';
+import Link from 'next/link';
 
 const indicator_map = fullMap();
 
-export default function SymbolStatistics({ info, data }) {
+export default function Statistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -18,123 +19,173 @@ export default function SymbolStatistics({ info, data }) {
 
 	return (
 		<Stock>
-			<div className="px-4 lg:px-6 mx-auto md:grid md:grid-cols-3 md:gap-8">
-				<div>
-					<StatsWidget
-						title="Total Valuation"
-						text={data.valuation.text}
-						data={data.valuation.data}
-						map={indicator_map}
-					/>
+			<div className="contain pt-1 xs:pt-1.5 lg:pt-1 pb-10 space-y-5 xs:space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-10">
+				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
+					<div>
+						<StatsWidget
+							title="Total Valuation"
+							data={data.valuation}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Important Dates"
-						text={data.dates.text}
-						data={data.dates.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Important Dates"
+							data={data.dates}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Share Statistics"
-						text={data.shares.text}
-						data={data.shares.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Share Statistics"
+							data={data.shares}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Valuation Ratios"
-						text={data.ratios.text}
-						data={data.ratios.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Valuation Ratios"
+							data={data.ratios}
+							map={indicator_map}
+						/>
 
-					<StatsWidget
-						title="Enterprise Valuation"
-						text={data.evratios.text}
-						data={data.evratios.data}
-						map={indicator_map}
-					/>
+						<button
+							type="button"
+							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
+							<Link href={`/stocks/${info.symbol}/financials/ratios/`}>
+								Financial Ratio History
+							</Link>
+						</button>
+					</div>
 
-					<StatsWidget
-						title="Financial Position"
-						text={data.financialPosition.text}
-						data={data.financialPosition.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Enterprise Valuation"
+							data={data.evratios}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Financial Efficiency"
-						text={data.financialEfficiency.text}
-						data={data.financialEfficiency.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Financial Position"
+							data={data.financialPosition}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Taxes"
-						text={data.taxes.text}
-						data={data.taxes.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Financial Efficiency"
+							data={data.financialEfficiency}
+							map={indicator_map}
+						/>
+					</div>
+
+					<div>
+						<StatsWidget
+							title="Taxes"
+							data={data.taxes}
+							map={indicator_map}
+						/>
+					</div>
 				</div>
 
-				<div>
-					<StatsWidget
-						title="Stock Price Statistics"
-						text={data.stockprice.text}
-						data={data.stockprice.data}
-						map={indicator_map}
-					/>
+				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
+					<div>
+						<StatsWidget
+							title="Stock Price Statistics"
+							data={data.stockprice}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Short Selling Information"
-						text={data.short.text}
-						data={data.short.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Short Selling Information"
+							data={data.short}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Income Statement"
-						text={data.income.text}
-						data={data.income.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Income Statement"
+							data={data.income}
+							map={indicator_map}
+						/>
 
-					<StatsWidget
-						title="Balance Sheet"
-						text={data.balance.text}
-						data={data.balance.data}
-						map={indicator_map}
-					/>
+						<button
+							type="button"
+							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
+							<Link href={`/stocks/${info.symbol}/financials/`}>
+								Full Income Statement
+							</Link>
+						</button>
+					</div>
 
-					<StatsWidget
-						title="Cash Flow"
-						text={data.cashflow.text}
-						data={data.cashflow.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Balance Sheet"
+							data={data.balance}
+							map={indicator_map}
+						/>
 
-					<StatsWidget
-						title="Margins"
-						text={data.margins.text}
-						data={data.margins.data}
-						map={indicator_map}
-					/>
+						<button
+							type="button"
+							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
+							<Link
+								href={`/stocks/${info.symbol}/financials/balance-sheet/`}>
+								Full Balance Sheet
+							</Link>
+						</button>
+					</div>
+
+					<div>
+						<StatsWidget
+							title="Cash Flow"
+							data={data.cashflow}
+							map={indicator_map}
+						/>
+
+						<button
+							type="button"
+							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
+							<Link
+								href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}>
+								Full Cash Flow Statement
+							</Link>
+						</button>
+					</div>
+
+					<div>
+						<StatsWidget
+							title="Margins"
+							data={data.margins}
+							map={indicator_map}
+						/>
+					</div>
 				</div>
 
-				<div>
-					<StatsWidget
-						title="Dividends & Yields"
-						text={data.dividends.text}
-						data={data.dividends.data}
-						map={indicator_map}
-					/>
+				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
+					<div>
+						<StatsWidget
+							title="Dividends & Yields"
+							data={data.dividends}
+							map={indicator_map}
+						/>
+					</div>
 
-					<StatsWidget
-						title="Stock Splits"
-						text={data.splits.text}
-						data={data.splits.data}
-						map={indicator_map}
-					/>
+					<div>
+						<StatsWidget
+							title="Stock Splits"
+							data={data.splits}
+							map={indicator_map}
+						/>
+					</div>
 				</div>
 			</div>
 		</Stock>

@@ -23,6 +23,7 @@ const Tooltip = ({ data, indicator }) => {
 			theme="light"
 			delay={100}
 			className={styles.bigTooltipText}
+			interactive={true}
 			content={<TooltipContent data={data} />}>
 			<span>{indicator}</span>
 		</Tippy>

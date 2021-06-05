@@ -1,13 +1,17 @@
 import styles from './StatsWidget.module.css';
 import Tooltip from './StatsTooltips';
 
-const StatsWidget = ({ title, text, data, map }) => (
+const StatsWidget = ({ title, data, map }) => (
 	<>
-		<h2 className="text-xl font-bold mb-1.5">{title}</h2>
-		<p className="text-base mb-3">{text}</p>
-		<table className={styles.statstable}>
+		<h2 className="text-xl xs:text-[1.3rem] text-gray-900 mb-2 font-bold px-0.5">
+			{title}
+		</h2>
+		<p className="text-base xs:text-[1.05rem] leading-relaxed lg:leading-normal text-gray-900 mb-4 px-0.5">
+			{data.text}
+		</p>
+		<table className={'text-sm xs:text-base ' + styles.statstable}>
 			<tbody>
-				{data.map((item) => {
+				{data.data.map((item) => {
 					let indicator_info = map.find((info) => info.id === item[0]);
 
 					return (
