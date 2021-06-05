@@ -3,6 +3,9 @@ import { getPageData, getStockInfo } from '@/Functions/fetchStockInfo';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 import ProfileDescription from '@/components/ProfilePage/ProfileDescription';
+import ProfileInfo from '@/components/ProfilePage/ProfileInfo';
+import ProfileContact from '@/components/ProfilePage/ProfileContact';
+import ProfileDetails from '@/components/ProfilePage/ProfileDetails';
 
 export default function SymbolStatistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -13,13 +16,26 @@ export default function SymbolStatistics({ info, data }) {
 		setData(data);
 	}, [data, info, setData, setInfo]);
 
-	console.log(data);
-
 	return (
 		<Stock>
 			<div className="contain">
-				<h2 className="text-2xl font-bold">Company Description</h2>
-				<ProfileDescription text={data.description} />
+				<div className="flex flex-col space-y-6 lg:space-y-0 lg:grid lg:grid-cols-sidebar lg:gap-10">
+					<div className="">
+						<ProfileDescription text={data.description} />
+					</div>
+
+					<div className="">
+						<ProfileInfo info={data.info} logo={data.logo} />
+					</div>
+
+					<div className="">
+						<ProfileContact contact={data.contact} />
+					</div>
+
+					<div className="">
+						<ProfileDetails details={data.stockDetails} />
+					</div>
+				</div>
 			</div>
 		</Stock>
 	);

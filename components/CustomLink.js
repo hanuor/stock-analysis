@@ -7,7 +7,7 @@ export const CustomLink = ({ as, href, ...otherProps }) => (
 );
 
 export const External = ({ url, text }) => (
-	<a href={url} target="_blank" rel="noopener noreferrer">
+	<a href={url} target="_blank" rel="noopener noreferrer" className="link">
 		{text}
 	</a>
 );
