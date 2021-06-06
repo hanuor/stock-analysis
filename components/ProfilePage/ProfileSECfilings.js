@@ -26,13 +26,8 @@ const ProfileSECfilings = ({ cik }) => {
 	useEffect(() => {
 		const source = axios.CancelToken.source();
 		const getFilings = async () => {
-			let api = process.env.NEXT_PUBLIC_VERCEL_URL
-				? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-				: 'http://localhost:3001';
-			let url = `${api}/api/sec/${cik}/`;
-
 			try {
-				let request = await axios.get(url, {
+				let request = await axios.get(`/api/sec/${cik}/`, {
 					cancelToken: source.token,
 					timeout: 5000,
 				});
