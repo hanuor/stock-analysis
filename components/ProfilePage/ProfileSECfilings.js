@@ -26,7 +26,7 @@ const ProfileSECfilings = ({ cik, api }) => {
 	useEffect(() => {
 		const source = axios.CancelToken.source();
 		const getFilings = async () => {
-			let url = `${api || 'http://localhost:3001'}/api/sec/${cik}/`;
+			let url = `https://${api}/api/sec/${cik}/`;
 
 			try {
 				let request = await axios.get(url, {
