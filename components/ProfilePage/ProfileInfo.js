@@ -93,6 +93,13 @@ const ProfileInfo = ({ info, logo }) => {
 						</tr>
 					)}
 				</tbody>
+				<style jsx>
+					{`
+						table tr:last-child {
+							border-bottom: 0;
+						}
+					`}
+				</style>
 			</table>
 		</div>
 	);

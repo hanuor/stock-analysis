@@ -18,7 +18,6 @@ export default function SymbolStatistics({ info, data }) {
 		setData(data);
 	}, [data, info, setData, setInfo]);
 
-	// lg:grid lg:grid-cols-sidebar lg:gap-10
 	return (
 		<Stock>
 			<div className="contain">
