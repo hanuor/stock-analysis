@@ -9,7 +9,7 @@ import ProfileDetails from '@/components/ProfilePage/ProfileDetails';
 import ProfileExecutives from '@/components/ProfilePage/ProfileExecutives';
 import ProfileSECfilings from '@/components/ProfilePage/ProfileSECfilings';
 
-export default function SymbolStatistics({ info, data }) {
+export default function SymbolStatistics({ info, data, api }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -18,7 +18,6 @@ export default function SymbolStatistics({ info, data }) {
 		setData(data);
 	}, [data, info, setData, setInfo]);
 
-	// lg:grid lg:grid-cols-sidebar lg:gap-10
 	return (
 		<Stock>
 			<div className="contain">
@@ -37,6 +36,7 @@ export default function SymbolStatistics({ info, data }) {
 					<ProfileSECfilings
 						filings={data.secFilings}
 						cik={data.stockDetails.cik}
+						api={api}
 					/>
 				</div>
 			</div>
@@ -47,11 +47,13 @@ export default function SymbolStatistics({ info, data }) {
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
 	const data = await getPageData(info.id, 'profile');
+	const api = process.env.VERCEL_URL;
 
 	return {
 		props: {
 			info,
 			data,
+			api,
 		},
 		revalidate: 300,
 	};

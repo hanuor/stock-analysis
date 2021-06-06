@@ -20,18 +20,16 @@ const formatSecDate = (string) => {
 	};
 };
 
-const ProfileSECfilings = ({ cik }) => {
+const ProfileSECfilings = ({ cik, api }) => {
 	const [secFilings, setSecFilings] = useState([]);
 
 	useEffect(() => {
 		const source = axios.CancelToken.source();
 		const getFilings = async () => {
-			let api = `${
-				process.env.VERCEL_URL || 'http://localhost:3001'
-			}/api/sec/${cik}/`;
+			let url = `${api || 'http://localhost:3001'}/api/sec/${cik}/`;
 
 			try {
-				let request = await axios.get(api, {
+				let request = await axios.get(url, {
 					cancelToken: source.token,
 					timeout: 5000,
 				});
@@ -46,7 +44,7 @@ const ProfileSECfilings = ({ cik }) => {
 		return () => {
 			source.cancel();
 		};
-	}, [cik]);
+	}, [api, cik]);
 
 	if (!secFilings.length) {
 		return null;
