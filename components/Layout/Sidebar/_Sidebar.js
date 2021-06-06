@@ -1,7 +1,8 @@
 import { NewsletterWidget } from './Newsletter';
 
 const Ad = () => {
-	return (
+	return null;
+	/* return (
 		<div className="py-10 sticky top-20">
 			<script
 				type="text/javascript"
@@ -9,7 +10,7 @@ const Ad = () => {
 				src="https://www.dianomi.com/js/contextfeed.js"></script>
 			<div className="dianomi_context" data-dianomi-context-id="420"></div>
 		</div>
-	);
+	); */
 };
 
 export default function Sidebar() {

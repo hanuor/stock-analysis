@@ -4,7 +4,8 @@
 
 @layer base {
 	.contain {
-		@apply px-3 xs:px-4 lg:px-6 mx-auto;
+		/* Container for the main content, but not if full-width on mobile */
+		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
 	}
 
 	.link {
@@ -13,6 +14,10 @@
 
 	.bll {
 		@apply text-blue-link hover:text-black;
+	}
+
+	.hh1 {
+		@apply text-3xl font-bold mb-4 text-gray-900;
 	}
 
 	.hh2 {

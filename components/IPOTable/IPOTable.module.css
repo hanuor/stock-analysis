@@ -1,0 +1,7 @@
+.ipotable {
+	width: 100%;
+}
+
+.striped tr:nth-child(even) {
+	background-color: #f6f7f8;
+}

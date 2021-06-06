@@ -50,3 +50,12 @@ export async function getHomePageData() {
 
 	return data;
 }
+
+export async function getIpoData(query) {
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+
+	const response = await Axios.get(API + `/ipos?q=${query}`);
+	const data = response.data;
+
+	return data;
+}
