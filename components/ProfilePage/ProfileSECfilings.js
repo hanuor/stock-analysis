@@ -26,9 +26,9 @@ const ProfileSECfilings = ({ cik }) => {
 	useEffect(() => {
 		const source = axios.CancelToken.source();
 		const getFilings = async () => {
-			let api =
-				process.env.VERCEL_URL ||
-				'http://localhost:3001' + `/api/sec/${cik}/`;
+			let api = `${
+				process.env.VERCEL_URL || 'http://localhost:3001'
+			}/api/sec/${cik}/`;
 
 			try {
 				let request = await axios.get(api, {
