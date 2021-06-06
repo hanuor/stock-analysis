@@ -3,7 +3,15 @@ const outputHtml = (text) => {
 };
 
 const ProfileDescription = ({ text }) => {
-	return <div dangerouslySetInnerHTML={outputHtml(text)} />;
+	return (
+		<>
+			<h2 className="hh2">Company Description</h2>
+			<div
+				className="text-page"
+				dangerouslySetInnerHTML={outputHtml(text)}
+			/>
+		</>
+	);
 };
 
 export default ProfileDescription;

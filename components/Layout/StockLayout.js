@@ -12,7 +12,7 @@ export default function Stock({ children }) {
 			<Meta title={info.ticker}></Meta>
 			<div className="flex flex-col">
 				<Header />
-				<div className="mx-auto py-5 sm:py-6 w-full xl:max-w-screen-xl">
+				<div className="mx-auto pt-5 pb-10 sm:pt-6 w-full xl:max-w-screen-xl">
 					<main>
 						<StockHeading />
 						{children}

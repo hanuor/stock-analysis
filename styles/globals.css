@@ -11,6 +11,14 @@
 		@apply text-blue-link hover:text-black;
 	}
 
+	.bll {
+		@apply text-blue-link hover:text-black;
+	}
+
+	.hh2 {
+		@apply text-2xl font-bold mb-3 text-gray-900;
+	}
+
 	.text-page {
 		@apply text-base md:text-lg text-gray-900;
 	}
@@ -67,5 +75,9 @@
 
 	.text-page table tr td {
 		@apply py-2 sm:px-3;
+	}
+
+	.profilewrap {
+		width: calc(100% - 336px - 40px);
 	}
 }

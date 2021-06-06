@@ -3,6 +3,11 @@ import { getPageData, getStockInfo } from '@/Functions/fetchStockInfo';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 import ProfileDescription from '@/components/ProfilePage/ProfileDescription';
+import ProfileInfo from '@/components/ProfilePage/ProfileInfo';
+import ProfileContact from '@/components/ProfilePage/ProfileContact';
+import ProfileDetails from '@/components/ProfilePage/ProfileDetails';
+import ProfileExecutives from '@/components/ProfilePage/ProfileExecutives';
+import ProfileSECfilings from '@/components/ProfilePage/ProfileSECfilings';
 
 export default function SymbolStatistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -13,13 +18,27 @@ export default function SymbolStatistics({ info, data }) {
 		setData(data);
 	}, [data, info, setData, setInfo]);
 
-	console.log(data);
-
+	// lg:grid lg:grid-cols-sidebar lg:gap-10
 	return (
 		<Stock>
 			<div className="contain">
-				<h2 className="text-2xl font-bold">Company Description</h2>
-				<ProfileDescription text={data.description} />
+				<div className="float-none lg:float-left lg:profilewrap">
+					<ProfileDescription text={data.description} />
+				</div>
+
+				<div className="float-none lg:float-right lg:max-w-[336px]">
+					<ProfileInfo info={data.info} logo={data.logo} />
+					<ProfileContact contact={data.contact} />
+					<ProfileDetails details={data.stockDetails} />
+				</div>
+
+				<div className="float-none lg:float-left lg:profilewrap">
+					<ProfileExecutives executives={data.executives} />
+					<ProfileSECfilings
+						filings={data.secFilings}
+						cik={data.stockDetails.cik}
+					/>
+				</div>
 			</div>
 		</Stock>
 	);
