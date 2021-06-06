@@ -6,6 +6,8 @@ import ProfileDescription from '@/components/ProfilePage/ProfileDescription';
 import ProfileInfo from '@/components/ProfilePage/ProfileInfo';
 import ProfileContact from '@/components/ProfilePage/ProfileContact';
 import ProfileDetails from '@/components/ProfilePage/ProfileDetails';
+import ProfileExecutives from '@/components/ProfilePage/ProfileExecutives';
+import ProfileSECfilings from '@/components/ProfilePage/ProfileSECfilings';
 
 export default function SymbolStatistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -16,25 +18,26 @@ export default function SymbolStatistics({ info, data }) {
 		setData(data);
 	}, [data, info, setData, setInfo]);
 
+	// lg:grid lg:grid-cols-sidebar lg:gap-10
 	return (
 		<Stock>
 			<div className="contain">
-				<div className="flex flex-col space-y-6 lg:space-y-0 lg:grid lg:grid-cols-sidebar lg:gap-10">
-					<div className="">
-						<ProfileDescription text={data.description} />
-					</div>
+				<div className="float-none lg:float-left lg:profilewrap">
+					<ProfileDescription text={data.description} />
+				</div>
 
-					<div className="">
-						<ProfileInfo info={data.info} logo={data.logo} />
-					</div>
+				<div className="float-none lg:float-right lg:max-w-[336px]">
+					<ProfileInfo info={data.info} logo={data.logo} />
+					<ProfileContact contact={data.contact} />
+					<ProfileDetails details={data.stockDetails} />
+				</div>
 
-					<div className="">
-						<ProfileContact contact={data.contact} />
-					</div>
-
-					<div className="">
-						<ProfileDetails details={data.stockDetails} />
-					</div>
+				<div className="float-none lg:float-left lg:profilewrap">
+					<ProfileExecutives executives={data.executives} />
+					<ProfileSECfilings
+						filings={data.secFilings}
+						cik={data.stockDetails.cik}
+					/>
 				</div>
 			</div>
 		</Stock>

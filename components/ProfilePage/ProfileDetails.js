@@ -51,24 +51,27 @@ const SingleRow = ({ title, string }) => {
 
 const ProfileDetails = ({ details }) => {
 	return (
-		<div className="bg-gray-50 px-4 pt-4 pb-2 border border-gray-200">
-			<table className="w-full detailstable">
-				<tbody>
-					{map.map((item, index) => (
-						<SingleRow
-							title={item.title}
-							string={details[item.id]}
-							key={index}
-						/>
-					))}
-				</tbody>
-			</table>
-			<style global jsx>{`
-				table.detailstable tr:not(:last-child) {
-					border-bottom: 1px solid #ddd;
-				}
-			`}</style>
-		</div>
+		<>
+			<h2 className="hh2 mt-6 xs:mt-8">Stock Details</h2>
+			<div className="bg-gray-50 px-2 xs:px-4 pt-2 xs:pt-2.5 pb-2 border border-gray-200 rounded">
+				<table className="w-full detailstable">
+					<tbody>
+						{map.map((item, index) => (
+							<SingleRow
+								title={item.title}
+								string={details[item.id]}
+								key={index}
+							/>
+						))}
+					</tbody>
+				</table>
+				<style global jsx>{`
+					table.detailstable tr:not(:last-child) {
+						border-bottom: 1px solid #ddd;
+					}
+				`}</style>
+			</div>
+		</>
 	);
 };
 
