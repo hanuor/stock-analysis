@@ -1,5 +1,6 @@
 import { useTable } from 'react-table';
 import styles from './IPOTable.module.css';
+import Link from 'next/link';
 
 const columns = [
 	{
@@ -12,6 +13,13 @@ const columns = [
 	{
 		Header: 'Symbol',
 		accessor: 'symbol',
+		Cell: function DateCell({ cell: { value } }) {
+			return (
+				<Link href={`/stocks/${value.toLowerCase()}`}>
+					<a className="bll">{value}</a>
+				</Link>
+			);
+		},
 	},
 	{
 		Header: 'Name',
@@ -37,8 +45,10 @@ const NoIpos = ({ title }) => {
 		case 'This Week': {
 			return (
 				<div>
-					<h2 className="hh2">{title}</h2>
-					<p>There are no upcoming IPOs remaining for the current week.</p>
+					<h2 className="hh2 mb-2">{title}</h2>
+					<p className="text-lg">
+						There are no upcoming IPOs remaining for the current week.
+					</p>
 				</div>
 			);
 		}
@@ -68,6 +78,8 @@ const NoIpos = ({ title }) => {
 
 const CalendarTable = ({ title, data }) => {
 	const tableInstance = useTable({ columns, data });
+	let thisWeek = title === 'This Week' ? true : false;
+	let nextWeek = title === 'Next Week or Later' ? true : false;
 
 	if (data.length === 0) {
 		return <NoIpos title={title} />;
@@ -88,6 +100,10 @@ const CalendarTable = ({ title, data }) => {
 							{headerGroup.headers.map((column) => (
 								<th {...column.getHeaderProps()}>
 									{column.render('Header')}
+									{thisWeek ||
+									(nextWeek && column.Header === 'IPO Date')
+										? '*'
+										: null}
 								</th>
 							))}
 						</tr>
@@ -110,6 +126,12 @@ const CalendarTable = ({ title, data }) => {
 					})}
 				</tbody>
 			</table>
+			{thisWeek ||
+				(nextWeek && (
+					<span className="text-sm text-gray-700 mt-1">
+						* Upcoming IPO dates are estimated and may change
+					</span>
+				))}
 		</div>
 	);
 };

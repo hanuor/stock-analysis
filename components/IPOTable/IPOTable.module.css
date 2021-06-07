@@ -2,6 +2,32 @@
 	width: 100%;
 }
 
-.striped tr:nth-child(even) {
+.ipotable tr th {
+	text-align: left;
+}
+
+.ipotable tr > * {
+	padding: 0.5rem;
+	border-bottom: 1px solid #ddd;
+}
+
+.ipotable tr > *:first-child {
+	padding-left: 0.8rem;
+}
+
+.ipotable tr > *:last-child {
+	padding-right: 0.8rem;
+}
+
+.ipotable tr > *:nth-child(n + 4) {
+	text-align: right;
+}
+
+.striped tr:nth-child(odd) {
 	background-color: #f6f7f8;
+}
+
+.striped tr th {
+	font-weight: 600;
+	background-color: #ffffff;
 }

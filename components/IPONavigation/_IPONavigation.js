@@ -34,7 +34,7 @@ const _IPONavigation = () => {
 		'px-5 py-2 bll rounded hover:bg-gray-100 hover:text-gray-700';
 
 	return (
-		<>
+		<div className="mb-6">
 			<div>
 				<nav className="border-b-2 border-gray-300 mb-3">
 					<ul className={`flex ${styles.navmenu}`}>
@@ -140,7 +140,7 @@ const _IPONavigation = () => {
 					</nav>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 
