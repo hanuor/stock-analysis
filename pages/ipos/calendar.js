@@ -3,21 +3,35 @@ import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
 import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
-import IPOTable from '@/components/IPOTable/_IPOTable';
+import CalendarTable from '@/components/IPOTable/CalendarTable';
 import IPONavigation from '@/components/IPONavigation/_IPONavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
-const RecentIpos = ({ data }) => {
+const IpoCalendar = ({ data }) => {
 	return (
 		<>
-			<Meta title="Recent IPOs" />
+			<Meta title="IPO Calendar" />
 			<Header />
 			<div className="contain lg:grid lg:grid-cols-sidebar gap-x-10">
 				<main className="w-full py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Recent IPOs</h1>
+					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation />
-					<IPOTable data={data} />
+					<div className="flex flex-col space-y-8">
+						<CalendarTable title="This Week" data={data.thisweek} />
+						<CalendarTable
+							title="Next Week or Later"
+							data={data.nextweek}
+						/>
+						<CalendarTable
+							title="Upcoming High-Profile IPOs"
+							data={data.highprofile}
+						/>
+						<CalendarTable
+							title="More Upcoming IPOs"
+							data={data.unknown}
+						/>
+					</div>
 				</main>
 				<div className="py-6">
 					<Sidebar />
@@ -28,10 +42,10 @@ const RecentIpos = ({ data }) => {
 	);
 };
 
-export default RecentIpos;
+export default IpoCalendar;
 
 export async function getStaticProps() {
-	const data = await getIpoData('recent');
+	const data = await getIpoData('calendar');
 
 	return {
 		props: {

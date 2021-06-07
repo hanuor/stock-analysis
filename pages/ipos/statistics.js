@@ -7,15 +7,15 @@ import IPOTable from '@/components/IPOTable/_IPOTable';
 import IPONavigation from '@/components/IPONavigation/_IPONavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
-const RecentIpos = ({ data }) => {
+const IpoStatistics = ({ data }) => {
 	return (
 		<>
-			<Meta title="Recent IPOs" />
+			<Meta title="IPO Statistics" />
 			<Header />
 			<div className="contain lg:grid lg:grid-cols-sidebar gap-x-10">
 				<main className="w-full py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Recent IPOs</h1>
+					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation />
 					<IPOTable data={data} />
 				</main>
@@ -28,7 +28,7 @@ const RecentIpos = ({ data }) => {
 	);
 };
 
-export default RecentIpos;
+export default IpoStatistics;
 
 export async function getStaticProps() {
 	const data = await getIpoData('recent');
