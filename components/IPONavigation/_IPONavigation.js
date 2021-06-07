@@ -23,21 +23,23 @@ const _IPONavigation = () => {
 		});
 	}, [router.asPath, setPath]);
 
+	//mb-[-2px]
+
 	const active =
-		'py-2 px-5 block bg-gray-100 font-semibold text-gray-900 border-b-2 rounded-t border-blue-brand mb-[-2px]';
+		'py-2 px-5 block bg-gray-100 font-semibold text-gray-900 border-b-2 rounded-t border-blue-brand';
 	const inactive =
-		'py-2 px-5 block bll hover:text-gray-900 hover:bg-gray-100 hover:border-b-2 hover:border-gray-400 mb-[-2px] transition duration-100';
+		'py-2 px-5 block bll hover:text-gray-900 hover:bg-gray-100 hover:border-b-2 hover:border-gray-400 transition duration-100';
 
 	const active_sub =
-		'px-5 py-2 font-semibold rounded bg-gray-100 text-gray-900';
+		'px-5 py-2 block font-semibold rounded bg-gray-100 text-gray-900';
 	const inactive_sub =
-		'px-5 py-2 bll rounded hover:bg-gray-100 hover:text-gray-700';
+		'px-5 py-2 block bll rounded hover:bg-gray-100 hover:text-gray-700';
 
 	return (
 		<div className="mb-6">
 			<div>
 				<nav className="border-b-2 border-gray-300 mb-3">
-					<ul className={`flex ${styles.navmenu}`}>
+					<ul className={`flex ${styles.navmenu} mb-[-2px] overflow-auto`}>
 						<li>
 							<Link href="/ipos/">
 								<a
@@ -89,7 +91,7 @@ const _IPONavigation = () => {
 			{(!path.two || ['#', '2021', '2020', '2019'].includes(path.two)) && (
 				<div>
 					<nav className="mb-4">
-						<ul className={`flex space-x-2`}>
+						<ul className={`flex ${styles.navmenu} overflow-auto`}>
 							<li>
 								<Link href="/ipos/">
 									<a

@@ -51,7 +51,9 @@ module.exports = {
 			},
 			colors: {
 				blue: {
-					brand: 'rgba(59, 130, 220, 1)',
+					/* brand: 'rgba(59, 130, 220, 1)', */
+					/* brand: 'rgba(15, 115, 177)', */
+					brand: 'rgba(41, 122, 187)',
 					sharp: 'rgba(1, 90, 210, 1)',
 					link: 'rgb(30, 115, 190, 1)',
 				},

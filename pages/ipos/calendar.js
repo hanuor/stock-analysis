@@ -17,7 +17,7 @@ const IpoCalendar = ({ data }) => {
 					<Breadcrumbs />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation />
-					<div className="flex flex-col space-y-8">
+					<div className="flex flex-col space-y-7">
 						<CalendarTable title="This Week" data={data.thisweek} />
 						<CalendarTable
 							title="Next Week or Later"

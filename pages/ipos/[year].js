@@ -17,8 +17,8 @@ const IpoYear = ({ year, data }) => {
 					<Breadcrumbs />
 					<h1 className="hh1">{year} IPOs</h1>
 					<IPONavigation />
-					<p>{data[0].info}</p>
-					<IPOTable data={data} />
+					<p>{data.info}</p>
+					<IPOTable rawdata={data.data} />
 				</main>
 				<div className="py-6">
 					<Sidebar />

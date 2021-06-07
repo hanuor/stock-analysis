@@ -12,12 +12,12 @@ const RecentIpos = ({ data }) => {
 		<>
 			<Meta title="Recent IPOs" />
 			<Header />
-			<div className="contain lg:grid lg:grid-cols-sidebar gap-x-10">
+			<div className="contain lg:grid lg:grid-cols-sidebar gap-x-12">
 				<main className="w-full py-6">
 					<Breadcrumbs />
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation />
-					<IPOTable data={data} />
+					<IPOTable rawdata={data} />
 				</main>
 				<div className="py-6">
 					<Sidebar />
