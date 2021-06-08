@@ -27,7 +27,7 @@ const _Breadcrumbs = () => {
 
 	return (
 		<nav>
-			<ol className="flex text-gray-600 mb-0.5">
+			<ol className="flex text-sm sm:text-base text-gray-600 mb-0.5">
 				<li>
 					<Link href="/">
 						<a>Home</a>

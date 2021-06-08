@@ -24,6 +24,10 @@
 		@apply text-2xl font-bold mb-3 text-gray-900;
 	}
 
+	.hh3 {
+		@apply text-xl font-bold mb-3 text-gray-900;
+	}
+
 	.text-page {
 		@apply text-base md:text-lg text-gray-900;
 	}
@@ -84,5 +88,13 @@
 
 	.profilewrap {
 		width: calc(100% - 336px - 40px);
+	}
+
+	.red {
+		color: red;
+	}
+
+	.green {
+		color: green;
 	}
 }

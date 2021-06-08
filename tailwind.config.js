@@ -39,6 +39,7 @@ module.exports = {
 		extend: {
 			gridTemplateColumns: {
 				sidebar: '1fr 300px',
+				sidebar_wide: '1fr 336px',
 				overview: '1fr 1fr 3fr',
 				news: '1fr 2fr',
 			},
@@ -65,5 +66,5 @@ module.exports = {
 			small: ".95rem",
 		}, */,
 	},
-	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+	plugins: [require('@tailwindcss/forms')],
 };

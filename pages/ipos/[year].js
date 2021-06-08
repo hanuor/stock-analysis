@@ -6,23 +6,28 @@ import { getIpoData } from '@/Functions/fetchStockInfo';
 import IPOTable from '@/components/IPOs/RecentTable';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
+import InfoBox from '@/components/IPOs/InfoBox';
 
 const IpoYear = ({ year, data }) => {
 	return (
 		<>
 			<Meta title="Recent IPOs" />
 			<Header />
-			<div className="contain lg:grid lg:grid-cols-sidebar gap-x-10">
-				<main className="w-full py-6">
+			<div className="contain">
+				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
 					<h1 className="hh1">{year} IPOs</h1>
 					<IPONavigation />
-					<p>{data.info}</p>
-					<IPOTable rawdata={data.data} />
+					<div className="lg:grid lg:grid-cols-sidebar_wide gap-x-10">
+						<div>
+							<InfoBox text={data.info} />
+							<IPOTable rawdata={data.data} />
+						</div>
+						<div>
+							<Sidebar />
+						</div>
+					</div>
 				</main>
-				<div className="py-6">
-					<Sidebar />
-				</div>
 			</div>
 			<Footer />
 		</>

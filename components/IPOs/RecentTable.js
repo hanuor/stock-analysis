@@ -77,7 +77,9 @@ const RecentTable = ({ rawdata }) => {
 							{headerGroup.headers.map((column) => (
 								<th
 									{...column.getHeaderProps(
-										column.getSortByToggleProps()
+										column.getSortByToggleProps({
+											title: `Sort by: ${column.Header}`,
+										})
 									)}>
 									<span className="inline-flex flex-row items-center">
 										{column.render('Header')}

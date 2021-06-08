@@ -3,23 +3,25 @@ import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
 import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
-import IPOTable from '@/components/IPOs/RecentTable';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
+import NewsFeed from '@/components/News/_NewsFeed';
 
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<Meta title="Recent IPOs" />
+			<Meta title="IPO News" />
 			<Header />
-			<div className="contain">
+			<div className="">
 				<main className="w-full py-5 xs:py-6">
-					<Breadcrumbs />
-					<h1 className="hh1">Recent IPOs</h1>
-					<IPONavigation />
+					<div className="contain">
+						<Breadcrumbs />
+						<h1 className="hh1">IPO News</h1>
+						<IPONavigation />
+					</div>
 
-					<div className="lg:grid lg:grid-cols-sidebar_wide gap-x-10">
-						<IPOTable rawdata={data} />
+					<div className="sm:contain lg:grid lg:grid-cols-sidebar_wide gap-x-10">
+						<NewsFeed data={data} />
 						<Sidebar />
 					</div>
 				</main>
@@ -32,7 +34,7 @@ const RecentIpos = ({ data }) => {
 export default RecentIpos;
 
 export async function getStaticProps() {
-	const data = await getIpoData('recent');
+	const data = await getIpoData('news');
 
 	return {
 		props: {
