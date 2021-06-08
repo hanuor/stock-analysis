@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import styles from '@/Styles/TabMenu.module.css';
 import navState from '@State/navState';
 
-const _IPONavigation = () => {
+const Navigation = () => {
 	const router = useRouter();
 	const path = navState((state) => state.path);
 	const setPath = navState((state) => state.setPath);
@@ -23,23 +23,19 @@ const _IPONavigation = () => {
 		});
 	}, [router.asPath, setPath]);
 
-	//mb-[-2px]
-
-	const active =
-		'py-2 px-5 block bg-gray-100 font-semibold text-gray-900 border-b-2 rounded-t border-blue-brand';
+	const active = 'py-1.5 px-5 block bg-[#eee] font-semibold text-gray-900 ';
 	const inactive =
-		'py-2 px-5 block bll hover:text-gray-900 hover:bg-gray-100 hover:border-b-2 hover:border-gray-400 transition duration-100';
+		'py-1.5 px-5 block bll hover:text-gray-900 hover:bg-[#eee] transition duration-100';
 
-	const active_sub =
-		'px-5 py-2 block font-semibold rounded bg-gray-100 text-gray-900';
+	const active_sub = 'px-4 py-1.5 block font-semibold bg-[#eee] text-gray-900';
 	const inactive_sub =
-		'px-5 py-2 block bll rounded hover:bg-gray-100 hover:text-gray-700';
+		'px-4 py-1.5 block bll rounded hover:bg-[#eee] hover:text-gray-700';
 
 	return (
 		<div className="mb-6">
 			<div>
-				<nav className="border-b-2 border-gray-300 mb-3">
-					<ul className={`flex ${styles.navmenu} mb-[-2px] overflow-auto`}>
+				<nav className="border-b-[3px] border-blue-brand_sharp mb-2">
+					<ul className={`flex ${styles.navmenu} overflow-auto`}>
 						<li>
 							<Link href="/ipos/">
 								<a
@@ -91,7 +87,8 @@ const _IPONavigation = () => {
 			{(!path.two || ['#', '2021', '2020', '2019'].includes(path.two)) && (
 				<div>
 					<nav className="mb-4">
-						<ul className={`flex ${styles.navmenu} overflow-auto`}>
+						<ul
+							className={`flex space-x-1 ${styles.navmenu} overflow-auto`}>
 							<li>
 								<Link href="/ipos/">
 									<a
@@ -146,4 +143,4 @@ const _IPONavigation = () => {
 	);
 };
 
-export default _IPONavigation;
+export default Navigation;

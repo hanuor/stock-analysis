@@ -25,7 +25,7 @@ export const NewsletterWidget = () => {
 
 			<button
 				type="button"
-				className="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-xl font-semibold rounded-md shadow-sm text-white bg-blue-brand hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+				className="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-xl font-semibold rounded-md shadow-sm text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
 				Subscribe Now
 			</button>
 		</div>

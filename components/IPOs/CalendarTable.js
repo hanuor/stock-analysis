@@ -1,5 +1,5 @@
 import { useTable } from 'react-table';
-import styles from './IPOTable.module.css';
+import styles from './Table.module.css';
 import Link from 'next/link';
 
 const columns = [

@@ -29,7 +29,7 @@
 	}
 
 	.text-page h1 {
-		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand border-b-2 pb-4 md:pb-5;
+		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-4 md:pb-5;
 	}
 
 	.text-page h2 {

@@ -3,8 +3,8 @@ import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
 import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
-import IPOTable from '@/components/IPOTable/_IPOTable';
-import IPONavigation from '@/components/IPONavigation/_IPONavigation';
+import IPOTable from '@/components/IPOs/RecentTable';
+import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
 const RecentIpos = ({ data }) => {

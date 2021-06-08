@@ -1,10 +1,10 @@
 import { useTable, useSortBy } from 'react-table';
-import styles from './IPOTable.module.css';
+import styles from './Table.module.css';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import { SortUp, SortDown } from '@/components/Icons';
 
-const IPOTable = ({ rawdata }) => {
+const RecentTable = ({ rawdata }) => {
 	const columns = useMemo(
 		() => [
 			{
@@ -118,4 +118,4 @@ const IPOTable = ({ rawdata }) => {
 	);
 };
 
-export default IPOTable;
+export default RecentTable;

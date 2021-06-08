@@ -3,8 +3,8 @@ import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
 import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
-import CalendarTable from '@/components/IPOTable/CalendarTable';
-import IPONavigation from '@/components/IPONavigation/_IPONavigation';
+import CalendarTable from '@/components/IPOs/CalendarTable';
+import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
 const IpoCalendar = ({ data }) => {
