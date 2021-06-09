@@ -1,6 +1,9 @@
 import Tickers from './Tickers';
-import LiteYouTubeEmbed from 'react-lite-youtube-embed';
-import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
+/* import LiteYouTubeEmbed from 'react-lite-youtube-embed'; */
+/* import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'; */
+import LiteYouTubeEmbed from './LiteYouTubeEmbed';
+/* import './LiteYouTubeEmbed.css'; */
+/* import './YouTubeEmbed.module.css'; */
 
 const NewsVideo = ({ item }) => {
 	return (
