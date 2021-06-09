@@ -29,7 +29,7 @@ import {
 	withSize,
 } from "react-financial-charts";
 import { IOHLCData } from "./iOHLCData";
-import { HoverTooltipCustom } from "@/components/Chart/HoverToolTipCustom";
+import { HoverTooltipCustom } from "@/components/Chart/HoverTooltipCustom";
 import { withOHLCData } from "./withOHLCData";
 import { current } from "immer";
 
