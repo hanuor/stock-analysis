@@ -3,7 +3,6 @@ import { useState } from 'react';
 import styles from './LiteYouTubeEmbed.module.css';
 
 export default function LiteYouTubeEmbed(props) {
-	const [preconnected, setPreconnected] = useState(false);
 	const [iframe, setIframe] = useState(false);
 	const videoId = encodeURIComponent(props.id);
 
@@ -12,21 +11,11 @@ export default function LiteYouTubeEmbed(props) {
 	const paramsImp = `&${props.params}` || '';
 	const posterUrl = `https://i.ytimg.com/vi/${videoId}/${posterImp}.jpg`;
 
-	let ytUrl = props.noCookie
-		? 'https://www.youtube-nocookie.com'
-		: 'https://www.youtube.com';
-	ytUrl = props.cookie
-		? 'https://www.youtube.com'
-		: 'https://www.youtube-nocookie.com';
+	const ytUrl = 'https://www.youtube-nocookie.com';
 
 	const iframeSrc = `${ytUrl}/embed/${videoId}?autoplay=1${paramsImp}`;
 
 	const onIframeAdded = props.onIframeAdded || function () {};
-
-	const warmConnections = () => {
-		if (preconnected) return;
-		setPreconnected(true);
-	};
 
 	const addIframe = () => {
 		if (iframe) return;
@@ -39,16 +28,7 @@ export default function LiteYouTubeEmbed(props) {
 
 	return (
 		<>
-			<>
-				{preconnected && (
-					<>
-						<link rel="preconnect" href={ytUrl} />
-						<link rel="preconnect" href="https://www.google.com" />
-					</>
-				)}
-			</>
 			<div
-				onPointerOver={warmConnections}
 				onClick={addIframe}
 				className={iframe ? active : inactive}
 				data-title={videoTitle}
