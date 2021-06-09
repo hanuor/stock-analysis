@@ -6,15 +6,8 @@ import { useImmerReducer } from "use-immer";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
 import { stockState } from "@State/stockState";
 import { useEffect, useState } from "react";
-import { initialData, secondaryData } from "@/components/datatemp";
-import CandleStickChartCustom from "@/components/Chart/CandlestickChartCustom";
-
-import Axios from "axios";
-
 import React from "react";
-import ReactDOM from "react-dom";
-import { format } from "d3-format";
-import { timeFormat } from "d3-time-format";
+
 import {
 	elderRay,
 	ema,

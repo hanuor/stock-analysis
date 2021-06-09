@@ -4,6 +4,7 @@ import * as React from "react";
 import {
 	elderRay,
 	ema,
+	sma,
 	discontinuousTimeScaleProviderBuilder,
 	Chart,
 	ChartCanvas,
@@ -14,6 +15,7 @@ import {
 	LineSeries,
 	MovingAverageTooltip,
 	OHLCTooltip,
+	HoverTooltip,
 	SingleValueTooltip,
 	lastVisibleItemBasedZoomAnchor,
 	XAxis,
@@ -27,7 +29,9 @@ import {
 	withSize,
 } from "react-financial-charts";
 import { IOHLCData } from "./iOHLCData";
+import { HoverTooltipCustom } from "@/components/Chart/HoverToolTipCustom";
 import { withOHLCData } from "./withOHLCData";
+import { current } from "immer";
 
 interface StockChartProps {
 	readonly data: IOHLCData[];
@@ -38,8 +42,10 @@ interface StockChartProps {
 }
 
 class StockChart extends React.Component<StockChartProps> {
+	private readonly dateFormat = timeFormat("%Y-%m-%d");
 	private readonly margin = { left: 35, right: 62, top: 0, bottom: 24 };
 	private readonly pricesDisplayFormat = format(".2f");
+	private readonly volumeDisplayFormat = format(".4s");
 	private readonly xScaleProvider =
 		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
 			(d: IOHLCData) => d.date
@@ -54,6 +60,14 @@ class StockChart extends React.Component<StockChartProps> {
 			width,
 		} = this.props;
 
+		const candlesAppearance = {
+			fill: function fill(d) {
+				return d.close > d.open ? "rgba(30, 130, 76, 1)" : "rgba(180,0,0)";
+			},
+			clip: true,
+			candleStrokeWidth: 0.5,
+			widthRatio: 0.8,
+		};
 		console.log(this.props);
 		const openCloseColor = (data) => {
 			return data.close > data.open ? "#26a69a" : "#ef5350";
@@ -77,31 +91,31 @@ class StockChart extends React.Component<StockChartProps> {
 			return data.volume;
 		};
 
-		const ema12 = ema()
+		const sma50 = sma()
 			.id(1)
-			.options({ windowSize: 12 })
+			.options({ windowSize: 50 })
 			.merge((d: any, c: any) => {
-				d.ema12 = c;
+				d.sma50 = c;
 			})
-			.accessor((d: any) => d.ema12);
+			.accessor((d: any) => d.sma50);
 
-		const ema26 = ema()
+		const sma200 = sma()
 			.id(2)
-			.options({ windowSize: 26 })
+			.options({ windowSize: 200 })
 			.merge((d: any, c: any) => {
-				d.ema26 = c;
+				d.sma200 = c;
 			})
-			.accessor((d: any) => d.ema26);
+			.accessor((d: any) => d.sma200);
 
 		const elder = elderRay();
-
-		const calculatedData = elder(ema26(ema12(initialData)));
-
+		console.log(sma50.accessor);
+		const calculatedData = elder(sma200(sma50(initialData)));
+		console.log(calculatedData);
 		const { margin, xScaleProvider } = this;
 
 		const { data, xScale, xAccessor, displayXAccessor } =
 			xScaleProvider(calculatedData);
-
+		console.log(data);
 		const max = xAccessor(data[data.length - 1]);
 		const min = xAccessor(data[Math.max(0, data.length - 100)]);
 		const xExtents = [min, max + 5];
@@ -120,11 +134,38 @@ class StockChart extends React.Component<StockChartProps> {
 		const ma2color = "#c65102";
 
 		const timeDisplayFormat = timeFormat(dateTimeFormat);
+		const tooltipContent = () => {
+			return ({ currentItem, xAccessor }) => {
+				// the console.log() below is not logging in the console.
+				console.log(xAccessor(currentItem));
+				return {
+					x: xAccessor(currentItem),
+					y: [
+						{
+							label: "Type",
+							value: currentItem.type && currentItem.type,
+						},
+						{
+							label: "Value",
+							value: currentItem.value && currentItem.value,
+						},
+						{
+							label: "Volume",
+							value: currentItem.volume && currentItem.volume,
+						},
+						{
+							label: "Total Volume",
+							value: currentItem.totalVolume && currentItem.totalVolume,
+						},
+					],
+				};
+			};
+		};
 
 		return (
 			<ChartCanvas
 				height={height}
-				ratio={2}
+				ratio={1}
 				width={width}
 				margin={margin}
 				data={data}
@@ -140,22 +181,22 @@ class StockChart extends React.Component<StockChartProps> {
 						showGridLines={true}
 						tickFormat={this.pricesDisplayFormat}
 					/>
-					<CandlestickSeries />
+					<CandlestickSeries {...candlesAppearance} />
 					<LineSeries
-						yAccessor={ema26.accessor()}
-						strokeStyle={ema26.stroke()}
+						yAccessor={sma200.accessor()}
+						strokeStyle={sma200.stroke()}
 					/>
 					<CurrentCoordinate
-						yAccessor={ema26.accessor()}
-						fillStyle={ema26.stroke()}
+						yAccessor={sma200.accessor()}
+						fillStyle={sma200.stroke()}
 					/>
 					<LineSeries
-						yAccessor={ema12.accessor()}
-						strokeStyle={ema12.stroke()}
+						yAccessor={sma50.accessor()}
+						strokeStyle={sma50.stroke()}
 					/>
 					<CurrentCoordinate
-						yAccessor={ema12.accessor()}
-						fillStyle={ema12.stroke()}
+						yAccessor={sma50.accessor()}
+						fillStyle={sma50.stroke()}
 					/>
 					<MouseCoordinateY
 						rectWidth={margin.right}
@@ -172,7 +213,7 @@ class StockChart extends React.Component<StockChartProps> {
 						fontSize={11}
 						lineStroke={ma2color}
 						displayFormat={this.pricesDisplayFormat}
-						yAccessor={ema26.accessor()}
+						yAccessor={sma200.accessor()}
 					/>
 					<EdgeIndicator
 						itemType="last"
@@ -185,7 +226,7 @@ class StockChart extends React.Component<StockChartProps> {
 						fontSize={11}
 						lineStroke={ma1color}
 						displayFormat={this.pricesDisplayFormat}
-						yAccessor={ema12.accessor()}
+						yAccessor={sma50.accessor()}
 					/>
 					<EdgeIndicator
 						itemType="last"
@@ -196,25 +237,59 @@ class StockChart extends React.Component<StockChartProps> {
 						yAccessor={yEdgeIndicator}
 						fontSize={13}
 					/>
-					<MovingAverageTooltip
-						origin={[8, 24]}
-						options={[
-							{
-								yAccessor: ema26.accessor(),
-								type: "EMA",
-								stroke: ema26.stroke(),
-								windowSize: ema26.options().windowSize,
-							},
-							{
-								yAccessor: ema12.accessor(),
-								type: "EMA",
-								stroke: ema12.stroke(),
-								windowSize: ema12.options().windowSize,
-							},
-						]}
+					<HoverTooltipCustom
+						yAccessor={sma50.accessor()}
+						tooltip={{
+							content: ({ currentItem, xAccessor }) => ({
+								x: this.dateFormat(xAccessor(currentItem)),
+								y: [
+									{
+										label: "Open",
+										value:
+											currentItem.open &&
+											this.pricesDisplayFormat(currentItem.open),
+									},
+									{
+										label: "High",
+										value:
+											currentItem.high &&
+											this.pricesDisplayFormat(currentItem.high),
+									},
+									{
+										label: "Low",
+										value:
+											currentItem.low &&
+											this.pricesDisplayFormat(currentItem.low),
+									},
+									{
+										label: "Close",
+										value:
+											currentItem.close &&
+											this.pricesDisplayFormat(currentItem.close),
+									},
+									{
+										label: "Volume",
+										value:
+											currentItem.volume &&
+											this.volumeDisplayFormat(currentItem.volume),
+									},
+									{
+										label: "MA (50)",
+										value:
+											currentItem.sma50 &&
+											this.pricesDisplayFormat(currentItem.sma50),
+									},
+									{
+										label: "MA (200)",
+										value:
+											currentItem.sma200 &&
+											this.pricesDisplayFormat(currentItem.sma200),
+									},
+								],
+							}),
+						}}
 					/>
 					<ZoomButtons />
-					<OHLCTooltip origin={[8, 16]} />
 				</Chart>
 				<Chart
 					id={4}
@@ -231,6 +306,7 @@ class StockChart extends React.Component<StockChartProps> {
 						innerTickSize={0}
 					/>
 					<BarSeries
+						widthRatio={0.5}
 						clip={true}
 						yAccessor={(d) => d.volume}
 						fillStyle={(d) => (d.close > d.open ? "#6BA583" : "red")}

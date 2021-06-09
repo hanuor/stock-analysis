@@ -3,6 +3,7 @@ import { timeParse } from "d3-time-format";
 import * as React from "react";
 import { IOHLCData } from "./iOHLCData";
 import Axios from "axios";
+import { ENGINE_METHOD_PKEY_ASN1_METHS } from "constants";
 
 const parseDate = timeParse("%Y-%m-%d");
 
@@ -33,6 +34,8 @@ function fixDataHeaders(obj) {
 		low: obj.l,
 		volume: obj.v,
 		date: obj.t,
+		ma1: obj.ma1,
+		ma2: obj.ma2,
 	};
 	return newObj;
 }
@@ -71,6 +74,7 @@ export function withOHLCData(dataSet = "DAILY") {
 				Axios.get(
 					`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
 				).then((res) => {
+					console.log(res.data);
 					const forDateParse = res.data.map(fixDataHeaders);
 					const data = forDateParse.map(parseData());
 					const period = this.props["period"];
