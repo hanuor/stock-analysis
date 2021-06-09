@@ -1,7 +1,6 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import IPOTable from '@/components/IPOs/RecentTable';
 import IPONavigation from '@/components/IPOs/Navigation';
@@ -22,10 +21,10 @@ const RecentIpos = ({ data }) => {
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<IPOTable rawdata={data.data} />
-						<div>
+						<aside>
 							<CalendarTableMin upcoming={data.upcoming} />
 							<NewsWidget news={data.news} />
-						</div>
+						</aside>
 					</div>
 				</main>
 			</div>
