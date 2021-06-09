@@ -22,7 +22,7 @@ export default function TabNavigation() {
 	const common = 'text-[15px] sm:text-base block py-2 px-2 sm:px-5';
 	const inactive =
 		common +
-		' text-blue-brand hover:text-black hover:bg-gray-100 transition duration-100';
+		' bll hover:text-black hover:bg-gray-100 transition duration-100';
 	const active = common + ' text-black bg-gray-100 font-semibold';
 
 	return (

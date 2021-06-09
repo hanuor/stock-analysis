@@ -18,7 +18,7 @@ const RecentIpos = ({ data }) => {
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation />
 
-					<div className="lg:grid lg:grid-cols-sidebar_wide gap-x-10">
+					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<IPOTable rawdata={data} />
 						<Sidebar />
 					</div>

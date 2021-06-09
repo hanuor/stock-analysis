@@ -20,7 +20,7 @@ const RecentIpos = ({ data }) => {
 						<IPONavigation />
 					</div>
 
-					<div className="sm:contain lg:grid lg:grid-cols-sidebar_wide gap-x-10">
+					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
 						<NewsFeed data={data} />
 						<Sidebar />
 					</div>

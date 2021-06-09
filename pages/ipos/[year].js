@@ -18,7 +18,7 @@ const IpoYear = ({ year, data }) => {
 					<Breadcrumbs />
 					<h1 className="hh1">{year} IPOs</h1>
 					<IPONavigation />
-					<div className="lg:grid lg:grid-cols-sidebar_wide gap-x-10">
+					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
 							<InfoBox text={data.info} />
 							<IPOTable rawdata={data.data} />
