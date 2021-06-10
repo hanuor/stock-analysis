@@ -1,6 +1,6 @@
 import Tickers from './Tickers';
 
-const NewsArticle = ({ item }) => {
+const NewsArticle = ({ item, related }) => {
 	return (
 		<div className="bg-white p-4 sm:px-0 sm:py-6 sm:first:pt-3 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5">
 			<div className="sm:mt-1">
@@ -30,9 +30,12 @@ const NewsArticle = ({ item }) => {
 				<p className="text-gray-800 sm:order-3 text-[0.95rem]">
 					{item.text}
 				</p>
-				<div className="mt-1.5 sm:mt-1 sm:order-4">
-					<Tickers tickers={item.tickers} intro={'Stocks:'} />
-				</div>
+				{item.tickers && (
+					<div className="mt-1.5 sm:mt-1 sm:order-4">
+						<Tickers tickers={item.tickers} intro={related} />
+					</div>
+				)}
+
 				<div className="mt-1 text-sm text-gray-700 sm:order-1 sm:mt-0">
 					<span title={item.timeFull}>{item.timeAgo}</span>
 					<span> - {item.source}</span>

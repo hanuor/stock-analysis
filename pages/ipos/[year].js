@@ -28,7 +28,14 @@ const IpoYear = ({ year, data }) => {
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
 							<CalendarTableMin upcoming={data.upcoming} />
-							<NewsWidget news={data.news} />
+							<NewsWidget
+								title="IPO News"
+								news={data.news}
+								button={{
+									text: 'More IPO News',
+									url: '/ipos/news/',
+								}}
+							/>
 						</aside>
 					</div>
 				</main>

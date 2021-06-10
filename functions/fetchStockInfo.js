@@ -34,9 +34,18 @@ export async function getPageData(id, page) {
 }
 
 export async function getStockNews(id) {
-	let API = process.env.API_URL || 'localhost:3001';
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
-	const response = await Axios.get(API + `/api/news?i=${id}`);
+	const response = await Axios.get(API + `/news?i=${id}`);
+	const news = response.data;
+
+	return news;
+}
+
+export async function getMarketNews(type) {
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+
+	const response = await Axios.get(API + `/news?type=${type}`);
 	const news = response.data;
 
 	return news;

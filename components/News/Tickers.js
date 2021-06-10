@@ -11,7 +11,7 @@ function Tickers({ tickers, intro }) {
 
 	return (
 		<div className="text-gray-800 inline-flex">
-			<span className="mr-1">{intro}</span>
+			<span className="mr-1">{intro}:</span>
 			<span className="">
 				{tickers.map(function (ticker, index) {
 					return <SingleTicker ticker={ticker} key={index} />;
