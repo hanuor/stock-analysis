@@ -4,6 +4,19 @@ import Link from 'next/link';
 const Break = () => <span className="px-2">&raquo;</span>;
 const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
+const formatPageTitle = (word) => {
+	let split = word.split('-');
+	if (split.length === 1) {
+		return split[0].charAt(0).toUpperCase() + split[0].slice(1);
+	} else {
+		let newstr = '';
+		split.forEach((element) => {
+			newstr += element.charAt(0).toUpperCase() + element.slice(1) + ' ';
+		});
+		return newstr.trim();
+	}
+};
+
 const One = ({ one, two }) => {
 	if (one === 'ipos') {
 		if (two) {
@@ -19,7 +32,7 @@ const One = ({ one, two }) => {
 };
 
 const formatTwo = (two) => {
-	return capitalize(two);
+	return formatPageTitle(two);
 };
 
 const _Breadcrumbs = () => {

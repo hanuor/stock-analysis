@@ -1,9 +1,9 @@
 import Button from '@/components/Button';
 
-const NewsWidget = ({ news }) => {
+const NewsWidget = ({ title, news, button }) => {
 	return (
 		<div className="border border-gray-200 rounded text-sm p-4">
-			<h3 className="hh3">IPO News</h3>
+			<h3 className="hh3">{title}</h3>
 			<ul className="text-gray-700">
 				{news.map((item, index) => (
 					<li key={index} className="mb-3 last:mb-1">
@@ -21,7 +21,7 @@ const NewsWidget = ({ news }) => {
 					</li>
 				))}
 			</ul>
-			<Button text="More IPO News" url="/ipos/news/" />
+			<Button text={button.text} url={button.url} />
 		</div>
 	);
 };

@@ -1,33 +1,38 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import { getIpoData } from '@/Functions/fetchStockInfo';
-import IPONavigation from '@/components/IPOs/Navigation';
+import { getMarketNews } from '@/Functions/fetchStockInfo';
+import NewsNavigation from '@/components/News/NewsNavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import NewsFeed from '@/components/News/_NewsFeed';
-import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
-import RecentTableMin from '@/components/IPOs/RecentTableMin';
+import NewsWidget from '@/components/News/NewsWidget';
 
-const RecentIpos = ({ data }) => {
+const MarketNews = ({ data }) => {
 	return (
 		<>
-			<Meta title="IPO News" />
+			<Meta title="Market News" />
 			<Header />
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">
 						<Breadcrumbs />
-						<h1 className="hh1">IPO News</h1>
-						<IPONavigation />
+						<h1 className="hh1">Stock Market News</h1>
+						<NewsNavigation />
 					</div>
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1 sm:py-2 lg:py-3">
-							<NewsFeed data={data.data} related="Stocks" />
+						<div className="py-2 lg:py-3">
+							<NewsFeed data={data.data} />
 						</div>
 						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
-							<CalendarTableMin upcoming={data.upcoming} />
-							<RecentTableMin recent={data.recent} />
+							<NewsWidget
+								title="Stock News"
+								news={data.other}
+								button={{
+									text: 'All Stock News',
+									url: '/news/all-stocks/',
+								}}
+							/>
 						</aside>
 					</div>
 				</main>
@@ -37,15 +42,15 @@ const RecentIpos = ({ data }) => {
 	);
 };
 
-export default RecentIpos;
+export default MarketNews;
 
 export async function getStaticProps() {
-	const data = await getIpoData('news');
+	const data = await getMarketNews('market');
 
 	return {
 		props: {
 			data,
 		},
-		revalidate: 300,
+		revalidate: 120,
 	};
 }

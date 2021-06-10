@@ -55,8 +55,10 @@ module.exports = {
 					/* brand: 'rgba(59, 130, 220, 1)', */
 					/* brand: 'rgba(15, 115, 177)', */
 					brand_sharp: 'rgba(44, 98, 136)', // from old site
-					brand_light: 'rgba(30, 118, 181)',
+					// brand_light: 'rgba(30, 118, 181)', // test later
+					brand_light: 'rgba(60, 125, 212)', // test later
 					/* brand: 'rgba(45, 129, 189)', */ // test later
+
 					/* brand: 'rgba(41, 122, 187)', */
 					sharp: 'rgba(1, 90, 210, 1)',
 					link: 'rgb(30, 115, 190, 1)',
