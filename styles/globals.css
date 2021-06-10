@@ -4,19 +4,33 @@
 
 @layer base {
 	.contain {
-		@apply px-3 xs:px-4 lg:px-6 mx-auto;
+		/* Container for the main content, but not if full-width on mobile */
+		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
 	}
 
-	.link {
-		@apply text-blue-link hover:text-black;
+	.uncontain {
+		/* Remove the container */
+		@apply px-0 mx-0 w-auto max-w-none;
 	}
 
 	.bll {
 		@apply text-blue-link hover:text-black;
 	}
 
+	.link {
+		@apply text-blue-link hover:text-black;
+	}
+
+	.hh1 {
+		@apply text-3xl font-bold mb-4 text-gray-900;
+	}
+
 	.hh2 {
 		@apply text-2xl font-bold mb-3 text-gray-900;
+	}
+
+	.hh3 {
+		@apply text-xl font-bold mb-2.5 xs:mb-3 text-gray-900;
 	}
 
 	.text-page {
@@ -24,7 +38,7 @@
 	}
 
 	.text-page h1 {
-		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand border-b-2 pb-4 md:pb-5;
+		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-4 md:pb-5;
 	}
 
 	.text-page h2 {
@@ -79,5 +93,13 @@
 
 	.profilewrap {
 		width: calc(100% - 336px - 40px);
+	}
+
+	.red {
+		color: red;
+	}
+
+	.green {
+		color: green;
 	}
 }

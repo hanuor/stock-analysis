@@ -48,7 +48,7 @@ export default function HeaderLogin() {
 			<span className="flex-1 py-2 px-3 text-white bg-gray-500 lg:flex-none lg:bg-white lg:text-black lg:font-normal hover:text-blue-700">
 				<LogInOut />
 			</span>
-			<span className="flex-1 py-2 px-4 bg-blue-brand lg:py-[0.4rem] lg:flex-none lg:px-3 text-white lg:rounded-sm lg:font-normal hover:bg-blue-600">
+			<span className="flex-1 py-2 px-4 bg-blue-brand_light lg:py-[0.4rem] lg:flex-none lg:px-3 text-white lg:rounded-sm lg:font-normal hover:bg-blue-brand_sharp">
 				<TrialOrAccount />
 			</span>
 		</div>

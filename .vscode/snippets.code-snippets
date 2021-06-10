@@ -24,5 +24,10 @@
 		"prefix": "co",
 		"body": ["console.log({$1});"],
 		"description": "console.log"
+	},
+	"classname": {
+		"prefix": "cn",
+		"body": ["className=\"$1\""],
+		"description": "className"
 	}
 }
