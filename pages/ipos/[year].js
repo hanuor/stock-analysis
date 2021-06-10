@@ -1,12 +1,14 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import IPOTable from '@/components/IPOs/RecentTable';
 import IPONavigation from '@/components/IPOs/Navigation';
+import SubNavigation from '@/components/IPOs/SubNavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import InfoBox from '@/components/IPOs/InfoBox';
+import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
+import NewsWidget from '@/components/News/NewsWidget';
 
 const IpoYear = ({ year, data }) => {
 	return (
@@ -20,12 +22,14 @@ const IpoYear = ({ year, data }) => {
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
-							<InfoBox text={data.info} />
-							<IPOTable rawdata={data.data} />
+							<SubNavigation />
+							<InfoBox text={data.data.info} />
+							<IPOTable rawdata={data.data.data} />
 						</div>
-						<div>
-							<Sidebar />
-						</div>
+						<aside className="flex flex-col space-y-10 py-6">
+							<CalendarTableMin upcoming={data.upcoming} />
+							<NewsWidget news={data.news} />
+						</aside>
 					</div>
 				</main>
 			</div>

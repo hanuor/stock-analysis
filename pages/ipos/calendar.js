@@ -1,41 +1,48 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import CalendarTable from '@/components/IPOs/CalendarTable';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
+import RecentTableMin from '@/components/IPOs/RecentTableMin';
+import NewsWidget from '@/components/News/NewsWidget';
 
 const IpoCalendar = ({ data }) => {
 	return (
 		<>
 			<Meta title="IPO Calendar" />
 			<Header />
-			<div className="contain lg:grid lg:grid-cols-sidebar gap-x-10">
+			<div className="contain">
 				<main className="w-full py-6">
 					<Breadcrumbs />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation />
-					<div className="flex flex-col space-y-7">
-						<CalendarTable title="This Week" data={data.thisweek} />
-						<CalendarTable
-							title="Next Week or Later"
-							data={data.nextweek}
-						/>
-						<CalendarTable
-							title="Upcoming High-Profile IPOs"
-							data={data.highprofile}
-						/>
-						<CalendarTable
-							title="More Upcoming IPOs"
-							data={data.unknown}
-						/>
+					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+						<div className="flex flex-col space-y-5 sm:space-y-7 py-4">
+							<CalendarTable
+								title="This Week"
+								data={data.data.thisweek}
+							/>
+							<CalendarTable
+								title="Next Week or Later"
+								data={data.data.nextweek}
+							/>
+							<CalendarTable
+								title="Upcoming High-Profile IPOs"
+								data={data.data.highprofile}
+							/>
+							<CalendarTable
+								title="More Upcoming IPOs"
+								data={data.data.unknown}
+							/>
+						</div>
+						<aside className="flex flex-col space-y-10 pt-4 pb-6 lg:py-6">
+							<RecentTableMin recent={data.recent} />
+							<NewsWidget news={data.news} />
+						</aside>
 					</div>
 				</main>
-				<div className="py-6">
-					<Sidebar />
-				</div>
 			</div>
 			<Footer />
 		</>

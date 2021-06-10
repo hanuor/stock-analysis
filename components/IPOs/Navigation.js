@@ -28,13 +28,8 @@ const Navigation = () => {
 	const inactive =
 		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bll hover:text-gray-900 hover:bg-[#eee] transition duration-100';
 
-	const active_sub =
-		'py-1.5 px-3.5 xs:px-4 block font-semibold bg-[#eee] text-gray-900';
-	const inactive_sub =
-		'py-1.5 px-3.5 xs:px-4 block bll hover:bg-[#eee] hover:text-gray-700 transition duration-100';
-
 	return (
-		<div className="mb-3">
+		<div className="mb-1">
 			<div>
 				<nav className="border-b-[3px] border-blue-brand_sharp mb-1.5">
 					<ul className={`flex ${styles.navmenu} overflow-auto`}>
@@ -86,61 +81,6 @@ const Navigation = () => {
 					</ul>
 				</nav>
 			</div>
-			{(!path.two || ['#', '2021', '2020', '2019'].includes(path.two)) && (
-				<div>
-					<nav className="mb-3">
-						<ul
-							className={`flex space-x-1 ${styles.navmenu} overflow-auto`}>
-							<li>
-								<Link href="/ipos/">
-									<a
-										data-title="Recent"
-										className={
-											!path.two || path.two === '#'
-												? active_sub
-												: inactive_sub
-										}>
-										Recent
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/ipos/2021/">
-									<a
-										data-title="2021"
-										className={
-											path.two === '2021' ? active_sub : inactive_sub
-										}>
-										2021
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/ipos/2020/">
-									<a
-										data-title="2020"
-										className={
-											path.two === '2020' ? active_sub : inactive_sub
-										}>
-										2020
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/ipos/2019/">
-									<a
-										data-title="2019"
-										className={
-											path.two === '2019' ? active_sub : inactive_sub
-										}>
-										2019
-									</a>
-								</Link>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			)}
 		</div>
 	);
 };

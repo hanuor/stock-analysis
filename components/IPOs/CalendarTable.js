@@ -46,7 +46,7 @@ const NoIpos = ({ title }) => {
 			return (
 				<div>
 					<h2 className="hh2 mb-2">{title}</h2>
-					<p className="text-lg">
+					<p className="text-lg text-gray-900">
 						There are no upcoming IPOs remaining for the current week.
 					</p>
 				</div>
@@ -57,7 +57,9 @@ const NoIpos = ({ title }) => {
 			return (
 				<div>
 					<h2 className="hh2">{title}</h2>
-					<p>There are no upcoming IPOs scheduled for next week.</p>
+					<p className="text-lg text-gray-900">
+						There are no upcoming IPOs scheduled for next week.
+					</p>
 				</div>
 			);
 		}
@@ -66,7 +68,9 @@ const NoIpos = ({ title }) => {
 			return (
 				<div>
 					<h2 className="hh2">{title}</h2>
-					<p>There are no upcoming but unscheduled IPOs.</p>
+					<p className="text-lg text-gray-900">
+						There are no upcoming but unscheduled IPOs.
+					</p>
 				</div>
 			);
 		}
@@ -90,45 +94,47 @@ const CalendarTable = ({ title, data }) => {
 
 	return (
 		<div>
-			<h2 className="hh2">{title}</h2>
-			<table
-				{...getTableProps()}
-				className={`${styles.ipotable} ${styles.striped}`}>
-				<thead>
-					{headerGroups.map((headerGroup) => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map((column) => (
-								<th {...column.getHeaderProps()}>
-									{column.render('Header')}
-									{thisWeek ||
-									(nextWeek && column.Header === 'IPO Date')
-										? '*'
-										: null}
-								</th>
-							))}
-						</tr>
-					))}
-				</thead>
-				<tbody {...getTableBodyProps()}>
-					{rows.map((row) => {
-						prepareRow(row);
-						return (
-							<tr {...row.getRowProps()}>
-								{row.cells.map((cell) => {
-									return (
-										<td {...cell.getCellProps()}>
-											{cell.render('Cell')}
-										</td>
-									);
-								})}
+			<h2 className="hh2 mb-2 sm:mb-3">{title}</h2>
+			<div className="overflow-x-auto">
+				<table
+					{...getTableProps()}
+					className={`${styles.ipotable} ${styles.striped}`}>
+					<thead>
+						{headerGroups.map((headerGroup) => (
+							<tr {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map((column) => (
+									<th {...column.getHeaderProps()}>
+										{column.render('Header')}
+										{thisWeek ||
+										(nextWeek && column.Header === 'IPO Date')
+											? '*'
+											: null}
+									</th>
+								))}
 							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+						))}
+					</thead>
+					<tbody {...getTableBodyProps()}>
+						{rows.map((row) => {
+							prepareRow(row);
+							return (
+								<tr {...row.getRowProps()}>
+									{row.cells.map((cell) => {
+										return (
+											<td {...cell.getCellProps()}>
+												{cell.render('Cell')}
+											</td>
+										);
+									})}
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
 			{thisWeek ||
 				(nextWeek && (
-					<span className="text-sm text-gray-700 mt-1">
+					<span className="text-sm text-gray-600 mt-1">
 						* Upcoming IPO dates are estimated and may change
 					</span>
 				))}

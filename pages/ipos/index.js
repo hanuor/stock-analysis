@@ -4,6 +4,7 @@ import Footer from '@/Layout/Footer';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import IPOTable from '@/components/IPOs/RecentTable';
 import IPONavigation from '@/components/IPOs/Navigation';
+import SubNavigation from '@/components/IPOs/SubNavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
 import NewsWidget from '@/components/News/NewsWidget';
@@ -20,8 +21,11 @@ const RecentIpos = ({ data }) => {
 					<IPONavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<IPOTable rawdata={data.data} />
-						<aside>
+						<div>
+							<SubNavigation />
+							<IPOTable rawdata={data.data} />
+						</div>
+						<aside className="flex flex-col space-y-10 py-6">
 							<CalendarTableMin upcoming={data.upcoming} />
 							<NewsWidget news={data.news} />
 						</aside>

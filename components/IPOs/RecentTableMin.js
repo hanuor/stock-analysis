@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import Button from '@/components/Button';
 
-const CalendarTableMin = ({ upcoming }) => {
+const CalendarTableMin = ({ recent }) => {
 	return (
 		<div>
-			<h3 className="hh3">Upcoming IPOs</h3>
+			<h3 className="hh3">Latest IPOs</h3>
 			<div className="border border-gray-200 rounded">
 				<table className="w-full text-gray-900 text-[0.95rem]">
 					<thead>
 						<tr className="border-b border-gray-200">
 							<th className="text-left py-2 px-2 pl-2 border-r border-gray-200">
-								Date*
+								Date
 							</th>
 							<th className="text-left py-2 px-2 border-r border-gray-200">
 								Symbol
@@ -19,7 +19,7 @@ const CalendarTableMin = ({ upcoming }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{upcoming.map((item, index) => (
+						{recent.map((item, index) => (
 							<tr
 								key={index}
 								className="border-b last:border-0 border-gray-200">
@@ -31,7 +31,7 @@ const CalendarTableMin = ({ upcoming }) => {
 										<a className="bll">{item.symbol}</a>
 									</Link>
 								</td>
-								<td className="py-2 px-2 pr-2 lg:max-w-[130px] lg:truncate">
+								<td className="py-2 px-2 pr-2 lg:max-w-[150px] lg:truncate">
 									{item.name}
 								</td>
 							</tr>
@@ -39,10 +39,7 @@ const CalendarTableMin = ({ upcoming }) => {
 					</tbody>
 				</table>
 			</div>
-			<span className="text-sm text-gray-700">
-				* Upcoming IPO dates are estimated.
-			</span>
-			<Button text="Full IPO Calendar" url="/ipos/calendar/" />
+			<Button text="All Recent IPOs" url="/ipos/" />
 		</div>
 	);
 };

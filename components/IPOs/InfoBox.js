@@ -1,9 +1,8 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { InformationCircleIcon } from '@heroicons/react/solid';
 
 export default function Example({ text }) {
 	return (
-		<div className="rounded bg-white border border-gray-300 p-3 sm:p-4 mb-2">
+		<div className="rounded bg-white border border-gray-300 p-3 sm:p-4 mt-4 mb-2 lg:mb-3">
 			<div className="sm:flex flex-row items-center sm:space-x-4">
 				<div className="float-left mr-1 sm:mr-0 sm:block flex-shrink-0">
 					<InformationCircleIcon

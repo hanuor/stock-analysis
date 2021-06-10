@@ -1,13 +1,14 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import StatsChartAnnual from '@/components/IPOs/StatsChartAnnual';
 import StatsChartMonthly from '@/components/IPOs/StatsChartMonthly';
 import Link from 'next/link';
+import RecentTableMin from '@/components/IPOs/RecentTableMin';
+import NewsWidget from '@/components/News/NewsWidget';
 
 const RecentIpos = ({ data }) => {
 	return (
@@ -21,7 +22,7 @@ const RecentIpos = ({ data }) => {
 					<IPONavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="flex flex-col space-y-3 py-2 sm:py-3">
+						<div className="flex flex-col space-y-3 py-3 sm:py-4">
 							<div>
 								<p className="text-base sm:text-lg text-gray-900">
 									This page contains statistics and charts for initial
@@ -33,7 +34,7 @@ const RecentIpos = ({ data }) => {
 							<div>
 								<h2 className="hh2 mb-2">Number of IPOs by Year</h2>
 								<p className="text-base sm:text-lg text-gray-900">
-									{`There have been ${data.total.toLocaleString(
+									{`There have been ${data.data.total.toLocaleString(
 										'en-US'
 									)}
 									IPOs between 2000 and 2021. The most was in the full year
@@ -42,7 +43,7 @@ const RecentIpos = ({ data }) => {
 								</p>
 								<StatsChartAnnual
 									title="Annual IPOs, 2000-2021"
-									data={data.year2021}
+									data={data.data.year2021}
 								/>
 							</div>
 							<div>
@@ -50,14 +51,14 @@ const RecentIpos = ({ data }) => {
 									2021 Initial Public Offerings
 								</h2>
 								<p className="text-base sm:text-lg text-gray-900">
-									{`There have been ${data.year2021} IPOs so far in 2021.`}{' '}
+									{`There have been ${data.data.year2021} IPOs so far in 2021.`}{' '}
 									<Link href="/ipos/2021/">
 										<a className="bll">View all 2021 IPOs.</a>
 									</Link>
 								</p>
 								<StatsChartMonthly
 									title="2021 IPOs"
-									data={data.months2021}
+									data={data.data.months2021}
 								/>
 							</div>
 							<div>
@@ -74,7 +75,7 @@ const RecentIpos = ({ data }) => {
 								</p>
 								<StatsChartMonthly
 									title="2020 IPOs"
-									data={data.months2020}
+									data={data.data.months2020}
 								/>
 							</div>
 							<div>
@@ -91,11 +92,14 @@ const RecentIpos = ({ data }) => {
 								</p>
 								<StatsChartMonthly
 									title="2019 IPOs"
-									data={data.months2019}
+									data={data.data.months2019}
 								/>
 							</div>
 						</div>
-						<Sidebar />
+						<aside className="flex flex-col space-y-10 py-6">
+							<RecentTableMin recent={data.recent} />
+							<NewsWidget news={data.news} />
+						</aside>
 					</div>
 				</main>
 			</div>

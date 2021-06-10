@@ -4,7 +4,7 @@ import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 import StatsWidget from '@/components/StatsWidget/_StatsWidget';
 import { fullMap } from '@Data/financials_data_map';
-import Link from 'next/link';
+import Button from '@/components/Button';
 
 const indicator_map = fullMap();
 
@@ -52,13 +52,10 @@ export default function Statistics({ info, data }) {
 							map={indicator_map}
 						/>
 
-						<button
-							type="button"
-							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
-							<Link href={`/stocks/${info.symbol}/financials/ratios/`}>
-								Financial Ratio History
-							</Link>
-						</button>
+						<Button
+							text="Financial Ratio History"
+							url={`/stocks/${info.symbol}/financials/ratios/`}
+						/>
 					</div>
 
 					<div>
@@ -118,13 +115,10 @@ export default function Statistics({ info, data }) {
 							map={indicator_map}
 						/>
 
-						<button
-							type="button"
-							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
-							<Link href={`/stocks/${info.symbol}/financials/`}>
-								Full Income Statement
-							</Link>
-						</button>
+						<Button
+							text="Full Income Statement"
+							url={`/stocks/${info.symbol}/financials/`}
+						/>
 					</div>
 
 					<div>
@@ -134,14 +128,10 @@ export default function Statistics({ info, data }) {
 							map={indicator_map}
 						/>
 
-						<button
-							type="button"
-							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
-							<Link
-								href={`/stocks/${info.symbol}/financials/balance-sheet/`}>
-								Full Balance Sheet
-							</Link>
-						</button>
+						<Button
+							text="Full Balance Sheet"
+							url={`/stocks/${info.symbol}/financials/balance-sheet/`}
+						/>
 					</div>
 
 					<div>
@@ -151,14 +141,10 @@ export default function Statistics({ info, data }) {
 							map={indicator_map}
 						/>
 
-						<button
-							type="button"
-							className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-4">
-							<Link
-								href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}>
-								Full Cash Flow Statement
-							</Link>
-						</button>
+						<Button
+							text="Full Cash Flow Statement"
+							url={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
+						/>
 					</div>
 
 					<div>

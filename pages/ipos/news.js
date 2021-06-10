@@ -1,11 +1,12 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import NewsFeed from '@/components/News/_NewsFeed';
+import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
+import RecentTableMin from '@/components/IPOs/RecentTableMin';
 
 const RecentIpos = ({ data }) => {
 	return (
@@ -21,8 +22,13 @@ const RecentIpos = ({ data }) => {
 					</div>
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
-						<NewsFeed data={data} />
-						<Sidebar />
+						<div className="py-1 sm:py-2 lg:py-3">
+							<NewsFeed data={data.data} />
+						</div>
+						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
+							<CalendarTableMin upcoming={data.upcoming} />
+							<RecentTableMin recent={data.recent} />
+						</aside>
 					</div>
 				</main>
 			</div>

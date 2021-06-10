@@ -8,6 +8,11 @@
 		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
 	}
 
+	.uncontain {
+		/* Remove the container */
+		@apply px-0 mx-0 w-auto max-w-none;
+	}
+
 	.bll {
 		@apply text-blue-link hover:text-black;
 	}
@@ -25,7 +30,7 @@
 	}
 
 	.hh3 {
-		@apply text-xl font-bold mb-3 text-gray-900;
+		@apply text-xl font-bold mb-2.5 xs:mb-3 text-gray-900;
 	}
 
 	.text-page {
