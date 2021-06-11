@@ -41,7 +41,7 @@ const ActionsAll = ({ data }) => {
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-4">
+						<div className="py-3">
 							<ActionsTable columndata={columns} rowdata={data} />
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
