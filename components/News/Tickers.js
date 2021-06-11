@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 function Tickers({ tickers, intro }) {
-	if (tickers.length === 0) {
+	if (tickers === null || tickers.length === 0) {
 		return null;
 	}
 

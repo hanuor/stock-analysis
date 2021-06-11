@@ -1,0 +1,34 @@
+.actionstable {
+	width: 100%;
+}
+
+.actionstable tr > * {
+	padding: 0.5rem;
+	border-bottom: 1px solid #ddd;
+}
+
+.actionstable tr > *:first-child {
+	padding-left: 0.8rem;
+}
+
+.actionstable tr th {
+	text-align: left;
+	font-size: 1.05rem;
+}
+
+.actionstable tr > *:not(:last-child) {
+	white-space: nowrap;
+}
+
+.actionstable tr:hover td {
+	background-color: #f2f9ff !important;
+}
+
+.striped tr:nth-child(odd) {
+	background-color: #f6f7f8;
+}
+
+.striped tr th {
+	font-weight: 600;
+	background-color: #ffffff;
+}
