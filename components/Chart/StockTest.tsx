@@ -39,6 +39,7 @@ interface StockChartProps {
 	readonly dateTimeFormat?: string;
 	readonly width: number;
 	readonly ratio: number;
+	readonly loading: boolean;
 }
 
 class StockChart extends React.Component<StockChartProps> {
@@ -46,6 +47,7 @@ class StockChart extends React.Component<StockChartProps> {
 	private readonly margin = { left: 35, right: 62, top: 0, bottom: 24 };
 	private readonly pricesDisplayFormat = format(".2f");
 	private readonly volumeDisplayFormat = format(".4s");
+
 	private readonly xScaleProvider =
 		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
 			(d: IOHLCData) => d.date
@@ -57,8 +59,13 @@ class StockChart extends React.Component<StockChartProps> {
 			dateTimeFormat = "%d %b",
 			height,
 			ratio,
+
 			width,
 		} = this.props;
+		console.log(this.props.loading);
+		const volumeFormatter = format(".2s");
+		const disablePan = false;
+		const disableZoom = false;
 
 		const candlesAppearance = {
 			fill: function fill(d) {
@@ -77,7 +84,7 @@ class StockChart extends React.Component<StockChartProps> {
 			return data.volume;
 		};
 		const candleChartExtents = (data) => {
-			return [data.high, data.low];
+			return [data.high, data.low, data.ma1, data.ma2];
 		};
 		const yEdgeIndicator = (data) => {
 			return data.close;
@@ -110,15 +117,31 @@ class StockChart extends React.Component<StockChartProps> {
 		const elder = elderRay();
 		console.log(sma50.accessor);
 		const calculatedData = elder(sma200(sma50(initialData)));
-		console.log(calculatedData);
+
 		const { margin, xScaleProvider } = this;
 
 		const { data, xScale, xAccessor, displayXAccessor } =
 			xScaleProvider(calculatedData);
-		console.log(data);
+
 		const max = xAccessor(data[data.length - 1]);
 		const min = xAccessor(data[Math.max(0, data.length - 100)]);
-		const xExtents = [min, max + 5];
+
+		const volumeMax = Math.max.apply(
+			Math,
+			data.map(function (o) {
+				return o.volume;
+			})
+		);
+		const volumeMin = Math.min.apply(
+			Math,
+			data.map(function (o) {
+				return o.volume;
+			})
+		);
+
+		const volumeYExtents = [0, volumeMax];
+
+		const xExtents = [0, max + 5];
 
 		const gridHeight = height - margin.top - margin.bottom;
 
@@ -132,7 +155,7 @@ class StockChart extends React.Component<StockChartProps> {
 		const chartHeight = gridHeight - elderRayHeight;
 		const ma1color = "#2c6288";
 		const ma2color = "#c65102";
-
+		console.log(xExtents);
 		const timeDisplayFormat = timeFormat(dateTimeFormat);
 		const tooltipContent = () => {
 			return ({ currentItem, xAccessor }) => {
@@ -161,16 +184,43 @@ class StockChart extends React.Component<StockChartProps> {
 				};
 			};
 		};
+		if (this.props.loading) {
+			return (
+				<div className="w-full h-full absolute">
+					<div className="flex justify-center items-center h-full bg-gray-50 border border-gray-200">
+						<svg
+							className="animate-spin h-12 w-12 text-blue-500"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24">
+							<circle
+								className="opacity-25"
+								cx="12"
+								cy="12"
+								r="10"
+								stroke="currentColor"
+								strokeWidth="4"></circle>
+							<path
+								className="opacity-75"
+								fill="currentColor"
+								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</div>
+			);
+		}
 
 		return (
 			<ChartCanvas
 				height={height}
-				ratio={1}
+				ratio={ratio}
 				width={width}
 				margin={margin}
 				data={data}
 				displayXAccessor={displayXAccessor}
 				seriesName="Data"
+				disablePan={disablePan}
+				disableZoom={disableZoom}
 				xScale={xScale}
 				xAccessor={xAccessor}
 				xExtents={xExtents}
@@ -183,19 +233,19 @@ class StockChart extends React.Component<StockChartProps> {
 					/>
 					<CandlestickSeries {...candlesAppearance} />
 					<LineSeries
-						yAccessor={sma200.accessor()}
+						yAccessor={(d) => d.ma1}
 						strokeStyle={sma200.stroke()}
 					/>
 					<CurrentCoordinate
-						yAccessor={sma200.accessor()}
+						yAccessor={(d) => d.ma1}
 						fillStyle={sma200.stroke()}
 					/>
 					<LineSeries
-						yAccessor={sma50.accessor()}
+						yAccessor={(d) => d.ma2}
 						strokeStyle={sma50.stroke()}
 					/>
 					<CurrentCoordinate
-						yAccessor={sma50.accessor()}
+						yAccessor={(d) => d.ma2}
 						fillStyle={sma50.stroke()}
 					/>
 					<MouseCoordinateY
@@ -276,32 +326,33 @@ class StockChart extends React.Component<StockChartProps> {
 									{
 										label: "MA (50)",
 										value:
-											currentItem.sma50 &&
-											this.pricesDisplayFormat(currentItem.sma50),
+											currentItem.ma1 &&
+											this.pricesDisplayFormat(currentItem.ma1),
 									},
 									{
 										label: "MA (200)",
 										value:
-											currentItem.sma200 &&
-											this.pricesDisplayFormat(currentItem.sma200),
+											currentItem.ma2 &&
+											this.pricesDisplayFormat(currentItem.ma2),
 									},
 								],
 							}),
 						}}
 					/>
-					<ZoomButtons />
 				</Chart>
 				<Chart
 					id={4}
 					height={100}
 					origin={(w, h) => [0, h - 200]}
-					yExtents={(d) => d.volume}>
+					yExtents={volumeYExtents}>
 					<YAxis
 						axisAt="left"
 						orient="left"
 						ticks={5}
 						gridLinesStrokeWidth={0}
-						tickFormat={format(".2s")}
+						tickFormat={(value) =>
+							value > 0 ? volumeFormatter(value) : ""
+						}
 						showDomain={false}
 						innerTickSize={0}
 					/>

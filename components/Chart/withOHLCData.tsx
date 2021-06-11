@@ -1,9 +1,7 @@
-import { tsvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import * as React from "react";
 import { IOHLCData } from "./iOHLCData";
 import Axios from "axios";
-import { ENGINE_METHOD_PKEY_ASN1_METHS } from "constants";
 
 const parseDate = timeParse("%Y-%m-%d");
 
@@ -49,6 +47,7 @@ interface WithOHLCState {
 	message: string;
 	period: string;
 	time: string;
+	loading: boolean;
 }
 
 export function withOHLCData(dataSet = "DAILY") {
@@ -66,6 +65,7 @@ export function withOHLCData(dataSet = "DAILY") {
 					message: `Loading ${dataSet} data...`,
 					period: "",
 					time: "",
+					loading: true,
 				};
 			}
 
@@ -74,7 +74,6 @@ export function withOHLCData(dataSet = "DAILY") {
 				Axios.get(
 					`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
 				).then((res) => {
-					console.log(res.data);
 					const forDateParse = res.data.map(fixDataHeaders);
 					const data = forDateParse.map(parseData());
 					const period = this.props["period"];
@@ -82,7 +81,10 @@ export function withOHLCData(dataSet = "DAILY") {
 					const time = this.props["time"];
 					this.setState({ time });
 					this.setState({ data });
-					console.log(data);
+					this.props["dispatcher"]({
+						type: "changeLoading",
+						value: false,
+					});
 				});
 			}
 
@@ -94,7 +96,6 @@ export function withOHLCData(dataSet = "DAILY") {
 					Axios.get(
 						`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
 					).then((res) => {
-						console.log(res.data);
 						const forDateParse = res.data.map(fixDataHeaders);
 						const data = forDateParse.map(parseData());
 						const period = this.props["period"];
@@ -103,6 +104,10 @@ export function withOHLCData(dataSet = "DAILY") {
 						this.setState({ time });
 						this.setState({ data });
 						console.log(data);
+						this.props["dispatcher"]({
+							type: "changeLoading",
+							value: false,
+						});
 					});
 				}
 				if (data === undefined) {

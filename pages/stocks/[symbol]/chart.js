@@ -57,6 +57,8 @@ export default function CandleStickStockChart(props) {
 				draft.loading = true;
 				console.log(action.value);
 				return;
+			case "changeLoading":
+				draft.loading = action.value;
 		}
 	}
 
@@ -79,9 +81,11 @@ export default function CandleStickStockChart(props) {
 						<Buttons dispatcher={dispatch} />
 					</div>
 					<StockTest
+						loading={state.loading}
 						stockId={props.info.id}
 						period={state.period}
 						time={state.time}
+						dispatcher={dispatch}
 					/>
 				</div>
 			</h2>

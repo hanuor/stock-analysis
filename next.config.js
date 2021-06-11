@@ -16,7 +16,7 @@ const withTM = require("next-transpile-modules")([
 
 module.exports = withTM({
 	future: {
-		webpack5: false, // you want to keep using Webpack 4
+		webpack5: true, // you want to keep using Webpack 4
 	},
 
 	trailingSlash: true,

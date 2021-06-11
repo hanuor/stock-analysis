@@ -30,7 +30,7 @@ export default function PriceChart() {
 
 	if (isLoading || !chartData) {
 		return (
-			<div className="w-full h-full">
+			<div className="w-full h-full absolute">
 				<div className="flex justify-center items-center h-full bg-gray-50 border border-gray-200">
 					<svg
 						className="animate-spin h-12 w-12 text-blue-500"
