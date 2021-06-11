@@ -42,7 +42,11 @@ const ActionsAll = ({ data }) => {
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-3">
-							<ActionsTable columndata={columns} rowdata={data} />
+							<ActionsTable
+								title="Delisted Stocks"
+								columndata={columns}
+								rowdata={data}
+							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
 							<NewsletterWidget />

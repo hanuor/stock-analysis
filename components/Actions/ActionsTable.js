@@ -1,6 +1,33 @@
-import { useTable, usePagination } from 'react-table';
+import {
+	useTable,
+	usePagination,
+	useGlobalFilter,
+	useAsyncDebounce,
+	useSortBy,
+} from 'react-table';
 import { useMemo } from 'react';
 import styles from './Actions.module.css';
+import { useState } from 'react';
+import { SortUp, SortDown } from '@/components/Icons';
+
+function GlobalFilter({ globalFilter, setGlobalFilter }) {
+	const [value, setValue] = useState(globalFilter);
+	const onChange = useAsyncDebounce((value) => {
+		setGlobalFilter(value || undefined);
+	}, 100);
+
+	return (
+		<input
+			className="shadow-sm outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md py-2 px-3"
+			value={value || ''}
+			onChange={(e) => {
+				setValue(e.target.value);
+				onChange(e.target.value);
+			}}
+			placeholder="Filter..."
+		/>
+	);
+}
 
 const RecentTable = ({ columndata, rowdata }) => {
 	const columns = useMemo(() => columndata, [columndata]);
@@ -12,13 +39,16 @@ const RecentTable = ({ columndata, rowdata }) => {
 		headerGroups,
 		prepareRow,
 		page,
+		rows,
 		canPreviousPage,
 		canNextPage,
 		pageOptions,
 		nextPage,
 		previousPage,
 		setPageSize,
-		state: { pageIndex, pageSize },
+		preGlobalFilteredRows,
+		setGlobalFilter,
+		state: { pageIndex, pageSize, globalFilter },
 	} = useTable(
 		{
 			columns,
@@ -28,11 +58,24 @@ const RecentTable = ({ columndata, rowdata }) => {
 				pageSize: 200,
 			},
 		},
+
+		useGlobalFilter,
+		useSortBy,
 		usePagination
 	);
 
 	return (
 		<>
+			<div className="flex flex-row justify-between mb-1 px-1">
+				<span className="text-2xl font-semibold">{rows.length} Items</span>
+				<div>
+					<GlobalFilter
+						preGlobalFilteredRows={preGlobalFilteredRows}
+						globalFilter={globalFilter}
+						setGlobalFilter={setGlobalFilter}
+					/>
+				</div>
+			</div>
 			<div className="overflow-x-auto">
 				<table
 					{...getTableProps()}
@@ -41,8 +84,25 @@ const RecentTable = ({ columndata, rowdata }) => {
 						{headerGroups.map((headerGroup) => (
 							<tr {...headerGroup.getHeaderGroupProps()}>
 								{headerGroup.headers.map((column) => (
-									<th {...column.getHeaderProps()}>
-										{column.render('Header')}
+									<th
+										{...column.getHeaderProps(
+											column.getSortByToggleProps({
+												title: `Sort by: ${column.Header}`,
+											})
+										)}>
+										<span className="inline-flex flex-row items-center">
+											{column.render('Header')}
+
+											{column.isSorted ? (
+												column.isSortedDesc ? (
+													<SortDown classes="h-5 w-5 text-gray-800" />
+												) : (
+													<SortUp classes="h-5 w-5 text-gray-800" />
+												)
+											) : (
+												''
+											)}
+										</span>
 									</th>
 								))}
 							</tr>
