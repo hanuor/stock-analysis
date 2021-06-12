@@ -68,3 +68,12 @@ export async function getIpoData(query) {
 
 	return data;
 }
+
+export async function getActionsData(query) {
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+
+	const response = await Axios.get(API + `/actions?q=${query}`);
+	const data = response.data;
+
+	return data;
+}
