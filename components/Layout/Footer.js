@@ -77,7 +77,7 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.sections.map((item) => (
 										<li key={item.name}>
-											<Link href={item.href}>
+											<Link href={item.href} prefetch={false}>
 												<a className="text-base text-gray-300 hover:text-white">
 													{item.name}
 												</a>
@@ -93,7 +93,7 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.support.map((item) => (
 										<li key={item.name}>
-											<Link href={item.href}>
+											<Link href={item.href} prefetch={false}>
 												<a className="text-base text-gray-300 hover:text-white">
 													{item.name}
 												</a>
@@ -111,7 +111,7 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.company.map((item) => (
 										<li key={item.name}>
-											<Link href={item.href}>
+											<Link href={item.href} prefetch={false}>
 												<a className="text-base text-gray-300 hover:text-white">
 													{item.name}
 												</a>
@@ -127,7 +127,7 @@ export default function Example() {
 								<ul className="mt-4 space-y-4">
 									{navigation.legal.map((item) => (
 										<li key={item.name}>
-											<Link href={item.href}>
+											<Link href={item.href} prefetch={false}>
 												<a className="text-base text-gray-300 hover:text-white">
 													{item.name}
 												</a>

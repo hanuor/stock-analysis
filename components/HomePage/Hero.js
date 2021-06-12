@@ -10,7 +10,7 @@ export default function Hero() {
 						Search for a stock to start your analysis
 					</h1>
 					<p className="text-base xs:text-lg md:text-xl mb-4 md:mb-5">
-						Detailed information on 6000+ stocks, including all the
+						Detailed information on 5000+ stocks, including all the
 						companies in the S&P500 index. See stock price quotes, news,
 						financial statements and more.
 					</p>

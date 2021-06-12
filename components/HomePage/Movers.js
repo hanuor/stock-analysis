@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import StockLink from '@/components/Links';
 
 const cellStyles =
 	'py-1.5 sm:py-2 px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
@@ -18,9 +18,7 @@ export default function Movers({ data }) {
 				key={index}
 				className="border-b border-gray-200 hover:bg-gray-50 transition duration-100">
 				<td className={cellStyles + ' text-left border-r'}>
-					<Link href={`/stocks/${item.s.toLowerCase()}`}>
-						<a className="text-blue-brand hover:text-black">{item.s}</a>
-					</Link>
+					<StockLink symbol={item.s} />
 				</td>
 				<td
 					className={

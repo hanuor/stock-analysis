@@ -1,3 +1,5 @@
+// Used on the /stocks/ and /etf/ index pages
+import { useMemo } from 'react';
 import {
 	useTable,
 	usePagination,
@@ -5,13 +7,12 @@ import {
 	useAsyncDebounce,
 	useSortBy,
 } from 'react-table';
-import { useMemo } from 'react';
-import styles from './Actions.module.css';
+import styles from './SymbolTable.module.css';
+import GlobalFilter from './GlobalFilter';
+import Pagination from './Pagination';
 import { SortUp, SortDown } from '@/components/Icons';
-import Pagination from '@/components/Tables/Pagination';
-import GlobalFilter from '@/components/Tables/GlobalFilter';
 
-const RecentTable = ({ title, columndata, rowdata }) => {
+export default function Table({ title, columndata, rowdata }) {
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => rowdata, [rowdata]);
 
@@ -61,7 +62,7 @@ const RecentTable = ({ title, columndata, rowdata }) => {
 			<div className="overflow-x-auto">
 				<table
 					{...getTableProps()}
-					className={`${styles.actionstable} ${styles.striped}`}>
+					className={[styles.table, styles.table_striped].join(' ')}>
 					<thead>
 						{headerGroups.map((headerGroup) => (
 							<tr {...headerGroup.getHeaderGroupProps()}>
@@ -120,6 +121,4 @@ const RecentTable = ({ title, columndata, rowdata }) => {
 			/>
 		</>
 	);
-};
-
-export default RecentTable;
+}
