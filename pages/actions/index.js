@@ -47,7 +47,7 @@ const ActionsAll = ({ data }) => {
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-3">
 							<ActionsTable
-								title="All Actions"
+								title="Actions"
 								columndata={columns}
 								rowdata={data}
 							/>

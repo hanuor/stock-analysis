@@ -40,18 +40,18 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<Meta title="Corporate Actions" />
+			<Meta title="Stock Splits" />
 			<Header />
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Corporate Actions</h1>
+					<h1 className="hh1">Stock Splits</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-3">
 							<ActionsTable
-								title="Stock Splits"
+								title="Splits"
 								columndata={columns}
 								rowdata={data}
 							/>
