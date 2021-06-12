@@ -18,7 +18,7 @@ export default function abbreviateNumber(num, dec = 2, noT = false) {
 		} else if (num > 1000000) {
 			return formatNum(num / 1000000, dec, 'M');
 		} else {
-			return num.toFixed(0);
+			return formatNum(num, 0, '');
 		}
 	}
 
@@ -29,7 +29,7 @@ export default function abbreviateNumber(num, dec = 2, noT = false) {
 		} else if (num < -1000000) {
 			return formatNum(num / 1000000, dec, 'M');
 		} else {
-			return num.toFixed(0);
+			return formatNum(num, 0, '');
 		}
 	}
 

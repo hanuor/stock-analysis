@@ -56,6 +56,12 @@
 	.table tr td {
 		white-space: nowrap;
 	}
+	.table tr td:nth-child(2) {
+		max-width: 280px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 @media screen and (max-width: 400px) {
@@ -65,4 +71,11 @@
 	.table tr > *:last-child {
 		padding-right: 0.5rem;
 	}
+	.table tr td:nth-child(2) {
+		max-width: 260px;
+	}
+}
+
+.table tr td:not(:nth-child(2)) {
+	white-space: nowrap;
 }

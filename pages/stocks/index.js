@@ -3,7 +3,7 @@
 
 import LayoutSidebar from '@/Layout/LayoutSidebar';
 import Table from '@/Tables/SymbolTable';
-import Link from '@/components/Links';
+import StockLink from '@/components/Links';
 import abbreviateNumber from '@/Functions/abbreviateNumber';
 
 export default function StocksIndexPage({ stocks }) {
@@ -12,7 +12,7 @@ export default function StocksIndexPage({ stocks }) {
 			Header: 'Symbol',
 			accessor: 's',
 			Cell: function FormatCell({ cell: { value } }) {
-				return <Link symbol={value} />;
+				return <StockLink symbol={value} />;
 			},
 		},
 		{
