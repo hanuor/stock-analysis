@@ -20,7 +20,7 @@ export function HeaderNavigation({ device }) {
 						</Link>
 					</li>
 					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
-						<Link href="/about/" prefetch={false}>
+						<Link href="/etf/" prefetch={false}>
 							<a>ETFs</a>
 						</Link>
 					</li>

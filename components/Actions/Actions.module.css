@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 1200px) {
 	.actionstable tr > * {
-		padding: 0.6em 0.3em;
+		padding: 0.5rem 0.3rem;
 	}
 	.actionstable tr > *:first-child {
 		padding-left: 0.6rem;

@@ -1,5 +1,7 @@
 import navState from '@State/navState';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Break = () => <span className="px-2">&raquo;</span>;
 const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
@@ -36,7 +38,23 @@ const formatTwo = (two) => {
 };
 
 const _Breadcrumbs = () => {
+	const router = useRouter();
 	const path = navState((state) => state.path);
+	const setPath = navState((state) => state.setPath);
+
+	useEffect(() => {
+		let route = router.asPath;
+		let split = route.split('/');
+		let one = split[1] || null;
+		let two = split[2] || null;
+		let three = split[3] || null;
+
+		setPath({
+			one,
+			two,
+			three,
+		});
+	}, [router.asPath, setPath]);
 
 	return (
 		<nav>

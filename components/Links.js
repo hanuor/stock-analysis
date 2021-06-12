@@ -9,3 +9,11 @@ const StockLink = ({ symbol }) => {
 };
 
 export default StockLink;
+
+export const EtfLink = ({ symbol }) => {
+	return (
+		<Link href={`/etf/${symbol.toLowerCase()}/`}>
+			<a className="bll">{symbol.toUpperCase()}</a>
+		</Link>
+	);
+};

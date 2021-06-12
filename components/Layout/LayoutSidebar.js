@@ -1,23 +1,30 @@
 import Meta from '@/components/Meta';
 import Header from '@/Layout/Header';
 import Footer from '@/Layout/Footer';
-import Sidebar from '@/components/Layout/Sidebar/_Sidebar';
+import { NewsletterWidget } from '@/components/Layout/Sidebar/Newsletter';
+import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
-function LayoutSidebar(props) {
+export default function PageLayout({ meta, children }) {
 	return (
 		<>
-			<Meta title={props.title}></Meta>
+			<Meta title={meta.title} />
 			<Header />
-			<div className="container max-w-screen-xl grid lg:grid-cols-sidebar py-10 gap-x-10">
-				<main>
-					<h1 className="text-3xl font-bold mb-5">{props.title}</h1>
-					{props.children}
+			<div className="contain">
+				<main className="w-full py-5 xs:py-6">
+					<Breadcrumbs />
+					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-3">
+						{meta.heading || meta.title}
+					</h1>
+
+					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+						<div className="py-2">{children}</div>
+						<aside className="flex flex-col space-y-10 py-6">
+							<NewsletterWidget />
+						</aside>
+					</div>
 				</main>
-				<Sidebar />
 			</div>
 			<Footer />
 		</>
 	);
 }
-
-export default LayoutSidebar;
