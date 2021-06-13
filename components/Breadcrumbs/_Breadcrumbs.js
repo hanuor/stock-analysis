@@ -23,7 +23,7 @@ const One = ({ one, two }) => {
 	if (one === 'ipos') {
 		if (two) {
 			return (
-				<Link href="/ipos/">
+				<Link href="/ipos/" prefetch={false}>
 					<a>IPOs</a>
 				</Link>
 			);
@@ -60,7 +60,7 @@ const _Breadcrumbs = () => {
 		<nav>
 			<ol className="flex text-sm sm:text-base text-gray-600 mb-0.5">
 				<li>
-					<Link href="/">
+					<Link href="/" prefetch={false}>
 						<a>Home</a>
 					</Link>
 				</li>
