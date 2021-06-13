@@ -1,0 +1,204 @@
+import Head from 'next/head';
+import Header from '@/Layout/Header';
+import Footer from '@/Layout/Footer';
+
+function startPaddleCheckout() {
+	// eslint-disable-next-line no-undef
+	Paddle.Checkout.open({
+		product: 649892,
+		success: 'https://stockanalysis.com/pro/confirmation/',
+	});
+}
+
+export default function LandingPage() {
+	return (
+		<>
+			<Head>
+				<title>Stock Analysis Pro</title>
+				<script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+				<script
+					type="text/javascript"
+					dangerouslySetInnerHTML={{
+						__html: `Paddle.Setup({ vendor: 128917 });`,
+					}}
+				/>
+			</Head>
+			<div className="">
+				<Header />
+				<main>
+					<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4">
+						<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
+							<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-5 text-gray-800">
+								Stock Analysis Pro
+							</h1>
+
+							<p className="text-lg sm:text-[21px] text-gray-900 leading-relaxed">
+								Get unlimited access to all of our financial data while
+								getting rid of ads and helping to support our mission of
+								making the world&apos;s best investing website.
+							</p>
+						</div>
+					</header>
+
+					<section className="max-w-screen-md mx-auto sm:flex flex-row justify-around mt-[-20px] sm:mt-[-65px]">
+						<div className="bg-white mx-auto w-[90%] sm:max-w-[44%]">
+							<table className="border border-gray-200 w-full">
+								<thead>
+									<tr className="border-b border-gray-200">
+										<th className="text-left p-3 text-xl">Pro</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Free for 30 days, then $9.99 a month. Cancel
+											anytime.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Unlimited access to all available data.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Financial history: Up to 26 years and growing.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Full access to ETF holdings.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Full corporate actions data.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											More features coming soon.
+										</td>
+									</tr>
+									<tr className="">
+										<td className="p-3 text-lg">No ads.</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-0">
+											<a
+												onClick={() => startPaddleCheckout()}
+												href="#!"
+												id="start-trial"
+												className="block p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center">
+												Start Free Trial
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div className="bg-white mx-auto w-[90%] sm:max-w-[44%] mt-14 sm:mt-0">
+							<table className="border border-gray-200 w-full">
+								<thead>
+									<tr className="border-b border-gray-200">
+										<th className="text-left p-3 text-xl">Free</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											No registration required.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Financial history: Limited to 10-15 years.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Limited ETF holdings.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">
+											Limited corporate actions.
+										</td>
+									</tr>
+									<tr className="border-b border-gray-200">
+										<td className="p-3 text-lg">Ad supported.</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section className="bg-gray-100 mt-16 sm:mt-24 py-8 md:py-10 border-t border-gray-200 px-5">
+						<div className="max-w-[750px] mx-auto">
+							<h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-5">
+								Common Questions
+							</h2>
+
+							<h3 className="text-2xl font-bold mb-5 text-gray-800">
+								How to sign up
+							</h3>
+
+							<p className="text-lg mb-5">
+								Click &quot;Start Free Trial&quot; above and enter your
+								email and payment details. Then you will instantly get
+								an email with a link to create a password and log in to
+								the site.
+							</p>
+
+							<h3 className="text-2xl font-bold mb-5 text-gray-800">
+								How to get support?
+							</h3>
+
+							<p className="text-lg mb-5">
+								You can send an email to support@stockanalysis.com or
+								send a message via the{' '}
+								<a href="<?= DOMAIN . '/contact/' ?>">contact form</a>.
+								You can also click the chat widget button in the bottom
+								right corner.
+							</p>
+
+							<h3 className="text-2xl font-bold mb-5 text-gray-800">
+								Can I cancel at any time?
+							</h3>
+
+							<p className="text-lg mb-5">
+								Of course. There is a &quot;Cancel subscription&quot;
+								button in the my account area that you get access to
+								after signing up. You can also send us a message and we
+								will cancel for you.
+							</p>
+
+							<h3 className="text-2xl font-bold mb-5 text-gray-800">
+								Will my card be charged?
+							</h3>
+
+							<p className="text-lg mb-5">
+								Your card will not be charged until after 30 days. If
+								you cancel before the 30 days then you will not be
+								charged at all.
+							</p>
+
+							<h3 className="text-2xl font-bold mb-5 text-gray-800">
+								What about the existing free site?
+							</h3>
+
+							<p className="text-lg mb-5">
+								We plan on making the world&apos;s best <em>free</em>{' '}
+								investing website, and that includes building more
+								useful features. But some features and data will only be
+								available to &quot;Pro&quot; accounts.
+							</p>
+						</div>
+					</section>
+				</main>
+				<Footer />
+			</div>
+		</>
+	);
+}
