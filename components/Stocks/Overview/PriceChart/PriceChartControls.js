@@ -11,32 +11,38 @@ const Controls = ({ chartTime, setChartTime }) => {
 				<button
 					className={chartTime === '1D' ? active : inactive}
 					onClick={() => setChartTime('1D')}>
-					<span className="block sm:hidden">1D</span>
-					<span className="hidden sm:block">1 Day</span>
+					<span className="block sm:hidden lg:block xl:hidden">1D</span>
+					<span className="hidden sm:block lg:hidden xl:block">1 Day</span>
 				</button>
 			</li>
 			<li>
 				<button
 					className={chartTime === '5D' ? active : inactive}
 					onClick={() => setChartTime('5D')}>
-					<span className="block sm:hidden">5D</span>
-					<span className="hidden sm:block">5 Days</span>
+					<span className="block sm:hidden lg:block xl:hidden">5D</span>
+					<span className="hidden sm:block lg:hidden xl:block">
+						5 Days
+					</span>
 				</button>
 			</li>
 			<li>
 				<button
 					className={chartTime === '1M' ? active : inactive}
 					onClick={() => setChartTime('1M')}>
-					<span className="block sm:hidden">1M</span>
-					<span className="hidden sm:block">1 Month</span>
+					<span className="block sm:hidden lg:block xl:hidden">1M</span>
+					<span className="hidden sm:block lg:hidden xl:block">
+						1 Month
+					</span>
 				</button>
 			</li>
 			<li>
 				<button
 					className={chartTime === '6M' ? active : inactive}
 					onClick={() => setChartTime('6M')}>
-					<span className="block sm:hidden">6M</span>
-					<span className="hidden sm:block">6 Months</span>
+					<span className="block sm:hidden lg:block xl:hidden">6M</span>
+					<span className="hidden sm:block lg:hidden xl:block">
+						6 Months
+					</span>
 				</button>
 			</li>
 			<li>
@@ -50,16 +56,20 @@ const Controls = ({ chartTime, setChartTime }) => {
 				<button
 					className={chartTime === '1Y' ? active : inactive}
 					onClick={() => setChartTime('1Y')}>
-					<span className="block sm:hidden">1Y</span>
-					<span className="hidden sm:block">1 Year</span>
+					<span className="block sm:hidden lg:block xl:hidden">1Y</span>
+					<span className="hidden sm:block lg:hidden xl:block">
+						1 Year
+					</span>
 				</button>
 			</li>
 			<li>
 				<button
 					className={chartTime === '5Y' ? active : inactive}
 					onClick={() => setChartTime('5Y')}>
-					<span className="block sm:hidden">5Y</span>
-					<span className="hidden sm:block">5 Years</span>
+					<span className="block sm:hidden lg:block xl:hidden">5Y</span>
+					<span className="hidden sm:block lg:hidden xl:block">
+						5 Years
+					</span>
 				</button>
 			</li>
 			<li>

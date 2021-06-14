@@ -7,7 +7,6 @@ import NewsFeed from '@/components/Stocks/Overview/StockNews';
 import FinancialsWidget from '@/components/Stocks/Overview/FinancialsWidget';
 import AnalystWidget from '@/components/Stocks/Overview/AnalystWidget';
 import Axios from 'axios';
-import styles from '@/components/Stocks/Overview/TopGrid.module.css';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 
@@ -22,10 +21,14 @@ export default function StockOverview({ info, data, news }) {
 
 	return (
 		<Stock>
-			<div className={'px-3 xs:px-4 lg:px-6 ' + styles.tg}>
-				<PriceChart />
-				<InfoTable />
-				<QuoteTable />
+			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
+				<div className="order-3 flex-grow overflow-auto">
+					<PriceChart />
+				</div>
+				<div className="order-1 flex flex-row justify-between gap-4">
+					<InfoTable />
+					<QuoteTable />
+				</div>
 			</div>
 			<div className="px-0 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar gap-10">
 				<div className="px-4 lg:px-0 lg:order-2 space-y-6">
