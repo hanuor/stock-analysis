@@ -1,13 +1,13 @@
 import { getPageData, getStockInfo } from '@/Functions/fetchStockInfo';
 import Stock from '@/components/Layout/StockLayout';
 import { InfoTable, QuoteTable } from '@/components/Stocks/Overview/TopTables';
-import PriceChart from '@/components/Stocks/Overview/PriceChart';
+import PriceChart from '@/components/Stocks/Overview/PriceChart/_PriceChart';
 import Profile from '@/components/Stocks/Overview/ProfileWidget';
 import NewsFeed from '@/components/Stocks/Overview/StockNews';
 import FinancialsWidget from '@/components/Stocks/Overview/FinancialsWidget';
 import AnalystWidget from '@/components/Stocks/Overview/AnalystWidget';
 import Axios from 'axios';
-import styles from '@/Styles/TopGrid.module.css';
+import styles from '@/components/Stocks/Overview/TopGrid.module.css';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 
@@ -22,7 +22,7 @@ export default function StockOverview({ info, data, news }) {
 
 	return (
 		<Stock>
-			<div className={'px-4 lg:px-6 ' + styles.tg}>
+			<div className={'px-3 xs:px-4 lg:px-6 ' + styles.tg}>
 				<PriceChart />
 				<InfoTable />
 				<QuoteTable />

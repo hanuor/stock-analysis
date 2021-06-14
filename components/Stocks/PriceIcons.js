@@ -3,7 +3,7 @@ export const IconMoon = () => {
 		<span className="text-blue-400 inline">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				className="h-6 w-6 sm:h-4 sm:w-4"
+				className="h-4 w-4 mt-1 sm:mt-0"
 				fill="none"
 				viewBox="0 0 24 24"
 				stroke="currentColor">

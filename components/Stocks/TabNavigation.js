@@ -1,53 +1,39 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import SubNavigation from '@/components/Stocks/SubNavigation';
 import styles from '@/Styles/TabMenu.module.css';
+import navState from '@State/navState';
 
 export default function TabNavigation() {
-	const router = useRouter();
+	const path = navState((state) => state.path);
 
-	let route = router.asPath;
-	let split = route.split('/');
-	let type = split[1] || null;
-	let symbol = split[2] || null;
-	let page = split[3] || 'overview';
-	let subpage = split[4] || '';
-	const path = {
-		type,
-		symbol,
-		page,
-		subpage,
-	};
-
-	const common = 'text-[15px] sm:text-base block py-2 px-2 sm:px-5';
+	const common =
+		'text-[15px] xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5';
 	const inactive =
 		common +
-		' bll hover:text-black hover:bg-gray-100 transition duration-100';
-	const active = common + ' text-black bg-gray-100 font-semibold';
+		' bll hover:text-gray-900 hover:bg-gray-100 transition duration-100';
+	const active = common + ' text-gray-900 bg-[#eee] font-semibold';
 
 	return (
 		<>
-			<nav className="border-b-2 border-gray-300 w-full">
+			<nav className="border-b-2 border-blue-brand_sharp w-full">
 				<ul
 					className={
 						'flex flex-row w-full overflow-auto ' + styles.navmenu
 					}>
 					<li>
-						<Link href={`/stocks/${path.symbol}/`} scroll={false}>
+						<Link href={`/stocks/${path.two}/`} scroll={false}>
 							<a
-								className={path.page == 'overview' ? active : inactive}
+								className={!path.three ? active : inactive}
 								data-title="Overview">
 								Overview
 							</a>
 						</Link>
 					</li>
 					<li>
-						<Link
-							href={`/stocks/${path.symbol}/financials/`}
-							scroll={false}>
+						<Link href={`/stocks/${path.two}/financials/`} scroll={false}>
 							<a
 								className={
-									path.page == 'financials' ? active : inactive
+									path.three == 'financials' ? active : inactive
 								}
 								data-title="Financials">
 								Financials
@@ -55,12 +41,10 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link
-							href={`/stocks/${path.symbol}/statistics/`}
-							scroll={false}>
+						<Link href={`/stocks/${path.two}/statistics/`} scroll={false}>
 							<a
 								className={
-									path.page == 'statistics' ? active : inactive
+									path.three == 'statistics' ? active : inactive
 								}
 								data-title="Statistics">
 								Statistics
@@ -68,18 +52,18 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.symbol}/company/`} scroll={false}>
+						<Link href={`/stocks/${path.two}/company/`} scroll={false}>
 							<a
-								className={path.page == 'company' ? active : inactive}
+								className={path.three == 'company' ? active : inactive}
 								data-title="Profile">
 								Profile
 							</a>
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.symbol}/chart/`} scroll={false}>
+						<Link href={`/stocks/${path.two}/chart/`} scroll={false}>
 							<a
-								className={path.page == 'chart' ? active : inactive}
+								className={path.three == 'chart' ? active : inactive}
 								data-title="Chart">
 								Chart
 							</a>
@@ -87,7 +71,7 @@ export default function TabNavigation() {
 					</li>
 				</ul>
 			</nav>
-			{path.page == 'financials' && <SubNavigation path={path} />}
+			{path.three == 'financials' && <SubNavigation path={path} />}
 		</>
 	);
 }

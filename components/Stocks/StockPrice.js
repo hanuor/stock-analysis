@@ -34,18 +34,19 @@ const Extended = ({ quote, market }) => {
 	const color = changeColor(quote.extC);
 
 	return (
-		<div>
+		<div className="max-w-[50%]">
 			<span className="text-4xl font-bold">{quote.extP}</span>{' '}
-			<span className={`block sm:inline text-2xl font-semibold ${color}`}>
+			<span
+				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}>
 				{quote.extC} ({quote.extCP})
 			</span>
-			<div className="text-sm text-gray-700 flex items-center mt-1">
+			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">
 				{market == 'preMarket' ? <IconSun /> : <IconMoon />}
 				<span className="ml-1">
 					<span className="block sm:inline font-semibold">
 						{quote.extS}:
 					</span>{' '}
-					{quote.extT}
+					{quote.extTF}
 				</span>
 			</div>
 		</div>
@@ -68,7 +69,7 @@ const ExtendedClose = ({ quote }) => {
 				<span className="block sm:inline font-semibold mr-1">
 					At close:
 				</span>{' '}
-				{quote.timestamp}
+				{quote.timestampF}
 			</div>
 		</div>
 	);

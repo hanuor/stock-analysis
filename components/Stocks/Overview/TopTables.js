@@ -1,10 +1,10 @@
-import styles from "@/Styles/TopTables.module.css";
-import { stockState } from "@State/stockState";
+import styles from '@/Styles/TopTables.module.css';
+import { stockState } from '@State/stockState';
 
-const css_table = "text-sm w-full";
-const css_rows = "border-b border-gray-200";
-const css_cell_left = "py-2 px-1 border-b-1 border-gray-900 whitespace-nowrap";
-const css_cell_right = "py-2 px-1 text-right font-semibold whitespace-nowrap";
+const css_table = 'text-small w-full text-gray-900';
+const css_rows = 'border-b border-gray-200';
+const css_cell_left = 'py-2 px-1 border-b-1 border-gray-900 whitespace-nowrap';
+const css_cell_right = 'py-2 px-1 text-right font-semibold whitespace-nowrap';
 
 export function InfoTable() {
 	const data = stockState((state) => state.data);

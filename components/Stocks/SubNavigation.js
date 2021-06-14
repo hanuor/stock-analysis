@@ -1,32 +1,33 @@
 import Link from 'next/link';
 import { financialsState } from '@State/financialsState';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styles from '@/Styles/TabMenu.module.css';
+import navState from '@State/navState';
 
 // styles
 const common =
-	'text-[15px] sm:text-base block py-2 sm:py-2 px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap';
-const inactive = common + ' text-blue-500 hover:text-black hover:bg-gray-100';
-const active = common + ' text-black bg-gray-100 font-semibold';
+	'text-sm sm:text-base block py-2 sm:py-2 px-2 xs:px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap';
+const inactive = common + ' bll hover:text-gray-900 hover:bg-[#eee]';
+const active = common + ' text-gray-900 bg-[#eee] font-semibold';
 
-export default function TabNavigation({ path }) {
+export default function TabNavigation() {
 	return (
 		<div className="flex flex-col sm:flex-row justify-between">
-			<Statement path={path} />
-			<Period path={path} />
+			<Statement />
+			<Period />
 		</div>
 	);
 }
 
-const Statement = ({ path }) => {
+const Statement = () => {
 	const statement = financialsState((state) => state.statement);
+	const path = navState((state) => state.path);
 
 	return (
-		<nav className="mb-2">
+		<nav className="mt-1.5">
 			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
-					<Link href={`/stocks/${path.symbol}/financials/`} scroll={false}>
+					<Link href={`/stocks/${path.two}/financials/`} scroll={false}>
 						<a
 							className={
 								statement == 'income_statement' ? active : inactive
@@ -38,7 +39,7 @@ const Statement = ({ path }) => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${path.symbol}/financials/balance-sheet`}
+						href={`/stocks/${path.two}/financials/balance-sheet`}
 						scroll={false}>
 						<a
 							className={
@@ -51,7 +52,7 @@ const Statement = ({ path }) => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${path.symbol}/financials/cash-flow-statement/`}
+						href={`/stocks/${path.two}/financials/cash-flow-statement/`}
 						scroll={false}>
 						<a
 							className={
@@ -64,7 +65,7 @@ const Statement = ({ path }) => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${path.symbol}/financials/ratios/`}
+						href={`/stocks/${path.two}/financials/ratios/`}
 						scroll={false}>
 						<a
 							className={statement == 'ratios' ? active : inactive}
@@ -78,7 +79,7 @@ const Statement = ({ path }) => {
 	);
 };
 
-const Period = ({ path }) => {
+const Period = () => {
 	const range = financialsState((state) => state.range);
 	const setRange = financialsState((state) => state.setRange);
 
@@ -96,32 +97,8 @@ const Period = ({ path }) => {
 		}
 	}, []);
 
-	const router = useRouter();
-	useEffect(() => {
-		let subpage =
-			path.subpage === 'balance-sheet' ||
-			path.subpage === 'cash-flow-statement' ||
-			path.subpage === 'ratios'
-				? `${path.subpage}/`
-				: '';
-
-		if (range === 'quarterly' || range === 'trailing') {
-			router.push(
-				`/stocks/[symbol]/financials/${subpage}?period=${range}`,
-				`/stocks/${path.symbol}/financials/${subpage}?period=${range}`,
-				{ shallow: true }
-			);
-		} else {
-			router.push(
-				`/stocks/[symbol]/financials/${subpage}`,
-				`/stocks/${path.symbol}/financials/${subpage}`,
-				{ shallow: true }
-			);
-		}
-	}, [range]);
-
 	return (
-		<nav className="sm:mb-2">
+		<nav className="mt-2 sm:mt-1.5">
 			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
 					<span
