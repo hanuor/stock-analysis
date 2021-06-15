@@ -1,11 +1,11 @@
 import { getPageData, getStockInfo } from '@/Functions/fetchStockInfo';
 import Stock from '@/components/Layout/StockLayout';
-import { InfoTable, QuoteTable } from '@/components/Stocks/Overview/TopTables';
-import PriceChart from '@/components/Stocks/Overview/PriceChart/_PriceChart';
-import Profile from '@/components/Stocks/Overview/ProfileWidget';
-import NewsFeed from '@/components/Stocks/Overview/StockNews';
-import FinancialsWidget from '@/components/Stocks/Overview/FinancialsWidget';
-import AnalystWidget from '@/components/Stocks/Overview/AnalystWidget';
+import { InfoTable, QuoteTable } from '@/components/Overview/TopTables';
+import PriceChart from '@/components/PriceChart/_PriceChart';
+import Profile from '@/components/Overview/ProfileWidget';
+import NewsArea from '@/components/Overview/NewsArea';
+import FinancialsWidget from '@/components/Overview/FinancialsWidget';
+import AnalystWidget from '@/components/Overview/AnalystWidget';
 import Axios from 'axios';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
@@ -30,14 +30,14 @@ export default function StockOverview({ info, data, news }) {
 					<QuoteTable />
 				</div>
 			</div>
-			<div className="px-0 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar gap-10">
-				<div className="px-4 lg:px-0 lg:order-2 space-y-6">
+			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
+				<div className="px-4 md:px-0 lg:order-2 space-y-6">
 					<Profile />
 					<FinancialsWidget />
 					<AnalystWidget />
 				</div>
 				<div className="lg:order-1">
-					<NewsFeed props={news} />
+					<NewsArea news={news} />
 				</div>
 			</div>
 		</Stock>

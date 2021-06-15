@@ -1,5 +1,5 @@
 import { stockState } from '@State/stockState';
-import { IconMoon, IconSun } from '@/components/Stocks/PriceIcons';
+import { IconMoon, IconSun } from '@/components/Icons';
 
 const changeColor = (change) => {
 	if (change > 0) {

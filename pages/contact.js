@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
-import PageLayout from '@/Layout/PageLayout';
+import ArticleLayout from '@/components/Layout/ArticleLayout';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
@@ -9,7 +9,7 @@ function classNames(...classes) {
 
 export default function Contact() {
 	return (
-		<PageLayout meta={{ heading: 'Contact', title: 'Contact Us' }}>
+		<ArticleLayout meta={{ heading: 'Contact', title: 'Contact Us' }}>
 			<p>
 				We do not provide personalized investment advice. Please contact a
 				qualified financial advisor if you have questions about specific
@@ -28,7 +28,7 @@ export default function Contact() {
 			</p>
 			<h2>Phone Number</h2>
 			<p>Phone number: (+354) 693-9246</p>
-		</PageLayout>
+		</ArticleLayout>
 	);
 }
 

@@ -3,7 +3,7 @@ import LiteYouTubeEmbed from './LiteYouTubeEmbed';
 
 const NewsVideo = ({ item, related }) => {
 	return (
-		<div className="flex flex-col bg-white p-4 sm:px-0 sm:py-6 sm:first:pt-3 shadow sm:shadow-none">
+		<div className="flex flex-col bg-white p-4 sm:px-0 sm:py-6 sm:first:pt-4 shadow sm:shadow-none">
 			<h3 className="hh3 leading-snug sm:leading-tight sm:order-2">
 				{item.title}
 			</h3>

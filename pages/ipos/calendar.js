@@ -1,6 +1,6 @@
 import Meta from '@/components/Meta';
-import Header from '@/Layout/Header';
-import Footer from '@/Layout/Footer';
+import Header from '@/components/Layout/Header/_Header';
+import Footer from '@/components/Layout/Footer/_Footer';
 import { getIpoData } from '@/Functions/fetchStockInfo';
 import CalendarTable from '@/components/IPOs/CalendarTable';
 import IPONavigation from '@/components/IPOs/Navigation';

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SubNavigation from '@/components/Stocks/SubNavigation';
+import SubNavigation from '@/components/StockHeading/SubNavigation';
 import styles from '@/Styles/TabMenu.module.css';
 import navState from '@State/navState';
 

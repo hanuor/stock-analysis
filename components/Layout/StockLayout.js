@@ -1,7 +1,7 @@
 import Meta from '@/components/Meta';
-import Header from '@/Layout/Header';
-import Footer from '@/Layout/Footer';
-import StockHeading from '@/components/Stocks/StockHeading';
+import Header from '@/components/Layout/Header/_Header';
+import Footer from '@/components/Layout/Footer/_Footer';
+import StockHeading from '@/components/StockHeading/_StockHeading';
 import stockState from '@State/stockState';
 
 export default function Stock({ children }) {

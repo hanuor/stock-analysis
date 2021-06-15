@@ -1,6 +1,6 @@
-import Title from '@/components/Stocks/Title';
-import StockPrice from '@/components/Stocks/StockPrice';
-import TabNavigation from '@/components/Stocks/TabNavigation';
+import Title from '@/components/StockHeading/Title';
+import StockPrice from '@/components/StockHeading/StockPrice';
+import TabNavigation from '@/components/StockHeading/TabNavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
 export default function StockHeading() {

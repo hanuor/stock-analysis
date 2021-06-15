@@ -4,7 +4,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from '@/Functions/markdown.functions.js';
-import PageLayout from '@/components/Layout/PageLayout';
+import ArticleLayout from '@/components/Layout/ArticleLayout';
 import Image from 'next/image';
 import { CustomLink, External } from '@/components/CustomLink';
 
@@ -16,11 +16,11 @@ const components = {
 
 export default function Page({ content, meta }) {
 	return (
-		<PageLayout meta={meta}>
+		<ArticleLayout meta={meta}>
 			<div>
 				<MDXRemote {...content} components={components} />
 			</div>
-		</PageLayout>
+		</ArticleLayout>
 	);
 }
 
