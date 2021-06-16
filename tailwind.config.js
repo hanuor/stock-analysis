@@ -30,6 +30,7 @@ module.exports = {
 		},
 		screens: {
 			xs: '350px',
+			bp: '380px',
 			sm: '640px',
 			md: '768px',
 			lg: '1024px',
@@ -42,6 +43,11 @@ module.exports = {
 				sidebar_wide: '1fr 336px',
 				overview: '1fr 1fr 3fr',
 				news: '1fr 2fr',
+			},
+			fontSize: {
+				smaller: ['0.95rem', '1.35rem'],
+				small: ['0.9rem', '1.3rem'],
+				tiny: ['0.8rem', '1.15rem'],
 			},
 			fontFamily: {
 				/* sans: ["Open Sans", ...defaultTheme.fontFamily.sans], */

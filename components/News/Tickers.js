@@ -10,7 +10,7 @@ function Tickers({ tickers, intro }) {
 	}
 
 	return (
-		<div className="text-gray-800 inline-flex">
+		<div className="text-gray-800 inline">
 			<span className="mr-1">{intro}:</span>
 			<span className="">
 				{tickers.map(function (ticker, index) {

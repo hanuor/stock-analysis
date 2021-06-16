@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const Break = () => <span className="px-2">&raquo;</span>;
 const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
 const formatPageTitle = (word) => {
@@ -19,9 +18,11 @@ const formatPageTitle = (word) => {
 	}
 };
 
-const One = ({ one, two }) => {
-	if (one === 'ipos') {
-		if (two) {
+const Break = () => <span className="px-1 sm:px-2">&raquo;</span>;
+
+const LevelOne = ({ path }) => {
+	if (path.one === 'ipos') {
+		if (path.two) {
 			return (
 				<Link href="/ipos/" prefetch={false}>
 					<a>IPOs</a>
@@ -30,11 +31,43 @@ const One = ({ one, two }) => {
 		}
 		return 'IPOs';
 	}
-	return capitalize(one);
+	if (path.two) {
+		return (
+			<Link href={`/${path.one}/`} prefetch={false}>
+				<a>{capitalize(path.one)}</a>
+			</Link>
+		);
+	}
+	return capitalize(path.one);
 };
 
-const formatTwo = (two) => {
-	return formatPageTitle(two);
+const LevelTwo = ({ path }) => {
+	if (path.one === 'stocks') {
+		if (path.three) {
+			return (
+				<Link href={`/stocks/${path.two.toLowerCase()}/`} prefetch={false}>
+					<a>{path.two.toUpperCase()}</a>
+				</Link>
+			);
+		}
+		return path.two.toUpperCase();
+	}
+	return formatPageTitle(path.two);
+};
+
+const LevelThree = ({ path }) => {
+	if (path.four) {
+		return (
+			<Link href={`/${path.one}/${path.two}/${path.three}`} prefetch={false}>
+				<a>{capitalize(path.three)}</a>
+			</Link>
+		);
+	}
+	return formatPageTitle(path.three);
+};
+
+const LevelFour = ({ path }) => {
+	return formatPageTitle(path.four);
 };
 
 const _Breadcrumbs = () => {
@@ -48,17 +81,19 @@ const _Breadcrumbs = () => {
 		let one = split[1] || null;
 		let two = split[2] || null;
 		let three = split[3] || null;
+		let four = split[4] || null;
 
 		setPath({
 			one,
 			two,
 			three,
+			four,
 		});
 	}, [router.asPath, setPath]);
 
 	return (
 		<nav>
-			<ol className="flex text-sm sm:text-base text-gray-600 mb-0.5">
+			<ol className="flex flex-wrap text-sm sm:text-small text-gray-600 sm:mb-0.5">
 				<li>
 					<Link href="/" prefetch={false}>
 						<a>Home</a>
@@ -67,13 +102,25 @@ const _Breadcrumbs = () => {
 				{path.one && (
 					<li>
 						<Break />
-						<One one={path.one} two={path.two} />
+						<LevelOne path={path} />
 					</li>
 				)}
 				{path.two && (
 					<li>
 						<Break />
-						{formatTwo(path.two)}
+						<LevelTwo path={path} />
+					</li>
+				)}
+				{path.three && (
+					<li>
+						<Break />
+						<LevelThree path={path} />
+					</li>
+				)}
+				{path.four && (
+					<li>
+						<Break />
+						<LevelFour path={path} />
 					</li>
 				)}
 			</ol>

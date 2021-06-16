@@ -1,5 +1,10 @@
-import { Bar } from 'react-chartjs-2';
+import { Bar, defaults } from 'react-chartjs-2';
 import { stockState } from '@State/stockState';
+
+defaults.font.family =
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+defaults.color = '#222222';
+defaults.animation = false;
 
 function PriceTarget({ target }) {
 	let priceTarget = target[0];
@@ -9,10 +14,10 @@ function PriceTarget({ target }) {
 	if (updown === 'upside') {
 		return (
 			<>
-				<div className="text-green-700 text-4xl text-center font-semibold mb-1">
+				<div className="text-green-700 text-4xl text-center font-semibold mb-0.5">
 					{priceTarget}
 				</div>
-				<div className="text-xl text-center mb-1">
+				<div className="text-xl text-center mb-1.5">
 					({difference} upside)
 				</div>
 			</>
@@ -47,27 +52,33 @@ function AnalystConsensus({ consensus }) {
 export default function AnalystWidget() {
 	const data = stockState((state) => state.data);
 
-	if (!data.analystChart) {
-		return <h1>Loading...</h1>;
+	if (
+		typeof data.analystTarget === 'undefined' ||
+		data.analystTarget[0] === '$0' ||
+		data.analysts === 'n/a'
+	) {
+		return null;
 	}
 
 	const ratings = data.analystChart;
 
 	return (
 		<div>
-			<h2 className="text-2xl font-bold mb-2">Analyst Forecast</h2>
-			{data.analystIntro && <p className="mb-5">{data.analystIntro}</p>}
-			<div className="border border-gray-200 p-2">
-				<div className="text-center m-auto text-xl font-semibold mb-2">
+			<h2 className="hh2 mb-2">Analyst Forecast</h2>
+			{data.analystIntro && (
+				<p className="mb-4 text-gray-900">{data.analystIntro}</p>
+			)}
+			<div className="border border-gray-200 p-2 xs:p-3">
+				<div className="text-center m-auto text-xl font-semibold mb-2 text-gray-900">
 					Price Target
 				</div>
 
 				<PriceTarget target={data.analystTarget} />
-				<div className="text-center text-lg font-semibold py-1">
+				<div className="text-center text-lg font-semibold py-1 text-gray-900">
 					Analyst Consensus: <AnalystConsensus consensus={data.analysts} />
 				</div>
 
-				<div>
+				<div className="h-48">
 					<Bar
 						data={{
 							labels: [
@@ -101,12 +112,26 @@ export default function AnalystWidget() {
 							maintainAspectRatio: false,
 							scales: {
 								x: {
+									ticks: {
+										font: {
+											size: 14,
+										},
+									},
 									grid: {
 										display: false,
 									},
 								},
 								y: {
 									position: 'right',
+									ticks: {
+										font: {
+											size: 14,
+										},
+										padding: 0,
+									},
+									grid: {
+										drawBorder: false,
+									},
 								},
 							},
 							plugins: {
