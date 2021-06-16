@@ -1,4 +1,5 @@
 import { stockState } from '@State/stockState';
+import { InformationCircleIcon } from '@heroicons/react/solid';
 
 const getQuoteSource = (quote) => {
 	if (
@@ -17,15 +18,30 @@ export default function Title() {
 		return null;
 	}
 
+	let notice = info.ipoInfo.notice ? info.ipoInfo.notice : null;
+
 	return (
 		<div className="mb-4">
 			<h1 className="text-2xl sm:text-[26px] font-bold text-gray-900">
 				{info.name_full} ({info.ticker})
 			</h1>
-			<div className="text-tiny text-gray-600 mt-[1px]">
-				{info.quote.exchange}: {info.ticker} &#183;{' '}
-				{getQuoteSource(info.quote)} &#183; USD
-			</div>
+			{notice && (
+				<div className="text-lg text-gray-800 mt-2">
+					<span>
+						<InformationCircleIcon
+							className="h-6 w-6 text-blue-400 inline mb-1 mr-1"
+							aria-hidden="true"
+						/>
+					</span>
+					<span>{notice}</span>
+				</div>
+			)}
+			{info.quote && (
+				<div className="text-tiny text-gray-600 mt-[1px]">
+					{info.quote.exchange}: {info.ticker} &#183;{' '}
+					{getQuoteSource(info.quote)} &#183; USD
+				</div>
+			)}
 		</div>
 	);
 }

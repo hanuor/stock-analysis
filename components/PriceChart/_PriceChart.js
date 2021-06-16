@@ -54,6 +54,16 @@ export default function PriceChart() {
 		};
 	}, [chartTime, info]);
 
+	if (info.state === 'upcomingipo') {
+		return (
+			<div className="border border-gray-200 rounded-sm lg:border-0 p-0.5 xs:p-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0 w-full h-full">
+				<div className="flex justify-center items-center h-full bg-gray-50 text-3xl font-semibold">
+					Chart not available yet
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="border border-gray-200 rounded-sm lg:border-0 p-0.5 xs:p-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0">
 			<div className="flex flex-row justify-between space-x-2 items-center py-1 sm:pt-0 px-1.5 sm:px-0 overflow-x-auto">

@@ -52,8 +52,12 @@ function AnalystConsensus({ consensus }) {
 export default function AnalystWidget() {
 	const data = stockState((state) => state.data);
 
-	if (!data.analystChart) {
-		return <h1>Loading...</h1>;
+	if (
+		typeof data.analystTarget === 'undefined' ||
+		data.analystTarget[0] === '$0' ||
+		data.analysts === 'n/a'
+	) {
+		return null;
 	}
 
 	const ratings = data.analystChart;

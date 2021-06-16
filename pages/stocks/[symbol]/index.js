@@ -52,6 +52,8 @@ export async function getStaticProps({ params }) {
 	);
 	const news = await newsdata.data;
 
+	console.log(info);
+
 	return {
 		props: {
 			info,

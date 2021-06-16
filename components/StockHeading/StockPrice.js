@@ -75,11 +75,41 @@ const ExtendedClose = ({ quote }) => {
 	);
 };
 
+// Closing price, if extended price is showing
+const IPOPrice = ({ ipoInfo }) => {
+	let ipoPrice = ipoInfo.ipoPrice
+		? '$' + ipoInfo.ipoPrice
+		: ipoInfo.ipoPriceLow && ipoInfo.ipoPriceHigh
+		? '$' + ipoInfo.ipoPriceLow + ' - $' + ipoInfo.ipoPriceHigh
+		: 'Pending';
+
+	return (
+		<div>
+			<span className="text-xl text-gray-800">
+				<span className="text-xl font-normal">Stock Price:</span>{' '}
+				<span className="text-2xl font-semibold">{ipoPrice}</span>
+			</span>
+
+			<div className="text-small text-gray-700 mt-0">
+				{ipoInfo.ipoPriceNotice}
+			</div>
+		</div>
+	);
+};
+
 export default function StockPrice() {
 	const info = stockState((state) => state.info);
 
+	if (info.state === 'upcomingipo') {
+		return (
+			<section className="mb-5">
+				<IPOPrice ipoInfo={info.ipoInfo} />
+			</section>
+		);
+	}
+
 	if (!info.quote) {
-		return <h1>Loading...</h1>;
+		return null;
 	}
 
 	const quote = info.quote;

@@ -1,43 +1,82 @@
 import { Line, defaults } from 'react-chartjs-2';
-import { DateTime } from 'luxon';
-import 'chartjs-adapter-luxon';
+import {
+	formatDateTimestamp,
+	formatDateClean,
+	formatDateMinute,
+	formatDateDay,
+	formatDateMonth,
+	formatDateYear,
+} from '@/Functions/formatDates';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 const Chart = ({ chartData, chartTime }) => {
-	let unit = 'month';
+	let label = 'Closing Price';
+	let ticks = 12;
 
-	if (chartTime === '1D') {
-		unit = 'minute';
-	} else if (chartTime === '5D') {
-		unit = 'day';
-	} else if (chartTime === '1M' || chartTime === '6M') {
-		unit = 'day';
-	} else if (chartTime === '5Y' || chartTime === 'MAX') {
-		unit = 'year';
-	}
-
-	const timeAxis = chartData.map((item) => {
-		if (chartTime === '1D' || chartTime === '5D') {
-			return DateTime.fromFormat(item.t, 'yyyy-MM-dd hh:mm');
+	switch (chartTime) {
+		case '1Y': {
+			ticks = 12;
+			if (window.screen.width < 450) {
+				ticks = 6;
+			}
+			break;
 		}
+
+		case '1D': {
+			ticks = 13;
+			if (window.screen.width < 450) {
+				ticks = 7;
+			}
+			label = 'Price';
+			break;
+		}
+
+		case '5D': {
+			ticks = 5;
+			label = 'Price';
+			break;
+		}
+
+		case '1M': {
+			ticks = 8;
+			break;
+		}
+
+		case '6M': {
+			ticks = 8;
+			break;
+		}
+
+		case 'YTD': {
+			ticks = 8;
+			break;
+		}
+
+		case '5Y': {
+			ticks = 5;
+			break;
+		}
+
+		case 'MAX': {
+			let firstYear = formatDateYear(chartData[0].t);
+			let lastYear = formatDateYear(chartData[chartData.length - 1].t);
+			let diff = lastYear - firstYear;
+			ticks = diff;
+			if (window.screen.width < 450 && diff > 7) {
+				ticks = 5;
+			}
+			break;
+		}
+	}
+	const timeAxis = chartData.map((item) => {
 		return item.t;
 	});
 
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
-
-	let ticks = 12;
-	if (typeof window !== 'undefined') {
-		if (window.screen.width < 450) {
-			ticks = 9;
-		}
-		if (window.screen.width < 370) {
-			ticks = 6;
-		}
-	}
 
 	return (
 		<Line
@@ -60,14 +99,29 @@ const Chart = ({ chartData, chartTime }) => {
 				spanGaps: true,
 				scales: {
 					x: {
-						type: 'timeseries',
-						time: {
-							unit: unit,
-						},
 						grid: {
 							display: false,
 						},
 						ticks: {
+							callback: function (value, index) {
+								if (
+									chartTime === '1Y' ||
+									chartTime === '6M' ||
+									chartTime === 'YTD'
+								) {
+									return formatDateMonth(timeAxis[index]);
+								} else if (chartTime === '1D') {
+									return formatDateMinute(timeAxis[index]);
+								} else if (chartTime === '5D') {
+									return formatDateDay(timeAxis[index]);
+								} else if (chartTime === '1M') {
+									return formatDateDay(timeAxis[index]);
+								} else if (chartTime === '5Y' || chartTime === 'MAX') {
+									return formatDateYear(timeAxis[index]);
+								} else {
+									return formatDateClean(timeAxis[index]);
+								}
+							},
 							color: '#323232',
 							font: {
 								size: 13,
@@ -89,6 +143,46 @@ const Chart = ({ chartData, chartTime }) => {
 				plugins: {
 					legend: {
 						display: false,
+					},
+					tooltip: {
+						enabled: true,
+						titleFont: {
+							size: 16,
+							weight: '600',
+						},
+						bodyFont: {
+							size: 14,
+							weight: '400',
+						},
+						padding: {
+							top: 12,
+							right: 15,
+							bottom: 12,
+							left: 15,
+						},
+						displayColors: false,
+						callbacks: {
+							title: function (tooltipItem) {
+								if (chartTime === '1Y') {
+									return formatDateClean(tooltipItem[0].label);
+								} else if (chartTime === '1D' || chartTime === '5D') {
+									return formatDateTimestamp(tooltipItem[0].label);
+								} else if (chartTime === '5Y' || chartTime === 'MAX') {
+									return (
+										'Week of ' + formatDateClean(tooltipItem[0].label)
+									);
+								}
+								return formatDateClean(tooltipItem[0].label);
+							},
+							label: function (context) {
+								let currlabel = context.dataset.label || '';
+								let value = context.parsed.y || '';
+								if (currlabel && value) {
+									currlabel = label + ': ' + value;
+								}
+								return currlabel;
+							},
+						},
 					},
 				},
 			}}
