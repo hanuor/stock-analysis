@@ -18,7 +18,8 @@ export default function Title() {
 		return null;
 	}
 
-	let notice = info.ipoInfo.notice ? info.ipoInfo.notice : null;
+	let notice =
+		info.ipoInfo !== null && info.ipoInfo.notice ? info.ipoInfo.notice : null;
 
 	return (
 		<div className="mb-4">
@@ -26,10 +27,10 @@ export default function Title() {
 				{info.name_full} ({info.ticker})
 			</h1>
 			{notice && (
-				<div className="text-lg text-gray-800 mt-2">
+				<div className="text-base sm:text-lg text-gray-800 mt-2">
 					<span>
 						<InformationCircleIcon
-							className="h-6 w-6 text-blue-400 inline mb-1 mr-1"
+							className="h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1"
 							aria-hidden="true"
 						/>
 					</span>

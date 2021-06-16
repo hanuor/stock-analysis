@@ -56,8 +56,8 @@ export default function PriceChart() {
 
 	if (info.state === 'upcomingipo') {
 		return (
-			<div className="border border-gray-200 rounded-sm lg:border-0 p-0.5 xs:p-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0 w-full h-full">
-				<div className="flex justify-center items-center h-full bg-gray-50 text-3xl font-semibold">
+			<div className="border border-gray-200 rounded-sm lg:border-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0 w-full h-[180px] sm:h-[240px] lg:h-full">
+				<div className="flex justify-center items-center h-full bg-gray-50 text-2xl lg:text-3xl font-semibold text-gray-800">
 					Chart not available yet
 				</div>
 			</div>
