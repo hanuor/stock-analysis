@@ -5,7 +5,6 @@ import { stockState } from '@State/stockState';
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 defaults.color = '#222222';
-defaults.animation = false;
 
 export default function FinancialsWidget() {
 	const info = stockState((state) => state.info);

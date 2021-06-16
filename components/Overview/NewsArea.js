@@ -41,7 +41,6 @@ const NewsArea = ({ news }) => {
 			} else if (type === 'v' || type === 'pr') {
 				fetchNews();
 			} else if (type === 'chat') {
-				console.log('load chat');
 				loadStockTwits(info.ticker);
 			}
 		}
