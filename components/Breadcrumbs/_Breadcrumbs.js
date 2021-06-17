@@ -31,6 +31,16 @@ const LevelOne = ({ path }) => {
 		}
 		return 'IPOs';
 	}
+	if (path.one === 'etf') {
+		if (path.two) {
+			return (
+				<Link href="/etf/" prefetch={false}>
+					<a>ETF</a>
+				</Link>
+			);
+		}
+		return 'ETF';
+	}
 	if (path.two) {
 		return (
 			<Link href={`/${path.one}/`} prefetch={false}>
@@ -46,6 +56,16 @@ const LevelTwo = ({ path }) => {
 		if (path.three) {
 			return (
 				<Link href={`/stocks/${path.two.toLowerCase()}/`} prefetch={false}>
+					<a>{path.two.toUpperCase()}</a>
+				</Link>
+			);
+		}
+		return path.two.toUpperCase();
+	}
+	if (path.one === 'etf') {
+		if (path.three) {
+			return (
+				<Link href={`/etf/${path.two.toLowerCase()}/`} prefetch={false}>
 					<a>{path.two.toUpperCase()}</a>
 				</Link>
 			);

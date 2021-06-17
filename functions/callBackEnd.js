@@ -13,6 +13,12 @@ export function getStockUrls() {
 	return paths;
 }
 
+export async function getData(path) {
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const resp = await Axios.get(API + path);
+	return resp.data;
+}
+
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
 
@@ -33,7 +39,7 @@ export async function getPageData(id, page) {
 	return data;
 }
 
-export async function getStockNews(id) {
+export async function getNewsData(id) {
 	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/news?i=${id}`);

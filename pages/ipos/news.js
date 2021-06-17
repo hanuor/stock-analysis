@@ -1,7 +1,7 @@
 import Meta from '@/components/Meta';
 import Header from '@/components/Layout/Header/_Header';
 import Footer from '@/components/Layout/Footer/_Footer';
-import { getIpoData } from '@/Functions/fetchStockInfo';
+import { getIpoData } from '@/Functions/callBackEnd';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import NewsFeed from '@/components/News/_NewsFeed';
@@ -22,7 +22,7 @@ const RecentIpos = ({ data }) => {
 					</div>
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1 sm:py-2 lg:py-3">
+						<div className="py-1">
 							<NewsFeed data={data.data} related="Stocks" />
 						</div>
 						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">

@@ -3,17 +3,14 @@ import {
 	getPageData,
 	getNewsData,
 } from '@/Functions/callBackEnd';
-import Stock from '@/components/Layout/StockLayout';
-import { InfoTable, QuoteTable } from '@/components/Overview/TopTables';
-import PriceChart from '@/components/PriceChart/_PriceChart';
-import Profile from '@/components/Overview/ProfileWidget';
-import NewsArea from '@/components/Overview/NewsArea';
-import FinancialsWidget from '@/components/Overview/FinancialsWidget';
-import AnalystWidget from '@/components/Overview/AnalystWidget';
-import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
+import stockState from '@State/stockState';
+import Stock from '@/components/Layout/StockLayout';
+import { InfoTable, QuoteTable } from '@/components/Overview/TopTablesETF';
+import PriceChart from '@/components/PriceChart/_PriceChart';
+import NewsArea from '@/components/Overview/NewsArea';
 
-export default function StockOverview({ info, data, news }) {
+const EtfOverview = ({ info, data, news }) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -34,18 +31,16 @@ export default function StockOverview({ info, data, news }) {
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
-				<div className="px-4 md:px-0 lg:order-2 space-y-6">
-					<Profile />
-					<FinancialsWidget />
-					<AnalystWidget />
-				</div>
+				<div className="px-4 md:px-0 lg:order-2 space-y-6">Sidebar</div>
 				<div className="lg:order-1">
 					<NewsArea news={news} />
 				</div>
 			</div>
 		</Stock>
 	);
-}
+};
+
+export default EtfOverview;
 
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });

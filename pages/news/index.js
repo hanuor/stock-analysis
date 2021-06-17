@@ -1,7 +1,7 @@
 import Meta from '@/components/Meta';
 import Header from '@/components/Layout/Header/_Header';
 import Footer from '@/components/Layout/Footer/_Footer';
-import { getMarketNews } from '@/Functions/fetchStockInfo';
+import { getMarketNews } from '@/Functions/callBackEnd';
 import NewsNavigation from '@/components/News/NewsNavigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 import NewsFeed from '@/components/News/_NewsFeed';

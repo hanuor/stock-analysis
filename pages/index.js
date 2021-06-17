@@ -3,7 +3,7 @@ import Hero from '@/components/HomePage/Hero';
 import Movers from '@/components/HomePage/Movers';
 import LatestNews from '@/components/HomePage/LatestNews';
 import IPOwidgets from '@/components/HomePage/IPOwidgets';
-import { getHomePageData } from '@/Functions/fetchStockInfo';
+import { getHomePageData } from '@/Functions/callBackEnd';
 
 export default function FrontPage(props) {
 	return (

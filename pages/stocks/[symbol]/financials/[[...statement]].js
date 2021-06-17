@@ -1,6 +1,6 @@
 import Stock from '@/components/Layout/StockLayout';
 import FinancialTable from '@/components/FinancialTable/_FinancialTable';
-import { getPageData, getStockInfo } from '@/Functions/fetchStockInfo';
+import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { stockState } from '@State/stockState';
