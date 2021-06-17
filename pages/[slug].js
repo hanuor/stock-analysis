@@ -6,7 +6,7 @@ import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from '@/Functions/markdown.functions.js';
 import ArticleLayout from '@/components/Layout/ArticleLayout';
 import Image from 'next/image';
-import { CustomLink, External } from '@/components/CustomLink';
+import CustomLink, { External } from '@/components/CustomLink';
 
 const components = {
 	a: CustomLink,
