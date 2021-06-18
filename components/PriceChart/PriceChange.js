@@ -1,5 +1,10 @@
+import { useEffect } from "react";
+import { stockState } from '@State/stockState';
+
 const PriceChange = ({ chartData, chartTime, quote }) => {
-	let change, formatted;
+	const info = stockState((state) => state.info);
+	
+	let raw, formatted;
 	let dec = 2;
 
 	if (typeof window !== 'undefined' && window.screen.width < 370) {
@@ -7,20 +12,26 @@ const PriceChange = ({ chartData, chartTime, quote }) => {
 	}
 
 	if (chartTime === '1D') {
-		change = quote.change;
+		raw = quote.change;
 		formatted = quote.change > 0 ? '+' + quote.changePc : quote.changePc;
 	} else {
 		let first = chartData[0].o;
 		let last = chartData[chartData.length - 1].c;
 
-		change = (last / first - 1) * 100;
+		raw = (last / first - 1) * 100;
 		formatted =
-			change > 0
-				? '+' + change.toFixed(dec) + '%'
-				: change.toFixed(dec) + '%';
+			raw > 0
+				? '+' + raw.toFixed(dec) + '%'
+				: raw.toFixed(dec) + '%';
 	}
 
-	let css = change > 0 ? 'green' : change < 0 ? 'red' : 'text-gray-600';
+	useEffect(() => {
+		if (info.type === 'etf') {
+			document.querySelector('#price1y').innerHTML = formatted;
+		}
+	}, [formatted, info.type]);
+
+	let css = raw > 0 ? 'green' : raw < 0 ? 'red' : 'text-gray-600';
 
 	return (
 		<div className="flex flex-row space-x-1 text-smaller sm:text-base">

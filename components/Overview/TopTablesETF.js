@@ -31,24 +31,24 @@ export function InfoTable() {
 					<td className={css_cell_right}>{data.peRatio}</td>
 				</tr>
 				<tr className={css_rows}>
-					<td className={css_cell_left}>Beta</td>
-					<td className={css_cell_right}>{data.beta}</td>
+					<td className={css_cell_left}>Shares Out</td>
+					<td className={css_cell_right}>{data.sharesOut}</td>
 				</tr>
 				<tr className={css_rows}>
-					<td className={css_cell_left}>EPS (ttm)</td>
-					<td className={css_cell_right}>{data.eps}</td>
-				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Forward PE</td>
-					<td className={css_cell_right}>{data.forwardPE}</td>
-				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Dividend</td>
+					<td className={css_cell_left}>Dividend (ttm)</td>
 					<td className={css_cell_right}>{data.dividend}</td>
+				</tr>
+				<tr className={css_rows}>
+					<td className={css_cell_left}>Dividend Yield</td>
+					<td className={css_cell_right}>{data.dividendYield}</td>
 				</tr>
 				<tr className={css_rows}>
 					<td className={css_cell_left}>Ex-Dividend Date</td>
 					<td className={css_cell_right}>{data.exDividendDate}</td>
+				</tr>
+				<tr className={css_rows}>
+					<td className={css_cell_left}>1-Year Return</td>
+					<td className={css_cell_right}><div id="price1y">-</div></td>
 				</tr>
 			</tbody>
 		</table>
@@ -78,24 +78,24 @@ export function QuoteTable() {
 					<td className={css_cell_right}>{data.rangeDay}</td>
 				</tr>
 				<tr className={css_rows}>
-					<td className={css_cell_left}>52-Week Range</td>
-					<td className={css_cell_right}>{data.range52w}</td>
+					<td className={css_cell_left}>52-Week Low</td>
+					<td className={css_cell_right}>{data.low52}</td>
+				</tr>
+				<tr className={css_rows}>
+					<td className={css_cell_left}>52-Week High</td>
+					<td className={css_cell_right}>{data.high52}</td>
 				</tr>
 				<tr className={css_rows}>
 					<td className={css_cell_left}>Beta</td>
 					<td className={css_cell_right}>{data.beta}</td>
 				</tr>
 				<tr className={css_rows}>
-					<td className={css_cell_left}>Analysts</td>
-					<td className={css_cell_right}>{data.analysts}</td>
+					<td className={css_cell_left}>Holdings</td>
+					<td className={css_cell_right}>{data.holdings}</td>
 				</tr>
 				<tr className={css_rows}>
-					<td className={css_cell_left}>Price Target</td>
-					<td className={css_cell_right}>{data.target}</td>
-				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Est. Earnings Date</td>
-					<td className={css_cell_right}>{data.earningsDate}</td>
+					<td className={css_cell_left}>Inception Date</td>
+					<td className={css_cell_right}>{data.inception}</td>
 				</tr>
 			</tbody>
 		</table>
