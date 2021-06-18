@@ -24,7 +24,18 @@ export async function getStockInfo({ params }) {
 
 	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
-	const response = await Axios.get(API + `/symbol?symbol=${symbol}`);
+	const response = await Axios.get(API + `/stock?symbol=${symbol}`);
+	const info = response.data;
+
+	return info;
+}
+
+export async function getEtfInfo({ params }) {
+	const symbol = params.symbol;
+
+	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+
+	const response = await Axios.get(API + `/etf?symbol=${symbol}`);
 	const info = response.data;
 
 	return info;
