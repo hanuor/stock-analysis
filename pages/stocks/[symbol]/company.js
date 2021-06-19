@@ -1,5 +1,5 @@
 import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getStockInfo } from '@/Functions/fetchStockInfo';
+import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 import ProfileDescription from '@/components/ProfilePage/ProfileDescription';

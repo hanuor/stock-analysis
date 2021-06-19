@@ -26,7 +26,7 @@ function SingleTicker({ ticker }) {
 
 	return (
 		<Link href={`/stocks/${symbol}/`}>
-			<a className="inline-flex items-center px-1.5 py-0.5 ml-1 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll">
+			<a className="inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll">
 				{ticker}
 			</a>
 		</Link>

@@ -19,12 +19,16 @@ export default function Title() {
 	}
 
 	let notice =
-		info.ipoInfo !== null && info.ipoInfo.notice ? info.ipoInfo.notice : null;
+		info.ipoInfo !== null &&
+		typeof info.ipoInfo !== 'undefined' &&
+		info.ipoInfo.notice
+			? info.ipoInfo.notice
+			: null;
 
 	return (
 		<div className="mb-4">
 			<h1 className="text-2xl sm:text-[26px] font-bold text-gray-900">
-				{info.name_full} ({info.ticker})
+				{info.name_full || info.name} ({info.ticker})
 			</h1>
 			{notice && (
 				<div className="text-base sm:text-lg text-gray-800 mt-2">

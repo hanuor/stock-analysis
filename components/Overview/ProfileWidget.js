@@ -11,16 +11,16 @@ export default function Profile() {
 			<h2 className="hh2 mb-2">About {info.ticker}</h2>
 			<p>
 				{data.description}{' '}
-				<Link href={`/stocks/${info.symbol}/company/`}>
+				{info.type === 'stocks' && <Link href={`/stocks/${info.symbol}/company/`}>
 					<a className="bll">[Read more...]</a>
-				</Link>
+				</Link>}
 			</p>
 
 			<div className="mt-3 grid grid-cols-2 gap-3">
 				{data.infoTable &&
 					Object.keys(data.infoTable).map(function (number, index) {
 						return (
-							<div key={index}>
+							<div key={index} className={info.type === 'etf' && data.infoTable[number][0] === 'Index Tracked' ? 'col-span-2' : 'col-span-1'}>
 								<span className="font-semibold block">
 									{data.infoTable[number][0]}
 								</span>
@@ -30,10 +30,10 @@ export default function Profile() {
 					})}
 			</div>
 
-			<Button
+			{info.type === 'stocks' && <Button
 				url={`/stocks/${info.symbol}/company/`}
 				text="Full Company Profile"
-			/>
+			/>}
 		</div>
 	);
 }

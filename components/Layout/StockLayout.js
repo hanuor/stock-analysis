@@ -14,7 +14,7 @@ export default function Stock({ children }) {
 				<Header />
 				<div className="mx-auto pt-5 pb-10 sm:pt-6 w-full xl:max-w-screen-xl">
 					<main>
-						<StockHeading />
+						<StockHeading type={info.type} />
 						{children}
 					</main>
 				</div>
