@@ -1,6 +1,6 @@
 import LayoutSidebar from '@/Layout/LayoutSidebar';
 import Table from '@/Tables/SymbolTable';
-import { EtfLink } from '@/components/Links';
+import { ETFLink } from '@/components/Links';
 import abbreviateNumber from '@/Functions/abbreviateNumber';
 
 export default function StocksIndexPage({ stocks }) {
@@ -9,7 +9,7 @@ export default function StocksIndexPage({ stocks }) {
 			Header: 'Symbol',
 			accessor: 's',
 			Cell: function FormatCell({ cell: { value } }) {
-				return <EtfLink symbol={value} />;
+				return <ETFLink symbol={value} />;
 			},
 		},
 		{
