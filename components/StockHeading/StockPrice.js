@@ -62,7 +62,7 @@ const ExtendedClose = ({ quote }) => {
 			<span className="text-3xl font-semibold text-gray-700">
 				{quote.price}
 			</span>{' '}
-			<span className={`block sm:inline text-xl ${color}`}>
+			<span className={`block sm:inline text-lg xs:text-xl ${color}`}>
 				{quote.change} ({quote.changePc})
 			</span>
 			<div className="text-sm text-gray-700 mt-1">

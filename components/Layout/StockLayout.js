@@ -10,16 +10,14 @@ export default function Stock({ children }) {
 	return (
 		<>
 			<Meta title={info.ticker}></Meta>
-			<div className="flex flex-col">
-				<Header />
-				<div className="mx-auto pt-5 pb-10 sm:pt-6 w-full xl:max-w-screen-xl">
-					<main>
-						<StockHeading type={info.type} />
-						{children}
-					</main>
-				</div>
-				<Footer />
+			<Header />
+			<div className="mx-auto pt-5 pb-10 sm:pt-6 w-full xl:max-w-screen-xl">
+				<main>
+					<StockHeading type={info.type} />
+					{children}
+				</main>
 			</div>
+			<Footer />
 		</>
 	);
 }

@@ -1,0 +1,87 @@
+.table {
+	width: 100%;
+}
+
+.table tr > * {
+	padding: 0.5rem;
+	border-bottom: 1px solid #ddd;
+}
+
+.table tr > *:first-child {
+	padding-left: 0.8rem;
+}
+
+.table tr > *:last-child {
+	padding-right: 0.8rem;
+}
+
+.table tr th {
+	background-color: #ffffff;
+	text-align: left;
+	border-top: 1px solid #ddd;
+	white-space: nowrap;
+}
+
+.table tr:nth-child(odd) {
+	background-color: #f6f7f8;
+}
+
+.table tr:hover td {
+	background-color: #f2f9ff !important;
+}
+
+.table tr > *:nth-child(n + 4) {
+	text-align: right;
+}
+
+@media screen and (max-width: 1200px) {
+	.table tr > * {
+		padding: 0.5em 0.3em;
+	}
+	.table tr > *:first-child {
+		padding-left: 0.6rem;
+	}
+	.table tr > *:last-child {
+		padding-right: 0.6rem;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.table tr th {
+		font-size: 0.95rem;
+	}
+	.table tr td {
+		font-size: 0.9rem;
+	}
+	.table tr td {
+		white-space: nowrap;
+	}
+	.table tr td:nth-child(3) {
+		max-width: 195px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.table tr > *:first-child {
+		padding-left: 0.5rem;
+	}
+	.table tr > *:last-child {
+		padding-right: 0.5rem;
+	}
+	.table tr td:nth-child(3) {
+		max-width: 160px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.table tr td:nth-child(3) {
+		max-width: 140px;
+	}
+}
+
+.table tr td:not(:nth-child(2)) {
+	white-space: nowrap;
+}

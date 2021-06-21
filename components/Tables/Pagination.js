@@ -9,7 +9,7 @@ const Pagination = ({
 	canNextPage,
 }) => {
 	return (
-		<nav className="mt-2 px-1 flex flex-row justify-between space-x-2 text-sm sm:text-base">
+		<nav className="mt-2.5 px-1 flex flex-row justify-between space-x-2 text-sm sm:text-base">
 			<button
 				onClick={() => previousPage()}
 				disabled={!canPreviousPage}

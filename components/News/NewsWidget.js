@@ -1,6 +1,10 @@
 import Button from '@/components/Button';
 
 const NewsWidget = ({ title, news, button }) => {
+	if (news.length === 0) {
+		return null;
+	}
+
 	return (
 		<div className="border border-gray-200 rounded text-sm p-4">
 			<h3 className="hh3">{title}</h3>

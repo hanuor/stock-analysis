@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+	body {
+		@apply text-gray-900;
+	}
+
 	.contain {
 		/* Container for the main content, but not if full-width on mobile */
 		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
@@ -14,23 +18,23 @@
 	}
 
 	.bll {
-		@apply text-blue-link hover:text-black;
+		@apply text-blue-link hover:text-gray-900;
 	}
 
 	.link {
-		@apply text-blue-link hover:text-black;
+		@apply text-blue-link hover:text-gray-900;
 	}
 
 	.hh1 {
-		@apply text-3xl font-bold mb-4 text-gray-900;
+		@apply text-3xl font-bold mb-4;
 	}
 
 	.hh2 {
-		@apply text-2xl font-bold mb-3 text-gray-900;
+		@apply text-2xl font-bold mb-3;
 	}
 
 	.hh3 {
-		@apply text-xl font-bold mb-2.5 xs:mb-3 text-gray-900;
+		@apply text-xl font-bold mb-2.5 xs:mb-3;
 	}
 
 	.text-page {
