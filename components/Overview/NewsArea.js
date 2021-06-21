@@ -65,7 +65,7 @@ const NewsArea = ({ news }) => {
 			<div className="px-4 md:px-0 mt-6 lg:mt-0">
 				<h2 className="hh2 mb-2">News</h2>
 				<div className="text-smaller xs:text-base">
-					<ul className="flex flex-row space-x-2.5 xs:space-x-5">
+					<ul className="flex flex-row justify-between bp:justify-start bp:space-x-5 whitespace-nowrap">
 						<li>
 							<button
 								className={type === 'all' ? active : inactive}
@@ -80,13 +80,16 @@ const NewsArea = ({ news }) => {
 								Videos
 							</button>
 						</li>
-						<li>
-							<button
-								className={type === 'pr' ? active : inactive}
-								onClick={() => setType('pr')}>
-								Press Releases
-							</button>
-						</li>
+						{info.type === 'stocks' && (
+							<li>
+								<button
+									className={type === 'pr' ? active : inactive}
+									onClick={() => setType('pr')}>
+									Press
+									<span className="hidden xs:inline"> Releases</span>
+								</button>
+							</li>
+						)}
 						<li>
 							<button
 								className={type === 'chat' ? active : inactive}

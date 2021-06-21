@@ -25,6 +25,10 @@ const DividendChart = ({ data, options }) => {
 		setY2(data.growthTTM);
 	};
 
+	if (data === null || data.amount.length === 0) {
+		return null;
+	}
+
 	return (
 		<>
 			<div className="flex flex-row justify-between items-end mb-1">
