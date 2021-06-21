@@ -5,34 +5,8 @@ import Buttons from "@/components/Chart/ButtonsUI";
 import { useImmerReducer } from "use-immer";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
 import { stockState } from "@State/stockState";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import React from "react";
-
-import {
-	elderRay,
-	ema,
-	discontinuousTimeScaleProviderBuilder,
-	Chart,
-	ChartCanvas,
-	CurrentCoordinate,
-	BarSeries,
-	CandlestickSeries,
-	ElderRaySeries,
-	LineSeries,
-	MovingAverageTooltip,
-	OHLCTooltip,
-	SingleValueTooltip,
-	lastVisibleItemBasedZoomAnchor,
-	XAxis,
-	YAxis,
-	CrossHairCursor,
-	EdgeIndicator,
-	MouseCoordinateX,
-	MouseCoordinateY,
-	ZoomButtons,
-	withDeviceRatio,
-	withSize,
-} from "react-financial-charts";
 
 export default function CandleStickStockChart(props) {
 	if (!props.info) {

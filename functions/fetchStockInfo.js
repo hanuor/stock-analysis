@@ -16,7 +16,7 @@ export function getStockUrls() {
 
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
-	const infoApi = process.env.API_URL + `/symbol?symbol=${symbol}`;
+	const infoApi = process.env.API_URL + `/stock?symbol=${symbol}`;
 
 	const response = await Axios.get(infoApi);
 	const info = response.data;

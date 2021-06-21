@@ -30,6 +30,7 @@ import {
 } from "react-financial-charts";
 import { IOHLCData } from "./iOHLCData";
 import { HoverTooltipCustom } from "@/components/Chart/HoverTooltipCustom";
+import { OHLCTooltipCustom } from "@/components/Chart/OHLCTooltipCustom";
 import { withOHLCData } from "./withOHLCData";
 import { current } from "immer";
 
@@ -47,6 +48,8 @@ class StockChart extends React.Component<StockChartProps> {
 	private readonly margin = { left: 35, right: 62, top: 0, bottom: 24 };
 	private readonly pricesDisplayFormat = format(".2f");
 	private readonly volumeDisplayFormat = format(".4s");
+	private readonly changeDisplayFormat = format("+.2f");
+	private readonly percentDisplayFormat = format("+.2%");
 
 	private readonly xScaleProvider =
 		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
@@ -62,7 +65,7 @@ class StockChart extends React.Component<StockChartProps> {
 
 			width,
 		} = this.props;
-		console.log(this.props.loading);
+
 		const volumeFormatter = format(".2s");
 		const disablePan = false;
 		const disableZoom = false;
@@ -75,7 +78,7 @@ class StockChart extends React.Component<StockChartProps> {
 			candleStrokeWidth: 0.5,
 			widthRatio: 0.8,
 		};
-		console.log(this.props);
+
 		const openCloseColor = (data) => {
 			return data.close > data.open ? "#26a69a" : "#ef5350";
 		};
@@ -115,7 +118,7 @@ class StockChart extends React.Component<StockChartProps> {
 			.accessor((d: any) => d.sma200);
 
 		const elder = elderRay();
-		console.log(sma50.accessor);
+
 		const calculatedData = elder(sma200(sma50(initialData)));
 
 		const { margin, xScaleProvider } = this;
@@ -124,7 +127,6 @@ class StockChart extends React.Component<StockChartProps> {
 			xScaleProvider(calculatedData);
 
 		const max = xAccessor(data[data.length - 1]);
-		const min = xAccessor(data[Math.max(0, data.length - 100)]);
 
 		const volumeMax = Math.max.apply(
 			Math,
@@ -248,6 +250,7 @@ class StockChart extends React.Component<StockChartProps> {
 						yAccessor={(d) => d.ma2}
 						fillStyle={sma50.stroke()}
 					/>
+
 					<MouseCoordinateY
 						rectWidth={margin.right}
 						displayFormat={this.pricesDisplayFormat}
@@ -257,11 +260,11 @@ class StockChart extends React.Component<StockChartProps> {
 						itemType="last"
 						rectWidth={margin.right - 20}
 						rectHeight={15}
-						fill={ma2color}
+						fill={ma1color}
 						orient="right"
 						edgeAt="right"
 						fontSize={11}
-						lineStroke={ma2color}
+						lineStroke={ma1color}
 						displayFormat={this.pricesDisplayFormat}
 						yAccessor={sma200.accessor()}
 					/>
@@ -270,7 +273,7 @@ class StockChart extends React.Component<StockChartProps> {
 						rectWidth={margin.right - 20}
 						rectHeight={15}
 						hideLine={true}
-						fill={ma1color}
+						fill={ma2color}
 						orient="right"
 						edgeAt="right"
 						fontSize={11}
@@ -286,6 +289,24 @@ class StockChart extends React.Component<StockChartProps> {
 						displayFormat={this.pricesDisplayFormat}
 						yAccessor={yEdgeIndicator}
 						fontSize={13}
+					/>
+					<OHLCTooltipCustom origin={[5, 15]} />
+					<MovingAverageTooltip
+						origin={[8, 24]}
+						options={[
+							{
+								yAccessor: (d) => d.ma1,
+								type: "SMA",
+								stroke: sma200.stroke(),
+								windowSize: sma200.options().windowSize,
+							},
+							{
+								yAccessor: (d) => d.ma2,
+								type: "SMA",
+								stroke: sma50.stroke(),
+								windowSize: sma50.options().windowSize,
+							},
+						]}
 					/>
 					<HoverTooltipCustom
 						yAccessor={sma50.accessor()}
@@ -322,18 +343,6 @@ class StockChart extends React.Component<StockChartProps> {
 										value:
 											currentItem.volume &&
 											this.volumeDisplayFormat(currentItem.volume),
-									},
-									{
-										label: "MA (50)",
-										value:
-											currentItem.ma1 &&
-											this.pricesDisplayFormat(currentItem.ma1),
-									},
-									{
-										label: "MA (200)",
-										value:
-											currentItem.ma2 &&
-											this.pricesDisplayFormat(currentItem.ma2),
 									},
 								],
 							}),

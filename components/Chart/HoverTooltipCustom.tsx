@@ -8,9 +8,9 @@ import {
 	last,
 } from "@react-financial-charts/core";
 
-const PADDING = 4;
+const PADDING = 2;
 const X = 8;
-const Y = 8;
+const Y = 0;
 
 const roundRect = (
 	ctx: CanvasRenderingContext2D,
@@ -68,15 +68,17 @@ const defaultTooltipCanvas = (
 	if (fontFill !== undefined) {
 		ctx.fillStyle = fontFill;
 	}
+	/*
 	ctx.textAlign = "left";
 	ctx.fillText(content.x, X, startY);
+	console.log(content.x); */
 
 	const maxLabel =
 		max(content.y, (y: any) => ctx.measureText(y.label as string).width) ?? 0;
 
 	for (let i = 0; i < content.y.length; i++) {
 		const y = content.y[i];
-		const textY = (i + 1) * PADDING + startY + fontSize * (i + 1);
+		const textY = (i + 1) * PADDING + startY - 8 + fontSize * (i + 1);
 		ctx.font = `${fontSize}px ${fontFamily}`;
 		ctx.fillStyle = y.stroke ?? fontFill;
 		ctx.fillText(y.label, X, textY);
@@ -212,7 +214,7 @@ const defaultOrigin = (
 	x = normalizeX(x, bgSize, pointWidth, width);
 	y = normalizeY(y, bgSize);
 
-	return [8, 24];
+	return [6, 60];
 };
 
 export interface HoverTooltipProps {
@@ -337,7 +339,7 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 		const bgSize = calculateTooltipSize(this.props, content, ctx);
 
 		const [x, y] = origin(this.props, moreProps, bgSize, pointWidth);
-
+		console.log(content);
 		return { x, y, content, centerX, pointWidth, bgSize };
 	};
 }
