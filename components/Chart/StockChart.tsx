@@ -31,6 +31,7 @@ import {
 import { IOHLCData } from "./iOHLCData";
 import { HoverTooltipCustom } from "@/components/Chart/HoverTooltipCustom";
 import { OHLCTooltipCustom } from "@/components/Chart/OHLCTooltipCustom";
+import { MovingAverageTooltipCustom } from "@/components/Chart/MovingAverageTooltipCustom";
 import { withOHLCData } from "./withOHLCData";
 import { current } from "immer";
 
@@ -41,6 +42,7 @@ interface StockChartProps {
 	readonly width: number;
 	readonly ratio: number;
 	readonly loading: boolean;
+	readonly type: string;
 }
 
 class StockChart extends React.Component<StockChartProps> {
@@ -62,10 +64,10 @@ class StockChart extends React.Component<StockChartProps> {
 			dateTimeFormat = "%d %b",
 			height,
 			ratio,
-
 			width,
+			type,
 		} = this.props;
-
+		console.log(type);
 		const volumeFormatter = format(".2s");
 		const disablePan = false;
 		const disableZoom = false;
@@ -83,9 +85,10 @@ class StockChart extends React.Component<StockChartProps> {
 			return data.close > data.open ? "#26a69a" : "#ef5350";
 		};
 
-		const barChartExtents = (data) => {
-			return data.volume;
+		const priceOrCandleStickColor = (data) => {
+			return type == "line" ? "#000000" : openCloseColor(data);
 		};
+
 		const candleChartExtents = (data) => {
 			return [data.high, data.low, data.ma1, data.ma2];
 		};
@@ -119,12 +122,36 @@ class StockChart extends React.Component<StockChartProps> {
 
 		const elder = elderRay();
 
+		var movingAverageTooltipOptions = [
+			{
+				yAccessor: (d) => d.ma1,
+				type: "SMA",
+				stroke: sma200.stroke(),
+				windowSize: sma200.options().windowSize,
+			},
+			{
+				yAccessor: (d) => d.ma2,
+				type: "SMA",
+				stroke: sma50.stroke(),
+				windowSize: sma50.options().windowSize,
+			},
+		];
+
 		const calculatedData = elder(sma200(sma50(initialData)));
 
 		const { margin, xScaleProvider } = this;
 
 		const { data, xScale, xAccessor, displayXAccessor } =
 			xScaleProvider(calculatedData);
+
+		if (type == "line") {
+			movingAverageTooltipOptions.push({
+				yAccessor: (d) => d.close,
+				type: "Price",
+				stroke: "#000000",
+				windowSize: null,
+			});
+		}
 
 		const max = xAccessor(data[data.length - 1]);
 
@@ -148,44 +175,12 @@ class StockChart extends React.Component<StockChartProps> {
 		const gridHeight = height - margin.top - margin.bottom;
 
 		const elderRayHeight = 100;
-		const elderRayOrigin = (_: number, h: number) => [0, h - elderRayHeight];
-		const barChartHeight = gridHeight / 4;
-		const barChartOrigin = (_: number, h: number) => [
-			0,
-			h - barChartHeight - elderRayHeight,
-		];
+
 		const chartHeight = gridHeight - elderRayHeight;
 		const ma1color = "#2c6288";
 		const ma2color = "#c65102";
 		console.log(xExtents);
-		const timeDisplayFormat = timeFormat(dateTimeFormat);
-		const tooltipContent = () => {
-			return ({ currentItem, xAccessor }) => {
-				// the console.log() below is not logging in the console.
-				console.log(xAccessor(currentItem));
-				return {
-					x: xAccessor(currentItem),
-					y: [
-						{
-							label: "Type",
-							value: currentItem.type && currentItem.type,
-						},
-						{
-							label: "Value",
-							value: currentItem.value && currentItem.value,
-						},
-						{
-							label: "Volume",
-							value: currentItem.volume && currentItem.volume,
-						},
-						{
-							label: "Total Volume",
-							value: currentItem.totalVolume && currentItem.totalVolume,
-						},
-					],
-				};
-			};
-		};
+
 		if (this.props.loading) {
 			return (
 				<div className="w-full h-full absolute">
@@ -233,7 +228,21 @@ class StockChart extends React.Component<StockChartProps> {
 						showGridLines={true}
 						tickFormat={this.pricesDisplayFormat}
 					/>
-					<CandlestickSeries {...candlesAppearance} />
+					{type == "candlestick" ? (
+						<CandlestickSeries {...candlesAppearance} />
+					) : (
+						<>
+							<LineSeries
+								yAccessor={(d) => d.close}
+								strokeStyle={"#000000"}
+							/>
+							<CurrentCoordinate
+								yAccessor={(d) => d.close}
+								fillStyle={priceOrCandleStickColor}
+							/>
+						</>
+					)}
+
 					<LineSeries
 						yAccessor={(d) => d.ma1}
 						strokeStyle={sma200.stroke()}
@@ -284,29 +293,16 @@ class StockChart extends React.Component<StockChartProps> {
 					<EdgeIndicator
 						itemType="last"
 						rectWidth={margin.right - 15}
-						fill={openCloseColor}
-						lineStroke={openCloseColor}
+						fill={priceOrCandleStickColor}
+						lineStroke={priceOrCandleStickColor}
 						displayFormat={this.pricesDisplayFormat}
 						yAccessor={yEdgeIndicator}
 						fontSize={13}
 					/>
 					<OHLCTooltipCustom origin={[5, 15]} />
-					<MovingAverageTooltip
+					<MovingAverageTooltipCustom
 						origin={[8, 24]}
-						options={[
-							{
-								yAccessor: (d) => d.ma1,
-								type: "SMA",
-								stroke: sma200.stroke(),
-								windowSize: sma200.options().windowSize,
-							},
-							{
-								yAccessor: (d) => d.ma2,
-								type: "SMA",
-								stroke: sma50.stroke(),
-								windowSize: sma50.options().windowSize,
-							},
-						]}
+						options={movingAverageTooltipOptions}
 					/>
 					<HoverTooltipCustom
 						yAccessor={sma50.accessor()}

@@ -339,7 +339,7 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 		const bgSize = calculateTooltipSize(this.props, content, ctx);
 
 		const [x, y] = origin(this.props, moreProps, bgSize, pointWidth);
-		console.log(content);
+
 		return { x, y, content, centerX, pointWidth, bgSize };
 	};
 }

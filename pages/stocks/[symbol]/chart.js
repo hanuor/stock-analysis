@@ -1,6 +1,6 @@
 import Stock from "@/components/Layout/StockLayout";
-import StockTest from "@/components/Chart/StockTest";
-import Select from "@/components/Chart/SelectUI";
+import StockChart from "@/components/Chart/StockChart";
+import { SelectPeriod, SelectType } from "@/components/Chart/SelectUI";
 import Buttons from "@/components/Chart/ButtonsUI";
 import { useImmerReducer } from "use-immer";
 import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
@@ -16,6 +16,7 @@ export default function CandleStickStockChart(props) {
 	const initialState = {
 		period: "d",
 		time: "1Y",
+		type: "candlestick",
 		loading: false,
 	};
 
@@ -33,6 +34,10 @@ export default function CandleStickStockChart(props) {
 				return;
 			case "changeLoading":
 				draft.loading = action.value;
+				return;
+			case "changeType":
+				draft.type = action.value;
+				return;
 		}
 	}
 
@@ -51,14 +56,16 @@ export default function CandleStickStockChart(props) {
 			<h2 className="text-2xl font-bold my-8">
 				<div>
 					<div>
-						<Select dispatcher={dispatch} />
+						<SelectType dispatcher={dispatch} />
+						<SelectPeriod dispatcher={dispatch} />
 						<Buttons dispatcher={dispatch} />
 					</div>
-					<StockTest
+					<StockChart
 						loading={state.loading}
 						stockId={props.info.id}
 						period={state.period}
 						time={state.time}
+						type={state.type}
 						dispatcher={dispatch}
 					/>
 				</div>
