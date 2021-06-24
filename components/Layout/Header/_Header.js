@@ -53,7 +53,7 @@ export default function Header() {
 				<div>
 					<Link href="/" className="flex">
 						<a>
-							<HeaderLogo />
+							<HeaderLogo className="h-8 w-8 lg:hidden" />
 							<HeaderLogoFull />
 						</a>
 					</Link>

@@ -1,6 +1,6 @@
-export default function HeaderLogo() {
+export default function HeaderLogo({ className }) {
 	return (
-		<div className="h-8 w-8 lg:hidden">
+		<div className={className}>
 			<svg
 				version="1.0"
 				xmlns="http://www.w3.org/2000/svg"
