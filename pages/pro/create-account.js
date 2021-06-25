@@ -32,7 +32,7 @@ export default function FreeTrial() {
 
 	return (
 		<>
-			<Meta title="Start Free Trial" />
+			<Meta title="Create Account" />
 			<Header />
 			<main>
 				<div className="max-w-[850px] mx-auto text-center px-6 py-20 sm:px-0">

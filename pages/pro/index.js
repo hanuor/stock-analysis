@@ -2,8 +2,13 @@ import Meta from '@/components/Meta';
 import Header from '@/components/Layout/Header/_Header';
 import Footer from '@/components/Layout/Footer/_Footer';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from 'firebase/AuthContext';
 
 export default function LandingPage() {
+	const router = useRouter();
+	const { signup, resetPassword } = useAuth();
+
 	useEffect(() => {
 		const paddleJs = document.createElement('script');
 		paddleJs.src = 'https://cdn.paddle.com/paddle/paddle.js';
@@ -16,6 +21,28 @@ export default function LandingPage() {
 			Paddle.Setup({ vendor: 2545 });
 		};
 	}, []);
+
+	function checkoutComplete(data) {
+		let checkoutId = data.checkout.id;
+
+		// eslint-disable-next-line no-undef
+		Paddle.Order.details(checkoutId, function (data) {
+			let email = data.order.customer.email;
+			let password = Math.random().toString(36).slice(-8) + '?!3377';
+
+			// console.log(data);
+			console.log('User email is: ' + email);
+			console.log('Password is: ' + password);
+
+			try {
+				signup(email, password);
+				resetPassword(email);
+				router.push('/pro/confirmation/');
+			} catch {
+				console.log('There was an error creating the user');
+			}
+		});
+	}
 
 	return (
 		<>
@@ -87,7 +114,8 @@ export default function LandingPage() {
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												Paddle.Checkout.open({
-													product: 649892,
+													product: 13309,
+													successCallback: checkoutComplete,
 												});
 											}}
 											id="start-trial"
