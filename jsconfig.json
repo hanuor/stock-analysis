@@ -9,7 +9,8 @@
 			"@/Functions/*": ["functions/*"],
 			"@Data/*": ["data/*"],
 			"@State/*": ["state/*"],
-			"@Content/*": ["content/*"]
+			"@Content/*": ["content/*"],
+			"Fire/*": ["firebase/*"]
 		}
 	}
 }

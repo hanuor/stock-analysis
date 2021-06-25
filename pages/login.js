@@ -1,12 +1,10 @@
-import Layout from "@/Layout/LayoutFullWidth";
-import LoginForm from "@/components/LoginForm";
+import Layout from '@/Layout/LayoutFullWidth';
+import LoginForm from '@/components/Users/LoginForm';
+import LogoutForm from '@/components/Users/LogoutForm';
+import { useAuth } from 'firebase/AuthContext';
 
-const Login = () => {
-	return (
-		<Layout>
-			<LoginForm />
-		</Layout>
-	);
-};
+export default function Login() {
+	const { currentUser } = useAuth();
 
-export default Login;
+	return <Layout>{currentUser ? <LogoutForm /> : <LoginForm />}</Layout>;
+}
