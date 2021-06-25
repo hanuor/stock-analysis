@@ -10,7 +10,7 @@ export function SelectPeriod(props) {
 				}
 				id="period"
 				name="period"
-				className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				className="block pl-3 sm:border-l border-r border-gray-300 pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="Day">
 				<option value="d">Day</option>
 				<option value="w">Week</option>
@@ -32,7 +32,7 @@ export function SelectType(props) {
 				}
 				id="period"
 				name="period"
-				className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+				className="block pl-3 sm:border-l border-gray-300 pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="Day">
 				<option value="candlestick">Candles</option>
 				<option value="line">Line</option>

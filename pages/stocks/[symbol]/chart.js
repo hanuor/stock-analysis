@@ -51,20 +51,24 @@ export default function CandleStickStockChart({ info, data }) {
 
 	return (
 		<Stock>
-			<div className="border border-gray-200">
-				<div className="flex flex-row justify-between items-center border-b border-gray-200 p-0.5 mb-3">
-					<Buttons dispatcher={dispatch} />
-					<SelectPeriod dispatcher={dispatch} />
-					<SelectType dispatcher={dispatch} />
+			<div className="px-2 sm:contain">
+				<div className="">
+					<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
+						<Buttons dispatcher={dispatch} />
+						<SelectPeriod dispatcher={dispatch} />
+						<SelectType dispatcher={dispatch} />
+					</div>
+					<div className="max-h-[500px] bp:max-h-[550px] sm:max-h-[600px]">
+						<StockChart
+							loading={state.loading}
+							stockId={info.id}
+							period={state.period}
+							time={state.time}
+							type={state.type}
+							dispatcher={dispatch}
+						/>
+					</div>
 				</div>
-				<StockChart
-					loading={state.loading}
-					stockId={info.id}
-					period={state.period}
-					time={state.time}
-					type={state.type}
-					dispatcher={dispatch}
-				/>
 			</div>
 		</Stock>
 	);
