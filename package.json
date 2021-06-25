@@ -9,7 +9,9 @@
 		"lint": "eslint ./"
 	},
 	"dependencies": {
+		"@headlessui/react": "^1.2.0",
 		"@babel/core": "^7.14.2",
+		"@heroicons/react": "^1.0.1",
 		"@babel/plugin-transform-modules-commonjs": "^7.14.0",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tippyjs/react": "^4.2.5",
@@ -23,6 +25,7 @@
 		"immer": "^9.0.2",
 		"luxon": "^1.26.0",
 		"next": "10.2.0",
+		"next-mdx-remote": "^3.0.2",
 		"next-transpile-modules": "^7.0.0",
 		"react": "17.0.2",
 		"react-chartjs-2": "^3.0.3",
@@ -30,10 +33,10 @@
 		"react-financial-charts": "^1.2.2",
 		"react-table": "^7.7.0",
 		"use-immer": "^0.5.1",
+		"xml2js": "^0.4.23",
 		"zustand": "^3.5.1"
 	},
 	"devDependencies": {
-		"@tailwindcss/typography": "^0.4.0",
 		"@types/node": "^15.6.1",
 		"@types/react": "^17.0.8",
 		"@types/react-dom": "^17.0.5",

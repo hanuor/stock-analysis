@@ -1,8 +1,8 @@
-import Meta from "@/components/Meta";
-import Header from "@/Layout/Header";
-import Footer from "@/Layout/Footer";
-import StockHeading from "@/components/Stocks/StockHeading";
-import stockState from "@State/stockState";
+import Meta from '@/components/Meta';
+import Header from '@/components/Layout/Header/_Header';
+import Footer from '@/components/Layout/Footer/_Footer';
+import StockHeading from '@/components/StockHeading/_StockHeading';
+import stockState from '@State/stockState';
 
 export default function Stock({ children }) {
 	const info = stockState((state) => state.info);
@@ -10,11 +10,11 @@ export default function Stock({ children }) {
 	return (
 		<>
 			<Meta title={info.ticker}></Meta>
-			<div className="flex flex-col h-screen">
+			<div className="flex flex-col">
 				<Header />
-				<div className="mx-auto py-5 sm:py-6 w-full xl:max-w-screen-xl">
+				<div className="mx-auto pt-5 pb-10 sm:pt-6 w-full xl:max-w-screen-xl">
 					<main>
-						<StockHeading />
+						<StockHeading type={info.type} />
 						{children}
 					</main>
 				</div>

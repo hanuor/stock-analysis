@@ -21,6 +21,6 @@ module.exports = withTM({
 
 	trailingSlash: true,
 	images: {
-		domains: ["cdn.snapi.dev"],
+		domains: ['storage.googleapis.com'],
 	},
 });

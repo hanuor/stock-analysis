@@ -4,7 +4,13 @@
 		"es2021": true,
 		"node": true
 	},
-	"extends": ["eslint:recommended", "plugin:react/recommended"],
+	"extends": [
+		"next",
+		"next/core-web-vitals",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended"
+	],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true
@@ -16,6 +22,7 @@
 	"rules": {
 		"react/react-in-jsx-scope": "off",
 		"react/prop-types": "off",
-		"react/jsx-key": "off"
+		"react/jsx-key": "off",
+		"@next/next/no-img-element": "off"
 	}
 }

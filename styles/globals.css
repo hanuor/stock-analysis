@@ -3,7 +3,111 @@
 @tailwind utilities;
 
 @layer base {
-	a {
-		@apply hover:text-blue-600;
+	body {
+		@apply text-gray-900;
+	}
+
+	.contain {
+		/* Container for the main content, but not if full-width on mobile */
+		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
+	}
+
+	.uncontain {
+		/* Remove the container */
+		@apply px-0 mx-0 w-auto max-w-none;
+	}
+
+	.bll {
+		@apply text-blue-link hover:text-gray-900;
+	}
+
+	.link {
+		@apply text-blue-link hover:text-gray-900;
+	}
+
+	.hh1 {
+		@apply text-3xl font-bold mb-4;
+	}
+
+	.hh2 {
+		@apply text-2xl font-bold mb-3;
+	}
+
+	.hh3 {
+		@apply text-xl font-bold mb-2.5 xs:mb-3;
+	}
+
+	.text-page {
+		@apply text-base md:text-lg text-gray-900;
+	}
+
+	.text-page h1 {
+		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-4 md:pb-5;
+	}
+
+	.text-page h2 {
+		@apply text-2xl md:text-3xl font-bold mb-3 md:mb-4;
+	}
+
+	.text-page h3 {
+		@apply text-xl md:text-2xl font-bold mb-3 md:mb-4;
+	}
+
+	.text-page p {
+		@apply mb-5;
+	}
+
+	.text-page a {
+		@apply link;
+	}
+
+	.text-page ul {
+		list-style: disc;
+		@apply ml-8 md:ml-10 mb-5;
+	}
+
+	.text-page ol {
+		list-style: decimal;
+		@apply ml-6 mb-5;
+	}
+
+	.text-page li {
+		@apply mb-3;
+	}
+
+	.text-page .right-image {
+		@apply max-w-[140px] sm:max-w-none float-right ml-5 mb-4 mr-1;
+	}
+
+	.text-page table {
+		@apply mb-6 w-full;
+	}
+
+	.text-page table tr {
+		@apply border-b first:border-t border-gray-200;
+	}
+
+	.text-page table tr th {
+		@apply py-2 sm:px-3;
+	}
+
+	.text-page table tr td {
+		@apply py-2 sm:px-3;
+	}
+
+	.profilewrap {
+		width: calc(100% - 336px - 40px);
+	}
+
+	.red {
+		color: red;
+	}
+
+	.green {
+		color: green;
+	}
+
+	.text-shadow {
+		text-shadow: 0 0 0.5px #555555;
 	}
 }

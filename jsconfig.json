@@ -8,7 +8,8 @@
 			"@/Styles/*": ["styles/*"],
 			"@/Functions/*": ["functions/*"],
 			"@Data/*": ["data/*"],
-			"@State/*": ["state/*"]
+			"@State/*": ["state/*"],
+			"@Content/*": ["content/*"]
 		}
 	}
 }

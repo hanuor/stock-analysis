@@ -1,0 +1,35 @@
+.bigTooltipText {
+	font-size: 1rem !important;
+	padding: 0.3rem;
+}
+
+.statstable {
+	width: 100%;
+}
+
+.statstable tr {
+	border-bottom: 1px solid #ddd;
+}
+
+.statstable tr:first-child {
+	border-top: 1px solid #ddd;
+}
+
+.statstable tr td {
+	padding: 8px 10px;
+}
+
+.statstable tr td:last-child {
+	text-align: right;
+	font-weight: 600;
+}
+
+.statstable tr:nth-child(odd) {
+	background-color: rgba(249, 250, 251, 1);
+}
+
+@media screen and (max-width: 350px) {
+	.statstable tr td {
+		padding: 6px 5px;
+	}
+}

@@ -3,10 +3,11 @@ import StockChart from "@/components/Chart/StockChart";
 import { SelectPeriod, SelectType } from "@/components/Chart/SelectUI";
 import Buttons from "@/components/Chart/ButtonsUI";
 import { useImmerReducer } from "use-immer";
-import { getPageData, getStockInfo } from "@/Functions/fetchStockInfo";
+import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
 import { stockState } from "@State/stockState";
 import { useEffect } from "react";
 import React from "react";
+
 
 export default function CandleStickStockChart(props) {
 	if (!props.info) {
@@ -47,9 +48,13 @@ export default function CandleStickStockChart(props) {
 	const setData = stockState((state) => state.setData);
 
 	useEffect(() => {
-		setInfo(props.info);
-		setData(props.data);
-	}, []);
+		setInfo(info);
+		setData(data);
+	}, [data, info, setData, setInfo]);
+
+	if (!info) {
+		return null;
+	}
 
 	return (
 		<Stock>
@@ -75,12 +80,12 @@ export default function CandleStickStockChart(props) {
 }
 
 export async function getStaticPaths() {
-	return { paths: [], fallback: "blocking" };
+	return { paths: [], fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
-	const data = await getPageData(info.id, "overview");
+	const data = await getPageData(info.id, 'overview');
 
 	return {
 		props: {

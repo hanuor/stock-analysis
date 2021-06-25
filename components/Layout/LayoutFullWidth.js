@@ -1,12 +1,12 @@
-import Meta from "@/components/Meta";
-import Header from "@/Layout/Header";
-import Footer from "@/Layout/Footer";
+import Meta from '@/components/Meta';
+import Header from '@/components/Layout/Header/_Header';
+import Footer from '@/components/Layout/Footer/_Footer';
 
 function LayoutFullWidth(props) {
 	return (
 		<>
 			<Meta title={props.title}></Meta>
-			<div className="h-screen flex flex-col">
+			<div className="">
 				<Header />
 				<main>{props.children}</main>
 				<Footer />
