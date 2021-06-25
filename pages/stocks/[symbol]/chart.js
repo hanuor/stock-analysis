@@ -1,42 +1,37 @@
-import Stock from "@/components/Layout/StockLayout";
-import StockChart from "@/components/Chart/StockChart";
-import { SelectPeriod, SelectType } from "@/components/Chart/SelectUI";
-import Buttons from "@/components/Chart/ButtonsUI";
-import { useImmerReducer } from "use-immer";
+import Stock from '@/components/Layout/StockLayout';
+import StockChart from '@/components/Chart/StockChart';
+import { SelectPeriod, SelectType } from '@/components/Chart/SelectUI';
+import Buttons from '@/components/Chart/ButtonsUI';
+import { useImmerReducer } from 'use-immer';
 import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
-import { stockState } from "@State/stockState";
-import { useEffect } from "react";
-import React from "react";
+import { stockState } from '@State/stockState';
+import { useEffect } from 'react';
+import React from 'react';
 
-
-export default function CandleStickStockChart(props) {
-	if (!props.info) {
-		return <h1>Loading...</h1>;
-	}
-
+export default function CandleStickStockChart({ info, data }) {
 	const initialState = {
-		period: "d",
-		time: "1Y",
-		type: "candlestick",
+		period: 'd',
+		time: '1Y',
+		type: 'candlestick',
 		loading: false,
 	};
 
 	function ourReducer(draft, action) {
 		switch (action.type) {
-			case "periodChange":
+			case 'periodChange':
 				draft.period = action.value;
 				draft.loading = true;
 				console.log(action.value);
 				return;
-			case "timeChange":
+			case 'timeChange':
 				draft.time = action.value;
 				draft.loading = true;
 				console.log(action.value);
 				return;
-			case "changeLoading":
+			case 'changeLoading':
 				draft.loading = action.value;
 				return;
-			case "changeType":
+			case 'changeType':
 				draft.type = action.value;
 				return;
 		}
@@ -67,7 +62,7 @@ export default function CandleStickStockChart(props) {
 					</div>
 					<StockChart
 						loading={state.loading}
-						stockId={props.info.id}
+						stockId={info.id}
 						period={state.period}
 						time={state.time}
 						type={state.type}
