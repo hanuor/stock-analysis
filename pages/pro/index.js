@@ -2,7 +2,6 @@ import Meta from '@/components/Meta';
 import Header from '@/components/Layout/Header/_Header';
 import Footer from '@/components/Layout/Footer/_Footer';
 import { useEffect } from 'react';
-import Link from 'next/link';
 
 export default function LandingPage() {
 	useEffect(() => {
@@ -12,7 +11,9 @@ export default function LandingPage() {
 
 		paddleJs.onload = () => {
 			// eslint-disable-next-line no-undef
-			Paddle.Setup({ vendor: 128917 });
+			Paddle.Environment.set('sandbox');
+			// eslint-disable-next-line no-undef
+			Paddle.Setup({ vendor: 2545 });
 		};
 	}, []);
 
@@ -82,19 +83,17 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-0">
-										<Link href="/pro/free-trial/" passHref>
-											<button
-												/*onClick={() => {
+										<button
+											onClick={() => {
 												// eslint-disable-next-line no-undef
 												Paddle.Checkout.open({
 													product: 649892,
 												});
-											}}*/
-												id="start-trial"
-												className="block w-full p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-												Start Free Trial
-											</button>
-										</Link>
+											}}
+											id="start-trial"
+											className="block w-full p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+											Start Free Trial
+										</button>
 									</td>
 								</tr>
 							</tbody>
