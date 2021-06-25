@@ -3,7 +3,6 @@ import { timeFormat } from 'd3-time-format';
 import * as React from 'react';
 import {
 	elderRay,
-	ema,
 	sma,
 	discontinuousTimeScaleProviderBuilder,
 	Chart,
@@ -11,20 +10,13 @@ import {
 	CurrentCoordinate,
 	BarSeries,
 	CandlestickSeries,
-	ElderRaySeries,
 	LineSeries,
-	MovingAverageTooltip,
-	OHLCTooltip,
-	HoverTooltip,
-	SingleValueTooltip,
 	lastVisibleItemBasedZoomAnchor,
 	XAxis,
 	YAxis,
 	CrossHairCursor,
 	EdgeIndicator,
-	MouseCoordinateX,
 	MouseCoordinateY,
-	ZoomButtons,
 	withDeviceRatio,
 	withSize,
 } from 'react-financial-charts';
@@ -174,12 +166,9 @@ class StockChart extends React.Component<StockChartProps> {
 
 		const gridHeight = height - margin.top - margin.bottom;
 
-		const elderRayHeight = 100;
-
-		const chartHeight = gridHeight - elderRayHeight;
+		const chartHeight = gridHeight;
 		const ma1color = '#2c6288';
 		const ma2color = '#c65102';
-		console.log(xExtents);
 
 		if (this.props.loading) {
 			return null;
@@ -349,7 +338,7 @@ class StockChart extends React.Component<StockChartProps> {
 				<Chart
 					id={4}
 					height={100}
-					origin={(w, h) => [0, h - 200]}
+					origin={(w, h) => [0, h - 100]}
 					yExtents={volumeYExtents}>
 					<YAxis
 						axisAt="left"
