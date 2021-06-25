@@ -1,6 +1,6 @@
-import { format } from "d3-format";
-import { timeFormat } from "d3-time-format";
-import * as React from "react";
+import { format } from 'd3-format';
+import { timeFormat } from 'd3-time-format';
+import * as React from 'react';
 import {
 	elderRay,
 	ema,
@@ -27,13 +27,13 @@ import {
 	ZoomButtons,
 	withDeviceRatio,
 	withSize,
-} from "react-financial-charts";
-import { IOHLCData } from "./iOHLCData";
-import { HoverTooltipCustom } from "@/components/Chart/HoverTooltipCustom";
-import { OHLCTooltipCustom } from "@/components/Chart/OHLCTooltipCustom";
-import { MovingAverageTooltipCustom } from "@/components/Chart/MovingAverageTooltipCustom";
-import { withOHLCData } from "./withOHLCData";
-import { current } from "immer";
+} from 'react-financial-charts';
+import { IOHLCData } from './iOHLCData';
+import { HoverTooltipCustom } from '@/components/Chart/HoverTooltipCustom';
+import { OHLCTooltipCustom } from '@/components/Chart/OHLCTooltipCustom';
+import { MovingAverageTooltipCustom } from '@/components/Chart/MovingAverageTooltipCustom';
+import { withOHLCData } from './withOHLCData';
+import { current } from 'immer';
 
 interface StockChartProps {
 	readonly data: IOHLCData[];
@@ -46,12 +46,12 @@ interface StockChartProps {
 }
 
 class StockChart extends React.Component<StockChartProps> {
-	private readonly dateFormat = timeFormat("%Y-%m-%d");
+	private readonly dateFormat = timeFormat('%Y-%m-%d');
 	private readonly margin = { left: 35, right: 62, top: 0, bottom: 24 };
-	private readonly pricesDisplayFormat = format(".2f");
-	private readonly volumeDisplayFormat = format(".4s");
-	private readonly changeDisplayFormat = format("+.2f");
-	private readonly percentDisplayFormat = format("+.2%");
+	private readonly pricesDisplayFormat = format('.2f');
+	private readonly volumeDisplayFormat = format('.4s');
+	private readonly changeDisplayFormat = format('+.2f');
+	private readonly percentDisplayFormat = format('+.2%');
 
 	private readonly xScaleProvider =
 		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
@@ -61,20 +61,20 @@ class StockChart extends React.Component<StockChartProps> {
 	public render() {
 		const {
 			data: initialData,
-			dateTimeFormat = "%d %b",
+			dateTimeFormat = '%d %b',
 			height,
 			ratio,
 			width,
 			type,
 		} = this.props;
 		console.log(type);
-		const volumeFormatter = format(".2s");
+		const volumeFormatter = format('.2s');
 		const disablePan = false;
 		const disableZoom = false;
 
 		const candlesAppearance = {
 			fill: function fill(d) {
-				return d.close > d.open ? "rgba(30, 130, 76, 1)" : "rgba(180,0,0)";
+				return d.close > d.open ? 'rgba(30, 130, 76, 1)' : 'rgba(180,0,0)';
 			},
 			clip: true,
 			candleStrokeWidth: 0.5,
@@ -82,11 +82,11 @@ class StockChart extends React.Component<StockChartProps> {
 		};
 
 		const openCloseColor = (data) => {
-			return data.close > data.open ? "#26a69a" : "#ef5350";
+			return data.close > data.open ? '#26a69a' : '#ef5350';
 		};
 
 		const priceOrCandleStickColor = (data) => {
-			return type == "line" ? "#000000" : openCloseColor(data);
+			return type == 'line' ? '#000000' : openCloseColor(data);
 		};
 
 		const candleChartExtents = (data) => {
@@ -97,8 +97,8 @@ class StockChart extends React.Component<StockChartProps> {
 		};
 		const volumeColor = (data) => {
 			return data.close > data.open
-				? "rgba(38, 166, 154, 0.3)"
-				: "rgba(239, 83, 80, 0.3)";
+				? 'rgba(38, 166, 154, 0.3)'
+				: 'rgba(239, 83, 80, 0.3)';
 		};
 		const volumeSeries = (data) => {
 			return data.volume;
@@ -125,13 +125,13 @@ class StockChart extends React.Component<StockChartProps> {
 		var movingAverageTooltipOptions = [
 			{
 				yAccessor: (d) => d.ma1,
-				type: "SMA",
+				type: 'SMA',
 				stroke: sma200.stroke(),
 				windowSize: sma200.options().windowSize,
 			},
 			{
 				yAccessor: (d) => d.ma2,
-				type: "SMA",
+				type: 'SMA',
 				stroke: sma50.stroke(),
 				windowSize: sma50.options().windowSize,
 			},
@@ -144,11 +144,11 @@ class StockChart extends React.Component<StockChartProps> {
 		const { data, xScale, xAccessor, displayXAccessor } =
 			xScaleProvider(calculatedData);
 
-		if (type == "line") {
+		if (type == 'line') {
 			movingAverageTooltipOptions.push({
 				yAccessor: (d) => d.close,
-				type: "Price",
-				stroke: "#000000",
+				type: 'Price',
+				stroke: '#000000',
 				windowSize: null,
 			});
 		}
@@ -177,11 +177,12 @@ class StockChart extends React.Component<StockChartProps> {
 		const elderRayHeight = 100;
 
 		const chartHeight = gridHeight - elderRayHeight;
-		const ma1color = "#2c6288";
-		const ma2color = "#c65102";
+		const ma1color = '#2c6288';
+		const ma2color = '#c65102';
 		console.log(xExtents);
 
 		if (this.props.loading) {
+			return null;
 			return (
 				<div className="w-full h-full absolute">
 					<div className="flex justify-center items-center h-full bg-gray-50 border border-gray-200">
@@ -228,13 +229,13 @@ class StockChart extends React.Component<StockChartProps> {
 						showGridLines={true}
 						tickFormat={this.pricesDisplayFormat}
 					/>
-					{type == "candlestick" ? (
+					{type == 'candlestick' ? (
 						<CandlestickSeries {...candlesAppearance} />
 					) : (
 						<>
 							<LineSeries
 								yAccessor={(d) => d.close}
-								strokeStyle={"#000000"}
+								strokeStyle={'#000000'}
 							/>
 							<CurrentCoordinate
 								yAccessor={(d) => d.close}
@@ -311,31 +312,31 @@ class StockChart extends React.Component<StockChartProps> {
 								x: this.dateFormat(xAccessor(currentItem)),
 								y: [
 									{
-										label: "Open",
+										label: 'Open',
 										value:
 											currentItem.open &&
 											this.pricesDisplayFormat(currentItem.open),
 									},
 									{
-										label: "High",
+										label: 'High',
 										value:
 											currentItem.high &&
 											this.pricesDisplayFormat(currentItem.high),
 									},
 									{
-										label: "Low",
+										label: 'Low',
 										value:
 											currentItem.low &&
 											this.pricesDisplayFormat(currentItem.low),
 									},
 									{
-										label: "Close",
+										label: 'Close',
 										value:
 											currentItem.close &&
 											this.pricesDisplayFormat(currentItem.close),
 									},
 									{
-										label: "Volume",
+										label: 'Volume',
 										value:
 											currentItem.volume &&
 											this.volumeDisplayFormat(currentItem.volume),
@@ -356,7 +357,7 @@ class StockChart extends React.Component<StockChartProps> {
 						ticks={5}
 						gridLinesStrokeWidth={0}
 						tickFormat={(value) =>
-							value > 0 ? volumeFormatter(value) : ""
+							value > 0 ? volumeFormatter(value) : ''
 						}
 						showDomain={false}
 						innerTickSize={0}
@@ -365,7 +366,7 @@ class StockChart extends React.Component<StockChartProps> {
 						widthRatio={0.5}
 						clip={true}
 						yAccessor={(d) => d.volume}
-						fillStyle={(d) => (d.close > d.open ? "#6BA583" : "red")}
+						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
 					/>
 					<EdgeIndicator
 						itemType="last"
@@ -376,7 +377,7 @@ class StockChart extends React.Component<StockChartProps> {
 						edgeAt="right"
 						fontSize={11}
 						lineStroke={openCloseColor}
-						displayFormat={format(".4s")}
+						displayFormat={format('.4s')}
 						yAccessor={volumeSeries}
 						yAxisPad={0}
 					/>
@@ -389,9 +390,9 @@ class StockChart extends React.Component<StockChartProps> {
 export default withOHLCData()(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );
-export const MinutesStockChart = withOHLCData("MINUTES")(
+export const MinutesStockChart = withOHLCData('MINUTES')(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );
-export const SecondsStockChart = withOHLCData("SECONDS")(
+export const SecondsStockChart = withOHLCData('SECONDS')(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );

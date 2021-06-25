@@ -3,7 +3,7 @@ import StockChart from '@/components/Chart/StockChart';
 import { SelectPeriod, SelectType } from '@/components/Chart/SelectUI';
 import Buttons from '@/components/Chart/ButtonsUI';
 import { useImmerReducer } from 'use-immer';
-import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
+import { getStockInfo } from '@/Functions/callBackEnd';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 import React from 'react';
@@ -40,12 +40,10 @@ export default function CandleStickStockChart({ info, data }) {
 	const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
 	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
 
 	useEffect(() => {
 		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
+	}, [info, setInfo]);
 
 	if (!info) {
 		return null;
@@ -53,23 +51,21 @@ export default function CandleStickStockChart({ info, data }) {
 
 	return (
 		<Stock>
-			<h2 className="text-2xl font-bold my-8">
-				<div>
-					<div>
-						<SelectType dispatcher={dispatch} />
-						<SelectPeriod dispatcher={dispatch} />
-						<Buttons dispatcher={dispatch} />
-					</div>
-					<StockChart
-						loading={state.loading}
-						stockId={info.id}
-						period={state.period}
-						time={state.time}
-						type={state.type}
-						dispatcher={dispatch}
-					/>
+			<div className="border border-gray-200">
+				<div className="flex flex-row justify-between items-center border-b border-gray-200 p-0.5 mb-3">
+					<Buttons dispatcher={dispatch} />
+					<SelectPeriod dispatcher={dispatch} />
+					<SelectType dispatcher={dispatch} />
 				</div>
-			</h2>
+				<StockChart
+					loading={state.loading}
+					stockId={info.id}
+					period={state.period}
+					time={state.time}
+					type={state.type}
+					dispatcher={dispatch}
+				/>
+			</div>
 		</Stock>
 	);
 }
@@ -80,12 +76,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
-	const data = await getPageData(info.id, 'overview');
 
 	return {
 		props: {
 			info,
-			data,
 		},
+		revalidate: 300,
 	};
 }

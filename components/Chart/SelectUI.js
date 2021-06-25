@@ -1,13 +1,10 @@
 export function SelectPeriod(props) {
 	return (
 		<div>
-			<label
-				htmlFor="location"
-				className="block text-sm font-medium text-gray-700"></label>
 			<select
 				onChange={(e) =>
 					props.dispatcher({
-						type: "periodChange",
+						type: 'periodChange',
 						value: e.target.value,
 					})
 				}
@@ -26,13 +23,10 @@ export function SelectPeriod(props) {
 export function SelectType(props) {
 	return (
 		<div>
-			<label
-				htmlFor="location"
-				className="block text-sm font-medium text-gray-700"></label>
 			<select
 				onChange={(e) =>
 					props.dispatcher({
-						type: "changeType",
+						type: 'changeType',
 						value: e.target.value,
 					})
 				}
@@ -40,7 +34,7 @@ export function SelectType(props) {
 				name="period"
 				className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
 				defaultValue="Day">
-				<option value="candlestick">Candlestick</option>
+				<option value="candlestick">Candles</option>
 				<option value="line">Line</option>
 			</select>
 		</div>

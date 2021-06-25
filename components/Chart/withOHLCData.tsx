@@ -1,9 +1,9 @@
-import { timeParse } from "d3-time-format";
-import * as React from "react";
-import { IOHLCData } from "./iOHLCData";
-import Axios from "axios";
+import { timeParse } from 'd3-time-format';
+import * as React from 'react';
+import { IOHLCData } from './iOHLCData';
+import Axios from 'axios';
 
-const parseDate = timeParse("%Y-%m-%d");
+const parseDate = timeParse('%Y-%m-%d');
 
 const parseData = () => {
 	return (d: any) => {
@@ -15,7 +15,7 @@ const parseData = () => {
 		}
 
 		for (const key in d) {
-			if (key !== "date" && Object.prototype.hasOwnProperty.call(d, key)) {
+			if (key !== 'date' && Object.prototype.hasOwnProperty.call(d, key)) {
 				d[key] = +d[key];
 			}
 		}
@@ -50,39 +50,39 @@ interface WithOHLCState {
 	loading: boolean;
 }
 
-export function withOHLCData(dataSet = "DAILY") {
+export function withOHLCData(dataSet = 'DAILY') {
 	return <TProps extends WithOHLCDataProps>(
 		OriginalComponent: React.ComponentClass<TProps>
 	) => {
 		return class WithOHLCData extends React.Component<
-			Omit<TProps, "data">,
+			Omit<TProps, 'data'>,
 			WithOHLCState
 		> {
-			public constructor(props: Omit<TProps, "data">) {
+			public constructor(props: Omit<TProps, 'data'>) {
 				super(props);
 
 				this.state = {
 					message: `Loading ${dataSet} data...`,
-					period: "",
-					time: "",
+					period: '',
+					time: '',
 					loading: true,
 				};
 			}
 
 			public componentDidMount() {
-				console.log(this.props["stockId"]);
+				console.log(this.props['stockId']);
 				Axios.get(
-					`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
+					`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=${this.props['time']}`
 				).then((res) => {
 					const forDateParse = res.data.map(fixDataHeaders);
 					const data = forDateParse.map(parseData());
-					const period = this.props["period"];
+					const period = this.props['period'];
 					this.setState({ period });
-					const time = this.props["time"];
+					const time = this.props['time'];
 					this.setState({ time });
 					this.setState({ data });
-					this.props["dispatcher"]({
-						type: "changeLoading",
+					this.props['dispatcher']({
+						type: 'changeLoading',
 						value: false,
 					});
 				});
@@ -92,20 +92,20 @@ export function withOHLCData(dataSet = "DAILY") {
 				const { data, message } = this.state;
 				const { time, period } = this.state;
 
-				if (time != this.props["time"] || period != this.props["period"]) {
+				if (time != this.props['time'] || period != this.props['period']) {
 					Axios.get(
-						`/api/chart?i=${this.props["stockId"]}&p=${this.props["period"]}&t=${this.props["time"]}`
+						`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=${this.props['time']}`
 					).then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
 						const data = forDateParse.map(parseData());
-						const period = this.props["period"];
+						const period = this.props['period'];
 						this.setState({ period });
-						const time = this.props["time"];
+						const time = this.props['time'];
 						this.setState({ time });
 						this.setState({ data });
 						console.log(data);
-						this.props["dispatcher"]({
-							type: "changeLoading",
+						this.props['dispatcher']({
+							type: 'changeLoading',
 							value: false,
 						});
 					});
