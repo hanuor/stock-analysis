@@ -1,13 +1,11 @@
-import { useRouter } from 'next/router';
-import { useAuth } from 'firebase/AuthContext';
+import useUserInfo from '@Firebase/useUserInfo';
 import Link from 'next/link';
 
 export default function HeaderLogin() {
-	const { currentUser, logout } = useAuth();
-	const router = useRouter();
+	const user = useUserInfo();
 
 	const LogInOut = () => {
-		if (!currentUser) {
+		if (!user) {
 			return (
 				<Link href="/login/">
 					<a>Log In</a>
@@ -15,15 +13,15 @@ export default function HeaderLogin() {
 			);
 		} else {
 			return (
-				<span onClick={() => logout()} className="cursor-pointer">
-					Log Out
-				</span>
+				<Link href="/login/">
+					<a>Log Out</a>
+				</Link>
 			);
 		}
 	};
 
 	const TrialOrAccount = () => {
-		if (!currentUser) {
+		if (!user) {
 			return (
 				<Link href="/pro/" prefetch={false}>
 					<a>Free Trial</a>
@@ -31,11 +29,9 @@ export default function HeaderLogin() {
 			);
 		} else {
 			return (
-				<span
-					onClick={() => router.push('/my-account/')}
-					className="cursor-pointer">
-					My Account
-				</span>
+				<Link href="/pro/my-account/" prefetch={false}>
+					<a>My Account</a>
+				</Link>
 			);
 		}
 	};

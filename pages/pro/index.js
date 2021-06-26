@@ -3,11 +3,13 @@ import Header from '@/components/Layout/Header/_Header';
 import Footer from '@/components/Layout/Footer/_Footer';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from 'firebase/AuthContext';
+import { auth } from '@Firebase/firebase';
+import registrationState from '@State/registrationState';
 
 export default function LandingPage() {
 	const router = useRouter();
-	const { signup, resetPassword } = useAuth();
+	const setEmail = registrationState((state) => state.setEmail);
+	const setPassword = registrationState((state) => state.setPassword);
 
 	useEffect(() => {
 		const paddleJs = document.createElement('script');
@@ -22,21 +24,23 @@ export default function LandingPage() {
 		};
 	}, []);
 
-	function checkoutComplete(data) {
+	async function checkoutComplete(data) {
 		let checkoutId = data.checkout.id;
 
 		// eslint-disable-next-line no-undef
-		Paddle.Order.details(checkoutId, function (data) {
+		Paddle.Order.details(checkoutId, async function (data) {
 			let email = data.order.customer.email;
-			let password = Math.random().toString(36).slice(-8) + '?!3377';
+			let password = Math.random().toString(36).slice(-8) + '?!337';
 
-			// console.log(data);
-			console.log('User email is: ' + email);
-			console.log('Password is: ' + password);
+			setEmail(email);
+			setPassword(password);
 
 			try {
-				signup(email, password);
-				resetPassword(email);
+				await auth
+					.createUserWithEmailAndPassword(email, password)
+					.catch((err) => {
+						console.log(err.message);
+					});
 				router.push('/pro/confirmation/');
 			} catch {
 				console.log('There was an error creating the user');

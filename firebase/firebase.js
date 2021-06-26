@@ -1,4 +1,4 @@
-import Firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 
 const KEYS = {
@@ -10,9 +10,8 @@ const KEYS = {
 	appId: process.env.APP_ID,
 };
 
-if (!Firebase.apps.length) {
-	Firebase.initializeApp(KEYS);
+if (!firebase.apps.length) {
+	firebase.initializeApp(KEYS);
 }
 
-export const auth = Firebase.auth();
-export default Firebase;
+export const auth = firebase.auth();

@@ -10,7 +10,7 @@
 			"@Data/*": ["data/*"],
 			"@State/*": ["state/*"],
 			"@Content/*": ["content/*"],
-			"Fire/*": ["firebase/*"]
+			"@Firebase/*": ["firebase/*"]
 		}
 	}
 }
