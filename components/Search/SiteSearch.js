@@ -23,9 +23,13 @@ export default function SiteSearch({ nav }) {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
-				const trendingJSON = await Axios.get('/api/trending/');
+				const trendingJSON = await Axios.get(
+					'https://stockanalysis.com/wp-json/sa/trending/'
+				);
 				setTrending(trendingJSON.data);
-				const indexJSON = await Axios.get('/api/search/');
+				const indexJSON = await Axios.get(
+					'https://stockanalysis.com/wp-json/sa/search/'
+				);
 				setIndex(indexJSON.data);
 			} catch (e) {
 				console.log('There was a problem');
@@ -83,6 +87,7 @@ export default function SiteSearch({ nav }) {
 		return () => {
 			clearTimeout(wait);
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, index]);
 
 	function keyClick(e) {
@@ -174,6 +179,7 @@ export default function SiteSearch({ nav }) {
 			document.removeEventListener('keydown', keyClick);
 			document.removeEventListener('mousedown', mouseClick);
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [open, results]);
 
 	const grayBg = nav ? ' bg-gray-50 focus:bg-white' : '';
