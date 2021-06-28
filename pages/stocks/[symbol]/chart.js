@@ -20,13 +20,11 @@ export default function CandleStickStockChart({ info, data }) {
 		switch (action.type) {
 			case 'periodChange':
 				draft.period = action.value;
-				draft.loading = true;
-				console.log(action.value);
+
 				return;
 			case 'timeChange':
 				draft.time = action.value;
-				draft.loading = true;
-				console.log(action.value);
+
 				return;
 			case 'changeLoading':
 				draft.loading = action.value;

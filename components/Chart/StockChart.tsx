@@ -1,5 +1,6 @@
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
+import { scaleLinear } from 'd3-scale';
 import * as React from 'react';
 import {
 	elderRay,
@@ -35,11 +36,13 @@ interface StockChartProps {
 	readonly ratio: number;
 	readonly loading: boolean;
 	readonly type: string;
+	readonly period: string;
+	readonly time: string;
 }
 
 class StockChart extends React.Component<StockChartProps> {
 	private readonly dateFormat = timeFormat('%Y-%m-%d');
-	private readonly margin = { left: 35, right: 62, top: 0, bottom: 24 };
+	private readonly margin = { left: 0, right: 62, top: 0, bottom: 24 };
 	private readonly pricesDisplayFormat = format('.2f');
 	private readonly volumeDisplayFormat = format('.4s');
 	private readonly changeDisplayFormat = format('+.2f');
@@ -59,7 +62,6 @@ class StockChart extends React.Component<StockChartProps> {
 			width,
 			type,
 		} = this.props;
-		console.log(type);
 		const volumeFormatter = format('.2s');
 		const disablePan = false;
 		const disableZoom = false;
@@ -84,6 +86,11 @@ class StockChart extends React.Component<StockChartProps> {
 		const candleChartExtents = (data) => {
 			return [data.high, data.low, data.ma1, data.ma2];
 		};
+
+		const volChartExtents = (data) => {
+			return [data.volume, 0];
+		};
+
 		const yEdgeIndicator = (data) => {
 			return data.close;
 		};
@@ -146,10 +153,44 @@ class StockChart extends React.Component<StockChartProps> {
 		}
 
 		const max = xAccessor(data[data.length - 1]);
+		let min;
+		let days;
 
+		let date: any = new Date(data[data.length - 1].date);
+
+		if (this.props.time == '1Y') {
+			days = 365;
+		} else if (this.props.time == '1M') {
+			days = 31;
+		} else if (this.props.time == '6M') {
+			days = 183;
+		} else if (this.props.time == 'YTD') {
+			let YTDdate: any = new Date('01/01/' + new Date().getFullYear());
+			let difference = date.getTime() - YTDdate.getTime();
+			days = difference / (1000 * 3600 * 24);
+		} else if (this.props.time == '3Y') {
+			days = 1095;
+		} else if (this.props.time == '5Y') {
+			days = 1825;
+		}
+		if (this.props.time != 'MAX') {
+			date.setDate(date.getDate() - days);
+
+			for (let i = data.length - 1; -1 < i; i--) {
+				let dateIndex: Date = new Date(data[i].date);
+				if (date > dateIndex) {
+					min = xAccessor(data[i + 1]);
+					break;
+				}
+			}
+		} else {
+			min = 0;
+		}
+
+		/*
 		const volumeMax = Math.max.apply(
 			Math,
-			data.map(function (o) {
+			dataSubset.map(function (o) {
 				return o.volume;
 			})
 		);
@@ -160,9 +201,9 @@ class StockChart extends React.Component<StockChartProps> {
 			})
 		);
 
-		const volumeYExtents = [0, volumeMax];
+		const volumeYExtents = [0, volumeMax]; */
 
-		const xExtents = [0, max + 5];
+		const xExtents = [min, max];
 
 		const gridHeight = height - margin.top - margin.bottom;
 
@@ -339,18 +380,7 @@ class StockChart extends React.Component<StockChartProps> {
 					id={4}
 					height={100}
 					origin={(w, h) => [0, h - 100]}
-					yExtents={volumeYExtents}>
-					<YAxis
-						axisAt="left"
-						orient="left"
-						ticks={5}
-						gridLinesStrokeWidth={0}
-						tickFormat={(value) =>
-							value > 0 ? volumeFormatter(value) : ''
-						}
-						showDomain={false}
-						innerTickSize={0}
-					/>
+					yExtents={volChartExtents}>
 					<BarSeries
 						widthRatio={0.5}
 						clip={true}

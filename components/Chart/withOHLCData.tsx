@@ -70,9 +70,8 @@ export function withOHLCData(dataSet = 'DAILY') {
 			}
 
 			public componentDidMount() {
-				console.log(this.props['stockId']);
 				Axios.get(
-					`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=${this.props['time']}`
+					`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=MAX`
 				).then((res) => {
 					const forDateParse = res.data.map(fixDataHeaders);
 					const data = forDateParse.map(parseData());
@@ -90,26 +89,22 @@ export function withOHLCData(dataSet = 'DAILY') {
 
 			public render() {
 				const { data, message } = this.state;
-				const { time, period } = this.state;
+				const { period } = this.state;
 
-				if (time != this.props['time'] || period != this.props['period']) {
+				if (period != this.props['period']) {
 					Axios.get(
-						`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=${this.props['time']}`
+						`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=MAX`
 					).then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
 						const data = forDateParse.map(parseData());
 						const period = this.props['period'];
-						this.setState({ period });
 						const time = this.props['time'];
+						this.setState({ period });
 						this.setState({ time });
 						this.setState({ data });
-						console.log(data);
-						this.props['dispatcher']({
-							type: 'changeLoading',
-							value: false,
-						});
 					});
 				}
+
 				if (data === undefined) {
 					return <div className="center">{message}</div>;
 				}
