@@ -6,6 +6,7 @@ import registrationState from '@State/registrationState';
 export default function FreeTrial() {
 	const newPassword = useRef();
 	const password = registrationState((state) => state.password);
+	const setPassword = registrationState((state) => state.setPassword);
 	const [message, setMessage] = useState('');
 	const [error, setError] = useState('');
 
@@ -17,14 +18,16 @@ export default function FreeTrial() {
 		}
 
 		setError('');
-		await auth.currentUser
-			.updatePassword(newPassword.current.value)
-			.then(() => {
-				setMessage('Your password has been updated.');
-			})
-			.catch((err) => {
-				setError(err.message);
-			});
+
+		try {
+			await auth.currentUser.updatePassword(newPassword.current.value);
+			setMessage(
+				'Your password has been updated. Go back to the home page.'
+			);
+			setPassword('');
+		} catch (err) {
+			return setError(err.message);
+		}
 	}
 
 	return (

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useUserInfo from '@Firebase/useUserInfo';
 
 export default function Login() {
-	const user = useUserInfo();
+	const { user, isLoggedIn } = useUserInfo();
 	const [error, setError] = useState('');
 	const inputEmail = useRef();
 	const password = useRef();
@@ -27,7 +27,7 @@ export default function Login() {
 		}
 	}
 
-	if (user) {
+	if (isLoggedIn) {
 		return (
 			<UserLayout>
 				<h1 className="hh1">You are logged in</h1>

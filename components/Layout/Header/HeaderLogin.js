@@ -1,27 +1,28 @@
+import { auth } from '@Firebase/firebase';
 import useUserInfo from '@Firebase/useUserInfo';
 import Link from 'next/link';
 
 export default function HeaderLogin() {
-	const user = useUserInfo();
+	const { isLoggedIn, setIsLoggedIn } = useUserInfo();
 
 	const LogInOut = () => {
-		if (!user) {
+		if (!isLoggedIn) {
 			return (
-				<Link href="/login/">
+				<Link href="/login/" prefetch={false}>
 					<a>Log In</a>
 				</Link>
 			);
 		} else {
 			return (
-				<Link href="/login/">
-					<a>Log Out</a>
-				</Link>
+				<span onClick={() => logOut()} className="cursor-pointer">
+					Log Out
+				</span>
 			);
 		}
 	};
 
 	const TrialOrAccount = () => {
-		if (!user) {
+		if (!isLoggedIn) {
 			return (
 				<Link href="/pro/" prefetch={false}>
 					<a>Free Trial</a>
@@ -35,6 +36,15 @@ export default function HeaderLogin() {
 			);
 		}
 	};
+
+	async function logOut() {
+		try {
+			await auth.signOut();
+			setIsLoggedIn(false);
+		} catch (error) {
+			console.log('There was an error:', error);
+		}
+	}
 
 	return (
 		<div className="flex flex-row text-center font-semibold lg:block lg:space-x-1 text-lg">

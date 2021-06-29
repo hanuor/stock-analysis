@@ -4,10 +4,10 @@ import Pagination from '@/components/Tables/Pagination';
 import styles from './HoldingsTable.module.css';
 import Paywall from './HoldingsPaywall';
 import StockLink, { ETFLink } from '@/components/Links';
-import userState from '@State/userState';
+import useUserInfo from '@Firebase/useUserInfo';
 
 const _HoldingsTable = ({ rawdata }) => {
-	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const { isPro } = useUserInfo();
 
 	const columns = useMemo(
 		() => [
@@ -104,7 +104,7 @@ const _HoldingsTable = ({ rawdata }) => {
 					</tbody>
 				</table>
 			</div>
-			{isLoggedIn && rows.length > 200 ? (
+			{isPro && rows.length > 200 ? (
 				<Pagination
 					previousPage={previousPage}
 					canPreviousPage={canPreviousPage}

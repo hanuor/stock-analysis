@@ -24,7 +24,7 @@ export default function LandingPage() {
 		};
 	}, []);
 
-	async function checkoutComplete(data) {
+	function checkoutComplete(data) {
 		let checkoutId = data.checkout.id;
 
 		// eslint-disable-next-line no-undef
@@ -36,14 +36,10 @@ export default function LandingPage() {
 			setPassword(password);
 
 			try {
-				await auth
-					.createUserWithEmailAndPassword(email, password)
-					.catch((err) => {
-						console.log(err.message);
-					});
+				await auth.createUserWithEmailAndPassword(email, password);
 				router.push('/pro/confirmation/');
-			} catch {
-				console.log('There was an error creating the user');
+			} catch (error) {
+				console.log('There was an error:', error);
 			}
 		});
 	}

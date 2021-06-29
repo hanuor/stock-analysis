@@ -13,16 +13,15 @@ export default function ForgotPassword() {
 
 		setMessage('');
 		setError('');
-		await auth
-			.sendPasswordResetEmail(email.current.value)
-			.then(() => {
-				setMessage(
-					'Check your email inbox for a link to change your password.'
-				);
-			})
-			.catch((err) => {
-				setError(err.message);
-			});
+
+		try {
+			await auth.sendPasswordResetEmail(email.current.value);
+			setMessage(
+				'Check your email inbox for a link to change your password.'
+			);
+		} catch (err) {
+			setError(err.message);
+		}
 	}
 
 	return (
