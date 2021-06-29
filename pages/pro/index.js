@@ -2,8 +2,15 @@ import Meta from '@/components/Meta';
 import Header from '@/components/Layout/Header/_Header';
 import Footer from '@/components/Layout/Footer/_Footer';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { auth } from '@Firebase/firebase';
+import registrationState from '@State/registrationState';
 
 export default function LandingPage() {
+	const router = useRouter();
+	const setEmail = registrationState((state) => state.setEmail);
+	const setPassword = registrationState((state) => state.setPassword);
+
 	useEffect(() => {
 		const paddleJs = document.createElement('script');
 		paddleJs.src = 'https://cdn.paddle.com/paddle/paddle.js';
@@ -11,9 +18,31 @@ export default function LandingPage() {
 
 		paddleJs.onload = () => {
 			// eslint-disable-next-line no-undef
-			Paddle.Setup({ vendor: 128917 });
+			Paddle.Environment.set('sandbox');
+			// eslint-disable-next-line no-undef
+			Paddle.Setup({ vendor: 2545 });
 		};
 	}, []);
+
+	function checkoutComplete(data) {
+		let checkoutId = data.checkout.id;
+
+		// eslint-disable-next-line no-undef
+		Paddle.Order.details(checkoutId, async function (data) {
+			let email = data.order.customer.email;
+			let password = Math.random().toString(36).slice(-8) + '?!337';
+
+			setEmail(email);
+			setPassword(password);
+
+			try {
+				await auth.createUserWithEmailAndPassword(email, password);
+				router.push('/pro/confirmation/');
+			} catch (error) {
+				console.log('There was an error:', error);
+			}
+		});
+	}
 
 	return (
 		<>
@@ -85,7 +114,8 @@ export default function LandingPage() {
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												Paddle.Checkout.open({
-													product: 649892,
+													product: 13309,
+													successCallback: checkoutComplete,
 												});
 											}}
 											id="start-trial"

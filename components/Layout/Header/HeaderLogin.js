@@ -1,24 +1,20 @@
-import { useRouter } from 'next/router';
-import userState from '@State/userState';
+import { auth } from '@Firebase/firebase';
+import useUserInfo from '@Firebase/useUserInfo';
 import Link from 'next/link';
 
 export default function HeaderLogin() {
-	const isLoggedIn = userState((state) => state.isLoggedIn);
-	const setIsLoggedIn = userState((state) => state.setIsLoggedIn);
-	const router = useRouter();
+	const { isLoggedIn, setIsLoggedIn } = useUserInfo();
 
 	const LogInOut = () => {
 		if (!isLoggedIn) {
 			return (
-				<Link href="/login/">
+				<Link href="/login/" prefetch={false}>
 					<a>Log In</a>
 				</Link>
 			);
 		} else {
 			return (
-				<span
-					onClick={() => setIsLoggedIn(false)}
-					className="cursor-pointer">
+				<span onClick={() => logOut()} className="cursor-pointer">
 					Log Out
 				</span>
 			);
@@ -34,14 +30,21 @@ export default function HeaderLogin() {
 			);
 		} else {
 			return (
-				<span
-					onClick={() => router.push('/pro/my-account/')}
-					className="cursor-pointer">
-					My Account
-				</span>
+				<Link href="/pro/my-account/" prefetch={false}>
+					<a>My Account</a>
+				</Link>
 			);
 		}
 	};
+
+	async function logOut() {
+		try {
+			await auth.signOut();
+			setIsLoggedIn(false);
+		} catch (error) {
+			console.log('There was an error:', error);
+		}
+	}
 
 	return (
 		<div className="flex flex-row text-center font-semibold lg:block lg:space-x-1 text-lg">

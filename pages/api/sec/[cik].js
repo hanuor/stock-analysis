@@ -1,7 +1,7 @@
 const axios = require('axios');
 const parseString = require('xml2js').parseString;
 
-export default async (req, res) => {
+export default async function CIK(req, res) {
 	if (req.method === 'GET') {
 		const cik = req.query.cik;
 		const url = `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&count=10&output=atom`;
@@ -19,4 +19,4 @@ export default async (req, res) => {
 				res.status(500).end('There was an error');
 			});
 	}
-};
+}

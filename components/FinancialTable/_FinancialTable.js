@@ -12,7 +12,7 @@
 import { forwardRef } from 'react';
 import { financialsState } from '@State/financialsState';
 import { stockState } from '@State/stockState';
-import userState from '@State/userState';
+import useUserInfo from '@Firebase/useUserInfo';
 import {
 	formatNumber,
 	formatYear,
@@ -39,7 +39,7 @@ export default function FinancialTable() {
 	const leftRight = financialsState((state) => state.leftRight);
 	const financialData = financialsState((state) => state.financialData);
 	const info = stockState((state) => state.info);
-	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const { isPro } = useUserInfo();
 
 	if (!financialData[statement]) {
 		return <h1>Loading...</h1>;
@@ -53,7 +53,7 @@ export default function FinancialTable() {
 	let paywall = range === 'annual' ? 15 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
 
-	let showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
+	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 
 	// Remove initial empty columns in ratios statement
 	if (statement === 'ratios') {

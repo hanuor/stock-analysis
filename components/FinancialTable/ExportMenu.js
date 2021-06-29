@@ -1,7 +1,7 @@
 import exportFromJSON from 'export-from-json';
 import financialsState from '@State/financialsState';
 import mapData from '@Data/financials_data_map';
-import userState from '@State/userState';
+import useUserInfo from '@Firebase/useUserInfo';
 import { stockState } from '@State/stockState';
 import { formatNumber } from './FinancialTable.functions';
 
@@ -11,9 +11,9 @@ export const ExportMenu = () => {
 	const range = financialsState((state) => state.range);
 	const statement = financialsState((state) => state.statement);
 	const financialData = financialsState((state) => state.financialData);
-	const isLoggedIn = userState((state) => state.isLoggedIn);
 	const info = stockState((state) => state.info);
 	const leftRight = financialsState((state) => state.leftRight);
+	const { isPro } = useUserInfo();
 
 	// Map the data (the export-from-json library needs the data in a specific format)
 	const Export = (type) => {
@@ -25,7 +25,7 @@ export const ExportMenu = () => {
 
 		let paywall = range === 'annual' ? 15 : 40;
 		const fullcount = rawdata.datekey.length;
-		let showcount = !isLoggedIn && fullcount > paywall ? paywall : fullcount; // How many data columns
+		let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 		const data_map = mapData(statement);
 
 		// Map the columns
