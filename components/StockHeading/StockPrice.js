@@ -30,7 +30,7 @@ export default function StockPrice() {
 
 		return () => {
 			source.cancel('Unmounted');
-			setQuote(null);
+			// setQuote(null);
 		};
 	}, [info.id, setQuote]);
 
