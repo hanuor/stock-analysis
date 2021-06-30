@@ -1,25 +1,16 @@
 import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
+import { getPageData, getEtfInfo } from '@/Functions/callBackEnd';
 import { stockState } from '@State/stockState';
 import { useEffect } from 'react';
 
 export default function SymbolStatistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
-	const quote = stockState((state) => state.quote);
-	const setQuote = stockState((state) => state.setQuote);
 
 	useEffect(() => {
 		setInfo(info);
 		setData(data);
-		if (!quote) {
-			setQuote(info.quote);
-		}
-	}, [data, info, quote, setData, setInfo, setQuote]);
-
-	if (!info) {
-		return null;
-	}
+	}, [data, info, setData, setInfo]);
 
 	return (
 		<Stock>
@@ -30,12 +21,8 @@ export default function SymbolStatistics({ info, data }) {
 	);
 }
 
-export async function getStaticPaths() {
-	return { paths: [], fallback: 'blocking' };
-}
-
 export async function getStaticProps({ params }) {
-	const info = await getStockInfo({ params });
+	const info = await getEtfInfo({ params });
 	const data = await getPageData(info.id, 'overview');
 
 	return {
@@ -43,5 +30,10 @@ export async function getStaticProps({ params }) {
 			info,
 			data,
 		},
+		revalidate: 300,
 	};
+}
+
+export async function getStaticPaths() {
+	return { paths: [], fallback: 'blocking' };
 }

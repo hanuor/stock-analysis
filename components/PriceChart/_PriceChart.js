@@ -41,8 +41,8 @@ export default function PriceChart() {
 					timeout: 5000,
 				});
 				setChartData(response.data);
-			} catch (e) {
-				console.log('There was a problem fetching the chart data.');
+			} catch (error) {
+				console.log('There was a problem fetching the chart data:', error);
 			}
 		}
 

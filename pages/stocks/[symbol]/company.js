@@ -12,11 +12,16 @@ import ProfileSECfilings from '@/components/ProfilePage/ProfileSECfilings';
 export default function SymbolStatistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
+	const quote = stockState((state) => state.quote);
+	const setQuote = stockState((state) => state.setQuote);
 
 	useEffect(() => {
 		setInfo(info);
 		setData(data);
-	}, [data, info, setData, setInfo]);
+		if (!quote) {
+			setQuote(info.quote);
+		}
+	}, [data, info, quote, setData, setInfo, setQuote]);
 
 	return (
 		<Stock>
