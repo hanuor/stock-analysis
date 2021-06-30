@@ -268,7 +268,7 @@ class StockChart extends React.Component<StockChartProps> {
 					/>
 
 					<MouseCoordinateY
-						rectWidth={margin.right}
+						rectWidth={margin.right - 15}
 						displayFormat={this.pricesDisplayFormat}
 					/>
 
