@@ -42,7 +42,7 @@ export default function PriceChart() {
 				});
 				setChartData(response.data);
 			} catch (error) {
-				console.log('There was a problem fetching the chart data:', error);
+				// console.log('There was a problem fetching the chart data:', error);
 			}
 		}
 

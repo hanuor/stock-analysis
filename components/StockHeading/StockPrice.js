@@ -21,7 +21,7 @@ export default function StockPrice() {
 				});
 				setQuote(res.data);
 			} catch (error) {
-				console.log('There was a problem fetching the quote data:', error);
+				// console.log('There was a problem fetching the quote data:', error);
 			}
 		}
 		if (info.id) {
@@ -30,7 +30,7 @@ export default function StockPrice() {
 
 		return () => {
 			source.cancel('Unmounted');
-			// setQuote(null);
+			setQuote(null);
 		};
 	}, [info.id, setQuote]);
 
