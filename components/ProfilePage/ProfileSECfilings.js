@@ -50,7 +50,7 @@ const ProfileSECfilings = ({ cik }) => {
 		return (
 			<>
 				<h2 className="hh2 mt-6 xs:mt-8">Latest SEC Filings</h2>
-				<table className="w-full">
+				<table className="w-full mb-12">
 					<thead>
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
 							<th
