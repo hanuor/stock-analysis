@@ -1,14 +1,15 @@
-/* This example requires Tailwind CSS v2.0+ */
+const common =
+	'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md focus:outline-none';
+const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
+const inactive =
+	common + ' text-gray-900 hover:text-gray-900 hover:text-shadow';
 
-const btnclasses =
-	'py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md focus:outline-none text-gray-900 hover:text-gray-900 hover:text-shadow';
-
-export default function Buttons(props) {
+export default function Buttons({ state, dispatch }) {
 	return (
 		<>
 			<select
 				onChange={(e) =>
-					props.dispatcher({
+					dispatch({
 						type: 'timeChange',
 						value: e.target.value,
 					})
@@ -25,75 +26,62 @@ export default function Buttons(props) {
 				<option value="5Y">5 Years</option>
 				<option value="MAX">MAX</option>
 			</select>
+
 			<ul className="hidden sm:flex flex-row whitespace-nowrap overflow-x-auto">
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: '1M' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: '1M' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === '1M' ? active : inactive}>
 						1 Month
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: '6M' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: '6M' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === '6M' ? active : inactive}>
 						6 Months
 					</button>
 				</li>
 
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: 'YTD' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: 'YTD' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === 'YTD' ? active : inactive}>
 						YTD
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: '1Y' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: '1Y' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === '1Y' ? active : inactive}>
 						1 Year
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: '3Y' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: '3Y' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === '3Y' ? active : inactive}>
 						3 Years
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: '5Y' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: '5Y' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === '5Y' ? active : inactive}>
 						5 Years
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() =>
-							props.dispatcher({ type: 'timeChange', value: 'MAX' })
-						}
+						onClick={() => dispatch({ type: 'timeChange', value: 'MAX' })}
 						type="button"
-						className={btnclasses}>
+						className={state.time === 'MAX' ? active : inactive}>
 						MAX
 					</button>
 				</li>

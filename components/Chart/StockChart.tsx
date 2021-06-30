@@ -1,6 +1,5 @@
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
-import { scaleLinear } from 'd3-scale';
 import * as React from 'react';
 import {
 	elderRay,
@@ -26,7 +25,6 @@ import { HoverTooltipCustom } from '@/components/Chart/HoverTooltipCustom';
 import { OHLCTooltipCustom } from '@/components/Chart/OHLCTooltipCustom';
 import { MovingAverageTooltipCustom } from '@/components/Chart/MovingAverageTooltipCustom';
 import { withOHLCData } from './withOHLCData';
-import { current } from 'immer';
 
 interface StockChartProps {
 	readonly data: IOHLCData[];
@@ -68,7 +66,8 @@ class StockChart extends React.Component<StockChartProps> {
 
 		const candlesAppearance = {
 			fill: function fill(d) {
-				return d.close > d.open ? 'rgba(30, 130, 76, 1)' : 'rgba(180,0,0)';
+				// return d.close > d.open ? 'rgba(30, 130, 76, 1)' : 'rgba(180,0,0)';
+				return d.close > d.open ? '#26a69a' : '#ef5350';
 			},
 			clip: true,
 			candleStrokeWidth: 0.5,
@@ -96,8 +95,8 @@ class StockChart extends React.Component<StockChartProps> {
 		};
 		const volumeColor = (data) => {
 			return data.close > data.open
-				? 'rgba(38, 166, 154, 0.3)'
-				: 'rgba(239, 83, 80, 0.3)';
+				? 'rgba(38, 166, 154, 1)'
+				: 'rgba(239, 83, 80, 1)';
 		};
 		const volumeSeries = (data) => {
 			return data.volume;
@@ -125,14 +124,14 @@ class StockChart extends React.Component<StockChartProps> {
 			{
 				yAccessor: (d) => d.ma1,
 				type: 'SMA',
-				stroke: sma200.stroke(),
-				windowSize: sma200.options().windowSize,
+				stroke: sma50.stroke(),
+				windowSize: sma50.options().windowSize,
 			},
 			{
 				yAccessor: (d) => d.ma2,
 				type: 'SMA',
-				stroke: sma50.stroke(),
-				windowSize: sma50.options().windowSize,
+				stroke: sma200.stroke(),
+				windowSize: sma200.options().windowSize,
 			},
 		];
 
@@ -213,29 +212,6 @@ class StockChart extends React.Component<StockChartProps> {
 
 		if (this.props.loading) {
 			return null;
-			return (
-				<div className="w-full h-full absolute">
-					<div className="flex justify-center items-center h-full bg-gray-50 border border-gray-200">
-						<svg
-							className="animate-spin h-12 w-12 text-blue-500"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24">
-							<circle
-								className="opacity-25"
-								cx="12"
-								cy="12"
-								r="10"
-								stroke="currentColor"
-								strokeWidth="4"></circle>
-							<path
-								className="opacity-75"
-								fill="currentColor"
-								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-						</svg>
-					</div>
-				</div>
-			);
 		}
 
 		return (
@@ -276,7 +252,7 @@ class StockChart extends React.Component<StockChartProps> {
 
 					<LineSeries
 						yAccessor={(d) => d.ma1}
-						strokeStyle={sma200.stroke()}
+						strokeStyle={sma50.stroke()}
 					/>
 					<CurrentCoordinate
 						yAccessor={(d) => d.ma1}
@@ -284,7 +260,7 @@ class StockChart extends React.Component<StockChartProps> {
 					/>
 					<LineSeries
 						yAccessor={(d) => d.ma2}
-						strokeStyle={sma50.stroke()}
+						strokeStyle={sma200.stroke()}
 					/>
 					<CurrentCoordinate
 						yAccessor={(d) => d.ma2}
@@ -300,11 +276,11 @@ class StockChart extends React.Component<StockChartProps> {
 						itemType="last"
 						rectWidth={margin.right - 20}
 						rectHeight={15}
-						fill={ma1color}
+						fill={ma2color}
 						orient="right"
 						edgeAt="right"
 						fontSize={11}
-						lineStroke={ma1color}
+						lineStroke={ma2color}
 						displayFormat={this.pricesDisplayFormat}
 						yAccessor={sma200.accessor()}
 					/>
@@ -313,7 +289,7 @@ class StockChart extends React.Component<StockChartProps> {
 						rectWidth={margin.right - 20}
 						rectHeight={15}
 						hideLine={true}
-						fill={ma2color}
+						fill={ma1color}
 						orient="right"
 						edgeAt="right"
 						fontSize={11}
@@ -407,11 +383,5 @@ class StockChart extends React.Component<StockChartProps> {
 	}
 }
 export default withOHLCData()(
-	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
-);
-export const MinutesStockChart = withOHLCData('MINUTES')(
-	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
-);
-export const SecondsStockChart = withOHLCData('SECONDS')(
 	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
 );
