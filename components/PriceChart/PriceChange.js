@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import { stockState } from '@State/stockState';
 
 const PriceChange = ({ chartData, chartTime, quote }) => {
 	const info = stockState((state) => state.info);
-	
+
 	let raw, formatted;
 	let dec = 2;
 
@@ -20,9 +20,7 @@ const PriceChange = ({ chartData, chartTime, quote }) => {
 
 		raw = (last / first - 1) * 100;
 		formatted =
-			raw > 0
-				? '+' + raw.toFixed(dec) + '%'
-				: raw.toFixed(dec) + '%';
+			raw > 0 ? '+' + raw.toFixed(dec) + '%' : raw.toFixed(dec) + '%';
 	}
 
 	useEffect(() => {

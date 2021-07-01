@@ -9,16 +9,11 @@ import { financialsState } from '@State/financialsState';
 export default function FinancialsPage({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setFinancialData = financialsState((state) => state.setFinancialData);
-	const quote = stockState((state) => state.quote);
-	const setQuote = stockState((state) => state.setQuote);
 
 	useEffect(() => {
 		setInfo(info);
 		setFinancialData(data);
-		if (!quote) {
-			setQuote(info.quote);
-		}
-	}, [data, info, quote, setFinancialData, setInfo, setQuote]);
+	}, [data, info, setFinancialData, setInfo]);
 
 	const statement = financialsState((state) => state.statement);
 	const setStatement = financialsState((state) => state.setStatement);

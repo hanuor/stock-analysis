@@ -95,7 +95,7 @@ const Period = () => {
 				}
 			}
 		}
-	}, []);
+	}, [range, setRange]);
 
 	return (
 		<nav className="mt-2 sm:mt-1.5">

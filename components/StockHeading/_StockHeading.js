@@ -5,12 +5,12 @@ import ETFNavigation from '@/components/StockHeading/TabNavigationETF';
 
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
-export default function StockHeading({type}) {
+export default function StockHeading({type, id}) {
 	return (
 		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-4 sm:mb-5">
 			<Breadcrumbs />
 			<Title />
-			<StockPrice />
+			<StockPrice id={id} />
 			{type === 'etf' ? <ETFNavigation /> : <TabNavigation />}
 		</div>
 	);

@@ -1,38 +1,26 @@
-import { useEffect } from 'react';
 import { stockState } from '@State/stockState';
 import { IconMoon, IconSun } from '@/components/Icons';
-import Axios from 'axios';
+import { useQuery } from 'react-query';
 
-export default function StockPrice() {
+async function queryQuote({ queryKey }) {
+	const id = queryKey[1];
+	if (typeof id === 'undefined') {
+		return null;
+	}
+	const res = await fetch(`https://stockanalysis.com/wp-json/sa/q?i=${id}`);
+	return res.json();
+}
+
+export default function StockPrice({ id }) {
 	const info = stockState((state) => state.info);
 	const quote = stockState((state) => state.quote);
 	const setQuote = stockState((state) => state.setQuote);
 
-	useEffect(() => {
-		let source = Axios.CancelToken.source();
-
-		async function fetchQuote(id) {
-			let url = 'https://stockanalysis.com/wp-json/sa/q?i=' + id;
-
-			try {
-				const res = await Axios.get(url, {
-					cancelToken: source.token,
-					timeout: 5000,
-				});
-				setQuote(res.data);
-			} catch (error) {
-				// console.log('There was a problem fetching the quote data:', error);
-			}
-		}
-		if (info.id) {
-			fetchQuote(info.id);
-		}
-
-		return () => {
-			source.cancel('Unmounted');
-			setQuote(null);
-		};
-	}, [info.id, setQuote]);
+	const { data } = useQuery(['q', id], queryQuote, {
+		onSuccess: () => setQuote(data),
+		refetchInterval: 10000,
+		initialData: info.quote,
+	});
 
 	if (info.state === 'upcomingipo') {
 		return (
@@ -42,24 +30,27 @@ export default function StockPrice() {
 		);
 	}
 
-	if (quote === null) {
+	if (!info.quote) {
 		return null;
 	}
 
+	let useQuote = quote || info.quote;
+
 	// Check if extended hours trading
-	const extendedHours = quote.ext ? true : false;
-	const extendedType = quote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
+	const extendedHours = useQuote.ext ? true : false;
+	const extendedType =
+		useQuote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
 
 	return (
 		<>
 			{extendedHours ? (
 				<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
-					<Extended quote={quote} market={extendedType} />
-					<ExtendedClose quote={quote} />
+					<Extended quote={useQuote} market={extendedType} />
+					<ExtendedClose quote={useQuote} />
 				</section>
 			) : (
 				<section className="mb-5">
-					<Regular quote={quote} />
+					<Regular quote={useQuote} />
 				</section>
 			)}
 		</>
@@ -103,7 +94,7 @@ function Regular({ quote }) {
 
 	return (
 		<div>
-			<span className="text-4xl font-bold">{quote.price}</span>{' '}
+			<span className="text-4xl font-bold">{quote.priceD}</span>{' '}
 			<span className={`text-2xl ${color} font-semibold`}>
 				{quote.change} ({quote.changePc})
 			</span>
@@ -146,7 +137,7 @@ function ExtendedClose({ quote }) {
 	return (
 		<div>
 			<span className="text-3xl font-semibold text-gray-700">
-				{quote.price}
+				{quote.priceD}
 			</span>{' '}
 			<span className={`block sm:inline text-lg xs:text-xl ${color}`}>
 				{quote.change} ({quote.changePc})
