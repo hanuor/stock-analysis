@@ -151,25 +151,31 @@ class StockChart extends React.Component<StockChartProps> {
 			});
 		}
 
-		const max = xAccessor(data[data.length - 1]);
+		let max = xAccessor(data[data.length - 1]);
 		let min;
 		let days;
 
 		let date: any = new Date(data[data.length - 1].date);
 
 		if (this.props.time == '1Y') {
+			max = max + 2;
 			days = 365;
 		} else if (this.props.time == '1M') {
 			days = 31;
+			max = max + 1;
 		} else if (this.props.time == '6M') {
+			max = max + 2;
 			days = 183;
 		} else if (this.props.time == 'YTD') {
+			max = max + 2;
 			let YTDdate: any = new Date('01/01/' + new Date().getFullYear());
 			let difference = date.getTime() - YTDdate.getTime();
 			days = difference / (1000 * 3600 * 24);
 		} else if (this.props.time == '3Y') {
+			max = max + 4;
 			days = 1095;
 		} else if (this.props.time == '5Y') {
+			max = max + 8;
 			days = 1825;
 		}
 		if (this.props.time != 'MAX') {
@@ -181,8 +187,12 @@ class StockChart extends React.Component<StockChartProps> {
 					min = xAccessor(data[i + 1]);
 					break;
 				}
+				if (i == 0) {
+					min = xAccessor(data[i]);
+				}
 			}
 		} else {
+			max = max + 6;
 			min = 0;
 		}
 
