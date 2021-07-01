@@ -1,6 +1,4 @@
 import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
 import { getIpoData } from '@/Functions/callBackEnd';
 import IPONavigation from '@/components/IPOs/Navigation';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
@@ -14,7 +12,6 @@ const RecentIpos = ({ data }) => {
 	return (
 		<>
 			<Meta title="IPO Statistics" />
-			<Header />
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
@@ -110,7 +107,6 @@ const RecentIpos = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };

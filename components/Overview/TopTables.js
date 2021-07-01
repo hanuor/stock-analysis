@@ -57,13 +57,16 @@ export function InfoTable() {
 
 export function QuoteTable() {
 	const data = stockState((state) => state.data);
+	const quote = stockState((state) => state.quote);
+
+	const quoteUsed = quote ? quote.volume : data.volume;
 
 	return (
 		<table className={css_table}>
 			<tbody>
 				<tr className={css_rows}>
 					<td className={css_cell_left}>Volume</td>
-					<td className={css_cell_right}>{data.volume}</td>
+					<td className={css_cell_right}>{quoteUsed}</td>
 				</tr>
 				<tr className={css_rows}>
 					<td className={css_cell_left}>Open</td>

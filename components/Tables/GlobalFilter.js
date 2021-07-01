@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import { useState } from 'react';
 
 const GlobalFilter = ({ useAsyncDebounce, globalFilter, setGlobalFilter }) => {

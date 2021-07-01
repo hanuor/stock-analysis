@@ -1,6 +1,4 @@
 import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
 import { NewsletterWidget } from '@/components/Layout/Sidebar/Newsletter';
 import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
 
@@ -8,7 +6,6 @@ export default function PageLayout({ meta, children }) {
 	return (
 		<>
 			<Meta title={meta.title} />
-			<Header />
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
@@ -24,7 +21,6 @@ export default function PageLayout({ meta, children }) {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 }

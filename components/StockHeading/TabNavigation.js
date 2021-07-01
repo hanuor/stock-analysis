@@ -21,7 +21,9 @@ export default function TabNavigation() {
 						'flex flex-row w-full overflow-auto ' + styles.navmenu
 					}>
 					<li>
-						<Link href={`/stocks/${path.two}/`} scroll={false}>
+						<Link
+							href={`/stocks/${path.two}/`}
+							scroll={false}>
 							<a
 								className={!path.three ? active : inactive}
 								data-title="Overview">
@@ -30,7 +32,9 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.two}/financials/`} scroll={false}>
+						<Link
+							href={`/stocks/${path.two}/financials/`}
+							scroll={false}>
 							<a
 								className={
 									path.three == 'financials' ? active : inactive
@@ -41,7 +45,9 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.two}/statistics/`} scroll={false}>
+						<Link
+							href={`/stocks/${path.two}/statistics/`}
+							scroll={false}>
 							<a
 								className={
 									path.three == 'statistics' ? active : inactive
@@ -52,7 +58,9 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.two}/company/`} scroll={false}>
+						<Link
+							href={`/stocks/${path.two}/company/`}
+							scroll={false}>
 							<a
 								className={path.three == 'company' ? active : inactive}
 								data-title="Profile">
@@ -61,7 +69,9 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/stocks/${path.two}/chart/`} scroll={false}>
+						<Link
+							href={`/stocks/${path.two}/chart/`}
+							scroll={false}>
 							<a
 								className={path.three == 'chart' ? active : inactive}
 								data-title="Chart">

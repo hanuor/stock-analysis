@@ -1,6 +1,4 @@
 import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
 import { getIpoData } from '@/Functions/callBackEnd';
 import CalendarTable from '@/components/IPOs/CalendarTable';
 import IPONavigation from '@/components/IPOs/Navigation';
@@ -12,7 +10,6 @@ const IpoCalendar = ({ data }) => {
 	return (
 		<>
 			<Meta title="IPO Calendar" />
-			<Header />
 			<div className="contain">
 				<main className="w-full py-6">
 					<Breadcrumbs />
@@ -51,7 +48,6 @@ const IpoCalendar = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };
