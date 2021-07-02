@@ -5,7 +5,6 @@ const PriceChange = ({ chartData, chartTime, quote }) => {
 	const info = stockState((state) => state.info);
 
 	let raw;
-	let;
 	formatted;
 	let dec = 2;
 
