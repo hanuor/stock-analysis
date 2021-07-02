@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import NewsFeed from '@/components/News/_NewsFeed';
-import { stockState } from '@State/stockState';
+import NewsFeed from 'components/News/_NewsFeed';
+import { stockState } from 'state/stockState';
 import Axios from 'axios';
-import loadStockTwits from '@/Functions/loadStockTwits';
+import loadStockTwits from 'functions/loadStockTwits';
 
 const NewsArea = ({ news }) => {
 	const info = stockState((state) => state.info);

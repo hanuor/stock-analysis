@@ -1,5 +1,5 @@
-import stockState from '@State/stockState';
-import financialsState from '@State/financialsState';
+import stockState from 'state/stockState';
+import financialsState from 'state/financialsState';
 
 export default function TableTitle({ empty }) {
 	const statement = financialsState((state) => state.statement);

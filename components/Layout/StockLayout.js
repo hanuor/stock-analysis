@@ -1,6 +1,6 @@
-import Meta from '@/components/Meta';
-import StockHeading from '@/components/StockHeading/_StockHeading';
-import stockState from '@State/stockState';
+import Meta from 'components/Meta';
+import StockHeading from 'components/StockHeading/_StockHeading';
+import stockState from 'state/stockState';
 
 export default function Stock({ children }) {
 	const info = stockState((state) => state.info);

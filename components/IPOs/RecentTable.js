@@ -2,7 +2,7 @@ import { useTable, useSortBy } from 'react-table';
 import styles from './Table.module.css';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import { SortUp, SortDown } from '@/components/Icons';
+import { SortUp, SortDown } from 'components/Icons';
 
 const RecentTable = ({ rawdata }) => {
 	const columns = useMemo(

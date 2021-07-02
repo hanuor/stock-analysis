@@ -1,4 +1,4 @@
-import stockState from '@State/stockState';
+import stockState from 'state/stockState';
 import { useEffect, useState } from 'react';
 import SingleChart from './SingleChart';
 

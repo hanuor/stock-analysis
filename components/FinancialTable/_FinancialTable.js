@@ -10,9 +10,9 @@
 // ? Make left column sticky
 
 import { forwardRef } from 'react';
-import { financialsState } from '@State/financialsState';
-import { stockState } from '@State/stockState';
-import useUserInfo from '@Firebase/useUserInfo';
+import { financialsState } from 'state/financialsState';
+import { stockState } from 'state/stockState';
+import useUserInfo from 'users/useUserInfo';
 import {
 	formatNumber,
 	formatYear,
@@ -20,9 +20,9 @@ import {
 	getPeriodLabel,
 	getPeriodTooltip,
 } from './FinancialTable.functions';
-import { HoverChartIcon } from '@/components/Icons';
+import { HoverChartIcon } from 'components/Icons';
 import styles from './FinancialTable.module.css';
-import mapData from '@Data/financials_data_map';
+import mapData from 'data/financials_data_map';
 import HoverChart from './HoverChart';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';

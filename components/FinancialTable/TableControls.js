@@ -1,6 +1,6 @@
-import { LeftRightSwitch, MenuDropDown } from '@/components/Icons';
+import { LeftRightSwitch, MenuDropDown } from 'components/Icons';
 import { ExportMenu } from './ExportMenu';
-import { financialsState } from '@State/financialsState';
+import { financialsState } from 'state/financialsState';
 
 import { useRef, useState, useEffect } from 'react';
 

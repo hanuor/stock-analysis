@@ -1,4 +1,4 @@
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
 const css_table = 'text-small w-[48%] lg:w-full text-gray-900';
 const css_rows =

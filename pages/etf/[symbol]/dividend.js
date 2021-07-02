@@ -1,12 +1,12 @@
-import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getEtfInfo } from '@/Functions/callBackEnd';
-import { stockState } from '@State/stockState';
+import Stock from 'components/Layout/StockLayout';
+import { getPageData, getEtfInfo } from 'functions/callBackEnd';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
-import InfoBox from '@/components/InfoBox';
-import InfoTable from '@/components/Dividend/InfoTable';
-import HistoryTable from '@/components/Dividend/HistoryTable';
-import NewsWidget from '@/components/News/NewsWidget';
-import DividendChart from '@/components/Dividend/DividendChart';
+import InfoBox from 'components/InfoBox';
+import InfoTable from 'components/Dividend/InfoTable';
+import HistoryTable from 'components/Dividend/HistoryTable';
+import NewsWidget from 'components/News/NewsWidget';
+import DividendChart from 'components/Dividend/DividendChart';
 
 export default function Holdings({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);

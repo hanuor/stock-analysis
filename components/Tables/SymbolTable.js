@@ -10,7 +10,7 @@ import {
 import styles from './SymbolTable.module.css';
 import GlobalFilter from './GlobalFilter';
 import Pagination from './Pagination';
-import { SortUp, SortDown } from '@/components/Icons';
+import { SortUp, SortDown } from 'components/Icons';
 
 export default function Table({ title, columndata, rowdata }) {
 	const columns = useMemo(() => columndata, [columndata]);

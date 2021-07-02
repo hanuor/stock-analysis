@@ -1,8 +1,8 @@
-import UserLayout from '@/Layout/UserLayout';
-import { auth } from '@Firebase/firebase';
+import UserLayout from 'components/Layout/UserLayout';
+import { auth } from 'users/firebase';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
-import useUserInfo from '@Firebase/useUserInfo';
+import useUserInfo from 'users/useUserInfo';
 
 export default function Login() {
 	const { user, isLoggedIn } = useUserInfo();

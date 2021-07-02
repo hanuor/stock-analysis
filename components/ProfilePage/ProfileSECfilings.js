@@ -1,4 +1,4 @@
-import { External } from '@/components/CustomLink';
+import { External } from 'components/CustomLink';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 

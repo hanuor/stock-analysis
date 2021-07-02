@@ -1,9 +1,9 @@
-import LayoutFullWidth from '@/Layout/LayoutFullWidth';
-import Hero from '@/components/HomePage/Hero';
-import Movers from '@/components/HomePage/Movers';
-import LatestNews from '@/components/HomePage/LatestNews';
-import IPOwidgets from '@/components/HomePage/IPOwidgets';
-import { getHomePageData } from '@/Functions/callBackEnd';
+import LayoutFullWidth from 'components/Layout/LayoutFullWidth';
+import Hero from 'components/HomePage/Hero';
+import Movers from 'components/HomePage/Movers';
+import LatestNews from 'components/HomePage/LatestNews';
+import IPOwidgets from 'components/HomePage/IPOwidgets';
+import { getHomePageData } from 'functions/callBackEnd';
 
 export default function FrontPage(props) {
 	return (

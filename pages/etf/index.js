@@ -1,7 +1,7 @@
-import LayoutSidebar from '@/Layout/LayoutSidebar';
-import Table from '@/Tables/SymbolTable';
-import { ETFLink } from '@/components/Links';
-import abbreviateNumber from '@/Functions/abbreviateNumber';
+import LayoutSidebar from 'components/Layout/LayoutSidebar';
+import Table from 'components/Tables/SymbolTable';
+import { ETFLink } from 'components/Links';
+import abbreviateNumber from 'functions/abbreviateNumber';
 
 export default function StocksIndexPage({ stocks }) {
 	const columns = [

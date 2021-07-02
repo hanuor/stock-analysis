@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
-import ArticleLayout from '@/components/Layout/ArticleLayout';
+import ArticleLayout from 'components/Layout/ArticleLayout';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import styles from '@/Styles/TabMenu.module.css';
-import navState from '@State/navState';
+import styles from 'styles/TabMenu.module.css';
+import navState from 'state/navState';
 
 const SubNavigation = () => {
 	const path = navState((state) => state.path);

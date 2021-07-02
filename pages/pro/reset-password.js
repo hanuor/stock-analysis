@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { auth } from '@Firebase/firebase';
-import UserLayout from '@/components/Layout/UserLayout';
+import { auth } from 'users/firebase';
+import UserLayout from 'components/Layout/UserLayout';
 import Link from 'next/link';
 
 export default function ForgotPassword() {

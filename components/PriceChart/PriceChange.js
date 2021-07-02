@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
 const PriceChange = ({ chartData, chartTime, quote }) => {
 	const info = stockState((state) => state.info);

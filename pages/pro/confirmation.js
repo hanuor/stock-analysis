@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import UserLayout from '@/components/Layout/UserLayout';
-import { auth } from '@Firebase/firebase';
-import registrationState from '@State/registrationState';
+import UserLayout from 'components/Layout/UserLayout';
+import { auth } from 'users/firebase';
+import registrationState from 'state/registrationState';
 
 export default function FreeTrial() {
 	const newPassword = useRef();

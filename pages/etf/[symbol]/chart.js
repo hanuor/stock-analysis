@@ -1,6 +1,6 @@
-import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getEtfInfo } from '@/Functions/callBackEnd';
-import { stockState } from '@State/stockState';
+import Stock from 'components/Layout/StockLayout';
+import { getPageData, getEtfInfo } from 'functions/callBackEnd';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 
 export default function SymbolStatistics({ info, data }) {

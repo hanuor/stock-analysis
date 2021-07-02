@@ -1,4 +1,4 @@
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 import { InformationCircleIcon } from '@heroicons/react/solid';
 
 const getQuoteSource = (quote) => {

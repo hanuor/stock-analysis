@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
-import Pagination from '@/components/Tables/Pagination';
+import Pagination from 'components/Tables/Pagination';
 import styles from './HoldingsTable.module.css';
 import Paywall from './HoldingsPaywall';
-import StockLink, { ETFLink } from '@/components/Links';
-import useUserInfo from '@Firebase/useUserInfo';
+import StockLink, { ETFLink } from 'components/Links';
+import useUserInfo from 'users/useUserInfo';
 
 const _HoldingsTable = ({ rawdata }) => {
 	const { isPro } = useUserInfo();

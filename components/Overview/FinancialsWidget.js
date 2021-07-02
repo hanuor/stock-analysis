@@ -1,6 +1,6 @@
-import Button from '@/components/Button';
+import Button from 'components/Button';
 import { Bar, defaults } from 'react-chartjs-2';
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";

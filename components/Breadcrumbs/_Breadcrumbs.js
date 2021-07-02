@@ -1,4 +1,4 @@
-import navState from '@State/navState';
+import navState from 'state/navState';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';

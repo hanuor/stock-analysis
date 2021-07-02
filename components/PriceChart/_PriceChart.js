@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 import Controls from './PriceChartControls';
 import PriceChange from './PriceChange';
 import Chart from './PriceChartChart';

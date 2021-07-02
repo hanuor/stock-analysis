@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { financialsState } from '@State/financialsState';
+import { financialsState } from 'state/financialsState';
 import { useEffect } from 'react';
-import styles from '@/Styles/TabMenu.module.css';
-import navState from '@State/navState';
+import styles from 'styles/TabMenu.module.css';
+import navState from 'state/navState';
 
 // styles
 const common =

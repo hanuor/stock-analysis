@@ -1,13 +1,13 @@
-import { getEtfInfo, getPageData, getNewsData } from '@/Functions/callBackEnd';
+import { getEtfInfo, getPageData, getNewsData } from 'functions/callBackEnd';
 import { useEffect } from 'react';
-import stockState from '@State/stockState';
-import Stock from '@/components/Layout/StockLayout';
-import { InfoTable, QuoteTable } from '@/components/Overview/TopTablesETF';
-import PriceChart from '@/components/PriceChart/_PriceChart';
-import Profile from '@/components/Overview/ProfileWidget';
-import NewsArea from '@/components/Overview/NewsArea';
-import HoldingsWidget from '@/components/Overview/HoldingsWidget';
-import DividendWidget from '@/components/Overview/DividendWidget';
+import stockState from 'state/stockState';
+import Stock from 'components/Layout/StockLayout';
+import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
+import PriceChart from 'components/PriceChart/_PriceChart';
+import Profile from 'components/Overview/ProfileWidget';
+import NewsArea from 'components/Overview/NewsArea';
+import HoldingsWidget from 'components/Overview/HoldingsWidget';
+import DividendWidget from 'components/Overview/DividendWidget';
 
 const EtfOverview = ({ info, data, news }) => {
 	const setInfo = stockState((state) => state.setInfo);

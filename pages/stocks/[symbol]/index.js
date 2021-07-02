@@ -1,16 +1,12 @@
-import {
-	getStockInfo,
-	getPageData,
-	getNewsData,
-} from '@/Functions/callBackEnd';
-import Stock from '@/components/Layout/StockLayout';
-import { InfoTable, QuoteTable } from '@/components/Overview/TopTables';
-import PriceChart from '@/components/PriceChart/_PriceChart';
-import Profile from '@/components/Overview/ProfileWidget';
-import NewsArea from '@/components/Overview/NewsArea';
-import FinancialsWidget from '@/components/Overview/FinancialsWidget';
-import AnalystWidget from '@/components/Overview/AnalystWidget';
-import { stockState } from '@State/stockState';
+import { getStockInfo, getPageData, getNewsData } from 'functions/callBackEnd';
+import Stock from 'components/Layout/StockLayout';
+import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
+import PriceChart from 'components/PriceChart/_PriceChart';
+import Profile from 'components/Overview/ProfileWidget';
+import NewsArea from 'components/Overview/NewsArea';
+import FinancialsWidget from 'components/Overview/FinancialsWidget';
+import AnalystWidget from 'components/Overview/AnalystWidget';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 
 export default function StockOverview({ info, data, news }) {

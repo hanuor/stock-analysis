@@ -1,4 +1,4 @@
-import StockLink from '@/components/Links';
+import StockLink from 'components/Links';
 
 const cellStyles =
 	'py-1.5 sm:py-2 px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';

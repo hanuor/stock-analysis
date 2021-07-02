@@ -7,9 +7,9 @@ import {
 } from 'react-table';
 import { useMemo } from 'react';
 import styles from './Actions.module.css';
-import { SortUp, SortDown } from '@/components/Icons';
-import Pagination from '@/components/Tables/Pagination';
-import GlobalFilter from '@/components/Tables/GlobalFilter';
+import { SortUp, SortDown } from 'components/Icons';
+import Pagination from 'components/Tables/Pagination';
+import GlobalFilter from 'components/Tables/GlobalFilter';
 
 const RecentTable = ({ title, columndata, rowdata }) => {
 	const columns = useMemo(() => columndata, [columndata]);

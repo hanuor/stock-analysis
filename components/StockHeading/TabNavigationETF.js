@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import styles from '@/Styles/TabMenu.module.css';
-import navState from '@State/navState';
+import styles from 'styles/TabMenu.module.css';
+import navState from 'state/navState';
 
 export default function TabNavigation() {
 	const path = navState((state) => state.path);
@@ -31,9 +31,7 @@ export default function TabNavigation() {
 					<li>
 						<Link href={`/etf/${path.two}/holdings/`} scroll={false}>
 							<a
-								className={
-									path.three == 'holdings' ? active : inactive
-								}
+								className={path.three == 'holdings' ? active : inactive}
 								data-title="Holdings">
 								Holdings
 							</a>
@@ -42,9 +40,7 @@ export default function TabNavigation() {
 					<li>
 						<Link href={`/etf/${path.two}/dividend/`} scroll={false}>
 							<a
-								className={
-									path.three == 'dividend' ? active : inactive
-								}
+								className={path.three == 'dividend' ? active : inactive}
 								data-title="Dividend">
 								Dividend
 							</a>

@@ -1,8 +1,8 @@
 import exportFromJSON from 'export-from-json';
-import financialsState from '@State/financialsState';
-import mapData from '@Data/financials_data_map';
-import useUserInfo from '@Firebase/useUserInfo';
-import { stockState } from '@State/stockState';
+import financialsState from 'state/financialsState';
+import mapData from 'data/financials_data_map';
+import useUserInfo from 'users/useUserInfo';
+import { stockState } from 'state/stockState';
 import { formatNumber } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';

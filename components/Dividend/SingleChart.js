@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { formatDateClean } from '@/Functions/formatDates';
+import { formatDateClean } from 'functions/formatDates';
 
 const countZero = (cutter) => {
 	let count = 0;

@@ -1,4 +1,4 @@
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
 const css_table = 'text-small w-[48%] lg:w-full text-gray-900';
 const css_rows =
@@ -48,7 +48,9 @@ export function InfoTable() {
 				</tr>
 				<tr className={css_rows}>
 					<td className={css_cell_left}>1-Year Return</td>
-					<td className={css_cell_right}><div id="price1y">-</div></td>
+					<td className={css_cell_right}>
+						<div id="price1y">-</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>

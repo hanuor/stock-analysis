@@ -1,10 +1,10 @@
-import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
-import { stockState } from '@State/stockState';
+import Stock from 'components/Layout/StockLayout';
+import { getPageData, getStockInfo } from 'functions/callBackEnd';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
-import StatsWidget from '@/components/StatsWidget/_StatsWidget';
-import { fullMap } from '@Data/financials_data_map';
-import Button from '@/components/Button';
+import StatsWidget from 'components/StatsWidget/_StatsWidget';
+import { fullMap } from 'data/financials_data_map';
+import Button from 'components/Button';
 
 const indicator_map = fullMap();
 

@@ -1,5 +1,5 @@
-import { auth } from '@Firebase/firebase';
-import useUserInfo from '@Firebase/useUserInfo';
+import { auth } from 'users/firebase';
+import useUserInfo from 'users/useUserInfo';
 import Link from 'next/link';
 
 export default function HeaderLogin() {

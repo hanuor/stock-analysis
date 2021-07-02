@@ -1,5 +1,5 @@
-import { stockState } from '@State/stockState';
-import { IconMoon, IconSun } from '@/components/Icons';
+import { stockState } from 'state/stockState';
+import { IconMoon, IconSun } from 'components/Icons';
 import { useQuery } from 'react-query';
 
 async function queryQuote({ queryKey }) {

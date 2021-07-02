@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SiteSearch from '@/components/Search/SiteSearch';
+import SiteSearch from 'components/Search/SiteSearch';
 
 export default function Hero() {
 	return (

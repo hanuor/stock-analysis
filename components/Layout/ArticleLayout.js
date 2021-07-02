@@ -1,4 +1,4 @@
-import Meta from '@/components/Meta';
+import Meta from 'components/Meta';
 import Sidebar from './Sidebar/_Sidebar';
 
 export default function PageLayout({ meta, children }) {

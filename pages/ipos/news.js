@@ -1,10 +1,10 @@
-import Meta from '@/components/Meta';
-import { getIpoData } from '@/Functions/callBackEnd';
-import IPONavigation from '@/components/IPOs/Navigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import NewsFeed from '@/components/News/_NewsFeed';
-import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
-import RecentTableMin from '@/components/IPOs/RecentTableMin';
+import Meta from 'components/Meta';
+import { getIpoData } from 'functions/callBackEnd';
+import IPONavigation from 'components/IPOs/Navigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import NewsFeed from 'components/News/_NewsFeed';
+import CalendarTableMin from 'components/IPOs/CalendarTableMin';
+import RecentTableMin from 'components/IPOs/RecentTableMin';
 
 const RecentIpos = ({ data }) => {
 	return (

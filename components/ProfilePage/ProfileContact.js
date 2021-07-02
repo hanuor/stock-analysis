@@ -1,4 +1,4 @@
-import { External } from '@/components/CustomLink';
+import { External } from 'components/CustomLink';
 
 const Address = (address) => {
 	return { __html: address };
