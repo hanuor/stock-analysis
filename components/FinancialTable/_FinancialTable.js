@@ -12,7 +12,7 @@ import {
 } from './FinancialTable.functions';
 import { HoverChartIcon } from 'components/Icons';
 import styles from './FinancialTable.module.css';
-import mapData from 'data/financials_data_map';
+import mapData from 'data/financials_map';
 import HoverChart from './HoverChart';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
