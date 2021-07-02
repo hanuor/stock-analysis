@@ -1,14 +1,4 @@
 /* eslint-disable react/display-name */
-// ? Add a menu that allows formatting by millions/thousands/raw
-// ? Add an option to show "current/ttm"
-// ? Add data disclaimers
-// ? Add link to 10K/10Q?
-// ? Link to financial statement definitions?
-// ? Add easy symbol switch
-// ? Include formats in export: csv, plain text, pdf
-// ? Add print button?
-// ? Make left column sticky
-
 import { forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
 import { stockState } from 'state/stockState';
