@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
 export default function SingleResult({ index, symbol, name, type, setOpen }) {
-	let url, tag;
+	let url; 
+	let tag;
 
 	switch (type) {
 		case 's':

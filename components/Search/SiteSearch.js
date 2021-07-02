@@ -46,28 +46,28 @@ export default function SiteSearch({ nav }) {
 		if (query.length) {
 			setWait(
 				setTimeout(() => {
-					let keyword = query.toString().toUpperCase();
+					const keyword = query.toString().toUpperCase();
 
-					let exact = index.filter((item) => {
+					const exact = index.filter((item) => {
 						if (item.s && item.s === keyword) {
 							return item.s;
 						}
 						if (item.n) {
-							let name = item.n.toUpperCase();
+							const name = item.n.toUpperCase();
 							if (name === keyword) {
 								return name;
 							}
 						}
 					});
 
-					let matches = index.filter((item) => {
+					const matches = index.filter((item) => {
 						if (item.s && item.s.startsWith(keyword)) {
 							if (item.s !== keyword) {
 								return item.s.startsWith(keyword);
 							}
 						}
 						if (item.n) {
-							let name = item.n.toUpperCase();
+							const name = item.n.toUpperCase();
 							if (item.s !== keyword && name !== keyword) {
 								return name.startsWith(keyword);
 							}
@@ -91,7 +91,7 @@ export default function SiteSearch({ nav }) {
 	}, [query, index]);
 
 	function keyClick(e) {
-		let active = document.querySelector('.activeresult');
+		const active = document.querySelector('.activeresult');
 
 		switch (e.key) {
 			case 'Escape':
@@ -112,7 +112,7 @@ export default function SiteSearch({ nav }) {
 							active.classList.remove('activeresult');
 						}
 						num++;
-						let next = document.querySelector('[data-num="' + num + '"]');
+						const next = document.querySelector('[data-num="' + num + '"]');
 						if (next) {
 							next.classList.add('activeresult');
 							next.focus();
@@ -130,7 +130,7 @@ export default function SiteSearch({ nav }) {
 							active.classList.remove('activeresult');
 						}
 						num--;
-						let next = document.querySelector('[data-num="' + num + '"]');
+						const next = document.querySelector('[data-num="' + num + '"]');
 						if (next) {
 							next.classList.add('activeresult');
 							next.focus();
@@ -143,9 +143,9 @@ export default function SiteSearch({ nav }) {
 			case 'Enter':
 				{
 					e.preventDefault();
-					let selected = document.querySelector('.activeresult').href;
-					let selectedUrl = new URL(selected);
-					let selectedPath = selectedUrl.pathname;
+					const selected = document.querySelector('.activeresult').href;
+					const selectedUrl = new URL(selected);
+					const selectedPath = selectedUrl.pathname;
 					setOpen(false);
 					setResults([]);
 					setQuery('');

@@ -34,7 +34,7 @@ export default function StockPrice({ id }) {
 		return null;
 	}
 
-	let useQuote = quote || info.quote;
+	const useQuote = quote || info.quote;
 
 	// Check if extended hours trading
 	const extendedHours = useQuote.ext ? true : false;
@@ -58,7 +58,7 @@ export default function StockPrice({ id }) {
 }
 
 function IPOPrice({ ipoInfo }) {
-	let ipoPrice = ipoInfo.ipoPrice
+	const ipoPrice = ipoInfo.ipoPrice
 		? '$' + ipoInfo.ipoPrice
 		: ipoInfo.ipoPriceLow && ipoInfo.ipoPriceHigh
 		? '$' + ipoInfo.ipoPriceLow + ' - $' + ipoInfo.ipoPriceHigh

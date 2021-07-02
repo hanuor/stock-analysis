@@ -60,9 +60,9 @@ const Chart = ({ chartData, chartTime }) => {
 		}
 
 		case 'MAX': {
-			let firstYear = formatDateYear(chartData[0].t);
-			let lastYear = formatDateYear(chartData[chartData.length - 1].t);
-			let diff = lastYear - firstYear;
+			const firstYear = formatDateYear(chartData[0].t);
+			const lastYear = formatDateYear(chartData[chartData.length - 1].t);
+			const diff = lastYear - firstYear;
 			ticks = diff;
 			if (window.screen.width < 450 && diff > 7) {
 				ticks = 5;
@@ -176,7 +176,7 @@ const Chart = ({ chartData, chartTime }) => {
 							},
 							label: function (context) {
 								let currlabel = context.dataset.label || '';
-								let value = context.parsed.y || '';
+								const value = context.parsed.y || '';
 								if (currlabel && value) {
 									currlabel = label + ': ' + value;
 								}

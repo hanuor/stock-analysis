@@ -1,8 +1,8 @@
 const Controls = ({ chartTime, setChartTime }) => {
-	let common =
+	const common =
 		' text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md focus:outline-none';
-	let active = 'bp:bg-gray-100 text-gray-800 font-semibold' + common;
-	let inactive =
+	const active = 'bp:bg-gray-100 text-gray-800 font-semibold' + common;
+	const inactive =
 		'text-gray-900 hover:text-gray-900 hover:text-shadow' + common;
 
 	return (

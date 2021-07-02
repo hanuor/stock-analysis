@@ -6,8 +6,8 @@ import PriceChange from './PriceChange';
 import Chart from './PriceChartChart';
 
 const getChartUrl = (id, time) => {
-	let url = 'https://stockanalysis.com/wp-json/sa/';
-	let params = `i=${id}&r=${time}&m=1`;
+	const url = 'https://stockanalysis.com/wp-json/sa/';
+	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
 	if (time === '1D' || time === '5D') {
@@ -27,8 +27,8 @@ export default function PriceChart() {
 	const [chartData, setChartData] = useState([]);
 
 	useEffect(() => {
-		let url = getChartUrl(info.id, chartTime);
-		let source = Axios.CancelToken.source();
+		const url = getChartUrl(info.id, chartTime);
+		const source = Axios.CancelToken.source();
 
 		if (typeof info.id === 'undefined') {
 			return null;

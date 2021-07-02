@@ -86,8 +86,8 @@ const Period = () => {
 	// Check for period in URL
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			let url = new URL(window.location.href);
-			let params = url.searchParams;
+			const url = new URL(window.location.href);
+			const params = url.searchParams;
 			const period = params.get('period');
 			if (period === 'quarterly' || period === 'trailing') {
 				if (period !== range) {

@@ -18,7 +18,7 @@ export default function Title() {
 		return null;
 	}
 
-	let notice =
+	const notice =
 		info.ipoInfo !== null &&
 		typeof info.ipoInfo !== 'undefined' &&
 		info.ipoInfo.notice
