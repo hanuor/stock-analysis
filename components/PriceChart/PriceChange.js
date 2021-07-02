@@ -5,7 +5,7 @@ const PriceChange = ({ chartData, chartTime, quote }) => {
 	const info = stockState((state) => state.info);
 
 	let raw;
-	formatted;
+	let formatted;
 	let dec = 2;
 
 	if (typeof window !== 'undefined' && window.screen.width < 370) {
@@ -28,7 +28,7 @@ const PriceChange = ({ chartData, chartTime, quote }) => {
 		if (info.type === 'etf') {
 			document.querySelector('#price1y').innerHTML = formatted;
 		}
-	}, [info.type]);
+	}, [formatted, info.type]);
 
 	const css = raw > 0 ? 'green' : raw < 0 ? 'red' : 'text-gray-600';
 
