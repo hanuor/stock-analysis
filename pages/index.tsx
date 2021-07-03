@@ -19,8 +19,6 @@ interface FrontPageProps {
 }
 
 export default function FrontPage({ data }: FrontPageProps) {
-	console.log(data);
-
 	return (
 		<LayoutFullWidth title="Home Page">
 			<Hero />

@@ -1,25 +1,12 @@
 import Axios from 'axios';
 
-export function getStockUrls() {
-	// Array of objects with the params key and the slugname-value key value pair.
-	const paths = [
-		{
-			params: {
-				symbol: 'aapl',
-			},
-		},
-	];
-
-	return paths;
+interface Params {
+	params: {
+		symbol: string;
+	};
 }
 
-export async function getData(path) {
-	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
-	const resp = await Axios.get(API + path);
-	return resp.data;
-}
-
-export async function getStockInfo({ params }) {
+export async function getStockInfo({ params }: Params) {
 	const symbol = params.symbol;
 
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
@@ -30,7 +17,7 @@ export async function getStockInfo({ params }) {
 	return info;
 }
 
-export async function getEtfInfo({ params }) {
+export async function getEtfInfo({ params }: Params) {
 	const symbol = params.symbol;
 
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
@@ -41,7 +28,7 @@ export async function getEtfInfo({ params }) {
 	return info;
 }
 
-export async function getPageData(id, page) {
+export async function getPageData(id: number, page: string) {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/${page}?i=${id}`);
@@ -50,7 +37,7 @@ export async function getPageData(id, page) {
 	return data;
 }
 
-export async function getNewsData(id) {
+export async function getNewsData(id: number) {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/news?i=${id}`);
@@ -59,7 +46,7 @@ export async function getNewsData(id) {
 	return news;
 }
 
-export async function getMarketNews(type) {
+export async function getMarketNews(type: string) {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/news?type=${type}`);
@@ -77,7 +64,7 @@ export async function getHomePageData() {
 	return data;
 }
 
-export async function getIpoData(query) {
+export async function getIpoData(query: string) {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/ipos?q=${query}`);
@@ -86,7 +73,7 @@ export async function getIpoData(query) {
 	return data;
 }
 
-export async function getActionsData(query) {
+export async function getActionsData(query: string) {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/actions?q=${query}`);

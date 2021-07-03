@@ -3,7 +3,7 @@ import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
-import { allPostPaths, POST_PATHS } from 'functions/markdown.functions.js';
+import { allPostPaths, POST_PATHS } from 'functions/markdown.functions';
 import ArticleLayout from 'components/Layout/ArticleLayout';
 import Image from 'next/image';
 import CustomLink, { External } from 'components/CustomLink';
