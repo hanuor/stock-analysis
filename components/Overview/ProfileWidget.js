@@ -29,7 +29,8 @@ export default function Profile() {
 									data.infoTable[number][0] === 'Index Tracked'
 										? 'col-span-2'
 										: 'col-span-1'
-								}>
+								}
+							>
 								<span className="font-semibold block">
 									{data.infoTable[number][0]}
 								</span>

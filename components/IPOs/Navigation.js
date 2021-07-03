@@ -24,7 +24,8 @@ const Navigation = () => {
 										['#', '2021', '2020', '2019'].includes(path.two)
 											? active
 											: inactive
-									}>
+									}
+								>
 									IPOs
 								</a>
 							</Link>
@@ -35,7 +36,8 @@ const Navigation = () => {
 									data-title="Calendar"
 									className={
 										path.two === 'calendar' ? active : inactive
-									}>
+									}
+								>
 									Calendar
 								</a>
 							</Link>
@@ -44,7 +46,8 @@ const Navigation = () => {
 							<Link href="/ipos/news/">
 								<a
 									data-title="News"
-									className={path.two === 'news' ? active : inactive}>
+									className={path.two === 'news' ? active : inactive}
+								>
 									News
 								</a>
 							</Link>
@@ -55,7 +58,8 @@ const Navigation = () => {
 									data-title="Statistics"
 									className={
 										path.two === 'statistics' ? active : inactive
-									}>
+									}
+								>
 									Statistics
 								</a>
 							</Link>

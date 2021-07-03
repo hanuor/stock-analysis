@@ -84,7 +84,8 @@ export default function MyAccount() {
 										href={userMeta.urlUpdate}
 										target="_blank"
 										rel="nofollow noopener noreferrer"
-										className="bll">
+										className="bll"
+									>
 										Update Payment Details
 									</a>
 								</div>
@@ -95,7 +96,8 @@ export default function MyAccount() {
 										href={userMeta.urlCancel}
 										target="_blank"
 										rel="nofollow noopener noreferrer"
-										className="bll">
+										className="bll"
+									>
 										Cancel Subscription
 									</a>
 								</div>

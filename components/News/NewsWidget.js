@@ -17,7 +17,8 @@ const NewsWidget = ({ title, news, button }) => {
 							href={item.url}
 							target="_blank"
 							rel="noopener noreferrer nofollow"
-							className="bll">
+							className="bll"
+						>
 							{item.title}
 						</a>
 						{' - '}

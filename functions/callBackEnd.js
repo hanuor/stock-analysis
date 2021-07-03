@@ -14,7 +14,7 @@ export function getStockUrls() {
 }
 
 export async function getData(path) {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 	const resp = await Axios.get(API + path);
 	return resp.data;
 }
@@ -22,7 +22,7 @@ export async function getData(path) {
 export async function getStockInfo({ params }) {
 	const symbol = params.symbol;
 
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/stock?symbol=${symbol}`);
 	const info = response.data;
@@ -33,7 +33,7 @@ export async function getStockInfo({ params }) {
 export async function getEtfInfo({ params }) {
 	const symbol = params.symbol;
 
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/etf?symbol=${symbol}`);
 	const info = response.data;
@@ -42,7 +42,7 @@ export async function getEtfInfo({ params }) {
 }
 
 export async function getPageData(id, page) {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/${page}?i=${id}`);
 	const data = response.data;
@@ -51,7 +51,7 @@ export async function getPageData(id, page) {
 }
 
 export async function getNewsData(id) {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/news?i=${id}`);
 	const news = response.data;
@@ -60,7 +60,7 @@ export async function getNewsData(id) {
 }
 
 export async function getMarketNews(type) {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/news?type=${type}`);
 	const news = response.data;
@@ -69,7 +69,7 @@ export async function getMarketNews(type) {
 }
 
 export async function getHomePageData() {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + '/homepage');
 	const data = response.data;
@@ -78,7 +78,7 @@ export async function getHomePageData() {
 }
 
 export async function getIpoData(query) {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/ipos?q=${query}`);
 	const data = response.data;
@@ -87,7 +87,7 @@ export async function getIpoData(query) {
 }
 
 export async function getActionsData(query) {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
 	const response = await Axios.get(API + `/actions?q=${query}`);
 	const data = response.data;

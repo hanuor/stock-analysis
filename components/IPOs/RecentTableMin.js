@@ -22,7 +22,8 @@ const CalendarTableMin = ({ recent }) => {
 						{recent.map((item, index) => (
 							<tr
 								key={index}
-								className="border-b last:border-0 border-gray-200">
+								className="border-b last:border-0 border-gray-200"
+							>
 								<td className="py-2 px-2 pl-2 border-r border-gray-200 whitespace-nowrap">
 									{item.date}
 								</td>

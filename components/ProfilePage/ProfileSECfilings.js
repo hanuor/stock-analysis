@@ -55,17 +55,20 @@ const ProfileSECfilings = ({ cik }) => {
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800">
+								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+							>
 								Date
 							</th>
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800">
+								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+							>
 								Type
 							</th>
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800">
+								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+							>
 								Title
 							</th>
 						</tr>

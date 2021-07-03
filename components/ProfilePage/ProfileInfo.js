@@ -8,7 +8,8 @@ const ProfileInfo = ({ info, logo }) => {
 					<tr>
 						<td
 							colSpan="2"
-							className="text-2xl font-semibold text-center pb-3">
+							className="text-2xl font-semibold text-center pb-3"
+						>
 							{info.name}
 						</td>
 					</tr>

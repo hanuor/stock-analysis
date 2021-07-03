@@ -68,7 +68,8 @@ export default function Header() {
 						className={`flex flex-col items-center focus:outline-none focus-visible:outline-none ${
 							open && 'text-blue-800'
 						}`}
-						onClick={clickMenu}>
+						onClick={clickMenu}
+					>
 						{open ? <CloseIcon /> : <HamburgerIcon />}
 						<span className="text-xs">{open ? 'Close' : 'Menu'}</span>
 					</button>

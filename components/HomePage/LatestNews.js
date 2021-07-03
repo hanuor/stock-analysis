@@ -11,7 +11,8 @@ export default function LatestNews({ news }) {
 							return (
 								<tr
 									key={index}
-									className="border-b border-gray-200 hover:bg-gray-50">
+									className="border-b border-gray-200 hover:bg-gray-50"
+								>
 									<td className="pr-1 pt-2 align-top text-gray-600">
 										{item.d}
 									</td>
@@ -20,7 +21,8 @@ export default function LatestNews({ news }) {
 											href={item.u}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
-											className="link">
+											className="link"
+										>
 											{item.t}
 										</a>
 										<span className="text-gray-600"> - {item.n}</span>
@@ -31,7 +33,8 @@ export default function LatestNews({ news }) {
 						<tr className="border-b border-gray-200 hover:bg-gray-50">
 							<td
 								colSpan="2"
-								className="pl-2 py-2 text-lg font-semibold">
+								className="pl-2 py-2 text-lg font-semibold"
+							>
 								<Link href="/news/">
 									<a className="link">More stock market news</a>
 								</Link>

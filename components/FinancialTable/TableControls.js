@@ -52,7 +52,8 @@ export default function TableControls() {
 					className={
 						btnStyles +
 						' flex flex-row items-center py-1 px-4 font-semibold'
-					}>
+					}
+				>
 					Export Financials
 					<MenuDropDown classes="w-6 h-6 ml-2 -mr-1" />
 				</button>
@@ -61,7 +62,8 @@ export default function TableControls() {
 			<div>
 				<button
 					className={btnStyles + ' px-3'}
-					onClick={() => clickLeftRight()}>
+					onClick={() => clickLeftRight()}
+				>
 					<LeftRightSwitch classes="h-9 w-9" />
 				</button>
 			</div>

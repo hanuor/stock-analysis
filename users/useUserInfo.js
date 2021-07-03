@@ -16,7 +16,7 @@ export default function useUserInfo() {
 					.doc(currentUser.uid)
 					.get()
 					.then((doc) => {
-						let data = doc.data();
+						const data = doc.data();
 						if (
 							data.status === 'new' ||
 							data.status === 'active' ||

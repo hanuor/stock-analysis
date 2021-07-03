@@ -41,7 +41,8 @@ const DividendChart = ({ data, options }) => {
 								active === 'all'
 									? 'text-gray-900'
 									: 'bll cursor-pointer'
-							}>
+							}
+						>
 							All
 						</span>
 						<span
@@ -50,7 +51,8 @@ const DividendChart = ({ data, options }) => {
 								active === 'trailing'
 									? 'text-gray-900'
 									: 'bll cursor-pointer'
-							}>
+							}
+						>
 							Trailing
 						</span>
 					</div>

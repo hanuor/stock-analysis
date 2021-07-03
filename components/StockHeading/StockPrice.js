@@ -114,7 +114,8 @@ function Extended({ quote, market }) {
 		<div className="max-w-[50%]">
 			<span className="text-4xl font-bold">{quote.extP}</span>{' '}
 			<span
-				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}>
+				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
+			>
 				{quote.extC} ({quote.extCP})
 			</span>
 			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">

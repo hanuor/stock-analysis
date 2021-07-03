@@ -9,14 +9,14 @@ import Footer from 'components/Layout/Footer/_Footer';
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-   return (
-      <QueryClientProvider client={queryClient}>
-         <Header />
-         <Component {...pageProps} />
-         <Footer />
-         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      </QueryClientProvider>
-   );
+	return (
+		<QueryClientProvider client={queryClient}>
+			<Header />
+			<Component {...pageProps} />
+			<Footer />
+			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
+		</QueryClientProvider>
+	);
 }
 
 export default MyApp;

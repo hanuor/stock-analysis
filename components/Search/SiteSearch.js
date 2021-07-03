@@ -112,7 +112,9 @@ export default function SiteSearch({ nav }) {
 							active.classList.remove('activeresult');
 						}
 						num++;
-						const next = document.querySelector('[data-num="' + num + '"]');
+						const next = document.querySelector(
+							'[data-num="' + num + '"]'
+						);
 						if (next) {
 							next.classList.add('activeresult');
 							next.focus();
@@ -130,7 +132,9 @@ export default function SiteSearch({ nav }) {
 							active.classList.remove('activeresult');
 						}
 						num--;
-						const next = document.querySelector('[data-num="' + num + '"]');
+						const next = document.querySelector(
+							'[data-num="' + num + '"]'
+						);
 						if (next) {
 							next.classList.add('activeresult');
 							next.focus();

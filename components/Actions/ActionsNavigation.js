@@ -21,7 +21,8 @@ const Navigation = () => {
 									data-title="Actions"
 									className={
 										!path.two || path.two === '#' ? active : inactive
-									}>
+									}
+								>
 									Actions
 								</a>
 							</Link>
@@ -32,7 +33,8 @@ const Navigation = () => {
 									data-title="Changes"
 									className={
 										path.two === 'changes' ? active : inactive
-									}>
+									}
+								>
 									Changes
 								</a>
 							</Link>
@@ -43,7 +45,8 @@ const Navigation = () => {
 									data-title="Spinoffs"
 									className={
 										path.two === 'spinoffs' ? active : inactive
-									}>
+									}
+								>
 									Spinoffs
 								</a>
 							</Link>
@@ -52,9 +55,8 @@ const Navigation = () => {
 							<Link href="/actions/splits/">
 								<a
 									data-title="Splits"
-									className={
-										path.two === 'splits' ? active : inactive
-									}>
+									className={path.two === 'splits' ? active : inactive}
+								>
 									Splits
 								</a>
 							</Link>
@@ -65,7 +67,8 @@ const Navigation = () => {
 									data-title="Delisted"
 									className={
 										path.two === 'delisted' ? active : inactive
-									}>
+									}
+								>
 									Delisted
 								</a>
 							</Link>
