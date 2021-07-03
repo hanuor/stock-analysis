@@ -1,4 +1,4 @@
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
 import { getPageData, getEtfInfo } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';

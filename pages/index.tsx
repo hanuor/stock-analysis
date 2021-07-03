@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
-import LayoutFullWidth from 'components/Layout/LayoutFullWidth';
+import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
+import { SEO } from 'components/SEO';
 import Hero from 'components/HomePage/Hero';
 import Movers from 'components/HomePage/Movers';
 import LatestNews from 'components/HomePage/LatestNews';
@@ -20,14 +21,23 @@ interface FrontPageProps {
 
 export default function FrontPage({ data }: FrontPageProps) {
 	return (
-		<LayoutFullWidth title="Home Page">
-			<Hero />
-			<Movers data={data} />
-			<div className="mx-auto flex flex-col space-y-6 pb-12 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-4 lg:max-w-[1200px]">
-				<LatestNews news={data.news} />
-				<IPOwidgets recent={data.recentIpos} upcoming={data.ipoCalendar} />
-			</div>
-		</LayoutFullWidth>
+		<>
+			<SEO
+				title="Stock Analysis | Free Online Stock Information for Investors"
+				description="Stock Analysis has everything you need to analyze stocks, including detailed financial data, news, charts and information on new and upcoming IPOs."
+			/>
+			<LayoutFullWidth>
+				<Hero />
+				<Movers data={data} />
+				<div className="mx-auto flex flex-col space-y-6 pb-12 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-4 lg:max-w-[1200px]">
+					<LatestNews news={data.news} />
+					<IPOwidgets
+						recent={data.recentIpos}
+						upcoming={data.ipoCalendar}
+					/>
+				</div>
+			</LayoutFullWidth>
+		</>
 	);
 }
 

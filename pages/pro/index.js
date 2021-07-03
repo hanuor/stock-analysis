@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { auth } from 'users/firebase';
@@ -45,7 +45,7 @@ export default function LandingPage() {
 
 	return (
 		<>
-			<Meta title="Stock Analysis Pro" />
+			<SEO title="Stock Analysis Pro" />
 			<main>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">

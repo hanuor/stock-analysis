@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import IPONavigation from 'components/IPOs/Navigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
@@ -9,7 +9,7 @@ import RecentTableMin from 'components/IPOs/RecentTableMin';
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<Meta title="IPO News" />
+			<SEO title="IPO News" />
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">

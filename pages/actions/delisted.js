@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import ActionsNavigation from 'components/Actions/ActionsNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
@@ -30,7 +30,7 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<Meta title="Delisted Stocks" />
+			<SEO title="Delisted Stocks" />
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

@@ -1,7 +1,7 @@
 import { getEtfInfo, getPageData, getNewsData } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import stockState from 'state/stockState';
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
 import PriceChart from 'components/PriceChart/_PriceChart';
 import Profile from 'components/Overview/ProfileWidget';

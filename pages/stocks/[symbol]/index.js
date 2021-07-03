@@ -1,5 +1,5 @@
 import { getStockInfo, getPageData, getNewsData } from 'functions/callBackEnd';
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
 import PriceChart from 'components/PriceChart/_PriceChart';
 import Profile from 'components/Overview/ProfileWidget';

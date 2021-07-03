@@ -1,4 +1,4 @@
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
 import FinancialTable from 'components/FinancialTable/_FinancialTable';
 import { getPageData, getStockInfo } from 'functions/callBackEnd';
 import { useRouter } from 'next/router';

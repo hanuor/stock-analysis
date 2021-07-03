@@ -1,11 +1,11 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 
 export default function PageLayout({ meta, children }) {
 	return (
 		<>
-			<Meta title={meta.title} />
+			<SEO title={meta.title} />
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
