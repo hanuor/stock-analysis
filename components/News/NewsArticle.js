@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Tickers from './Tickers';
 
 const NewsArticle = ({ item, related }) => {
@@ -7,7 +8,8 @@ const NewsArticle = ({ item, related }) => {
 				<a
 					href={item.url}
 					target="_blank"
-					rel="nofollow noopener noreferrer">
+					rel="nofollow noopener noreferrer"
+				>
 					<img
 						loading="lazy"
 						src={item.image}
@@ -23,7 +25,8 @@ const NewsArticle = ({ item, related }) => {
 					<a
 						href={item.url}
 						target="_blank"
-						rel="noopener noreferrer nofollow">
+						rel="noopener noreferrer nofollow"
+					>
 						{item.title}
 					</a>
 				</h3>

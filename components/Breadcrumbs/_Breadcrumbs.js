@@ -1,4 +1,4 @@
-import navState from '@State/navState';
+import navState from 'state/navState';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
 const formatPageTitle = (word) => {
-	let split = word.split('-');
+	const split = word.split('-');
 	if (split.length === 1) {
 		return split[0].charAt(0).toUpperCase() + split[0].slice(1);
 	} else {
@@ -96,12 +96,12 @@ const _Breadcrumbs = () => {
 	const setPath = navState((state) => state.setPath);
 
 	useEffect(() => {
-		let route = router.asPath;
-		let split = route.split('/');
-		let one = split[1] || null;
-		let two = split[2] || null;
-		let three = split[3] || null;
-		let four = split[4] || null;
+		const route = router.asPath;
+		const split = route.split('/');
+		const one = split[1] || null;
+		const two = split[2] || null;
+		const three = split[3] || null;
+		const four = split[4] || null;
 
 		setPath({
 			one,

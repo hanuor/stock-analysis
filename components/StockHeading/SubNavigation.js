@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { financialsState } from '@State/financialsState';
+import { financialsState } from 'state/financialsState';
 import { useEffect } from 'react';
-import styles from '@/Styles/TabMenu.module.css';
-import navState from '@State/navState';
+import styles from 'styles/TabMenu.module.css';
+import navState from 'state/navState';
 
 // styles
 const common =
@@ -32,7 +32,8 @@ const Statement = () => {
 							className={
 								statement == 'income_statement' ? active : inactive
 							}
-							data-title="Income">
+							data-title="Income"
+						>
 							Income
 						</a>
 					</Link>
@@ -40,12 +41,14 @@ const Statement = () => {
 				<li>
 					<Link
 						href={`/stocks/${path.two}/financials/balance-sheet`}
-						scroll={false}>
+						scroll={false}
+					>
 						<a
 							className={
 								statement == 'balance_sheet' ? active : inactive
 							}
-							data-title="Balance Sheet">
+							data-title="Balance Sheet"
+						>
 							Balance Sheet
 						</a>
 					</Link>
@@ -53,12 +56,14 @@ const Statement = () => {
 				<li>
 					<Link
 						href={`/stocks/${path.two}/financials/cash-flow-statement/`}
-						scroll={false}>
+						scroll={false}
+					>
 						<a
 							className={
 								statement == 'cash_flow_statement' ? active : inactive
 							}
-							data-title="Cash Flow">
+							data-title="Cash Flow"
+						>
 							Cash Flow
 						</a>
 					</Link>
@@ -66,10 +71,12 @@ const Statement = () => {
 				<li>
 					<Link
 						href={`/stocks/${path.two}/financials/ratios/`}
-						scroll={false}>
+						scroll={false}
+					>
 						<a
 							className={statement == 'ratios' ? active : inactive}
-							data-title="Ratios">
+							data-title="Ratios"
+						>
 							Ratios
 						</a>
 					</Link>
@@ -86,8 +93,8 @@ const Period = () => {
 	// Check for period in URL
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			let url = new URL(window.location.href);
-			let params = url.searchParams;
+			const url = new URL(window.location.href);
+			const params = url.searchParams;
 			const period = params.get('period');
 			if (period === 'quarterly' || period === 'trailing') {
 				if (period !== range) {
@@ -106,7 +113,8 @@ const Period = () => {
 						onClick={function () {
 							setRange('annual');
 						}}
-						data-title="Annual">
+						data-title="Annual"
+					>
 						Annual
 					</span>
 				</li>
@@ -118,7 +126,8 @@ const Period = () => {
 								setRange('quarterly');
 							}
 						}}
-						data-title="Quarterly">
+						data-title="Quarterly"
+					>
 						Quarterly
 					</span>
 				</li>
@@ -128,7 +137,8 @@ const Period = () => {
 						onClick={function () {
 							setRange('trailing');
 						}}
-						data-title="Trailing">
+						data-title="Trailing"
+					>
 						Trailing
 					</span>
 				</li>

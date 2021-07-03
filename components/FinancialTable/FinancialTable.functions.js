@@ -76,7 +76,7 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 
 		case 'reduce_precision': {
 			if (current) {
-				let num = (current / numbersIn).toFixed(0) * numbersIn;
+				const num = (current / numbersIn).toFixed(0) * numbersIn;
 				return new Intl.NumberFormat('en-US', {
 					maximumFractionDigits: 2,
 				}).format(num / numbersIn);
@@ -122,9 +122,9 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 }
 
 export function formatYear(date) {
-	let dateObject = new Date(date);
+	const dateObject = new Date(date);
 	let year = dateObject.getFullYear();
-	let month = dateObject.getMonth();
+	const month = dateObject.getMonth();
 	// If fiscal year ends in Jan-Mar, show year as previous
 
 	if (month < 4) {

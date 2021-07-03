@@ -1,4 +1,4 @@
-import StockLink from '@/components/Links';
+import StockLink from 'components/Links';
 
 const cellStyles =
 	'py-1.5 sm:py-2 px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
@@ -10,13 +10,14 @@ export default function Movers({ data }) {
 	const marketStatus = data.marketStatus;
 
 	const Rows = ({ movers, type }) => {
-		let items = movers.slice(0, 10);
-		let redOrGreen = type === 'Gainers' ? 'text-green-600' : 'text-red-500';
+		const items = movers.slice(0, 10);
+		const redOrGreen = type === 'Gainers' ? 'text-green-600' : 'text-red-500';
 
 		return items.map((item, index) => (
 			<tr
 				key={index}
-				className="border-b border-gray-200 hover:bg-gray-50 transition duration-100">
+				className="border-b border-gray-200 hover:bg-gray-50 transition duration-100"
+			>
 				<td className={cellStyles + ' text-left border-r'}>
 					<StockLink symbol={item.s} />
 				</td>
@@ -24,7 +25,8 @@ export default function Movers({ data }) {
 					className={
 						cellStyles +
 						' text-left border-r max-w-[90px] xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap overflow-hidden overflow-ellipsis'
-					}>
+					}
+				>
 					{item.n}
 				</td>
 
@@ -37,7 +39,7 @@ export default function Movers({ data }) {
 	};
 
 	const Table = ({ movers, type }) => {
-		let titlePrefix = marketStatus === 'pre-market' ? 'Pre-Market' : 'Top';
+		const titlePrefix = marketStatus === 'pre-market' ? 'Pre-Market' : 'Top';
 
 		return (
 			<div className="flex-grow">

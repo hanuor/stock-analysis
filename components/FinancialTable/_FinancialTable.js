@@ -1,18 +1,8 @@
 /* eslint-disable react/display-name */
-// ? Add a menu that allows formatting by millions/thousands/raw
-// ? Add an option to show "current/ttm"
-// ? Add data disclaimers
-// ? Add link to 10K/10Q?
-// ? Link to financial statement definitions?
-// ? Add easy symbol switch
-// ? Include formats in export: csv, plain text, pdf
-// ? Add print button?
-// ? Make left column sticky
-
 import { forwardRef } from 'react';
-import { financialsState } from '@State/financialsState';
-import { stockState } from '@State/stockState';
-import useUserInfo from '@Firebase/useUserInfo';
+import { financialsState } from 'state/financialsState';
+import { stockState } from 'state/stockState';
+import useUserInfo from 'users/useUserInfo';
 import {
 	formatNumber,
 	formatYear,
@@ -20,9 +10,9 @@ import {
 	getPeriodLabel,
 	getPeriodTooltip,
 } from './FinancialTable.functions';
-import { HoverChartIcon } from '@/components/Icons';
+import { HoverChartIcon } from 'components/Icons';
 import styles from './FinancialTable.module.css';
-import mapData from '@Data/financials_data_map';
+import mapData from 'data/financials_map';
 import HoverChart from './HoverChart';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -50,15 +40,17 @@ export default function FinancialTable() {
 			? financialData.ratios.trailing
 			: financialData[statement][range]; // The data for the selected financial statement
 
-	let paywall = range === 'annual' ? 15 : 40;
+	const paywall = range === 'annual' ? 15 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
 
 	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 
 	// Remove initial empty columns in ratios statement
 	if (statement === 'ratios') {
-		let marketCapData = data.marketcap;
-		let marketCapValid = marketCapData.filter((item) => item != null).length;
+		const marketCapData = data.marketcap;
+		const marketCapValid = marketCapData.filter(
+			(item) => item != null
+		).length;
 		if (marketCapValid < showcount) {
 			showcount = marketCapValid;
 		}
@@ -79,7 +71,7 @@ export default function FinancialTable() {
 		);
 	}
 
-	const data_map = mapData(statement);
+	const DATA_MAP = mapData(statement);
 
 	const HeaderRow = () => {
 		let headerdata = data.datekey;
@@ -100,7 +92,7 @@ export default function FinancialTable() {
 	};
 
 	const RowTitle = forwardRef((props, ref) => {
-		let margin = props.indent ? ' ml-3' : '';
+		const margin = props.indent ? ' ml-3' : '';
 
 		return (
 			<span ref={ref} className={'cursor-help' + margin}>
@@ -132,9 +124,9 @@ export default function FinancialTable() {
 	});
 
 	const BodyRow = ({ row }) => {
-		let id = row.id;
-		let dataid = row.data || row.id;
-		let format = row.format || 'standard';
+		const id = row.id;
+		const dataid = row.data || row.id;
+		const format = row.format || 'standard';
 		let offset = range === 'annual' ? 1 : 4;
 		let total = 0;
 
@@ -155,11 +147,11 @@ export default function FinancialTable() {
 			rowdata = rowdata.reverse();
 		}
 
-		let dataRows = rowdata.map((cell, index) => {
-			let prev = format === 'growth' ? rowdata[index + offset] : null;
-			let rev = format === 'margin' ? revenuedata[index] : null;
+		const dataRows = rowdata.map((cell, index) => {
+			const prev = format === 'growth' ? rowdata[index + offset] : null;
+			const rev = format === 'margin' ? revenuedata[index] : null;
 
-			let titleTag = formatNumber({
+			const titleTag = formatNumber({
 				type: row.format || 'standard',
 				current: cell,
 				previous: prev,
@@ -167,7 +159,7 @@ export default function FinancialTable() {
 				divider: 'raw',
 			});
 
-			let cellContent = formatNumber({
+			const cellContent = formatNumber({
 				type: row.format || 'standard',
 				current: cell,
 				previous: prev,
@@ -175,7 +167,7 @@ export default function FinancialTable() {
 				divider,
 			});
 
-			let cellClass = () => {
+			const cellClass = () => {
 				if (format === 'growth') {
 					return redOrGreen(cellContent, id);
 				}
@@ -193,7 +185,7 @@ export default function FinancialTable() {
 		});
 
 		const getRowStyles = () => {
-			let styles = [];
+			const styles = [];
 			if (row.format === 'growth' || row.border) {
 				styles.push(
 					'border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]'
@@ -220,7 +212,8 @@ export default function FinancialTable() {
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
 							delay={100}
-							className={styles.bigTooltipText}>
+							className={styles.bigTooltipText}
+						>
 							<RowTitle
 								title={row.title}
 								indent={row.format === 'growth' || row.indent}
@@ -231,7 +224,8 @@ export default function FinancialTable() {
 								<div
 									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
 									tabIndex="-1"
-									{...attrs}>
+									{...attrs}
+								>
 									<HoverChart
 										data={data}
 										count={showcount}
@@ -249,7 +243,8 @@ export default function FinancialTable() {
 								modifiers: [{ name: 'flip', enabled: false }],
 							}}
 							trigger="mouseenter focus click"
-							zIndex={30}>
+							zIndex={30}
+						>
 							<ChartIcon />
 						</HeadlessTippy>
 					</td>
@@ -259,7 +254,7 @@ export default function FinancialTable() {
 		);
 	};
 
-	let paywalled = showcount < fullcount ? 'true' : false;
+	const paywalled = showcount < fullcount ? 'true' : false;
 
 	return (
 		<div className="px-4 lg:px-6 mx-auto">
@@ -271,7 +266,8 @@ export default function FinancialTable() {
 				className={
 					'overflow-x-auto border border-gray-300' +
 					(paywalled ? ' flex flex-row' : '')
-				}>
+				}
+			>
 				{paywalled && <div className="flex flex-row"></div>}
 				<table className={[styles.table, styles.table_financial].join(' ')}>
 					<thead>
@@ -281,7 +277,8 @@ export default function FinancialTable() {
 									content={getPeriodTooltip(range)}
 									theme="light"
 									delay={100}
-									className={styles.bigTooltipText}>
+									className={styles.bigTooltipText}
+								>
 									<RowTitle title={getPeriodLabel(range)} />
 								</Tippy>
 							</th>
@@ -289,7 +286,7 @@ export default function FinancialTable() {
 						</tr>
 					</thead>
 					<tbody>
-						{data_map.map((row, index) => {
+						{DATA_MAP.map((row, index) => {
 							return <BodyRow row={row} key={index} />;
 						})}
 					</tbody>

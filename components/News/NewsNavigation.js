@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import styles from '@/Styles/TabMenu.module.css';
-import navState from '@State/navState';
+import styles from 'styles/TabMenu.module.css';
+import navState from 'state/navState';
 
 const Navigation = () => {
 	const router = useRouter();
@@ -10,11 +10,11 @@ const Navigation = () => {
 	const setPath = navState((state) => state.setPath);
 
 	useEffect(() => {
-		let route = router.asPath;
-		let split = route.split('/');
-		let one = split[1] || null;
-		let two = split[2] || null;
-		let three = split[3] || null;
+		const route = router.asPath;
+		const split = route.split('/');
+		const one = split[1] || null;
+		const two = split[2] || null;
+		const three = split[3] || null;
 
 		setPath({
 			one,
@@ -42,7 +42,8 @@ const Navigation = () => {
 										['#', '2021', '2020', '2019'].includes(path.two)
 											? active
 											: inactive
-									}>
+									}
+								>
 									Markets
 								</a>
 							</Link>
@@ -53,7 +54,8 @@ const Navigation = () => {
 									data-title="All Stocks"
 									className={
 										path.two === 'all-stocks' ? active : inactive
-									}>
+									}
+								>
 									All Stocks
 								</a>
 							</Link>
@@ -64,7 +66,8 @@ const Navigation = () => {
 									data-title="Press Releases"
 									className={
 										path.two === 'press-releases' ? active : inactive
-									}>
+									}
+								>
 									Press Releases
 								</a>
 							</Link>

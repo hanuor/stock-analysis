@@ -7,12 +7,14 @@ const ProfileExecutives = ({ executives }) => {
 					<tr className="border-b border-t border-gray-200">
 						<th
 							scope="col"
-							className="text-left py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 font-medium text-gray-800">
+							className="text-left py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 font-medium text-gray-800"
+						>
 							Name
 						</th>
 						<th
 							scope="col"
-							className="text-left py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 font-medium text-gray-800">
+							className="text-left py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 font-medium text-gray-800"
+						>
 							Position
 						</th>
 					</tr>

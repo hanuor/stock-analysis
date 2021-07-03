@@ -32,7 +32,8 @@ export default function LiteYouTubeEmbed(props) {
 				onClick={addIframe}
 				className={iframe ? active : inactive}
 				data-title={videoTitle}
-				style={{ backgroundImage: `url(${posterUrl})` }}>
+				style={{ backgroundImage: `url(${posterUrl})` }}
+			>
 				<div className={styles['lty-playbtn']}></div>
 				{iframe && (
 					<iframe
@@ -43,7 +44,8 @@ export default function LiteYouTubeEmbed(props) {
 						frameBorder="0"
 						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 						allowFullScreen
-						src={iframeSrc}></iframe>
+						src={iframeSrc}
+					></iframe>
 				)}
 			</div>
 		</>

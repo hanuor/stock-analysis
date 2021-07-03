@@ -1,4 +1,4 @@
-import stockState from '@State/stockState';
+import stockState from 'state/stockState';
 import { useEffect, useState } from 'react';
 import SingleChart from './SingleChart';
 
@@ -41,7 +41,8 @@ const DividendChart = ({ data, options }) => {
 								active === 'all'
 									? 'text-gray-900'
 									: 'bll cursor-pointer'
-							}>
+							}
+						>
 							All
 						</span>
 						<span
@@ -50,7 +51,8 @@ const DividendChart = ({ data, options }) => {
 								active === 'trailing'
 									? 'text-gray-900'
 									: 'bll cursor-pointer'
-							}>
+							}
+						>
 							Trailing
 						</span>
 					</div>

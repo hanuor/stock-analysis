@@ -1,4 +1,4 @@
-import StockLink, { ETFLink } from '@/components/Links';
+import StockLink, { ETFLink } from 'components/Links';
 
 function Tickers({ tickers, intro }) {
 	if (tickers === null || tickers.length === 0) {

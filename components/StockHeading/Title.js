@@ -1,4 +1,4 @@
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 import { InformationCircleIcon } from '@heroicons/react/solid';
 
 const getQuoteSource = (quote) => {
@@ -18,7 +18,7 @@ export default function Title() {
 		return null;
 	}
 
-	let notice =
+	const notice =
 		info.ipoInfo !== null &&
 		typeof info.ipoInfo !== 'undefined' &&
 		info.ipoInfo.notice

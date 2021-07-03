@@ -1,6 +1,6 @@
-import Meta from '@/components/Meta';
-import { NewsletterWidget } from '@/components/Layout/Sidebar/Newsletter';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
+import Meta from 'components/Meta';
+import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 
 export default function PageLayout({ meta, children }) {
 	return (

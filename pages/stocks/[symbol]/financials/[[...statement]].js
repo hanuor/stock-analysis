@@ -1,10 +1,10 @@
-import Stock from '@/components/Layout/StockLayout';
-import FinancialTable from '@/components/FinancialTable/_FinancialTable';
-import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
+import Stock from 'components/Layout/StockLayout';
+import FinancialTable from 'components/FinancialTable/_FinancialTable';
+import { getPageData, getStockInfo } from 'functions/callBackEnd';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { stockState } from '@State/stockState';
-import { financialsState } from '@State/financialsState';
+import { stockState } from 'state/stockState';
+import { financialsState } from 'state/financialsState';
 
 export default function FinancialsPage({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -20,9 +20,9 @@ export default function FinancialsPage({ info, data }) {
 
 	const router = useRouter();
 	useEffect(() => {
-		let route = router.asPath;
-		let split = route.split('/');
-		let subpage = split[4] || 'income-statement';
+		const route = router.asPath;
+		const split = route.split('/');
+		const subpage = split[4] || 'income-statement';
 
 		if (subpage !== statement) {
 			switch (subpage) {

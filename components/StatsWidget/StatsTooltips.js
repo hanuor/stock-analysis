@@ -24,7 +24,8 @@ const Tooltip = ({ data, indicator }) => {
 			delay={100}
 			className={styles.bigTooltipText}
 			interactive={true}
-			content={<TooltipContent data={data} />}>
+			content={<TooltipContent data={data} />}
+		>
 			<span>{indicator}</span>
 		</Tippy>
 	);

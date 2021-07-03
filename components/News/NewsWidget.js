@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from 'components/Button';
 
 const NewsWidget = ({ title, news, button }) => {
 	if (news.length === 0) {
@@ -17,7 +17,8 @@ const NewsWidget = ({ title, news, button }) => {
 							href={item.url}
 							target="_blank"
 							rel="noopener noreferrer nofollow"
-							className="bll">
+							className="bll"
+						>
 							{item.title}
 						</a>
 						{' - '}

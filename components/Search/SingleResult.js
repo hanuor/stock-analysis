@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
 export default function SingleResult({ index, symbol, name, type, setOpen }) {
-	let url, tag;
+	let url;
+	let tag;
 
 	switch (type) {
 		case 's':
@@ -31,7 +32,8 @@ export default function SingleResult({ index, symbol, name, type, setOpen }) {
 				<a
 					data-num={index + 1}
 					className={searchResultStyles}
-					onClick={() => setOpen(false)}>
+					onClick={() => setOpen(false)}
+				>
 					<span className="min-w-[3rem]">{symbol}</span>
 					<span className="flex-grow">{name}</span>
 					<span className="hidden sm:block text-sm">{tag}</span>

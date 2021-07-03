@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 const StockLink = ({ symbol, className }) => {
-	let classes = className || 'bll';
+	const classes = className || 'bll';
 
 	return (
 		<Link href={`/stocks/${symbol.toLowerCase()}/`}>
@@ -13,7 +13,7 @@ const StockLink = ({ symbol, className }) => {
 export default StockLink;
 
 export const ETFLink = ({ symbol, className }) => {
-	let classes = className || 'bll';
+	const classes = className || 'bll';
 
 	return (
 		<Link href={`/etf/${symbol.toLowerCase()}/`}>

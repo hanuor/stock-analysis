@@ -2,7 +2,7 @@ import { useTable, useSortBy } from 'react-table';
 import styles from './Table.module.css';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import { SortUp, SortDown } from '@/components/Icons';
+import { SortUp, SortDown } from 'components/Icons';
 
 const RecentTable = ({ rawdata }) => {
 	const columns = useMemo(
@@ -45,7 +45,7 @@ const RecentTable = ({ rawdata }) => {
 				accessor: 'return',
 				sortType: 'basic',
 				Cell: ({ cell: { value } }) => {
-					let fixed = value.toFixed(2) + '%';
+					const fixed = value.toFixed(2) + '%';
 					if (value > 0) {
 						return <span className="text-[green]">{fixed}</span>;
 					} else if (value < 0) {
@@ -70,17 +70,20 @@ const RecentTable = ({ rawdata }) => {
 		<div className="overflow-x-auto">
 			<table
 				{...getTableProps()}
-				className={`${styles.ipotable} ${styles.striped}`}>
+				className={`${styles.ipotable} ${styles.striped}`}
+			>
 				<thead>
-					{headerGroups.map((headerGroup) => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map((column) => (
+					{headerGroups.map((headerGroup, index) => (
+						<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+							{headerGroup.headers.map((column, index) => (
 								<th
 									{...column.getHeaderProps(
 										column.getSortByToggleProps({
 											title: `Sort by: ${column.Header}`,
 										})
-									)}>
+									)}
+									key={index}
+								>
 									<span className="inline-flex flex-row items-center">
 										{column.render('Header')}
 
@@ -100,13 +103,13 @@ const RecentTable = ({ rawdata }) => {
 					))}
 				</thead>
 				<tbody {...getTableBodyProps()}>
-					{rows.map((row) => {
+					{rows.map((row, index) => {
 						prepareRow(row);
 						return (
-							<tr {...row.getRowProps()}>
-								{row.cells.map((cell) => {
+							<tr {...row.getRowProps()} key={index}>
+								{row.cells.map((cell, index) => {
 									return (
-										<td {...cell.getCellProps()}>
+										<td {...cell.getCellProps()} key={index}>
 											{cell.render('Cell')}
 										</td>
 									);

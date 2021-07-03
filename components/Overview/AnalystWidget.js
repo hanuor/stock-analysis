@@ -1,14 +1,14 @@
 import { Bar, defaults } from 'react-chartjs-2';
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 defaults.color = '#222222';
 
 function PriceTarget({ target }) {
-	let priceTarget = target[0];
-	let difference = target[1];
-	let updown = target[2];
+	const priceTarget = target[0];
+	const difference = target[1];
+	const updown = target[2];
 
 	if (updown === 'upside') {
 		return (

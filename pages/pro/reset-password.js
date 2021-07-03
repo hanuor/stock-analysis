@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { auth } from '@Firebase/firebase';
-import UserLayout from '@/components/Layout/UserLayout';
+import { auth } from 'users/firebase';
+import UserLayout from 'components/Layout/UserLayout';
 import Link from 'next/link';
 
 export default function ForgotPassword() {
@@ -47,7 +47,8 @@ export default function ForgotPassword() {
 						<div>
 							<label
 								htmlFor="email"
-								className="block text-small font-medium text-gray-700 text-left mb-1">
+								className="block text-small font-medium text-gray-700 text-left mb-1"
+							>
 								Email
 							</label>
 							<input

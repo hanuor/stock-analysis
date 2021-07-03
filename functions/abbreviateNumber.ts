@@ -1,4 +1,4 @@
-function formatNum(num, dec, append) {
+function formatNum(num: number, dec: number, append: string): string {
 	return (
 		new Intl.NumberFormat('en-US', {
 			minimumFractionDigits: dec,
@@ -7,7 +7,11 @@ function formatNum(num, dec, append) {
 	);
 }
 
-export default function abbreviateNumber(num, dec = 2, noT = false) {
+export default function abbreviateNumber(
+	num: number,
+	dec = 2,
+	noT = false
+): string {
 	// for positive values
 	if (num > 0) {
 		if (!noT && num > 1000000000000) {

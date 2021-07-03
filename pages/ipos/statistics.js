@@ -1,12 +1,12 @@
-import Meta from '@/components/Meta';
-import { getIpoData } from '@/Functions/callBackEnd';
-import IPONavigation from '@/components/IPOs/Navigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import StatsChartAnnual from '@/components/IPOs/StatsChartAnnual';
-import StatsChartMonthly from '@/components/IPOs/StatsChartMonthly';
+import Meta from 'components/Meta';
+import { getIpoData } from 'functions/callBackEnd';
+import IPONavigation from 'components/IPOs/Navigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import StatsChartAnnual from 'components/IPOs/StatsChartAnnual';
+import StatsChartMonthly from 'components/IPOs/StatsChartMonthly';
 import Link from 'next/link';
-import RecentTableMin from '@/components/IPOs/RecentTableMin';
-import NewsWidget from '@/components/News/NewsWidget';
+import RecentTableMin from 'components/IPOs/RecentTableMin';
+import NewsWidget from 'components/News/NewsWidget';
 
 const RecentIpos = ({ data }) => {
 	return (

@@ -1,5 +1,5 @@
-import stockState from '@State/stockState';
-import financialsState from '@State/financialsState';
+import stockState from 'state/stockState';
+import financialsState from 'state/financialsState';
 
 export default function TableTitle({ empty }) {
 	const statement = financialsState((state) => state.statement);
@@ -15,7 +15,7 @@ export default function TableTitle({ empty }) {
 function TableHeader({ statement }) {
 	const range = financialsState((state) => state.range);
 
-	let rangeTitle = range.charAt(0).toUpperCase() + range.slice(1);
+	const rangeTitle = range.charAt(0).toUpperCase() + range.slice(1);
 	let statementTitle;
 	switch (statement) {
 		case 'income_statement':

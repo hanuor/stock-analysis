@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import useUserInfo from '@Firebase/useUserInfo';
-import LayoutFullWidth from '@/Layout/LayoutFullWidth';
-import LoginPrompt from '@/components/LoginPrompt';
+import useUserInfo from 'users/useUserInfo';
+import LayoutFullWidth from 'components/Layout/LayoutFullWidth';
+import LoginPrompt from 'components/LoginPrompt';
 import Head from 'next/head';
 import Link from 'next/link';
-import { db } from '@Firebase/firebase';
-import { formatDateClean } from '@/Functions/formatDates';
+import { db } from 'users/firebase';
+import { formatDateClean } from 'functions/formatDates';
 
 export default function MyAccount() {
 	const { user } = useUserInfo();
@@ -84,7 +84,8 @@ export default function MyAccount() {
 										href={userMeta.urlUpdate}
 										target="_blank"
 										rel="nofollow noopener noreferrer"
-										className="bll">
+										className="bll"
+									>
 										Update Payment Details
 									</a>
 								</div>
@@ -95,7 +96,8 @@ export default function MyAccount() {
 										href={userMeta.urlCancel}
 										target="_blank"
 										rel="nofollow noopener noreferrer"
-										className="bll">
+										className="bll"
+									>
 										Cancel Subscription
 									</a>
 								</div>

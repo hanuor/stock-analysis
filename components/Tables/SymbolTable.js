@@ -10,7 +10,7 @@ import {
 import styles from './SymbolTable.module.css';
 import GlobalFilter from './GlobalFilter';
 import Pagination from './Pagination';
-import { SortUp, SortDown } from '@/components/Icons';
+import { SortUp, SortDown } from 'components/Icons';
 
 export default function Table({ title, columndata, rowdata }) {
 	const columns = useMemo(() => columndata, [columndata]);
@@ -62,17 +62,20 @@ export default function Table({ title, columndata, rowdata }) {
 			<div className="overflow-x-auto">
 				<table
 					{...getTableProps()}
-					className={[styles.table, styles.table_striped].join(' ')}>
+					className={[styles.table, styles.table_striped].join(' ')}
+				>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
+						{headerGroups.map((headerGroup, index) => (
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+								{headerGroup.headers.map((column, index) => (
 									<th
 										{...column.getHeaderProps(
 											column.getSortByToggleProps({
 												title: `Sort by: ${column.Header}`,
 											})
-										)}>
+										)}
+										key={index}
+									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}
 
@@ -92,13 +95,13 @@ export default function Table({ title, columndata, rowdata }) {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row) => {
+						{page.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
+								<tr {...row.getRowProps()} key={index}>
+									{row.cells.map((cell, index) => {
 										return (
-											<td {...cell.getCellProps()}>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);

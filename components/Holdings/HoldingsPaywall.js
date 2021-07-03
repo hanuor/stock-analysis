@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from 'components/Button';
 
 const Paywall = ({ total }) => {
 	if (total < 200) {

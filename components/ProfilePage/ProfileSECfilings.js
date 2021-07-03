@@ -1,13 +1,13 @@
-import { External } from '@/components/CustomLink';
+import { External } from 'components/CustomLink';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const formatSecDate = (string) => {
-	let datetime = new Date(string);
-	let timestamp = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const timestamp = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 	});
-	let date = datetime.toLocaleString('en-US', {
+	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 		day: 'numeric',
 		year: 'numeric',
@@ -27,7 +27,7 @@ const ProfileSECfilings = ({ cik }) => {
 		const source = axios.CancelToken.source();
 		const getFilings = async () => {
 			try {
-				let request = await axios.get(`/api/sec/${cik}/`, {
+				const request = await axios.get(`/api/sec/${cik}/`, {
 					cancelToken: source.token,
 					timeout: 5000,
 				});
@@ -55,24 +55,27 @@ const ProfileSECfilings = ({ cik }) => {
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800">
+								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+							>
 								Date
 							</th>
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800">
+								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+							>
 								Type
 							</th>
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800">
+								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+							>
 								Title
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						{secFilings.map((entry, index) => {
-							let { timestamp, date } = formatSecDate(entry.updated);
+							const { timestamp, date } = formatSecDate(entry.updated);
 
 							return (
 								<tr key={index} className="border-b border-gray-200">

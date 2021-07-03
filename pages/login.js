@@ -1,8 +1,8 @@
-import UserLayout from '@/Layout/UserLayout';
-import { auth } from '@Firebase/firebase';
+import UserLayout from 'components/Layout/UserLayout';
+import { auth } from 'users/firebase';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
-import useUserInfo from '@Firebase/useUserInfo';
+import useUserInfo from 'users/useUserInfo';
 
 export default function Login() {
 	const { user, isLoggedIn } = useUserInfo();
@@ -34,7 +34,8 @@ export default function Login() {
 				<div className="mb-2">Email: {user.email}</div>
 				<button
 					onClick={() => auth.signOut()}
-					className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+					className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+				>
 					Log Out
 				</button>
 			</UserLayout>

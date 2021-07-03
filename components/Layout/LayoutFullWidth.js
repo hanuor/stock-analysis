@@ -1,4 +1,4 @@
-import Meta from '@/components/Meta';
+import Meta from 'components/Meta';
 
 function LayoutFullWidth(props) {
 	return (

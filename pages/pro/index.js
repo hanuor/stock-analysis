@@ -1,10 +1,8 @@
-import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
+import Meta from 'components/Meta';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { auth } from '@Firebase/firebase';
-import registrationState from '@State/registrationState';
+import { auth } from 'users/firebase';
+import registrationState from 'state/registrationState';
 
 export default function LandingPage() {
 	const router = useRouter();
@@ -20,17 +18,18 @@ export default function LandingPage() {
 			// eslint-disable-next-line no-undef
 			Paddle.Environment.set('sandbox');
 			// eslint-disable-next-line no-undef
+			// eslint-disable-next-line new-cap
 			Paddle.Setup({ vendor: 2545 });
 		};
 	}, []);
 
 	function checkoutComplete(data) {
-		let checkoutId = data.checkout.id;
+		const checkoutId = data.checkout.id;
 
 		// eslint-disable-next-line no-undef
 		Paddle.Order.details(checkoutId, async function (data) {
-			let email = data.order.customer.email;
-			let password = Math.random().toString(36).slice(-8) + '?!337';
+			const email = data.order.customer.email;
+			const password = Math.random().toString(36).slice(-8) + '?!337';
 
 			setEmail(email);
 			setPassword(password);
@@ -47,7 +46,6 @@ export default function LandingPage() {
 	return (
 		<>
 			<Meta title="Stock Analysis Pro" />
-			<Header />
 			<main>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
@@ -119,7 +117,8 @@ export default function LandingPage() {
 												});
 											}}
 											id="start-trial"
-											className="block w-full p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+											className="block w-full p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+										>
 											Start Free Trial
 										</button>
 									</td>
@@ -231,7 +230,6 @@ export default function LandingPage() {
 					</div>
 				</section>
 			</main>
-			<Footer />
 		</>
 	);
 }

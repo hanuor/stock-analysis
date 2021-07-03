@@ -1,6 +1,6 @@
 export const formatDateTimestamp = (string) => {
-	let datetime = new Date(string);
-	let timestamp = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const timestamp = datetime.toLocaleString('en-US', {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
@@ -11,8 +11,8 @@ export const formatDateTimestamp = (string) => {
 };
 
 export const formatDateClean = (string) => {
-	let datetime = new Date(string);
-	let date = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 		day: 'numeric',
 		year: 'numeric',
@@ -22,8 +22,8 @@ export const formatDateClean = (string) => {
 };
 
 export const formatDateMinute = (string) => {
-	let datetime = new Date(string);
-	let date = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const date = datetime.toLocaleString('en-US', {
 		hour: '2-digit',
 		minute: '2-digit',
 	});
@@ -31,8 +31,8 @@ export const formatDateMinute = (string) => {
 };
 
 export const formatDateHour = (string) => {
-	let datetime = new Date(string);
-	let date = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const date = datetime.toLocaleString('en-US', {
 		month: 'short',
 		day: 'numeric',
 		hour: '2-digit',
@@ -41,8 +41,8 @@ export const formatDateHour = (string) => {
 };
 
 export const formatDateDay = (string) => {
-	let datetime = new Date(string);
-	let date = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 		month: 'short',
 		day: 'numeric',
@@ -51,8 +51,8 @@ export const formatDateDay = (string) => {
 };
 
 export const formatDateMonth = (string) => {
-	let datetime = new Date(string);
-	let date = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 		year: 'numeric',
 		month: 'short',
@@ -61,8 +61,8 @@ export const formatDateMonth = (string) => {
 };
 
 export const formatDateYear = (string) => {
-	let datetime = new Date(string);
-	let date = datetime.toLocaleString('en-US', {
+	const datetime = new Date(string);
+	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 		year: 'numeric',
 	});

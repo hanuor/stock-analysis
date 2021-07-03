@@ -1,11 +1,12 @@
+/* eslint-disable no-invalid-this */
 // Load the StockTwits widget
 const loadStockTwits = (symbol) => {
 	// Add the stocktwits div to the container
-	var wrap = document.getElementById('altwrap');
+	const wrap = document.getElementById('altwrap');
 	wrap.innerHTML = '<div id="stw"></div>';
 
 	// Get container width
-	let wrapWidth = wrap.clientWidth;
+	const wrapWidth = wrap.clientWidth;
 	let wrapHeight;
 	if (wrapWidth < 500) {
 		wrapHeight = 3500;
@@ -13,16 +14,16 @@ const loadStockTwits = (symbol) => {
 		wrapHeight = 2800;
 	}
 
-	let STWT = window.STWT || {};
+	const STWT = window.STWT || {};
 	(function () {
 		function e() {
-			var e = [];
+			const e = [];
 			this.add = function (t, n) {
 				e.push({ name: t, value: n });
 			};
 			this.toString = function () {
-				var t = [];
-				for (var n = 0; n < e.length; n++) {
+				const t = [];
+				for (let n = 0; n < e.length; n++) {
 					t[n] =
 						encodeURIComponent(e[n].name) +
 						'=' +
@@ -36,7 +37,7 @@ const loadStockTwits = (symbol) => {
 		}
 		STWT.Widget = function (t) {
 			function c() {
-				var e =
+				const e =
 					'https://api.stocktwits.com/addon/widget/2/widget-streams.min.js?1370378977';
 				return [
 					'<body style="border:0;margin:0" onload="',
@@ -49,9 +50,10 @@ const loadStockTwits = (symbol) => {
 				].join('');
 			}
 			t = t || {};
-			var n = document.createElement('iframe');
-			var r = new e();
-			var i = [
+			const n = document.createElement('iframe');
+			// eslint-disable-next-line new-cap
+			const r = new e();
+			const i = [
 				'avatars',
 				'scrollbars',
 				'times',
@@ -64,7 +66,7 @@ const loadStockTwits = (symbol) => {
 				'user',
 				'canned_stream',
 			];
-			var s = [
+			const s = [
 				'stream_option',
 				'message_option',
 				'footer_option',
@@ -91,15 +93,16 @@ const loadStockTwits = (symbol) => {
 				'time_color',
 				'time_font_size',
 			];
-			var o = document.getElementById(t.container || 'stocktwits-widget');
-			var u, a, f, l;
+			const o = document.getElementById(t.container || 'stocktwits-widget');
+			let u;
+			let l;
 			n.setAttribute('allowtranparency', 'true');
 			n.setAttribute('frameBorder', '0');
 			n.setAttribute('border', '0');
 			n.setAttribute('style', 'border: 0');
 			n.setAttribute('scrolling', 'no');
-			a = /\d+/.test(t.width) ? t.width : 300;
-			f = /\d+/.test(t.height) ? t.height : 300;
+			const a = /\d+/.test(t.width) ? t.width : 300;
+			const f = /\d+/.test(t.height) ? t.height : 300;
 			n.style.width = a + 'px';
 			n.style.height = f + 'px';
 			r.add('width', a);
@@ -138,7 +141,7 @@ const loadStockTwits = (symbol) => {
 				n.src = l + 'void(0);';
 			}
 			try {
-				var p = n.contentWindow.document;
+				const p = n.contentWindow.document;
 				p.write(c());
 				p.close();
 			} catch (h) {
@@ -148,6 +151,7 @@ const loadStockTwits = (symbol) => {
 		};
 	})();
 
+	// eslint-disable-next-line new-cap
 	STWT.Widget({
 		container: 'stw',
 		symbol: symbol,

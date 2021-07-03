@@ -1,7 +1,7 @@
-import LayoutSidebar from '@/Layout/LayoutSidebar';
-import Table from '@/Tables/SymbolTable';
-import { ETFLink } from '@/components/Links';
-import abbreviateNumber from '@/Functions/abbreviateNumber';
+import LayoutSidebar from 'components/Layout/LayoutSidebar';
+import Table from 'components/Tables/SymbolTable';
+import { ETFLink } from 'components/Links';
+import abbreviateNumber from 'functions/abbreviateNumber';
 
 export default function StocksIndexPage({ stocks }) {
 	const columns = [
@@ -37,14 +37,15 @@ export default function StocksIndexPage({ stocks }) {
 			meta={{
 				heading: 'All ETFs',
 				title: 'List of ETF Symbols',
-			}}>
+			}}
+		>
 			<Table title="ETFs" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
 	);
 }
 
 export async function getStaticProps() {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 	const stocksList = await fetch(API + '/index?type=etfspage');
 	const json = await stocksList.json();
 

@@ -1,7 +1,7 @@
-import LayoutSidebar from '@/Layout/LayoutSidebar';
-import Table from '@/Tables/SymbolTable';
-import StockLink from '@/components/Links';
-import abbreviateNumber from '@/Functions/abbreviateNumber';
+import LayoutSidebar from 'components/Layout/LayoutSidebar';
+import Table from 'components/Tables/SymbolTable';
+import StockLink from 'components/Links';
+import abbreviateNumber from 'functions/abbreviateNumber';
 
 export default function StocksIndexPage({ stocks }) {
 	const columns = [
@@ -34,14 +34,15 @@ export default function StocksIndexPage({ stocks }) {
 			meta={{
 				heading: 'All Stock Symbols',
 				title: 'List of All Stock Ticker Symbols',
-			}}>
+			}}
+		>
 			<Table title="Stocks" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
 	);
 }
 
 export async function getStaticProps() {
-	let API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 	const stocksList = await fetch(API + '/index?type=stockspage');
 	const json = await stocksList.json();
 

@@ -1,5 +1,5 @@
-import { SymbolLink } from '@/components/Links';
-import Button from '@/components/Button';
+import { SymbolLink } from 'components/Links';
+import Button from 'components/Button';
 
 const HoldingsWidget = ({ ticker, data }) => {
 	if (data.list.length < 10) {

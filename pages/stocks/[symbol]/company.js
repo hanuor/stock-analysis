@@ -1,13 +1,13 @@
-import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getStockInfo } from '@/Functions/callBackEnd';
-import { stockState } from '@State/stockState';
+import Stock from 'components/Layout/StockLayout';
+import { getPageData, getStockInfo } from 'functions/callBackEnd';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
-import ProfileDescription from '@/components/ProfilePage/ProfileDescription';
-import ProfileInfo from '@/components/ProfilePage/ProfileInfo';
-import ProfileContact from '@/components/ProfilePage/ProfileContact';
-import ProfileDetails from '@/components/ProfilePage/ProfileDetails';
-import ProfileExecutives from '@/components/ProfilePage/ProfileExecutives';
-import ProfileSECfilings from '@/components/ProfilePage/ProfileSECfilings';
+import ProfileDescription from 'components/ProfilePage/ProfileDescription';
+import ProfileInfo from 'components/ProfilePage/ProfileInfo';
+import ProfileContact from 'components/ProfilePage/ProfileContact';
+import ProfileDetails from 'components/ProfilePage/ProfileDetails';
+import ProfileExecutives from 'components/ProfilePage/ProfileExecutives';
+import ProfileSECfilings from 'components/ProfilePage/ProfileSECfilings';
 
 export default function SymbolStatistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
