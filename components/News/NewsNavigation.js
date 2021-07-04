@@ -1,27 +1,9 @@
 import styles from 'styles/TabMenu.module.css';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import navState from 'state/navState';
+import { useNavState } from 'hooks/useNavState';
 
 const Navigation = () => {
-	const router = useRouter();
-	const path = navState((state) => state.path);
-	const setPath = navState((state) => state.setPath);
-
-	useEffect(() => {
-		const route = router.asPath;
-		const split = route.split('/');
-		const one = split[1] || null;
-		const two = split[2] || null;
-		const three = split[3] || null;
-
-		setPath({
-			one,
-			two,
-			three,
-		});
-	}, [router.asPath, setPath]);
+	const path = useNavState();
 
 	const active =
 		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900';

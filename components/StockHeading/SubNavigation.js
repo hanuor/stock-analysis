@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
 import { useEffect } from 'react';
 import styles from 'styles/TabMenu.module.css';
-import navState from 'state/navState';
+import { useNavState } from 'hooks/useNavState';
 
 // styles
 const common =
@@ -21,7 +21,7 @@ export default function TabNavigation() {
 
 const Statement = () => {
 	const statement = financialsState((state) => state.statement);
-	const path = navState((state) => state.path);
+	const path = useNavState();
 
 	return (
 		<nav className="mt-1.5">

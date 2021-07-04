@@ -1,21 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-interface IPath {
-	one: string | null;
-	two: string | null;
-	three: string | null;
-	four: string | null;
-}
+import { navState } from 'state/navState';
 
 export const useNavState = () => {
 	const router = useRouter();
-	const [path, setPath] = useState<IPath>({
-		one: '',
-		two: '',
-		three: '',
-		four: '',
-	});
+	const path = navState((state) => state.path);
+	const setPath = navState((state) => state.setPath);
 
 	useEffect(() => {
 		const route = router.asPath;
@@ -31,8 +21,7 @@ export const useNavState = () => {
 			three,
 			four,
 		});
-	}, [router.asPath]);
+	}, [router.asPath, setPath]);
 
-	console.log(path);
 	return path;
 };

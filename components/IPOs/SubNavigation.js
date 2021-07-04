@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from 'styles/TabMenu.module.css';
-import navState from 'state/navState';
+import { useNavState } from 'hooks/useNavState';
 
 const SubNavigation = () => {
-	const path = navState((state) => state.path);
+	const path = useNavState();
 
 	const active =
 		'py-1.5 px-3.5 xs:px-4 block font-semibold bg-[#eee] text-gray-900';

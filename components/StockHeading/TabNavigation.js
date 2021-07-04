@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import SubNavigation from 'components/StockHeading/SubNavigation';
 import styles from 'styles/TabMenu.module.css';
-import navState from 'state/navState';
+import { useNavState } from 'hooks/useNavState';
 
 export default function TabNavigation() {
-	const path = navState((state) => state.path);
+	const path = useNavState();
 
 	const common =
 		'text-[15px] xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5';
