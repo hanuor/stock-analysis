@@ -1,6 +1,10 @@
 import { InformationCircleIcon } from '@heroicons/react/solid';
 
-export default function InfoBox({ text }) {
+interface IInfoBox {
+	text: string;
+}
+
+export default function InfoBox({ text }: IInfoBox) {
 	return (
 		<div className="rounded bg-white border border-gray-300 p-3 sm:p-4 mt-4 mb-2 lg:mb-3">
 			<div className="sm:flex flex-row items-center sm:space-x-4">

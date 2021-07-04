@@ -33,7 +33,11 @@ export default function FreeTrial() {
 
 	return (
 		<>
-			<SEO title="Confirmation" canonical="confirmation/" noindex={true} />
+			<SEO
+				title="Confirmation"
+				canonical="pro/confirmation/"
+				noindex={true}
+			/>
 			<UserLayout title="Confirmation">
 				<div className="space-y-6">
 					<h1 className="text-4xl font-bold mb-5 text-gray-800">

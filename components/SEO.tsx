@@ -26,8 +26,9 @@ export const SEO = ({
 
 	const canonicalUrl = 'https://stockanalysis.com/' + canonical;
 
-	const featuredImage =
-		image || 'https://stockanalysis.com/img/bear-vs-bull.jpg';
+	const featuredImage = image
+		? `https://stockanalysis.com${image}`
+		: 'https://stockanalysis.com/img/bear-vs-bull.jpg';
 
 	return (
 		<Head>
@@ -52,18 +53,21 @@ export const SEO = ({
 				<meta name="twitter:description" content={description} />
 			)}
 			<meta name="twitter:image" content={featuredImage} />
-			<link rel="shortcut icon" href="/favicon.ico" />
+			<link
+				rel="shortcut icon"
+				href="https://stockanalysis.com/favicon.ico"
+			/>
 			<link
 				rel="icon"
 				type="image/png"
 				sizes="32x32"
-				href="/favicon-32x32.png"
+				href="https://stockanalysis.com/favicon-32x32.png"
 			/>
 			<link
 				rel="icon"
 				type="image/png"
 				sizes="16x16"
-				href="/favicon-16x16.png"
+				href="https://stockanalysis.com/favicon-16x16.png"
 			/>
 			<link
 				rel="apple-touch-icon"
