@@ -1,8 +1,8 @@
 import navState from 'state/navState';
 import Link from 'next/link';
+import { useNavState } from 'hooks/useNavState';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-
 const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
 const formatPageTitle = (word) => {
@@ -92,7 +92,6 @@ const LevelFour = ({ path }) => {
 
 const _Breadcrumbs = () => {
 	const router = useRouter();
-	const path = navState((state) => state.path);
 	const setPath = navState((state) => state.setPath);
 
 	useEffect(() => {
@@ -110,6 +109,8 @@ const _Breadcrumbs = () => {
 			four,
 		});
 	}, [router.asPath, setPath]);
+
+	const path = useNavState();
 
 	return (
 		<nav>

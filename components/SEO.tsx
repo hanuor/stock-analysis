@@ -74,6 +74,10 @@ export const SEO = ({
 				href="https://stockanalysis.com/apple-touch-icon.png"
 				sizes="180x180"
 			/>
+			{title ===
+				'Stock Analysis | Free Online Stock Information for Investors' && (
+				<script type="application/ld+json">{`"@context":"https://schema.org","@type":"Organization","url":"https://stockanalysis.com/","name":"Stock Analysis","logo":"https://stockanalysis.com/logo.png","sameAs":["https://www.facebook.com/stockanalysisoff/","https://twitter.com/stock_analysisx","https://www.linkedin.com/company/stock-analysis/"]`}</script>
+			)}
 		</Head>
 	);
 };
