@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { BreadcrumbSchema } from 'components/Breadcrumbs/BreadcrumbSchema';
 
 interface ISEO {
 	title: string;
@@ -34,10 +35,8 @@ export const SEO = ({
 		<Head>
 			<title>{seoTitle}</title>
 			{description && <meta name="description" content={description} />}
-
 			<meta name="robots" content={metaRobots} />
 			<link rel="canonical" href={canonicalUrl} />
-
 			<meta property="og:image" content={featuredImage} />
 			<meta property="og:title" content={seoTitle} />
 			{description && (
@@ -45,7 +44,6 @@ export const SEO = ({
 			)}
 			<meta property="og:url" content={canonicalUrl} />
 			<meta property="og:site_name" content="Stock Analysis" />
-
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:site" content="@stock_analysisx" />
 			<meta name="twitter:title" content={seoTitle} />
@@ -74,6 +72,7 @@ export const SEO = ({
 				href="https://stockanalysis.com/apple-touch-icon.png"
 				sizes="180x180"
 			/>
+			<BreadcrumbSchema path={canonical} />
 			{title ===
 				'Stock Analysis | Free Online Stock Information for Investors' && (
 				<script type="application/ld+json">{`"@context":"https://schema.org","@type":"Organization","url":"https://stockanalysis.com/","name":"Stock Analysis","logo":"https://stockanalysis.com/logo.png","sameAs":["https://www.facebook.com/stockanalysisoff/","https://twitter.com/stock_analysisx","https://www.linkedin.com/company/stock-analysis/"]`}</script>
