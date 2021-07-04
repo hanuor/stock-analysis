@@ -1,7 +1,7 @@
 import create from 'zustand';
 
 export const financialsState = create((set) => ({
-	statement: 'income_statement',
+	statement: '',
 	range: 'annual',
 	divider: 'millions',
 	leftRight: false,

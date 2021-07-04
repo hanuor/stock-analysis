@@ -86,6 +86,9 @@ export default function FinancialsPage({ info, data }) {
 		}
 	}
 
+	console.log(title);
+	console.log(urlPath);
+
 	return (
 		<Stock>
 			<SEO
