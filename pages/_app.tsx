@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import '../styles/globals.css';
+import 'styles/globals.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 /* import { ReactQueryDevtools } from 'react-query/devtools' */
 import Header from 'components/Layout/Header/_Header';

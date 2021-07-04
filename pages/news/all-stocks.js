@@ -8,7 +8,11 @@ import NewsWidget from 'components/News/NewsWidget';
 const AllStockNews = ({ data }) => {
 	return (
 		<>
-			<SEO title="All Stock News" />
+			<SEO
+				title="All Stock News"
+				description="The latest news on individual stocks on the US stock market, gathered from trusted finance and investing websites."
+				canonical="news/all-stocks/"
+			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">

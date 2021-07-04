@@ -9,7 +9,11 @@ import RecentTableMin from 'components/IPOs/RecentTableMin';
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<SEO title="IPO News" />
+			<SEO
+				title="Latest IPO News"
+				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
+				canonical="ipos/news/"
+			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">

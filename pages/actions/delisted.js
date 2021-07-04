@@ -30,7 +30,11 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<SEO title="Delisted Stocks" />
+			<SEO
+				title="Latest Delisted Stocks"
+				description="Stocks that have been delisted from the US stock market. Some have gone bankrupt or been acquired, others have been delisted for other reasons."
+				canonical="actions/delisted/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

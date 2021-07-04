@@ -1,6 +1,6 @@
-// Taken from here: https://github.com/ibrahimcesar/react-lite-youtube-embed
-import { useState } from 'react';
 import styles from './LiteYouTubeEmbed.module.css';
+import { useState } from 'react';
+// Taken from here: https://github.com/ibrahimcesar/react-lite-youtube-embed
 
 export default function LiteYouTubeEmbed(props) {
 	const [iframe, setIframe] = useState(false);

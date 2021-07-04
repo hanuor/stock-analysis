@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useUserInfo from 'users/useUserInfo';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import LoginPrompt from 'components/LoginPrompt';
+import { LoginPrompt } from 'components/LoginPrompt';
 import Link from 'next/link';
 import { db } from 'users/firebase';
 import { formatDateClean } from 'functions/formatDates';

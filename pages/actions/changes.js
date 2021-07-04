@@ -40,7 +40,11 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<SEO title="Stock Symbol Changes" />
+			<SEO
+				title="Latest Stock Symbol Changes"
+				description="Latest stock ticker symbol changes. Companies change stock symbols for different reasons, including when they change their company name or complete a merger."
+				canonical="actions/changes/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

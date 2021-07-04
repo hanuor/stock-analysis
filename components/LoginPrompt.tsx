@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function LoginPrompt() {
+export const LoginPrompt = () => {
 	return (
 		<div className="">
 			<div className="text-2xl font-bold mb-5 pb-4 border-b-2 border-gray-900">
@@ -22,4 +22,4 @@ export default function LoginPrompt() {
 			</p>
 		</div>
 	);
-}
+};

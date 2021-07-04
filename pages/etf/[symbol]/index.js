@@ -2,6 +2,7 @@ import { getEtfInfo, getPageData, getNewsData } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import stockState from 'state/stockState';
 import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
 import PriceChart from 'components/PriceChart/_PriceChart';
 import Profile from 'components/Overview/ProfileWidget';
@@ -20,6 +21,11 @@ const EtfOverview = ({ info, data, news }) => {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
+				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
+				canonical={`etf/${info.symbol}/`}
+			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
 				<div className="order-3 flex-grow overflow-auto">
 					<PriceChart />

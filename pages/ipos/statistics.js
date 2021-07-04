@@ -11,7 +11,11 @@ import NewsWidget from 'components/News/NewsWidget';
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<SEO title="IPO Statistics" />
+			<SEO
+				title="IPO Statistics and Charts"
+				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2021 and monthly data for 2019-2021."
+				canonical="ipos/statistics/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

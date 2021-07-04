@@ -1,14 +1,39 @@
+import { GetStaticProps } from 'next';
 import LayoutSidebar from 'components/Layout/LayoutSidebar';
+import { SEO } from 'components/SEO';
 import Table from 'components/Tables/SymbolTable';
 import StockLink from 'components/Links';
 import abbreviateNumber from 'functions/abbreviateNumber';
 
-export default function StocksIndexPage({ stocks }) {
+interface IStock {
+	s: string;
+	n: string;
+	ind: string;
+	mcap: number;
+}
+
+interface IStocks {
+	stocks: IStock;
+}
+
+interface ICellString {
+	cell: {
+		value: string;
+	};
+}
+
+interface ICellNumber {
+	cell: {
+		value: number;
+	};
+}
+
+export default function StocksIndexPage({ stocks }: IStocks) {
 	const columns = [
 		{
 			Header: 'Symbol',
 			accessor: 's',
-			Cell: function FormatCell({ cell: { value } }) {
+			Cell: function FormatCell({ cell: { value } }: ICellString) {
 				return <StockLink symbol={value} />;
 			},
 		},
@@ -23,25 +48,25 @@ export default function StocksIndexPage({ stocks }) {
 		{
 			Header: 'Market Cap',
 			accessor: 'mcap',
-			Cell: function FormatCell({ cell: { value } }) {
+			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
 				return abbreviateNumber(value, 2, true);
 			},
 		},
 	];
 
 	return (
-		<LayoutSidebar
-			meta={{
-				heading: 'All Stock Symbols',
-				title: 'List of All Stock Ticker Symbols',
-			}}
-		>
+		<LayoutSidebar heading="All Stock Symbols">
+			<SEO
+				title="List of All Stock Ticker Symbols"
+				description="An overview of all the stock ticker symbols listed. Explore the stock pages to learn about the company’s price history, financials, key stats, and more."
+				canonical="stocks/"
+			/>
 			<Table title="Stocks" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
 	);
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 	const stocksList = await fetch(API + '/index?type=stockspage');
 	const json = await stocksList.json();
@@ -52,4 +77,4 @@ export async function getStaticProps() {
 		},
 		revalidate: 600,
 	};
-}
+};

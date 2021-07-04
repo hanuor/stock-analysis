@@ -1,3 +1,4 @@
+import styles from './Actions.module.css';
 import {
 	useTable,
 	usePagination,
@@ -6,7 +7,6 @@ import {
 	useSortBy,
 } from 'react-table';
 import { useMemo } from 'react';
-import styles from './Actions.module.css';
 import { SortUp, SortDown } from 'components/Icons';
 import Pagination from 'components/Tables/Pagination';
 import GlobalFilter from 'components/Tables/GlobalFilter';

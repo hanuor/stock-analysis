@@ -9,7 +9,11 @@ import NewsWidget from 'components/News/NewsWidget';
 const IpoCalendar = ({ data }) => {
 	return (
 		<>
-			<SEO title="IPO Calendar" />
+			<SEO
+				title="IPO Calendar - All Upcoming IPOs"
+				description="All upcoming initial public offerings (IPOs) on the stock market. Includes estimated IPO dates, offering price, how many shares are offered and more."
+				canonical="ipos/calendar/"
+			/>
 			<div className="contain">
 				<main className="w-full py-6">
 					<Breadcrumbs />

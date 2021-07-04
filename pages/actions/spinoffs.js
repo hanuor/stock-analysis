@@ -40,7 +40,11 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<SEO title="Stock Spinoffs" />
+			<SEO
+				title="Recent Stock Spinoffs"
+				description="Latest spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new independent company."
+				canonical="actions/spinoffs/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

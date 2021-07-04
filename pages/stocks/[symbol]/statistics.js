@@ -1,4 +1,5 @@
 import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
 import { getPageData, getStockInfo } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
@@ -19,6 +20,11 @@ export default function Statistics({ info, data }) {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.name} (${info.ticker}) Stock Statistics & Valuation Metrics`}
+				description={`Detailed statistics for ${info.name} (${info.ticker}) stock, including valuation metrics, financial numbers, share information and more.`}
+				canonical={`stocks/${info.symbol}/statistics/`}
+			/>
 			<div className="contain pt-1 xs:pt-1.5 lg:pt-1 pb-10 space-y-5 xs:space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-10">
 				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
 					<div>

@@ -1,4 +1,5 @@
 import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
 import { getPageData, getEtfInfo } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
@@ -24,6 +25,11 @@ export default function Holdings({ info, data }) {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.ticker} ETF Holdings - ${info.name}`}
+				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
+				canonical={`etf/${info.symbol}/holdings/`}
+			/>
 			<div className="contain">
 				<div className="lg:grid grid-cols-sidebar_wide gap-8">
 					<div>
