@@ -1,4 +1,5 @@
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
 import { getPageData, getEtfInfo } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
@@ -19,6 +20,11 @@ export default function Holdings({ info, data }) {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.ticker} Dividend History, Dates & Yield`}
+				description={`Get the latest dividend data for ${info.ticker} (${info.name}), including dividend history, yield, key dates, growth and other metrics.`}
+				canonical={`stocks/${info.symbol}/dividend/`}
+			/>
 			<div className="contain">
 				<div className="lg:grid grid-cols-sidebar_wide py-1 gap-8">
 					<div>

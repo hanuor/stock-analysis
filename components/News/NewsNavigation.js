@@ -1,7 +1,7 @@
+import styles from 'styles/TabMenu.module.css';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import styles from 'styles/TabMenu.module.css';
 import navState from 'state/navState';
 
 const Navigation = () => {

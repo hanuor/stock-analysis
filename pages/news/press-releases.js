@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { getMarketNews } from 'functions/callBackEnd';
 import NewsNavigation from 'components/News/NewsNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
@@ -8,7 +8,11 @@ import NewsWidget from 'components/News/NewsWidget';
 const AllPressReleases = ({ data }) => {
 	return (
 		<>
-			<Meta title="Press Releases" />
+			<SEO
+				title="Press Releases From Publicly Traded Companies"
+				description="Press releases for publicly traded companies on the US stock market. Includes important company events, earnings releases and more."
+				canonical="news/press-releases/"
+			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">

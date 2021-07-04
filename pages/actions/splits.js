@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import ActionsNavigation from 'components/Actions/ActionsNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
@@ -38,7 +38,11 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<Meta title="Stock Splits" />
+			<SEO
+				title="Recent Stock Splits"
+				description="The most recent stock splits on the US stock market. Regular splits increase the share count and lower the stock price, while reverse splits do the opposite."
+				canonical="actions/splits/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

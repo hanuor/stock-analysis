@@ -1,4 +1,5 @@
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
 import { getPageData, getEtfInfo } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
@@ -14,6 +15,11 @@ export default function SymbolStatistics({ info, data }) {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.ticker} Interactive Stock Chart`}
+				description={`Interactive stock chart for ${info.name} (${info.ticker}) with full price history, volume, trends and moving averages.`}
+				canonical={`stocks/${info.symbol}/chart/`}
+			/>
 			<h2 className="text-2xl font-bold my-8">
 				This is the chart page for {info.ticker}
 			</h2>

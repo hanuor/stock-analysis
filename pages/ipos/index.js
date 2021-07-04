@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import IPOTable from 'components/IPOs/RecentTable';
 import IPONavigation from 'components/IPOs/Navigation';
@@ -10,7 +10,11 @@ import NewsWidget from 'components/News/NewsWidget';
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<Meta title="Recent IPOs" />
+			<SEO
+				title="All Recent IPOs"
+				description="Detailed information on all the recent IPOs (initial public offerings) on the stock market. Includes an IPO calendar, news and more."
+				canonical="ipos/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />

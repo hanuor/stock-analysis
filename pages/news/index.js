@@ -1,4 +1,4 @@
-import Meta from 'components/Meta';
+import { SEO } from 'components/SEO';
 import { getMarketNews } from 'functions/callBackEnd';
 import NewsNavigation from 'components/News/NewsNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
@@ -8,7 +8,11 @@ import NewsWidget from 'components/News/NewsWidget';
 const MarketNews = ({ data }) => {
 	return (
 		<>
-			<Meta title="Market News" />
+			<SEO
+				title="Today's Stock Market News and Breaking Stories"
+				description="Get the latest stock market news and breaking stories from the world's best finance and investing websites."
+				canonical="news/"
+			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">

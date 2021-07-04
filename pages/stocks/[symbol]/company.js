@@ -1,4 +1,5 @@
-import Stock from 'components/Layout/StockLayout';
+import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
 import { getPageData, getStockInfo } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
@@ -20,6 +21,11 @@ export default function SymbolStatistics({ info, data }) {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.name} (${info.ticker}) Company Profile & Overview`}
+				description={`Company profile for ${info.name}, including a description, list of executives, contact details and other key facts.`}
+				canonical={`stocks/${info.symbol}/company/`}
+			/>
 			<div className="contain">
 				<div className="float-none lg:float-left lg:profilewrap">
 					<ProfileDescription text={data.description} />
