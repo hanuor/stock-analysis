@@ -12,12 +12,12 @@ const StatsWidget = ({ title, data, map }) => (
 		<table className={'text-sm xs:text-base ' + styles.statstable}>
 			<tbody>
 				{data.data.map((item) => {
-					let indicator_info = map.find((info) => info.id === item[0]);
+					const indicatorInfo = map.find((info) => info.id === item[0]);
 
 					return (
 						<tr key={item[0]}>
 							<td>
-								<Tooltip data={indicator_info} indicator={item[1]} />
+								<Tooltip data={indicatorInfo} indicator={item[1]} />
 							</td>
 							<td title={item[3]}>{item[2]}</td>
 						</tr>

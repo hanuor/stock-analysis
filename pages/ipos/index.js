@@ -1,19 +1,20 @@
-import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
-import { getIpoData } from '@/Functions/callBackEnd';
-import IPOTable from '@/components/IPOs/RecentTable';
-import IPONavigation from '@/components/IPOs/Navigation';
-import SubNavigation from '@/components/IPOs/SubNavigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
-import NewsWidget from '@/components/News/NewsWidget';
+import { SEO } from 'components/SEO';
+import { getIpoData } from 'functions/callBackEnd';
+import IPOTable from 'components/IPOs/RecentTable';
+import IPONavigation from 'components/IPOs/Navigation';
+import SubNavigation from 'components/IPOs/SubNavigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import CalendarTableMin from 'components/IPOs/CalendarTableMin';
+import NewsWidget from 'components/News/NewsWidget';
 
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<Meta title="Recent IPOs" />
-			<Header />
+			<SEO
+				title="All Recent IPOs"
+				description="Detailed information on all the recent IPOs (initial public offerings) on the stock market. Includes an IPO calendar, news and more."
+				canonical="ipos/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
@@ -39,7 +40,6 @@ const RecentIpos = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };

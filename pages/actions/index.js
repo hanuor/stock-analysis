@@ -1,12 +1,10 @@
-import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
-import { getActionsData } from '@/Functions/callBackEnd';
-import ActionsNavigation from '@/components/Actions/ActionsNavigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import { NewsletterWidget } from '@/components/Layout/Sidebar/Newsletter';
-import ActionsTable from '@/components/Actions/ActionsTable';
-import StockLink from '@/components/Links';
+import { SEO } from 'components/SEO';
+import { getActionsData } from 'functions/callBackEnd';
+import ActionsNavigation from 'components/Actions/ActionsNavigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import ActionsTable from 'components/Actions/ActionsTable';
+import StockLink from 'components/Links';
 
 const ActionsAll = ({ data }) => {
 	const columns = [
@@ -36,8 +34,11 @@ const ActionsAll = ({ data }) => {
 
 	return (
 		<>
-			<Meta title="Corporate Actions" />
-			<Header />
+			<SEO
+				title="Recent Corporate Actions and Stock Changes"
+				description="The most recent corporate actions and stock changes for companies listed on the US stock market."
+				canonical="actions/"
+			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
@@ -58,7 +59,6 @@ const ActionsAll = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };

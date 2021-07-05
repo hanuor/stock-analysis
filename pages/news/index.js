@@ -1,17 +1,18 @@
-import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
-import { getMarketNews } from '@/Functions/callBackEnd';
-import NewsNavigation from '@/components/News/NewsNavigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import NewsFeed from '@/components/News/_NewsFeed';
-import NewsWidget from '@/components/News/NewsWidget';
+import { SEO } from 'components/SEO';
+import { getMarketNews } from 'functions/callBackEnd';
+import NewsNavigation from 'components/News/NewsNavigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import NewsFeed from 'components/News/_NewsFeed';
+import NewsWidget from 'components/News/NewsWidget';
 
 const MarketNews = ({ data }) => {
 	return (
 		<>
-			<Meta title="Market News" />
-			<Header />
+			<SEO
+				title="Today's Stock Market News and Breaking Stories"
+				description="Get the latest stock market news and breaking stories from the world's best finance and investing websites."
+				canonical="news/"
+			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">
@@ -37,7 +38,6 @@ const MarketNews = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };

@@ -1,6 +1,6 @@
-import Button from '@/components/Button';
+import Button from 'components/Button';
 import { Bar, defaults } from 'react-chartjs-2';
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
@@ -30,7 +30,7 @@ export default function FinancialsWidget() {
 		id: 'padLegend',
 
 		beforeInit: (chart) => {
-			let originalFit = chart.legend.fit;
+			const originalFit = chart.legend.fit;
 
 			chart.legend.fit = function fit() {
 				originalFit.bind(chart.legend)();
@@ -44,10 +44,10 @@ export default function FinancialsWidget() {
 
 		beforeDraw: function (c) {
 			if (earnings[earnings.length - 1] > 0) {
-				let legends = c.legend.legendItems;
+				const legends = c.legend.legendItems;
 				legends[legends.length - 1].fillStyle = '#00853E';
 			} else {
-				let legends = c.legend.legendItems;
+				const legends = c.legend.legendItems;
 				legends[legends.length - 1].fillStyle = '#CD5C5C';
 			}
 		},
@@ -102,7 +102,7 @@ export default function FinancialsWidget() {
 									padding: 0,
 									beginAtZero: true,
 									callback: function (value) {
-										let newvalue = value / 1000000;
+										const newvalue = value / 1000000;
 										return newvalue
 											.toString()
 											.replace(/\B(?=(\d{3})+(?!\d))/g, ',');

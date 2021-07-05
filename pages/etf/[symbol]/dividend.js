@@ -1,12 +1,13 @@
-import Stock from '@/components/Layout/StockLayout';
-import { getPageData, getEtfInfo } from '@/Functions/callBackEnd';
-import { stockState } from '@State/stockState';
+import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
+import { getPageData, getEtfInfo } from 'functions/callBackEnd';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
-import InfoBox from '@/components/InfoBox';
-import InfoTable from '@/components/Dividend/InfoTable';
-import HistoryTable from '@/components/Dividend/HistoryTable';
-import NewsWidget from '@/components/News/NewsWidget';
-import DividendChart from '@/components/Dividend/DividendChart';
+import InfoBox from 'components/InfoBox';
+import InfoTable from 'components/Dividend/InfoTable';
+import HistoryTable from 'components/Dividend/HistoryTable';
+import NewsWidget from 'components/News/NewsWidget';
+import DividendChart from 'components/Dividend/DividendChart';
 
 export default function Holdings({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -19,6 +20,11 @@ export default function Holdings({ info, data }) {
 
 	return (
 		<Stock>
+			<SEO
+				title={`${info.ticker} Dividend History, Dates & Yield`}
+				description={`Get the latest dividend data for ${info.ticker} (${info.name}), including dividend history, yield, key dates, growth and other metrics.`}
+				canonical={`stocks/${info.symbol}/dividend/`}
+			/>
 			<div className="contain">
 				<div className="lg:grid grid-cols-sidebar_wide py-1 gap-8">
 					<div>

@@ -1,3 +1,4 @@
+import styles from './Actions.module.css';
 import {
 	useTable,
 	usePagination,
@@ -6,10 +7,9 @@ import {
 	useSortBy,
 } from 'react-table';
 import { useMemo } from 'react';
-import styles from './Actions.module.css';
-import { SortUp, SortDown } from '@/components/Icons';
-import Pagination from '@/components/Tables/Pagination';
-import GlobalFilter from '@/components/Tables/GlobalFilter';
+import { SortUp, SortDown } from 'components/Icons';
+import Pagination from 'components/Tables/Pagination';
+import GlobalFilter from 'components/Tables/GlobalFilter';
 
 const RecentTable = ({ title, columndata, rowdata }) => {
 	const columns = useMemo(() => columndata, [columndata]);
@@ -61,17 +61,20 @@ const RecentTable = ({ title, columndata, rowdata }) => {
 			<div className="overflow-x-auto">
 				<table
 					{...getTableProps()}
-					className={`${styles.actionstable} ${styles.striped}`}>
+					className={`${styles.actionstable} ${styles.striped}`}
+				>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
+						{headerGroups.map((headerGroup, index) => (
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+								{headerGroup.headers.map((column, index) => (
 									<th
 										{...column.getHeaderProps(
 											column.getSortByToggleProps({
 												title: `Sort by: ${column.Header}`,
 											})
-										)}>
+										)}
+										key={index}
+									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}
 
@@ -91,13 +94,13 @@ const RecentTable = ({ title, columndata, rowdata }) => {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row) => {
+						{page.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
+								<tr {...row.getRowProps()} key={index}>
+									{row.cells.map((cell, index) => {
 										return (
-											<td {...cell.getCellProps()}>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);

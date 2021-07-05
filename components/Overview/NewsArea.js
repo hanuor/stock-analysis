@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import NewsFeed from '@/components/News/_NewsFeed';
-import { stockState } from '@State/stockState';
+import NewsFeed from 'components/News/_NewsFeed';
+import { stockState } from 'state/stockState';
 import Axios from 'axios';
-import loadStockTwits from '@/Functions/loadStockTwits';
+import loadStockTwits from 'functions/loadStockTwits';
 
 const NewsArea = ({ news }) => {
 	const info = stockState((state) => state.info);
@@ -17,16 +17,16 @@ const NewsArea = ({ news }) => {
 	const originalData = news;
 
 	useEffect(() => {
-		let url = `https://stockanalysis.com/wp-json/sa/news?i=${info.id}&f=${type}`;
-		let source = Axios.CancelToken.source();
+		const url = `https://stockanalysis.com/wp-json/sa/news?i=${info.id}&f=${type}`;
+		const source = Axios.CancelToken.source();
 
 		const fetchNews = async () => {
 			try {
-				let resp = await Axios.get(url, {
+				const resp = await Axios.get(url, {
 					cancelToken: source.token,
 					timeout: '5000',
 				});
-				let newData = await resp.data;
+				const newData = await resp.data;
 				setData(newData);
 			} catch {
 				console.log('There was an error fetching news of type: ' + type);
@@ -69,14 +69,16 @@ const NewsArea = ({ news }) => {
 						<li>
 							<button
 								className={type === 'all' ? active : inactive}
-								onClick={() => setType('all')}>
+								onClick={() => setType('all')}
+							>
 								All
 							</button>
 						</li>
 						<li>
 							<button
 								className={type === 'v' ? active : inactive}
-								onClick={() => setType('v')}>
+								onClick={() => setType('v')}
+							>
 								Videos
 							</button>
 						</li>
@@ -84,7 +86,8 @@ const NewsArea = ({ news }) => {
 							<li>
 								<button
 									className={type === 'pr' ? active : inactive}
-									onClick={() => setType('pr')}>
+									onClick={() => setType('pr')}
+								>
 									Press
 									<span className="hidden xs:inline"> Releases</span>
 								</button>
@@ -93,7 +96,8 @@ const NewsArea = ({ news }) => {
 						<li>
 							<button
 								className={type === 'chat' ? active : inactive}
-								onClick={() => setType('chat')}>
+								onClick={() => setType('chat')}
+							>
 								Conversation
 							</button>
 						</li>

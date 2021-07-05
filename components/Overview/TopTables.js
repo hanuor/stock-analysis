@@ -1,54 +1,54 @@
-import { stockState } from '@State/stockState';
+import { stockState } from 'state/stockState';
 
-const css_table = 'text-small w-[48%] lg:w-full text-gray-900';
-const css_rows =
+const cssTable = 'text-small w-[48%] lg:w-full text-gray-900';
+const cssRows =
 	'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0';
-const css_cells = 'py-[1px] sm:py-2 px-1 whitespace-nowrap';
-const css_cell_left = css_cells;
-const css_cell_right =
-	css_cells + ' text-left sm:text-right text-base sm:text-small font-semibold';
+const cssCells = 'py-[1px] sm:py-2 px-1 whitespace-nowrap';
+const cssCellLeft = cssCells;
+const cssCellRight =
+	cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold';
 
 export function InfoTable() {
 	const data = stockState((state) => state.data);
 
 	return (
-		<table className={css_table}>
+		<table className={cssTable}>
 			<tbody>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Market Cap</td>
-					<td className={css_cell_right}>{data.marketCap}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Market Cap</td>
+					<td className={cssCellRight}>{data.marketCap}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Revenue</td>
-					<td className={css_cell_right}>{data.revenue}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Revenue</td>
+					<td className={cssCellRight}>{data.revenue}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Net Income</td>
-					<td className={css_cell_right}>{data.netIncome}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Net Income</td>
+					<td className={cssCellRight}>{data.netIncome}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Shares Out</td>
-					<td className={css_cell_right}>{data.sharesOut}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Shares Out</td>
+					<td className={cssCellRight}>{data.sharesOut}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>EPS (ttm)</td>
-					<td className={css_cell_right}>{data.eps}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>EPS (ttm)</td>
+					<td className={cssCellRight}>{data.eps}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>PE Ratio</td>
-					<td className={css_cell_right}>{data.peRatio}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>PE Ratio</td>
+					<td className={cssCellRight}>{data.peRatio}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Forward PE</td>
-					<td className={css_cell_right}>{data.forwardPE}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Forward PE</td>
+					<td className={cssCellRight}>{data.forwardPE}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Dividend</td>
-					<td className={css_cell_right}>{data.dividend}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Dividend</td>
+					<td className={cssCellRight}>{data.dividend}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Ex-Dividend Date</td>
-					<td className={css_cell_right}>{data.exDividendDate}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Ex-Dividend Date</td>
+					<td className={cssCellRight}>{data.exDividendDate}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -57,45 +57,48 @@ export function InfoTable() {
 
 export function QuoteTable() {
 	const data = stockState((state) => state.data);
+	const quote = stockState((state) => state.quote);
+
+	const quoteUsed = quote ? quote.volume : data.volume;
 
 	return (
-		<table className={css_table}>
+		<table className={cssTable}>
 			<tbody>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Volume</td>
-					<td className={css_cell_right}>{data.volume}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Volume</td>
+					<td className={cssCellRight}>{quoteUsed}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Open</td>
-					<td className={css_cell_right}>{data.open}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Open</td>
+					<td className={cssCellRight}>{data.open}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Previous Close</td>
-					<td className={css_cell_right}>{data.close}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Previous Close</td>
+					<td className={cssCellRight}>{data.close}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Day&apos;s Range</td>
-					<td className={css_cell_right}>{data.rangeDay}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Day&apos;s Range</td>
+					<td className={cssCellRight}>{data.rangeDay}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>52-Week Range</td>
-					<td className={css_cell_right}>{data.range52w}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>52-Week Range</td>
+					<td className={cssCellRight}>{data.range52w}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Beta</td>
-					<td className={css_cell_right}>{data.beta}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Beta</td>
+					<td className={cssCellRight}>{data.beta}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Analysts</td>
-					<td className={css_cell_right}>{data.analysts}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Analysts</td>
+					<td className={cssCellRight}>{data.analysts}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Price Target</td>
-					<td className={css_cell_right}>{data.target}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Price Target</td>
+					<td className={cssCellRight}>{data.target}</td>
 				</tr>
-				<tr className={css_rows}>
-					<td className={css_cell_left}>Est. Earnings Date</td>
-					<td className={css_cell_right}>{data.earningsDate}</td>
+				<tr className={cssRows}>
+					<td className={cssCellLeft}>Est. Earnings Date</td>
+					<td className={cssCellRight}>{data.earningsDate}</td>
 				</tr>
 			</tbody>
 		</table>

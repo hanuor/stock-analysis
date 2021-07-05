@@ -1,6 +1,6 @@
-import { External } from '@/components/CustomLink';
+import { External } from 'components/CustomLink';
 
-const Address = (address) => {
+const address = (address) => {
 	return { __html: address };
 };
 
@@ -18,7 +18,7 @@ const ProfileContact = ({ contact }) => {
 										Address:
 									</div>
 									<div
-										dangerouslySetInnerHTML={Address(contact.address)}
+										dangerouslySetInnerHTML={address(contact.address)}
 									/>
 								</td>
 							</tr>

@@ -29,5 +29,14 @@
 		"prefix": "cn",
 		"body": ["className=\"$1\""],
 		"description": "className"
+	},
+	"Function - Export": {
+		"prefix": "funed",
+		"body": [
+			"export default function ${1:name}(${2:props}) {",
+			"\treturn (${3});",
+			"}"
+		],
+		"description": "Function - Export"
 	}
 }

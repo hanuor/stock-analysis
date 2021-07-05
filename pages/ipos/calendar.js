@@ -1,18 +1,19 @@
-import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
-import { getIpoData } from '@/Functions/callBackEnd';
-import CalendarTable from '@/components/IPOs/CalendarTable';
-import IPONavigation from '@/components/IPOs/Navigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import RecentTableMin from '@/components/IPOs/RecentTableMin';
-import NewsWidget from '@/components/News/NewsWidget';
+import { SEO } from 'components/SEO';
+import { getIpoData } from 'functions/callBackEnd';
+import CalendarTable from 'components/IPOs/CalendarTable';
+import IPONavigation from 'components/IPOs/Navigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import RecentTableMin from 'components/IPOs/RecentTableMin';
+import NewsWidget from 'components/News/NewsWidget';
 
 const IpoCalendar = ({ data }) => {
 	return (
 		<>
-			<Meta title="IPO Calendar" />
-			<Header />
+			<SEO
+				title="IPO Calendar - All Upcoming IPOs"
+				description="All upcoming initial public offerings (IPOs) on the stock market. Includes estimated IPO dates, offering price, how many shares are offered and more."
+				canonical="ipos/calendar/"
+			/>
 			<div className="contain">
 				<main className="w-full py-6">
 					<Breadcrumbs />
@@ -51,7 +52,6 @@ const IpoCalendar = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };

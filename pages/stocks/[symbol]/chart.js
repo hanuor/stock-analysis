@@ -1,10 +1,11 @@
-import Stock from '@/components/Layout/StockLayout';
-import StockChart from '@/components/Chart/StockChart';
-import { SelectPeriod, SelectType } from '@/components/Chart/SelectUI';
-import Buttons from '@/components/Chart/ButtonsUI';
+import {Stock} from '/components/Layout/StockLayout';
+import StockChart from '/components/Chart/StockChart';
+import { SEO } from 'components/SEO';
+import { SelectPeriod, SelectType } from '/components/Chart/SelectUI';
+import Buttons from '/components/Chart/ButtonsUI';
 import { useImmerReducer } from 'use-immer';
-import { getStockInfo } from '@/Functions/callBackEnd';
-import { stockState } from '@State/stockState';
+import { getStockInfo } from '/functions/callBackEnd';
+import { stockState } from 'State/stockState';
 import { useEffect } from 'react';
 import React from 'react';
 
@@ -47,7 +48,12 @@ export default function CandleStickStockChart({ info, data }) {
 		return null;
 	}
 
-	return (
+	return <>
+		<SEO
+				title={`${info.name} (${info.ticker}) Stock Chart`}
+				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
+				canonical={`stocks/${info.symbol}/chart/`}
+		/>
 		<Stock>
 			<div className="px-2 sm:contain">
 				<div className="">
@@ -69,7 +75,7 @@ export default function CandleStickStockChart({ info, data }) {
 				</div>
 			</div>
 		</Stock>
-	);
+	</>;
 }
 
 export async function getStaticPaths() {

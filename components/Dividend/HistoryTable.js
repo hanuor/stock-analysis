@@ -46,10 +46,10 @@ export default function Table({ rawdata }) {
 			<div className="overflow-x-auto">
 				<table {...getTableProps()} className={styles.table}>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
-									<th {...column.getHeaderProps()}>
+						{headerGroups.map((headerGroup, index) => (
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+								{headerGroup.headers.map((column, index) => (
+									<th {...column.getHeaderProps()} key={index}>
 										{column.render('Header') ===
 										'Ex-Dividend Date' ? (
 											<>
@@ -75,13 +75,13 @@ export default function Table({ rawdata }) {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{rows.map((row) => {
+						{rows.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
+								<tr {...row.getRowProps()} key={index}>
+									{row.cells.map((cell, index) => {
 										return (
-											<td {...cell.getCellProps()}>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);

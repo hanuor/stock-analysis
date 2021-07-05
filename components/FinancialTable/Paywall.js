@@ -1,6 +1,6 @@
 export default function Paywall({ range, fullcount, showcount }) {
-	let diff = fullcount - showcount;
-	let type = range === 'annual' ? 'years' : 'quarters';
+	const diff = fullcount - showcount;
+	const type = range === 'annual' ? 'years' : 'quarters';
 
 	return (
 		<div className="flex flex-col px-8 justify-center items-center whitespace-nowrap bg-gray-100 border-l border-gray-300">

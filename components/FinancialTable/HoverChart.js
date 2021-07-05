@@ -8,16 +8,16 @@ defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 export default function HoverChart({ data, count, row, range, ticker }) {
-	let rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
-	let dataid = row.data || row.id;
-	let rowdata = data[dataid];
-	let type = row.format;
+	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
+	const dataid = row.data || row.id;
+	const rowdata = data[dataid];
+	const type = row.format;
 
 	const y = rowdata.map((current, index) => {
-		let previous = row.format === 'growth' ? data[dataid][index + 1] : null;
-		let revenue = row.format === 'margin' ? data.revenue[index] : null;
+		const previous = row.format === 'growth' ? data[dataid][index + 1] : null;
+		const revenue = row.format === 'margin' ? data.revenue[index] : null;
 
-		let cellContent =
+		const cellContent =
 			type && type !== 'reduce_precision'
 				? formatNumber({
 						type,
@@ -40,11 +40,11 @@ export default function HoverChart({ data, count, row, range, ticker }) {
 	const xdata = xdatadraft;
 	const ydata = y.slice(0, count);
 
-	let xaxis = xdata.reverse();
-	let yaxis = ydata.reverse();
+	const xaxis = xdata.reverse();
+	const yaxis = ydata.reverse();
 
 	// Cut zero values from start of data array
-	let ylength = yaxis.length;
+	const ylength = yaxis.length;
 	for (let i = 0; i < ylength; i++) {
 		if (!yaxis[0]) {
 			yaxis.shift();

@@ -1,18 +1,19 @@
-import Meta from '@/components/Meta';
-import Header from '@/components/Layout/Header/_Header';
-import Footer from '@/components/Layout/Footer/_Footer';
-import { getIpoData } from '@/Functions/callBackEnd';
-import IPONavigation from '@/components/IPOs/Navigation';
-import Breadcrumbs from '@/components/Breadcrumbs/_Breadcrumbs';
-import NewsFeed from '@/components/News/_NewsFeed';
-import CalendarTableMin from '@/components/IPOs/CalendarTableMin';
-import RecentTableMin from '@/components/IPOs/RecentTableMin';
+import { SEO } from 'components/SEO';
+import { getIpoData } from 'functions/callBackEnd';
+import IPONavigation from 'components/IPOs/Navigation';
+import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import NewsFeed from 'components/News/_NewsFeed';
+import CalendarTableMin from 'components/IPOs/CalendarTableMin';
+import RecentTableMin from 'components/IPOs/RecentTableMin';
 
 const RecentIpos = ({ data }) => {
 	return (
 		<>
-			<Meta title="IPO News" />
-			<Header />
+			<SEO
+				title="Latest IPO News"
+				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
+				canonical="ipos/news/"
+			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">
@@ -32,7 +33,6 @@ const RecentIpos = ({ data }) => {
 					</div>
 				</main>
 			</div>
-			<Footer />
 		</>
 	);
 };

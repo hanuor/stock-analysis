@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { formatDateClean } from '@/Functions/formatDates';
+import { formatDateClean } from 'functions/formatDates';
 
 const countZero = (cutter) => {
 	let count = 0;
 	for (let i = 0; i < cutter.length; i++) {
-		let zeroCheck = cutter[i];
+		const zeroCheck = cutter[i];
 		if (zeroCheck !== 0) {
 			break;
 		}
@@ -57,7 +57,7 @@ const SingleChart = ({ xdata, ydata, type, title }) => {
 								padding: 5,
 								callback: function (value) {
 									if (type === 'amount') {
-										let newvalue = value.toFixed(2);
+										const newvalue = value.toFixed(2);
 										return '$' + newvalue;
 									}
 									return value + '%';
@@ -116,12 +116,12 @@ const SingleChart = ({ xdata, ydata, type, title }) => {
 									return formatDateClean(tooltipItem[0].label);
 								},
 								label: function (context) {
-									let value = context.parsed.y || '';
+									const value = context.parsed.y || '';
 									if (type === 'amount') {
-										let newvalue = value.toFixed(3);
+										const newvalue = value.toFixed(3);
 										return '$' + newvalue;
 									}
-									let newvalue = value.toFixed(2);
+									const newvalue = value.toFixed(2);
 									return newvalue + '%';
 								},
 							},

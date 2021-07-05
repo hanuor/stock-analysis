@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
-import Pagination from '@/components/Tables/Pagination';
+import Pagination from 'components/Tables/Pagination';
 import styles from './HoldingsTable.module.css';
 import Paywall from './HoldingsPaywall';
-import StockLink, { ETFLink } from '@/components/Links';
-import userState from '@State/userState';
+import StockLink, { ETFLink } from 'components/Links';
+import useUserInfo from 'users/useUserInfo';
 
 const _HoldingsTable = ({ rawdata }) => {
-	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const { isPro } = useUserInfo();
 
 	const columns = useMemo(
 		() => [
@@ -76,10 +76,10 @@ const _HoldingsTable = ({ rawdata }) => {
 			<div className="overflow-x-auto">
 				<table {...getTableProps()} className={styles.table}>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
-									<th {...column.getHeaderProps()}>
+						{headerGroups.map((headerGroup, index) => (
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+								{headerGroup.headers.map((column, index) => (
+									<th {...column.getHeaderProps()} key={index}>
 										{column.render('Header')}
 									</th>
 								))}
@@ -87,13 +87,13 @@ const _HoldingsTable = ({ rawdata }) => {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row) => {
+						{page.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
+								<tr {...row.getRowProps()} key={index}>
+									{row.cells.map((cell, index) => {
 										return (
-											<td {...cell.getCellProps()}>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);
@@ -104,7 +104,7 @@ const _HoldingsTable = ({ rawdata }) => {
 					</tbody>
 				</table>
 			</div>
-			{isLoggedIn && rows.length > 200 ? (
+			{isPro && rows.length > 200 ? (
 				<Pagination
 					previousPage={previousPage}
 					canPreviousPage={canPreviousPage}

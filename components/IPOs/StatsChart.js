@@ -104,9 +104,9 @@ const StatsChart = ({ title, x, y }) => {
 								typeof window !== 'undefined' &&
 								window.innerWidth > 500
 							) {
-								let chartInstance = ref.current.$context.chart;
-								let ctx = chartInstance.ctx;
-								let size = x.length > 12 ? '13px' : '14 px';
+								const chartInstance = ref.current.$context.chart;
+								const ctx = chartInstance.ctx;
+								const size = x.length > 12 ? '13px' : '14 px';
 
 								ctx.font =
 									size +
@@ -119,9 +119,9 @@ const StatsChart = ({ title, x, y }) => {
 									dataset,
 									i
 								) {
-									let meta = chartInstance.getDatasetMeta(i);
+									const meta = chartInstance.getDatasetMeta(i);
 									meta.data.forEach(function (bar, index) {
-										let data = y[index];
+										const data = y[index];
 										ctx.fillText(data, bar.x, bar.y - 5);
 									});
 								});

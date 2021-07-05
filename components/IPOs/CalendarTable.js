@@ -82,8 +82,8 @@ const NoIpos = ({ title }) => {
 
 const CalendarTable = ({ title, data }) => {
 	const tableInstance = useTable({ columns, data });
-	let thisWeek = title === 'This Week' ? true : false;
-	let nextWeek = title === 'Next Week or Later' ? true : false;
+	const thisWeek = title === 'This Week' ? true : false;
+	const nextWeek = title === 'Next Week or Later' ? true : false;
 
 	if (data.length === 0) {
 		return <NoIpos title={title} />;
@@ -98,12 +98,13 @@ const CalendarTable = ({ title, data }) => {
 			<div className="overflow-x-auto">
 				<table
 					{...getTableProps()}
-					className={`${styles.ipotable} ${styles.striped}`}>
+					className={`${styles.ipotable} ${styles.striped}`}
+				>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
-									<th {...column.getHeaderProps()}>
+						{headerGroups.map((headerGroup, index) => (
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+								{headerGroup.headers.map((column, index) => (
+									<th {...column.getHeaderProps()} key={index}>
 										{column.render('Header')}
 										{thisWeek ||
 										(nextWeek && column.Header === 'IPO Date')
@@ -115,13 +116,13 @@ const CalendarTable = ({ title, data }) => {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{rows.map((row) => {
+						{rows.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
+								<tr {...row.getRowProps()} key={index}>
+									{row.cells.map((cell, index) => {
 										return (
-											<td {...cell.getCellProps()}>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);

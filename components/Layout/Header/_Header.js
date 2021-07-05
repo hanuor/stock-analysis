@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import HeaderLogo from '@/components/Layout/Header/HeaderLogo';
-import HeaderLogoFull from '@/components/Layout/Header/HeaderLogoFull';
-import HeaderSearch from '@/Layout/Header/HeaderSearch';
-import HeaderLogin from '@/Layout/Header/HeaderLogin';
+import HeaderLogo from 'components/Layout/Header/HeaderLogo';
+import HeaderLogoFull from 'components/Layout/Header/HeaderLogoFull';
+import HeaderSearch from 'components/Layout/Header/HeaderSearch';
+import HeaderLogin from 'components/Layout/Header/HeaderLogin';
 
 import {
 	HeaderNavigation,
 	HamburgerIcon,
 	CloseIcon,
-} from '@/Layout/Header/HeaderNavigation';
+} from 'components/Layout/Header/HeaderNavigation';
 
 export default function Header() {
 	const node = useRef();
@@ -53,7 +53,7 @@ export default function Header() {
 				<div>
 					<Link href="/" className="flex">
 						<a>
-							<HeaderLogo />
+							<HeaderLogo className="h-8 w-8 lg:hidden" />
 							<HeaderLogoFull />
 						</a>
 					</Link>
@@ -68,7 +68,8 @@ export default function Header() {
 						className={`flex flex-col items-center focus:outline-none focus-visible:outline-none ${
 							open && 'text-blue-800'
 						}`}
-						onClick={clickMenu}>
+						onClick={clickMenu}
+					>
 						{open ? <CloseIcon /> : <HamburgerIcon />}
 						<span className="text-xs">{open ? 'Close' : 'Menu'}</span>
 					</button>

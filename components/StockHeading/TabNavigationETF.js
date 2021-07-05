@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import styles from '@/Styles/TabMenu.module.css';
-import navState from '@State/navState';
+import styles from 'styles/TabMenu.module.css';
+import navState from 'state/navState';
 
 export default function TabNavigation() {
 	const path = navState((state) => state.path);
@@ -18,12 +18,14 @@ export default function TabNavigation() {
 				<ul
 					className={
 						'flex flex-row w-full overflow-auto ' + styles.navmenu
-					}>
+					}
+				>
 					<li>
 						<Link href={`/etf/${path.two}/`} scroll={false}>
 							<a
 								className={!path.three ? active : inactive}
-								data-title="Overview">
+								data-title="Overview"
+							>
 								Overview
 							</a>
 						</Link>
@@ -31,10 +33,9 @@ export default function TabNavigation() {
 					<li>
 						<Link href={`/etf/${path.two}/holdings/`} scroll={false}>
 							<a
-								className={
-									path.three == 'holdings' ? active : inactive
-								}
-								data-title="Holdings">
+								className={path.three == 'holdings' ? active : inactive}
+								data-title="Holdings"
+							>
 								Holdings
 							</a>
 						</Link>
@@ -42,10 +43,9 @@ export default function TabNavigation() {
 					<li>
 						<Link href={`/etf/${path.two}/dividend/`} scroll={false}>
 							<a
-								className={
-									path.three == 'dividend' ? active : inactive
-								}
-								data-title="Dividend">
+								className={path.three == 'dividend' ? active : inactive}
+								data-title="Dividend"
+							>
 								Dividend
 							</a>
 						</Link>
@@ -54,7 +54,8 @@ export default function TabNavigation() {
 						<Link href={`/etf/${path.two}/chart/`} scroll={false}>
 							<a
 								className={path.three == 'chart' ? active : inactive}
-								data-title="Chart">
+								data-title="Chart"
+							>
 								Chart
 							</a>
 						</Link>

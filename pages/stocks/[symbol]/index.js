@@ -1,16 +1,13 @@
-import {
-	getStockInfo,
-	getPageData,
-	getNewsData,
-} from '@/Functions/callBackEnd';
-import Stock from '@/components/Layout/StockLayout';
-import { InfoTable, QuoteTable } from '@/components/Overview/TopTables';
-import PriceChart from '@/components/PriceChart/_PriceChart';
-import Profile from '@/components/Overview/ProfileWidget';
-import NewsArea from '@/components/Overview/NewsArea';
-import FinancialsWidget from '@/components/Overview/FinancialsWidget';
-import AnalystWidget from '@/components/Overview/AnalystWidget';
-import { stockState } from '@State/stockState';
+import { getStockInfo, getPageData, getNewsData } from 'functions/callBackEnd';
+import { Stock } from 'components/Layout/StockLayout';
+import { SEO } from 'components/SEO';
+import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
+import PriceChart from 'components/PriceChart/_PriceChart';
+import Profile from 'components/Overview/ProfileWidget';
+import NewsArea from 'components/Overview/NewsArea';
+import FinancialsWidget from 'components/Overview/FinancialsWidget';
+import AnalystWidget from 'components/Overview/AnalystWidget';
+import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 
 export default function StockOverview({ info, data, news }) {
@@ -22,8 +19,20 @@ export default function StockOverview({ info, data, news }) {
 		setData(data);
 	}, [data, info, setData, setInfo]);
 
+	let description = `Get a real-time ${info.name} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`;
+	if (info.state == 'upcomingipo') {
+		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`;
+	} else if (info.archived) {
+		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials and other important investing information.`;
+	}
+
 	return (
 		<Stock>
+			<SEO
+				title={`${info.name} (${info.ticker}) Stock Price, Quote & News`}
+				description={description}
+				canonical={`stocks/${info.symbol}/`}
+			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
 				<div className="order-3 flex-grow overflow-auto">
 					<PriceChart />

@@ -1,7 +1,12 @@
 import Link from 'next/link';
 
-const StockLink = ({ symbol, className }) => {
-	let classes = className || 'bll';
+interface ILinks {
+	symbol: string;
+	className?: string;
+}
+
+const StockLink = ({ symbol, className }: ILinks) => {
+	const classes = className || 'bll';
 
 	return (
 		<Link href={`/stocks/${symbol.toLowerCase()}/`}>
@@ -12,8 +17,8 @@ const StockLink = ({ symbol, className }) => {
 
 export default StockLink;
 
-export const ETFLink = ({ symbol, className }) => {
-	let classes = className || 'bll';
+export const ETFLink = ({ symbol, className }: ILinks) => {
+	const classes = className || 'bll';
 
 	return (
 		<Link href={`/etf/${symbol.toLowerCase()}/`}>
@@ -22,7 +27,7 @@ export const ETFLink = ({ symbol, className }) => {
 	);
 };
 
-export const SymbolLink = ({ symbol, className }) => {
+export const SymbolLink = ({ symbol, className }: ILinks) => {
 	if (symbol.startsWith('$')) {
 		return <StockLink symbol={symbol.slice(1)} className={className} />;
 	} else if (symbol.startsWith('#')) {
