@@ -16,6 +16,38 @@ const components = {
 };
 
 export default function Page({ content, meta, slug }) {
+	// eslint-disable-next-line prefer-const
+	let schema = {
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://stockanalysis/${slug}/`,
+		},
+		headline: meta.title,
+		description: meta.description,
+		author: { '@type': 'Person', name: 'Kris Gunnars, BSc' },
+		publisher: {
+			'@type': 'Organization',
+			name: 'Stock Analysis',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://stockanalysis.com/logo.png',
+			},
+		},
+	};
+
+	if (meta.image) {
+		schema.image = {
+			'@type': 'ImageObject',
+			url: `https://stockanalysis${meta.image}`,
+		};
+	}
+
+	if (meta.date) {
+		schema.datePublished = meta.date;
+	}
+
 	return (
 		<>
 			<SEO
@@ -23,6 +55,7 @@ export default function Page({ content, meta, slug }) {
 				description={meta.description}
 				canonical={`${slug}/`}
 				image={meta.image}
+				schema={schema}
 			/>
 			<ArticleLayout heading={meta.heading || meta.title}>
 				<div>
