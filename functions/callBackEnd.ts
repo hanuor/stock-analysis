@@ -37,6 +37,15 @@ export async function getPageData(id: number, page: string) {
 	return data;
 }
 
+export async function getStockFinancials(page: string, id: number) {
+	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+
+	const response = await Axios.get(API + `/financials?i=${id}&type=${page}`);
+	const data = response.data;
+
+	return data;
+}
+
 export async function getNewsData(id: number) {
 	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 

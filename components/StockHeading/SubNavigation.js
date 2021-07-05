@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
-import { useEffect } from 'react';
 import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
 
@@ -89,20 +88,6 @@ const Statement = () => {
 const Period = () => {
 	const range = financialsState((state) => state.range);
 	const setRange = financialsState((state) => state.setRange);
-
-	// Check for period in URL
-	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			const url = new URL(window.location.href);
-			const params = url.searchParams;
-			const period = params.get('period');
-			if (period === 'quarterly' || period === 'trailing') {
-				if (period !== range) {
-					setRange(period);
-				}
-			}
-		}
-	}, [range, setRange]);
 
 	return (
 		<nav className="mt-2 sm:mt-1.5">

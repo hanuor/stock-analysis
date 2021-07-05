@@ -22,23 +22,21 @@ import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
 
-export default function FinancialTable() {
+export default function FinancialTable({ statement, financialData }) {
 	const range = financialsState((state) => state.range);
-	const statement = financialsState((state) => state.statement);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
-	const financialData = financialsState((state) => state.financialData);
 	const info = stockState((state) => state.info);
 	const { isPro } = useUserInfo();
 
-	if (!financialData[statement]) {
-		return <h1>Loading...</h1>;
+	if (!financialData || Object.keys(financialData).length === 0) {
+		return <span>Loading...</span>;
 	}
 
 	const data =
 		statement === 'ratios' && range === 'quarterly'
-			? financialData.ratios.trailing
-			: financialData[statement][range]; // The data for the selected financial statement
+			? financialData.trailing
+			: financialData[range]; // The data for the selected financial statement
 
 	const paywall = range === 'annual' ? 15 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
@@ -132,6 +130,7 @@ export default function FinancialTable() {
 
 		let rowdata = data[dataid];
 		let revenuedata = data.revenue;
+
 		if (fullcount > showcount) {
 			if (statement === 'income_statement') {
 				revenuedata = revenuedata.slice(0, showcount);
@@ -259,7 +258,7 @@ export default function FinancialTable() {
 	return (
 		<div className="px-4 lg:px-6 mx-auto">
 			<div className="flex flex-row justify-between items-end">
-				<TableTitle />
+				<TableTitle statement={statement} />
 				<TableControls />
 			</div>
 			<div

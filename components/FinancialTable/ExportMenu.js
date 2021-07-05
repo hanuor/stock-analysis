@@ -20,8 +20,8 @@ export const ExportMenu = () => {
 		// Get the info required to map the data
 		const rawdata =
 			statement === 'ratios' && range === 'quarterly'
-				? financialData.ratios.trailing
-				: financialData[statement][range];
+				? financialData.trailing
+				: financialData[range];
 
 		const paywall = range === 'annual' ? 15 : 40;
 		const fullcount = rawdata.datekey.length;
