@@ -91,7 +91,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		.join('')}</urlset>`;
 
 	res.setHeader('Cache-Control', 's-maxage=6000, stale-while-revalidate');
-	res.setHeader('Content-Type', 'text/xml');
+	res.setHeader('Content-Type', 'application/xml');
+	res.setHeader('Content-Encoding', 'gzip');
 	res.write(sitemap);
 	res.end();
 
