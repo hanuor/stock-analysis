@@ -84,21 +84,11 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
 	const allPages = pages.concat(symbols);
 
-	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-	<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	<url>
-		<loc>https://stockanalysis.com/</loc>
-	</url>
-	${allPages
+	const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://stockanalysis.com/</loc></url>${allPages
 		.map((item: string) => {
-			return `<url>
-			<loc>https://stockanalysis.com/${item}/</loc>
-			</url>
-			`;
+			return `<url><loc>https://stockanalysis.com/${item}/</loc></url>`;
 		})
-		.join('')}
-	</urlset>
-	`;
+		.join('')}</urlset>`;
 
 	res.setHeader('Cache-Control', 's-maxage=6000, stale-while-revalidate');
 	res.setHeader('Content-Type', 'text/xml');
