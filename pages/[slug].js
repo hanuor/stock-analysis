@@ -5,6 +5,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from 'functions/markdown.functions';
 import ArticleLayout from 'components/Layout/ArticleLayout';
+import { SEO } from 'components/SEO';
 import Image from 'next/image';
 import CustomLink, { External } from 'components/CustomLink';
 
@@ -14,13 +15,54 @@ const components = {
 	External,
 };
 
-export default function Page({ content, meta }) {
+export default function Page({ content, meta, slug }) {
+	// eslint-disable-next-line prefer-const
+	let schema = {
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://stockanalysis/${slug}/`,
+		},
+		headline: meta.title,
+		description: meta.description,
+		author: { '@type': 'Person', name: 'Kris Gunnars, BSc' },
+		publisher: {
+			'@type': 'Organization',
+			name: 'Stock Analysis',
+			logo: {
+				'@type': 'ImageObject',
+				url: 'https://stockanalysis.com/logo.png',
+			},
+		},
+	};
+
+	if (meta.image) {
+		schema.image = {
+			'@type': 'ImageObject',
+			url: `https://stockanalysis${meta.image}`,
+		};
+	}
+
+	if (meta.date) {
+		schema.datePublished = meta.date;
+	}
+
 	return (
-		<ArticleLayout meta={meta}>
-			<div>
-				<MDXRemote {...content} components={components} />
-			</div>
-		</ArticleLayout>
+		<>
+			<SEO
+				title={meta.title}
+				description={meta.description}
+				canonical={`${slug}/`}
+				image={meta.image}
+				schema={schema}
+			/>
+			<ArticleLayout heading={meta.heading || meta.title}>
+				<div>
+					<MDXRemote {...content} components={components} />
+				</div>
+			</ArticleLayout>
+		</>
 	);
 }
 
@@ -38,6 +80,7 @@ export async function getStaticProps({ params }) {
 		props: {
 			content: mdxSource,
 			meta: data,
+			slug: params.slug,
 		},
 	};
 }

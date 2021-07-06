@@ -1,13 +1,11 @@
 import stockState from 'state/stockState';
 import financialsState from 'state/financialsState';
 
-export default function TableTitle({ empty }) {
-	const statement = financialsState((state) => state.statement);
-
+export default function TableTitle({ statement }) {
 	return (
 		<div>
 			<TableHeader statement={statement} />
-			{!empty && <TableInfo statement={statement} />}
+			<TableInfo statement={statement} />
 		</div>
 	);
 }

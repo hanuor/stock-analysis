@@ -1,6 +1,6 @@
 import HeaderLogo from './Header/HeaderLogo';
 
-function UserLayout({ title, children }) {
+function UserLayout({ children }) {
 	return (
 		<>
 			<div className="max-w-[850px] mx-auto px-6 py-20 sm:px-0 space-y-6">

@@ -2,33 +2,41 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import ArticleLayout from 'components/Layout/ArticleLayout';
+import { SEO } from 'components/SEO';
 
-function classNames(...classes) {
+function classNames(...classes: Array<string>) {
 	return classes.filter(Boolean).join(' ');
 }
 
 export default function Contact() {
 	return (
-		<ArticleLayout meta={{ heading: 'Contact', title: 'Contact Us' }}>
-			<p>
-				We do not provide personalized investment advice. Please contact a
-				qualified financial advisor if you have questions about specific
-				investments.
-			</p>
-			<ContactForm />
-			<h2 className="mt-16">Mailing Address</h2>
-			<p>
-				Vefir ehf.
-				<br />
-				Austurkor 102,
-				<br />
-				203 Kopavogur,
-				<br />
-				Iceland
-			</p>
-			<h2>Phone Number</h2>
-			<p>Phone number: (+354) 693-9246</p>
-		</ArticleLayout>
+		<>
+			<SEO
+				title="Contact Us"
+				description="This page contains a contact form. Use this form if you have questions or suggestions about the content on this site."
+				canonical="contact/"
+			/>
+			<ArticleLayout heading="Contact">
+				<p>
+					We do not provide personalized investment advice. Please contact
+					a qualified financial advisor if you have questions about
+					specific investments.
+				</p>
+				<ContactForm />
+				<h2 className="mt-16">Mailing Address</h2>
+				<p>
+					Vefir ehf.
+					<br />
+					Austurkor 102,
+					<br />
+					203 Kopavogur,
+					<br />
+					Iceland
+				</p>
+				<h2>Phone Number</h2>
+				<p>Phone number: (+354) 693-9246</p>
+			</ArticleLayout>
+		</>
 	);
 }
 
@@ -70,7 +78,6 @@ function ContactForm() {
 							</label>
 							<div className="mt-1">
 								<input
-									id="email"
 									name="email"
 									type="email"
 									autoComplete="email"
