@@ -29,7 +29,7 @@ export default function Login() {
 	}
 
 	const PageSeo = () => (
-		<SEO title="Log in to Stock Analysis" canonical="login/" noindex={true} />
+		<SEO title="Log in to Stock Analysis" canonical="login/" />
 	);
 
 	if (isLoggedIn) {
