@@ -5,4 +5,6 @@ export interface IOHLCData {
 	readonly low: number;
 	readonly open: number;
 	readonly volume: number;
+	readonly ma1: number;
+	readonly ma2: number;
 }

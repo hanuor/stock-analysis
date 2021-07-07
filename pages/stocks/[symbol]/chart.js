@@ -1,11 +1,11 @@
-import {Stock} from '/components/Layout/StockLayout';
+import { Stock } from '/components/Layout/StockLayout';
 import StockChart from '/components/Chart/StockChart';
 import { SEO } from 'components/SEO';
 import { SelectPeriod, SelectType } from '/components/Chart/SelectUI';
 import Buttons from '/components/Chart/ButtonsUI';
 import { useImmerReducer } from 'use-immer';
 import { getStockInfo } from '/functions/callBackEnd';
-import { stockState } from 'State/stockState';
+import stockState from 'state/stockState';
 import { useEffect } from 'react';
 import React from 'react';
 
@@ -48,34 +48,36 @@ export default function CandleStickStockChart({ info, data }) {
 		return null;
 	}
 
-	return <>
-		<SEO
+	return (
+		<>
+			<SEO
 				title={`${info.name} (${info.ticker}) Stock Chart`}
 				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`stocks/${info.symbol}/chart/`}
-		/>
-		<Stock>
-			<div className="px-2 sm:contain">
-				<div className="">
-					<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
-						<Buttons state={state} dispatch={dispatch} />
-						<SelectPeriod dispatcher={dispatch} />
-						<SelectType dispatcher={dispatch} />
-					</div>
-					<div className="max-h-[400px] xs:max-h-[450px] bp:max-h-[550px] sm:max-h-[600px]">
-						<StockChart
-							loading={state.loading}
-							stockId={info.id}
-							period={state.period}
-							time={state.time}
-							type={state.type}
-							dispatcher={dispatch}
-						/>
+			/>
+			<Stock>
+				<div className="px-2 sm:contain">
+					<div className="">
+						<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
+							<Buttons state={state} dispatch={dispatch} />
+							<SelectPeriod dispatcher={dispatch} />
+							<SelectType dispatcher={dispatch} />
+						</div>
+						<div className="max-h-[400px] xs:max-h-[450px] bp:max-h-[550px] sm:max-h-[600px]">
+							<StockChart
+								loading={state.loading}
+								stockId={info.id}
+								period={state.period}
+								time={state.time}
+								type={state.type}
+								dispatcher={dispatch}
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
-		</Stock>
-	</>;
+			</Stock>
+		</>
+	);
 }
 
 export async function getStaticPaths() {

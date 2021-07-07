@@ -1,20 +1,20 @@
+/* eslint-disable no-invalid-this */
 import {
 	functor,
 	GenericChartComponent,
 	last,
-} from "@react-financial-charts/core";
-import { format } from "d3-format";
-import * as React from "react";
-import { ToolTipText } from "./ToolTipText";
-import { timeFormat } from "d3-time-format";
-import { ToolTipTSpanLabel } from "./ToolTipTSpanLabel";
+} from '@react-financial-charts/core';
+import { format } from 'd3-format';
+import * as React from 'react';
+import { ToolTipText } from './ToolTipText';
+import { timeFormat } from 'd3-time-format';
 
 const displayTextsDefault = {
-	o: "O: ",
-	h: " H: ",
-	l: " L: ",
-	c: " C: ",
-	na: "n/a",
+	o: 'O: ',
+	h: ' H: ',
+	l: ' L: ',
+	c: ' C: ',
+	na: 'n/a',
 };
 
 export interface OHLCTooltipProps {
@@ -48,15 +48,15 @@ export interface OHLCTooltipProps {
 export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 	public static defaultProps = {
 		accessor: (d: unknown) => d,
-		changeFormat: format("+.2f"),
-		className: "react-financial-charts-tooltip-hover",
+		changeFormat: format('+.2f'),
+		className: 'react-financial-charts-tooltip-hover',
 		displayTexts: displayTextsDefault,
 		displayValuesFor: (_: any, props: any) => props.currentItem,
 		fontFamily:
 			"-apple-system, system-ui, 'Helvetica Neue', Ubuntu, sans-serif",
-		ohlcFormat: format(".2f"),
+		ohlcFormat: format('.2f'),
 		origin: [0, 0],
-		percentFormat: format(".2%"),
+		percentFormat: format('.2%'),
 	};
 
 	public render() {
@@ -64,7 +64,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			<GenericChartComponent
 				clip={false}
 				svgDraw={this.renderSVG}
-				drawOn={["mousemove"]}
+				drawOn={['mousemove']}
 			/>
 		);
 	}
@@ -79,9 +79,9 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			fontFamily,
 			fontSize,
 			fontWeight,
-			labelFill,
-			labelFontWeight,
-			ohlcFormat = OHLCTooltipCustom.defaultProps.ohlcFormat,
+			// labelFill,
+			// labelFontWeight,
+			// ohlcFormat = OHLCTooltipCustom.defaultProps.ohlcFormat,
 			onClick,
 			percentFormat = OHLCTooltipCustom.defaultProps.percentFormat,
 			textFill,
@@ -95,21 +95,21 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 		const currentItem =
 			displayValuesFor(this.props, moreProps) ?? last(fullData);
 
-		let open: string = displayTexts.na;
-		let high: string = displayTexts.na;
-		let low: string = displayTexts.na;
-		let close: string = displayTexts.na;
+		// let open: string = displayTexts.na;
+		// let high: string = displayTexts.na;
+		// let low: string = displayTexts.na;
+		// let close: string = displayTexts.na;
 		let change: string = displayTexts.na;
-		let date: string;
+		let date: Date = new Date('August 19, 1975 23:15:30 GMT+11:00');
 
 		if (currentItem !== undefined && accessor !== undefined) {
 			const item = accessor(currentItem);
 			if (item !== undefined) {
 				date = item.date;
-				open = ohlcFormat(item.open);
-				high = ohlcFormat(item.high);
-				low = ohlcFormat(item.low);
-				close = ohlcFormat(item.close);
+				// open = ohlcFormat(item.open);
+				// high = ohlcFormat(item.high);
+				// low = ohlcFormat(item.low);
+				// close = ohlcFormat(item.close);
 				change = `${changeFormat(item.close - item.open)} (${percentFormat(
 					(item.close - item.open) / item.open
 				)})`;
@@ -124,15 +124,17 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			<g
 				className={className}
 				transform={`translate(${x}, ${y})`}
-				onClick={onClick}>
+				onClick={onClick}
+			>
 				<ToolTipText
 					x={0}
 					y={0}
 					fontFamily={fontFamily}
 					fontSize={fontSize}
-					fontWeight={fontWeight}>
+					fontWeight={fontWeight}
+				>
 					<tspan key="value_Change" fill={valueFill}>
-						{`${timeFormat("%Y-%m-%d")(date)}` + "  " + `${change}`}
+						{`${timeFormat('%Y-%m-%d')(date)}` + '  ' + `${change}`}
 					</tspan>
 				</ToolTipText>
 			</g>

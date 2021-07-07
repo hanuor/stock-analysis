@@ -1,12 +1,13 @@
-import { max, sum } from "d3-array";
-import * as PropTypes from "prop-types";
-import * as React from "react";
+/* eslint-disable no-invalid-this */
+import { max, sum } from 'd3-array';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
 import {
 	first,
-	isDefined,
+	// isDefined,
 	GenericComponent,
 	last,
-} from "@react-financial-charts/core";
+} from '@react-financial-charts/core';
 
 const PADDING = 2;
 const X = 8;
@@ -44,7 +45,7 @@ const defaultBackgroundShapeCanvas = (
 	roundRect(ctx, 0, 0, width, height, 4);
 	if (toolTipFillStyle !== undefined) {
 		ctx.fillStyle = toolTipFillStyle;
-		ctx.shadowColor = "#898";
+		ctx.shadowColor = '#898';
 		ctx.shadowBlur = 4;
 		ctx.fill();
 		ctx.shadowBlur = 0;
@@ -139,7 +140,7 @@ const calculateTooltipSize = (
 	if (fontFill !== undefined) {
 		ctx.fillStyle = fontFill;
 	}
-	ctx.textAlign = "left";
+	ctx.textAlign = 'left';
 
 	const measureText = (str: string) => ({
 		width: ctx.measureText(str).width,
@@ -163,10 +164,11 @@ const calculateTooltipSize = (
 const sumSizes = (...sizes: any[]) => {
 	return {
 		width: Math.max(...sizes.map((size) => size.width)),
-		height: sum(sizes, (d) => d.height),
+		height: sum(sizes, (d: any) => d.height),
 	};
 };
 
+/*
 const normalizeX = (
 	x: number,
 	bgSize: any,
@@ -181,39 +183,13 @@ const normalizeX = (
 const normalizeY = (y: number, bgSize: any) => {
 	return y - bgSize.height <= 0 ? y + PADDING : y - bgSize.height - PADDING;
 };
-
+*/
 const defaultOrigin = (
 	props: HoverTooltipProps,
 	moreProps: any,
 	bgSize: any,
 	pointWidth: any
 ) => {
-	const { chartId, yAccessor } = props;
-
-	const { mouseXY, xAccessor, currentItem, xScale, chartConfig, width } =
-		moreProps;
-
-	let y = last(mouseXY);
-
-	const xValue = xAccessor(currentItem);
-
-	let x = Math.round(xScale(xValue));
-
-	if (
-		isDefined(chartId) &&
-		isDefined(yAccessor) &&
-		isDefined(chartConfig) &&
-		isDefined(chartConfig.findIndex)
-	) {
-		const yValue = yAccessor(currentItem);
-		const chartIndex = chartConfig.findIndex((c: any) => c.id === chartId);
-
-		y = Math.round(chartConfig[chartIndex].yScale(yValue));
-	}
-
-	x = normalizeX(x, bgSize, pointWidth, width);
-	y = normalizeY(y, bgSize);
-
 	return [6, 60];
 };
 
@@ -258,14 +234,14 @@ export interface HoverTooltipProps {
 export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 	public static defaultProps = {
 		background: {
-			fillStyle: "rgba(33, 148, 243, 0.1)",
+			fillStyle: 'rgba(33, 148, 243, 0.1)',
 		},
-		toolTipFillStyle: "rgb(245,245,245)",
-		toolTipStrokeStyle: "rgb(112,112,112)",
+		toolTipFillStyle: 'rgb(245,245,245)',
+		toolTipStrokeStyle: 'rgb(112,112,112)',
 		tooltipCanvas: defaultTooltipCanvas,
 		origin: defaultOrigin,
 		backgroundShapeCanvas: defaultBackgroundShapeCanvas,
-		fontFill: "#000000",
+		fontFill: '#000000',
 		fontFamily:
 			"-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
 		fontSize: 12,
@@ -280,7 +256,7 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 		return (
 			<GenericComponent
 				canvasDraw={this.drawOnCanvas}
-				drawOn={["mousemove", "pan"]}
+				drawOn={['mousemove', 'pan']}
 			/>
 		);
 	}

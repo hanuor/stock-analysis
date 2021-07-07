@@ -2,11 +2,11 @@ import {
 	functor,
 	GenericChartComponent,
 	last,
-} from "@react-financial-charts/core";
-import { format } from "d3-format";
-import * as React from "react";
-import { ToolTipText } from "./ToolTipText";
-import { ToolTipTSpanLabel } from "./ToolTipTSpanLabel";
+} from '@react-financial-charts/core';
+import { format } from 'd3-format';
+import * as React from 'react';
+import { ToolTipText } from './ToolTipText';
+import { ToolTipTSpanLabel } from './ToolTipTSpanLabel';
 
 export interface SingleMAToolTipProps {
 	readonly color: string;
@@ -42,11 +42,11 @@ export class SingleMAToolTip extends React.Component<SingleMAToolTipProps> {
 		} = this.props;
 
 		const translate =
-			"translate(" +
+			'translate(' +
 			this.props.origin[0] +
-			", " +
+			', ' +
 			this.props.origin[1] +
-			")";
+			')';
 
 		return (
 			<g transform={translate}>
@@ -56,7 +56,8 @@ export class SingleMAToolTip extends React.Component<SingleMAToolTipProps> {
 					y={11}
 					fontFamily={fontFamily}
 					fontSize={fontSize}
-					fontWeight={fontWeight}>
+					fontWeight={fontWeight}
+				>
 					<ToolTipTSpanLabel fill={labelFill} fontWeight={labelFontWeight}>
 						{displayName}
 					</ToolTipTSpanLabel>
@@ -80,6 +81,7 @@ export class SingleMAToolTip extends React.Component<SingleMAToolTipProps> {
 	private readonly onClick = (
 		event: React.MouseEvent<SVGRectElement, MouseEvent>
 	) => {
+		// eslint-disable-next-line no-invalid-this
 		const { onClick, forChart, options } = this.props;
 		if (onClick !== undefined) {
 			onClick(event, { chartId: forChart, ...options });
@@ -109,7 +111,7 @@ interface MovingAverageTooltipProps {
 		yAccessor: (data: any) => number;
 		type: string;
 		stroke: string;
-		windowSize: number;
+		windowSize: number | null;
 	}[];
 }
 
@@ -117,9 +119,9 @@ interface MovingAverageTooltipProps {
 export class MovingAverageTooltipCustom extends React.Component<MovingAverageTooltipProps> {
 	public static defaultProps = {
 		className:
-			"react-financial-charts-tooltip react-financial-charts-moving-average-tooltip",
-		displayFormat: format(".2f"),
-		displayInit: "n/a",
+			'react-financial-charts-tooltip react-financial-charts-moving-average-tooltip',
+		displayFormat: format('.2f'),
+		displayInit: 'n/a',
 		displayValuesFor: (_: any, props: any) => props.currentItem,
 		origin: [0, 10],
 		width: 65,
@@ -130,7 +132,7 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 			<GenericChartComponent
 				clip={false}
 				svgDraw={this.renderSVG}
-				drawOn={["mousemove"]}
+				drawOn={['mousemove']}
 			/>
 		);
 	}
@@ -158,9 +160,11 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 			displayValuesFor = MovingAverageTooltipCustom.defaultProps
 				.displayValuesFor,
 			options,
+			// eslint-disable-next-line no-invalid-this
 		} = this.props;
 
 		const currentItem =
+			// eslint-disable-next-line no-invalid-this
 			displayValuesFor(this.props, moreProps) ?? last(fullData);
 
 		const config = chartConfig;

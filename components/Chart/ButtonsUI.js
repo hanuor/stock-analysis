@@ -17,7 +17,8 @@ export default function Buttons({ state, dispatch }) {
 				id="period"
 				name="period"
 				className="block sm:hidden pl-3 border-r border-gray-300 pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="1Y">
+				defaultValue="1Y"
+			>
 				<option value="1M">1 Month</option>
 				<option value="6M">6 Months</option>
 				<option value="YTD">YTD</option>
@@ -32,7 +33,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: '1M' })}
 						type="button"
-						className={state.time === '1M' ? active : inactive}>
+						className={state.time === '1M' ? active : inactive}
+					>
 						1 Month
 					</button>
 				</li>
@@ -40,7 +42,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: '6M' })}
 						type="button"
-						className={state.time === '6M' ? active : inactive}>
+						className={state.time === '6M' ? active : inactive}
+					>
 						6 Months
 					</button>
 				</li>
@@ -49,7 +52,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: 'YTD' })}
 						type="button"
-						className={state.time === 'YTD' ? active : inactive}>
+						className={state.time === 'YTD' ? active : inactive}
+					>
 						YTD
 					</button>
 				</li>
@@ -57,7 +61,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: '1Y' })}
 						type="button"
-						className={state.time === '1Y' ? active : inactive}>
+						className={state.time === '1Y' ? active : inactive}
+					>
 						1 Year
 					</button>
 				</li>
@@ -65,7 +70,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: '3Y' })}
 						type="button"
-						className={state.time === '3Y' ? active : inactive}>
+						className={state.time === '3Y' ? active : inactive}
+					>
 						3 Years
 					</button>
 				</li>
@@ -73,7 +79,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: '5Y' })}
 						type="button"
-						className={state.time === '5Y' ? active : inactive}>
+						className={state.time === '5Y' ? active : inactive}
+					>
 						5 Years
 					</button>
 				</li>
@@ -81,7 +88,8 @@ export default function Buttons({ state, dispatch }) {
 					<button
 						onClick={() => dispatch({ type: 'timeChange', value: 'MAX' })}
 						type="button"
-						className={state.time === 'MAX' ? active : inactive}>
+						className={state.time === 'MAX' ? active : inactive}
+					>
 						MAX
 					</button>
 				</li>

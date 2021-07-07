@@ -17,13 +17,15 @@ import {
 	CrossHairCursor,
 	EdgeIndicator,
 	MouseCoordinateY,
-	withDeviceRatio,
-	withSize,
+	// withDeviceRatio,
+	// withSize,
 } from 'react-financial-charts';
 import { IOHLCData } from './iOHLCData';
-import { HoverTooltipCustom } from '@/components/Chart/HoverTooltipCustom';
-import { OHLCTooltipCustom } from '@/components/Chart/OHLCTooltipCustom';
-import { MovingAverageTooltipCustom } from '@/components/Chart/MovingAverageTooltipCustom';
+import { HoverTooltipCustom } from 'components/Chart/HoverTooltipCustom';
+import { OHLCTooltipCustom } from 'components/Chart/OHLCTooltipCustom';
+import { withSize } from 'components/Chart/withSizeCustom';
+import { withDeviceRatio } from 'components/Chart/withDeviceRatioCustom';
+import { MovingAverageTooltipCustom } from 'components/Chart/MovingAverageTooltipCustom';
 import { withOHLCData } from './withOHLCData';
 
 interface StockChartProps {
@@ -36,6 +38,15 @@ interface StockChartProps {
 	readonly type: string;
 	readonly period: string;
 	readonly time: string;
+	readonly stockId: number;
+	readonly message: string;
+}
+
+interface TooltipOptions {
+	yAccessor: (data: any) => number;
+	type: string;
+	stroke: string;
+	windowSize: number | null;
 }
 
 class StockChart extends React.Component<StockChartProps> {
@@ -52,20 +63,13 @@ class StockChart extends React.Component<StockChartProps> {
 		);
 
 	public render() {
-		const {
-			data: initialData,
-			dateTimeFormat = '%d %b',
-			height,
-			ratio,
-			width,
-			type,
-		} = this.props;
-		const volumeFormatter = format('.2s');
+		const { data: initialData, height, ratio, width, type } = this.props;
+
 		const disablePan = false;
 		const disableZoom = false;
 
 		const candlesAppearance = {
-			fill: function fill(d) {
+			fill: function fill(d: IOHLCData) {
 				// return d.close > d.open ? 'rgba(30, 130, 76, 1)' : 'rgba(180,0,0)';
 				return d.close > d.open ? '#26a69a' : '#ef5350';
 			},
@@ -74,31 +78,31 @@ class StockChart extends React.Component<StockChartProps> {
 			widthRatio: 0.8,
 		};
 
-		const openCloseColor = (data) => {
+		const openCloseColor = (data: IOHLCData) => {
 			return data.close > data.open ? '#26a69a' : '#ef5350';
 		};
 
-		const priceOrCandleStickColor = (data) => {
+		const priceOrCandleStickColor = (data: IOHLCData) => {
 			return type == 'line' ? '#000000' : openCloseColor(data);
 		};
 
-		const candleChartExtents = (data) => {
+		const candleChartExtents = (data: IOHLCData) => {
 			return [data.high, data.low, data.ma1, data.ma2];
 		};
 
-		const volChartExtents = (data) => {
+		const volChartExtents = (data: IOHLCData) => {
 			return [data.volume, 0];
 		};
 
-		const yEdgeIndicator = (data) => {
+		const yEdgeIndicator = (data: IOHLCData) => {
 			return data.close;
 		};
-		const volumeColor = (data) => {
+		const volumeColor = (data: IOHLCData) => {
 			return data.close > data.open
 				? 'rgba(38, 166, 154, 1)'
 				: 'rgba(239, 83, 80, 1)';
 		};
-		const volumeSeries = (data) => {
+		const volumeSeries = (data: IOHLCData) => {
 			return data.volume;
 		};
 
@@ -120,15 +124,15 @@ class StockChart extends React.Component<StockChartProps> {
 
 		const elder = elderRay();
 
-		var movingAverageTooltipOptions = [
+		const movingAverageTooltipOptions: TooltipOptions[] = [
 			{
-				yAccessor: (d) => d.ma1,
+				yAccessor: (d: IOHLCData) => d.ma1,
 				type: 'SMA',
 				stroke: sma50.stroke(),
 				windowSize: sma50.options().windowSize,
 			},
 			{
-				yAccessor: (d) => d.ma2,
+				yAccessor: (d: IOHLCData) => d.ma2,
 				type: 'SMA',
 				stroke: sma200.stroke(),
 				windowSize: sma200.options().windowSize,
@@ -152,10 +156,10 @@ class StockChart extends React.Component<StockChartProps> {
 		}
 
 		let max = xAccessor(data[data.length - 1]);
-		let min;
-		let days;
+		let min = 0;
+		let days = 0;
 
-		let date: any = new Date(data[data.length - 1].date);
+		const date: any = new Date(data[data.length - 1].date);
 
 		if (this.props.time == '1Y') {
 			max = max + 2;
@@ -168,8 +172,8 @@ class StockChart extends React.Component<StockChartProps> {
 			days = 183;
 		} else if (this.props.time == 'YTD') {
 			max = max + 2;
-			let YTDdate: any = new Date('01/01/' + new Date().getFullYear());
-			let difference = date.getTime() - YTDdate.getTime();
+			const YTDdate: any = new Date('01/01/' + new Date().getFullYear());
+			const difference = date.getTime() - YTDdate.getTime();
 			days = difference / (1000 * 3600 * 24);
 		} else if (this.props.time == '3Y') {
 			max = max + 4;
@@ -182,7 +186,7 @@ class StockChart extends React.Component<StockChartProps> {
 			date.setDate(date.getDate() - days);
 
 			for (let i = data.length - 1; -1 < i; i--) {
-				let dateIndex: Date = new Date(data[i].date);
+				const dateIndex: Date = new Date(data[i].date);
 				if (date > dateIndex) {
 					min = xAccessor(data[i + 1]);
 					break;
@@ -195,6 +199,57 @@ class StockChart extends React.Component<StockChartProps> {
 			max = max + 6;
 			min = 0;
 		}
+		/*
+		const calcExtent = (data: any[]) => {
+			let max = data.length - 1;
+			let min = 0;
+			let days = 0;
+
+			const date: any = new Date(data[data.length - 1].date);
+
+			if (this.props.time == '1Y') {
+				max = max + 2;
+				days = 365;
+			} else if (this.props.time == '1M') {
+				days = 31;
+				max = max + 1;
+			} else if (this.props.time == '6M') {
+				max = max + 2;
+				days = 183;
+			} else if (this.props.time == 'YTD') {
+				max = max + 2;
+				const YTDdate: any = new Date('01/01/' + new Date().getFullYear());
+				const difference = date.getTime() - YTDdate.getTime();
+				days = difference / (1000 * 3600 * 24);
+			} else if (this.props.time == '3Y') {
+				max = max + 4;
+				days = 1095;
+			} else if (this.props.time == '5Y') {
+				max = max + 8;
+				days = 1825;
+			}
+			if (this.props.time != 'MAX') {
+				date.setDate(date.getDate() - days);
+
+				for (let i = data.length - 1; -1 < i; i--) {
+					const dateIndex: Date = new Date(data[i].date);
+					if (date > dateIndex) {
+						min = xAccessor(data[i + 1]);
+						break;
+					}
+					if (i == 0) {
+						min = xAccessor(data[i]);
+					}
+				}
+			} else {
+				max = max + 6;
+				min = 0;
+			}
+			if (typeof min == 'number' && typeof max == 'number') {
+				const range: [number, number] | undefined = [min, max];
+				return range;
+			}
+		};
 
 		/*
 		const volumeMax = Math.max.apply(
@@ -238,7 +293,8 @@ class StockChart extends React.Component<StockChartProps> {
 				xScale={xScale}
 				xAccessor={xAccessor}
 				xExtents={xExtents}
-				zoomAnchor={lastVisibleItemBasedZoomAnchor}>
+				zoomAnchor={lastVisibleItemBasedZoomAnchor}
+			>
 				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
 					<XAxis showTickLabel={true} />
 					<YAxis
@@ -366,7 +422,8 @@ class StockChart extends React.Component<StockChartProps> {
 					id={4}
 					height={100}
 					origin={(w, h) => [0, h - 100]}
-					yExtents={volChartExtents}>
+					yExtents={volChartExtents}
+				>
 					<BarSeries
 						widthRatio={0.5}
 						clip={true}

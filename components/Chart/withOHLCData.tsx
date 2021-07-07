@@ -24,8 +24,8 @@ const parseData = () => {
 	};
 };
 
-function fixDataHeaders(obj) {
-	var newObj = {
+function fixDataHeaders(obj: any) {
+	const newObj = {
 		open: obj.o,
 		close: obj.c,
 		high: obj.h,
@@ -40,6 +40,11 @@ function fixDataHeaders(obj) {
 
 interface WithOHLCDataProps {
 	readonly data: IOHLCData[];
+	readonly period: string;
+	readonly time: string;
+	readonly loading: boolean;
+	readonly message: string;
+	readonly stockId: number;
 }
 
 interface WithOHLCState {
@@ -48,6 +53,7 @@ interface WithOHLCState {
 	period: string;
 	time: string;
 	loading: boolean;
+	stockId: number;
 }
 
 export function withOHLCData(dataSet = 'DAILY') {
@@ -60,47 +66,44 @@ export function withOHLCData(dataSet = 'DAILY') {
 		> {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props);
-
+				console.log(props);
 				this.state = {
 					message: `Loading ${dataSet} data...`,
 					period: '',
 					time: '',
 					loading: true,
+					stockId: 0,
 				};
 			}
 
 			public componentDidMount() {
+				const newState: WithOHLCState = this.props;
 				Axios.get(
-					`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=MAX`
+					`https://stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
 				).then((res) => {
 					const forDateParse = res.data.map(fixDataHeaders);
 					const data = forDateParse.map(parseData());
-					const period = this.props['period'];
+					const period = newState.period;
+					const time = newState.time;
 					this.setState({ period });
-					const time = this.props['time'];
 					this.setState({ time });
 					this.setState({ data });
-					this.props['dispatcher']({
-						type: 'changeLoading',
-						value: false,
-					});
 				});
 			}
 
 			public render() {
-				const { data, message } = this.state;
-				const { period } = this.state;
+				const { data, message, period } = this.state;
 
-				if (period != this.props['period']) {
+				const newState: WithOHLCState = this.props;
+
+				if (period != newState.period) {
 					Axios.get(
-						`https://stockanalysis.com/wp-json/sa/cch?i=${this.props['stockId']}&p=${this.props['period']}&r=MAX`
+						`https://stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
 					).then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
 						const data = forDateParse.map(parseData());
-						const period = this.props['period'];
-						const time = this.props['time'];
+						const period = newState.period;
 						this.setState({ period });
-						this.setState({ time });
 						this.setState({ data });
 					});
 				}
