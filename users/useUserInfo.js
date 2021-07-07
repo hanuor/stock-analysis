@@ -1,39 +1,23 @@
 import { useState, useEffect } from 'react';
-import { auth, db } from './firebase';
+import { firebaseApp } from './firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export default function useUserInfo() {
+	const auth = getAuth(firebaseApp);
 	const [user, setUser] = useState(null);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [isPro, setIsPro] = useState(false);
 
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setUser(currentUser);
 
 			if (currentUser) {
 				setIsLoggedIn(true);
-				db.collection('users')
-					.doc(currentUser.uid)
-					.get()
-					.then((doc) => {
-						const data = doc.data();
-						if (
-							data.status === 'new' ||
-							data.status === 'active' ||
-							data.status === 'trialing' ||
-							data.status === 'past_due'
-						) {
-							setIsPro(true);
-						}
-					})
-					.catch((err) => {
-						console.log('getUserMeta error:', err);
-					});
 			}
 		});
 
 		return unsubscribe;
-	}, [isLoggedIn]);
+	}, [auth, isLoggedIn]);
 
-	return { user, isLoggedIn, setIsLoggedIn, isPro };
+	return { user, isLoggedIn, setIsLoggedIn };
 }
