@@ -66,7 +66,6 @@ export function withOHLCData(dataSet = 'DAILY') {
 		> {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props);
-				console.log(props);
 				this.state = {
 					message: `Loading ${dataSet} data...`,
 					period: '',
