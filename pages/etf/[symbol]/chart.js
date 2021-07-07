@@ -1,7 +1,7 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData, getEtfInfo } from 'functions/callBackEnd';
-import { stockState } from 'state/stockState';
+import stockState from 'state/stockState';
 import { useEffect } from 'react';
 
 export default function SymbolStatistics({ info, data }) {
