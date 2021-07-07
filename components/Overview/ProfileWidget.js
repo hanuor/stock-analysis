@@ -12,7 +12,7 @@ export default function Profile() {
 			<p>
 				{data.description}{' '}
 				{info.type === 'stocks' && (
-					<Link href={`/stocks/${info.symbol}/company/`}>
+					<Link href={`/stocks/${info.symbol}/company/`} prefetch={false}>
 						<a className="bll">[Read more...]</a>
 					</Link>
 				)}

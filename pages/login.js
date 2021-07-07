@@ -84,7 +84,7 @@ export default function Login() {
 								Log In
 							</button>
 							<div className="mt-2">
-								<Link href="/pro/reset-password/">
+								<Link href="/pro/reset-password/" prefetch={false}>
 									<a className="bll">Forgot Password?</a>
 								</Link>
 							</div>
@@ -92,7 +92,7 @@ export default function Login() {
 					</div>
 				</form>
 				Need an account?{' '}
-				<Link href="/pro/">
+				<Link href="/pro/" prefetch={false}>
 					<a className="bll">Sign up here</a>
 				</Link>
 			</UserLayout>

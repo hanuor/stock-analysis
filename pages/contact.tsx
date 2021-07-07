@@ -127,7 +127,7 @@ function ContactForm() {
 								<div className="ml-3">
 									<p className="text-base text-gray-500">
 										By selecting this, you agree to the{' '}
-										<Link href="/privacy-policy/">
+										<Link href="/privacy-policy/" prefetch={false}>
 											<a className="font-medium link">
 												Privacy Policy.
 											</a>

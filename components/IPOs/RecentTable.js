@@ -1,6 +1,6 @@
 import { useTable, useSortBy } from 'react-table';
 import styles from './Table.module.css';
-import Link from 'next/link';
+import { StockLink } from 'components/Links';
 import { useMemo } from 'react';
 import { SortUp, SortDown } from 'components/Icons';
 
@@ -15,11 +15,7 @@ const RecentTable = ({ rawdata }) => {
 				Header: 'Symbol',
 				accessor: 'symbol',
 				Cell: function DateCell({ cell: { value } }) {
-					return (
-						<Link href={`/stocks/${value.toLowerCase()}`}>
-							<a className="bll">{value}</a>
-						</Link>
-					);
+					return <StockLink symbol={value} />;
 				},
 			},
 			{

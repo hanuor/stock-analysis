@@ -1,7 +1,7 @@
-import Link from 'next/link';
+import { StockLink } from 'components/Links';
 import Button from 'components/Button';
 
-const CalendarTableMin = ({ recent }) => {
+const RecentTableMin = ({ recent }) => {
 	return (
 		<div>
 			<h3 className="hh3">Latest IPOs</h3>
@@ -28,9 +28,7 @@ const CalendarTableMin = ({ recent }) => {
 									{item.date}
 								</td>
 								<td className="py-2 px-2 border-r border-gray-200">
-									<Link href={`/stocks/${item.symbol.toLowerCase()}`}>
-										<a className="bll">{item.symbol}</a>
-									</Link>
+									<StockLink symbol={item.symbol} />
 								</td>
 								<td className="py-2 px-2 pr-2 lg:max-w-[150px] lg:truncate">
 									{item.name}
@@ -45,4 +43,4 @@ const CalendarTableMin = ({ recent }) => {
 	);
 };
 
-export default CalendarTableMin;
+export default RecentTableMin;

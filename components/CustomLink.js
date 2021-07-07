@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export const CustomLink = ({ as, href, children }) => {
 	return (
-		<Link as={as} href={href}>
+		<Link as={as} href={href} prefetch={false}>
 			<a href={href}>{children}</a>
 		</Link>
 	);
@@ -13,5 +13,3 @@ export const External = ({ url, text }) => (
 		{text}
 	</a>
 );
-
-export default CustomLink;
