@@ -79,9 +79,6 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			fontFamily,
 			fontSize,
 			fontWeight,
-			// labelFill,
-			// labelFontWeight,
-			// ohlcFormat = OHLCTooltipCustom.defaultProps.ohlcFormat,
 			onClick,
 			percentFormat = OHLCTooltipCustom.defaultProps.percentFormat,
 			textFill,
@@ -95,10 +92,6 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 		const currentItem =
 			displayValuesFor(this.props, moreProps) ?? last(fullData);
 
-		// let open: string = displayTexts.na;
-		// let high: string = displayTexts.na;
-		// let low: string = displayTexts.na;
-		// let close: string = displayTexts.na;
 		let change: string = displayTexts.na;
 		let date: Date = new Date('August 19, 1975 23:15:30 GMT+11:00');
 
@@ -106,10 +99,6 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			const item = accessor(currentItem);
 			if (item !== undefined) {
 				date = item.date;
-				// open = ohlcFormat(item.open);
-				// high = ohlcFormat(item.high);
-				// low = ohlcFormat(item.low);
-				// close = ohlcFormat(item.close);
 				change = `${changeFormat(item.close - item.open)} (${percentFormat(
 					(item.close - item.open) / item.open
 				)})`;

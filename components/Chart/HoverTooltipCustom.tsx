@@ -69,10 +69,6 @@ const defaultTooltipCanvas = (
 	if (fontFill !== undefined) {
 		ctx.fillStyle = fontFill;
 	}
-	/*
-	ctx.textAlign = "left";
-	ctx.fillText(content.x, X, startY);
-	console.log(content.x); */
 
 	const maxLabel =
 		max(content.y, (y: any) => ctx.measureText(y.label as string).width) ?? 0;
@@ -168,22 +164,6 @@ const sumSizes = (...sizes: any[]) => {
 	};
 };
 
-/*
-const normalizeX = (
-	x: number,
-	bgSize: any,
-	pointWidth: number,
-	width: number
-) => {
-	return x < width / 2
-		? x + pointWidth / 2 + PADDING
-		: x - bgSize.width - pointWidth / 2 - PADDING;
-};
-
-const normalizeY = (y: number, bgSize: any) => {
-	return y - bgSize.height <= 0 ? y + PADDING : y - bgSize.height - PADDING;
-};
-*/
 const defaultOrigin = (
 	props: HoverTooltipProps,
 	moreProps: any,

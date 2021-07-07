@@ -17,8 +17,6 @@ import {
 	CrossHairCursor,
 	EdgeIndicator,
 	MouseCoordinateY,
-	// withDeviceRatio,
-	// withSize,
 } from 'react-financial-charts';
 import { IOHLCData } from './iOHLCData';
 import { HoverTooltipCustom } from 'components/Chart/HoverTooltipCustom';
@@ -51,7 +49,7 @@ interface TooltipOptions {
 
 class StockChart extends React.Component<StockChartProps> {
 	private readonly dateFormat = timeFormat('%Y-%m-%d');
-	private readonly margin = { left: 0, right: 62, top: 0, bottom: 24 };
+	private readonly margin = { left: 0, right: 62, top: 3, bottom: 24 };
 	private readonly pricesDisplayFormat = format('.2f');
 	private readonly volumeDisplayFormat = format('.4s');
 	private readonly changeDisplayFormat = format('+.2f');
@@ -70,7 +68,6 @@ class StockChart extends React.Component<StockChartProps> {
 
 		const candlesAppearance = {
 			fill: function fill(d: IOHLCData) {
-				// return d.close > d.open ? 'rgba(30, 130, 76, 1)' : 'rgba(180,0,0)';
 				return d.close > d.open ? '#26a69a' : '#ef5350';
 			},
 			clip: true,
@@ -121,7 +118,8 @@ class StockChart extends React.Component<StockChartProps> {
 				d.sma200 = c;
 			})
 			.accessor((d: any) => d.sma200);
-
+		console.log(sma50);
+		console.log(sma200);
 		const elder = elderRay();
 
 		const movingAverageTooltipOptions: TooltipOptions[] = [
@@ -199,73 +197,6 @@ class StockChart extends React.Component<StockChartProps> {
 			max = max + 6;
 			min = 0;
 		}
-		/*
-		const calcExtent = (data: any[]) => {
-			let max = data.length - 1;
-			let min = 0;
-			let days = 0;
-
-			const date: any = new Date(data[data.length - 1].date);
-
-			if (this.props.time == '1Y') {
-				max = max + 2;
-				days = 365;
-			} else if (this.props.time == '1M') {
-				days = 31;
-				max = max + 1;
-			} else if (this.props.time == '6M') {
-				max = max + 2;
-				days = 183;
-			} else if (this.props.time == 'YTD') {
-				max = max + 2;
-				const YTDdate: any = new Date('01/01/' + new Date().getFullYear());
-				const difference = date.getTime() - YTDdate.getTime();
-				days = difference / (1000 * 3600 * 24);
-			} else if (this.props.time == '3Y') {
-				max = max + 4;
-				days = 1095;
-			} else if (this.props.time == '5Y') {
-				max = max + 8;
-				days = 1825;
-			}
-			if (this.props.time != 'MAX') {
-				date.setDate(date.getDate() - days);
-
-				for (let i = data.length - 1; -1 < i; i--) {
-					const dateIndex: Date = new Date(data[i].date);
-					if (date > dateIndex) {
-						min = xAccessor(data[i + 1]);
-						break;
-					}
-					if (i == 0) {
-						min = xAccessor(data[i]);
-					}
-				}
-			} else {
-				max = max + 6;
-				min = 0;
-			}
-			if (typeof min == 'number' && typeof max == 'number') {
-				const range: [number, number] | undefined = [min, max];
-				return range;
-			}
-		};
-
-		/*
-		const volumeMax = Math.max.apply(
-			Math,
-			dataSubset.map(function (o) {
-				return o.volume;
-			})
-		);
-		const volumeMin = Math.min.apply(
-			Math,
-			data.map(function (o) {
-				return o.volume;
-			})
-		);
-
-		const volumeYExtents = [0, volumeMax]; */
 
 		const xExtents = [min, max];
 

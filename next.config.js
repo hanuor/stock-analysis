@@ -3,8 +3,6 @@ const withTM = require('next-transpile-modules')([
 	'd3-array',
 	'd3-time-format',
 	'internmap',
-	'd3-scale',
-	'd3-dsv',
 	'react-financial-charts',
 	'@react-financial-charts/annotations',
 	'@react-financial-charts/core',
