@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import LayoutSidebar from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
 import Table from 'components/Tables/SymbolTable';
-import StockLink from 'components/Links';
+import { StockLink } from 'components/Links';
 import abbreviateNumber from 'functions/abbreviateNumber';
 
 interface IStock {
