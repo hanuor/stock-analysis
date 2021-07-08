@@ -7,7 +7,7 @@ import { allPostPaths, POST_PATHS } from 'functions/markdown.functions';
 import ArticleLayout from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
 import Image from 'next/image';
-import CustomLink, { External } from 'components/CustomLink';
+import { CustomLink, External } from 'components/CustomLink';
 
 const components = {
 	a: CustomLink,

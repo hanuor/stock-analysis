@@ -21,7 +21,11 @@ export default function TabNavigation() {
 					}
 				>
 					<li>
-						<Link href={`/etf/${path.two}/`} scroll={false}>
+						<Link
+							href={`/etf/${path.two}/`}
+							prefetch={false}
+							scroll={false}
+						>
 							<a
 								className={!path.three ? active : inactive}
 								data-title="Overview"
@@ -31,7 +35,11 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/etf/${path.two}/holdings/`} scroll={false}>
+						<Link
+							href={`/etf/${path.two}/holdings/`}
+							prefetch={false}
+							scroll={false}
+						>
 							<a
 								className={path.three == 'holdings' ? active : inactive}
 								data-title="Holdings"
@@ -41,7 +49,11 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/etf/${path.two}/dividend/`} scroll={false}>
+						<Link
+							href={`/etf/${path.two}/dividend/`}
+							prefetch={false}
+							scroll={false}
+						>
 							<a
 								className={path.three == 'dividend' ? active : inactive}
 								data-title="Dividend"
@@ -51,7 +63,11 @@ export default function TabNavigation() {
 						</Link>
 					</li>
 					<li>
-						<Link href={`/etf/${path.two}/chart/`} scroll={false}>
+						<Link
+							href={`/etf/${path.two}/chart/`}
+							prefetch={false}
+							scroll={false}
+						>
 							<a
 								className={path.three == 'chart' ? active : inactive}
 								data-title="Chart"

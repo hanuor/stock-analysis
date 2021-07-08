@@ -26,7 +26,11 @@ const Statement = () => {
 		<nav className="mt-1.5">
 			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
-					<Link href={`/stocks/${path.two}/financials/`} scroll={false}>
+					<Link
+						href={`/stocks/${path.two}/financials/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={
 								statement == 'income_statement' ? active : inactive
@@ -40,6 +44,7 @@ const Statement = () => {
 				<li>
 					<Link
 						href={`/stocks/${path.two}/financials/balance-sheet`}
+						prefetch={false}
 						scroll={false}
 					>
 						<a
@@ -55,6 +60,7 @@ const Statement = () => {
 				<li>
 					<Link
 						href={`/stocks/${path.two}/financials/cash-flow-statement/`}
+						prefetch={false}
 						scroll={false}
 					>
 						<a
@@ -70,6 +76,7 @@ const Statement = () => {
 				<li>
 					<Link
 						href={`/stocks/${path.two}/financials/ratios/`}
+						prefetch={false}
 						scroll={false}
 					>
 						<a

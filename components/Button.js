@@ -8,7 +8,7 @@ const Button = ({ url, text, className }) => {
 	}
 
 	return (
-		<Link href={url}>
+		<Link href={url} prefetch={false}>
 			<a className={classes}>{text}</a>
 		</Link>
 	);

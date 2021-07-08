@@ -3,11 +3,11 @@ import { useTable, usePagination } from 'react-table';
 import Pagination from 'components/Tables/Pagination';
 import styles from './HoldingsTable.module.css';
 import Paywall from './HoldingsPaywall';
-import StockLink, { ETFLink } from 'components/Links';
-import useUserInfo from 'users/useUserInfo';
+import { StockLink, ETFLink } from 'components/Links';
+import { useProInfo } from 'users/useProInfo';
 
 const _HoldingsTable = ({ rawdata }) => {
-	const { isPro } = useUserInfo();
+	const { isPro } = useProInfo();
 
 	const columns = useMemo(
 		() => [

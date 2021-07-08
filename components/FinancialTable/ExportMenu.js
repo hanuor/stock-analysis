@@ -1,7 +1,7 @@
 import exportFromJSON from 'export-from-json';
 import financialsState from 'state/financialsState';
 import mapData from 'data/financials_map';
-import useUserInfo from 'users/useUserInfo';
+import { useProInfo } from 'users/useProInfo';
 import { stockState } from 'state/stockState';
 import { formatNumber } from './FinancialTable.functions';
 
@@ -13,7 +13,7 @@ export const ExportMenu = () => {
 	const financialData = financialsState((state) => state.financialData);
 	const info = stockState((state) => state.info);
 	const leftRight = financialsState((state) => state.leftRight);
-	const { isPro } = useUserInfo();
+	const { isPro } = useProInfo();
 
 	// Map the data (the export-from-json library needs the data in a specific format)
 	const exportData = (type) => {

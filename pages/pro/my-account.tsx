@@ -1,34 +1,19 @@
-import { useState, useEffect } from 'react';
-import useUserInfo from 'users/useUserInfo';
+import { useUserInfo } from 'users/useUserInfo';
+import { useProInfo } from 'users/useProInfo';
 import { SEO } from 'components/SEO';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { LoginPrompt } from 'components/LoginPrompt';
 import Link from 'next/link';
-import { db } from 'users/firebase';
 import { formatDateClean } from 'functions/formatDates';
 
 export default function MyAccount() {
 	const { user } = useUserInfo();
-	const [userMeta, setUserMeta] = useState();
-
-	useEffect(() => {
-		if (user && user.uid) {
-			db.collection('users')
-				.doc(user.uid)
-				.get()
-				.then((doc) => {
-					setUserMeta(doc.data());
-				})
-				.catch((err) => {
-					console.log('getUserMeta error:', err);
-				});
-		}
-	}, [user]);
+	const { userMeta } = useProInfo();
 
 	return (
 		<>
 			<SEO title="My Account" canonical="pro/my-account/" noindex={true} />
-			<LayoutFullWidth title="My Account">
+			<LayoutFullWidth>
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
 					{user && userMeta ? (
 						<>
@@ -143,7 +128,7 @@ export default function MyAccount() {
 	);
 }
 
-function formatSubscriptionStatus(status) {
+function formatSubscriptionStatus(status: string) {
 	switch (status) {
 		case 'new':
 		case 'trialing':

@@ -1,38 +1,55 @@
 import UserLayout from 'components/Layout/UserLayout';
 import { SEO } from 'components/SEO';
-import { auth } from 'users/firebase';
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import useUserInfo from 'users/useUserInfo';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { useUserInfo } from 'users/useUserInfo';
 
 export default function Login() {
+	const auth = getAuth();
 	const { user, isLoggedIn } = useUserInfo();
 	const [error, setError] = useState('');
 	const inputEmail = useRef();
 	const password = useRef();
+	const router = useRouter();
 
-	async function handleSubmit(e) {
+	function handleSubmit(e) {
 		e.preventDefault();
 
-		try {
-			await auth
-				.signInWithEmailAndPassword(
-					inputEmail.current.value,
-					password.current.value
-				)
-				.catch((err) => {
-					setError(err.message);
-				});
-		} catch {
-			console.log('Failed to log in');
-		}
+		signInWithEmailAndPassword(
+			auth,
+			inputEmail.current.value,
+			password.current.value
+		).catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.log({ errorCode });
+			console.log({ errorMessage });
+			setError(errorMessage);
+		});
+	}
+
+	function handleLogout() {
+		signOut(auth)
+			.then(() => {
+				console.log('Logged out successfully');
+				router.push('/');
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log({ errorCode });
+				console.log({ errorMessage });
+				setError(errorMessage);
+			});
 	}
 
 	const PageSeo = () => (
 		<SEO title="Log in to Stock Analysis" canonical="login/" />
 	);
 
-	if (isLoggedIn) {
+	if (isLoggedIn && user) {
 		return (
 			<>
 				<PageSeo />
@@ -40,7 +57,7 @@ export default function Login() {
 					<h1 className="hh1">You are logged in</h1>
 					<div className="mb-2">Email: {user.email}</div>
 					<button
-						onClick={() => auth.signOut()}
+						onClick={() => handleLogout()}
 						className="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-lg font-medium rounded-sm shadow-sm text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 					>
 						Log Out
@@ -84,7 +101,7 @@ export default function Login() {
 								Log In
 							</button>
 							<div className="mt-2">
-								<Link href="/pro/reset-password/">
+								<Link href="/pro/reset-password/" prefetch={false}>
 									<a className="bll">Forgot Password?</a>
 								</Link>
 							</div>
@@ -92,7 +109,7 @@ export default function Login() {
 					</div>
 				</form>
 				Need an account?{' '}
-				<Link href="/pro/">
+				<Link href="/pro/" prefetch={false}>
 					<a className="bll">Sign up here</a>
 				</Link>
 			</UserLayout>

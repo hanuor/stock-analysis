@@ -1,13 +1,14 @@
 import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { auth } from 'users/firebase';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import registrationState from 'state/registrationState';
 
 export default function LandingPage() {
 	const router = useRouter();
 	const setEmail = registrationState((state) => state.setEmail);
 	const setPassword = registrationState((state) => state.setPassword);
+	const auth = getAuth();
 
 	useEffect(() => {
 		const paddleJs = document.createElement('script');
@@ -34,12 +35,9 @@ export default function LandingPage() {
 			setEmail(email);
 			setPassword(password);
 
-			try {
-				await auth.createUserWithEmailAndPassword(email, password);
-				router.push('/pro/confirmation/');
-			} catch (error) {
-				console.log('There was an error:', error);
-			}
+			createUserWithEmailAndPassword(auth, email, password)
+				.then(() => router.push('/pro/confirmation/'))
+				.catch((error) => console.error('There was an error:', error));
 		});
 	}
 

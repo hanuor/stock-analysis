@@ -21,7 +21,7 @@ export default function LatestNews({ news }) {
 											href={item.u}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
-											className="link"
+											className="bll"
 										>
 											{item.t}
 										</a>
@@ -36,7 +36,7 @@ export default function LatestNews({ news }) {
 								className="pl-2 py-2 text-lg font-semibold"
 							>
 								<Link href="/news/">
-									<a className="link">More stock market news</a>
+									<a className="bll">More stock market news</a>
 								</Link>
 							</td>
 						</tr>

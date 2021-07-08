@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { auth } from 'users/firebase';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import UserLayout from 'components/Layout/UserLayout';
 import { SEO } from 'components/SEO';
 import Link from 'next/link';
@@ -8,6 +8,7 @@ export default function ForgotPassword() {
 	const email = useRef();
 	const [message, setMessage] = useState('');
 	const [error, setError] = useState('');
+	const auth = getAuth();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -15,14 +16,15 @@ export default function ForgotPassword() {
 		setMessage('');
 		setError('');
 
-		try {
-			await auth.sendPasswordResetEmail(email.current.value);
-			setMessage(
-				'Check your email inbox for a link to change your password.'
-			);
-		} catch (err) {
-			setError(err.message);
-		}
+		sendPasswordResetEmail(auth, email.current.value)
+			.then(() => {
+				setMessage(
+					'Check your email inbox for a link to change your password.'
+				);
+			})
+			.catch((error) => {
+				setError(err.message);
+			});
 	}
 
 	return (
