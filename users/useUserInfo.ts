@@ -11,7 +11,6 @@ export function useUserInfo() {
 	const setIsLoggedIn = userState((state) => state.setIsLoggedIn);
 
 	useEffect(() => {
-		console.log('useUserInfo');
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setUser(currentUser);
 

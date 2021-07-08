@@ -12,8 +12,6 @@ export function useProInfo() {
 	const setIsPro = userState((state) => state.setIsPro);
 
 	useEffect(() => {
-		console.log(user);
-		console.log('useProInfo');
 		async function getUserMeta(uid: string) {
 			const db = getFirestore(firebase);
 			try {
@@ -29,10 +27,8 @@ export function useProInfo() {
 						data.status === 'trialing' ||
 						data.status === 'past_due'
 					) {
-						console.log('user is pro');
 						setIsPro(true);
 					} else {
-						console.log('user is not pro');
 						setIsPro(false);
 					}
 				} else {
