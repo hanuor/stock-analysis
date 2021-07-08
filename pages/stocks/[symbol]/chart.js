@@ -1,33 +1,82 @@
-import { Stock } from 'components/Layout/StockLayout';
+import { Stock } from '/components/Layout/StockLayout';
+import StockChart from '/components/Chart/StockChart';
 import { SEO } from 'components/SEO';
-import { getPageData, getStockInfo } from 'functions/callBackEnd';
-import { stockState } from 'state/stockState';
+import { SelectPeriod, SelectType } from '/components/Chart/SelectUI';
+import Buttons from '/components/Chart/ButtonsUI';
+import { useImmerReducer } from 'use-immer';
+import { getStockInfo } from '/functions/callBackEnd';
+import stockState from 'state/stockState';
 import { useEffect } from 'react';
+import React from 'react';
 
-export default function SymbolStatistics({ info, data }) {
+export default function CandleStickStockChart({ info, data }) {
+	const initialState = {
+		period: 'd',
+		time: '1Y',
+		type: 'candlestick',
+		loading: false,
+	};
+
+	function ourReducer(draft, action) {
+		switch (action.type) {
+			case 'periodChange':
+				draft.period = action.value;
+
+				return;
+			case 'timeChange':
+				draft.time = action.value;
+
+				return;
+			case 'changeLoading':
+				draft.loading = action.value;
+				return;
+			case 'changeType':
+				draft.type = action.value;
+				return;
+		}
+	}
+
+	const [state, dispatch] = useImmerReducer(ourReducer, initialState);
+
 	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
 
 	useEffect(() => {
 		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
+	}, [info, setInfo]);
 
 	if (!info) {
 		return null;
 	}
 
 	return (
-		<Stock>
+		<>
 			<SEO
 				title={`${info.name} (${info.ticker}) Stock Chart`}
 				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`stocks/${info.symbol}/chart/`}
 			/>
-			<h2 className="text-2xl font-bold my-8">
-				This is the chart page for {info.ticker}
-			</h2>
-		</Stock>
+			<Stock>
+				<div className="px-2 sm:contain">
+					<div className="">
+						<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
+							<Buttons state={state} dispatch={dispatch} />
+							<SelectPeriod dispatcher={dispatch} />
+							<SelectType dispatcher={dispatch} />
+						</div>
+						<div className="max-h-[400px] xs:max-h-[450px] bp:max-h-[550px] sm:max-h-[600px]">
+							<StockChart
+								loading={state.loading}
+								stockId={info.id}
+								period={state.period}
+								time={state.time}
+								type={state.type}
+								dispatcher={dispatch}
+							/>
+						</div>
+					</div>
+				</div>
+			</Stock>
+		</>
 	);
 }
 
@@ -37,12 +86,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const info = await getStockInfo({ params });
-	const data = await getPageData(info.id, 'overview');
 
 	return {
 		props: {
 			info,
-			data,
 		},
+		revalidate: 300,
 	};
 }
