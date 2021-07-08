@@ -1,7 +1,7 @@
 import { SEO } from 'components/SEO';
 import { useState, useRef } from 'react';
 import UserLayout from 'components/Layout/UserLayout';
-import { auth } from 'users/firebase';
+import { getAuth, updatePassword } from 'firebase/auth';
 import registrationState from 'state/registrationState';
 
 export default function FreeTrial() {
@@ -10,6 +10,7 @@ export default function FreeTrial() {
 	const setPassword = registrationState((state) => state.setPassword);
 	const [message, setMessage] = useState('');
 	const [error, setError] = useState('');
+	const auth = getAuth();
 
 	async function handleSetPassword(e) {
 		e.preventDefault();
@@ -20,15 +21,15 @@ export default function FreeTrial() {
 
 		setError('');
 
-		try {
-			await auth.currentUser.updatePassword(newPassword.current.value);
-			setMessage(
-				'Your password has been updated. Go back to the home page.'
-			);
-			setPassword('');
-		} catch (err) {
-			return setError(err.message);
-		}
+		const user = auth.currentUser;
+		updatePassword(user, newPassword.current.value)
+			.then(() => {
+				setMessage('Password updated successfully.');
+				setPassword('');
+			})
+			.catch((error) => {
+				return setError(error.message);
+			});
 	}
 
 	return (

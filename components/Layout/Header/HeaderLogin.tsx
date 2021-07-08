@@ -1,9 +1,10 @@
-import { auth } from 'users/firebase';
-import useUserInfo from 'users/useUserInfo';
+import { getAuth, signOut } from 'firebase/auth';
+import { useUserInfo } from 'users/useUserInfo';
 import Link from 'next/link';
 
 export default function HeaderLogin() {
-	const { isLoggedIn, setIsLoggedIn } = useUserInfo();
+	const auth = getAuth();
+	const { isLoggedIn } = useUserInfo();
 
 	const LogInOut = () => {
 		if (!isLoggedIn) {
@@ -14,7 +15,7 @@ export default function HeaderLogin() {
 			);
 		} else {
 			return (
-				<span onClick={() => logOut()} className="cursor-pointer">
+				<span onClick={() => handleLogout()} className="cursor-pointer">
 					Log Out
 				</span>
 			);
@@ -37,13 +38,17 @@ export default function HeaderLogin() {
 		}
 	};
 
-	async function logOut() {
-		try {
-			await auth.signOut();
-			setIsLoggedIn(false);
-		} catch (error) {
-			console.log('There was an error:', error);
-		}
+	function handleLogout() {
+		signOut(auth)
+			.then(() => {
+				console.log('Logged out successfully');
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log({ errorCode });
+				console.log({ errorMessage });
+			});
 	}
 
 	return (
