@@ -1,9 +1,10 @@
-import { getAuth, signOut } from 'firebase/auth';
 import { userState } from 'state/userState';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const SignOut = dynamic(() => import('./SignOut'), { ssr: false });
 
 export default function HeaderLogin() {
-	const auth = getAuth();
 	const isLoggedIn = userState((state) => state.isLoggedIn);
 
 	const LogInOut = () => {
@@ -14,11 +15,7 @@ export default function HeaderLogin() {
 				</Link>
 			);
 		} else {
-			return (
-				<span onClick={() => handleLogout()} className="cursor-pointer">
-					Log Out
-				</span>
-			);
+			return <SignOut />;
 		}
 	};
 
@@ -37,19 +34,6 @@ export default function HeaderLogin() {
 			);
 		}
 	};
-
-	function handleLogout() {
-		signOut(auth)
-			.then(() => {
-				console.log('Logged out successfully');
-			})
-			.catch((error) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log({ errorCode });
-				console.log({ errorMessage });
-			});
-	}
 
 	return (
 		<div className="flex flex-row text-center font-semibold lg:block lg:space-x-1 text-lg">
