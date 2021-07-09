@@ -28,7 +28,7 @@ export default function SingleResult({ index, symbol, name, type, setOpen }) {
 
 	return (
 		<li className="first:border-t border-b last:border-none border-gray-200">
-			<Link href={url}>
+			<Link href={url} prefetch={false}>
 				<a
 					data-num={index + 1}
 					className={searchResultStyles}
