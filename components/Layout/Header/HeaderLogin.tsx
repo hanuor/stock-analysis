@@ -1,10 +1,10 @@
 import { getAuth, signOut } from 'firebase/auth';
-import { useUserInfo } from 'users/useUserInfo';
+import { userState } from 'state/userState';
 import Link from 'next/link';
 
 export default function HeaderLogin() {
 	const auth = getAuth();
-	const { isLoggedIn } = useUserInfo();
+	const isLoggedIn = userState((state) => state.isLoggedIn);
 
 	const LogInOut = () => {
 		if (!isLoggedIn) {

@@ -1,11 +1,10 @@
 import firebase from './firebase';
-import { useUserInfo } from './useUserInfo';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { userState } from 'state/userState';
 
 export function useProInfo() {
-	const { user } = useUserInfo();
+	const user = userState((state) => state.user);
 	const userMeta = userState((state) => state.userMeta);
 	const setUserMeta = userState((state) => state.setUserMeta);
 	const isPro = userState((state) => state.isPro);
