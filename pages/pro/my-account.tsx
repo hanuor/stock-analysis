@@ -15,7 +15,7 @@ export default function MyAccount() {
 			<SEO title="My Account" canonical="pro/my-account/" noindex={true} />
 			<LayoutFullWidth>
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
-					{user && userMeta ? (
+					{user ? (
 						<>
 							<h1 className="text-3xl xs:text-4xl font-bold mb-5 pb-4 text-gray-800 border-b-2 border-gray-800">
 								My Account

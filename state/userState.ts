@@ -28,12 +28,12 @@ interface UserState {
 	user: User | null;
 	isLoggedIn: boolean;
 	isPro: boolean;
-	userMeta: UserMeta | null;
+	userMeta: UserMeta;
 	setEmail: (newEmail: string) => void;
 	setUser: (newUser: User | null) => void;
 	setIsLoggedIn: (newIsLoggedIn: boolean) => void;
 	setIsPro: (newIsPro: boolean) => void;
-	setUserMeta: (newUserMeta: UserMeta | null) => void;
+	setUserMeta: (newUserMeta: UserMeta) => void;
 }
 
 export const userState = create<UserState>((set) => ({
@@ -41,7 +41,7 @@ export const userState = create<UserState>((set) => ({
 	user: null,
 	isLoggedIn: false,
 	isPro: false,
-	userMeta: null,
+	userMeta: {},
 	setEmail: (newEmail) => set({ email: newEmail }),
 	setUser: (newUser) => set({ user: newUser }),
 	setIsLoggedIn: (newIsLoggedIn) => set({ isLoggedIn: newIsLoggedIn }),

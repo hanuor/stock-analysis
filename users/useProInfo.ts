@@ -18,7 +18,10 @@ export function useProInfo() {
 				const userDoc = await getDoc(userDbRef);
 				if (userDoc.exists()) {
 					const data = userDoc.data();
-					setUserMeta(data);
+
+					if (data) {
+						setUserMeta(data);
+					}
 
 					if (
 						data.status === 'new' ||
