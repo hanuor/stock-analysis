@@ -75,7 +75,7 @@ export default function ForgotPassword() {
 									Reset Password
 								</button>
 								<div className="mt-2">
-									<Link href="/login/">
+									<Link href="/login/" prefetch={false}>
 										<a className="bll">Login</a>
 									</Link>
 								</div>
@@ -84,7 +84,7 @@ export default function ForgotPassword() {
 					</form>
 					<div>
 						Need an account?{' '}
-						<Link href="/pro/">
+						<Link href="/pro/" prefetch={false}>
 							<a className="bll">Sign up here</a>
 						</Link>
 						.
