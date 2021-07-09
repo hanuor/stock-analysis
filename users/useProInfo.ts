@@ -1,31 +1,18 @@
 import firebase from './firebase';
-import { useUserInfo } from './useUserInfo';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
-
-interface UserMeta {
-	country?: string;
-	email?: string;
-	name?: string;
-	nextPaymentAmount?: string;
-	nextPaymentDate?: string;
-	paymentMethod?: string;
-	paymentCurrency?: string;
-	plan?: string;
-	status?: string;
-	urlCancel?: string;
-	urlReceipt?: string;
-	urlUpdate?: string;
-}
+import { useEffect } from 'react';
+import { userState } from 'state/userState';
 
 export function useProInfo() {
-	const { user } = useUserInfo();
-	const [isPro, setIsPro] = useState<boolean | undefined>();
-	const db = getFirestore(firebase);
-	const [userMeta, setUserMeta] = useState<UserMeta>({});
+	const user = userState((state) => state.user);
+	const userMeta = userState((state) => state.userMeta);
+	const setUserMeta = userState((state) => state.setUserMeta);
+	const isPro = userState((state) => state.isPro);
+	const setIsPro = userState((state) => state.setIsPro);
 
 	useEffect(() => {
 		async function getUserMeta(uid: string) {
+			const db = getFirestore(firebase);
 			try {
 				const userDbRef = doc(db, 'users', uid);
 				const userDoc = await getDoc(userDbRef);
@@ -55,9 +42,11 @@ export function useProInfo() {
 		if (!user) {
 			setIsPro(false);
 		} else {
-			getUserMeta(user.uid);
+			if (!isPro) {
+				getUserMeta(user.uid);
+			}
 		}
-	}, [db, user]);
+	}, [isPro, setIsPro, setUserMeta, user]);
 
 	return { isPro, userMeta };
 }

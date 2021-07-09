@@ -1,19 +1,14 @@
 import firebase from './firebase';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
-interface User {
-	uid: string;
-	email: string | null;
-	metadata: {
-		creationTime?: string;
-	};
-}
+import { userState } from 'state/userState';
 
 export function useUserInfo() {
 	const auth = getAuth(firebase);
-	const [user, setUser] = useState<User | null>(null);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const user = userState((state) => state.user);
+	const setUser = userState((state) => state.setUser);
+	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const setIsLoggedIn = userState((state) => state.setIsLoggedIn);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -27,7 +22,7 @@ export function useUserInfo() {
 		});
 
 		return unsubscribe;
-	}, [auth, isLoggedIn, user]);
+	}, [auth, isLoggedIn, setIsLoggedIn, setUser, user]);
 
 	return { user, isLoggedIn };
 }

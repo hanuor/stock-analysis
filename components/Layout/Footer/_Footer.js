@@ -1,16 +1,18 @@
 /* eslint-disable react/display-name */
+import { useUserInfo } from 'users/useUserInfo';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+
+const ProData = dynamic(() => import('components/useProInfoLoader'), {
+	ssr: false,
+});
+
 const navigation = {
 	sections: [
 		{ name: 'Stocks', href: '/stocks/' },
 		{ name: 'IPOs', href: '/ipos/' },
 		{ name: 'ETFs', href: '/etf/' },
 		{ name: 'Market News', href: '/news/' },
-	],
-	support: [
-		{ name: 'Contact', href: '/contact/' },
-		{ name: 'Log In', href: '/login/' },
-		{ name: 'Free Trial', href: '/pro/' },
 	],
 	company: [
 		{ name: 'About', href: '/about/' },
@@ -61,6 +63,8 @@ const navigation = {
 };
 
 export default function Example() {
+	const { isLoggedIn } = useUserInfo();
+
 	return (
 		<footer
 			className="bg-gray-800 clear-both"
@@ -94,15 +98,49 @@ export default function Example() {
 									Support
 								</h3>
 								<ul className="mt-4 space-y-4">
-									{navigation.support.map((item) => (
-										<li key={item.name}>
-											<Link href={item.href} prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">
-													{item.name}
-												</a>
-											</Link>
-										</li>
-									))}
+									<li>
+										<Link href="/contact/" prefetch={false}>
+											<a className="text-base text-gray-300 hover:text-white">
+												Contact
+											</a>
+										</Link>
+									</li>
+									{isLoggedIn ? (
+										<>
+											<li>
+												<Link href="/login/" prefetch={false}>
+													<a className="text-base text-gray-300 hover:text-white">
+														Log out
+													</a>
+												</Link>
+											</li>
+											<li>
+												<Link href="/my-account/" prefetch={false}>
+													<a className="text-base text-gray-300 hover:text-white">
+														<ProData />
+														My Account
+													</a>
+												</Link>
+											</li>
+										</>
+									) : (
+										<>
+											<li>
+												<Link href="/login/" prefetch={false}>
+													<a className="text-base text-gray-300 hover:text-white">
+														Login
+													</a>
+												</Link>
+											</li>
+											<li>
+												<Link href="/pro/" prefetch={false}>
+													<a className="text-base text-gray-300 hover:text-white">
+														Free Trial
+													</a>
+												</Link>
+											</li>
+										</>
+									)}
 								</ul>
 							</div>
 						</div>

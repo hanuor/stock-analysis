@@ -90,7 +90,7 @@ export default function MyAccount() {
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Manage Account</h2>
 								<div>
-									<Link href="/pro/reset-password/">
+									<Link href="/pro/reset-password/" prefetch={false}>
 										<a className="bll">Reset or Change Password</a>
 									</Link>
 								</div>
@@ -111,7 +111,7 @@ export default function MyAccount() {
 									</li>
 									<li>
 										Send a message via the{' '}
-										<Link href="/contact/">
+										<Link href="/contact/" prefetch={false}>
 											<a className="bll">contact form</a>
 										</Link>
 										.
