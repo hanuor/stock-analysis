@@ -20,6 +20,7 @@ export default function StockPrice({ id }) {
 		onSuccess: () => setQuote(data),
 		refetchInterval: 10000,
 		initialData: info.quote,
+		initialDataUpdatedAt: Date.now() - 60000,
 	});
 
 	if (info.state === 'upcomingipo') {
