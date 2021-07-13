@@ -21,7 +21,7 @@ export default function Login() {
 
 		try {
 			const res = await Axios.post(
-				'https://stockanalysis17jun2.local/wp-json/authorize/v1/auth',
+				'https://stockanalysis.com/wp-json/authorize/v1/auth',
 				{
 					email: email,
 					password: password,

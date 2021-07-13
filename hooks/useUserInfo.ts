@@ -19,7 +19,7 @@ export function useUserInfo() {
 		) {
 			try {
 				const res = await Axios.get(
-					`https://stockanalysis17jun2.local/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&a=${hasAvatar}`
+					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&a=${hasAvatar}`
 				);
 
 				if (

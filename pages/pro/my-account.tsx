@@ -25,7 +25,7 @@ export default function MyAccount() {
 		async function getUserDetails() {
 			try {
 				const res = await Axios.get(
-					`https://stockanalysis17jun2.local/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
+					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
 				);
 				setRegisteredDate(res.data.registeredDate);
 				setStatus(res.data.status);

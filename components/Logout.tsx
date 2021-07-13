@@ -20,7 +20,7 @@ export const Logout: FC = () => {
 
 		try {
 			await Axios.post(
-				`https://stockanalysis17jun2.local/wp-json/authorize/v1/auth/revoke?JWT=${token}`
+				`https://stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`
 			);
 		} catch (err) {
 			console.log({ err });
