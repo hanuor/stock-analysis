@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import 'styles/globals.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-/* iport { ReactQueryDevtools } from 'react-query/devtools' */
+/* import { ReactQueryDevtools } from 'react-query/devtools' */
 import Header from 'components/Layout/Header/_Header';
 import Footer from 'components/Layout/Footer/_Footer';
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
