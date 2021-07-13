@@ -1,11 +1,6 @@
 /* eslint-disable react/display-name */
-import { useUserInfo } from 'users/useUserInfo';
-import dynamic from 'next/dynamic';
+import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
-
-const ProData = dynamic(() => import('components/useProInfoLoader'), {
-	ssr: false,
-});
 
 const navigation = {
 	sections: [
@@ -62,7 +57,7 @@ const navigation = {
 	],
 };
 
-export default function Example() {
+export default function Footer() {
 	const { isLoggedIn } = useUserInfo();
 
 	return (
@@ -117,7 +112,6 @@ export default function Example() {
 											<li>
 												<Link href="/my-account/" prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
-														<ProData />
 														My Account
 													</a>
 												</Link>

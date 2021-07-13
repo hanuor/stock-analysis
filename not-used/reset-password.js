@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+// import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import UserLayout from 'components/Layout/UserLayout';
 import { SEO } from 'components/SEO';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ export default function ForgotPassword() {
 	const email = useRef();
 	const [message, setMessage] = useState('');
 	const [error, setError] = useState('');
-	const auth = getAuth();
+	// const auth = getAuth();
 
 	async function handleSubmit(e) {
 		e.preventDefault();

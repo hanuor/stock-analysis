@@ -2,7 +2,7 @@ import exportFromJSON from 'export-from-json';
 import financialsState from 'state/financialsState';
 import mapData from 'data/financials_map';
 import { stockState } from 'state/stockState';
-import { userState } from 'state/userState';
+import { authState } from 'state/authState';
 import { formatNumber } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
@@ -13,7 +13,7 @@ export const ExportMenu = () => {
 	const financialData = financialsState((state) => state.financialData);
 	const info = stockState((state) => state.info);
 	const leftRight = financialsState((state) => state.leftRight);
-	const isPro = userState((state) => state.isPro);
+	const isPro = authState((state) => state.isPro);
 
 	// Map the data (the export-from-json library needs the data in a specific format)
 	const exportData = (type) => {

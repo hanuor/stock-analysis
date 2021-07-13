@@ -1,71 +1,102 @@
-import { useUserInfo } from 'users/useUserInfo';
-import { useProInfo } from 'users/useProInfo';
+import { authState } from 'state/authState';
 import { SEO } from 'components/SEO';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { LoginPrompt } from 'components/LoginPrompt';
 import Link from 'next/link';
-import { formatDateClean } from 'functions/formatDates';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
+
+type StringOrNull = string | null | undefined;
 
 export default function MyAccount() {
-	const { user } = useUserInfo();
-	const { userMeta } = useProInfo();
+	const isLoggedIn = authState((state) => state.isLoggedIn);
+	const email = authState((state) => state.email);
+	const [registeredDate, setRegisteredDate] = useState<StringOrNull>(null);
+	const [status, setStatus] = useState<StringOrNull>(null);
+	const [nextPaymentDate, setNextPaymentDate] = useState<StringOrNull>(null);
+	const [nextPaymentAmount, setNextPaymentAmount] =
+		useState<StringOrNull>(null);
+	const [paymentCurrency, setPaymentCurrency] = useState<StringOrNull>(null);
+	const [paymentMethod, setPaymentMethod] = useState<StringOrNull>(null);
+	const [urlUpdate, setUrlUpdate] = useState<StringOrNull>(null);
+	const [urlCancel, setUrlCancel] = useState<StringOrNull>(null);
+
+	useEffect(() => {
+		async function getUserDetails() {
+			try {
+				const res = await Axios.get(
+					`https://stockanalysis17jun2.local/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
+				);
+				setRegisteredDate(res.data.registeredDate);
+				setStatus(res.data.status);
+				setNextPaymentDate(res.data.nextPaymentDate);
+				setNextPaymentAmount(res.data.nextPaymentAmount);
+				setPaymentCurrency(res.data.paymentCurrency);
+				setPaymentMethod(res.data.paymentMethod);
+				setUrlUpdate(res.data.urlUpdate);
+				setUrlCancel(res.data.urlCancel);
+			} catch (err) {
+				console.error(err);
+			}
+		}
+
+		const token = localStorage.getItem('auth');
+
+		if (token) {
+			getUserDetails();
+		}
+	}, [email]);
 
 	return (
 		<>
 			<SEO title="My Account" canonical="pro/my-account/" noindex={true} />
 			<LayoutFullWidth>
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
-					{user ? (
+					{isLoggedIn ? (
 						<>
 							<h1 className="text-3xl xs:text-4xl font-bold mb-5 pb-4 text-gray-800 border-b-2 border-gray-800">
 								My Account
 							</h1>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">User Information</h2>
-								{userMeta.email && (
+								{email && (
 									<div>
-										<strong>Email Address:</strong> {userMeta.email}
+										<strong>Email Address:</strong> {email}
 									</div>
 								)}
-								{user.metadata.creationTime && (
+								{registeredDate && (
 									<div>
-										<strong>Registered Date:</strong>{' '}
-										{formatDateClean(user.metadata.creationTime)}
+										<strong>Registered Date:</strong> {registeredDate}
 									</div>
 								)}
 							</div>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Manage Subscription</h2>
-								{userMeta.status && (
+								{status && (
 									<div className="mb-2">
-										<strong>Status:</strong>{' '}
-										{formatSubscriptionStatus(userMeta.status)}
+										<strong>Status:</strong> {status}
 									</div>
 								)}
-								{userMeta.nextPaymentDate && (
+								{nextPaymentDate && (
+									<div>Next Billing Date: {nextPaymentDate}</div>
+								)}
+								{nextPaymentAmount && (
 									<div>
-										Next Billing Date:{' '}
-										{formatDateClean(userMeta.nextPaymentDate)}
+										Amount: {nextPaymentAmount}{' '}
+										{paymentCurrency && paymentCurrency}
 									</div>
 								)}
-								{userMeta.nextPaymentAmount && (
-									<div>
-										Amount: {userMeta.nextPaymentAmount}{' '}
-										{userMeta.paymentCurrency &&
-											userMeta.paymentCurrency}
-									</div>
-								)}
-								{userMeta.paymentMethod && (
+								{paymentMethod && (
 									<div>
 										Payment Method:{' '}
-										{userMeta.paymentMethod.charAt(0).toUpperCase() +
-											userMeta.paymentMethod.slice(1)}
+										{paymentMethod.charAt(0).toUpperCase() +
+											paymentMethod.slice(1)}
 									</div>
 								)}
-								{userMeta.urlUpdate && (
+								{urlUpdate && (
 									<div>
 										<a
-											href={userMeta.urlUpdate}
+											href={urlUpdate}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
 											className="bll"
@@ -74,10 +105,10 @@ export default function MyAccount() {
 										</a>
 									</div>
 								)}
-								{userMeta.urlCancel && (
+								{urlCancel && (
 									<div className="mt-3">
 										<a
-											href={userMeta.urlCancel}
+											href={urlCancel}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
 											className="bll"
@@ -90,9 +121,12 @@ export default function MyAccount() {
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Manage Account</h2>
 								<div>
-									<Link href="/pro/reset-password/" prefetch={false}>
-										<a className="bll">Reset or Change Password</a>
-									</Link>
+									<a
+										href="https://stockanalysis.com/pro-login/?action=lostpassword"
+										className="bll"
+									>
+										Reset or Change Password
+									</a>
 								</div>
 							</div>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
@@ -126,25 +160,4 @@ export default function MyAccount() {
 			</LayoutFullWidth>
 		</>
 	);
-}
-
-function formatSubscriptionStatus(status: string) {
-	switch (status) {
-		case 'new':
-		case 'trialing':
-			return 'Free Trial Active';
-
-		case 'active':
-			return 'Subscription Active';
-
-		case 'past_due':
-			return 'Payment past due';
-
-		case 'paused':
-		case 'deleted':
-			return 'Subscription Inactive';
-
-		default:
-			return 'n/a';
-	}
 }
