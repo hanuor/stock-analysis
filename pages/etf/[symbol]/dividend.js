@@ -1,6 +1,6 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import { getPageData, getEtfInfo } from 'functions/callBackEnd';
+import { getPageData } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 import InfoBox from 'components/InfoBox';
@@ -9,7 +9,7 @@ import HistoryTable from 'components/Dividend/HistoryTable';
 import NewsWidget from 'components/News/NewsWidget';
 import DividendChart from 'components/Dividend/DividendChart';
 
-export default function Holdings({ info, data }) {
+export default function Holdings({ info, data, news }) {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -44,7 +44,7 @@ export default function Holdings({ info, data }) {
 					<aside className="mt-7 lg:mt-5">
 						<NewsWidget
 							title={`${info.ticker} News`}
-							news={data.news}
+							news={news}
 							button={{
 								text: 'More News',
 								url: `/etf/${info.symbol}/`,
@@ -58,15 +58,15 @@ export default function Holdings({ info, data }) {
 }
 
 export async function getStaticProps({ params }) {
-	const info = await getEtfInfo({ params });
-	const data = await getPageData(info.id, 'dividend');
+	const { info, data, news } = await getPageData('dividend', params.symbol);
 
 	return {
 		props: {
 			info,
 			data,
+			news,
 		},
-		revalidate: 300,
+		revalidate: 3600,
 	};
 }
 

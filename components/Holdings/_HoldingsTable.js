@@ -4,10 +4,10 @@ import Pagination from 'components/Tables/Pagination';
 import styles from './HoldingsTable.module.css';
 import Paywall from './HoldingsPaywall';
 import { StockLink, ETFLink } from 'components/Links';
-import { userState } from 'state/userState';
+import { authState } from 'state/authState';
 
 const _HoldingsTable = ({ rawdata }) => {
-	const isPro = userState((state) => state.isPro);
+	const isPro = authState((state) => state.isPro);
 
 	const columns = useMemo(
 		() => [

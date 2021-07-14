@@ -1,6 +1,6 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import { getPageData, getStockInfo } from 'functions/callBackEnd';
+import { getPageData } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 import ProfileDescription from 'components/ProfilePage/ProfileDescription';
@@ -50,15 +50,14 @@ export default function SymbolStatistics({ info, data }) {
 }
 
 export async function getStaticProps({ params }) {
-	const info = await getStockInfo({ params });
-	const data = await getPageData(info.id, 'profile');
+	const { info, data } = await getPageData('profile', params.symbol);
 
 	return {
 		props: {
 			info,
 			data,
 		},
-		revalidate: 300,
+		revalidate: 3600,
 	};
 }
 

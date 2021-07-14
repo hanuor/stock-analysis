@@ -2,7 +2,7 @@
 import { forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
 import { stockState } from 'state/stockState';
-import { userState } from 'state/userState';
+import { authState } from 'state/authState';
 import {
 	formatNumber,
 	formatYear,
@@ -27,7 +27,7 @@ export default function FinancialTable({ statement, financialData }) {
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
 	const info = stockState((state) => state.info);
-	const isPro = userState((state) => state.isPro);
+	const isPro = authState((state) => state.isPro);
 
 	if (!financialData || Object.keys(financialData).length === 0) {
 		return <span>Loading...</span>;

@@ -16,7 +16,7 @@ const Navigation = () => {
 				<nav className="border-b-[3px] border-blue-brand_sharp mb-1.5">
 					<ul className={`flex ${styles.navmenu} overflow-auto`}>
 						<li>
-							<Link href="/actions/">
+							<Link href="/actions/" prefetch={false}>
 								<a
 									data-title="Actions"
 									className={
@@ -28,7 +28,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/actions/changes/">
+							<Link href="/actions/changes/" prefetch={false}>
 								<a
 									data-title="Changes"
 									className={
@@ -40,7 +40,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/actions/spinoffs/">
+							<Link href="/actions/spinoffs/" prefetch={false}>
 								<a
 									data-title="Spinoffs"
 									className={
@@ -52,7 +52,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/actions/splits/">
+							<Link href="/actions/splits/" prefetch={false}>
 								<a
 									data-title="Splits"
 									className={path.two === 'splits' ? active : inactive}
@@ -62,7 +62,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/actions/delisted/">
+							<Link href="/actions/delisted/" prefetch={false}>
 								<a
 									data-title="Delisted"
 									className={

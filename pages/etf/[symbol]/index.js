@@ -1,4 +1,4 @@
-import { getEtfInfo, getPageData, getNewsData } from 'functions/callBackEnd';
+import { getPageData } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import stockState from 'state/stockState';
 import { Stock } from 'components/Layout/StockLayout';
@@ -52,9 +52,7 @@ const EtfOverview = ({ info, data, news }) => {
 export default EtfOverview;
 
 export async function getStaticProps({ params }) {
-	const info = await getEtfInfo({ params });
-	const data = await getPageData(info.id, 'overview');
-	const news = await getNewsData(info.id);
+	const { info, data, news } = await getPageData('overview', params.symbol);
 
 	return {
 		props: {
@@ -62,7 +60,7 @@ export async function getStaticProps({ params }) {
 			data,
 			news,
 		},
-		revalidate: 300,
+		revalidate: 600,
 	};
 }
 

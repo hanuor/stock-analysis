@@ -1,17 +1,15 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import { getPageData, getEtfInfo } from 'functions/callBackEnd';
+import { getEtfInfo } from 'functions/callBackEnd';
 import stockState from 'state/stockState';
 import { useEffect } from 'react';
 
-export default function SymbolStatistics({ info, data }) {
+export default function SymbolStatistics({ info }) {
 	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
 
 	useEffect(() => {
 		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
+	}, [info, setInfo]);
 
 	return (
 		<Stock>
@@ -29,14 +27,12 @@ export default function SymbolStatistics({ info, data }) {
 
 export async function getStaticProps({ params }) {
 	const info = await getEtfInfo({ params });
-	const data = await getPageData(info.id, 'overview');
 
 	return {
 		props: {
 			info,
-			data,
 		},
-		revalidate: 300,
+		revalidate: 3600,
 	};
 }
 

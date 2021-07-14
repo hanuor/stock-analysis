@@ -1,11 +1,9 @@
-import { userState } from 'state/userState';
+import { authState } from 'state/authState';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-
-const SignOut = dynamic(() => import('./SignOut'), { ssr: false });
+import { Logout } from 'components/Logout';
 
 export default function HeaderLogin() {
-	const isLoggedIn = userState((state) => state.isLoggedIn);
+	const isLoggedIn = authState((state) => state.isLoggedIn);
 
 	const LogInOut = () => {
 		if (!isLoggedIn) {
@@ -15,7 +13,7 @@ export default function HeaderLogin() {
 				</Link>
 			);
 		} else {
-			return <SignOut />;
+			return <Logout />;
 		}
 	};
 

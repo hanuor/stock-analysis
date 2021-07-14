@@ -1,17 +1,9 @@
 import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import firebase from 'users/firebase';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import registrationState from 'state/registrationState';
 
 export default function LandingPage() {
 	const router = useRouter();
-	const setEmail = registrationState((state) => state.setEmail);
-	const setPassword = registrationState((state) => state.setPassword);
-	const auth = getAuth();
-	const db = getFirestore(firebase);
 
 	useEffect(() => {
 		const paddleJs = document.createElement('script');
@@ -27,42 +19,8 @@ export default function LandingPage() {
 		};
 	}, []);
 
-	function checkoutComplete(data) {
-		const checkoutId = data.checkout.id;
-
-		// eslint-disable-next-line no-undef
-		Paddle.Order.details(checkoutId, async function (data) {
-			const email = data.order.customer.email;
-			const password = Math.random().toString(36).slice(-8) + '?!337';
-
-			const currency = data.order.currency;
-
-			setEmail(email);
-			setPassword(password);
-
-			createUserWithEmailAndPassword(auth, email, password)
-				.then((user) => {
-					const uid = user.user.uid;
-
-					setDoc(doc(db, 'users', uid), {
-						email: email,
-						status: 'new',
-						name: '',
-						country: '',
-						urlReceipt: '',
-						urlUpdate: '',
-						urlCancel: '',
-						plan: 'Pro',
-						paymentMethod: '',
-						paymentCurrency: currency,
-						nextPaymentDate: '',
-						nextPaymentAmount: '',
-					})
-						.then(() => router.push('/pro/confirmation/'))
-						.catch((error) => console.error(error));
-				})
-				.catch((error) => console.error('There was an error:', error));
-		});
+	function checkoutComplete() {
+		router.push('/pro/confirmation/');
 	}
 
 	return (
