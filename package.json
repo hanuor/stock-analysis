@@ -37,7 +37,6 @@
 		"react-query": "^3.18.1",
 		"react-table": "^7.7.0",
 		"use-immer": "^0.5.1",
-		"xml2js": "^0.4.23",
 		"zustand": "^3.5.1"
 	},
 	"devDependencies": {
