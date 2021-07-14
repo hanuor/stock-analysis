@@ -1,4 +1,9 @@
-import { getStockInfo, getPageData, getNewsData } from 'functions/callBackEnd';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { Overview } from 'types/Overview';
+import { News } from 'types/News';
+import { getPageData } from 'functions/callBackEnd';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
@@ -10,7 +15,13 @@ import AnalystWidget from 'components/Overview/AnalystWidget';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 
-export default function StockOverview({ info, data, news }) {
+interface IProps {
+	info: Info;
+	data: Overview;
+	news: News;
+}
+
+const StockOverview = ({ info, data, news }: IProps) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -54,12 +65,17 @@ export default function StockOverview({ info, data, news }) {
 			</div>
 		</Stock>
 	);
+};
+
+export default StockOverview;
+
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
 }
 
-export async function getStaticProps({ params }) {
-	const info = await getStockInfo({ params });
-	const data = await getPageData(info.id, 'overview');
-	const news = await getNewsData(info.id);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data, news } = await getPageData('overview', symbol);
 
 	return {
 		props: {
@@ -67,10 +83,10 @@ export async function getStaticProps({ params }) {
 			data,
 			news,
 		},
-		revalidate: 300,
+		revalidate: 600,
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: [], fallback: 'blocking' };
-}
+};

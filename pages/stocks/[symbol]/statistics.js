@@ -1,6 +1,6 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import { getPageData, getStockInfo } from 'functions/callBackEnd';
+import { getPageData } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 import StatsWidget from 'components/StatsWidget/_StatsWidget';
@@ -189,13 +189,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const info = await getStockInfo({ params });
-	const data = await getPageData(info.id, 'statistics');
+	const { info, data } = await getPageData('statistics', params.symbol);
 
 	return {
 		props: {
 			info,
 			data,
 		},
+		revalidate: 3600,
 	};
 }

@@ -7,9 +7,8 @@ import { useImmerReducer } from 'use-immer';
 import { getStockInfo } from '/functions/callBackEnd';
 import stockState from 'state/stockState';
 import { useEffect } from 'react';
-import React from 'react';
 
-export default function CandleStickStockChart({ info, data }) {
+export default function CandleStickStockChart({ info }) {
 	const initialState = {
 		period: 'd',
 		time: '1Y',
@@ -91,6 +90,6 @@ export async function getStaticProps({ params }) {
 		props: {
 			info,
 		},
-		revalidate: 300,
+		revalidate: 3600,
 	};
 }

@@ -1,7 +1,7 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import FinancialTable from 'components/FinancialTable/_FinancialTable';
-import { getStockInfo, getStockFinancials } from 'functions/callBackEnd';
+import { getStockFinancials } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import { stockState } from 'state/stockState';
 import { financialsState } from 'state/financialsState';
@@ -30,15 +30,17 @@ export default function CashFlowStatement({ info, data }) {
 }
 
 export async function getStaticProps({ params }) {
-	const info = await getStockInfo({ params });
-	const data = await getStockFinancials('cash_flow_statement', info.id);
+	const { info, data } = await getStockFinancials(
+		'cash_flow_statement',
+		params.symbol
+	);
 
 	return {
 		props: {
 			info,
 			data,
 		},
-		revalidate: 300,
+		revalidate: 3600,
 	};
 }
 
