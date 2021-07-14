@@ -1,30 +1,26 @@
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
 import * as React from 'react';
-import {
-	elderRay,
-	sma,
-	discontinuousTimeScaleProviderBuilder,
-	Chart,
-	ChartCanvas,
-	CurrentCoordinate,
-	BarSeries,
-	CandlestickSeries,
-	LineSeries,
-	lastVisibleItemBasedZoomAnchor,
-	XAxis,
-	YAxis,
-	CrossHairCursor,
-	EdgeIndicator,
-	MouseCoordinateY,
-} from 'react-financial-charts';
 import { IOHLCData } from './iOHLCData';
 import { HoverTooltipCustom } from 'components/Chart/HoverTooltipCustom';
 import { OHLCTooltipCustom } from 'components/Chart/OHLCTooltipCustom';
-import { withSize } from 'components/Chart/withSizeCustom';
-import { withDeviceRatio } from 'components/Chart/withDeviceRatioCustom';
+import { withSize } from './utils';
+import { withDeviceRatio } from './utils';
 import { MovingAverageTooltipCustom } from 'components/Chart/MovingAverageTooltipCustom';
 import { withOHLCData } from './withOHLCData';
+import { ChartCanvas } from './core/ChartCanvas';
+import { Chart } from './core/Chart';
+import { CandlestickSeries } from './series/CandlestickSeries';
+import { LineSeries } from './series/LineSeries';
+import { BarSeries } from './series/BarSeries';
+import { XAxis, YAxis } from './axes';
+import { CrossHairCursor } from './coordinates/CrossHairCursor';
+import { EdgeIndicator } from './coordinates/EdgeIndicator';
+import { CurrentCoordinate } from './coordinates/CurrentCoordinate';
+import { MouseCoordinateY } from './coordinates/MouseCoordinateY';
+import { discontinuousTimeScaleProviderBuilder } from './scales/discontinuousTimeScaleProvider';
+import { lastVisibleItemBasedZoomAnchor } from './core/zoom';
+import { sma } from './indicators/indicator';
 
 interface StockChartProps {
 	readonly data: IOHLCData[];
@@ -118,9 +114,6 @@ class StockChart extends React.Component<StockChartProps> {
 				d.sma200 = c;
 			})
 			.accessor((d: any) => d.sma200);
-		console.log(sma50);
-		console.log(sma200);
-		const elder = elderRay();
 
 		const movingAverageTooltipOptions: TooltipOptions[] = [
 			{
@@ -137,7 +130,7 @@ class StockChart extends React.Component<StockChartProps> {
 			},
 		];
 
-		const calculatedData = elder(sma200(sma50(initialData)));
+		const calculatedData = sma200(sma50(initialData));
 
 		const { margin, xScaleProvider } = this;
 

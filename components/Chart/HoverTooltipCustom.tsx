@@ -7,7 +7,7 @@ import {
 	// isDefined,
 	GenericComponent,
 	last,
-} from '@react-financial-charts/core';
+} from './core';
 
 const PADDING = 2;
 const X = 8;
