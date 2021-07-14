@@ -6,6 +6,7 @@
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
 		"declaration": false,
+		"downlevelIteration": true,
 		"skipLibCheck": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,

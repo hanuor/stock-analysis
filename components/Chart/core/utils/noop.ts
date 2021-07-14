@@ -1,2 +1,1 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop = () => {};
+export const noop = (x: any, y: any, z: any) => {};

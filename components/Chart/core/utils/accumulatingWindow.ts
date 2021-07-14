@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /*
 
 Taken from https://github.com/ScottLogic/d3fc/blob/master/src/indicator/algorithm/calculator/slidingWindow.js
@@ -26,93 +27,97 @@ THE SOFTWARE.
 
 */
 
-import { identity } from "./identity";
-import { functor } from "./index";
-import { noop } from "./noop";
+import { identity } from './identity';
+import { functor } from './index';
+import { noop } from './noop';
 
 interface AccumulatingWindow {
-    (data: any[]): any[];
-    accumulateTill(): any;
-    accumulateTill(x: any): AccumulatingWindow;
-    accumulator(): any;
-    accumulator(x: any): AccumulatingWindow;
-    value(): any;
-    value(x: any): AccumulatingWindow;
-    discardTillStart(): boolean;
-    discardTillStart(x: boolean): AccumulatingWindow;
-    discardTillEnd(): boolean;
-    discardTillEnd(x: boolean): AccumulatingWindow;
+	(data: any[]): any[];
+	accumulateTill(): any;
+	accumulateTill(x: any): AccumulatingWindow;
+	accumulator(): any;
+	accumulator(x: any): AccumulatingWindow;
+	value(): any;
+	value(x: any): AccumulatingWindow;
+	discardTillStart(): boolean;
+	discardTillStart(x: boolean): AccumulatingWindow;
+	discardTillEnd(): boolean;
+	discardTillEnd(x: boolean): AccumulatingWindow;
 }
 
 export default function () {
-    let accumulateTill = functor(false);
-    let accumulator = noop;
-    let value = identity;
-    let discardTillStart = false;
-    let discardTillEnd = false;
+	let accumulateTill = functor(false);
+	let accumulator = noop;
+	let value = identity;
+	let discardTillStart = false;
+	let discardTillEnd = false;
 
-    const accumulatingWindow = function (data: any[]) {
-        let accumulatedWindow: any[] | undefined = discardTillStart ? undefined : [];
-        const response: any[] = [];
-        let accumulatorIdx = 0;
-        let i = 0;
-        for (i = 0; i < data.length; i++) {
-            const d = data[i];
-            if (accumulateTill(d, i, accumulatedWindow || [])) {
-                if (accumulatedWindow && accumulatedWindow.length > 0) {
-                    // @ts-ignore
-                    response.push(accumulator(accumulatedWindow, i, accumulatorIdx++));
-                }
+	const accumulatingWindow = function (data: any[]) {
+		let accumulatedWindow: any[] | undefined = discardTillStart
+			? undefined
+			: [];
+		const response: any[] = [];
+		let accumulatorIdx = 0;
+		let i = 0;
+		for (i = 0; i < data.length; i++) {
+			const d = data[i];
+			if (accumulateTill(d, i, accumulatedWindow || [])) {
+				if (accumulatedWindow && accumulatedWindow.length > 0) {
+					// @ts-error
+					response.push(
+						accumulator(accumulatedWindow, i, accumulatorIdx++)
+					);
+				}
 
-                accumulatedWindow = [value(d)];
-            } else if (accumulatedWindow) {
-                accumulatedWindow.push(value(d));
-            }
-        }
+				accumulatedWindow = [value(d)];
+			} else if (accumulatedWindow) {
+				accumulatedWindow.push(value(d));
+			}
+		}
 
-        if (!discardTillEnd) {
-            // @ts-ignore
-            response.push(accumulator(accumulatedWindow, i, accumulatorIdx));
-        }
+		if (!discardTillEnd) {
+			// @ts-ignore
+			response.push(accumulator(accumulatedWindow, i, accumulatorIdx));
+		}
 
-        return response;
-    };
+		return response;
+	};
 
-    accumulatingWindow.accumulateTill = function (x: any) {
-        if (!arguments.length) {
-            return accumulateTill;
-        }
-        accumulateTill = functor(x);
-        return accumulatingWindow;
-    };
-    accumulatingWindow.accumulator = function (x: any) {
-        if (!arguments.length) {
-            return accumulator;
-        }
-        accumulator = x;
-        return accumulatingWindow;
-    };
-    accumulatingWindow.value = function (x: any) {
-        if (!arguments.length) {
-            return value;
-        }
-        value = x;
-        return accumulatingWindow;
-    };
-    accumulatingWindow.discardTillStart = function (x: any) {
-        if (!arguments.length) {
-            return discardTillStart;
-        }
-        discardTillStart = x;
-        return accumulatingWindow;
-    };
-    accumulatingWindow.discardTillEnd = function (x: any) {
-        if (!arguments.length) {
-            return discardTillEnd;
-        }
-        discardTillEnd = x;
-        return accumulatingWindow;
-    };
+	accumulatingWindow.accumulateTill = function (x: any) {
+		if (!arguments.length) {
+			return accumulateTill;
+		}
+		accumulateTill = functor(x);
+		return accumulatingWindow;
+	};
+	accumulatingWindow.accumulator = function (x: any) {
+		if (!arguments.length) {
+			return accumulator;
+		}
+		accumulator = x;
+		return accumulatingWindow;
+	};
+	accumulatingWindow.value = function (x: any) {
+		if (!arguments.length) {
+			return value;
+		}
+		value = x;
+		return accumulatingWindow;
+	};
+	accumulatingWindow.discardTillStart = function (x: any) {
+		if (!arguments.length) {
+			return discardTillStart;
+		}
+		discardTillStart = x;
+		return accumulatingWindow;
+	};
+	accumulatingWindow.discardTillEnd = function (x: any) {
+		if (!arguments.length) {
+			return discardTillEnd;
+		}
+		discardTillEnd = x;
+		return accumulatingWindow;
+	};
 
-    return accumulatingWindow as AccumulatingWindow;
+	return accumulatingWindow as AccumulatingWindow;
 }

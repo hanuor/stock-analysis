@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /*
 https://github.com/ScottLogic/d3fc/blob/master/src/indicator/algorithm/merge.js
 
@@ -23,48 +24,49 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-import zipper from "./zipper";
-import { identity } from "./identity";
+import zipper from './zipper';
+import { identity } from './identity';
 // applies an algorithm to an array, merging the result back into
 // the source array using the given merge function.
 export default function () {
-    let algorithm = identity;
-    let skipUndefined = true;
-    let merge = () => {
-        /** Do Nothing */
-    };
-    const mergeCompute = (data) => {
-        const zip = zipper().combine((datum, indicator) => {
-            const result = skipUndefined && indicator === undefined
-                ? datum
-                : // @ts-ignore
-                    merge(datum, indicator);
-            return result === undefined ? datum : result;
-        });
-        // @ts-ignore
-        return zip(data, algorithm(data));
-    };
-    mergeCompute.algorithm = (newAlgorithm) => {
-        if (newAlgorithm === undefined) {
-            return algorithm;
-        }
-        algorithm = newAlgorithm;
-        return mergeCompute;
-    };
-    mergeCompute.merge = (newMerge) => {
-        if (newMerge === undefined) {
-            return merge;
-        }
-        merge = newMerge;
-        return mergeCompute;
-    };
-    mergeCompute.skipUndefined = (newSkipUndefined) => {
-        if (newSkipUndefined === undefined) {
-            return skipUndefined;
-        }
-        skipUndefined = newSkipUndefined;
-        return mergeCompute;
-    };
-    return mergeCompute;
+	let algorithm = identity;
+	let skipUndefined = true;
+	let merge = () => {
+		/** Do Nothing */
+	};
+	const mergeCompute = (data) => {
+		const zip = zipper().combine((datum, indicator) => {
+			const result =
+				skipUndefined && indicator === undefined
+					? datum
+					: // @ts-ignore
+					  merge(datum, indicator);
+			return result === undefined ? datum : result;
+		});
+		// @ts-ignore
+		return zip(data, algorithm(data));
+	};
+	mergeCompute.algorithm = (newAlgorithm) => {
+		if (newAlgorithm === undefined) {
+			return algorithm;
+		}
+		algorithm = newAlgorithm;
+		return mergeCompute;
+	};
+	mergeCompute.merge = (newMerge) => {
+		if (newMerge === undefined) {
+			return merge;
+		}
+		merge = newMerge;
+		return mergeCompute;
+	};
+	mergeCompute.skipUndefined = (newSkipUndefined) => {
+		if (newSkipUndefined === undefined) {
+			return skipUndefined;
+		}
+		skipUndefined = newSkipUndefined;
+		return mergeCompute;
+	};
+	return mergeCompute;
 }
-//# sourceMappingURL=merge.js.map
+// # sourceMappingURL=merge.js.map

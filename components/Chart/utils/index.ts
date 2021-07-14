@@ -1,2 +1,2 @@
-export * from "./withDeviceRatio";
-export * from "./withSize";
+export * from './withDeviceRatio';
+export * from './withSize';

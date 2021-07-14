@@ -1,41 +1,42 @@
-import { mean } from "d3-array";
-import { slidingWindow } from "../utils";
-import { SMA as defaultOptions } from "./defaultOptionsForComputation";
+/* eslint-disable import/no-anonymous-default-export */
+import { mean } from 'd3-array';
+import { slidingWindow } from '../utils';
+import { SMA as defaultOptions } from './defaultOptionsForComputation';
 
 export interface SMAOptions {
-    readonly sourcePath?: string;
-    readonly windowSize: number;
+	readonly sourcePath?: string;
+	readonly windowSize: number;
 }
 
 export default function () {
-    let options = defaultOptions;
+	let options = defaultOptions;
 
-    const calculator = (data: any[]) => {
-        const { windowSize, sourcePath } = options;
+	const calculator = (data: any[]) => {
+		const { windowSize, sourcePath } = options;
 
-        const average = slidingWindow()
-            .windowSize(windowSize)
-            .sourcePath(sourcePath)
-            .accumulator((values: any[]) => mean(values));
+		const average = slidingWindow()
+			.windowSize(windowSize)
+			.sourcePath(sourcePath)
+			.accumulator((values: any[]) => mean(values));
 
-        return average(data);
-    };
+		return average(data);
+	};
 
-    calculator.undefinedLength = () => {
-        const { windowSize } = options;
+	calculator.undefinedLength = () => {
+		const { windowSize } = options;
 
-        return windowSize - 1;
-    };
+		return windowSize - 1;
+	};
 
-    calculator.options = (newOptions?: SMAOptions) => {
-        if (newOptions === undefined) {
-            return options;
-        }
+	calculator.options = (newOptions?: SMAOptions) => {
+		if (newOptions === undefined) {
+			return options;
+		}
 
-        options = { ...defaultOptions, ...newOptions };
+		options = { ...defaultOptions, ...newOptions };
 
-        return calculator;
-    };
+		return calculator;
+	};
 
-    return calculator;
+	return calculator;
 }

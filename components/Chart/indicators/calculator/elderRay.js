@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /*
 https://github.com/ScottLogic/d3fc/blob/master/src/indicator/algorithm/calculator/elderRay.js
 
@@ -23,47 +24,55 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-import { mean, zip } from "d3-array";
-import { slidingWindow } from "../utils";
-import ema from "./ema";
-import { ElderRay as defaultOptions } from "./defaultOptionsForComputation";
+import { mean, zip } from 'd3-array';
+import { slidingWindow } from '../utils';
+import ema from './ema';
+import { ElderRay as defaultOptions } from './defaultOptionsForComputation';
 export default function () {
-    let options = defaultOptions;
-    let ohlc = (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close });
-    const calculator = (data) => {
-        const { windowSize, sourcePath, movingAverageType } = options;
-        const meanAlgorithm = movingAverageType === "ema"
-            ? ema().options({ windowSize, sourcePath })
-            : slidingWindow()
-                .windowSize(windowSize)
-                .accumulator((values) => mean(values))
-                .sourcePath(sourcePath);
-        return zip(data, meanAlgorithm(data)).map((d) => {
-            const datum = d[0];
-            const meanValue = d[1];
-            const bullPower = meanValue !== undefined ? ohlc(datum).high - meanValue : undefined;
-            const bearPower = meanValue !== undefined ? ohlc(datum).low - meanValue : undefined;
-            return { bullPower, bearPower };
-        });
-    };
-    calculator.undefinedLength = () => {
-        const { windowSize } = options;
-        return windowSize - 1;
-    };
-    calculator.ohlc = (ohlcAccessor) => {
-        if (ohlcAccessor === undefined) {
-            return ohlc;
-        }
-        ohlc = ohlcAccessor;
-        return calculator;
-    };
-    calculator.options = (newOptions) => {
-        if (newOptions === undefined) {
-            return options;
-        }
-        options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-        return calculator;
-    };
-    return calculator;
+	let options = defaultOptions;
+	let ohlc = (d) => ({
+		open: d.open,
+		high: d.high,
+		low: d.low,
+		close: d.close,
+	});
+	const calculator = (data) => {
+		const { windowSize, sourcePath, movingAverageType } = options;
+		const meanAlgorithm =
+			movingAverageType === 'ema'
+				? ema().options({ windowSize, sourcePath })
+				: slidingWindow()
+						.windowSize(windowSize)
+						.accumulator((values) => mean(values))
+						.sourcePath(sourcePath);
+		return zip(data, meanAlgorithm(data)).map((d) => {
+			const datum = d[0];
+			const meanValue = d[1];
+			const bullPower =
+				meanValue !== undefined ? ohlc(datum).high - meanValue : undefined;
+			const bearPower =
+				meanValue !== undefined ? ohlc(datum).low - meanValue : undefined;
+			return { bullPower, bearPower };
+		});
+	};
+	calculator.undefinedLength = () => {
+		const { windowSize } = options;
+		return windowSize - 1;
+	};
+	calculator.ohlc = (ohlcAccessor) => {
+		if (ohlcAccessor === undefined) {
+			return ohlc;
+		}
+		ohlc = ohlcAccessor;
+		return calculator;
+	};
+	calculator.options = (newOptions) => {
+		if (newOptions === undefined) {
+			return options;
+		}
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
+		return calculator;
+	};
+	return calculator;
 }
-//# sourceMappingURL=elderRay.js.map
+// # sourceMappingURL=elderRay.js.map

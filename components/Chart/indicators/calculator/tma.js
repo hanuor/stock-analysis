@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 /*
  TRIMA (Triangular Moving Average).
 
@@ -30,37 +31,37 @@
 
  The SMA of a SMA is the algorithm generally found in books.
 */
-import { sum } from "d3-array";
-import { slidingWindow } from "../utils";
-import { TMA as defaultOptions } from "./defaultOptionsForComputation";
+import { sum } from 'd3-array';
+import { slidingWindow } from '../utils';
+import { TMA as defaultOptions } from './defaultOptionsForComputation';
 export default function () {
-    let options = defaultOptions;
-    const calculator = (data) => {
-        const { windowSize, sourcePath } = options;
-        const n = Math.floor(windowSize / 2);
-        const weight = windowSize % 2 === 0 ? n * (n + 1) : (n + 1) * (n + 1);
-        const triaverage = slidingWindow()
-            .windowSize(windowSize)
-            .sourcePath(sourcePath)
-            .accumulator((values) => {
-            const total = sum(values, (v, i) => {
-                return i < n ? (i + 1) * v : (windowSize - i) * v;
-            });
-            return total / weight;
-        });
-        return triaverage(data);
-    };
-    calculator.undefinedLength = () => {
-        const { windowSize } = options;
-        return windowSize - 1;
-    };
-    calculator.options = (newOptions) => {
-        if (newOptions === undefined) {
-            return options;
-        }
-        options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-        return calculator;
-    };
-    return calculator;
+	let options = defaultOptions;
+	const calculator = (data) => {
+		const { windowSize, sourcePath } = options;
+		const n = Math.floor(windowSize / 2);
+		const weight = windowSize % 2 === 0 ? n * (n + 1) : (n + 1) * (n + 1);
+		const triaverage = slidingWindow()
+			.windowSize(windowSize)
+			.sourcePath(sourcePath)
+			.accumulator((values) => {
+				const total = sum(values, (v, i) => {
+					return i < n ? (i + 1) * v : (windowSize - i) * v;
+				});
+				return total / weight;
+			});
+		return triaverage(data);
+	};
+	calculator.undefinedLength = () => {
+		const { windowSize } = options;
+		return windowSize - 1;
+	};
+	calculator.options = (newOptions) => {
+		if (newOptions === undefined) {
+			return options;
+		}
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
+		return calculator;
+	};
+	return calculator;
 }
-//# sourceMappingURL=tma.js.map
+// # sourceMappingURL=tma.js.map
