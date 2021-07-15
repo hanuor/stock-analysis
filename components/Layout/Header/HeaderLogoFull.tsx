@@ -1,4 +1,4 @@
-export default function HeaderLogo() {
+export const HeaderLogoFull = () => {
 	return (
 		<div className="hidden lg:flex lg:h-12 lg:w-32">
 			<svg
@@ -20,4 +20,4 @@ export default function HeaderLogo() {
 			</svg>
 		</div>
 	);
-}
+};

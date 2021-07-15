@@ -2,7 +2,7 @@ import { authState } from 'state/authState';
 import Link from 'next/link';
 import { Logout } from 'components/Logout';
 
-export default function HeaderLogin() {
+export const HeaderLogin = () => {
 	const isLoggedIn = authState((state) => state.isLoggedIn);
 
 	const LogInOut = () => {
@@ -43,4 +43,4 @@ export default function HeaderLogin() {
 			</span>
 		</div>
 	);
-}
+};

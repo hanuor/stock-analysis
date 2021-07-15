@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export function HeaderNavigation({ device }) {
+export const HeaderNavigation = ({ device }: { device: string }) => {
 	const menuDesktop = 'flex flex-row space-x-5 text-lg';
 	const menuMobile =
 		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200';
@@ -38,9 +38,9 @@ export function HeaderNavigation({ device }) {
 			</nav>
 		</>
 	);
-}
+};
 
-export function HamburgerIcon() {
+export const HamburgerIcon = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -57,9 +57,9 @@ export function HamburgerIcon() {
 			/>
 		</svg>
 	);
-}
+};
 
-export function CloseIcon() {
+export const CloseIcon = () => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -76,4 +76,4 @@ export function CloseIcon() {
 			/>
 		</svg>
 	);
-}
+};

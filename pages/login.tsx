@@ -1,4 +1,4 @@
-import UserLayout from 'components/Layout/UserLayout';
+import { UserLayout } from 'components/Layout/UserLayout';
 import { SEO } from 'components/SEO';
 import { useState } from 'react';
 import { useRouter } from 'next/router';

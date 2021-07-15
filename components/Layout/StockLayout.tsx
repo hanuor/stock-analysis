@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import StockHeading from 'components/StockHeading/_StockHeading';
 import stockState from 'state/stockState';
 
-export const Stock = ({ children }) => {
+export const Stock: FC = ({ children }) => {
 	const info = stockState((state) => state.info);
 
 	return (

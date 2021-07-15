@@ -1,5 +1,5 @@
 import { SEO } from 'components/SEO';
-import UserLayout from 'components/Layout/UserLayout';
+import { UserLayout } from 'components/Layout/UserLayout';
 
 export default function FreeTrial() {
 	return (

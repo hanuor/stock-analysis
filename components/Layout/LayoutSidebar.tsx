@@ -1,7 +1,13 @@
+import { ReactNode } from 'react';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 
-export default function PageLayout({ heading, children }) {
+interface Props {
+	heading: string;
+	children: ReactNode;
+}
+
+export const LayoutSidebar = ({ heading, children }: Props) => {
 	return (
 		<div className="contain">
 			<main className="w-full py-5 xs:py-6">
@@ -19,4 +25,4 @@ export default function PageLayout({ heading, children }) {
 			</main>
 		</div>
 	);
-}
+};

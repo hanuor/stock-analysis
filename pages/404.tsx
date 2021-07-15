@@ -1,4 +1,4 @@
-import UserLayout from 'components/Layout/UserLayout';
+import { UserLayout } from 'components/Layout/UserLayout';
 import Head from 'next/head';
 
 export default function Custom404() {
