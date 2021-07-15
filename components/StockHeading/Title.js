@@ -1,5 +1,5 @@
 import { stockState } from 'state/stockState';
-import { InformationCircleIcon } from '@heroicons/react/solid';
+import { InformationCircleIcon } from 'components/Icons/InformationCircle';
 
 const getQuoteSource = (quote) => {
 	if (
@@ -33,10 +33,7 @@ export default function Title() {
 			{notice && (
 				<div className="text-base sm:text-lg text-gray-800 mt-2">
 					<span>
-						<InformationCircleIcon
-							className="h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1"
-							aria-hidden="true"
-						/>
+						<InformationCircleIcon classes="h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1" />
 					</span>
 					<span>{notice}</span>
 				</div>

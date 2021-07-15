@@ -1,5 +1,6 @@
 import { stockState } from 'state/stockState';
-import { IconMoon, IconSun } from 'components/Icons';
+import { MoonIcon } from 'components/Icons/Moon';
+import { SunIcon } from 'components/Icons/Sun';
 import { useQuery } from 'react-query';
 
 async function queryQuote({ queryKey }) {
@@ -13,11 +14,8 @@ async function queryQuote({ queryKey }) {
 
 export default function StockPrice({ id }) {
 	const info = stockState((state) => state.info);
-	const quote = stockState((state) => state.quote);
-	const setQuote = stockState((state) => state.setQuote);
 
 	const { data } = useQuery(['q', id], queryQuote, {
-		onSuccess: () => setQuote(data),
 		refetchInterval: 10000,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
@@ -31,27 +29,27 @@ export default function StockPrice({ id }) {
 		);
 	}
 
-	if (!info.quote) {
+	if (!data && !info.quote) {
 		return null;
 	}
 
-	const useQuote = quote || info.quote;
+	const displayQuote = data || info.quote;
 
 	// Check if extended hours trading
-	const extendedHours = useQuote.ext ? true : false;
+	const extendedHours = displayQuote.ext ? true : false;
 	const extendedType =
-		useQuote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
+		displayQuote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
 
 	return (
 		<>
 			{extendedHours ? (
 				<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
-					<Extended quote={useQuote} market={extendedType} />
-					<ExtendedClose quote={useQuote} />
+					<Extended quote={displayQuote} market={extendedType} />
+					<ExtendedClose quote={displayQuote} />
 				</section>
 			) : (
 				<section className="mb-5">
-					<Regular quote={useQuote} />
+					<Regular quote={displayQuote} />
 				</section>
 			)}
 		</>
@@ -120,7 +118,7 @@ function Extended({ quote, market }) {
 				{quote.extC} ({quote.extCP})
 			</span>
 			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">
-				{market == 'preMarket' ? <IconSun /> : <IconMoon />}
+				{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}
 				<span className="ml-1">
 					<span className="block sm:inline font-semibold">
 						{quote.extS}:

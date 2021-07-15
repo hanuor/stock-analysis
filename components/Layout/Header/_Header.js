@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import HeaderLogo from 'components/Layout/Header/HeaderLogo';
-import HeaderLogoFull from 'components/Layout/Header/HeaderLogoFull';
-import HeaderSearch from 'components/Layout/Header/HeaderSearch';
-import HeaderLogin from 'components/Layout/Header/HeaderLogin';
+import { HeaderLogo } from 'components/Layout/Header/HeaderLogo';
+import { HeaderLogoFull } from 'components/Layout/Header/HeaderLogoFull';
+import { HeaderSearch } from 'components/Layout/Header/HeaderSearch';
+import { HeaderLogin } from 'components/Layout/Header/HeaderLogin';
 
 import {
 	HeaderNavigation,
@@ -51,8 +51,8 @@ export default function Header() {
 		<header className="bg-white shadow-md sticky top-0 z-50">
 			<div className="mx-auto px-3 lg:px-4 flex items-center py-2 space-x-4 lg:space-x-8 xl:max-w-screen-xl">
 				<div>
-					<Link href="/" className="flex" prefetch={false}>
-						<a>
+					<Link href="/" prefetch={false}>
+						<a className="flex">
 							<HeaderLogo className="h-8 w-8 lg:hidden" />
 							<HeaderLogoFull />
 						</a>

@@ -1,55 +1,73 @@
 import { External } from 'components/CustomLink';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 
-const formatSecDate = (string) => {
-	const datetime = new Date(string);
-	const timestamp = datetime.toLocaleString('en-US', {
-		timeZone: 'America/New_York',
-	});
-	const date = datetime.toLocaleString('en-US', {
-		timeZone: 'America/New_York',
-		day: 'numeric',
-		year: 'numeric',
-		month: 'short',
-	});
-
-	return {
-		timestamp,
-		date,
-	};
-};
-
-const ProfileSECfilings = ({ cik }) => {
-	const [secFilings, setSecFilings] = useState([]);
+const ProfileSECfilings = ({ filings, cik, id }) => {
+	const [entries, setEntries] = useState([]);
+	const [updated, setUpdated] = useState();
+	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
-		const source = axios.CancelToken.source();
-		const getFilings = async () => {
-			try {
-				const request = await axios.get(`/api/sec/${cik}/`, {
-					cancelToken: source.token,
-					timeout: 5000,
-				});
-				setSecFilings(request.data);
-			} catch (e) {
-				console.log('There was a problem fetching SEC filings.');
-			}
-		};
+		if (filings) {
+			setEntries(filings[0]);
+			setUpdated(filings[1]);
+			setLoaded(true);
+		} else if (filings === null) {
+			setUpdated(null);
+			setLoaded(true);
+		}
+	}, [filings]);
 
-		getFilings();
+	useEffect(() => {
+		const source = Axios.CancelToken.source();
+
+		if (loaded) {
+			async function fetchSec() {
+				try {
+					const res = await Axios.get(
+						`https://stockanalysis.com/wp-json/sa/sec?cik=${cik}&c=10&i=${id}&json=1`,
+						{
+							cancelToken: source.token,
+							timeout: 5000,
+						}
+					);
+					const newSec = res.data;
+
+					if (
+						!entries.length ||
+						(newSec && newSec[0][0].time !== entries[0].time)
+					) {
+						setEntries(newSec[0]);
+						setUpdated(newSec[1]);
+					}
+				} catch (err) {
+					if (!Axios.isCancel(err)) {
+						console.error(err);
+					}
+				}
+			}
+
+			const now = new Date().getTime();
+			const timestamp = Date.parse(updated);
+			const diff = (now - timestamp) / 1000;
+
+			if (!entries.length || diff > 12 * 60 * 60) {
+				fetchSec();
+			}
+		}
 
 		return () => {
-			source.cancel();
+			source.cancel('Unmounted');
 		};
-	}, [cik]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [updated]);
 
-	if (!secFilings.length) {
+	if (!entries || !entries.length) {
 		return null;
 	} else {
 		return (
 			<>
-				<h2 className="hh2 mt-6 xs:mt-8">Latest SEC Filings</h2>
+				<h2 className="hh2">Latest SEC Filings</h2>
 				<table className="w-full mb-12">
 					<thead>
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
@@ -74,21 +92,23 @@ const ProfileSECfilings = ({ cik }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{secFilings.map((entry, index) => {
-							const { timestamp, date } = formatSecDate(entry.updated);
+						{entries.map((entry, index) => {
+							// const { timestamp, date } = formatSecDate(entry.updated);
 
 							return (
 								<tr key={index} className="border-b border-gray-200">
 									<td className="py-3 pr-1 xs:px-2 text-gray-900 align-top">
-										<span title={timestamp}>{date}</span>
+										<span title={entry['time']}>
+											{entry['cleantime']}
+										</span>
 									</td>
 									<td className="py-3 px-1 xs:px-2 text-gray-900 align-top">
-										{entry.content[0]['filing-type']}
+										{entry['type']}
 									</td>
 									<td className="py-3 pl-1 xs:px-2 align-top">
 										<External
-											url={entry.content[0]['filing-href']}
-											text={entry.content[0]['form-name']}
+											url={entry['url']}
+											text={entry['title']}
 										/>
 									</td>
 								</tr>

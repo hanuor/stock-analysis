@@ -1,13 +1,12 @@
 import exportFromJSON from 'export-from-json';
 import financialsState from 'state/financialsState';
-import mapData from 'data/financials_map';
 import { stockState } from 'state/stockState';
 import { authState } from 'state/authState';
 import { formatNumber } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
-export const ExportMenu = () => {
+export const ExportMenu = ({ map }) => {
 	const range = financialsState((state) => state.range);
 	const statement = financialsState((state) => state.statement);
 	const financialData = financialsState((state) => state.financialData);
@@ -26,7 +25,7 @@ export const ExportMenu = () => {
 		const paywall = range === 'annual' ? 15 : 40;
 		const fullcount = rawdata.datekey.length;
 		const showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
-		const DATA_MAP = mapData(statement);
+		const DATA_MAP = map;
 
 		// Map the columns
 		let dataColumns = leftRight ? [] : ['Indicator'];

@@ -1,4 +1,4 @@
-export default function HeaderLogo({ className }) {
+export const HeaderLogo = ({ className }: { className: string }) => {
 	return (
 		<div className={className}>
 			<svg
@@ -13,4 +13,4 @@ export default function HeaderLogo({ className }) {
 			</svg>
 		</div>
 	);
-}
+};

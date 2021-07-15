@@ -1,6 +1,7 @@
-import HeaderLogo from './Header/HeaderLogo';
+import { FC } from 'react';
+import { HeaderLogo } from './Header/HeaderLogo';
 
-function UserLayout({ children }) {
+export const UserLayout: FC = ({ children }) => {
 	return (
 		<>
 			<div className="max-w-[850px] mx-auto px-6 py-20 sm:px-0 space-y-6">
@@ -11,6 +12,4 @@ function UserLayout({ children }) {
 			</div>
 		</>
 	);
-}
-
-export default UserLayout;
+};

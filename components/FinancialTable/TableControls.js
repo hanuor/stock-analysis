@@ -1,4 +1,5 @@
-import { LeftRightSwitch, MenuDropDown } from 'components/Icons';
+import { LeftRightIcon } from 'components/Icons/LeftRight';
+import { DropdownIcon } from 'components/Icons/Dropdown';
 import { ExportMenu } from './ExportMenu';
 import { financialsState } from 'state/financialsState';
 
@@ -7,7 +8,7 @@ import { useRef, useState, useEffect } from 'react';
 const btnStyles =
 	'bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md';
 
-export default function TableControls() {
+export default function TableControls({ map }) {
 	const dropdownNode = useRef();
 	const [exportOpen, setExportOpen] = useState(false);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -55,16 +56,18 @@ export default function TableControls() {
 					}
 				>
 					Export Financials
-					<MenuDropDown classes="w-6 h-6 ml-2 -mr-1" />
+					<DropdownIcon classes="w-6 h-6 ml-2 -mr-1" />
 				</button>
-				<div ref={dropdownNode}>{exportOpen && <ExportMenu />}</div>
+				<div ref={dropdownNode}>
+					{exportOpen && <ExportMenu map={map} />}
+				</div>
 			</div>
 			<div>
 				<button
 					className={btnStyles + ' px-3'}
 					onClick={() => clickLeftRight()}
 				>
-					<LeftRightSwitch classes="h-9 w-9" />
+					<LeftRightIcon classes="h-9 w-9" />
 				</button>
 			</div>
 		</div>

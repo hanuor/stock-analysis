@@ -1,3 +1,4 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
 import fs from 'fs';
 import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
@@ -15,9 +16,51 @@ const components = {
 	External,
 };
 
-export default function Page({ content, meta, slug }) {
+interface Props {
+	content: {
+		compiledSource: string;
+	};
+	meta: {
+		title: string;
+		heading: string;
+		description: string;
+		image: string;
+		date: string;
+	};
+	slug: string;
+}
+
+interface Schema {
+	'@context': string;
+	'@type': string;
+	mainEntityOfPage: {
+		'@type': string;
+		'@id': string;
+	};
+	headline: string;
+	description: string;
+	author: {
+		'@type': string;
+		name: string;
+	};
+	publisher: {
+		'@type': string;
+		name: string;
+		logo: {
+			'@type': string;
+			url: string;
+		};
+	};
+	image?: {
+		'@type'?: string;
+		url?: string;
+	};
+	datePublished?: string;
+}
+
+export default function Page({ content, meta, slug }: Props) {
 	// eslint-disable-next-line prefer-const
-	let schema = {
+	let schema: Schema = {
 		'@context': 'https://schema.org',
 		'@type': 'Article',
 		mainEntityOfPage: {
@@ -59,15 +102,20 @@ export default function Page({ content, meta, slug }) {
 			/>
 			<ArticleLayout heading={meta.heading || meta.title}>
 				<div>
-					<MDXRemote {...content} components={components} />
+					<MDXRemote
+						{...content}
+						compiledSource={content.compiledSource}
+						components={components}
+					/>
 				</div>
 			</ArticleLayout>
 		</>
 	);
 }
 
-export async function getStaticProps({ params }) {
-	const postFile = path.join(POST_PATHS, `${params.slug}.mdx`);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const slug = params ? params.slug : '';
+	const postFile = path.join(POST_PATHS, `${slug}.mdx`);
 	const source = fs.readFileSync(postFile);
 
 	const { content, data } = matter(source);
@@ -80,12 +128,12 @@ export async function getStaticProps({ params }) {
 		props: {
 			content: mdxSource,
 			meta: data,
-			slug: params.slug,
+			slug: slug,
 		},
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = allPostPaths
 		.map((path) => path.replace(/\.mdx?$/, ''))
 		.map((slug) => ({ params: { slug } }));
@@ -94,4 +142,4 @@ export async function getStaticPaths() {
 		paths,
 		fallback: false,
 	};
-}
+};

@@ -10,9 +10,8 @@ import {
 	getPeriodLabel,
 	getPeriodTooltip,
 } from './FinancialTable.functions';
-import { HoverChartIcon } from 'components/Icons';
+import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
-import mapData from 'data/financials_map';
 import HoverChart from './HoverChart';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -22,7 +21,7 @@ import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
 
-export default function FinancialTable({ statement, financialData }) {
+export default function FinancialTable({ statement, financialData, map }) {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -59,17 +58,17 @@ export default function FinancialTable({ statement, financialData }) {
 		return (
 			<>
 				<div className="px-4 lg:px-6 mx-auto">
-					<TableTitle empty={true} />
+					<TableTitle statement={statement} />
 					<span className="text-xl">
-						No {range} {statement.replaceAll('_', ' ')} data found for
-						this stock.
+						No {range} {statement.replace(/_/g, ' ')} data found for this
+						stock.
 					</span>
 				</div>
 			</>
 		);
 	}
 
-	const DATA_MAP = mapData(statement);
+	const DATA_MAP = map;
 
 	const HeaderRow = () => {
 		let headerdata = data.datekey;
@@ -259,7 +258,7 @@ export default function FinancialTable({ statement, financialData }) {
 		<div className="px-4 lg:px-6 mx-auto">
 			<div className="flex flex-row justify-between items-end">
 				<TableTitle statement={statement} />
-				<TableControls />
+				<TableControls map={map} />
 			</div>
 			<div
 				className={

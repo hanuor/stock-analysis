@@ -5,6 +5,7 @@ import { getStockFinancials } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import { stockState } from 'state/stockState';
 import { financialsState } from 'state/financialsState';
+import { MAP_RATIOS } from 'data/financials/map_ratios';
 
 export default function Ratios({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -24,7 +25,11 @@ export default function Ratios({ info, data }) {
 				description={`Financial ratios and metrics for ${info.name} stock (${info.ticker}). Includes annual, quarterly and trailing numbers with full history and charts.`}
 				canonical={`stocks/${info.symbol}/financials/ratios/`}
 			/>
-			<FinancialTable statement="ratios" financialData={data} />
+			<FinancialTable
+				statement="ratios"
+				financialData={data}
+				map={MAP_RATIOS}
+			/>
 		</Stock>
 	);
 }

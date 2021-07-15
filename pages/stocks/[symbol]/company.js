@@ -37,9 +37,10 @@ export default function SymbolStatistics({ info, data }) {
 					<ProfileDetails details={data.stockDetails} />
 				</div>
 
-				<div className="float-none lg:float-left lg:profilewrap">
+				<div className="float-none lg:float-left lg:profilewrap mb-2">
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
+						id={info.id}
 						filings={data.secFilings}
 						cik={data.stockDetails.cik}
 					/>

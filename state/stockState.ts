@@ -2,16 +2,16 @@ import create from 'zustand';
 import { Info } from 'types/Info';
 
 interface StockState {
-	info: Info | object;
+	info: Info;
 	data: object;
 	quote: object | null;
-	setInfo: (newInfo: Info | object) => void;
+	setInfo: (newInfo: Info) => void;
 	setData: (newData: object) => void;
 	setQuote: (newQuote: object | null) => void;
 }
 
 export const stockState = create<StockState>((set) => ({
-	info: {},
+	info: {} as Info,
 	data: {},
 	quote: null,
 	setInfo: (newInfo) => set({ info: newInfo }),

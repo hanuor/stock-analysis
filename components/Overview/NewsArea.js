@@ -51,7 +51,7 @@ const NewsArea = ({ news }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type]);
 
-	if (news.length === 0) {
+	if (!news || news.length === 0) {
 		return (
 			<div className="px-4 md:px-0 mt-6 lg:mt-0">
 				<h2 className="hh2 mb-2">News</h2>

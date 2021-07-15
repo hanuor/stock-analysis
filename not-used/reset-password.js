@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 // import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import UserLayout from 'components/Layout/UserLayout';
+import { UserLayout } from 'components/Layout/UserLayout';
 import { SEO } from 'components/SEO';
 import Link from 'next/link';
 

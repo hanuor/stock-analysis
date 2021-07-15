@@ -4,10 +4,8 @@ import { getPageData } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 import StatsWidget from 'components/StatsWidget/_StatsWidget';
-import { fullMap } from 'data/financials_map';
 import Button from 'components/Button';
-
-const INDICATORS = fullMap();
+import { MAP_STATISTICS } from 'data/financials/map_statistics';
 
 export default function Statistics({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -31,7 +29,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Total Valuation"
 							data={data.valuation}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -39,7 +37,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Important Dates"
 							data={data.dates}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -47,7 +45,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Share Statistics"
 							data={data.shares}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -55,7 +53,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Valuation Ratios"
 							data={data.ratios}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 
 						<Button
@@ -68,7 +66,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Enterprise Valuation"
 							data={data.evratios}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -76,7 +74,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Financial Position"
 							data={data.financialPosition}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -84,7 +82,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Financial Efficiency"
 							data={data.financialEfficiency}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -92,7 +90,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Taxes"
 							data={data.taxes}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 				</div>
@@ -102,7 +100,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Stock Price Statistics"
 							data={data.stockprice}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -110,7 +108,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Short Selling Information"
 							data={data.short}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -118,7 +116,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Income Statement"
 							data={data.income}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 
 						<Button
@@ -131,7 +129,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Balance Sheet"
 							data={data.balance}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 
 						<Button
@@ -144,7 +142,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Cash Flow"
 							data={data.cashflow}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 
 						<Button
@@ -157,7 +155,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Margins"
 							data={data.margins}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 				</div>
@@ -167,7 +165,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Dividends & Yields"
 							data={data.dividends}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 
@@ -175,7 +173,7 @@ export default function Statistics({ info, data }) {
 						<StatsWidget
 							title="Stock Splits"
 							data={data.splits}
-							map={INDICATORS}
+							map={MAP_STATISTICS}
 						/>
 					</div>
 				</div>

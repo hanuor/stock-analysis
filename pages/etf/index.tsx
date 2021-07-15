@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import LayoutSidebar from 'components/Layout/LayoutSidebar';
+import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
 import Table from 'components/Tables/SymbolTable';
 import { ETFLink } from 'components/Links';
