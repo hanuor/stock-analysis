@@ -111,3 +111,4 @@ export const ExportMenu = ({ map }) => {
 		</div>
 	);
 };
+export default ExportMenu;
