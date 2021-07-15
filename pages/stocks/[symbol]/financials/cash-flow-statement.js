@@ -5,6 +5,7 @@ import { getStockFinancials } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import { stockState } from 'state/stockState';
 import { financialsState } from 'state/financialsState';
+import { MAP_CASH_FLOW_STATEMENT } from 'data/financials/map_cash_flow_statement';
 
 export default function CashFlowStatement({ info, data }) {
 	const setInfo = stockState((state) => state.setInfo);
@@ -24,7 +25,11 @@ export default function CashFlowStatement({ info, data }) {
 				description={`Detailed cash flow statements for ${info.name} stock (${info.ticker}), including operating cash flow, capex and free cash flow.`}
 				canonical={`stocks/${info.symbol}/financials/cash-flow-statement/`}
 			/>
-			<FinancialTable statement="cash_flow_statement" financialData={data} />
+			<FinancialTable
+				statement="cash_flow_statement"
+				financialData={data}
+				map={MAP_CASH_FLOW_STATEMENT}
+			/>
 		</Stock>
 	);
 }
