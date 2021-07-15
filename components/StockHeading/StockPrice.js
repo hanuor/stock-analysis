@@ -14,11 +14,8 @@ async function queryQuote({ queryKey }) {
 
 export default function StockPrice({ id }) {
 	const info = stockState((state) => state.info);
-	const quote = stockState((state) => state.quote);
-	const setQuote = stockState((state) => state.setQuote);
 
 	const { data } = useQuery(['q', id], queryQuote, {
-		onSuccess: () => setQuote(data),
 		refetchInterval: 10000,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
@@ -32,27 +29,27 @@ export default function StockPrice({ id }) {
 		);
 	}
 
-	if (!info.quote) {
+	if (!data && !info.quote) {
 		return null;
 	}
 
-	const useQuote = quote || info.quote;
+	const displayQuote = data || info.quote;
 
 	// Check if extended hours trading
-	const extendedHours = useQuote.ext ? true : false;
+	const extendedHours = displayQuote.ext ? true : false;
 	const extendedType =
-		useQuote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
+		displayQuote.extS == 'Pre-market' ? 'preMarket' : 'afterHours';
 
 	return (
 		<>
 			{extendedHours ? (
 				<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
-					<Extended quote={useQuote} market={extendedType} />
-					<ExtendedClose quote={useQuote} />
+					<Extended quote={displayQuote} market={extendedType} />
+					<ExtendedClose quote={displayQuote} />
 				</section>
 			) : (
 				<section className="mb-5">
-					<Regular quote={useQuote} />
+					<Regular quote={displayQuote} />
 				</section>
 			)}
 		</>
