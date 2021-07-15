@@ -25,7 +25,7 @@ const ProfileSECfilings = ({ filings, cik, id }) => {
 			async function fetchSec() {
 				try {
 					const res = await Axios.get(
-						`https://stockanalysis.com/wp-json/sa/sec?cik=${cik}&c=10&i=${id}&json=true`,
+						`https://stockanalysis.com/wp-json/sa/sec?cik=${cik}&c=10&i=${id}&json=1`,
 						{
 							cancelToken: source.token,
 							timeout: 5000,
