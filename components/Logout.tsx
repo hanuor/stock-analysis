@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { authState } from 'state/authState';
-import Axios from 'axios';
 
 export const Logout: FC = () => {
 	const setIsLoggedIn = authState((state) => state.setIsLoggedIn);
@@ -19,8 +18,9 @@ export const Logout: FC = () => {
 		setAvatar(null);
 
 		try {
-			await Axios.post(
-				`https://stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`
+			await fetch(
+				`https://stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`,
+				{ method: 'POST' }
 			);
 		} catch (err) {
 			console.log({ err });
