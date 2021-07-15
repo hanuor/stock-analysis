@@ -1,4 +1,4 @@
-import { MailIcon } from '@heroicons/react/solid';
+import { MailIcon } from 'components/Icons/Mail';
 
 export const NewsletterWidget = () => {
 	return (
@@ -12,7 +12,7 @@ export const NewsletterWidget = () => {
 			</label>
 			<div className="mt-1 relative rounded-md shadow-sm mb-3">
 				<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-					<MailIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+					<MailIcon className="h-5 w-5 text-gray-400" />
 				</div>
 				<input
 					type="email"

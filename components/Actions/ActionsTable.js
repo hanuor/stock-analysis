@@ -7,7 +7,8 @@ import {
 	useSortBy,
 } from 'react-table';
 import { useMemo } from 'react';
-import { SortUp, SortDown } from 'components/Icons';
+import { SortUpIcon } from 'components/Icons/SortUp';
+import { SortDownIcon } from 'components/Icons/SortDown';
 import Pagination from 'components/Tables/Pagination';
 import GlobalFilter from 'components/Tables/GlobalFilter';
 
@@ -80,9 +81,9 @@ const RecentTable = ({ title, columndata, rowdata }) => {
 
 											{column.isSorted ? (
 												column.isSortedDesc ? (
-													<SortDown classes="h-5 w-5 text-gray-800" />
+													<SortDownIcon classes="h-5 w-5 text-gray-800" />
 												) : (
-													<SortUp classes="h-5 w-5 text-gray-800" />
+													<SortUpIcon classes="h-5 w-5 text-gray-800" />
 												)
 											) : (
 												''

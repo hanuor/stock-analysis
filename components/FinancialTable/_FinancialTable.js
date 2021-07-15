@@ -10,7 +10,7 @@ import {
 	getPeriodLabel,
 	getPeriodTooltip,
 } from './FinancialTable.functions';
-import { HoverChartIcon } from 'components/Icons';
+import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
 import mapData from 'data/financials_map';
 import HoverChart from './HoverChart';
@@ -59,10 +59,10 @@ export default function FinancialTable({ statement, financialData }) {
 		return (
 			<>
 				<div className="px-4 lg:px-6 mx-auto">
-					<TableTitle empty={true} />
+					<TableTitle statement={statement} />
 					<span className="text-xl">
-						No {range} {statement.replaceAll('_', ' ')} data found for
-						this stock.
+						No {range} {statement.replace(/_/g, ' ')} data found for this
+						stock.
 					</span>
 				</div>
 			</>

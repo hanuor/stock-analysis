@@ -1,5 +1,6 @@
 import { stockState } from 'state/stockState';
-import { IconMoon, IconSun } from 'components/Icons';
+import { MoonIcon } from 'components/Icons/Moon';
+import { SunIcon } from 'components/Icons/Sun';
 import { useQuery } from 'react-query';
 
 async function queryQuote({ queryKey }) {
@@ -120,7 +121,7 @@ function Extended({ quote, market }) {
 				{quote.extC} ({quote.extCP})
 			</span>
 			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">
-				{market == 'preMarket' ? <IconSun /> : <IconMoon />}
+				{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}
 				<span className="ml-1">
 					<span className="block sm:inline font-semibold">
 						{quote.extS}:

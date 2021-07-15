@@ -1,4 +1,5 @@
-import { LeftRightSwitch, MenuDropDown } from 'components/Icons';
+import { LeftRightIcon } from 'components/Icons/LeftRight';
+import { DropdownIcon } from 'components/Icons/Dropdown';
 import { ExportMenu } from './ExportMenu';
 import { financialsState } from 'state/financialsState';
 
@@ -55,7 +56,7 @@ export default function TableControls() {
 					}
 				>
 					Export Financials
-					<MenuDropDown classes="w-6 h-6 ml-2 -mr-1" />
+					<DropdownIcon classes="w-6 h-6 ml-2 -mr-1" />
 				</button>
 				<div ref={dropdownNode}>{exportOpen && <ExportMenu />}</div>
 			</div>
@@ -64,7 +65,7 @@ export default function TableControls() {
 					className={btnStyles + ' px-3'}
 					onClick={() => clickLeftRight()}
 				>
-					<LeftRightSwitch classes="h-9 w-9" />
+					<LeftRightIcon classes="h-9 w-9" />
 				</button>
 			</div>
 		</div>

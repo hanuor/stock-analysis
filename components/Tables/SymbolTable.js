@@ -10,7 +10,8 @@ import {
 import styles from './SymbolTable.module.css';
 import GlobalFilter from './GlobalFilter';
 import Pagination from './Pagination';
-import { SortUp, SortDown } from 'components/Icons';
+import { SortUpIcon } from 'components/Icons/SortUp';
+import { SortDownIcon } from 'components/Icons/SortDown';
 
 export default function Table({ title, columndata, rowdata }) {
 	const columns = useMemo(() => columndata, [columndata]);
@@ -81,9 +82,9 @@ export default function Table({ title, columndata, rowdata }) {
 
 											{column.isSorted ? (
 												column.isSortedDesc ? (
-													<SortDown classes="h-5 w-5 text-gray-800" />
+													<SortDownIcon classes="h-5 w-5 text-gray-800" />
 												) : (
-													<SortUp classes="h-5 w-5 text-gray-800" />
+													<SortUpIcon classes="h-5 w-5 text-gray-800" />
 												)
 											) : (
 												''
