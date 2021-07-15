@@ -1,6 +1,6 @@
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import FinancialTable from 'components/FinancialTable/_FinancialTable';
+import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
 import { getStockFinancials } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import { stockState } from 'state/stockState';

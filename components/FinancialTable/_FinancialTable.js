@@ -21,7 +21,7 @@ import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
 
-export default function FinancialTable({ statement, financialData, map }) {
+export const FinancialTable = ({ statement, financialData, map }) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -299,4 +299,4 @@ export default function FinancialTable({ statement, financialData, map }) {
 			</div>
 		</div>
 	);
-}
+};
