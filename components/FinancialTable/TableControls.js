@@ -1,10 +1,8 @@
 import { LeftRightIcon } from 'components/Icons/LeftRight';
 import { DropdownIcon } from 'components/Icons/Dropdown';
+import { ExportMenu } from './ExportMenu';
 import { financialsState } from 'state/financialsState';
 import { useRef, useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-
-const ExportMenu = dynamic(() => import('./ExportMenu'), { ssr: false });
 
 const btnStyles =
 	'bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md';
