@@ -1,9 +1,10 @@
-import { stockState } from 'state/stockState';
 import { MoonIcon } from 'components/Icons/Moon';
 import { SunIcon } from 'components/Icons/Sun';
 import { useQuery } from 'react-query';
+import { Info, IpoInfo } from 'types/Info';
+import { Quote } from 'types/Quote';
 
-async function queryQuote({ queryKey }) {
+async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 	const id = queryKey[1];
 	if (typeof id === 'undefined') {
 		return null;
@@ -12,10 +13,8 @@ async function queryQuote({ queryKey }) {
 	return res.json();
 }
 
-export default function StockPrice({ id }) {
-	const info = stockState((state) => state.info);
-
-	const { data } = useQuery(['q', id], queryQuote, {
+export default function StockPrice({ info }: { info: Info }) {
+	const { data } = useQuery(['q', info.id], queryQuote, {
 		refetchInterval: 10000,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
@@ -56,12 +55,13 @@ export default function StockPrice({ id }) {
 	);
 }
 
-function IPOPrice({ ipoInfo }) {
-	const ipoPrice = ipoInfo.ipoPrice
-		? '$' + ipoInfo.ipoPrice
-		: ipoInfo.ipoPriceLow && ipoInfo.ipoPriceHigh
-		? '$' + ipoInfo.ipoPriceLow + ' - $' + ipoInfo.ipoPriceHigh
-		: 'Pending';
+function IPOPrice({ ipoInfo }: { ipoInfo?: IpoInfo | null }) {
+	const ipoPrice =
+		ipoInfo && ipoInfo.ipoPrice
+			? '$' + ipoInfo.ipoPrice
+			: ipoInfo && ipoInfo.ipoPriceLow && ipoInfo.ipoPriceHigh
+			? '$' + ipoInfo.ipoPriceLow + ' - $' + ipoInfo.ipoPriceHigh
+			: 'Pending';
 
 	return (
 		<div>
@@ -71,13 +71,13 @@ function IPOPrice({ ipoInfo }) {
 			</span>
 
 			<div className="text-small text-gray-700 mt-0">
-				{ipoInfo.ipoPriceNotice}
+				{ipoInfo && ipoInfo.ipoPriceNotice}
 			</div>
 		</div>
 	);
 }
 
-function changeColor(change) {
+function changeColor(change: number) {
 	if (change > 0) {
 		return 'text-green-700';
 	} else if (change < 0) {
@@ -88,7 +88,7 @@ function changeColor(change) {
 }
 
 // Regular price if market open or no extended price available
-function Regular({ quote }) {
+function Regular({ quote }: { quote: Quote }) {
 	const color = changeColor(quote.change);
 
 	return (
@@ -106,7 +106,7 @@ function Regular({ quote }) {
 }
 
 // Extended price
-function Extended({ quote, market }) {
+function Extended({ quote, market }: { quote: Quote; market: string }) {
 	const color = changeColor(quote.extC);
 
 	return (
@@ -131,7 +131,7 @@ function Extended({ quote, market }) {
 }
 
 // Closing price, if extended price is showing
-function ExtendedClose({ quote }) {
+function ExtendedClose({ quote }: { quote: Quote }) {
 	const color = changeColor(quote.change);
 
 	return (

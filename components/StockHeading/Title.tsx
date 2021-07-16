@@ -24,10 +24,12 @@ export const Title = ({ info }: { info: Info }) => {
 			? info.ipoInfo.notice
 			: null;
 
+	const name = info.nameFull || info.name;
+
 	return (
 		<div className="mb-4">
 			<h1 className="text-2xl sm:text-[26px] font-bold text-gray-900">
-				{info.nameFull || info.name} ({info.ticker})
+				{`${name} (${info.ticker})`}
 			</h1>
 			{notice && (
 				<div className="text-base sm:text-lg text-gray-800 mt-2">
@@ -39,8 +41,9 @@ export const Title = ({ info }: { info: Info }) => {
 			)}
 			{info.quote && (
 				<div className="text-tiny text-gray-600 mt-[1px]">
-					{info.quote.exchange}: {info.ticker} &#183;{' '}
-					{getQuoteSource(info.quote)} &#183; USD
+					{`${info.quote.exchange}: ${info.ticker} · ${getQuoteSource(
+						info.quote
+					)} · USD`}
 				</div>
 			)}
 		</div>

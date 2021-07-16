@@ -1,11 +1,11 @@
 export interface Quote {
-	change: string;
+	change: number;
 	changePc: string;
 	class: string;
 	close: string;
 	exchange: string;
 	ext: boolean;
-	extC: string;
+	extC: number;
 	extCP: string;
 	extCol: string;
 	extP: string;

@@ -14,7 +14,7 @@ export default function StockHeading({ info }: { info: Info }) {
 			<Breadcrumbs />
 			<Title info={info} />
 			<QueryClientProvider client={queryClient}>
-				<StockPrice id={info.id} />
+				<StockPrice info={info} />
 			</QueryClientProvider>
 			{info.type === 'stocks' ? (
 				<TabNavigation symbol={info.symbol} />
