@@ -32,8 +32,8 @@ export default function SiteSearch({ nav }) {
 				);
 				const indexData = await resB.json();
 				setIndex(indexData);
-			} catch (e) {
-				console.log('There was a problem');
+			} catch (error) {
+				console.error(error);
 			} finally {
 				setLoading(false);
 			}
