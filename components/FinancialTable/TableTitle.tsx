@@ -1,7 +1,7 @@
 import stockState from 'state/stockState';
-import financialsState from 'state/financialsState';
+import { financialsState } from 'state/financialsState';
 
-export default function TableTitle({ statement }) {
+export default function TableTitle({ statement }: { statement: string }) {
 	return (
 		<div>
 			<TableHeader statement={statement} />
@@ -10,7 +10,7 @@ export default function TableTitle({ statement }) {
 	);
 }
 
-function TableHeader({ statement }) {
+function TableHeader({ statement }: { statement: string }) {
 	const range = financialsState((state) => state.range);
 
 	const rangeTitle = range.charAt(0).toUpperCase() + range.slice(1);
@@ -40,14 +40,14 @@ function TableHeader({ statement }) {
 	);
 }
 
-function TableInfo({ statement }) {
+function TableInfo({ statement }: { statement: string }) {
 	const info = stockState((state) => state.info);
 	const divider = financialsState((state) => state.divider);
 	const firstWord = statement === 'ratios' ? 'Market cap' : 'Financials';
 
 	return (
 		<div className="text-sm pb-1 text-gray-600">
-			{`${firstWord} in ${divider} ${info.currency}. Fiscal year is ${info.fiscal_year}.`}
+			{`${firstWord} in ${divider} ${info.currency}. Fiscal year is ${info.fiscalYear}.`}
 		</div>
 	);
 }

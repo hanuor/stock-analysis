@@ -1,6 +1,19 @@
 import create from 'zustand';
 
-export const financialsState = create((set) => ({
+interface FinancialsState {
+	statement: string;
+	range: string;
+	divider: string;
+	leftRight: boolean;
+	financialData: object;
+	setStatement: (newStatement: string) => void;
+	setRange: (newRange: string) => void;
+	setDivider: (newDivider: string) => void;
+	setLeftRight: (newLeftRight: boolean) => void;
+	setFinancialData: (newFinancialData: object) => void;
+}
+
+export const financialsState = create<FinancialsState>((set) => ({
 	statement: '',
 	range: 'annual',
 	divider: 'millions',
@@ -13,4 +26,3 @@ export const financialsState = create((set) => ({
 	setFinancialData: (newFinancialData) =>
 		set({ financialData: newFinancialData }),
 }));
-export default financialsState;

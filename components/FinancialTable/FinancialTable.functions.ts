@@ -1,4 +1,4 @@
-export const getPeriodLabel = (range) => {
+export const getPeriodLabel = (range: string) => {
 	switch (range) {
 		case 'annual':
 			return 'Year';
@@ -8,10 +8,13 @@ export const getPeriodLabel = (range) => {
 
 		case 'trailing':
 			return 'Period Ended';
+
+		default:
+			return '';
 	}
 };
 
-export const getPeriodTooltip = (range) => {
+export const getPeriodTooltip = (range: string) => {
 	switch (range) {
 		case 'annual':
 			return "The company's fiscal year, which is a 12-month financial reporting period. The fiscal year does not always match the calendar year.";
@@ -21,10 +24,13 @@ export const getPeriodTooltip = (range) => {
 
 		case 'trailing':
 			return 'The end date of the preceding trailing twelve-month period.';
+
+		default:
+			return '';
 	}
 };
 
-export const redOrGreen = (value, id) => {
+export const redOrGreen = (value: string, id: string) => {
 	let change = parseFloat(value);
 	if (id === 'shareschange') {
 		change = change * -1;
@@ -39,12 +45,12 @@ export const redOrGreen = (value, id) => {
 	}
 };
 
-export const setBorder = (rowname) => {
+export const setBorder = (rowname: string) => {
 	return rowname.includes('Growth') && '1px solid #CCC';
 };
 
 // Format the Y axis on hover charts
-export const formatY = (value, format) => {
+export const formatY = (value: number, format: string) => {
 	if (!format && (value > 10000000 || value < -10000000)) {
 		return new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
@@ -63,9 +69,23 @@ export const formatY = (value, format) => {
 	return value;
 };
 
+interface FormatNumber {
+	type: string;
+	current: number;
+	previous: number;
+	revenue: number;
+	divider: string;
+}
+
 // Format the number in the cells
-export function formatNumber({ type, current, previous, revenue, divider }) {
-	const numbersIn = getDivider(divider);
+export function formatNumber({
+	type,
+	current,
+	previous,
+	revenue,
+	divider,
+}: FormatNumber) {
+	const numbersIn: number = getDivider(divider);
 	const decimals = divider === 'raw' ? 3 : 2;
 
 	switch (type) {
@@ -76,7 +96,8 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 
 		case 'reduce_precision': {
 			if (current) {
-				const num = (current / numbersIn).toFixed(0) * numbersIn;
+				const rawnum: number | any = current / numbersIn;
+				const num = rawnum.toFixed(0) * numbersIn;
 				return new Intl.NumberFormat('en-US', {
 					maximumFractionDigits: 2,
 				}).format(num / numbersIn);
@@ -111,17 +132,17 @@ export function formatNumber({ type, current, previous, revenue, divider }) {
 
 		case 'ratio': {
 			if (current) {
-				return parseFloat(current).toFixed(decimals);
+				return current.toFixed(decimals);
 			}
 			return '-';
 		}
 
 		default:
-			break;
+			return;
 	}
 }
 
-export function formatYear(date) {
+export function formatYear(date: string) {
 	const dateObject = new Date(date);
 	let year = dateObject.getFullYear();
 	const month = dateObject.getMonth();
@@ -134,7 +155,7 @@ export function formatYear(date) {
 }
 
 // Show numbers in thousands, millions or raw
-function getDivider(divider) {
+function getDivider(divider: string) {
 	switch (divider) {
 		case 'thousands':
 			return 1000;

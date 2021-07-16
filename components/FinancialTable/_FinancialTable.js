@@ -12,19 +12,14 @@ import {
 } from './FinancialTable.functions';
 import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
-// import HoverChart from './HoverChart';
-
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light.css';
 import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
 import dynamic from 'next/dynamic';
 
-const Tippy = dynamic(() => import('@tippyjs/react'), { ssr: false });
-const HeadlessTippy = dynamic(() => import('@tippyjs/react/headless'), {
-	ssr: false,
-});
+import { Tooltip } from './Tooltip';
+import { TooltipChart } from './TooltipChart';
+
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
 export const FinancialTable = ({ statement, financialData, map }) => {
@@ -216,57 +211,47 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 						className="flex flex-row justify-between items-center"
 						onMouseEnter={() => setHover(true)}
 					>
-						{!hover ? (
-							<>
-								<RowTitle
-									title={row.title}
-									indent={row.format === 'growth' || row.indent}
-								/>
-								<ChartIcon />
-							</>
-						) : (
-							<>
-								<Tippy
-									content={<IndicatorTooltip row={row} />}
-									theme="light"
-									delay={100}
-									className={styles.bigTooltipText}
+						<Tooltip
+							content={<IndicatorTooltip row={row} />}
+							theme="light"
+							delay={100}
+							className={styles.bigTooltipText}
+						>
+							<RowTitle
+								title={row.title}
+								indent={row.format === 'growth' || row.indent}
+							/>
+						</Tooltip>
+						<TooltipChart
+							render={(attrs) => (
+								<div
+									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+									tabIndex="-1"
+									{...attrs}
 								>
-									<RowTitle
-										title={row.title}
-										indent={row.format === 'growth' || row.indent}
-									/>
-								</Tippy>
-								<HeadlessTippy
-									render={(attrs) => (
-										<div
-											className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
-											tabIndex="-1"
-											{...attrs}
-										>
-											<HoverChart
-												data={data}
-												count={showcount}
-												row={row}
-												range={range}
-												ticker={info.ticker}
-												divider={divider}
-											/>
-										</div>
+									{hover && (
+										<HoverChart
+											data={data}
+											count={showcount}
+											row={row}
+											range={range}
+											ticker={info.ticker}
+											divider={divider}
+										/>
 									)}
-									delay={100}
-									interactive="true"
-									offset={[150, -1]}
-									popperOptions={{
-										modifiers: [{ name: 'flip', enabled: false }],
-									}}
-									trigger="mouseenter focus click"
-									zIndex={30}
-								>
-									<ChartIcon />
-								</HeadlessTippy>
-							</>
-						)}
+								</div>
+							)}
+							delay={100}
+							interactive="true"
+							offset={[150, -1]}
+							popperOptions={{
+								modifiers: [{ name: 'flip', enabled: false }],
+							}}
+							trigger="mouseenter focus click"
+							zIndex={30}
+						>
+							<ChartIcon />
+						</TooltipChart>
 					</td>
 					{dataRows}
 				</tr>
@@ -293,14 +278,14 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">
-								<Tippy
+								<Tooltip
 									content={getPeriodTooltip(range)}
 									theme="light"
 									delay={100}
 									className={styles.bigTooltipText}
 								>
 									<RowTitle title={getPeriodLabel(range)} />
-								</Tippy>
+								</Tooltip>
 							</th>
 							<HeaderRow />
 						</tr>
