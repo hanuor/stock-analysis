@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
 import { stockState } from 'state/stockState';
 import { authState } from 'state/authState';
@@ -13,8 +13,7 @@ import {
 import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
 // import HoverChart from './HoverChart';
-import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
+
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 import TableTitle from './TableTitle';
@@ -22,6 +21,10 @@ import TableControls from './TableControls';
 import Paywall from './Paywall';
 import dynamic from 'next/dynamic';
 
+const Tippy = dynamic(() => import('@tippyjs/react'), { ssr: false });
+const HeadlessTippy = dynamic(() => import('@tippyjs/react/headless'), {
+	ssr: false,
+});
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
 export const FinancialTable = ({ statement, financialData, map }) => {
@@ -30,6 +33,7 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 	const leftRight = financialsState((state) => state.leftRight);
 	const info = stockState((state) => state.info);
 	const isPro = authState((state) => state.isPro);
+	const [hover, setHover] = useState(false);
 
 	if (!financialData || Object.keys(financialData).length === 0) {
 		return <span>Loading...</span>;
@@ -208,46 +212,61 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 		return (
 			<>
 				<tr className={getRowStyles()}>
-					<td className="flex flex-row justify-between items-center">
-						<Tippy
-							content={<IndicatorTooltip row={row} />}
-							theme="light"
-							delay={100}
-							className={styles.bigTooltipText}
-						>
-							<RowTitle
-								title={row.title}
-								indent={row.format === 'growth' || row.indent}
-							/>
-						</Tippy>
-						<HeadlessTippy
-							render={(attrs) => (
-								<div
-									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
-									tabIndex="-1"
-									{...attrs}
+					<td
+						className="flex flex-row justify-between items-center"
+						onMouseEnter={() => setHover(true)}
+					>
+						{!hover ? (
+							<>
+								<RowTitle
+									title={row.title}
+									indent={row.format === 'growth' || row.indent}
+								/>
+								<ChartIcon />
+							</>
+						) : (
+							<>
+								<Tippy
+									content={<IndicatorTooltip row={row} />}
+									theme="light"
+									delay={100}
+									className={styles.bigTooltipText}
 								>
-									<HoverChart
-										data={data}
-										count={showcount}
-										row={row}
-										range={range}
-										ticker={info.ticker}
-										divider={divider}
+									<RowTitle
+										title={row.title}
+										indent={row.format === 'growth' || row.indent}
 									/>
-								</div>
-							)}
-							delay={100}
-							interactive="true"
-							offset={[150, -1]}
-							popperOptions={{
-								modifiers: [{ name: 'flip', enabled: false }],
-							}}
-							trigger="mouseenter focus click"
-							zIndex={30}
-						>
-							<ChartIcon />
-						</HeadlessTippy>
+								</Tippy>
+								<HeadlessTippy
+									render={(attrs) => (
+										<div
+											className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+											tabIndex="-1"
+											{...attrs}
+										>
+											<HoverChart
+												data={data}
+												count={showcount}
+												row={row}
+												range={range}
+												ticker={info.ticker}
+												divider={divider}
+											/>
+										</div>
+									)}
+									delay={100}
+									interactive="true"
+									offset={[150, -1]}
+									popperOptions={{
+										modifiers: [{ name: 'flip', enabled: false }],
+									}}
+									trigger="mouseenter focus click"
+									zIndex={30}
+								>
+									<ChartIcon />
+								</HeadlessTippy>
+							</>
+						)}
 					</td>
 					{dataRows}
 				</tr>
