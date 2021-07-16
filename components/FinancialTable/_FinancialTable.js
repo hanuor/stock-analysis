@@ -12,7 +12,7 @@ import {
 } from './FinancialTable.functions';
 import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
-import HoverChart from './HoverChart';
+// import HoverChart from './HoverChart';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
@@ -20,6 +20,9 @@ import 'tippy.js/themes/light.css';
 import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
+import dynamic from 'next/dynamic';
+
+const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
 export const FinancialTable = ({ statement, financialData, map }) => {
 	const range = financialsState((state) => state.range);

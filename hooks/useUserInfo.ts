@@ -23,7 +23,6 @@ export function useUserInfo() {
 
 				if (response.ok) {
 					const data = await response.json();
-					console.log(data);
 
 					if (data.message === 'User was logged in.') {
 						setIsLoggedIn(true);
