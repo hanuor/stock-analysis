@@ -20,7 +20,7 @@ const EtfOverview = ({ info, data, news }) => {
 	}, [data, info, setData, setInfo]);
 
 	return (
-		<Stock type={info.type} id={info.id}>
+		<Stock info={info}>
 			<SEO
 				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
 				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}

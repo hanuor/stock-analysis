@@ -19,7 +19,7 @@ export default function CashFlowStatement({ info, data }) {
 	}, [info, setInfo, data, setFinancialData, setStatement]);
 
 	return (
-		<Stock type={info.type} id={info.id}>
+		<Stock info={info}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Cash Flow Statement`}
 				description={`Detailed cash flow statements for ${info.name} stock (${info.ticker}), including operating cash flow, capex and free cash flow.`}

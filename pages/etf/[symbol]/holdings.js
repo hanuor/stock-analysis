@@ -24,7 +24,7 @@ export default function Holdings({ info, data, news }) {
 	const HeaderEmpty = () => <>{info.ticker} Holdings</>;
 
 	return (
-		<Stock type={info.type} id={info.id}>
+		<Stock info={info}>
 			<SEO
 				title={`${info.ticker} ETF Holdings - ${info.name}`}
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}

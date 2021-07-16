@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
 import styles from 'styles/TabMenu.module.css';
-import { stockState } from 'state/stockState';
 
 // styles
 const common =
@@ -9,25 +8,28 @@ const common =
 const inactive = common + ' bll hover:text-gray-900 hover:bg-[#eee]';
 const active = common + ' text-gray-900 bg-[#eee] font-semibold';
 
-export default function TabNavigation() {
+interface Symbol {
+	symbol: string;
+}
+
+export const SubNavigation = ({ symbol }: Symbol) => {
 	return (
 		<div className="flex flex-col sm:flex-row justify-between">
-			<Statement />
+			<Statement symbol={symbol} />
 			<Period />
 		</div>
 	);
-}
+};
 
-const Statement = () => {
+function Statement({ symbol }: Symbol) {
 	const statement = financialsState((state) => state.statement);
-	const info = stockState((state) => state.info);
 
 	return (
 		<nav className="mt-1.5">
 			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
 					<Link
-						href={`/stocks/${info.symbol}/financials/`}
+						href={`/stocks/${symbol}/financials/`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -43,7 +45,7 @@ const Statement = () => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${info.symbol}/financials/balance-sheet`}
+						href={`/stocks/${symbol}/financials/balance-sheet`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -59,7 +61,7 @@ const Statement = () => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
+						href={`/stocks/${symbol}/financials/cash-flow-statement/`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -75,7 +77,7 @@ const Statement = () => {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${info.symbol}/financials/ratios/`}
+						href={`/stocks/${symbol}/financials/ratios/`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -90,9 +92,9 @@ const Statement = () => {
 			</ul>
 		</nav>
 	);
-};
+}
 
-const Period = () => {
+function Period() {
 	const range = financialsState((state) => state.range);
 	const setRange = financialsState((state) => state.setRange);
 
@@ -137,4 +139,4 @@ const Period = () => {
 			</ul>
 		</nav>
 	);
-};
+}

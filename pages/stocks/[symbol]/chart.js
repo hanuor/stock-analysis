@@ -54,7 +54,7 @@ export default function CandleStickStockChart({ info }) {
 				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`stocks/${info.symbol}/chart/`}
 			/>
-			<Stock type={info.type} id={info.id}>
+			<Stock info={info}>
 				<div className="px-2 sm:contain">
 					<div className="">
 						<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">

@@ -19,7 +19,7 @@ export default function Ratios({ info, data }) {
 	}, [info, setInfo, data, setFinancialData, setStatement]);
 
 	return (
-		<Stock type={info.type} id={info.id}>
+		<Stock info={info}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Financial Ratios and Metrics`}
 				description={`Financial ratios and metrics for ${info.name} stock (${info.ticker}). Includes annual, quarterly and trailing numbers with full history and charts.`}

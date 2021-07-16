@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import SubNavigation from 'components/StockHeading/SubNavigation';
 import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
-import { stockState } from 'state/stockState';
 
-export default function TabNavigation() {
+interface Symbol {
+	symbol: string;
+}
+
+export const TabNavigationETF = ({ symbol }: Symbol) => {
 	const path = useNavState();
-	const info = stockState((state) => state.info);
 
 	const common =
 		'text-[15px] xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5';
@@ -25,7 +26,7 @@ export default function TabNavigation() {
 				>
 					<li>
 						<Link
-							href={`/stocks/${info.symbol}/`}
+							href={`/etf/${symbol}/`}
 							prefetch={false}
 							scroll={false}
 						>
@@ -39,53 +40,35 @@ export default function TabNavigation() {
 					</li>
 					<li>
 						<Link
-							href={`/stocks/${info.symbol}/financials/`}
+							href={`/etf/${symbol}/holdings/`}
 							prefetch={false}
 							scroll={false}
 						>
 							<a
-								className={
-									path.three == 'financials' ? active : inactive
-								}
-								data-title="Financials"
+								className={path.three == 'holdings' ? active : inactive}
+								data-title="Holdings"
 							>
-								Financials
+								Holdings
 							</a>
 						</Link>
 					</li>
 					<li>
 						<Link
-							href={`/stocks/${info.symbol}/statistics/`}
+							href={`/etf/${symbol}/dividend/`}
 							prefetch={false}
 							scroll={false}
 						>
 							<a
-								className={
-									path.three == 'statistics' ? active : inactive
-								}
-								data-title="Statistics"
+								className={path.three == 'dividend' ? active : inactive}
+								data-title="Dividend"
 							>
-								Statistics
+								Dividend
 							</a>
 						</Link>
 					</li>
 					<li>
 						<Link
-							href={`/stocks/${info.symbol}/company/`}
-							prefetch={false}
-							scroll={false}
-						>
-							<a
-								className={path.three == 'company' ? active : inactive}
-								data-title="Profile"
-							>
-								Profile
-							</a>
-						</Link>
-					</li>
-					<li>
-						<Link
-							href={`/stocks/${info.symbol}/chart/`}
+							href={`/etf/${symbol}/chart/`}
 							prefetch={false}
 							scroll={false}
 						>
@@ -99,7 +82,6 @@ export default function TabNavigation() {
 					</li>
 				</ul>
 			</nav>
-			{path.three == 'financials' && <SubNavigation path={path} />}
 		</>
 	);
-}
+};

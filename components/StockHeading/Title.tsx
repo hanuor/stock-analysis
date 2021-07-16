@@ -1,7 +1,8 @@
-import { stockState } from 'state/stockState';
+import { Info } from 'types/Info';
+import { Quote } from 'types/Quote';
 import { InformationCircleIcon } from 'components/Icons/InformationCircle';
 
-const getQuoteSource = (quote) => {
+const getQuoteSource = (quote: Quote) => {
 	if (
 		(quote.status === 'open' || quote.status === 'closed') &&
 		quote.exchange !== 'OTCMKTS'
@@ -11,9 +12,7 @@ const getQuoteSource = (quote) => {
 	return 'Delayed Price';
 };
 
-export default function Title() {
-	const info = stockState((state) => state.info);
-
+export const Title = ({ info }: { info: Info }) => {
 	if (typeof info.symbol === 'undefined') {
 		return null;
 	}
@@ -28,7 +27,7 @@ export default function Title() {
 	return (
 		<div className="mb-4">
 			<h1 className="text-2xl sm:text-[26px] font-bold text-gray-900">
-				{info.name_full || info.name} ({info.ticker})
+				{info.nameFull || info.name} ({info.ticker})
 			</h1>
 			{notice && (
 				<div className="text-base sm:text-lg text-gray-800 mt-2">
@@ -46,4 +45,4 @@ export default function Title() {
 			)}
 		</div>
 	);
-}
+};

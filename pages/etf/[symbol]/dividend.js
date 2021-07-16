@@ -19,7 +19,7 @@ export default function Holdings({ info, data, news }) {
 	}, [data, info, setData, setInfo]);
 
 	return (
-		<Stock type={info.type} id={info.id}>
+		<Stock info={info}>
 			<SEO
 				title={`${info.ticker} Dividend History, Dates & Yield`}
 				description={`Get the latest dividend data for ${info.ticker} (${info.name}), including dividend history, yield, key dates, growth and other metrics.`}

@@ -19,7 +19,7 @@ export default function BalanceSheet({ info, data }) {
 	}, [info, setInfo, data, setFinancialData, setStatement]);
 
 	return (
-		<Stock type={info.type} id={info.id}>
+		<Stock info={info}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Balance Sheet`}
 				description={`Detailed balance sheet for ${info.name} stock (${info.ticker}), including cash, debt, assets, liabilities, and book value.`}
