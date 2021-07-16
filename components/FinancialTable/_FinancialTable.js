@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
 import { stockState } from 'state/stockState';
 import { authState } from 'state/authState';
@@ -12,21 +12,23 @@ import {
 } from './FinancialTable.functions';
 import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
-import HoverChart from './HoverChart';
-import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light.css';
 import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
+import dynamic from 'next/dynamic';
 
-export default function FinancialTable({ statement, financialData, map }) {
+import { Tooltip } from './Tooltip';
+import { TooltipChart } from './TooltipChart';
+
+const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
+
+export const FinancialTable = ({ statement, financialData, map }) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
 	const info = stockState((state) => state.info);
 	const isPro = authState((state) => state.isPro);
+	const [hover, setHover] = useState(false);
 
 	if (!financialData || Object.keys(financialData).length === 0) {
 		return <span>Loading...</span>;
@@ -205,8 +207,11 @@ export default function FinancialTable({ statement, financialData, map }) {
 		return (
 			<>
 				<tr className={getRowStyles()}>
-					<td className="flex flex-row justify-between items-center">
-						<Tippy
+					<td
+						className="flex flex-row justify-between items-center"
+						onMouseEnter={() => setHover(true)}
+					>
+						<Tooltip
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
 							delay={100}
@@ -216,22 +221,24 @@ export default function FinancialTable({ statement, financialData, map }) {
 								title={row.title}
 								indent={row.format === 'growth' || row.indent}
 							/>
-						</Tippy>
-						<HeadlessTippy
+						</Tooltip>
+						<TooltipChart
 							render={(attrs) => (
 								<div
 									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
 									tabIndex="-1"
 									{...attrs}
 								>
-									<HoverChart
-										data={data}
-										count={showcount}
-										row={row}
-										range={range}
-										ticker={info.ticker}
-										divider={divider}
-									/>
+									{hover && (
+										<HoverChart
+											data={data}
+											count={showcount}
+											row={row}
+											range={range}
+											ticker={info.ticker}
+											divider={divider}
+										/>
+									)}
 								</div>
 							)}
 							delay={100}
@@ -244,7 +251,7 @@ export default function FinancialTable({ statement, financialData, map }) {
 							zIndex={30}
 						>
 							<ChartIcon />
-						</HeadlessTippy>
+						</TooltipChart>
 					</td>
 					{dataRows}
 				</tr>
@@ -271,14 +278,14 @@ export default function FinancialTable({ statement, financialData, map }) {
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">
-								<Tippy
+								<Tooltip
 									content={getPeriodTooltip(range)}
 									theme="light"
 									delay={100}
 									className={styles.bigTooltipText}
 								>
 									<RowTitle title={getPeriodLabel(range)} />
-								</Tippy>
+								</Tooltip>
 							</th>
 							<HeaderRow />
 						</tr>
@@ -299,4 +306,4 @@ export default function FinancialTable({ statement, financialData, map }) {
 			</div>
 		</div>
 	);
-}
+};

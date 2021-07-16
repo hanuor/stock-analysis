@@ -106,4 +106,16 @@
 	.text-shadow {
 		text-shadow: 0 0 0.5px #555555;
 	}
+
+	.news-article {
+		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5;
+	}
+
+	.news-video {
+		@apply flex flex-col bg-white p-4 sm:px-0 sm:py-6 first:pt-3 sm:first:pt-4 shadow sm:shadow-none;
+	}
+
+	.news-ticker {
+		@apply inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll;
+	}
 }

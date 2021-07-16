@@ -22,78 +22,90 @@ export default function TabNavigation() {
 					}
 				>
 					<li>
-						<Link
-							href={`/stocks/${path.two}/`}
-							prefetch={false}
-							scroll={false}
-						>
-							<a
-								className={!path.three ? active : inactive}
-								data-title="Overview"
+						{path.two && (
+							<Link
+								href={`/stocks/${path.two}/`}
+								prefetch={false}
+								scroll={false}
 							>
-								Overview
-							</a>
-						</Link>
+								<a
+									className={!path.three ? active : inactive}
+									data-title="Overview"
+								>
+									Overview
+								</a>
+							</Link>
+						)}
 					</li>
 					<li>
-						<Link
-							href={`/stocks/${path.two}/financials/`}
-							prefetch={false}
-							scroll={false}
-						>
-							<a
-								className={
-									path.three == 'financials' ? active : inactive
-								}
-								data-title="Financials"
+						{path.two && (
+							<Link
+								href={`/stocks/${path.two}/financials/`}
+								prefetch={false}
+								scroll={false}
 							>
-								Financials
-							</a>
-						</Link>
+								<a
+									className={
+										path.three == 'financials' ? active : inactive
+									}
+									data-title="Financials"
+								>
+									Financials
+								</a>
+							</Link>
+						)}
 					</li>
 					<li>
-						<Link
-							href={`/stocks/${path.two}/statistics/`}
-							prefetch={false}
-							scroll={false}
-						>
-							<a
-								className={
-									path.three == 'statistics' ? active : inactive
-								}
-								data-title="Statistics"
+						{path.two && (
+							<Link
+								href={`/stocks/${path.two}/statistics/`}
+								prefetch={false}
+								scroll={false}
 							>
-								Statistics
-							</a>
-						</Link>
+								<a
+									className={
+										path.three == 'statistics' ? active : inactive
+									}
+									data-title="Statistics"
+								>
+									Statistics
+								</a>
+							</Link>
+						)}
 					</li>
 					<li>
-						<Link
-							href={`/stocks/${path.two}/company/`}
-							prefetch={false}
-							scroll={false}
-						>
-							<a
-								className={path.three == 'company' ? active : inactive}
-								data-title="Profile"
+						{path.two && (
+							<Link
+								href={`/stocks/${path.two}/company/`}
+								prefetch={false}
+								scroll={false}
 							>
-								Profile
-							</a>
-						</Link>
+								<a
+									className={
+										path.three == 'company' ? active : inactive
+									}
+									data-title="Profile"
+								>
+									Profile
+								</a>
+							</Link>
+						)}
 					</li>
 					<li>
-						<Link
-							href={`/stocks/${path.two}/chart/`}
-							prefetch={false}
-							scroll={false}
-						>
-							<a
-								className={path.three == 'chart' ? active : inactive}
-								data-title="Chart"
+						{path.two && (
+							<Link
+								href={`/stocks/${path.two}/chart/`}
+								prefetch={false}
+								scroll={false}
 							>
-								Chart
-							</a>
-						</Link>
+								<a
+									className={path.three == 'chart' ? active : inactive}
+									data-title="Chart"
+								>
+									Chart
+								</a>
+							</Link>
+						)}
 					</li>
 				</ul>
 			</nav>

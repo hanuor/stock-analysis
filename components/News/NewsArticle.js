@@ -3,7 +3,7 @@ import Tickers from './Tickers';
 
 const NewsArticle = ({ item, related }) => {
 	return (
-		<div className="bg-white p-4 sm:px-0 sm:py-6 first:pt-5 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5">
+		<div className="news-article">
 			<div className="sm:mt-1">
 				<a
 					href={item.url}

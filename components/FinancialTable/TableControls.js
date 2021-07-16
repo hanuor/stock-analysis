@@ -2,7 +2,6 @@ import { LeftRightIcon } from 'components/Icons/LeftRight';
 import { DropdownIcon } from 'components/Icons/Dropdown';
 import { ExportMenu } from './ExportMenu';
 import { financialsState } from 'state/financialsState';
-
 import { useRef, useState, useEffect } from 'react';
 
 const btnStyles =

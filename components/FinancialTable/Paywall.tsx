@@ -1,4 +1,10 @@
-export default function Paywall({ range, fullcount, showcount }) {
+interface Props {
+	range: string;
+	fullcount: number;
+	showcount: number;
+}
+
+export default function Paywall({ range, fullcount, showcount }: Props) {
 	const diff = fullcount - showcount;
 	const type = range === 'annual' ? 'years' : 'quarters';
 

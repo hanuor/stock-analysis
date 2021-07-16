@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 // todo: Add y-axis data tags @AZID
 import { Bar, defaults } from 'react-chartjs-2';
-import 'chartjs-adapter-luxon';
 import { formatY, formatNumber, formatYear } from './FinancialTable.functions';
 
 defaults.font.family =

@@ -22,12 +22,7 @@ function Tickers({ tickers, intro }) {
 }
 
 function SingleTicker({ ticker }) {
-	return (
-		<SymbolLink
-			symbol={ticker}
-			className="inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll"
-		/>
-	);
+	return <SymbolLink symbol={ticker} className="news-ticker" />;
 }
 
 export default Tickers;

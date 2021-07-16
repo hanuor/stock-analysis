@@ -1,5 +1,5 @@
 import exportFromJSON from 'export-from-json';
-import financialsState from 'state/financialsState';
+import { financialsState } from 'state/financialsState';
 import { stockState } from 'state/stockState';
 import { authState } from 'state/authState';
 import { formatNumber } from './FinancialTable.functions';
@@ -111,3 +111,4 @@ export const ExportMenu = ({ map }) => {
 		</div>
 	);
 };
+export default ExportMenu;

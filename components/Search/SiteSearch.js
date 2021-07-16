@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import SearchIcon from './SearchIcon';
 import SingleResult from './SingleResult';
-import Axios from 'axios';
 import { useRouter } from 'next/router';
 
 export default function SiteSearch({ nav }) {
@@ -23,16 +22,18 @@ export default function SiteSearch({ nav }) {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
-				const trendingJSON = await Axios.get(
+				const resA = await fetch(
 					'https://stockanalysis.com/wp-json/sa/trending/'
 				);
-				setTrending(trendingJSON.data);
-				const indexJSON = await Axios.get(
+				const trendingData = await resA.json();
+				setTrending(trendingData);
+				const resB = await fetch(
 					'https://stockanalysis.com/wp-json/sa/search/'
 				);
-				setIndex(indexJSON.data);
-			} catch (e) {
-				console.log('There was a problem');
+				const indexData = await resB.json();
+				setIndex(indexData);
+			} catch (error) {
+				console.error(error);
 			} finally {
 				setLoading(false);
 			}

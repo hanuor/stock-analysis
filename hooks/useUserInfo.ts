@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { authState } from 'state/authState';
-import Axios from 'axios';
 
 export function useUserInfo() {
 	const email = authState((state) => state.email);
@@ -18,26 +17,31 @@ export function useUserInfo() {
 			hasAvatar: boolean
 		) {
 			try {
-				const res = await Axios.get(
+				const response = await fetch(
 					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&a=${hasAvatar}`
 				);
 
-				if (
-					res.status === 200 &&
-					res.data.message === 'User was logged in.'
-				) {
-					setIsLoggedIn(true);
-					setEmail(res.data.e);
-					setIsPro(res.data.p);
-					if (res.data.a) {
-						localStorage.setItem('avatar', res.data.a);
+				if (response.ok) {
+					const data = await response.json();
+
+					if (data.message === 'User was logged in.') {
+						setIsLoggedIn(true);
+						setEmail(data.e);
+						setIsPro(data.p);
+
+						if (data.a) {
+							localStorage.setItem('avatar', data.a);
+						}
+					} else {
+						setIsLoggedIn(false);
+						setIsPro(false);
+						setAvatar('');
 					}
 				} else {
-					setIsLoggedIn(false);
-					setIsPro(false);
+					throw new Error('Network response not ok.');
 				}
-			} catch (err) {
-				console.error({ err });
+			} catch (error) {
+				console.error(error);
 			}
 		}
 
