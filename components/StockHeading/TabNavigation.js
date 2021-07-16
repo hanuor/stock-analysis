@@ -2,9 +2,11 @@ import Link from 'next/link';
 import SubNavigation from 'components/StockHeading/SubNavigation';
 import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
+import { stockState } from 'state/stockState';
 
 export default function TabNavigation() {
 	const path = useNavState();
+	const info = stockState((state) => state.info);
 
 	const common =
 		'text-[15px] xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5';
@@ -22,90 +24,78 @@ export default function TabNavigation() {
 					}
 				>
 					<li>
-						{path.two && (
-							<Link
-								href={`/stocks/${path.two}/`}
-								prefetch={false}
-								scroll={false}
+						<Link
+							href={`/stocks/${info.symbol}/`}
+							prefetch={false}
+							scroll={false}
+						>
+							<a
+								className={!path.three ? active : inactive}
+								data-title="Overview"
 							>
-								<a
-									className={!path.three ? active : inactive}
-									data-title="Overview"
-								>
-									Overview
-								</a>
-							</Link>
-						)}
+								Overview
+							</a>
+						</Link>
 					</li>
 					<li>
-						{path.two && (
-							<Link
-								href={`/stocks/${path.two}/financials/`}
-								prefetch={false}
-								scroll={false}
+						<Link
+							href={`/stocks/${info.symbol}/financials/`}
+							prefetch={false}
+							scroll={false}
+						>
+							<a
+								className={
+									path.three == 'financials' ? active : inactive
+								}
+								data-title="Financials"
 							>
-								<a
-									className={
-										path.three == 'financials' ? active : inactive
-									}
-									data-title="Financials"
-								>
-									Financials
-								</a>
-							</Link>
-						)}
+								Financials
+							</a>
+						</Link>
 					</li>
 					<li>
-						{path.two && (
-							<Link
-								href={`/stocks/${path.two}/statistics/`}
-								prefetch={false}
-								scroll={false}
+						<Link
+							href={`/stocks/${info.symbol}/statistics/`}
+							prefetch={false}
+							scroll={false}
+						>
+							<a
+								className={
+									path.three == 'statistics' ? active : inactive
+								}
+								data-title="Statistics"
 							>
-								<a
-									className={
-										path.three == 'statistics' ? active : inactive
-									}
-									data-title="Statistics"
-								>
-									Statistics
-								</a>
-							</Link>
-						)}
+								Statistics
+							</a>
+						</Link>
 					</li>
 					<li>
-						{path.two && (
-							<Link
-								href={`/stocks/${path.two}/company/`}
-								prefetch={false}
-								scroll={false}
+						<Link
+							href={`/stocks/${info.symbol}/company/`}
+							prefetch={false}
+							scroll={false}
+						>
+							<a
+								className={path.three == 'company' ? active : inactive}
+								data-title="Profile"
 							>
-								<a
-									className={
-										path.three == 'company' ? active : inactive
-									}
-									data-title="Profile"
-								>
-									Profile
-								</a>
-							</Link>
-						)}
+								Profile
+							</a>
+						</Link>
 					</li>
 					<li>
-						{path.two && (
-							<Link
-								href={`/stocks/${path.two}/chart/`}
-								prefetch={false}
-								scroll={false}
+						<Link
+							href={`/stocks/${info.symbol}/chart/`}
+							prefetch={false}
+							scroll={false}
+						>
+							<a
+								className={path.three == 'chart' ? active : inactive}
+								data-title="Chart"
 							>
-								<a
-									className={path.three == 'chart' ? active : inactive}
-									data-title="Chart"
-								>
-									Chart
-								</a>
-							</Link>
-						)}
+								Chart
+							</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
 import styles from 'styles/TabMenu.module.css';
-import { useNavState } from 'hooks/useNavState';
+import { stockState } from 'state/stockState';
 
 // styles
 const common =
@@ -20,82 +20,72 @@ export default function TabNavigation() {
 
 const Statement = () => {
 	const statement = financialsState((state) => state.statement);
-	const path = useNavState();
+	const info = stockState((state) => state.info);
 
 	return (
 		<nav className="mt-1.5">
 			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
-					{path.two && (
-						<Link
-							href={`/stocks/${path.two}/financials/`}
-							prefetch={false}
-							scroll={false}
+					<Link
+						href={`/stocks/${info.symbol}/financials/`}
+						prefetch={false}
+						scroll={false}
+					>
+						<a
+							className={
+								statement == 'income_statement' ? active : inactive
+							}
+							data-title="Income"
 						>
-							<a
-								className={
-									statement == 'income_statement' ? active : inactive
-								}
-								data-title="Income"
-							>
-								Income
-							</a>
-						</Link>
-					)}
+							Income
+						</a>
+					</Link>
 				</li>
 				<li>
-					{path.two && (
-						<Link
-							href={`/stocks/${path.two}/financials/balance-sheet`}
-							prefetch={false}
-							scroll={false}
+					<Link
+						href={`/stocks/${info.symbol}/financials/balance-sheet`}
+						prefetch={false}
+						scroll={false}
+					>
+						<a
+							className={
+								statement == 'balance_sheet' ? active : inactive
+							}
+							data-title="Balance Sheet"
 						>
-							<a
-								className={
-									statement == 'balance_sheet' ? active : inactive
-								}
-								data-title="Balance Sheet"
-							>
-								Balance Sheet
-							</a>
-						</Link>
-					)}
+							Balance Sheet
+						</a>
+					</Link>
 				</li>
 				<li>
-					{path.two && (
-						<Link
-							href={`/stocks/${path.two}/financials/cash-flow-statement/`}
-							prefetch={false}
-							scroll={false}
+					<Link
+						href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
+						prefetch={false}
+						scroll={false}
+					>
+						<a
+							className={
+								statement == 'cash_flow_statement' ? active : inactive
+							}
+							data-title="Cash Flow"
 						>
-							<a
-								className={
-									statement == 'cash_flow_statement'
-										? active
-										: inactive
-								}
-								data-title="Cash Flow"
-							>
-								Cash Flow
-							</a>
-						</Link>
-					)}
+							Cash Flow
+						</a>
+					</Link>
 				</li>
 				<li>
-					{path.two && (
-						<Link
-							href={`/stocks/${path.two}/financials/ratios/`}
-							prefetch={false}
-							scroll={false}
+					<Link
+						href={`/stocks/${info.symbol}/financials/ratios/`}
+						prefetch={false}
+						scroll={false}
+					>
+						<a
+							className={statement == 'ratios' ? active : inactive}
+							data-title="Ratios"
 						>
-							<a
-								className={statement == 'ratios' ? active : inactive}
-								data-title="Ratios"
-							>
-								Ratios
-							</a>
-						</Link>
-					)}
+							Ratios
+						</a>
+					</Link>
 				</li>
 			</ul>
 		</nav>
