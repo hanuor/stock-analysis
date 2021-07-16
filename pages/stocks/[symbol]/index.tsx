@@ -38,7 +38,7 @@ const StockOverview = ({ info, data, news }: IProps) => {
 	}
 
 	return (
-		<Stock>
+		<Stock type={info.type} id={info.id}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}

@@ -20,7 +20,7 @@ export default function SymbolStatistics({ info, data }) {
 	}, [data, info, setData, setInfo]);
 
 	return (
-		<Stock>
+		<Stock type={info.type} id={info.id}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Company Profile & Overview`}
 				description={`Company profile for ${info.name}, including a description, list of executives, contact details and other key facts.`}

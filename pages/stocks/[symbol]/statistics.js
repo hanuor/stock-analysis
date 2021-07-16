@@ -17,7 +17,7 @@ export default function Statistics({ info, data }) {
 	}, [data, info, setData, setInfo]);
 
 	return (
-		<Stock>
+		<Stock type={info.type} id={info.id}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Stock Statistics & Valuation Metrics`}
 				description={`Detailed statistics for ${info.name} (${info.ticker}) stock, including valuation metrics, financial numbers, share information and more.`}

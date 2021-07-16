@@ -12,7 +12,7 @@ export default function SymbolStatistics({ info }) {
 	}, [info, setInfo]);
 
 	return (
-		<Stock>
+		<Stock type={info.type} id={info.id}>
 			<SEO
 				title={`${info.ticker} Interactive Stock Chart`}
 				description={`Interactive stock chart for ${info.name} (${info.ticker}) with full price history, volume, trends and moving averages.`}

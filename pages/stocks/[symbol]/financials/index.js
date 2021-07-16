@@ -19,7 +19,7 @@ export default function IncomeStatement({ info, data }) {
 	}, [info, setInfo, data, setFinancialData, setStatement]);
 
 	return (
-		<Stock>
+		<Stock type={info.type} id={info.id}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Financial Statements: Income`}
 				description={`Detailed financial statements for ${info.name} stock (${info.ticker}), including the income statement, balance sheet, and cash flow statement.`}
