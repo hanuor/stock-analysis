@@ -1,4 +1,4 @@
-export const formatDateTimestamp = (string) => {
+export const formatDateTimestamp = (string: string) => {
 	const datetime = new Date(string);
 	const timestamp = datetime.toLocaleString('en-US', {
 		year: 'numeric',
@@ -10,7 +10,7 @@ export const formatDateTimestamp = (string) => {
 	return timestamp;
 };
 
-export const formatDateClean = (string) => {
+export const formatDateClean = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
@@ -21,7 +21,7 @@ export const formatDateClean = (string) => {
 	return date;
 };
 
-export const formatDateMinute = (string) => {
+export const formatDateMinute = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
 		hour: '2-digit',
@@ -30,7 +30,7 @@ export const formatDateMinute = (string) => {
 	return date;
 };
 
-export const formatDateHour = (string) => {
+export const formatDateHour = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
 		month: 'short',
@@ -40,7 +40,7 @@ export const formatDateHour = (string) => {
 	return date;
 };
 
-export const formatDateDay = (string) => {
+export const formatDateDay = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
@@ -50,7 +50,7 @@ export const formatDateDay = (string) => {
 	return date;
 };
 
-export const formatDateMonth = (string) => {
+export const formatDateMonth = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
@@ -60,11 +60,12 @@ export const formatDateMonth = (string) => {
 	return date;
 };
 
-export const formatDateYear = (string) => {
+export const formatDateYear = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
 		timeZone: 'America/New_York',
 		year: 'numeric',
 	});
-	return date;
+	const dateNum = parseInt(date);
+	return dateNum;
 };

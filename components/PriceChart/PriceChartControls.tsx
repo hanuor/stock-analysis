@@ -1,4 +1,11 @@
-export const Controls = ({ chartTime, setChartTime }) => {
+import { Dispatch, SetStateAction } from 'react';
+
+interface Props {
+	chartTime: string;
+	setChartTime: Dispatch<SetStateAction<string>>;
+}
+
+export const Controls = ({ chartTime, setChartTime }: Props) => {
 	const common =
 		' text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md focus:outline-none';
 	const active = 'bp:bg-gray-100 text-gray-800 font-semibold' + common;

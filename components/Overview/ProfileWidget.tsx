@@ -1,11 +1,18 @@
+import { Info } from 'types/Info';
 import Link from 'next/link';
-import Button from 'components/Button';
-import { stockState } from 'state/stockState';
+import { Button } from 'components/Button';
 
-export default function Profile() {
-	const info = stockState((state) => state.info);
-	const data = stockState((state) => state.data);
+interface Props {
+	info: Info;
+	data: {
+		description: string;
+		infoTable: {
+			[key: string]: string[];
+		};
+	};
+}
 
+export const Profile = ({ info, data }: Props) => {
 	return (
 		<div className="text-gray-900">
 			<h2 className="hh2 mb-2">About {info.ticker}</h2>
@@ -20,7 +27,7 @@ export default function Profile() {
 
 			<div className="mt-3 grid grid-cols-2 gap-3">
 				{data.infoTable &&
-					Object.keys(data.infoTable).map(function (number, index) {
+					Object.keys(data.infoTable).map((number, index) => {
 						return (
 							<div
 								key={index}
@@ -48,4 +55,4 @@ export default function Profile() {
 			)}
 		</div>
 	);
-}
+};

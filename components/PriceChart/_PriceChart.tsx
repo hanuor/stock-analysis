@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Controls } from './PriceChartControls';
-import PriceChange from './PriceChange';
-import Chart from './PriceChartChart';
+import { PriceChange } from './PriceChange';
+import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
 
 const getChartUrl = (id: number, time: string) => {
@@ -70,6 +70,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 						chartData={chartData}
 						chartTime={chartTime}
 						quote={info.quote}
+						type={info.type}
 					/>
 				)}
 			</div>

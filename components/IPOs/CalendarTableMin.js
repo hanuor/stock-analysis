@@ -1,5 +1,5 @@
 import { StockLink } from 'components/Links';
-import Button from 'components/Button';
+import { Button } from 'components/Button';
 
 const CalendarTableMin = ({ upcoming }) => {
 	return (

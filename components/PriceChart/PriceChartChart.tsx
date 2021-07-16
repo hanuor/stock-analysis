@@ -11,7 +11,18 @@ import {
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
-const Chart = ({ chartData, chartTime }) => {
+type ChartDataType = {
+	t: string;
+	c: number;
+	o?: number;
+};
+
+interface Props {
+	chartData: ChartDataType[];
+	chartTime: string;
+}
+
+export const Chart = ({ chartData, chartTime }: Props) => {
 	let label = 'Closing Price';
 	let ticks = 12;
 
@@ -80,6 +91,7 @@ const Chart = ({ chartData, chartTime }) => {
 
 	return (
 		<Line
+			type="Line"
 			data={{
 				labels: timeAxis,
 				datasets: [
@@ -103,7 +115,7 @@ const Chart = ({ chartData, chartTime }) => {
 							display: false,
 						},
 						ticks: {
-							callback: function (value, index) {
+							callback: function (index: number) {
 								if (
 									chartTime === '1Y' ||
 									chartTime === '6M' ||
@@ -162,7 +174,7 @@ const Chart = ({ chartData, chartTime }) => {
 						},
 						displayColors: false,
 						callbacks: {
-							title: function (tooltipItem) {
+							title: function (tooltipItem: { label: string }[]) {
 								if (chartTime === '1Y') {
 									return formatDateClean(tooltipItem[0].label);
 								} else if (chartTime === '1D' || chartTime === '5D') {
@@ -174,7 +186,10 @@ const Chart = ({ chartData, chartTime }) => {
 								}
 								return formatDateClean(tooltipItem[0].label);
 							},
-							label: function (context) {
+							label: function (context: {
+								dataset: { label: string };
+								parsed: { y: string };
+							}) {
 								let currlabel = context.dataset.label || '';
 								const value = context.parsed.y || '';
 								if (currlabel && value) {
@@ -189,5 +204,3 @@ const Chart = ({ chartData, chartTime }) => {
 		/>
 	);
 };
-
-export default Chart;

@@ -1,4 +1,4 @@
-import Button from 'components/Button';
+import { Button } from 'components/Button';
 import { Bar, defaults } from 'react-chartjs-2';
 import { stockState } from 'state/stockState';
 

@@ -1,4 +1,4 @@
-import Button from 'components/Button';
+import { Button } from 'components/Button';
 
 const NewsWidget = ({ title, news, button }) => {
 	if (news.length === 0) {

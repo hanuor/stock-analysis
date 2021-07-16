@@ -4,7 +4,7 @@ import { getPageData } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 import StatsWidget from 'components/StatsWidget/_StatsWidget';
-import Button from 'components/Button';
+import { Button } from 'components/Button';
 import { MAP_STATISTICS } from 'data/financials/map_statistics';
 
 export default function Statistics({ info, data }) {

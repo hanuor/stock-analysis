@@ -8,7 +8,7 @@ import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
 import { PriceChart } from 'components/PriceChart/_PriceChart';
-import Profile from 'components/Overview/ProfileWidget';
+import { Profile } from 'components/Overview/ProfileWidget';
 import NewsArea from 'components/Overview/NewsArea';
 import FinancialsWidget from 'components/Overview/FinancialsWidget';
 import AnalystWidget from 'components/Overview/AnalystWidget';
@@ -55,7 +55,7 @@ const StockOverview = ({ info, data, news }: IProps) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-6">
-					<Profile />
+					<Profile info={info} data={data} />
 					<FinancialsWidget />
 					<AnalystWidget />
 				</div>

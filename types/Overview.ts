@@ -18,7 +18,9 @@ export interface Overview {
 	target: string;
 	earningsDate: string;
 	description: string;
-	infoTable: string;
+	infoTable: {
+		[key: string]: string[];
+	};
 	financialIntro: string;
 	financialChart: string;
 	analystIntro: string;
