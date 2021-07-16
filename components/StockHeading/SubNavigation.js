@@ -26,66 +26,76 @@ const Statement = () => {
 		<nav className="mt-1.5">
 			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
 				<li>
-					<Link
-						href={`/stocks/${path.two}/financials/`}
-						prefetch={false}
-						scroll={false}
-					>
-						<a
-							className={
-								statement == 'income_statement' ? active : inactive
-							}
-							data-title="Income"
+					{path.two && (
+						<Link
+							href={`/stocks/${path.two}/financials/`}
+							prefetch={false}
+							scroll={false}
 						>
-							Income
-						</a>
-					</Link>
+							<a
+								className={
+									statement == 'income_statement' ? active : inactive
+								}
+								data-title="Income"
+							>
+								Income
+							</a>
+						</Link>
+					)}
 				</li>
 				<li>
-					<Link
-						href={`/stocks/${path.two}/financials/balance-sheet`}
-						prefetch={false}
-						scroll={false}
-					>
-						<a
-							className={
-								statement == 'balance_sheet' ? active : inactive
-							}
-							data-title="Balance Sheet"
+					{path.two && (
+						<Link
+							href={`/stocks/${path.two}/financials/balance-sheet`}
+							prefetch={false}
+							scroll={false}
 						>
-							Balance Sheet
-						</a>
-					</Link>
+							<a
+								className={
+									statement == 'balance_sheet' ? active : inactive
+								}
+								data-title="Balance Sheet"
+							>
+								Balance Sheet
+							</a>
+						</Link>
+					)}
 				</li>
 				<li>
-					<Link
-						href={`/stocks/${path.two}/financials/cash-flow-statement/`}
-						prefetch={false}
-						scroll={false}
-					>
-						<a
-							className={
-								statement == 'cash_flow_statement' ? active : inactive
-							}
-							data-title="Cash Flow"
+					{path.two && (
+						<Link
+							href={`/stocks/${path.two}/financials/cash-flow-statement/`}
+							prefetch={false}
+							scroll={false}
 						>
-							Cash Flow
-						</a>
-					</Link>
+							<a
+								className={
+									statement == 'cash_flow_statement'
+										? active
+										: inactive
+								}
+								data-title="Cash Flow"
+							>
+								Cash Flow
+							</a>
+						</Link>
+					)}
 				</li>
 				<li>
-					<Link
-						href={`/stocks/${path.two}/financials/ratios/`}
-						prefetch={false}
-						scroll={false}
-					>
-						<a
-							className={statement == 'ratios' ? active : inactive}
-							data-title="Ratios"
+					{path.two && (
+						<Link
+							href={`/stocks/${path.two}/financials/ratios/`}
+							prefetch={false}
+							scroll={false}
 						>
-							Ratios
-						</a>
-					</Link>
+							<a
+								className={statement == 'ratios' ? active : inactive}
+								data-title="Ratios"
+							>
+								Ratios
+							</a>
+						</Link>
+					)}
 				</li>
 			</ul>
 		</nav>
