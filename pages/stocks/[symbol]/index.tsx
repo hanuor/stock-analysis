@@ -7,7 +7,7 @@ import { getPageData } from 'functions/callBackEnd';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
-import PriceChart from 'components/PriceChart/_PriceChart';
+import { PriceChart } from 'components/PriceChart/_PriceChart';
 import Profile from 'components/Overview/ProfileWidget';
 import NewsArea from 'components/Overview/NewsArea';
 import FinancialsWidget from 'components/Overview/FinancialsWidget';
@@ -46,7 +46,7 @@ const StockOverview = ({ info, data, news }: IProps) => {
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart />
+					<PriceChart info={info} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
 					<InfoTable />

@@ -1,4 +1,4 @@
-const Controls = ({ chartTime, setChartTime }) => {
+export const Controls = ({ chartTime, setChartTime }) => {
 	const common =
 		' text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md focus:outline-none';
 	const active = 'bp:bg-gray-100 text-gray-800 font-semibold' + common;

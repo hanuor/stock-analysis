@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { stockState } from 'state/stockState';
-import Controls from './PriceChartControls';
+import { Controls } from './PriceChartControls';
 import PriceChange from './PriceChange';
 import Chart from './PriceChartChart';
+import { Info } from 'types/Info';
 
-const getChartUrl = (id, time) => {
+const getChartUrl = (id: number, time: string) => {
 	const url = 'https://stockanalysis.com/wp-json/sa/';
 	const params = `i=${id}&r=${time}&m=1`;
 
@@ -21,8 +21,7 @@ const getChartUrl = (id, time) => {
 	return apiurl;
 };
 
-export default function PriceChart() {
-	const info = stockState((state) => state.info);
+export const PriceChart = ({ info }: { info: Info }) => {
 	const [chartTime, setChartTime] = useState('1Y');
 	const [chartData, setChartData] = useState([]);
 
@@ -30,11 +29,7 @@ export default function PriceChart() {
 		const url = getChartUrl(info.id, chartTime);
 		const source = Axios.CancelToken.source();
 
-		if (typeof info.id === 'undefined') {
-			return null;
-		}
-
-		async function fetchChartData() {
+		const fetchChartData = async () => {
 			try {
 				const response = await Axios.get(url, {
 					cancelToken: source.token,
@@ -42,11 +37,13 @@ export default function PriceChart() {
 				});
 				setChartData(response.data);
 			} catch (error) {
-				// console.log('There was a problem fetching the chart data:', error);
+				console.error(error);
 			}
-		}
+		};
 
-		fetchChartData();
+		if (typeof info.id !== 'undefined') {
+			fetchChartData();
+		}
 
 		return () => {
 			source.cancel('Unmounted');
@@ -83,4 +80,4 @@ export default function PriceChart() {
 			</div>
 		</div>
 	);
-}
+};
