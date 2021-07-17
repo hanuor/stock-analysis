@@ -32,4 +32,6 @@ export interface Overview {
 		strongbuy: number;
 		strongsell: number;
 	};
+	holdingsTable?: object;
+	dividendTable?: object;
 }

@@ -5,7 +5,7 @@ import Axios from 'axios';
 import loadStockTwits from 'functions/loadStockTwits';
 import { News } from 'types/News';
 
-const NewsArea = ({ news }: { news: News[] }) => {
+export const NewsArea = ({ news }: { news: News[] }) => {
 	const info = stockState((state) => state.info);
 	const [data, setData] = useState(news);
 	const [type, setType] = useState('all');
@@ -113,5 +113,3 @@ const NewsArea = ({ news }: { news: News[] }) => {
 		</>
 	);
 };
-
-export default NewsArea;

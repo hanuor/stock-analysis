@@ -9,7 +9,7 @@ import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
 import { PriceChart } from 'components/PriceChart/_PriceChart';
 import { Profile } from 'components/Overview/ProfileWidget';
-import NewsArea from 'components/Overview/NewsArea';
+import { NewsArea } from 'components/Overview/NewsArea';
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
 import { AnalystWidget } from 'components/Overview/AnalystWidget';
 import { stockState } from 'state/stockState';

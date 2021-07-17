@@ -17,7 +17,7 @@ export default function Holdings({ info, data, news }) {
 		setInfo(info);
 		setData(data);
 	}, [data, info, setData, setInfo]);
-
+	console.log(data);
 	return (
 		<Stock info={info}>
 			<SEO

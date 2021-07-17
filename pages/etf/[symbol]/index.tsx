@@ -1,16 +1,27 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { Overview } from 'types/Overview';
+import { News } from 'types/News';
 import { getPageData } from 'functions/callBackEnd';
 import { useEffect } from 'react';
 import stockState from 'state/stockState';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
-import PriceChart from 'components/PriceChart/_PriceChart';
-import Profile from 'components/Overview/ProfileWidget';
-import NewsArea from 'components/Overview/NewsArea';
+import { PriceChart } from 'components/PriceChart/_PriceChart';
+import { Profile } from 'components/Overview/ProfileWidget';
+import { NewsArea } from 'components/Overview/NewsArea';
 import HoldingsWidget from 'components/Overview/HoldingsWidget';
 import DividendWidget from 'components/Overview/DividendWidget';
 
-const EtfOverview = ({ info, data, news }) => {
+interface Props {
+	info: Info;
+	data: Overview;
+	news: News[];
+}
+
+const EtfOverview = ({ info, data, news }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -28,7 +39,7 @@ const EtfOverview = ({ info, data, news }) => {
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart />
+					<PriceChart info={info} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
 					<InfoTable />
@@ -37,7 +48,7 @@ const EtfOverview = ({ info, data, news }) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-7">
-					<Profile />
+					<Profile info={info} data={data} />
 					<HoldingsWidget ticker={info.ticker} data={data.holdingsTable} />
 					<DividendWidget ticker={info.ticker} data={data.dividendTable} />
 				</div>
@@ -48,11 +59,15 @@ const EtfOverview = ({ info, data, news }) => {
 		</Stock>
 	);
 };
-
 export default EtfOverview;
 
-export async function getStaticProps({ params }) {
-	const { info, data, news } = await getPageData('overview', params.symbol);
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data, news } = await getPageData('overview', symbol);
 
 	return {
 		props: {
@@ -62,8 +77,8 @@ export async function getStaticProps({ params }) {
 		},
 		revalidate: 600,
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: [], fallback: 'blocking' };
-}
+};

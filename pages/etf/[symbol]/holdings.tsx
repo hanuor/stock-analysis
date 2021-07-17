@@ -1,3 +1,8 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { HoldingsI } from 'types/Holdings';
+import { News } from 'types/News';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
@@ -6,7 +11,13 @@ import { useEffect } from 'react';
 import HoldingsTable from 'components/Holdings/_HoldingsTable';
 import NewsWidget from 'components/News/NewsWidget';
 
-export default function Holdings({ info, data, news }) {
+interface Props {
+	info: Info;
+	data: HoldingsI;
+	news: News[];
+}
+
+const Holdings = ({ info, data, news }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -14,6 +25,7 @@ export default function Holdings({ info, data, news }) {
 		setInfo(info);
 		setData(data);
 	}, [data, info, setData, setInfo]);
+	console.log(data);
 
 	const HeaderFull = () => (
 		<>
@@ -67,10 +79,16 @@ export default function Holdings({ info, data, news }) {
 			</div>
 		</Stock>
 	);
+};
+export default Holdings;
+
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
 }
 
-export async function getStaticProps({ params }) {
-	const { info, data, news } = await getPageData('holdings', params.symbol);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data, news } = await getPageData('holdings', symbol);
 
 	return {
 		props: {
@@ -80,8 +98,8 @@ export async function getStaticProps({ params }) {
 		},
 		revalidate: 3600,
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: [], fallback: 'blocking' };
-}
+};
