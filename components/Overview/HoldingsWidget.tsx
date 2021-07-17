@@ -1,7 +1,13 @@
+import { HoldingsI } from 'types/Holdings';
 import { SymbolLink } from 'components/Links';
 import { Button } from 'components/Button';
 
-const HoldingsWidget = ({ ticker, data }) => {
+interface Props {
+	ticker: string;
+	data: HoldingsI;
+}
+
+export const HoldingsWidget = ({ ticker, data }: Props) => {
 	if (data.list.length < 10) {
 		return null;
 	}
@@ -57,5 +63,3 @@ const HoldingsWidget = ({ ticker, data }) => {
 		</div>
 	);
 };
-
-export default HoldingsWidget;

@@ -1,3 +1,6 @@
+import { HoldingsI } from 'types/Holdings';
+import { Dividend } from 'types/Dividend';
+
 export interface Overview {
 	revenue: string;
 	netIncome: string;
@@ -13,6 +16,7 @@ export interface Overview {
 	close: string;
 	rangeDay: string;
 	range52w: string;
+
 	beta: string;
 	analysts: string;
 	target: string;
@@ -32,6 +36,14 @@ export interface Overview {
 		strongbuy: number;
 		strongsell: number;
 	};
-	holdingsTable?: object;
-	dividendTable?: object;
+	assets?: string;
+	nav?: string;
+	er?: string;
+	dividendYield?: string;
+	holdings?: number;
+	inception?: string;
+	low52?: string;
+	high52?: string;
+	holdingsTable?: HoldingsI;
+	dividendTable?: Dividend[];
 }

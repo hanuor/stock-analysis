@@ -1,3 +1,9 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { DividendI } from 'types/Dividend';
+import { News } from 'types/News';
+
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
@@ -9,7 +15,13 @@ import HistoryTable from 'components/Dividend/HistoryTable';
 import NewsWidget from 'components/News/NewsWidget';
 import DividendChart from 'components/Dividend/DividendChart';
 
-export default function Holdings({ info, data, news }) {
+interface Props {
+	info: Info;
+	data: DividendI;
+	news: News[];
+}
+
+const Dividend = ({ info, data, news }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -17,7 +29,7 @@ export default function Holdings({ info, data, news }) {
 		setInfo(info);
 		setData(data);
 	}, [data, info, setData, setInfo]);
-	console.log(data);
+
 	return (
 		<Stock info={info}>
 			<SEO
@@ -55,10 +67,16 @@ export default function Holdings({ info, data, news }) {
 			</div>
 		</Stock>
 	);
+};
+export default Dividend;
+
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
 }
 
-export async function getStaticProps({ params }) {
-	const { info, data, news } = await getPageData('dividend', params.symbol);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data, news } = await getPageData('dividend', symbol);
 
 	return {
 		props: {
@@ -68,8 +86,8 @@ export async function getStaticProps({ params }) {
 		},
 		revalidate: 3600,
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: [], fallback: 'blocking' };
-}
+};

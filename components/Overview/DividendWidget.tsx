@@ -1,6 +1,12 @@
+import { Dividend } from 'types/Dividend';
 import { Button } from 'components/Button';
 
-const HoldingsWidget = ({ ticker, data }) => {
+interface Props {
+	ticker: string;
+	data: Dividend[];
+}
+
+export const DividendWidget = ({ ticker, data }: Props) => {
 	if (data.length === 0) {
 		return null;
 	}
@@ -51,5 +57,3 @@ const HoldingsWidget = ({ ticker, data }) => {
 		</div>
 	);
 };
-
-export default HoldingsWidget;

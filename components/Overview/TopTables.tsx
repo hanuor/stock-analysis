@@ -9,7 +9,7 @@ const cssCellLeft = cssCells;
 const cssCellRight =
 	cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold';
 
-export function InfoTable({ data }: { data: Overview }) {
+export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
 		<table className={cssTable}>
 			<tbody>
@@ -52,9 +52,15 @@ export function InfoTable({ data }: { data: Overview }) {
 			</tbody>
 		</table>
 	);
-}
+};
 
-export function QuoteTable({ data, quote }: { data: Overview; quote: Quote }) {
+export const QuoteTable = ({
+	data,
+	quote,
+}: {
+	data: Overview;
+	quote: Quote;
+}) => {
 	const quoteUsed = quote ? quote.volume : data.volume;
 
 	return (
@@ -99,4 +105,4 @@ export function QuoteTable({ data, quote }: { data: Overview; quote: Quote }) {
 			</tbody>
 		</table>
 	);
-}
+};

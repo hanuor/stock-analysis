@@ -12,8 +12,8 @@ import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
 import { PriceChart } from 'components/PriceChart/_PriceChart';
 import { Profile } from 'components/Overview/ProfileWidget';
 import { NewsArea } from 'components/Overview/NewsArea';
-import HoldingsWidget from 'components/Overview/HoldingsWidget';
-import DividendWidget from 'components/Overview/DividendWidget';
+import { HoldingsWidget } from 'components/Overview/HoldingsWidget';
+import { DividendWidget } from 'components/Overview/DividendWidget';
 
 interface Props {
 	info: Info;
@@ -42,15 +42,25 @@ const EtfOverview = ({ info, data, news }: Props) => {
 					<PriceChart info={info} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
-					<InfoTable />
-					<QuoteTable />
+					<InfoTable data={data} />
+					<QuoteTable data={data} quote={info.quote} />
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-7">
 					<Profile info={info} data={data} />
-					<HoldingsWidget ticker={info.ticker} data={data.holdingsTable} />
-					<DividendWidget ticker={info.ticker} data={data.dividendTable} />
+					{data.holdingsTable && (
+						<HoldingsWidget
+							ticker={info.ticker}
+							data={data.holdingsTable}
+						/>
+					)}
+					{data.dividendTable && (
+						<DividendWidget
+							ticker={info.ticker}
+							data={data.dividendTable}
+						/>
+					)}
 				</div>
 				<div className="lg:order-1">
 					<NewsArea news={news} />

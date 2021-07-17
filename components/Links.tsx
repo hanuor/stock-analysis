@@ -43,7 +43,7 @@ export const SymbolLink = ({ symbol, className, prefetch = false }: ILinks) => {
 				prefetch={prefetch}
 			/>
 		);
+	} else {
+		return <>{symbol.toUpperCase()}</>;
 	}
-
-	return symbol.toUpperCase();
 };
