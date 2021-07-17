@@ -1,21 +1,24 @@
 import { Button } from 'components/Button';
 import { Bar, defaults } from 'react-chartjs-2';
-import { stockState } from 'state/stockState';
+import { Info } from 'types/Info';
+import { Overview } from 'types/Overview';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 defaults.color = '#222222';
 
-export default function FinancialsWidget() {
-	const info = stockState((state) => state.info);
-	const data = stockState((state) => state.data);
+interface Props {
+	info: Info;
+	data: Overview;
+}
 
-	if (!data.financialChart) {
+export const FinancialsWidget = ({ info, data }: Props) => {
+	if (!data || !data.financialChart) {
 		return null;
 	}
 
-	const earnings = data.financialChart[2];
-	const colors = [];
+	const earnings: number[] = data.financialChart[2];
+	const colors: string[] = [];
 
 	earnings.map(function (item) {
 		if (item < 0) {
@@ -29,12 +32,12 @@ export default function FinancialsWidget() {
 	const padLegend = {
 		id: 'padLegend',
 
-		beforeInit: (chart) => {
+		beforeInit: (chart: { legend: { fit: () => void; height: number } }) => {
 			const originalFit = chart.legend.fit;
 
 			chart.legend.fit = function fit() {
 				originalFit.bind(chart.legend)();
-				this.height += 6;
+				chart.legend.height += 6;
 			};
 		},
 	};
@@ -42,12 +45,12 @@ export default function FinancialsWidget() {
 	const colorEarnings = {
 		id: 'colorEarnings',
 
-		beforeDraw: function (c) {
+		beforeDraw: function (chart: { legend: { legendItems: any } }) {
 			if (earnings[earnings.length - 1] > 0) {
-				const legends = c.legend.legendItems;
+				const legends = chart.legend.legendItems;
 				legends[legends.length - 1].fillStyle = '#00853E';
 			} else {
-				const legends = c.legend.legendItems;
+				const legends = chart.legend.legendItems;
 				legends[legends.length - 1].fillStyle = '#CD5C5C';
 			}
 		},
@@ -61,6 +64,7 @@ export default function FinancialsWidget() {
 			)}
 			<div className="h-72 border border-gray-200 rounded-sm p-1 xs:px-2 bp:px-3">
 				<Bar
+					type="bar"
 					data={{
 						labels: data.financialChart[0],
 						datasets: [
@@ -101,7 +105,7 @@ export default function FinancialsWidget() {
 									},
 									padding: 0,
 									beginAtZero: true,
-									callback: function (value) {
+									callback: function (value: number) {
 										const newvalue = value / 1000000;
 										return newvalue
 											.toString()
@@ -160,4 +164,4 @@ export default function FinancialsWidget() {
 			/>
 		</div>
 	);
-}
+};

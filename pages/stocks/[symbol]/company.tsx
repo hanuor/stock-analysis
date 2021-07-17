@@ -1,16 +1,25 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { Company } from 'types/Company';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
-import ProfileDescription from 'components/ProfilePage/ProfileDescription';
-import ProfileInfo from 'components/ProfilePage/ProfileInfo';
-import ProfileContact from 'components/ProfilePage/ProfileContact';
-import ProfileDetails from 'components/ProfilePage/ProfileDetails';
-import ProfileExecutives from 'components/ProfilePage/ProfileExecutives';
-import ProfileSECfilings from 'components/ProfilePage/ProfileSECfilings';
+import { ProfileDescription } from 'components/ProfilePage/ProfileDescription';
+import { ProfileInfo } from 'components/ProfilePage/ProfileInfo';
+import { ProfileContact } from 'components/ProfilePage/ProfileContact';
+import { ProfileDetails } from 'components/ProfilePage/ProfileDetails';
+import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives';
+import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings';
 
-export default function SymbolStatistics({ info, data }) {
+interface Props {
+	info: Info;
+	data: Company;
+}
+
+const SymbolStatistics = ({ info, data }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -48,10 +57,16 @@ export default function SymbolStatistics({ info, data }) {
 			</div>
 		</Stock>
 	);
+};
+export default SymbolStatistics;
+
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
 }
 
-export async function getStaticProps({ params }) {
-	const { info, data } = await getPageData('profile', params.symbol);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data } = await getPageData('profile', symbol);
 
 	return {
 		props: {
@@ -60,8 +75,8 @@ export async function getStaticProps({ params }) {
 		},
 		revalidate: 3600,
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: [], fallback: 'blocking' };
-}
+};

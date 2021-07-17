@@ -3,8 +3,9 @@ import NewsFeed from 'components/News/_NewsFeed';
 import { stockState } from 'state/stockState';
 import Axios from 'axios';
 import loadStockTwits from 'functions/loadStockTwits';
+import { News } from 'types/News';
 
-const NewsArea = ({ news }) => {
+const NewsArea = ({ news }: { news: News[] }) => {
 	const info = stockState((state) => state.info);
 	const [data, setData] = useState(news);
 	const [type, setType] = useState('all');
@@ -24,7 +25,7 @@ const NewsArea = ({ news }) => {
 			try {
 				const resp = await Axios.get(url, {
 					cancelToken: source.token,
-					timeout: '5000',
+					timeout: 5000,
 				});
 				const newData = await resp.data;
 				setData(newData);

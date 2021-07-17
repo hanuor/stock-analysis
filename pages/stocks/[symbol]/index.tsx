@@ -10,18 +10,18 @@ import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
 import { PriceChart } from 'components/PriceChart/_PriceChart';
 import { Profile } from 'components/Overview/ProfileWidget';
 import NewsArea from 'components/Overview/NewsArea';
-import FinancialsWidget from 'components/Overview/FinancialsWidget';
-import AnalystWidget from 'components/Overview/AnalystWidget';
+import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
+import { AnalystWidget } from 'components/Overview/AnalystWidget';
 import { stockState } from 'state/stockState';
 import { useEffect } from 'react';
 
-interface IProps {
+interface Props {
 	info: Info;
 	data: Overview;
-	news: News;
+	news: News[];
 }
 
-const StockOverview = ({ info, data, news }: IProps) => {
+const StockOverview = ({ info, data, news }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -49,15 +49,15 @@ const StockOverview = ({ info, data, news }: IProps) => {
 					<PriceChart info={info} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
-					<InfoTable />
-					<QuoteTable />
+					<InfoTable data={data} />
+					<QuoteTable data={data} quote={info.quote} />
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-6">
 					<Profile info={info} data={data} />
-					<FinancialsWidget />
-					<AnalystWidget />
+					<FinancialsWidget info={info} data={data} />
+					<AnalystWidget data={data} />
 				</div>
 				<div className="lg:order-1">
 					<NewsArea news={news} />

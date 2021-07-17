@@ -1,3 +1,7 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { Statistics } from 'types/Statistics';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
@@ -7,7 +11,12 @@ import StatsWidget from 'components/StatsWidget/_StatsWidget';
 import { Button } from 'components/Button';
 import { MAP_STATISTICS } from 'data/financials/map_statistics';
 
-export default function Statistics({ info, data }) {
+interface Props {
+	info: Info;
+	data: Statistics;
+}
+
+const StatisticsPage = ({ info, data }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setData = stockState((state) => state.setData);
 
@@ -180,14 +189,16 @@ export default function Statistics({ info, data }) {
 			</div>
 		</Stock>
 	);
+};
+export default StatisticsPage;
+
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
 }
 
-export async function getStaticPaths() {
-	return { paths: [], fallback: 'blocking' };
-}
-
-export async function getStaticProps({ params }) {
-	const { info, data } = await getPageData('statistics', params.symbol);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data } = await getPageData('statistics', symbol);
 
 	return {
 		props: {
@@ -196,4 +207,8 @@ export async function getStaticProps({ params }) {
 		},
 		revalidate: 3600,
 	};
-}
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	return { paths: [], fallback: 'blocking' };
+};

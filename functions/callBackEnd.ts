@@ -8,9 +8,7 @@ interface Params {
 
 const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
 
-export async function getStockInfo({ params }: Params) {
-	const symbol = params.symbol;
-
+export async function getStockInfo(symbol: string) {
 	const response = await Axios.get(API + `/stock?symbol=${symbol}`);
 	const info = response.data;
 

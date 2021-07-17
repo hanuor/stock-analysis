@@ -1,13 +1,19 @@
+import { CompanyInfo, Logo } from 'types/Company';
 import Image from 'next/image';
 
-const ProfileInfo = ({ info, logo }) => {
+interface Props {
+	info: CompanyInfo;
+	logo: Logo;
+}
+
+export const ProfileInfo = ({ info, logo }: Props) => {
 	return (
 		<div className="bg-gray-50 mt-7 lg:mt-1 px-3 xs:px-4 pt-3 xs:pt-4 pb-2 border border-gray-200 rounded">
 			<table className="w-full">
 				<tbody>
 					<tr>
 						<td
-							colSpan="2"
+							colSpan={2}
 							className="text-2xl font-semibold text-center pb-3"
 						>
 							{info.name}
@@ -15,7 +21,7 @@ const ProfileInfo = ({ info, logo }) => {
 					</tr>
 					{logo.src && (
 						<tr>
-							<td colSpan="2" className="text-center">
+							<td colSpan={2} className="text-center">
 								<Image
 									src={logo.src}
 									width={logo.width}
@@ -105,5 +111,3 @@ const ProfileInfo = ({ info, logo }) => {
 		</div>
 	);
 };
-
-export default ProfileInfo;

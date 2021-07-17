@@ -1,19 +1,26 @@
+import { SecFilings, Filing } from 'types/Company';
 import { External } from 'components/CustomLink';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
-const ProfileSECfilings = ({ filings, cik, id }) => {
-	const [entries, setEntries] = useState([]);
-	const [updated, setUpdated] = useState();
+interface Props {
+	id: number;
+	cik: string;
+	filings: SecFilings | null;
+}
+
+export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
+	const [entries, setEntries] = useState<Filing[]>([]);
+	const [updated, setUpdated] = useState<string>('');
 	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
 		if (filings) {
-			setEntries(filings[0]);
-			setUpdated(filings[1]);
+			setEntries(filings.filings);
+			setUpdated(filings.updated);
 			setLoaded(true);
 		} else if (filings === null) {
-			setUpdated(null);
+			setUpdated('');
 			setLoaded(true);
 		}
 	}, [filings]);
@@ -22,7 +29,7 @@ const ProfileSECfilings = ({ filings, cik, id }) => {
 		const source = Axios.CancelToken.source();
 
 		if (loaded) {
-			async function fetchSec() {
+			const fetchSec = async () => {
 				try {
 					const res = await Axios.get(
 						`https://stockanalysis.com/wp-json/sa/sec?cik=${cik}&c=10&i=${id}&json=1`,
@@ -45,7 +52,7 @@ const ProfileSECfilings = ({ filings, cik, id }) => {
 						console.error(err);
 					}
 				}
-			}
+			};
 
 			const now = new Date().getTime();
 			const timestamp = Date.parse(updated);
@@ -93,8 +100,6 @@ const ProfileSECfilings = ({ filings, cik, id }) => {
 					</thead>
 					<tbody>
 						{entries.map((entry, index) => {
-							// const { timestamp, date } = formatSecDate(entry.updated);
-
 							return (
 								<tr key={index} className="border-b border-gray-200">
 									<td className="py-3 pr-1 xs:px-2 text-gray-900 align-top">
@@ -115,7 +120,7 @@ const ProfileSECfilings = ({ filings, cik, id }) => {
 							);
 						})}
 						<tr className="border-b border-gray-200">
-							<td colSpan="3" className="py-3 px-4 text-xl font-medium">
+							<td colSpan={3} className="py-3 px-4 text-xl font-medium">
 								<External
 									url={`https://www.sec.gov/cgi-bin/browse-edgar?CIK=${cik}&count=100`}
 									text="View All SEC Filings"
@@ -128,5 +133,3 @@ const ProfileSECfilings = ({ filings, cik, id }) => {
 		);
 	}
 };
-
-export default ProfileSECfilings;

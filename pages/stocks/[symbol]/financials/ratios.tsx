@@ -1,3 +1,7 @@
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Info } from 'types/Info';
+import { Financials } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
@@ -7,7 +11,12 @@ import { stockState } from 'state/stockState';
 import { financialsState } from 'state/financialsState';
 import { MAP_RATIOS } from 'data/financials/map_ratios';
 
-export default function Ratios({ info, data }) {
+interface Props {
+	info: Info;
+	data: Financials;
+}
+
+const Ratios = ({ info, data }: Props) => {
 	const setInfo = stockState((state) => state.setInfo);
 	const setStatement = financialsState((state) => state.setStatement);
 	const setFinancialData = financialsState((state) => state.setFinancialData);
@@ -32,10 +41,16 @@ export default function Ratios({ info, data }) {
 			/>
 		</Stock>
 	);
+};
+export default Ratios;
+
+interface IParams extends ParsedUrlQuery {
+	symbol: string;
 }
 
-export async function getStaticProps({ params }) {
-	const { info, data } = await getStockFinancials('ratios', params.symbol);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { symbol } = params as IParams;
+	const { info, data } = await getStockFinancials('ratios', symbol);
 
 	return {
 		props: {
@@ -44,8 +59,8 @@ export async function getStaticProps({ params }) {
 		},
 		revalidate: 3600,
 	};
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	return { paths: [], fallback: 'blocking' };
-}
+};

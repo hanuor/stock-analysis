@@ -1,8 +1,8 @@
-const outputHtml = (text) => {
+const outputHtml = (text: string) => {
 	return { __html: text };
 };
 
-const ProfileDescription = ({ text }) => {
+export const ProfileDescription = ({ text }: { text: string }) => {
 	return (
 		<>
 			<h2 className="hh2">Company Description</h2>
@@ -13,5 +13,3 @@ const ProfileDescription = ({ text }) => {
 		</>
 	);
 };
-
-export default ProfileDescription;

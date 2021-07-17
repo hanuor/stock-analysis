@@ -1,11 +1,11 @@
+import { Overview } from 'types/Overview';
 import { Bar, defaults } from 'react-chartjs-2';
-import { stockState } from 'state/stockState';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 defaults.color = '#222222';
 
-function PriceTarget({ target }) {
+function PriceTarget({ target }: { target: string[] }) {
 	const priceTarget = target[0];
 	const difference = target[1];
 	const updown = target[2];
@@ -33,7 +33,7 @@ function PriceTarget({ target }) {
 	}
 }
 
-function AnalystConsensus({ consensus }) {
+function AnalystConsensus({ consensus }: { consensus: string }) {
 	switch (consensus) {
 		case 'Buy':
 		case 'Strong Buy':
@@ -48,9 +48,7 @@ function AnalystConsensus({ consensus }) {
 	}
 }
 
-export default function AnalystWidget() {
-	const data = stockState((state) => state.data);
-
+export const AnalystWidget = ({ data }: { data: Overview }) => {
 	if (
 		typeof data.analystTarget === 'undefined' ||
 		data.analystTarget[0] === '$0' ||
@@ -79,6 +77,7 @@ export default function AnalystWidget() {
 
 				<div className="h-48">
 					<Bar
+						type="bar"
 						data={{
 							labels: [
 								'Sell',
@@ -144,4 +143,4 @@ export default function AnalystWidget() {
 			</div>
 		</div>
 	);
-}
+};

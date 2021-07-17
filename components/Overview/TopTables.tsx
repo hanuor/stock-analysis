@@ -1,4 +1,5 @@
-import { stockState } from 'state/stockState';
+import { Overview } from 'types/Overview';
+import { Quote } from 'types/Quote';
 
 const cssTable = 'text-small w-[48%] lg:w-full text-gray-900';
 const cssRows =
@@ -8,9 +9,7 @@ const cssCellLeft = cssCells;
 const cssCellRight =
 	cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold';
 
-export function InfoTable() {
-	const data = stockState((state) => state.data);
-
+export function InfoTable({ data }: { data: Overview }) {
 	return (
 		<table className={cssTable}>
 			<tbody>
@@ -55,10 +54,7 @@ export function InfoTable() {
 	);
 }
 
-export function QuoteTable() {
-	const data = stockState((state) => state.data);
-	const quote = stockState((state) => state.quote);
-
+export function QuoteTable({ data, quote }: { data: Overview; quote: Quote }) {
 	const quoteUsed = quote ? quote.volume : data.volume;
 
 	return (

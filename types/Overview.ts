@@ -22,8 +22,14 @@ export interface Overview {
 		[key: string]: string[];
 	};
 	financialIntro: string;
-	financialChart: string;
+	financialChart: [][];
 	analystIntro: string;
-	analystTarget: string;
-	analystChart: string;
+	analystTarget: string[];
+	analystChart: {
+		buy: number;
+		hold: number;
+		sell: number;
+		strongbuy: number;
+		strongsell: number;
+	};
 }
