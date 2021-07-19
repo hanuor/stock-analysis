@@ -236,6 +236,7 @@ const updateChart = (
 			xAccessor,
 			updatedXScale
 		);
+
 		initialPlotData = response.plotData;
 		updatedXScale.domain(response.domain); // if last item was visible, then shift
 	}
@@ -1425,6 +1426,8 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 		const cursorStyle = useCrossHairStyleCursor && interaction;
 
 		const cursor = getCursorStyle();
+		console.log(width);
+		width = 800;
 
 		return (
 			<div

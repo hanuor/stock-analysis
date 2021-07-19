@@ -1,8 +1,9 @@
 import { useTable, useSortBy } from 'react-table';
 import styles from './Table.module.css';
-import Link from 'next/link';
+import { StockLink } from 'components/Links';
 import { useMemo } from 'react';
-import { SortUp, SortDown } from 'components/Icons';
+import { SortUpIcon } from 'components/Icons/SortUp';
+import { SortDownIcon } from 'components/Icons/SortDown';
 
 const RecentTable = ({ rawdata }) => {
 	const columns = useMemo(
@@ -15,11 +16,7 @@ const RecentTable = ({ rawdata }) => {
 				Header: 'Symbol',
 				accessor: 'symbol',
 				Cell: function DateCell({ cell: { value } }) {
-					return (
-						<Link href={`/stocks/${value.toLowerCase()}`}>
-							<a className="bll">{value}</a>
-						</Link>
-					);
+					return <StockLink symbol={value} />;
 				},
 			},
 			{
@@ -89,9 +86,9 @@ const RecentTable = ({ rawdata }) => {
 
 										{column.isSorted ? (
 											column.isSortedDesc ? (
-												<SortDown classes="h-5 w-5 text-gray-800" />
+												<SortDownIcon classes="h-5 w-5 text-gray-800" />
 											) : (
-												<SortUp classes="h-5 w-5 text-gray-800" />
+												<SortUpIcon classes="h-5 w-5 text-gray-800" />
 											)
 										) : (
 											''

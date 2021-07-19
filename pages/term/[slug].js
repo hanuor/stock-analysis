@@ -5,21 +5,30 @@ import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
 import { allTermPaths, TERM_PATHS } from 'functions/markdown.functions';
 import ArticleLayout from 'components/Layout/ArticleLayout';
+import { SEO } from 'components/SEO';
 import Image from 'next/image';
-import CustomLink from 'components/CustomLink';
+import { CustomLink } from 'components/CustomLink';
 
 const components = {
 	a: CustomLink,
 	Image,
 };
 
-export default function Page({ content, meta }) {
+export default function Page({ content, meta, slug }) {
 	return (
-		<ArticleLayout meta={meta}>
-			<div>
-				<MDXRemote {...content} components={components} />
-			</div>
-		</ArticleLayout>
+		<>
+			<SEO
+				title={meta.title}
+				description={meta.description}
+				canonical={`term/${slug}/`}
+				image={meta.image}
+			/>
+			<ArticleLayout heading={meta.heading || meta.title}>
+				<div>
+					<MDXRemote {...content} components={components} />
+				</div>
+			</ArticleLayout>
+		</>
 	);
 }
 
@@ -37,6 +46,7 @@ export async function getStaticProps({ params }) {
 		props: {
 			content: mdxSource,
 			meta: data,
+			slug: params.slug,
 		},
 	};
 }

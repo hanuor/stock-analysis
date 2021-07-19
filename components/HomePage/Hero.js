@@ -19,20 +19,20 @@ export default function Hero() {
 					</div>
 					<p className="text-sm xs:text-base md:text-lg">
 						Example searches:{' '}
-						<Link href="/stocks/aapl/">
-							<a className="link">Apple</a>
+						<Link href="/stocks/aapl/" prefetch={false}>
+							<a className="bll">Apple</a>
 						</Link>
 						,{' '}
-						<Link href="/stocks/tsla/">
-							<a className="link">Tesla</a>
+						<Link href="/stocks/tsla/" prefetch={false}>
+							<a className="bll">Tesla</a>
 						</Link>
 						,{' '}
-						<Link href="/stocks/msft/">
-							<a className="link">MSFT</a>
+						<Link href="/stocks/msft/" prefetch={false}>
+							<a className="bll">MSFT</a>
 						</Link>
 						,{' '}
-						<Link href="/stocks/amzn/">
-							<a className="link">AMZN</a>
+						<Link href="/stocks/amzn/" prefetch={false}>
+							<a className="bll">AMZN</a>
 						</Link>
 					</p>
 				</div>

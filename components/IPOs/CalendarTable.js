@@ -1,6 +1,6 @@
 import { useTable } from 'react-table';
 import styles from './Table.module.css';
-import Link from 'next/link';
+import { StockLink } from 'components/Links';
 
 const columns = [
 	{
@@ -14,11 +14,7 @@ const columns = [
 		Header: 'Symbol',
 		accessor: 'symbol',
 		Cell: function DateCell({ cell: { value } }) {
-			return (
-				<Link href={`/stocks/${value.toLowerCase()}`}>
-					<a className="bll">{value}</a>
-				</Link>
-			);
+			return <StockLink symbol={value} />;
 		},
 	},
 	{

@@ -1,13 +1,9 @@
 import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { auth } from 'users/firebase';
-import registrationState from 'state/registrationState';
 
 export default function LandingPage() {
 	const router = useRouter();
-	const setEmail = registrationState((state) => state.setEmail);
-	const setPassword = registrationState((state) => state.setPassword);
 
 	useEffect(() => {
 		const paddleJs = document.createElement('script');
@@ -23,29 +19,17 @@ export default function LandingPage() {
 		};
 	}, []);
 
-	function checkoutComplete(data) {
-		const checkoutId = data.checkout.id;
-
-		// eslint-disable-next-line no-undef
-		Paddle.Order.details(checkoutId, async function (data) {
-			const email = data.order.customer.email;
-			const password = Math.random().toString(36).slice(-8) + '?!337';
-
-			setEmail(email);
-			setPassword(password);
-
-			try {
-				await auth.createUserWithEmailAndPassword(email, password);
-				router.push('/pro/confirmation/');
-			} catch (error) {
-				console.log('There was an error:', error);
-			}
-		});
+	function checkoutComplete() {
+		router.push('/pro/confirmation/');
 	}
 
 	return (
 		<>
-			<SEO title="Stock Analysis Pro" />
+			<SEO
+				title="Stock Analysis Pro: Free 30-Day Trial"
+				description="Get unlimited access to all of our financial data, including full financial history, full ETF holdings, and more."
+				canonical="pro/"
+			/>
 			<main>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">

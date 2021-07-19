@@ -5,11 +5,8 @@ import { SelectPeriod, SelectType } from '/components/Chart/SelectUI';
 import Buttons from '/components/Chart/ButtonsUI';
 import { useImmerReducer } from 'use-immer';
 import { getStockInfo } from '/functions/callBackEnd';
-import stockState from 'state/stockState';
-import { useEffect } from 'react';
-import React from 'react';
 
-export default function CandleStickStockChart({ info, data }) {
+export default function CandleStickStockChart({ info }) {
 	const initialState = {
 		period: 'd',
 		time: '1Y',
@@ -38,16 +35,6 @@ export default function CandleStickStockChart({ info, data }) {
 
 	const [state, dispatch] = useImmerReducer(ourReducer, initialState);
 
-	const setInfo = stockState((state) => state.setInfo);
-
-	useEffect(() => {
-		setInfo(info);
-	}, [info, setInfo]);
-
-	if (!info) {
-		return null;
-	}
-
 	return (
 		<>
 			<SEO
@@ -55,7 +42,7 @@ export default function CandleStickStockChart({ info, data }) {
 				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`stocks/${info.symbol}/chart/`}
 			/>
-			<Stock>
+			<Stock info={info}>
 				<div className="px-2 sm:contain">
 					<div className="">
 						<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
@@ -80,17 +67,19 @@ export default function CandleStickStockChart({ info, data }) {
 	);
 }
 
-export async function getStaticPaths() {
-	return { paths: [], fallback: 'blocking' };
-}
-
 export async function getStaticProps({ params }) {
+	const { symbol } = params;
 	const info = await getStockInfo({ params });
 
 	return {
 		props: {
+			key: symbol,
 			info,
 		},
-		revalidate: 300,
+		revalidate: 3600,
 	};
+}
+
+export async function getStaticPaths() {
+	return { paths: [], fallback: 'blocking' };
 }

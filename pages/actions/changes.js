@@ -4,7 +4,7 @@ import ActionsNavigation from 'components/Actions/ActionsNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import ActionsTable from 'components/Actions/ActionsTable';
-import StockLink from 'components/Links';
+import { StockLink } from 'components/Links';
 
 const ActionsAll = ({ data }) => {
 	const columns = [
@@ -78,6 +78,6 @@ export async function getStaticProps() {
 		props: {
 			data,
 		},
-		revalidate: 600,
+		revalidate: 3600,
 	};
 }

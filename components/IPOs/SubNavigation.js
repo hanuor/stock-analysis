@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from 'styles/TabMenu.module.css';
-import navState from 'state/navState';
+import { useNavState } from 'hooks/useNavState';
 
 const SubNavigation = () => {
-	const path = navState((state) => state.path);
+	const path = useNavState();
 
 	const active =
 		'py-1.5 px-3.5 xs:px-4 block font-semibold bg-[#eee] text-gray-900';
@@ -16,7 +16,7 @@ const SubNavigation = () => {
 				<nav className="mb-1 sm:mb-2 lg:mb-3">
 					<ul className={`flex space-x-1 ${styles.navmenu} overflow-auto`}>
 						<li>
-							<Link href="/ipos/">
+							<Link href="/ipos/" prefetch={false}>
 								<a
 									data-title="Recent"
 									className={
@@ -28,7 +28,7 @@ const SubNavigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/2021/">
+							<Link href="/ipos/2021/" prefetch={false}>
 								<a
 									data-title="2021"
 									className={path.two === '2021' ? active : inactive}
@@ -38,7 +38,7 @@ const SubNavigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/2020/">
+							<Link href="/ipos/2020/" prefetch={false}>
 								<a
 									data-title="2020"
 									className={path.two === '2020' ? active : inactive}
@@ -48,7 +48,7 @@ const SubNavigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/2019/">
+							<Link href="/ipos/2019/" prefetch={false}>
 								<a
 									data-title="2019"
 									className={path.two === '2019' ? active : inactive}

@@ -1,8 +1,7 @@
 /* eslint-disable react/display-name */
-import { forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
-import { stockState } from 'state/stockState';
-import useUserInfo from 'users/useUserInfo';
+import { authState } from 'state/authState';
 import {
 	formatNumber,
 	formatYear,
@@ -10,35 +9,33 @@ import {
 	getPeriodLabel,
 	getPeriodTooltip,
 } from './FinancialTable.functions';
-import { HoverChartIcon } from 'components/Icons';
+import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
-import mapData from 'data/financials_map';
-import HoverChart from './HoverChart';
-import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light.css';
 import TableTitle from './TableTitle';
 import TableControls from './TableControls';
 import Paywall from './Paywall';
+import dynamic from 'next/dynamic';
 
-export default function FinancialTable() {
+import { Tooltip } from './Tooltip';
+import { TooltipChart } from './TooltipChart';
+
+const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
+
+export const FinancialTable = ({ statement, financialData, info, map }) => {
 	const range = financialsState((state) => state.range);
-	const statement = financialsState((state) => state.statement);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
-	const financialData = financialsState((state) => state.financialData);
-	const info = stockState((state) => state.info);
-	const { isPro } = useUserInfo();
+	const isPro = authState((state) => state.isPro);
+	const [hover, setHover] = useState(false);
 
-	if (!financialData[statement]) {
-		return <h1>Loading...</h1>;
+	if (!financialData || Object.keys(financialData).length === 0) {
+		return <span>Loading...</span>;
 	}
 
 	const data =
 		statement === 'ratios' && range === 'quarterly'
-			? financialData.ratios.trailing
-			: financialData[statement][range]; // The data for the selected financial statement
+			? financialData.trailing
+			: financialData[range]; // The data for the selected financial statement
 
 	const paywall = range === 'annual' ? 15 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
@@ -61,17 +58,17 @@ export default function FinancialTable() {
 		return (
 			<>
 				<div className="px-4 lg:px-6 mx-auto">
-					<TableTitle empty={true} />
+					<TableTitle statement={statement} />
 					<span className="text-xl">
-						No {range} {statement.replaceAll('_', ' ')} data found for
-						this stock.
+						No {range} {statement.replace(/_/g, ' ')} data found for this
+						stock.
 					</span>
 				</div>
 			</>
 		);
 	}
 
-	const DATA_MAP = mapData(statement);
+	const DATA_MAP = map;
 
 	const HeaderRow = () => {
 		let headerdata = data.datekey;
@@ -132,6 +129,7 @@ export default function FinancialTable() {
 
 		let rowdata = data[dataid];
 		let revenuedata = data.revenue;
+
 		if (fullcount > showcount) {
 			if (statement === 'income_statement') {
 				revenuedata = revenuedata.slice(0, showcount);
@@ -207,8 +205,12 @@ export default function FinancialTable() {
 		return (
 			<>
 				<tr className={getRowStyles()}>
-					<td className="flex flex-row justify-between items-center">
-						<Tippy
+					<td
+						className="flex flex-row justify-between items-center"
+						onClick={() => !hover && setHover(true)}
+						onMouseEnter={() => !hover && setHover(true)}
+					>
+						<Tooltip
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
 							delay={100}
@@ -218,22 +220,24 @@ export default function FinancialTable() {
 								title={row.title}
 								indent={row.format === 'growth' || row.indent}
 							/>
-						</Tippy>
-						<HeadlessTippy
+						</Tooltip>
+						<TooltipChart
 							render={(attrs) => (
 								<div
 									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
 									tabIndex="-1"
 									{...attrs}
 								>
-									<HoverChart
-										data={data}
-										count={showcount}
-										row={row}
-										range={range}
-										ticker={info.ticker}
-										divider={divider}
-									/>
+									{hover && (
+										<HoverChart
+											data={data}
+											count={showcount}
+											row={row}
+											range={range}
+											ticker={info.ticker}
+											divider={divider}
+										/>
+									)}
 								</div>
 							)}
 							delay={100}
@@ -246,7 +250,7 @@ export default function FinancialTable() {
 							zIndex={30}
 						>
 							<ChartIcon />
-						</HeadlessTippy>
+						</TooltipChart>
 					</td>
 					{dataRows}
 				</tr>
@@ -257,10 +261,19 @@ export default function FinancialTable() {
 	const paywalled = showcount < fullcount ? 'true' : false;
 
 	return (
-		<div className="px-4 lg:px-6 mx-auto">
+		<div>
 			<div className="flex flex-row justify-between items-end">
-				<TableTitle />
-				<TableControls />
+				<TableTitle
+					statement={statement}
+					currency={info.currency}
+					fiscalYear={info.fiscalYear}
+				/>
+				<TableControls
+					map={map}
+					financialData={financialData}
+					statement={statement}
+					symbol={info.symbol}
+				/>
 			</div>
 			<div
 				className={
@@ -273,14 +286,14 @@ export default function FinancialTable() {
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">
-								<Tippy
+								<Tooltip
 									content={getPeriodTooltip(range)}
 									theme="light"
 									delay={100}
 									className={styles.bigTooltipText}
 								>
 									<RowTitle title={getPeriodLabel(range)} />
-								</Tippy>
+								</Tooltip>
 							</th>
 							<HeaderRow />
 						</tr>
@@ -301,4 +314,4 @@ export default function FinancialTable() {
 			</div>
 		</div>
 	);
-}
+};

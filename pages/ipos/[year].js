@@ -63,7 +63,7 @@ export async function getStaticProps({ params }) {
 			year: params.year,
 			data,
 		},
-		revalidate: 300,
+		revalidate: 2 * 60 * 60,
 	};
 }
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { StockLink } from 'components/Links';
 
 export default function IPOwidgets({ recent, upcoming }) {
 	const IPOTable = ({ ipos }) => {
@@ -26,9 +27,7 @@ export default function IPOwidgets({ recent, upcoming }) {
 									{item.d}
 								</td>
 								<td className="py-1.5 px-2 border-r border-gray-200">
-									<Link href={`/stocks/${item.s.toLowerCase()}`}>
-										<a className="link">{item.s}</a>
-									</Link>
+									<StockLink symbol={item.s} className="bll" />
 								</td>
 								<td className="py-1.5 px-2">{item.n}</td>
 							</tr>
@@ -46,8 +45,8 @@ export default function IPOwidgets({ recent, upcoming }) {
 					<div className="flex flex-row justify-between items-end mb-1">
 						<h2 className="text-2xl font-bold mb-1">Recent IPOs</h2>
 						<span>
-							<Link href="/ipos/">
-								<a className="link">All Recent IPOs</a>
+							<Link href="/ipos/" prefetch={false}>
+								<a className="bll">All Recent IPOs</a>
 							</Link>
 						</span>
 					</div>
@@ -57,8 +56,8 @@ export default function IPOwidgets({ recent, upcoming }) {
 					<div className="flex flex-row justify-between items-end mb-1">
 						<h2 className="text-2xl font-bold mb-1">Upcoming IPOs</h2>
 						<span>
-							<Link href="/ipos/calendar/">
-								<a className="link">IPO Calendar</a>
+							<Link href="/ipos/calendar/" prefetch={false}>
+								<a className="bll">IPO Calendar</a>
 							</Link>
 						</span>
 					</div>

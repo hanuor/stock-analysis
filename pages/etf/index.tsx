@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import LayoutSidebar from 'components/Layout/LayoutSidebar';
+import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
 import Table from 'components/Tables/SymbolTable';
 import { ETFLink } from 'components/Links';
@@ -70,14 +70,15 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
-	const stocksList = await fetch(API + '/index?type=etfspage');
+	const stocksList = await fetch(
+		'https://stockanalysis.com/wp-json/sa/index?type=etfspage'
+	);
 	const json = await stocksList.json();
 
 	return {
 		props: {
 			stocks: json,
 		},
-		revalidate: 600,
+		revalidate: 24 * 60 * 60,
 	};
 };

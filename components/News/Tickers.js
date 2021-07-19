@@ -1,4 +1,4 @@
-import StockLink, { ETFLink } from 'components/Links';
+import { SymbolLink } from 'components/Links';
 
 function Tickers({ tickers, intro }) {
 	if (tickers === null || tickers.length === 0) {
@@ -22,22 +22,7 @@ function Tickers({ tickers, intro }) {
 }
 
 function SingleTicker({ ticker }) {
-	if (ticker.startsWith('$')) {
-		return (
-			<StockLink
-				symbol={ticker.slice(1)}
-				className="inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll"
-			/>
-		);
-	} else if (ticker.startsWith('#')) {
-		return (
-			<ETFLink
-				symbol={ticker.slice(1)}
-				className="inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll"
-			/>
-		);
-	}
-	return ticker.toUpperCase();
+	return <SymbolLink symbol={ticker} className="news-ticker" />;
 }
 
 export default Tickers;

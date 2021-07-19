@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from 'styles/TabMenu.module.css';
-import navState from 'state/navState';
+import { useNavState } from 'hooks/useNavState';
 
 const Navigation = () => {
-	const path = navState((state) => state.path);
+	const path = useNavState();
 
 	const active =
 		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900';
@@ -16,7 +16,7 @@ const Navigation = () => {
 				<nav className="border-b-[3px] border-blue-brand_sharp mb-1.5">
 					<ul className={`flex ${styles.navmenu} overflow-auto`}>
 						<li>
-							<Link href="/ipos/">
+							<Link href="/ipos/" prefetch={false}>
 								<a
 									data-title="IPOs"
 									className={
@@ -31,7 +31,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/calendar/">
+							<Link href="/ipos/calendar/" prefetch={false}>
 								<a
 									data-title="Calendar"
 									className={
@@ -43,7 +43,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/news/">
+							<Link href="/ipos/news/" prefetch={false}>
 								<a
 									data-title="News"
 									className={path.two === 'news' ? active : inactive}
@@ -53,7 +53,7 @@ const Navigation = () => {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/statistics/">
+							<Link href="/ipos/statistics/" prefetch={false}>
 								<a
 									data-title="Statistics"
 									className={

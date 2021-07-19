@@ -26,10 +26,10 @@ const RecentIpos = ({ data }) => {
 						<div className="flex flex-col space-y-3 py-3 sm:py-4">
 							<div>
 								<p className="text-base sm:text-lg text-gray-900">
-									This page contains statistics and charts for initial
+									`This page contains statistics and charts for initial
 									public offerings (IPOs) on the US stock market.
 									Annual data is available from 2000-2021 and monthly
-									data since 2019.
+									data since 2019.`
 								</p>
 							</div>
 							<div>
@@ -37,10 +37,7 @@ const RecentIpos = ({ data }) => {
 								<p className="text-base sm:text-lg text-gray-900">
 									{`There have been ${data.data.total.toLocaleString(
 										'en-US'
-									)}
-									IPOs between 2000 and 2021. The most was in the full year
-									2020, with a total of 480 IPOs. The least was in
-									2009, with only 62 IPOs. The year 2021 is on track to beat the previous year's record.`}
+									)} IPOs between 2000 and 2021. The most was in the full year 2020, with a total of 480 IPOs. The least was in 2009, with only 62 IPOs. The year 2021 is on track to beat the previous year's record.`}
 								</p>
 								<StatsChartAnnual
 									title="Annual IPOs, 2000-2021"
@@ -124,6 +121,6 @@ export async function getStaticProps() {
 		props: {
 			data,
 		},
-		revalidate: 300,
+		revalidate: 2 * 60 * 60,
 	};
 }

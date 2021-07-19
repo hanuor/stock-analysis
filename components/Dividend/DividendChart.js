@@ -1,9 +1,7 @@
-import stockState from 'state/stockState';
 import { useEffect, useState } from 'react';
 import SingleChart from './SingleChart';
 
-const DividendChart = ({ data, options }) => {
-	const info = stockState((state) => state.info);
+const DividendChart = ({ data, options, ticker }) => {
 	const [active, setActive] = useState('all');
 	const [y1, setY1] = useState([]);
 	const [y2, setY2] = useState([]);
@@ -65,8 +63,8 @@ const DividendChart = ({ data, options }) => {
 					type="amount"
 					title={
 						active === 'trailing'
-							? `${info.ticker} Dividends (ttm)`
-							: `${info.ticker} Dividends`
+							? `${ticker} Dividends (ttm)`
+							: `${ticker} Dividends`
 					}
 				/>
 				<SingleChart
@@ -75,8 +73,8 @@ const DividendChart = ({ data, options }) => {
 					type="percentage"
 					title={
 						active === 'trailing'
-							? `${info.ticker} Dividend Growth (TTM YoY)`
-							: `${info.ticker} Dividend Growth (YoY)`
+							? `${ticker} Dividend Growth (TTM YoY)`
+							: `${ticker} Dividend Growth (YoY)`
 					}
 				/>
 			</div>
