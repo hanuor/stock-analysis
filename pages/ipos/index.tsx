@@ -4,9 +4,9 @@ import { IpoUpcoming } from 'types/IpoUpcoming';
 import { News } from 'types/News';
 import { getIpoData } from 'functions/callBackEnd';
 import { SEO } from 'components/SEO';
-import IPOTable from 'components/IPOs/RecentTable';
+import { RecentTable } from 'components/IPOs/RecentTable';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
-import SubNavigation from 'components/IPOs/SubNavigation';
+import { SubNavigation } from 'components/IPOs/SubNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
@@ -34,7 +34,7 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
 							<SubNavigation />
-							<IPOTable rawdata={data} />
+							<RecentTable rawdata={data} />
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
 							<CalendarTableMin upcoming={upcoming} />
