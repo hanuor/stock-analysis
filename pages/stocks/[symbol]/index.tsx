@@ -34,7 +34,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 				description={description}
 				canonical={`stocks/${info.symbol}/`}
 			/>
-			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
+			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
 					<PriceChart info={info} />
 				</div>
@@ -50,7 +50,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 					<AnalystWidget data={data} />
 				</div>
 				<div className="lg:order-1">
-					<NewsArea news={news} />
+					<NewsArea info={info} news={news} />
 				</div>
 			</div>
 		</Stock>

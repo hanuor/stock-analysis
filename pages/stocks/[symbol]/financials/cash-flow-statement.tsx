@@ -31,8 +31,7 @@ export default function CashFlowStatement({ info, data }: Props) {
 					statement="cash_flow_statement"
 					financialData={data}
 					map={MAP_CASH_FLOW_STATEMENT}
-					symbol={info.symbol}
-					ticker={info.ticker}
+					info={info}
 				/>
 			</div>
 		</Stock>

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import NewsFeed from 'components/News/_NewsFeed';
-import { stockState } from 'state/stockState';
 import Axios from 'axios';
 import loadStockTwits from 'functions/loadStockTwits';
 import { News } from 'types/News';
+import { Info } from 'types/Info';
 
-export const NewsArea = ({ news }: { news: News[] }) => {
-	const info = stockState((state) => state.info);
+export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 	const [data, setData] = useState(news);
 	const [type, setType] = useState('all');
 	const [firstRender, setFirstRender] = useState(true);

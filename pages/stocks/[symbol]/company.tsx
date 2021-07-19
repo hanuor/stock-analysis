@@ -25,7 +25,7 @@ const SymbolStatistics = ({ info, data }: Props) => {
 				description={`Company profile for ${info.name}, including a description, list of executives, contact details and other key facts.`}
 				canonical={`stocks/${info.symbol}/company/`}
 			/>
-			<div className="contain">
+			<div className="contain mt-4 sm:mt-5 lg:mt-6">
 				<div className="float-none lg:float-left lg:profilewrap">
 					<ProfileDescription text={data.description} />
 				</div>

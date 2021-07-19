@@ -7,8 +7,6 @@ import { News } from 'types/News';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
-import { stockState } from 'state/stockState';
-import { useEffect } from 'react';
 import InfoBox from 'components/InfoBox';
 import InfoTable from 'components/Dividend/InfoTable';
 import HistoryTable from 'components/Dividend/HistoryTable';
@@ -22,14 +20,6 @@ interface Props {
 }
 
 const Dividend = ({ info, data, news }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
-	useEffect(() => {
-		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
-
 	return (
 		<Stock info={info}>
 			<SEO
@@ -37,7 +27,7 @@ const Dividend = ({ info, data, news }: Props) => {
 				description={`Get the latest dividend data for ${info.ticker} (${info.name}), including dividend history, yield, key dates, growth and other metrics.`}
 				canonical={`stocks/${info.symbol}/dividend/`}
 			/>
-			<div className="contain">
+			<div className="contain mt-3 sm:mt-4">
 				<div className="lg:grid grid-cols-sidebar_wide py-1 gap-8">
 					<div>
 						<h1 className="text-xl bp:text-2xl font-bold">
@@ -51,6 +41,7 @@ const Dividend = ({ info, data, news }: Props) => {
 						<DividendChart
 							data={data.chartData}
 							options={data.chartOptions}
+							ticker={info.ticker}
 						/>
 					</div>
 					<aside className="mt-7 lg:mt-5">
@@ -80,6 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
+			key: symbol,
 			info,
 			data,
 			news,

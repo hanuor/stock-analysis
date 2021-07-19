@@ -6,8 +6,6 @@ import { News } from 'types/News';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
-import { stockState } from 'state/stockState';
-import { useEffect } from 'react';
 import HoldingsTable from 'components/Holdings/_HoldingsTable';
 import NewsWidget from 'components/News/NewsWidget';
 
@@ -18,15 +16,6 @@ interface Props {
 }
 
 const Holdings = ({ info, data, news }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
-	useEffect(() => {
-		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
-	console.log(data);
-
 	const HeaderFull = () => (
 		<>
 			{info.ticker} Holdings - {data.count}
@@ -42,7 +31,7 @@ const Holdings = ({ info, data, news }: Props) => {
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
 				canonical={`etf/${info.symbol}/holdings/`}
 			/>
-			<div className="contain">
+			<div className="contain mt-3 sm:mt-4">
 				<div className="lg:grid grid-cols-sidebar_wide gap-8">
 					<div>
 						<div className="flex flex-row justify-between items-end mb-1">
@@ -92,6 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
+			key: symbol,
 			info,
 			data,
 			news,

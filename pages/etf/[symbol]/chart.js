@@ -4,9 +4,7 @@ import { SEO } from 'components/SEO';
 import { SelectPeriod, SelectType } from '/components/Chart/SelectUI';
 import Buttons from '/components/Chart/ButtonsUI';
 import { useImmerReducer } from 'use-immer';
-import { getStockInfo } from '/functions/callBackEnd';
-import stockState from 'state/stockState';
-import { useEffect } from 'react';
+import { getEtfInfo } from '/functions/callBackEnd';
 
 export default function CandleStickStockChart({ info }) {
 	const initialState = {
@@ -36,16 +34,6 @@ export default function CandleStickStockChart({ info }) {
 	}
 
 	const [state, dispatch] = useImmerReducer(ourReducer, initialState);
-
-	const setInfo = stockState((state) => state.setInfo);
-
-	useEffect(() => {
-		setInfo(info);
-	}, [info, setInfo]);
-
-	if (!info) {
-		return null;
-	}
 
 	return (
 		<>
@@ -79,17 +67,19 @@ export default function CandleStickStockChart({ info }) {
 	);
 }
 
-export async function getStaticPaths() {
-	return { paths: [], fallback: 'blocking' };
-}
-
 export async function getStaticProps({ params }) {
-	const info = await getStockInfo({ params });
+	const { symbol } = params;
+	const info = await getEtfInfo({ params });
 
 	return {
 		props: {
+			key: symbol,
 			info,
 		},
 		revalidate: 3600,
 	};
+}
+
+export async function getStaticPaths() {
+	return { paths: [], fallback: 'blocking' };
 }

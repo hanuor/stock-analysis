@@ -28,8 +28,7 @@ export default function IncomeStatement({ info, data }: Props) {
 					statement="income_statement"
 					financialData={data}
 					map={MAP_INCOME_STATEMENT}
-					symbol={info.symbol}
-					ticker={info.ticker}
+					info={info}
 				/>
 			</div>
 		</Stock>

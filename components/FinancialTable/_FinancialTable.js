@@ -21,13 +21,7 @@ import { TooltipChart } from './TooltipChart';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
-export const FinancialTable = ({
-	statement,
-	financialData,
-	map,
-	ticker,
-	symbol,
-}) => {
+export const FinancialTable = ({ statement, financialData, info, map }) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -240,7 +234,7 @@ export const FinancialTable = ({
 											count={showcount}
 											row={row}
 											range={range}
-											ticker={ticker}
+											ticker={info.ticker}
 											divider={divider}
 										/>
 									)}
@@ -269,12 +263,16 @@ export const FinancialTable = ({
 	return (
 		<div>
 			<div className="flex flex-row justify-between items-end">
-				<TableTitle statement={statement} />
+				<TableTitle
+					statement={statement}
+					currency={info.currency}
+					fiscalYear={info.fiscalYear}
+				/>
 				<TableControls
 					map={map}
 					financialData={financialData}
 					statement={statement}
-					symbol={symbol}
+					symbol={info.symbol}
 				/>
 			</div>
 			<div

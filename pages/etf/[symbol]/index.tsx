@@ -4,8 +4,6 @@ import { Info } from 'types/Info';
 import { Overview } from 'types/Overview';
 import { News } from 'types/News';
 import { getPageData } from 'functions/callBackEnd';
-import { useEffect } from 'react';
-import stockState from 'state/stockState';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
@@ -22,14 +20,6 @@ interface Props {
 }
 
 const EtfOverview = ({ info, data, news }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
-	useEffect(() => {
-		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
-
 	return (
 		<Stock info={info}>
 			<SEO
@@ -37,7 +27,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
 				canonical={`etf/${info.symbol}/`}
 			/>
-			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4">
+			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
 					<PriceChart info={info} />
 				</div>
@@ -63,7 +53,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 					)}
 				</div>
 				<div className="lg:order-1">
-					<NewsArea news={news} />
+					<NewsArea info={info} news={news} />
 				</div>
 			</div>
 		</Stock>
@@ -81,6 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
+			key: symbol,
 			info,
 			data,
 			news,

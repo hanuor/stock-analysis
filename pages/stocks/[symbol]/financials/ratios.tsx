@@ -28,8 +28,7 @@ export default function Ratios({ info, data }: Props) {
 					statement="ratios"
 					financialData={data}
 					map={MAP_RATIOS}
-					symbol={info.symbol}
-					ticker={info.ticker}
+					info={info}
 				/>
 			</div>
 		</Stock>

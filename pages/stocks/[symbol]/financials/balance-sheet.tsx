@@ -28,8 +28,7 @@ export default function BalanceSheet({ info, data }: Props) {
 					statement="balance_sheet"
 					financialData={data}
 					map={MAP_BALANCE_SHEET}
-					symbol={info.symbol}
-					ticker={info.ticker}
+					info={info}
 				/>
 			</div>
 		</Stock>
