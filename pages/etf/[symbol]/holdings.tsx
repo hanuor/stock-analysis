@@ -7,7 +7,7 @@ import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
 import HoldingsTable from 'components/Holdings/_HoldingsTable';
-import NewsWidget from 'components/News/NewsWidget';
+import { NewsWidget } from 'components/News/NewsWidget';
 
 interface Props {
 	info: Info;

@@ -1,12 +1,12 @@
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import IPOTable from 'components/IPOs/RecentTable';
-import IPONavigation from 'components/IPOs/Navigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation';
 import SubNavigation from 'components/IPOs/SubNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 import InfoBox from 'components/InfoBox';
-import CalendarTableMin from 'components/IPOs/CalendarTableMin';
-import NewsWidget from 'components/News/NewsWidget';
+import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
+import { NewsWidget } from 'components/News/NewsWidget';
 
 const IpoYear = ({ year, data }) => {
 	const title =

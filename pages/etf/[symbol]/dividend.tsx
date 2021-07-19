@@ -10,7 +10,7 @@ import { getPageData } from 'functions/callBackEnd';
 import InfoBox from 'components/InfoBox';
 import InfoTable from 'components/Dividend/InfoTable';
 import HistoryTable from 'components/Dividend/HistoryTable';
-import NewsWidget from 'components/News/NewsWidget';
+import { NewsWidget } from 'components/News/NewsWidget';
 import DividendChart from 'components/Dividend/DividendChart';
 
 interface Props {

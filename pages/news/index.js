@@ -3,7 +3,7 @@ import { getMarketNews } from 'functions/callBackEnd';
 import NewsNavigation from 'components/News/NewsNavigation';
 import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
 import NewsFeed from 'components/News/_NewsFeed';
-import NewsWidget from 'components/News/NewsWidget';
+import { NewsWidget } from 'components/News/NewsWidget';
 
 const MarketNews = ({ data }) => {
 	return (

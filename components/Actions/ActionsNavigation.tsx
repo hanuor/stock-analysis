@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
 
-const Navigation = () => {
+export const ActionsNavigation = () => {
 	const path = useNavState();
 
 	const active =
@@ -79,5 +79,3 @@ const Navigation = () => {
 		</div>
 	);
 };
-
-export default Navigation;
