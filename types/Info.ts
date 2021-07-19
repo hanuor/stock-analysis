@@ -16,7 +16,7 @@ export interface Info {
 	ipoInfo?: IpoInfo | null;
 }
 
-interface IpoInfo {
+export interface IpoInfo {
 	ipoDate: string;
 	ipoPrice: string;
 	ipoPriceLow: string;

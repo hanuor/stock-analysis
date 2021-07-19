@@ -1,16 +1,12 @@
 import exportFromJSON from 'export-from-json';
 import { financialsState } from 'state/financialsState';
-import { stockState } from 'state/stockState';
 import { authState } from 'state/authState';
 import { formatNumber } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
-export const ExportMenu = ({ map }) => {
+export const ExportMenu = ({ map, financialData, statement, symbol }) => {
 	const range = financialsState((state) => state.range);
-	const statement = financialsState((state) => state.statement);
-	const financialData = financialsState((state) => state.financialData);
-	const info = stockState((state) => state.info);
 	const leftRight = financialsState((state) => state.leftRight);
 	const isPro = authState((state) => state.isPro);
 
@@ -35,7 +31,7 @@ export const ExportMenu = ({ map }) => {
 
 		// Limit columns if paywalled
 		if (fullcount > showcount) {
-			dataColumns = dataColumns.slice(0, showcount);
+			dataColumns = dataColumns.slice(0, showcount + 1);
 		}
 
 		if (leftRight) {
@@ -72,7 +68,7 @@ export const ExportMenu = ({ map }) => {
 
 			// Limit columns if paywalled
 			if (fullcount > showcount) {
-				newRow = newRow.slice(0, showcount);
+				newRow = newRow.slice(0, showcount + 1);
 			}
 
 			if (leftRight) {
@@ -89,7 +85,7 @@ export const ExportMenu = ({ map }) => {
 		});
 
 		const data = newArray;
-		const fileName = info.symbol + '-' + statement + '-' + range;
+		const fileName = symbol + '-' + statement + '-' + range;
 		const exportType = type;
 		exportFromJSON({ data, fileName, exportType });
 	};

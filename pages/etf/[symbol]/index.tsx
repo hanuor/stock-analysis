@@ -6,12 +6,12 @@ import { News } from 'types/News';
 import { getPageData } from 'functions/callBackEnd';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import { InfoTable, QuoteTable } from 'components/Overview/TopTables';
+import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
 import { PriceChart } from 'components/PriceChart/_PriceChart';
 import { Profile } from 'components/Overview/ProfileWidget';
 import { NewsArea } from 'components/Overview/NewsArea';
-import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
-import { AnalystWidget } from 'components/Overview/AnalystWidget';
+import { HoldingsWidget } from 'components/Overview/HoldingsWidget';
+import { DividendWidget } from 'components/Overview/DividendWidget';
 
 interface Props {
 	info: Info;
@@ -19,20 +19,13 @@ interface Props {
 	news: News[];
 }
 
-const StockOverview = ({ info, data, news }: Props) => {
-	let description = `Get a real-time ${info.name} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`;
-	if (info.state == 'upcomingipo') {
-		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`;
-	} else if (info.archived) {
-		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials and other important investing information.`;
-	}
-
+const EtfOverview = ({ info, data, news }: Props) => {
 	return (
 		<Stock info={info}>
 			<SEO
-				title={`${info.name} (${info.ticker}) Stock Price, Quote & News`}
-				description={description}
-				canonical={`stocks/${info.symbol}/`}
+				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
+				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
+				canonical={`etf/${info.symbol}/`}
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
@@ -44,10 +37,20 @@ const StockOverview = ({ info, data, news }: Props) => {
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
-				<div className="px-4 md:px-0 lg:order-2 space-y-6">
+				<div className="px-4 md:px-0 lg:order-2 space-y-7">
 					<Profile info={info} data={data} />
-					<FinancialsWidget info={info} data={data} />
-					<AnalystWidget data={data} />
+					{data.holdingsTable && (
+						<HoldingsWidget
+							ticker={info.ticker}
+							data={data.holdingsTable}
+						/>
+					)}
+					{data.dividendTable && (
+						<DividendWidget
+							ticker={info.ticker}
+							data={data.dividendTable}
+						/>
+					)}
 				</div>
 				<div className="lg:order-1">
 					<NewsArea info={info} news={news} />
@@ -56,8 +59,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 		</Stock>
 	);
 };
-
-export default StockOverview;
+export default EtfOverview;
 
 interface IParams extends ParsedUrlQuery {
 	symbol: string;

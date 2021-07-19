@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import SearchIcon from './SearchIcon';
+import { SearchIcon } from 'components/Icons/Search';
 import SingleResult from './SingleResult';
 import { useRouter } from 'next/router';
 

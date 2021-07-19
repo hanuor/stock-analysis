@@ -16,21 +16,23 @@ const loadStockTwits = (symbol) => {
 
 	const STWT = window.STWT || {};
 	(function () {
-		function e() {
-			const e = [];
-			this.add = function (t, n) {
-				e.push({ name: t, value: n });
-			};
-			this.toString = function () {
-				const t = [];
-				for (let n = 0; n < e.length; n++) {
-					t[n] =
-						encodeURIComponent(e[n].name) +
-						'=' +
-						encodeURIComponent(e[n].value);
-				}
-				return t.join('&');
-			};
+		class e {
+			constructor() {
+				const e = [];
+				this.add = function (t, n) {
+					e.push({ name: t, value: n });
+				};
+				this.toString = function () {
+					const t = [];
+					for (let n = 0; n < e.length; n++) {
+						t[n] =
+							encodeURIComponent(e[n].name) +
+							'=' +
+							encodeURIComponent(e[n].value);
+					}
+					return t.join('&');
+				};
+			}
 		}
 		if (STWT && STWT.Widget) {
 			return;
