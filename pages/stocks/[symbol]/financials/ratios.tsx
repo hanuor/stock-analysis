@@ -4,11 +4,9 @@ import { Info } from 'types/Info';
 import { Financials } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
+import { SubNavigation } from 'components/FinancialTable/SubNavigation';
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
 import { getStockFinancials } from 'functions/callBackEnd';
-import { useEffect } from 'react';
-import { stockState } from 'state/stockState';
-import { financialsState } from 'state/financialsState';
 import { MAP_RATIOS } from 'data/financials/map_ratios';
 
 interface Props {
@@ -16,17 +14,7 @@ interface Props {
 	data: Financials;
 }
 
-const Ratios = ({ info, data }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setStatement = financialsState((state) => state.setStatement);
-	const setFinancialData = financialsState((state) => state.setFinancialData);
-
-	useEffect(() => {
-		setInfo(info);
-		setStatement('ratios');
-		setFinancialData(data);
-	}, [info, setInfo, data, setFinancialData, setStatement]);
-
+export default function Ratios({ info, data }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -34,15 +22,19 @@ const Ratios = ({ info, data }: Props) => {
 				description={`Financial ratios and metrics for ${info.name} stock (${info.ticker}). Includes annual, quarterly and trailing numbers with full history and charts.`}
 				canonical={`stocks/${info.symbol}/financials/ratios/`}
 			/>
-			<FinancialTable
-				statement="ratios"
-				financialData={data}
-				map={MAP_RATIOS}
-			/>
+			<div className="px-4 lg:px-6 mx-auto">
+				<SubNavigation symbol={info.symbol} statement="ratios" />
+				<FinancialTable
+					statement="ratios"
+					financialData={data}
+					map={MAP_RATIOS}
+					symbol={info.symbol}
+					ticker={info.ticker}
+				/>
+			</div>
 		</Stock>
 	);
-};
-export default Ratios;
+}
 
 interface IParams extends ParsedUrlQuery {
 	symbol: string;
@@ -51,9 +43,11 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data } = await getStockFinancials('ratios', symbol);
+	const key = `${symbol}_ratios`;
 
 	return {
 		props: {
+			key: key,
 			info,
 			data,
 		},

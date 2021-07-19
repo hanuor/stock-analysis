@@ -12,8 +12,6 @@ import { Profile } from 'components/Overview/ProfileWidget';
 import { NewsArea } from 'components/Overview/NewsArea';
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
 import { AnalystWidget } from 'components/Overview/AnalystWidget';
-import { stockState } from 'state/stockState';
-import { useEffect } from 'react';
 
 interface Props {
 	info: Info;
@@ -22,14 +20,6 @@ interface Props {
 }
 
 const StockOverview = ({ info, data, news }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
-	useEffect(() => {
-		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
-
 	let description = `Get a real-time ${info.name} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`;
 	if (info.state == 'upcomingipo') {
 		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`;
@@ -79,6 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
+			key: symbol,
 			info,
 			data,
 			news,

@@ -5,8 +5,6 @@ import { Company } from 'types/Company';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
-import { stockState } from 'state/stockState';
-import { useEffect } from 'react';
 import { ProfileDescription } from 'components/ProfilePage/ProfileDescription';
 import { ProfileInfo } from 'components/ProfilePage/ProfileInfo';
 import { ProfileContact } from 'components/ProfilePage/ProfileContact';
@@ -20,14 +18,6 @@ interface Props {
 }
 
 const SymbolStatistics = ({ info, data }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
-	useEffect(() => {
-		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
-
 	return (
 		<Stock info={info}>
 			<SEO
@@ -70,6 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
+			key: symbol,
 			info,
 			data,
 		},

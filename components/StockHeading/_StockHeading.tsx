@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 
 export default function StockHeading({ info }: { info: Info }) {
 	return (
-		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-4 sm:mb-5">
+		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-2">
 			<Breadcrumbs />
 			<Title info={info} />
 			<QueryClientProvider client={queryClient}>

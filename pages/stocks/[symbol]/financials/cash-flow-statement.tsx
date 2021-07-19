@@ -4,11 +4,9 @@ import { Info } from 'types/Info';
 import { Financials } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
+import { SubNavigation } from 'components/FinancialTable/SubNavigation';
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
 import { getStockFinancials } from 'functions/callBackEnd';
-import { useEffect } from 'react';
-import { stockState } from 'state/stockState';
-import { financialsState } from 'state/financialsState';
 import { MAP_CASH_FLOW_STATEMENT } from 'data/financials/map_cash_flow_statement';
 
 interface Props {
@@ -16,17 +14,7 @@ interface Props {
 	data: Financials;
 }
 
-const CashFlowStatement = ({ info, data }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setStatement = financialsState((state) => state.setStatement);
-	const setFinancialData = financialsState((state) => state.setFinancialData);
-
-	useEffect(() => {
-		setInfo(info);
-		setStatement('cash_flow_statement');
-		setFinancialData(data);
-	}, [info, setInfo, data, setFinancialData, setStatement]);
-
+export default function CashFlowStatement({ info, data }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -34,15 +22,22 @@ const CashFlowStatement = ({ info, data }: Props) => {
 				description={`Detailed cash flow statements for ${info.name} stock (${info.ticker}), including operating cash flow, capex and free cash flow.`}
 				canonical={`stocks/${info.symbol}/financials/cash-flow-statement/`}
 			/>
-			<FinancialTable
-				statement="cash_flow_statement"
-				financialData={data}
-				map={MAP_CASH_FLOW_STATEMENT}
-			/>
+			<div className="px-4 lg:px-6 mx-auto">
+				<SubNavigation
+					symbol={info.symbol}
+					statement="cash_flow_statement"
+				/>
+				<FinancialTable
+					statement="cash_flow_statement"
+					financialData={data}
+					map={MAP_CASH_FLOW_STATEMENT}
+					symbol={info.symbol}
+					ticker={info.ticker}
+				/>
+			</div>
 		</Stock>
 	);
-};
-export default CashFlowStatement;
+}
 
 interface IParams extends ParsedUrlQuery {
 	symbol: string;
@@ -54,9 +49,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		'cash_flow_statement',
 		symbol
 	);
+	const key = `${symbol}_cash_flow_statement`;
 
 	return {
 		props: {
+			key: key,
 			info,
 			data,
 		},

@@ -30,22 +30,19 @@ export default function Header() {
 		setOpen(false);
 	}
 
-	useEffect(
-		function () {
-			if (open) {
-				setMenu('block bg-white shadow-xl absolute w-full');
-				document.addEventListener('mousedown', clickOutside);
-			} else {
-				setMenu('hidden');
-				document.removeEventListener('mousedown', clickOutside);
-			}
+	useEffect(() => {
+		if (open) {
+			setMenu('block bg-white shadow-xl absolute w-full');
+			document.addEventListener('mousedown', clickOutside);
+		} else {
+			setMenu('hidden');
+			document.removeEventListener('mousedown', clickOutside);
+		}
 
-			return function () {
-				document.removeEventListener('mousedown', clickOutside);
-			};
-		},
-		[open]
-	);
+		return () => {
+			document.removeEventListener('mousedown', clickOutside);
+		};
+	}, [open]);
 
 	return (
 		<header className="bg-white shadow-md sticky top-0 z-50">

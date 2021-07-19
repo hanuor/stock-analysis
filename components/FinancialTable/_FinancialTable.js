@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import { useState, forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
-import { stockState } from 'state/stockState';
 import { authState } from 'state/authState';
 import {
 	formatNumber,
@@ -22,11 +21,16 @@ import { TooltipChart } from './TooltipChart';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
-export const FinancialTable = ({ statement, financialData, map }) => {
+export const FinancialTable = ({
+	statement,
+	financialData,
+	map,
+	ticker,
+	symbol,
+}) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
-	const info = stockState((state) => state.info);
 	const isPro = authState((state) => state.isPro);
 	const [hover, setHover] = useState(false);
 
@@ -209,7 +213,8 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 				<tr className={getRowStyles()}>
 					<td
 						className="flex flex-row justify-between items-center"
-						onMouseEnter={() => setHover(true)}
+						onClick={() => !hover && setHover(true)}
+						onMouseEnter={() => !hover && setHover(true)}
 					>
 						<Tooltip
 							content={<IndicatorTooltip row={row} />}
@@ -235,7 +240,7 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 											count={showcount}
 											row={row}
 											range={range}
-											ticker={info.ticker}
+											ticker={ticker}
 											divider={divider}
 										/>
 									)}
@@ -262,10 +267,15 @@ export const FinancialTable = ({ statement, financialData, map }) => {
 	const paywalled = showcount < fullcount ? 'true' : false;
 
 	return (
-		<div className="px-4 lg:px-6 mx-auto">
+		<div>
 			<div className="flex flex-row justify-between items-end">
 				<TableTitle statement={statement} />
-				<TableControls map={map} />
+				<TableControls
+					map={map}
+					financialData={financialData}
+					statement={statement}
+					symbol={symbol}
+				/>
 			</div>
 			<div
 				className={

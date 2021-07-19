@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { SubNavigation } from 'components/StockHeading/SubNavigation';
 import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
 
@@ -101,7 +100,6 @@ export const TabNavigation = ({ symbol }: Symbol) => {
 					</li>
 				</ul>
 			</nav>
-			{path.three == 'financials' && <SubNavigation symbol={symbol} />}
 		</>
 	);
 };

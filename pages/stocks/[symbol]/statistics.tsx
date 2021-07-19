@@ -5,8 +5,6 @@ import { Statistics } from 'types/Statistics';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
-import { stockState } from 'state/stockState';
-import { useEffect } from 'react';
 import StatsWidget from 'components/StatsWidget/_StatsWidget';
 import { Button } from 'components/Button';
 import { MAP_STATISTICS } from 'data/financials/map_statistics';
@@ -17,14 +15,6 @@ interface Props {
 }
 
 const StatisticsPage = ({ info, data }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setData = stockState((state) => state.setData);
-
-	useEffect(() => {
-		setInfo(info);
-		setData(data);
-	}, [data, info, setData, setInfo]);
-
 	return (
 		<Stock info={info}>
 			<SEO
@@ -202,6 +192,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: {
+			key: symbol,
 			info,
 			data,
 		},

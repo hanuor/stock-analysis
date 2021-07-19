@@ -4,11 +4,9 @@ import { Info } from 'types/Info';
 import { Financials } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
+import { SubNavigation } from 'components/FinancialTable/SubNavigation';
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
 import { getStockFinancials } from 'functions/callBackEnd';
-import { useEffect } from 'react';
-import { stockState } from 'state/stockState';
-import { financialsState } from 'state/financialsState';
 import { MAP_BALANCE_SHEET } from 'data/financials/map_balance_sheet';
 
 interface Props {
@@ -16,17 +14,7 @@ interface Props {
 	data: Financials;
 }
 
-const BalanceSheet = ({ info, data }: Props) => {
-	const setInfo = stockState((state) => state.setInfo);
-	const setStatement = financialsState((state) => state.setStatement);
-	const setFinancialData = financialsState((state) => state.setFinancialData);
-
-	useEffect(() => {
-		setInfo(info);
-		setStatement('balance_sheet');
-		setFinancialData(data);
-	}, [info, setInfo, data, setFinancialData, setStatement]);
-
+export default function BalanceSheet({ info, data }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -34,15 +22,19 @@ const BalanceSheet = ({ info, data }: Props) => {
 				description={`Detailed balance sheet for ${info.name} stock (${info.ticker}), including cash, debt, assets, liabilities, and book value.`}
 				canonical={`stocks/${info.symbol}/financials/balance-sheet/`}
 			/>
-			<FinancialTable
-				statement="balance_sheet"
-				financialData={data}
-				map={MAP_BALANCE_SHEET}
-			/>
+			<div className="px-4 lg:px-6 mx-auto">
+				<SubNavigation symbol={info.symbol} statement="balance_sheet" />
+				<FinancialTable
+					statement="balance_sheet"
+					financialData={data}
+					map={MAP_BALANCE_SHEET}
+					symbol={info.symbol}
+					ticker={info.ticker}
+				/>
+			</div>
 		</Stock>
 	);
-};
-export default BalanceSheet;
+}
 
 interface IParams extends ParsedUrlQuery {
 	symbol: string;
@@ -51,9 +43,11 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data } = await getStockFinancials('balance_sheet', symbol);
+	const key = `${symbol}_balance_sheet`;
 
 	return {
 		props: {
+			key: key,
 			info,
 			data,
 		},
