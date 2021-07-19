@@ -1426,8 +1426,6 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 		const cursorStyle = useCrossHairStyleCursor && interaction;
 
 		const cursor = getCursorStyle();
-		console.log(width);
-		width = 800;
 
 		return (
 			<div
