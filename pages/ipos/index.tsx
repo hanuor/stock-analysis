@@ -7,7 +7,7 @@ import { SEO } from 'components/SEO';
 import { RecentTable } from 'components/IPOs/RecentTable';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
 import { SubNavigation } from 'components/IPOs/SubNavigation';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 

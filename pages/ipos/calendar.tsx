@@ -6,7 +6,7 @@ import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { CalendarTable } from 'components/IPOs/CalendarTable';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 

@@ -5,8 +5,8 @@ import { IpoRecent } from 'types/IpoRecent';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
-import NewsFeed from 'components/News/_NewsFeed';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
+import { NewsFeed } from 'components/News/_NewsFeed';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
 

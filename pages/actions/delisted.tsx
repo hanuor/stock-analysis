@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';

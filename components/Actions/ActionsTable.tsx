@@ -10,8 +10,8 @@ import {
 import { useMemo } from 'react';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import Pagination from 'components/Tables/Pagination';
-import GlobalFilter from 'components/Tables/GlobalFilter';
+import { Pagination } from 'components/Tables/Pagination';
+import { GlobalFilter } from 'components/Tables/GlobalFilter';
 
 interface Props {
 	title: string;

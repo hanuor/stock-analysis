@@ -4,7 +4,7 @@ import { News } from 'types/News';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { StatsChartAnnual } from 'components/IPOs/StatsChartAnnual';
 import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly';
 import Link from 'next/link';

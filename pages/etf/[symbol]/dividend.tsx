@@ -3,15 +3,14 @@ import { ParsedUrlQuery } from 'querystring';
 import { Info } from 'types/Info';
 import { DividendI } from 'types/Dividend';
 import { News } from 'types/News';
-
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
 import { InfoBox } from 'components/InfoBox';
-import InfoTable from 'components/Dividend/InfoTable';
-import HistoryTable from 'components/Dividend/HistoryTable';
+import { InfoTable } from 'components/Dividend/InfoTable';
+import { HistoryTable } from 'components/Dividend/HistoryTable';
 import { NewsWidget } from 'components/News/NewsWidget';
-import DividendChart from 'components/Dividend/DividendChart';
+import { DividendChart } from 'components/Dividend/DividendChart';
 
 interface Props {
 	info: Info;
