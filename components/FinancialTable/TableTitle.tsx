@@ -6,7 +6,7 @@ interface Props {
 	fiscalYear: string;
 }
 
-export default function TableTitle({ statement, currency, fiscalYear }: Props) {
+export const TableTitle = ({ statement, currency, fiscalYear }: Props) => {
 	return (
 		<div>
 			<TableHeader statement={statement} />
@@ -17,7 +17,7 @@ export default function TableTitle({ statement, currency, fiscalYear }: Props) {
 			/>
 		</div>
 	);
-}
+};
 
 function TableHeader({ statement }: { statement: string }) {
 	const range = financialsState((state) => state.range);

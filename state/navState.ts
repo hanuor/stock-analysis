@@ -1,10 +1,10 @@
 import create from 'zustand';
 
 type PathObject = {
-	one?: string | null;
-	two?: string | null;
-	three?: string | null;
-	four?: string | null;
+	one: string | null;
+	two: string | null;
+	three: string | null;
+	four: string | null;
 };
 
 interface NavStateInterface {
@@ -13,6 +13,6 @@ interface NavStateInterface {
 }
 
 export const navState = create<NavStateInterface>((set) => ({
-	path: {},
+	path: {} as PathObject,
 	setPath: (newPath) => set({ path: newPath }),
 }));
