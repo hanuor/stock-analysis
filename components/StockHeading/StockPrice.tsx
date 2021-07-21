@@ -9,6 +9,7 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 	if (typeof id === 'undefined') {
 		return null;
 	}
+
 	const res = await fetch(`https://stockanalysis.com/wp-json/sa/q?i=${id}`);
 	return res.json();
 }
@@ -77,10 +78,10 @@ function IPOPrice({ ipoInfo }: { ipoInfo?: IpoInfo | null }) {
 	);
 }
 
-function changeColor(change: number) {
-	if (change > 0) {
-		return 'text-green-700';
-	} else if (change < 0) {
+function changeColor(change?: number) {
+	if (change && change > 0) {
+		return 'green-quote';
+	} else if (change && change < 0) {
 		return 'text-red-600';
 	} else {
 		return 'text-gray-800';
@@ -89,7 +90,7 @@ function changeColor(change: number) {
 
 // Regular price if market open or no extended price available
 function Regular({ quote }: { quote: Quote }) {
-	const color = changeColor(quote.change);
+	const color = changeColor(quote.changeR);
 
 	return (
 		<div>
@@ -107,7 +108,7 @@ function Regular({ quote }: { quote: Quote }) {
 
 // Extended price
 function Extended({ quote, market }: { quote: Quote; market: string }) {
-	const color = changeColor(quote.extC);
+	const color = changeColor(quote.extCR);
 
 	return (
 		<div className="max-w-[50%]">
@@ -132,7 +133,7 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 
 // Closing price, if extended price is showing
 function ExtendedClose({ quote }: { quote: Quote }) {
-	const color = changeColor(quote.change);
+	const color = changeColor(quote.changeR);
 
 	return (
 		<div>
