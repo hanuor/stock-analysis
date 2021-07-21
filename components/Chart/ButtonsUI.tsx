@@ -1,19 +1,22 @@
+import { Dispatch, SetStateAction } from 'react';
+
+interface ButtonUIProps {
+	state: string;
+	dispatch: Dispatch<SetStateAction<string>>;
+}
+
 const common =
 	'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md focus:outline-none';
 const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
 const inactive =
 	common + ' text-gray-900 hover:text-gray-900 hover:text-shadow';
+// const SymbolStatistics = ({ info, data }: Props) => {
 
-export default function Buttons({ state, dispatch }) {
+const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 	return (
 		<>
 			<select
-				onChange={(e) =>
-					dispatch({
-						type: 'timeChange',
-						value: e.target.value,
-					})
-				}
+				onChange={(e) => dispatch(e.target.value)}
 				id="period"
 				name="period"
 				className="block sm:hidden pl-3 border-r border-gray-300 pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
@@ -31,18 +34,18 @@ export default function Buttons({ state, dispatch }) {
 			<ul className="hidden sm:flex flex-row whitespace-nowrap overflow-x-auto">
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: '1M' })}
+						onClick={() => dispatch('1M')}
 						type="button"
-						className={state.time === '1M' ? active : inactive}
+						className={state === '1M' ? active : inactive}
 					>
 						1 Month
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: '6M' })}
+						onClick={() => dispatch('6M')}
 						type="button"
-						className={state.time === '6M' ? active : inactive}
+						className={state === '6M' ? active : inactive}
 					>
 						6 Months
 					</button>
@@ -50,45 +53,45 @@ export default function Buttons({ state, dispatch }) {
 
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: 'YTD' })}
+						onClick={() => dispatch('YTD')}
 						type="button"
-						className={state.time === 'YTD' ? active : inactive}
+						className={state === 'YTD' ? active : inactive}
 					>
 						YTD
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: '1Y' })}
+						onClick={() => dispatch('1Y')}
 						type="button"
-						className={state.time === '1Y' ? active : inactive}
+						className={state === '1Y' ? active : inactive}
 					>
 						1 Year
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: '3Y' })}
+						onClick={() => dispatch('3Y')}
 						type="button"
-						className={state.time === '3Y' ? active : inactive}
+						className={state === '3Y' ? active : inactive}
 					>
 						3 Years
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: '5Y' })}
+						onClick={() => dispatch('5Y')}
 						type="button"
-						className={state.time === '5Y' ? active : inactive}
+						className={state === '5Y' ? active : inactive}
 					>
 						5 Years
 					</button>
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch({ type: 'timeChange', value: 'MAX' })}
+						onClick={() => dispatch('MAX')}
 						type="button"
-						className={state.time === 'MAX' ? active : inactive}
+						className={state === 'MAX' ? active : inactive}
 					>
 						MAX
 					</button>
@@ -96,4 +99,5 @@ export default function Buttons({ state, dispatch }) {
 			</ul>
 		</>
 	);
-}
+};
+export default Buttons;

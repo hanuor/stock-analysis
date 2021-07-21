@@ -7,8 +7,7 @@ export interface WithSizeProps {
 	readonly height: number;
 	readonly period: string;
 	readonly time: string;
-	readonly loading: boolean;
-	readonly message: string;
+	readonly type: string;
 	readonly stockId: number;
 	readonly data: IOHLCData[];
 }

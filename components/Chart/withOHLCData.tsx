@@ -42,17 +42,15 @@ interface WithOHLCDataProps {
 	readonly data: IOHLCData[];
 	readonly period: string;
 	readonly time: string;
-	readonly loading: boolean;
-	readonly message: string;
+	readonly type: string;
 	readonly stockId: number;
 }
 
 interface WithOHLCState {
 	data?: IOHLCData[];
-	message: string;
 	period: string;
 	time: string;
-	loading: boolean;
+	type: string;
 	stockId: number;
 }
 
@@ -67,11 +65,10 @@ export function withOHLCData(dataSet = 'DAILY') {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props);
 				this.state = {
-					message: `Loading ${dataSet} data...`,
 					period: '',
 					time: '',
-					loading: true,
 					stockId: 0,
+					type: '',
 				};
 			}
 
@@ -91,7 +88,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 			}
 
 			public render() {
-				const { data, message, period } = this.state;
+				const { data, period } = this.state;
 
 				const newState: WithOHLCState = this.props;
 
@@ -108,7 +105,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 				}
 
 				if (data === undefined) {
-					return <div className="center">{message}</div>;
+					return <div className="center"></div>;
 				}
 
 				return (

@@ -28,12 +28,10 @@ interface StockChartProps {
 	readonly dateTimeFormat?: string;
 	readonly width: number;
 	readonly ratio: number;
-	readonly loading: boolean;
 	readonly type: string;
 	readonly period: string;
 	readonly time: string;
 	readonly stockId: number;
-	readonly message: string;
 }
 
 interface TooltipOptions {
@@ -99,33 +97,36 @@ class StockChart extends React.Component<StockChartProps> {
 			return data.volume;
 		};
 
+		const ma1color = '#2c6288';
+		const ma2color = '#c65102';
+
 		const sma50 = sma()
 			.id(1)
 			.options({ windowSize: 50 })
 			.merge((d: any, c: any) => {
-				d.sma50 = c;
+				d.ma1 = c;
 			})
-			.accessor((d: any) => d.sma50);
+			.accessor((d: any) => d.ma1);
 
 		const sma200 = sma()
 			.id(2)
 			.options({ windowSize: 200 })
 			.merge((d: any, c: any) => {
-				d.sma200 = c;
+				d.ma2 = c;
 			})
-			.accessor((d: any) => d.sma200);
+			.accessor((d: any) => d.ma2);
 
 		const movingAverageTooltipOptions: TooltipOptions[] = [
 			{
 				yAccessor: (d: IOHLCData) => d.ma1,
 				type: 'SMA',
-				stroke: sma50.stroke(),
+				stroke: ma1color,
 				windowSize: sma50.options().windowSize,
 			},
 			{
 				yAccessor: (d: IOHLCData) => d.ma2,
 				type: 'SMA',
-				stroke: sma200.stroke(),
+				stroke: ma2color,
 				windowSize: sma200.options().windowSize,
 			},
 		];
@@ -196,12 +197,6 @@ class StockChart extends React.Component<StockChartProps> {
 		const gridHeight = height - margin.top - margin.bottom;
 
 		const chartHeight = gridHeight;
-		const ma1color = '#2c6288';
-		const ma2color = '#c65102';
-
-		if (this.props.loading) {
-			return null;
-		}
 
 		return (
 			<ChartCanvas
@@ -240,21 +235,15 @@ class StockChart extends React.Component<StockChartProps> {
 						</>
 					)}
 
-					<LineSeries
-						yAccessor={(d) => d.ma1}
-						strokeStyle={sma50.stroke()}
-					/>
+					<LineSeries yAccessor={(d) => d.ma1} strokeStyle={ma1color} />
 					<CurrentCoordinate
 						yAccessor={(d) => d.ma1}
-						fillStyle={sma200.stroke()}
+						fillStyle={ma1color}
 					/>
-					<LineSeries
-						yAccessor={(d) => d.ma2}
-						strokeStyle={sma200.stroke()}
-					/>
+					<LineSeries yAccessor={(d) => d.ma2} strokeStyle={ma2color} />
 					<CurrentCoordinate
 						yAccessor={(d) => d.ma2}
-						fillStyle={sma50.stroke()}
+						fillStyle={ma2color}
 					/>
 
 					<MouseCoordinateY
