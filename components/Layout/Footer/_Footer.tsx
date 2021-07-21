@@ -11,7 +11,6 @@ const navigation = {
 		{ name: 'Stocks', href: '/stocks/' },
 		{ name: 'IPOs', href: '/ipos/' },
 		{ name: 'ETFs', href: '/etf/' },
-		{ name: 'Market News', href: '/news/' },
 	],
 	company: [
 		{ name: 'About', href: '/about/' },

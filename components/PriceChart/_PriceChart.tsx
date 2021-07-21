@@ -22,14 +22,22 @@ const getChartUrl = (id: number, time: string) => {
 };
 
 export const PriceChart = ({ info }: { info: Info }) => {
-	const [chartTime, setChartTime] = useState('1Y');
 	const [chartData, setChartData] = useState([]);
+	const [chartTime, setChartTime] = useState('');
 
 	useEffect(() => {
-		const url = getChartUrl(info.id, chartTime);
+		const brandNew = info.quote.brandNew ?? null;
+		const daysFrom = info.quote.daysFrom ?? null;
+
+		const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
+		setChartTime(show);
+	}, [info.quote.brandNew, info.quote.daysFrom]);
+
+	useEffect(() => {
 		const source = Axios.CancelToken.source();
 
-		const fetchChartData = async () => {
+		const fetchChartData = async (selected: string) => {
+			const url = getChartUrl(info.id, selected);
 			try {
 				const response = await Axios.get(url, {
 					cancelToken: source.token,
@@ -41,15 +49,15 @@ export const PriceChart = ({ info }: { info: Info }) => {
 			}
 		};
 
-		if (typeof info.id !== 'undefined') {
-			fetchChartData();
+		if (chartTime) {
+			fetchChartData(chartTime);
 		}
 
 		return () => {
 			source.cancel('Unmounted');
 			setChartData([]);
 		};
-	}, [chartTime, info]);
+	}, [chartTime, info.id]);
 
 	if (info.state === 'upcomingipo') {
 		return (

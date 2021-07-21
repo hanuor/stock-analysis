@@ -61,21 +61,22 @@ export const QuoteTable = ({
 	data: Overview;
 	quote: Quote;
 }) => {
-	const quoteUsed = quote ? quote.volume : data.volume;
+	const volume = quote ? quote.volume : data.volume;
+	const previous = !quote || !quote.brandNew ? 'Previous Close' : 'IPO Price';
 
 	return (
 		<table className={cssTable}>
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Volume</td>
-					<td className={cssCellRight}>{quoteUsed}</td>
+					<td className={cssCellRight}>{volume}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Open</td>
 					<td className={cssCellRight}>{data.open}</td>
 				</tr>
 				<tr className={cssRows}>
-					<td className={cssCellLeft}>Previous Close</td>
+					<td className={cssCellLeft}>{previous}</td>
 					<td className={cssCellRight}>{data.close}</td>
 				</tr>
 				<tr className={cssRows}>
