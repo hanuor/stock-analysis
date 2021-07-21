@@ -126,6 +126,14 @@
 	.green-quote::before {
 		content: '+';
 	}
+
+	.dropd {
+		@apply max-h-60 w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-50 transition-opacity duration-200;
+	}
+
+	.dropd.active {
+		@apply opacity-100;
+	}
 }
 
 /* NPROGRESS */
