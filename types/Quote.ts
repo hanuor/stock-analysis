@@ -27,4 +27,6 @@ export interface Quote {
 	timestamp: string;
 	timestampF: string;
 	volume: string;
+	brandNew?: boolean;
+	daysFrom?: number;
 }
