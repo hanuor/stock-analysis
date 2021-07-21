@@ -15,7 +15,7 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 
 export default function StockPrice({ info }: { info: Info }) {
 	const { data } = useQuery(['q', info.id], queryQuote, {
-		refetchInterval: 10000,
+		refetchInterval: 5000,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
 	});
