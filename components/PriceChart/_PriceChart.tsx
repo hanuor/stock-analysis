@@ -22,9 +22,16 @@ const getChartUrl = (id: number, time: string) => {
 };
 
 export const PriceChart = ({ info }: { info: Info }) => {
-	const [chartTime, setChartTime] = useState('1Y');
 	const [chartData, setChartData] = useState([]);
-	const [forced1day, setForced1day] = useState(false);
+	const [chartTime, setChartTime] = useState('');
+
+	useEffect(() => {
+		const brandNew = info.quote.brandNew ?? null;
+		const daysFrom = info.quote.daysFrom ?? null;
+
+		const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
+		setChartTime(show);
+	}, [info.quote.brandNew, info.quote.daysFrom]);
 
 	useEffect(() => {
 		const source = Axios.CancelToken.source();
@@ -42,28 +49,15 @@ export const PriceChart = ({ info }: { info: Info }) => {
 			}
 		};
 
-		if (typeof info.id !== 'undefined') {
-			let selected: string = chartTime;
-
-			if (info.state === 'newipo' && !forced1day) {
-				if (
-					info.quote.brandNew ||
-					(info.quote.daysFrom && info.quote.daysFrom < 5)
-				) {
-					selected = '1D';
-					setChartTime('1D');
-					setForced1day(true);
-				}
-			}
-
-			fetchChartData(selected);
+		if (chartTime) {
+			fetchChartData(chartTime);
 		}
 
 		return () => {
 			source.cancel('Unmounted');
 			setChartData([]);
 		};
-	}, [chartTime, forced1day, info]);
+	}, [chartTime, info.id]);
 
 	if (info.state === 'upcomingipo') {
 		return (
