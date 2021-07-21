@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import NewsFeed from 'components/News/_NewsFeed';
+import { NewsFeed } from 'components/News/_NewsFeed';
 import Axios from 'axios';
 import loadStockTwits from 'functions/loadStockTwits';
 import { News } from 'types/News';

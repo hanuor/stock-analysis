@@ -1,9 +1,9 @@
-import { Dividend } from 'types/Dividend';
+import { DividendType } from 'types/Dividend';
 import { Button } from 'components/Button';
 
 interface Props {
 	ticker: string;
-	data: Dividend[];
+	data: DividendType[];
 }
 
 export const DividendWidget = ({ ticker, data }: Props) => {

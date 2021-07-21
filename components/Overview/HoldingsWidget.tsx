@@ -1,10 +1,10 @@
-import { HoldingsI } from 'types/Holdings';
+import { HoldingsType } from 'types/Holdings';
 import { SymbolLink } from 'components/Links';
 import { Button } from 'components/Button';
 
 interface Props {
 	ticker: string;
-	data: HoldingsI;
+	data: HoldingsType;
 }
 
 export const HoldingsWidget = ({ ticker, data }: Props) => {

@@ -76,7 +76,7 @@ const navigation = {
 	],
 };
 
-export default function Footer() {
+export const Footer = () => {
 	const { isLoggedIn } = useUserInfo();
 
 	return (
@@ -249,4 +249,4 @@ export default function Footer() {
 			</div>
 		</footer>
 	);
-}
+};

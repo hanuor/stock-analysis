@@ -1,5 +1,5 @@
-import { HoldingsI } from 'types/Holdings';
-import { Dividend } from 'types/Dividend';
+import { HoldingsType } from 'types/Holdings';
+import { DividendType } from 'types/Dividend';
 
 export interface Overview {
 	revenue: string;
@@ -44,6 +44,6 @@ export interface Overview {
 	inception?: string;
 	low52?: string;
 	high52?: string;
-	holdingsTable?: HoldingsI;
-	dividendTable?: Dividend[];
+	holdingsTable?: HoldingsType;
+	dividendTable?: DividendType[];
 }

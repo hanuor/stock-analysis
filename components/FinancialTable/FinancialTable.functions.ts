@@ -50,7 +50,7 @@ export const setBorder = (rowname: string) => {
 };
 
 // Format the Y axis on hover charts
-export const formatY = (value: number, format: string) => {
+export const formatY = (value: number, format?: string) => {
 	if (!format && (value > 10000000 || value < -10000000)) {
 		return new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
@@ -72,8 +72,8 @@ export const formatY = (value: number, format: string) => {
 interface FormatNumber {
 	type: string;
 	current: number;
-	previous: number;
-	revenue: number;
+	previous: number | null | string;
+	revenue: number | null;
 	divider: string;
 }
 
@@ -106,7 +106,14 @@ export function formatNumber({
 		}
 
 		case 'growth': {
-			if (current && previous && current > 0 && previous > 0) {
+			if (
+				current &&
+				previous &&
+				typeof current === 'number' &&
+				typeof previous === 'number' &&
+				current > 0 &&
+				previous > 0
+			) {
 				return ((current / previous - 1) * 100).toFixed(decimals) + '%';
 			}
 			return '-';
@@ -138,11 +145,11 @@ export function formatNumber({
 		}
 
 		default:
-			return;
+			return '';
 	}
 }
 
-export function formatYear(date: string) {
+export function formatYear(date: string | number) {
 	const dateObject = new Date(date);
 	let year = dateObject.getFullYear();
 	const month = dateObject.getMonth();

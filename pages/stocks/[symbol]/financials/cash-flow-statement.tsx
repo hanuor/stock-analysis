@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { Info } from 'types/Info';
-import { Financials } from 'types/Financials';
+import { FinancialsType } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { SubNavigation } from 'components/FinancialTable/SubNavigation';
@@ -11,7 +11,7 @@ import { MAP_CASH_FLOW_STATEMENT } from 'data/financials/map_cash_flow_statement
 
 interface Props {
 	info: Info;
-	data: Financials;
+	data: FinancialsType;
 }
 
 export default function CashFlowStatement({ info, data }: Props) {
@@ -29,7 +29,7 @@ export default function CashFlowStatement({ info, data }: Props) {
 				/>
 				<FinancialTable
 					statement="cash_flow_statement"
-					financialData={data}
+					financials={data}
 					map={MAP_CASH_FLOW_STATEMENT}
 					info={info}
 				/>

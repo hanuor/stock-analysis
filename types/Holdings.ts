@@ -1,14 +1,14 @@
-export interface HoldingsI {
+export interface HoldingsType {
 	count: number;
 	list: Holding[];
 	top10: number;
 	updated: string;
 }
 
-type Holding = {
+export interface Holding {
 	no: number;
 	symbol: string;
 	name: string;
 	assets: string;
 	shares: string;
-};
+}

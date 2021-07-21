@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 
 interface Props {
 	heading: string;

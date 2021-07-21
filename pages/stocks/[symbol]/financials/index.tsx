@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { Info } from 'types/Info';
-import { Financials } from 'types/Financials';
+import { FinancialsType } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { SubNavigation } from 'components/FinancialTable/SubNavigation';
@@ -11,7 +11,7 @@ import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement';
 
 interface Props {
 	info: Info;
-	data: Financials;
+	data: FinancialsType;
 }
 
 export default function IncomeStatement({ info, data }: Props) {
@@ -26,7 +26,7 @@ export default function IncomeStatement({ info, data }: Props) {
 				<SubNavigation symbol={info.symbol} statement="income_statement" />
 				<FinancialTable
 					statement="income_statement"
-					financialData={data}
+					financials={data}
 					map={MAP_INCOME_STATEMENT}
 					info={info}
 				/>

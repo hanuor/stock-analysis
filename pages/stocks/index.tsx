@@ -1,7 +1,8 @@
 import { GetStaticProps } from 'next';
+import { Column } from 'react-table';
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
-import Table from 'components/Tables/SymbolTable';
+import { SymbolTable } from 'components/Tables/SymbolTable';
 import { StockLink } from 'components/Links';
 import abbreviateNumber from 'functions/abbreviateNumber';
 
@@ -13,7 +14,7 @@ interface IStock {
 }
 
 interface IStocks {
-	stocks: IStock;
+	stocks: IStock[];
 }
 
 interface ICellString {
@@ -29,7 +30,7 @@ interface ICellNumber {
 }
 
 export default function StocksIndexPage({ stocks }: IStocks) {
-	const columns = [
+	const columns: Column[] = [
 		{
 			Header: 'Symbol',
 			accessor: 's',
@@ -61,7 +62,7 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 				description="An overview of all the stock ticker symbols listed. Explore the stock pages to learn about the company’s price history, financials, key stats, and more."
 				canonical="stocks/"
 			/>
-			<Table title="Stocks" columndata={columns} rowdata={stocks} />
+			<SymbolTable title="Stocks" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
 	);
 }

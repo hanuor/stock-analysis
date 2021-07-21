@@ -3,7 +3,7 @@ import { Title } from 'components/StockHeading/Title';
 import StockPrice from 'components/StockHeading/StockPrice';
 import { TabNavigation } from 'components/StockHeading/TabNavigation';
 import { TabNavigationETF } from 'components/StockHeading/TabNavigationETF';
-import Breadcrumbs from 'components/Breadcrumbs/_Breadcrumbs';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();

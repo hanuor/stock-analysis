@@ -5,7 +5,7 @@ import { Statistics } from 'types/Statistics';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
-import StatsWidget from 'components/StatsWidget/_StatsWidget';
+import { StatsWidget } from 'components/StatsWidget/_StatsWidget';
 import { Button } from 'components/Button';
 import { MAP_STATISTICS } from 'data/financials/map_statistics';
 
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const StatisticsPage = ({ info, data }: Props) => {
+	console.log(data);
 	return (
 		<Stock info={info}>
 			<SEO

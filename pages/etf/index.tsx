@@ -1,7 +1,8 @@
 import { GetStaticProps } from 'next';
+import { Column } from 'react-table';
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
-import Table from 'components/Tables/SymbolTable';
+import { SymbolTable } from 'components/Tables/SymbolTable';
 import { ETFLink } from 'components/Links';
 import abbreviateNumber from 'functions/abbreviateNumber';
 
@@ -12,8 +13,8 @@ interface IStock {
 	aum: number;
 }
 
-interface IStocks {
-	stocks: IStock;
+interface IEtfs {
+	stocks: IStock[];
 }
 
 interface ICellString {
@@ -28,8 +29,8 @@ interface ICellNumber {
 	};
 }
 
-export default function StocksIndexPage({ stocks }: IStocks) {
-	const columns = [
+export default function StocksIndexPage({ stocks }: IEtfs) {
+	const columns: Column[] = [
 		{
 			Header: 'Symbol',
 			accessor: 's',
@@ -64,7 +65,7 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 				description="An overview of the ETF symbols currently listed on the site. Explore the ETF pages to learn about the fund’s price history, key information and more."
 				canonical="etf/"
 			/>
-			<Table title="ETFs" columndata={columns} rowdata={stocks} />
+			<SymbolTable title="ETFs" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
 	);
 }

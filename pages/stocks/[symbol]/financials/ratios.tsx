@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { Info } from 'types/Info';
-import { Financials } from 'types/Financials';
+import { FinancialsType } from 'types/Financials';
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
 import { SubNavigation } from 'components/FinancialTable/SubNavigation';
@@ -11,7 +11,7 @@ import { MAP_RATIOS } from 'data/financials/map_ratios';
 
 interface Props {
 	info: Info;
-	data: Financials;
+	data: FinancialsType;
 }
 
 export default function Ratios({ info, data }: Props) {
@@ -26,7 +26,7 @@ export default function Ratios({ info, data }: Props) {
 				<SubNavigation symbol={info.symbol} statement="ratios" />
 				<FinancialTable
 					statement="ratios"
-					financialData={data}
+					financials={data}
 					map={MAP_RATIOS}
 					info={info}
 				/>
