@@ -1,8 +1,4 @@
-import {
-	functor,
-	GenericChartComponent,
-	last,
-} from '@react-financial-charts/core';
+import { functor, GenericChartComponent, last } from './core';
 import { format } from 'd3-format';
 import * as React from 'react';
 import { ToolTipText } from './ToolTipText';
