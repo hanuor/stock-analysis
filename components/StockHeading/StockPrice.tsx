@@ -9,13 +9,14 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 	if (typeof id === 'undefined') {
 		return null;
 	}
+
 	const res = await fetch(`https://stockanalysis.com/wp-json/sa/q?i=${id}`);
 	return res.json();
 }
 
 export default function StockPrice({ info }: { info: Info }) {
 	const { data } = useQuery(['q', info.id], queryQuote, {
-		refetchInterval: 10000,
+		refetchInterval: 5000,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
 	});
@@ -77,10 +78,10 @@ function IPOPrice({ ipoInfo }: { ipoInfo?: IpoInfo | null }) {
 	);
 }
 
-function changeColor(change: number) {
-	if (change > 0) {
-		return 'text-green-700';
-	} else if (change < 0) {
+function changeColor(change?: number) {
+	if (change && change > 0) {
+		return 'green-quote';
+	} else if (change && change < 0) {
 		return 'text-red-600';
 	} else {
 		return 'text-gray-800';
@@ -89,17 +90,17 @@ function changeColor(change: number) {
 
 // Regular price if market open or no extended price available
 function Regular({ quote }: { quote: Quote }) {
-	const color = changeColor(quote.change);
+	const color = changeColor(quote.changeR);
+	const market = quote.market == 'open' ? 'Market open' : 'Market closed';
 
 	return (
 		<div>
 			<span className="text-4xl font-bold">{quote.priceD}</span>{' '}
 			<span className={`text-2xl ${color} font-semibold`}>
-				{quote.change} ({quote.changePc})
+				{`${quote.change} (${quote.changePc})`}
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
-				{quote.timestamp} -{' '}
-				{quote.market == 'open' ? <>Market open</> : <>Market closed</>}
+				{`${quote.timestamp} - ${market}`}
 			</div>
 		</div>
 	);
@@ -107,7 +108,7 @@ function Regular({ quote }: { quote: Quote }) {
 
 // Extended price
 function Extended({ quote, market }: { quote: Quote; market: string }) {
-	const color = changeColor(quote.extC);
+	const color = changeColor(quote.extCR);
 
 	return (
 		<div className="max-w-[50%]">
@@ -132,7 +133,7 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 
 // Closing price, if extended price is showing
 function ExtendedClose({ quote }: { quote: Quote }) {
-	const color = changeColor(quote.change);
+	const color = changeColor(quote.changeR);
 
 	return (
 		<div>

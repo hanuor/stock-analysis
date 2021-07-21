@@ -49,8 +49,8 @@ module.exports = {
 			},
 			colors: {
 				blue: {
-					brand_sharp: 'rgba(44, 98, 136)', // from old site
-					brand_light: 'rgba(60, 125, 212)', // test later
+					brand_sharp: 'rgba(44, 98, 136)',
+					brand_light: 'rgba(60, 125, 212)',
 					sharp: 'rgba(1, 90, 210, 1)',
 					link: 'rgb(30, 115, 190, 1)',
 				},

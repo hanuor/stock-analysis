@@ -90,7 +90,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				const allResults = exact.concat(matches);
 				setResults(allResults);
 				setOpen(true);
-			}, 200);
+			}, 150);
 		} else if (fetched) {
 			setResults(trending);
 			setOpen(true);
@@ -217,7 +217,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			<SearchIcon />
 			<input
 				className={
-					'border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none focus:bg-white focus:shadow-lg transition' +
+					'border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg' +
 					grayBg
 				}
 				name="q"
@@ -240,32 +240,34 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 					}
 				}}
 			/>
-			{open && (
-				<>
-					<div className="max-h-60 w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg searchresults">
-						{query.length === 0 && (
-							<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
-								Trending
-							</h4>
-						)}
-						<ul>
-							{results.map((item, index) => (
-								<SingleResult
-									key={index}
-									index={index}
-									result={item}
-									setOpen={setOpen}
-								/>
-							))}
-						</ul>
-					</div>
-					<style global jsx>{`
-						.activeresult {
-							background-color: #f3f4f6;
-						}
-					`}</style>
-				</>
-			)}
+			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
+				{open && (
+					<>
+						<div>
+							{query.length === 0 && (
+								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+									Trending
+								</h4>
+							)}
+							<ul>
+								{results.map((item, index) => (
+									<SingleResult
+										key={index}
+										index={index}
+										result={item}
+										setOpen={setOpen}
+									/>
+								))}
+							</ul>
+						</div>
+						<style global jsx>{`
+							.activeresult {
+								background-color: #f3f4f6;
+							}
+						`}</style>
+					</>
+				)}
+			</div>
 		</>
 	);
 };

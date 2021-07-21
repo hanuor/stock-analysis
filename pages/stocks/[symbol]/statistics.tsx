@@ -15,7 +15,6 @@ interface Props {
 }
 
 const StatisticsPage = ({ info, data }: Props) => {
-	console.log(data);
 	return (
 		<Stock info={info}>
 			<SEO

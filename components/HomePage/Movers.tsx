@@ -3,12 +3,12 @@ import { StockLink } from 'components/Links';
 const cellStyles =
 	'py-1.5 sm:py-2 px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
 
-type Mover = {
+interface Mover {
 	s: string;
 	n: string;
 	p: string;
 	c: string;
-};
+}
 
 interface Props {
 	date: string;
@@ -18,7 +18,12 @@ interface Props {
 }
 
 export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
-	const Rows = ({ movers, type }: { movers: Mover[]; type: string }) => {
+	interface InnerProps {
+		movers: Mover[];
+		type: string;
+	}
+
+	const Rows = ({ movers, type }: InnerProps) => {
 		const items = movers.slice(0, 10);
 		const redOrGreen = type === 'Gainers' ? 'text-green-600' : 'text-red-500';
 
@@ -53,8 +58,8 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		);
 	};
 
-	const Table = ({ movers, type }: { movers: Mover[]; type: string }) => {
-		const titlePrefix = marketStatus === 'pre-market' ? 'Pre-Market' : 'Top';
+	const Table = ({ movers, type }: InnerProps) => {
+		const titlePrefix = marketStatus === 'premarket' ? 'Pre-Market' : 'Top';
 
 		return (
 			<div className="flex-grow">
