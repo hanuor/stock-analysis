@@ -38,7 +38,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 				<div className="order-3 flex-grow overflow-auto">
 					<PriceChart info={info} />
 				</div>
-				<div className="order-1 flex flex-row justify-between gap-4">
+				<div className="order-1 flex flex-row gap-4">
 					<InfoTable data={data} />
 					<QuoteTable data={data} quote={info.quote} />
 				</div>
