@@ -27,7 +27,7 @@ const formatPageTitle = (word: string) => {
 const Break = () => <span className="px-1 sm:px-2">&raquo;</span>;
 
 const LevelOne = ({ path }: { path: PathObject }) => {
-	if (path.one) {
+	if (path.one && path.one !== '#main') {
 		if (path.one === 'ipos') {
 			if (path.two) {
 				return (
@@ -61,7 +61,7 @@ const LevelOne = ({ path }: { path: PathObject }) => {
 };
 
 const LevelTwo = ({ path }: { path: PathObject }) => {
-	if (path.two) {
+	if (path.two && path.two !== '#main') {
 		if (path.one === 'stocks') {
 			if (path.three) {
 				return (
@@ -91,7 +91,7 @@ const LevelTwo = ({ path }: { path: PathObject }) => {
 };
 
 const LevelThree = ({ path }: { path: PathObject }) => {
-	if (path.three) {
+	if (path.three && path.three !== '#main') {
 		if (path.four) {
 			return (
 				<Link
@@ -108,7 +108,7 @@ const LevelThree = ({ path }: { path: PathObject }) => {
 };
 
 const LevelFour = ({ path }: { path: PathObject }) => {
-	if (path.four) {
+	if (path.four && path.four !== '#main') {
 		return <>{formatPageTitle(path.four)}</>;
 	}
 	return null;

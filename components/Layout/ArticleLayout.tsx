@@ -19,7 +19,7 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 	return (
 		<>
 			<div className="mx-auto lg:max-w-[1150px] py-6 lg:py-8 px-4 lg:px-6 lg:grid lg:grid-cols-sidebar lg:gap-12">
-				<main>
+				<main id="main">
 					<article className="text-page lg:px-6">
 						<header className="article-header">
 							<h1>{meta.heading || meta.title}</h1>

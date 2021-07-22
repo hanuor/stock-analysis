@@ -10,7 +10,7 @@ interface Props {
 export const LayoutSidebar = ({ heading, children }: Props) => {
 	return (
 		<div className="contain">
-			<main className="w-full py-5 xs:py-6">
+			<main id="main" className="w-full py-5 xs:py-6">
 				<Breadcrumbs />
 				<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-3">
 					{heading}
