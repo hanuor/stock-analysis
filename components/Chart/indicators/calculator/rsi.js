@@ -27,7 +27,7 @@ THE SOFTWARE.
 import { mean } from 'd3-array';
 import { path, slidingWindow } from '../utils';
 import { RSI as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Rsi() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { windowSize, sourcePath } = options;

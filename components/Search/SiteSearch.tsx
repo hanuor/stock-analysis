@@ -19,7 +19,6 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [trending, setTrending] = useState([]);
-	const [clicking, setClicking] = useState(false);
 	let num = 1;
 
 	// Fetch the site index
@@ -92,7 +91,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				setResults(allResults);
 				setOpen(true);
 			}, 150);
-		} else if (fetched && !clicking) {
+		} else if (fetched) {
 			setResults(trending);
 			setOpen(true);
 		}
@@ -173,13 +172,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 						const selectedUrl = new URL(selected);
 						const selectedPath = selectedUrl.pathname;
 						router.push(selectedPath);
-						setClicking(true);
-						setResults(trending);
-						setQuery('');
 						setOpen(false);
-						setTimeout(() => {
-							setClicking(false);
-						}, 1000);
 						if (keyref) {
 							keyref.blur();
 						}
@@ -197,7 +190,6 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			(formref && formref.contains(e.target as Node)) ||
 			(resultsdoc && resultsdoc.contains(e.target as Node))
 		) {
-			setOpen(true);
 			return;
 		}
 		setOpen(false);
@@ -224,7 +216,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			<SearchIcon />
 			<input
 				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
-					nav ? ' bg-gray-50 focus:bg-white' : ''
+					nav ? ' bg-gray-50 focus:bg-white' : 'lg:text-[17px]'
 				}`}
 				type="search"
 				aria-label="Search"
@@ -256,16 +248,22 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 									Trending
 								</h4>
 							)}
-							<ul>
-								{results.map((item, index) => (
-									<SingleResult
-										key={index}
-										index={index}
-										result={item}
-										setOpen={setOpen}
-									/>
-								))}
-							</ul>
+							{results.length ? (
+								<ul>
+									{results.map((item, index) => (
+										<SingleResult
+											key={index}
+											index={index}
+											result={item}
+											setOpen={setOpen}
+										/>
+									))}
+								</ul>
+							) : (
+								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+									No results found.
+								</h4>
+							)}
 						</div>
 						<style global jsx>{`
 							.activeresult {

@@ -29,7 +29,8 @@ export const HoverChart = ({
 	const type = row.format;
 
 	const y = rowdata.map((curr, index) => {
-		const previous = row.format === 'growth' ? rowdata[index + 1] : null;
+		const offset = range === 'quarterly' ? 4 : 1;
+		const previous = row.format === 'growth' ? rowdata[index + offset] : null;
 		const revenue = row.format === 'margin' ? data.revenue[index] : null;
 		const current = curr as number;
 
@@ -166,6 +167,19 @@ export const HoverChart = ({
 						bodyFontStyle: 400,
 						padding: 10,
 						displayColors: false,
+						callbacks: {
+							label: function (context: { parsed: { y: string } }) {
+								const value = context.parsed.y || '';
+								if (
+									type === 'growth' ||
+									type === 'percentage' ||
+									type === 'margin'
+								) {
+									return `${value}%`;
+								}
+								return value;
+							},
+						},
 					},
 				},
 			}}

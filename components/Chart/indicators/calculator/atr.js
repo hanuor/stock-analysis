@@ -2,7 +2,7 @@
 import { sum } from 'd3-array';
 import { slidingWindow } from '../utils';
 import { ATR as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Atr() {
 	let options = defaultOptions;
 	let source = (d) => ({
 		open: d.open,

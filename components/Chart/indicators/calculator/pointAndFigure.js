@@ -59,7 +59,7 @@ function updateColumns(columnData, dateAccessor, dateMutator) {
 	});
 	return columnData;
 }
-export default function () {
+export default function PointAndFigureComponent() {
 	let options = defaultOptions;
 	let dateAccessor = (d) => d.date;
 	let dateMutator = (d, date) => {

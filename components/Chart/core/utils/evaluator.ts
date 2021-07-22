@@ -210,14 +210,16 @@ function getFilteredResponse<T, TAccessor extends number | Date>(
 	return filteredData;
 }
 
-export default function ({
-	xScale,
-	useWholeData,
-	clamp,
-	pointsPerPxThreshold,
-	minPointsPerPxThreshold,
-	flipXScale,
-}: any) {
+export default function Evaluator(
+    {
+        xScale,
+        useWholeData,
+        clamp,
+        pointsPerPxThreshold,
+        minPointsPerPxThreshold,
+        flipXScale,
+    }: any
+) {
 	return extentsWrapper(
 		useWholeData || isNotDefined(xScale.invert),
 		clamp,

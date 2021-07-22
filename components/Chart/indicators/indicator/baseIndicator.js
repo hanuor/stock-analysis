@@ -12,7 +12,7 @@ const defaultColors = [
 ];
 let i = 0;
 const overlayColors = scaleOrdinal(defaultColors);
-export default function () {
+export default function BaseIndicator() {
 	let id = i++;
 	let accessor;
 	let stroke;

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
-import ArticleLayout from 'components/Layout/ArticleLayout';
+import { ArticleLayout } from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
 
 function classNames(...classes: Array<string>) {
@@ -16,7 +16,13 @@ export default function Contact() {
 				description="This page contains a contact form. Use this form if you have questions or suggestions about the content on this site."
 				canonical="contact/"
 			/>
-			<ArticleLayout heading="Contact">
+			<ArticleLayout
+				meta={{
+					title: 'Contact Us',
+					description:
+						'This page contains a contact form. Use this form if you have questions or suggestions about the content on this site.',
+				}}
+			>
 				<p>
 					We do not provide personalized investment advice. Please contact
 					a qualified financial advisor if you have questions about

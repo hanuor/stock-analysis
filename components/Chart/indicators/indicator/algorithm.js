@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { identity, merge, slidingWindow } from '../utils';
-export default function () {
+export default function Algorithm() {
 	let windowSize = 1;
 	let accumulator = identity;
 	let mergeAs = identity;

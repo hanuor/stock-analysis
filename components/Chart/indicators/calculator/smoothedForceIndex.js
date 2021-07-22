@@ -4,7 +4,7 @@ import { SmoothedForceIndex as defaultOptions } from './defaultOptionsForComputa
 import ema from './ema';
 import forceIndex from './forceIndex';
 import sma from './sma';
-export default function () {
+export default function SmoothedForceIndexComponent() {
 	const underlyingAlgorithm = forceIndex();
 	let options = defaultOptions;
 	const calculator = (data) => {

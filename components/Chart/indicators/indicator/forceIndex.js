@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { forceIndex } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'ForceIndex';
-export default function () {
+export default function ForceIndex() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.forceIndex);

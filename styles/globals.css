@@ -37,8 +37,12 @@
 		@apply text-base md:text-lg text-gray-900;
 	}
 
+	.text-page .article-header {
+		@apply mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-3 md:pb-3;
+	}
+
 	.text-page h1 {
-		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-4 md:pb-5;
+		@apply text-3xl md:text-4xl font-bold mb-3;
 	}
 
 	.text-page h2 {
@@ -55,6 +59,10 @@
 
 	.text-page a {
 		@apply bll;
+	}
+
+	.text-page .article-header a {
+		@apply text-gray-700 hover:text-black;
 	}
 
 	.text-page ul {
@@ -128,7 +136,7 @@
 	}
 
 	.dropd {
-		@apply max-h-60 w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-200;
+		@apply max-h-[265px] w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-200;
 	}
 
 	.dropd.active {

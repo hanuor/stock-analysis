@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { rsi } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'RSI';
-export default function () {
+export default function Rsi() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.rsi);
