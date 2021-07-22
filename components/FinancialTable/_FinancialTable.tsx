@@ -234,6 +234,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				<tr className={getRowStyles()}>
 					<td
 						className="flex flex-row justify-between items-center"
+						onTouchStart={() => !hover && setHover(true)}
 						onClick={() => !hover && setHover(true)}
 						onMouseEnter={() => !hover && setHover(true)}
 					>
