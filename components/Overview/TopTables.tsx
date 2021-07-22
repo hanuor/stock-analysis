@@ -1,7 +1,7 @@
 import { Overview } from 'types/Overview';
 import { Quote } from 'types/Quote';
 
-const cssTable = 'text-small w-[48%] lg:w-full text-gray-900';
+const cssTable = 'text-small w-[48%] text-gray-900';
 const cssRows =
 	'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0';
 const cssCells = 'py-[1px] sm:py-2 px-1 whitespace-nowrap';
