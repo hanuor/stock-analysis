@@ -52,14 +52,16 @@ export const Header = () => {
 			<div className="mx-auto px-3 lg:px-4 flex items-center py-2 space-x-4 lg:space-x-8 xl:max-w-screen-xl">
 				<div>
 					<Link href="/" prefetch={false}>
-						<a className="flex">
+						<a className="flex" aria-label="Stock Analysis home page">
 							<HeaderLogo className="h-8 w-8 lg:hidden" />
 							<HeaderLogoFull />
 						</a>
 					</Link>
 				</div>
 				<div className="flex-grow">
-					<HeaderSearch />
+					<form role="search">
+						<HeaderSearch />
+					</form>
 				</div>
 				<div className="lg:hidden">
 					<button

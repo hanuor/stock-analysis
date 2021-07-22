@@ -19,6 +19,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [trending, setTrending] = useState([]);
+	const [clicking, setClicking] = useState(false);
 	let num = 1;
 
 	// Fetch the site index
@@ -91,7 +92,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				setResults(allResults);
 				setOpen(true);
 			}, 150);
-		} else if (fetched) {
+		} else if (fetched && !clicking) {
 			setResults(trending);
 			setOpen(true);
 		}
@@ -171,10 +172,17 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 						const selected = activeResult.href;
 						const selectedUrl = new URL(selected);
 						const selectedPath = selectedUrl.pathname;
-						setOpen(false);
-						setResults([]);
-						setQuery('');
 						router.push(selectedPath);
+						setClicking(true);
+						setResults(trending);
+						setQuery('');
+						setOpen(false);
+						setTimeout(() => {
+							setClicking(false);
+						}, 1000);
+						if (keyref) {
+							keyref.blur();
+						}
 					}
 				}
 				break;
@@ -182,13 +190,14 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 	}
 
 	function mouseClick(e: MouseEvent) {
-		const resultsref = inputRef.current ?? null;
+		const formref = inputRef.current ?? null;
 		const resultsdoc = document.querySelector('.searchresults') ?? null;
 
 		if (
-			(resultsref && resultsref.contains(e.target as Node)) ||
+			(formref && formref.contains(e.target as Node)) ||
 			(resultsdoc && resultsdoc.contains(e.target as Node))
 		) {
+			setOpen(true);
 			return;
 		}
 		setOpen(false);
@@ -210,22 +219,21 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [open, results]);
 
-	const grayBg = nav ? ' bg-gray-50 focus:bg-white' : '';
-
 	return (
 		<>
 			<SearchIcon />
 			<input
-				className={
-					'border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg' +
-					grayBg
-				}
-				name="q"
-				type="text"
-				spellCheck="false"
-				autoComplete="off"
-				title="Search"
+				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
+					nav ? ' bg-gray-50 focus:bg-white' : ''
+				}`}
+				type="search"
 				aria-label="Search"
+				role="combobox"
+				autoComplete="off"
+				autoCorrect="off"
+				spellCheck="false"
+				aria-autocomplete="list"
+				name="search"
 				placeholder="Company or stock ticker..."
 				ref={inputRef}
 				value={query}
@@ -234,8 +242,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				onFocus={() => {
 					if (!fetched) {
 						fetchIndex();
-					}
-					if (results.length) {
+					} else {
 						setOpen(true);
 					}
 				}}
@@ -243,7 +250,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
 				{open && (
 					<>
-						<div>
+						<div className="searchresults">
 							{query.length === 0 && (
 								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
 									Trending
