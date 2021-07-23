@@ -8,7 +8,7 @@ import {
 	last,
 	strokeDashTypes,
 } from '../core';
-import { range as d3Range, zip } from 'd3-array';
+import { max, range as d3Range, zip } from 'd3-array';
 import { forceCollide, forceSimulation, forceX } from 'd3-force';
 import { ScaleContinuousNumeric } from 'd3-scale';
 import * as React from 'react';
@@ -28,6 +28,7 @@ interface AxisProps {
 	readonly fontFamily?: string;
 	readonly fontSize?: number;
 	readonly fontWeight?: number;
+	readonly getMaxTicks?: (data: number) => void;
 	readonly getMouseDelta: (
 		startXY: [number, number],
 		mouseXY: [number, number]
@@ -228,6 +229,11 @@ const tickHelper = (
 			: baseTickValues;
 	} else if (scale.ticks !== undefined) {
 		tickValues = scale.ticks(tickArguments);
+		if (props.getMaxTicks != undefined && tickValues !== undefined) {
+			// let maxTick = max(tickValues);
+			const something = max(tickValues);
+			props.getMaxTicks(Number(something));
+		}
 	} else {
 		tickValues = scale.domain();
 	}

@@ -27,7 +27,7 @@ THE SOFTWARE.
 import { zip } from 'd3-array';
 import { MACD as defaultOptions } from './defaultOptionsForComputation';
 import ema from './ema';
-export default function () {
+export default function Macd() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { fast, slow, signal, sourcePath } = options;

@@ -3,7 +3,7 @@
 /* eslint-disable no-invalid-this */
 import { functor } from './functor';
 import { identity } from './identity';
-export default function () {
+export default function MappedSlidingWindow() {
 	let undefinedValue;
 	let windowSize = 10;
 	let accumulator = () => {

@@ -2,7 +2,7 @@
 import { functor, merge, path } from '../utils';
 import atr from './atr';
 import { Kagi as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function KagiComponent() {
 	let options = defaultOptions;
 	let dateAccessor = (d) => d.date;
 	let dateMutator = (d, date) => {

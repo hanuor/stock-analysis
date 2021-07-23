@@ -45,7 +45,7 @@ interface AccumulatingWindow {
 	discardTillEnd(x: boolean): AccumulatingWindow;
 }
 
-export default function () {
+export default function AccumulatingWindowComponent() {
 	let accumulateTill = functor(false);
 	let accumulator = noop;
 	let value = identity;

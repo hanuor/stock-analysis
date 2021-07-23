@@ -72,21 +72,6 @@ export function withOHLCData(dataSet = 'DAILY') {
 				};
 			}
 
-			public componentDidMount() {
-				const newState: WithOHLCState = this.props;
-				Axios.get(
-					`https://stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
-				).then((res) => {
-					const forDateParse = res.data.map(fixDataHeaders);
-					const data = forDateParse.map(parseData());
-					const period = newState.period;
-					const time = newState.time;
-					this.setState({ period });
-					this.setState({ time });
-					this.setState({ data });
-				});
-			}
-
 			public render() {
 				const { data, period } = this.state;
 

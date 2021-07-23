@@ -4,7 +4,7 @@ import { macd } from '../calculator';
 import baseIndicator from './baseIndicator';
 import { MACD as appearanceOptions } from './defaultOptionsForAppearance';
 const ALGORITHM_TYPE = 'MACD';
-export default function () {
+export default function Macd() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.fill(appearanceOptions.fill)

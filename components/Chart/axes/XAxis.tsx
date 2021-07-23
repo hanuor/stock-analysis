@@ -110,6 +110,7 @@ export class XAxis<T extends number | Date> extends React.Component<
 				strokeWidth={strokeWidth}
 				zoomEnabled={zoomEnabled && showTicks}
 				axisZoomCallback={this.axisZoomCallback}
+				getMaxTicks={undefined}
 			/>
 		);
 	}

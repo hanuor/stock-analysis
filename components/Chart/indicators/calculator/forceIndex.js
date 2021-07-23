@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { path, slidingWindow } from '../utils';
 import { ForceIndex as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function ForceIndexComponent() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { sourcePath, volumePath } = options;

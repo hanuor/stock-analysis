@@ -26,7 +26,7 @@ THE SOFTWARE.
 */
 import { path } from '../utils';
 import { EMA as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Ema() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { windowSize, sourcePath } = options;

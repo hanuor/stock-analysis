@@ -50,7 +50,7 @@ interface SlidingWindow {
 	undefinedValue(x: any): SlidingWindow;
 }
 
-export default function () {
+export default function SlidingWindowComponent() {
 	let undefinedValue: any;
 	let windowSize = 10;
 	let accumulator = noop;

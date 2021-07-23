@@ -3,7 +3,7 @@ import { change } from '../calculator';
 import { merge, rebind } from '../utils';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'Change';
-export default function () {
+export default function Change() {
 	const base = baseIndicator().type(ALGORITHM_TYPE);
 	const underlyingAlgorithm = change();
 	const mergedAlgorithm = merge()

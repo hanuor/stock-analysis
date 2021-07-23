@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { path } from '../utils';
 import { Change as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Compare() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { basePath, mainKeys, compareKeys } = options;

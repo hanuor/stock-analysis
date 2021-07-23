@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { sma } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'SMA';
-export default function () {
+export default function Sma() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.sma);

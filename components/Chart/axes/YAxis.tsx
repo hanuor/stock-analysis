@@ -15,6 +15,7 @@ export interface YAxisProps {
 		startXY: [number, number],
 		mouseXY: [number, number]
 	) => number;
+	readonly getMaxTicks?: (data: number) => void;
 	readonly gridLinesStrokeStyle?: string;
 	readonly gridLinesStrokeWidth?: number;
 	readonly gridLinesStrokeDasharray?: strokeDashTypes;
@@ -108,6 +109,7 @@ export class YAxis extends React.Component<YAxisProps> {
 				strokeWidth={strokeWidth}
 				zoomEnabled={this.props.zoomEnabled && zoomEnabled}
 				axisZoomCallback={this.axisZoomCallback}
+				getMaxTicks={this.props.getMaxTicks}
 			/>
 		);
 	}
