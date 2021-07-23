@@ -109,6 +109,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 		switch (e.key) {
 			case 'Escape':
+			case 'Tab':
 				{
 					if (keyref) {
 						e.preventDefault();

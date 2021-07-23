@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
 
 export const IPONavigation = () => {
@@ -14,7 +13,7 @@ export const IPONavigation = () => {
 		<div className="mb-1">
 			<div>
 				<nav className="border-b-[3px] border-blue-brand_sharp mb-1.5">
-					<ul className={`flex ${styles.navmenu} overflow-auto`}>
+					<ul className="navmenu">
 						<li>
 							<Link href="/ipos/" prefetch={false}>
 								<a

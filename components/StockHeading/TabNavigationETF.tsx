@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import styles from 'styles/TabMenu.module.css';
 import { useNavState } from 'hooks/useNavState';
 
 interface Symbol {
@@ -19,11 +18,7 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 	return (
 		<>
 			<nav className="border-b-2 border-blue-brand_sharp w-full">
-				<ul
-					className={
-						'flex flex-row w-full overflow-auto ' + styles.navmenu
-					}
-				>
+				<ul className="w-full navmenu">
 					<li>
 						<Link
 							href={`/etf/${symbol}/`}

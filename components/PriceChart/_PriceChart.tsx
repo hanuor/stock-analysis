@@ -26,12 +26,12 @@ export const PriceChart = ({ info }: { info: Info }) => {
 	const [chartTime, setChartTime] = useState('');
 
 	useEffect(() => {
-		const brandNew = info.quote.brandNew ?? null;
-		const daysFrom = info.quote.daysFrom ?? null;
+		const brandNew = (info.quote && info.quote.brandNew) ?? null;
+		const daysFrom = (info.quote && info.quote.daysFrom) ?? null;
 
 		const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
 		setChartTime(show);
-	}, [info.quote.brandNew, info.quote.daysFrom]);
+	}, [info.quote]);
 
 	useEffect(() => {
 		const source = Axios.CancelToken.source();

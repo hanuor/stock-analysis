@@ -11,14 +11,10 @@ import {
 	CloseIcon,
 } from 'components/Layout/Header/HeaderNavigation';
 
-import { navState } from 'state/navState';
-
 export const Header = () => {
 	const noderef = useRef<HTMLDivElement>(null);
 	const [open, setOpen] = useState(false);
 	const [menu, setMenu] = useState('hidden lg:flex');
-	const path = navState((state) => state.path);
-	console.log(path);
 
 	function clickMenu() {
 		setOpen((open) => !open);

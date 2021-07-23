@@ -1,4 +1,3 @@
-import styles from 'styles/TabMenu.module.css';
 import Link from 'next/link';
 import { useNavState } from 'hooks/useNavState';
 
@@ -13,7 +12,7 @@ export const NewsNavigation = () => {
 	return (
 		<div>
 			<nav className="border-b-[3px] border-blue-brand_sharp mb-0.5">
-				<ul className={`flex ${styles.navmenu} overflow-auto`}>
+				<ul className="navmenu">
 					<li>
 						<Link href="/news/">
 							<a
