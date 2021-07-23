@@ -48,7 +48,7 @@ export const Header = () => {
 	}, [open]);
 
 	return (
-		<header className="bg-white shadow-md sticky top-0 z-50">
+		<header className="bg-white shadow-md sticky landscape:static landscape:border-b-0 border-gray-200 landscape:md:sticky landscape:md:border-b-0 top-0 z-50">
 			<div className="mx-auto px-3 lg:px-4 flex items-center py-2 space-x-4 lg:space-x-8 xl:max-w-screen-xl">
 				<div>
 					<Link href="/" prefetch={false}>
