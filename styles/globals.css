@@ -7,6 +7,33 @@
 		@apply text-gray-900;
 	}
 
+	.skip-nav {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
+	.skip-nav:focus {
+		background: white;
+		clip: auto;
+		height: auto;
+		left: 10px;
+		padding: 0.65rem 0.8rem;
+		position: fixed;
+		top: 10px;
+		width: auto;
+		z-index: 1001;
+	}
+
+	#main {
+		scroll-margin-top: 68px;
+	}
+
 	.contain {
 		/* Container for the main content, but not if full-width on mobile */
 		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
