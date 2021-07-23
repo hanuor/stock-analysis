@@ -2,7 +2,7 @@
 import { functor, merge } from '../utils';
 import atr from './atr';
 import { Renko as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function RenkoComponent() {
 	let options = defaultOptions;
 	let dateAccessor = (d) => d.date;
 	let dateMutator = (d, date) => {

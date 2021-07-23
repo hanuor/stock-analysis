@@ -68,7 +68,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
 		this.state = {
 			maxValue: 0,
-			margin: { left: 0, right: 62, top: 3, bottom: 24 },
+			margin: { left: 0, right: 62, top: 70, bottom: 24 },
 			counter: 0,
 			screenWidth: window.innerWidth,
 		};
@@ -114,31 +114,31 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 				if (data >= 100 && data < 1000) {
 					this.setState({
 						maxValue: data,
-						margin: { left: 0, right: 47, top: 3, bottom: 24 },
+						margin: { left: 0, right: 47, top: 7, bottom: 24 },
 						counter: this.state.counter + 1,
 					});
 				} else if (data < 100 && data >= 10) {
 					this.setState({
 						maxValue: data,
-						margin: { left: 0, right: 40, top: 3, bottom: 24 },
+						margin: { left: 0, right: 40, top: 7, bottom: 24 },
 						counter: this.state.counter + 1,
 					});
 				} else if (data >= 1000 && data < 10000) {
 					this.setState({
 						maxValue: data,
-						margin: { left: 0, right: 100, top: 3, bottom: 24 },
+						margin: { left: 0, right: 100, top: 7, bottom: 24 },
 						counter: this.state.counter + 1,
 					});
 				} else if (data >= 10000) {
 					this.setState({
 						maxValue: data,
-						margin: { left: 0, right: 64, top: 3, bottom: 24 },
+						margin: { left: 0, right: 64, top: 7, bottom: 24 },
 						counter: this.state.counter + 1,
 					});
 				} else if (data >= 1 && data < 10) {
 					this.setState({
 						maxValue: data,
-						margin: { left: 0, right: 40, top: 3, bottom: 24 },
+						margin: { left: 0, right: 40, top: 7, bottom: 24 },
 						counter: this.state.counter + 1,
 					});
 				}

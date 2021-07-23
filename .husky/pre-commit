@@ -3,13 +3,6 @@
 
 echo '🏗️👷 Styling, testing and building before committing'
 
-# Check Prettier standards
-npm run check-format ||
-(
-    echo '🤢 Prettier Check Failed. Format files and try again.';
-    false;
-)
-
 # Check ESLint Standards
 npm run check-lint ||
 (

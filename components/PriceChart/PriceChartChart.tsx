@@ -91,7 +91,6 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 
 	return (
 		<Line
-			type="Line"
 			data={{
 				labels: timeAxis,
 				datasets: [

@@ -3,7 +3,7 @@ import { merge, rebind, slidingWindow } from '../utils';
 import baseIndicator from './baseIndicator';
 import { ElderImpulse as appearanceOptions } from './defaultOptionsForAppearance';
 const ALGORITHM_TYPE = 'ElderImpulse';
-export default function () {
+export default function ElderImpulseComponent() {
 	let macdSource;
 	let emaSource;
 	const base = baseIndicator()

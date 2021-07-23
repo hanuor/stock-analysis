@@ -30,7 +30,7 @@ THE SOFTWARE.
 */
 import { functor } from './functor';
 import { path } from './path';
-export default function () {
+export default function SlidingWindow() {
 	let undefinedValue;
 	let windowSize = 10;
 	let accumulator = () => {

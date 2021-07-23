@@ -3,7 +3,7 @@ import { rebind } from '../utils';
 import { renko } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'Renko';
-export default function () {
+export default function Renko() {
 	const base = baseIndicator().type(ALGORITHM_TYPE);
 	const underlyingAlgorithm = renko();
 	const indicator = underlyingAlgorithm;

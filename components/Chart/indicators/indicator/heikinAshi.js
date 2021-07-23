@@ -3,7 +3,7 @@ import { heikinAshi } from '../calculator';
 import baseIndicator from './baseIndicator';
 import { merge, rebind } from '../utils';
 const ALGORITHM_TYPE = 'HeikinAshi';
-export default function () {
+export default function HeikinAshi() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.ha);

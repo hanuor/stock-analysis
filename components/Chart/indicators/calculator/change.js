@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { slidingWindow } from '../utils';
 import { Change as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function ChangeComponent() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { sourcePath } = options;

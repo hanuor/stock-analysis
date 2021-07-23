@@ -27,7 +27,7 @@ THE SOFTWARE.
 import { max, mean, min, zip } from 'd3-array';
 import { slidingWindow } from '../utils';
 import { FullStochasticOscillator as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Sto() {
 	let options = defaultOptions;
 	let source = (d) => ({
 		open: d.open,

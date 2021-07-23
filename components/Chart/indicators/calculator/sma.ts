@@ -8,7 +8,7 @@ export interface SMAOptions {
 	readonly windowSize: number;
 }
 
-export default function () {
+export default function Sma() {
 	let options = defaultOptions;
 
 	const calculator = (data: any[]) => {

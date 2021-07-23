@@ -3,7 +3,7 @@ import { rebind } from '../utils';
 import { pointAndFigure } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'PointAndFigure';
-export default function () {
+export default function PointAndFigure() {
 	const base = baseIndicator().type(ALGORITHM_TYPE);
 	const underlyingAlgorithm = pointAndFigure();
 	const indicator = underlyingAlgorithm;

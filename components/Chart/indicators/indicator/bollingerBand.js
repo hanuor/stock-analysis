@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { bollingerband } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'BollingerBand';
-export default function () {
+export default function BollingerBand() {
 	const base = baseIndicator().type(ALGORITHM_TYPE);
 	const underlyingAlgorithm = bollingerband();
 	const mergedAlgorithm = merge()

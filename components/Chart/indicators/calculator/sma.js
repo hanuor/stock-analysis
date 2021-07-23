@@ -2,7 +2,7 @@
 import { mean } from 'd3-array';
 import { slidingWindow } from '../utils';
 import { SMA as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Sma() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { windowSize, sourcePath } = options;
