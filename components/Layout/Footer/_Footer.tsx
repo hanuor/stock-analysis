@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import { useUserInfo } from 'hooks/useUserInfo';
+import { useNavState } from 'hooks/useNavState';
 import Link from 'next/link';
 
 interface IconProps {
@@ -77,6 +78,8 @@ const navigation = {
 
 export const Footer = () => {
 	const { isLoggedIn } = useUserInfo();
+	// eslint-disable-next-line no-unused-vars
+	const path = useNavState();
 
 	return (
 		<footer

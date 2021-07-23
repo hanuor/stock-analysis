@@ -11,10 +11,14 @@ import {
 	CloseIcon,
 } from 'components/Layout/Header/HeaderNavigation';
 
+import { navState } from 'state/navState';
+
 export const Header = () => {
 	const noderef = useRef<HTMLDivElement>(null);
 	const [open, setOpen] = useState(false);
 	const [menu, setMenu] = useState('hidden lg:flex');
+	const path = navState((state) => state.path);
+	console.log(path);
 
 	function clickMenu() {
 		setOpen((open) => !open);
@@ -48,7 +52,7 @@ export const Header = () => {
 	}, [open]);
 
 	return (
-		<header className="bg-white shadow-md sticky landscape:static landscape:border-b-0 border-gray-200 landscape:md:sticky landscape:md:border-b-0 top-0 z-50">
+		<header className="bg-white shadow-md sticky landscape:static landscape:md:sticky top-0 z-50">
 			<a href="#main" className="skip-nav">
 				Skip to main content
 			</a>
