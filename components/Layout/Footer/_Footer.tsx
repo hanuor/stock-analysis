@@ -201,26 +201,51 @@ export const Footer = () => {
 						<p className="mt-4 text-base text-gray-300">
 							The latest updates, straight to your inbox.
 						</p>
-						<form className="mt-4 sm:flex sm:max-w-md">
+						<form
+							className="mt-4 sm:flex sm:max-w-md"
+							method="post"
+							acceptCharset="UTF-8"
+							action="https://www.aweber.com/scripts/addlead.pl"
+						>
+							<input
+								type="hidden"
+								name="meta_web_form_id"
+								value="734113215"
+							/>
+							<input
+								type="hidden"
+								name="listname"
+								value="awlist5254312"
+							/>
+							<input
+								type="hidden"
+								name="redirect"
+								value="https://stockanalysis.com/thank-you/"
+								id="redirect_756a76620e2e180d07c2981f91a5fa1e"
+							/>
+							<input
+								type="hidden"
+								name="meta_adtracking"
+								value="Footer"
+							/>
 							<label htmlFor="emailAddress" className="sr-only">
 								Email address
 							</label>
 							<input
 								type="email"
-								name="emailAddress"
-								id="emailAddress"
+								name="email"
+								id="email"
 								autoComplete="email"
-								required
 								className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
 								placeholder="Enter your email"
 							/>
 							<div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-								<button
+								<input
+									name="submit"
 									type="submit"
 									className="w-full bg-blue-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-								>
-									Subscribe
-								</button>
+									value="Subscribe"
+								/>
 							</div>
 						</form>
 					</div>

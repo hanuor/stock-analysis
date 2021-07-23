@@ -6,7 +6,7 @@ import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
 
 const getChartUrl = (id: number, time: string) => {
-	const url = 'https://stockanalysis.com/wp-json/sa/';
+	const url = 'https://stockanalysis17jun2.local/wp-json/sa/';
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;

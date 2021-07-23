@@ -84,7 +84,7 @@
 	}
 
 	.text-page {
-		@apply text-base md:text-lg text-gray-900;
+		@apply text-base md:text-lg;
 	}
 
 	.text-page .article-header {
