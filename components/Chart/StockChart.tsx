@@ -41,10 +41,19 @@ interface TooltipOptions {
 	windowSize: number | null;
 }
 
-class StockChart extends React.Component<StockChartProps> {
+interface StateProps {
+	maxValue: number;
+	margin: any;
+	counter: number;
+	screenWidth: number;
+}
+
+class StockChart extends React.Component<StockChartProps, StateProps> {
 	private readonly dateFormat = timeFormat('%Y-%m-%d');
-	private readonly margin = { left: 0, right: 62, top: 3, bottom: 24 };
+	// private margin = { left: 0, right: 62, top: 3, bottom: 24 };
 	private readonly pricesDisplayFormat = format('.2f');
+	private readonly pricesBelowOneDisplayFormat = format('.3~f');
+	private readonly yAxisTickDisplay = format('.2~f');
 	private readonly volumeDisplayFormat = format('.4s');
 	private readonly changeDisplayFormat = format('+.2f');
 	private readonly percentDisplayFormat = format('+.2%');
@@ -54,9 +63,87 @@ class StockChart extends React.Component<StockChartProps> {
 			(d: IOHLCData) => d.date
 		);
 
+	constructor(props: any) {
+		super(props);
+		this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
+		this.state = {
+			maxValue: 0,
+			margin: { left: 0, right: 62, top: 3, bottom: 24 },
+			counter: 0,
+			screenWidth: window.innerWidth,
+		};
+	}
+	handleWindowSizeChange = () => {
+		// eslint-disable-next-line no-invalid-this
+		this.setState({
+			screenWidth: window.innerWidth,
+		});
+	};
+
+	public componentDidMount() {
+		window.addEventListener('resize', this.handleWindowSizeChange);
+	}
+
+	public componentWillUnmount() {
+		window.removeEventListener('resize', this.handleWindowSizeChange);
+	}
+
 	public render() {
+		const sma50LabelNumber = (label: string) => {
+			if (label == 'd') {
+				return 50;
+			} else {
+				return 10;
+			}
+		};
+		const sma200LabelNumber = (label: string) => {
+			if (label == 'd') {
+				return 200;
+			} else if (label == 'w') {
+				return 40;
+			} else {
+				return 20;
+			}
+		};
+
+		const isBrowser: boolean = this.state.screenWidth >= 768;
 		const { data: initialData, height, ratio, width, type } = this.props;
 
+		const maxValueCallback = (data: number) => {
+			if (this.state.maxValue != data && this.state.counter == 0) {
+				if (data >= 100 && data < 1000) {
+					this.setState({
+						maxValue: data,
+						margin: { left: 0, right: 47, top: 3, bottom: 24 },
+						counter: this.state.counter + 1,
+					});
+				} else if (data < 100 && data >= 10) {
+					this.setState({
+						maxValue: data,
+						margin: { left: 0, right: 40, top: 3, bottom: 24 },
+						counter: this.state.counter + 1,
+					});
+				} else if (data >= 1000 && data < 10000) {
+					this.setState({
+						maxValue: data,
+						margin: { left: 0, right: 100, top: 3, bottom: 24 },
+						counter: this.state.counter + 1,
+					});
+				} else if (data >= 10000) {
+					this.setState({
+						maxValue: data,
+						margin: { left: 0, right: 64, top: 3, bottom: 24 },
+						counter: this.state.counter + 1,
+					});
+				} else if (data >= 1 && data < 10) {
+					this.setState({
+						maxValue: data,
+						margin: { left: 0, right: 40, top: 3, bottom: 24 },
+						counter: this.state.counter + 1,
+					});
+				}
+			}
+		};
 		const disablePan = false;
 		const disableZoom = false;
 
@@ -67,6 +154,12 @@ class StockChart extends React.Component<StockChartProps> {
 			clip: true,
 			candleStrokeWidth: 0.5,
 			widthRatio: 0.8,
+		};
+
+		const priceFormatDecider = (data: number) => {
+			return data < 1
+				? this.pricesBelowOneDisplayFormat(data)
+				: this.pricesDisplayFormat(data);
 		};
 
 		const openCloseColor = (data: IOHLCData) => {
@@ -121,19 +214,20 @@ class StockChart extends React.Component<StockChartProps> {
 				yAccessor: (d: IOHLCData) => d.ma1,
 				type: 'SMA',
 				stroke: ma1color,
-				windowSize: sma50.options().windowSize,
+				windowSize: sma50LabelNumber(this.props.period),
 			},
 			{
 				yAccessor: (d: IOHLCData) => d.ma2,
 				type: 'SMA',
 				stroke: ma2color,
-				windowSize: sma200.options().windowSize,
+				windowSize: sma200LabelNumber(this.props.period),
 			},
 		];
 
 		const calculatedData = sma200(sma50(initialData));
 
-		const { margin, xScaleProvider } = this;
+		const { xScaleProvider } = this;
+		const { margin } = this.state;
 
 		const { data, xScale, xAccessor, displayXAccessor } =
 			xScaleProvider(calculatedData);
@@ -203,7 +297,7 @@ class StockChart extends React.Component<StockChartProps> {
 				height={height}
 				ratio={ratio}
 				width={width}
-				margin={margin}
+				margin={this.state.margin}
 				data={data}
 				displayXAccessor={displayXAccessor}
 				seriesName="Data"
@@ -214,11 +308,38 @@ class StockChart extends React.Component<StockChartProps> {
 				xExtents={xExtents}
 				zoomAnchor={lastVisibleItemBasedZoomAnchor}
 			>
+				<Chart
+					id={4}
+					height={100}
+					origin={(w, h) => [0, h - 100]}
+					yExtents={volChartExtents}
+				>
+					<BarSeries
+						widthRatio={0.5}
+						clip={true}
+						yAccessor={(d) => d.volume}
+						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
+					/>
+					<EdgeIndicator
+						itemType="last"
+						rectWidth={margin.right - 1.05}
+						rectHeight={15}
+						fill={volumeColor}
+						orient="right"
+						edgeAt="right"
+						fontSize={11}
+						lineStroke={openCloseColor}
+						displayFormat={format('.4~s')}
+						yAccessor={volumeSeries}
+						yAxisPad={0}
+					/>
+				</Chart>
 				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
 					<XAxis showTickLabel={true} />
 					<YAxis
 						showGridLines={true}
-						tickFormat={this.pricesDisplayFormat}
+						tickFormat={this.yAxisTickDisplay}
+						getMaxTicks={maxValueCallback}
 					/>
 					{type == 'candlestick' ? (
 						<CandlestickSeries {...candlesAppearance} />
@@ -253,19 +374,19 @@ class StockChart extends React.Component<StockChartProps> {
 
 					<EdgeIndicator
 						itemType="last"
-						rectWidth={margin.right - 20}
+						rectWidth={margin.right / 1.05}
 						rectHeight={15}
 						fill={ma2color}
 						orient="right"
 						edgeAt="right"
 						fontSize={11}
 						lineStroke={ma2color}
-						displayFormat={this.pricesDisplayFormat}
+						displayFormat={priceFormatDecider}
 						yAccessor={sma200.accessor()}
 					/>
 					<EdgeIndicator
 						itemType="last"
-						rectWidth={margin.right - 20}
+						rectWidth={margin.right / 1.05}
 						rectHeight={15}
 						hideLine={true}
 						fill={ma1color}
@@ -273,15 +394,15 @@ class StockChart extends React.Component<StockChartProps> {
 						edgeAt="right"
 						fontSize={11}
 						lineStroke={ma1color}
-						displayFormat={this.pricesDisplayFormat}
+						displayFormat={priceFormatDecider}
 						yAccessor={sma50.accessor()}
 					/>
 					<EdgeIndicator
 						itemType="last"
-						rectWidth={margin.right - 15}
+						rectWidth={margin.right / 1.01225}
 						fill={priceOrCandleStickColor}
 						lineStroke={priceOrCandleStickColor}
-						displayFormat={this.pricesDisplayFormat}
+						displayFormat={priceFormatDecider}
 						yAccessor={yEdgeIndicator}
 						fontSize={13}
 					/>
@@ -290,74 +411,55 @@ class StockChart extends React.Component<StockChartProps> {
 						origin={[8, 24]}
 						options={movingAverageTooltipOptions}
 					/>
-					<HoverTooltipCustom
-						yAccessor={sma50.accessor()}
-						tooltip={{
-							content: ({ currentItem, xAccessor }) => ({
-								x: this.dateFormat(xAccessor(currentItem)),
-								y: [
-									{
-										label: 'Open',
-										value:
-											currentItem.open &&
-											this.pricesDisplayFormat(currentItem.open),
-									},
-									{
-										label: 'High',
-										value:
-											currentItem.high &&
-											this.pricesDisplayFormat(currentItem.high),
-									},
-									{
-										label: 'Low',
-										value:
-											currentItem.low &&
-											this.pricesDisplayFormat(currentItem.low),
-									},
-									{
-										label: 'Close',
-										value:
-											currentItem.close &&
-											this.pricesDisplayFormat(currentItem.close),
-									},
-									{
-										label: 'Volume',
-										value:
-											currentItem.volume &&
-											this.volumeDisplayFormat(currentItem.volume),
-									},
-								],
-							}),
-						}}
-					/>
+					{isBrowser == true ? (
+						<HoverTooltipCustom
+							yAccessor={sma50.accessor()}
+							tooltip={{
+								content: ({ currentItem, xAccessor }) => ({
+									x: this.dateFormat(xAccessor(currentItem)),
+									y: [
+										{
+											label: 'Open',
+											value:
+												currentItem.open &&
+												this.pricesDisplayFormat(currentItem.open),
+										},
+										{
+											label: 'High',
+											value:
+												currentItem.high &&
+												this.pricesDisplayFormat(currentItem.high),
+										},
+										{
+											label: 'Low',
+											value:
+												currentItem.low &&
+												this.pricesDisplayFormat(currentItem.low),
+										},
+										{
+											label: 'Close',
+											value:
+												currentItem.close &&
+												this.pricesDisplayFormat(currentItem.close),
+										},
+										{
+											label: 'Volume',
+											value:
+												currentItem.volume &&
+												this.volumeDisplayFormat(
+													currentItem.volume
+												),
+										},
+									],
+								}),
+							}}
+						/>
+					) : (
+						<> </>
+					)}
 				</Chart>
-				<Chart
-					id={4}
-					height={100}
-					origin={(w, h) => [0, h - 100]}
-					yExtents={volChartExtents}
-				>
-					<BarSeries
-						widthRatio={0.5}
-						clip={true}
-						yAccessor={(d) => d.volume}
-						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 20}
-						rectHeight={15}
-						fill={volumeColor}
-						orient="right"
-						edgeAt="right"
-						fontSize={11}
-						lineStroke={openCloseColor}
-						displayFormat={format('.4s')}
-						yAccessor={volumeSeries}
-						yAxisPad={0}
-					/>
-				</Chart>
-				<CrossHairCursor />
+
+				{isBrowser == true ? <CrossHairCursor /> : <> </>}
 			</ChartCanvas>
 		);
 	}
