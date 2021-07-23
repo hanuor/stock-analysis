@@ -128,7 +128,9 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							const y = meta.data[last].y - 10;
 
 							// retrieve the stock price, data.
-							const str = dataset.data[last];
+							const raw = parseFloat(dataset.data[last]);
+							// const str = dataset.data[last];
+							const str = raw.toFixed(2);
 
 							// begin drawing and styling
 
