@@ -10,11 +10,12 @@ interface Props {
 export const NewsArticle = ({ item, related }: Props) => {
 	return (
 		<div className="news-article">
-			<div className="sm:mt-1">
+			<div className="sm:mt-1" aria-hidden="true">
 				<a
 					href={item.url}
 					target="_blank"
 					rel="nofollow noopener noreferrer"
+					tabIndex={-1}
 				>
 					<img
 						loading="lazy"

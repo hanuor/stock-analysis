@@ -25,7 +25,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 
 	const Rows = ({ movers, type }: InnerProps) => {
 		const items = movers.slice(0, 10);
-		const redOrGreen = type === 'Gainers' ? 'text-green-600' : 'text-red-500';
+		const redOrGreen = type === 'Gainers' ? 'text-green-700' : 'text-red-600';
 
 		return (
 			<>

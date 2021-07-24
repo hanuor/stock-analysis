@@ -243,7 +243,7 @@ export const Footer = () => {
 								<input
 									name="submit"
 									type="submit"
-									className="w-full bg-blue-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+									className="w-full bg-blue-brand_light border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-brand_sharp transition duration-200 cursor-pointer"
 									value="Subscribe"
 								/>
 							</div>
