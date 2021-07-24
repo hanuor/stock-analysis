@@ -147,7 +147,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		const id = row.id;
 		const dataid = row.data || row.id;
 		const format = row.format || 'standard';
-		let offset = range === 'annual' ? 1 : 4;
+		let offset = range === 'quarterly' ? 4 : 1;
 		let total = 0;
 
 		let rowdata = data[dataid as keyof FinancialReport];
@@ -234,6 +234,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				<tr className={getRowStyles()}>
 					<td
 						className="flex flex-row justify-between items-center"
+						onTouchStart={() => !hover && setHover(true)}
 						onClick={() => !hover && setHover(true)}
 						onMouseEnter={() => !hover && setHover(true)}
 					>

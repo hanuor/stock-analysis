@@ -5,7 +5,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
 import { allPostPaths, POST_PATHS } from 'functions/markdown.functions';
-import ArticleLayout from 'components/Layout/ArticleLayout';
+import { ArticleLayout } from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
 import Image from 'next/image';
 import { CustomLink, External } from 'components/CustomLink';
@@ -100,7 +100,7 @@ export default function Page({ content, meta, slug }: Props) {
 				image={meta.image}
 				schema={schema}
 			/>
-			<ArticleLayout heading={meta.heading || meta.title}>
+			<ArticleLayout meta={meta}>
 				<div>
 					<MDXRemote
 						{...content}

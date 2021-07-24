@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import styles from 'styles/TabMenu.module.css';
-import { useNavState } from 'hooks/useNavState';
+import { navState } from 'state/navState';
 
 interface Symbol {
 	symbol: string;
 }
 
 export const TabNavigationETF = ({ symbol }: Symbol) => {
-	const path = useNavState();
+	const path = navState((state) => state.path);
 
 	const common =
 		'text-[15px] xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5';
@@ -19,11 +18,7 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 	return (
 		<>
 			<nav className="border-b-2 border-blue-brand_sharp w-full">
-				<ul
-					className={
-						'flex flex-row w-full overflow-auto ' + styles.navmenu
-					}
-				>
+				<ul className="w-full navmenu">
 					<li>
 						<Link
 							href={`/etf/${symbol}/`}

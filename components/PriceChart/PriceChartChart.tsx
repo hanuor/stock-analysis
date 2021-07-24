@@ -105,6 +105,68 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 					},
 				],
 			}}
+			plugins={[
+				{
+					afterDatasetsDraw: function (chart: any) {
+						const chartInstance = chart;
+						const ctx = chartInstance.ctx;
+						ctx.font =
+							'13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+						const fontSize = 12;
+						ctx.textAlign = 'start';
+						ctx.textBaseline = 'bottom';
+
+						chartInstance.data.datasets.forEach(function (
+							dataset: { data: any[] },
+							i: any
+						) {
+							const meta = chartInstance.getDatasetMeta(i);
+							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
+
+							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
+							const x = meta.data[last].x + 32;
+							const y = meta.data[last].y - 10;
+
+							// retrieve the stock price, data.
+							const raw = parseFloat(dataset.data[last]);
+							// const str = dataset.data[last];
+							const str = raw.toFixed(2);
+
+							// begin drawing and styling
+
+							ctx.save();
+
+							ctx.strokeStyle = '#2c6288';
+							ctx.fillStyle = '#2c6288';
+							ctx.lineWidth = '3.5';
+							ctx.lineJoin = 'round';
+
+							// calculate the width of the box and height is based on fontsize.
+							const width = ctx.measureText(str).width + 1.2;
+							const xPos = x - 23.5;
+							const height = fontSize + 2.8;
+							const yPos = y + 1;
+
+							// draw triangle to form a pointer.
+							ctx.beginPath();
+							ctx.moveTo(xPos - 7.7, yPos + 1.5 + height / 2);
+							ctx.lineTo(xPos + 0.7, yPos + 2.5 + height);
+							ctx.lineTo(xPos + 0.7, yPos + 0.5);
+							ctx.fill();
+							ctx.closePath();
+
+							// draw the box
+							ctx.strokeRect(xPos + 2, yPos + 1.5, width, height);
+							ctx.fillRect(xPos + 2, yPos + 1.5, width, height);
+
+							// draw the text
+							ctx.fillStyle = '#ffffff';
+							ctx.fillText(str, x - 22, meta.data[last].y + 7.5);
+							ctx.restore();
+						});
+					},
+				},
+			]}
 			options={{
 				maintainAspectRatio: false,
 				spanGaps: true,
@@ -149,6 +211,11 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 								size: 12.5,
 							},
 						},
+					},
+				},
+				layout: {
+					padding: {
+						right: 17,
 					},
 				},
 				plugins: {

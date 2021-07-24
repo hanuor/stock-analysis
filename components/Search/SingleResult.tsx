@@ -1,3 +1,4 @@
+import { navState } from 'state/navState';
 import Link from 'next/link';
 
 interface SearchItem {
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const SingleResult = ({ index, result, setOpen }: Props) => {
+	const path = navState((state) => state.path);
 	const symbol = result.s;
 	const name = result.n;
 	const type = result.t;
@@ -34,6 +36,64 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 
 	if (!url) {
 		return <></>;
+	} else {
+		if (path.three) {
+			switch (path.three) {
+				case 'chart':
+					url = `${url}chart/`;
+					break;
+
+				case 'financials':
+					{
+						if (type === 's') {
+							switch (path.four) {
+								case 'balance-sheet':
+									url = `${url}financials/balance-sheet/`;
+									break;
+
+								case 'cash-flow-statement':
+									url = `${url}financials/cash-flow-statement/`;
+									break;
+
+								case 'ratios':
+									url = `${url}financials/ratios/`;
+									break;
+
+								default:
+									url = `${url}financials/`;
+									break;
+							}
+						}
+					}
+					break;
+
+				case 'company':
+					if (type === 's') {
+						url = `${url}company/`;
+					}
+					break;
+
+				case 'statistics':
+					if (type === 's') {
+						url = `${url}statistics/`;
+					}
+					break;
+
+				case 'holdings':
+					if (type === 'e') {
+						url = `${url}holdings/`;
+					}
+					break;
+
+				case 'dividend':
+					if (type === 'e') {
+						url = `${url}dividend/`;
+					}
+					break;
+			}
+		}
+		if (path.four) {
+		}
 	}
 
 	let searchResultStyles =

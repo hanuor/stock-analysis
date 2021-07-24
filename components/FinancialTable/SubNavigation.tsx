@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
-import styles from 'styles/TabMenu.module.css';
 
 // styles
 const common =
@@ -25,7 +24,7 @@ export const SubNavigation = ({ symbol, statement }: Props) => {
 function Statement({ symbol, statement }: Props) {
 	return (
 		<nav>
-			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
+			<ul className="w-full navmenu">
 				<li>
 					<Link
 						href={`/stocks/${symbol}/financials/`}
@@ -99,7 +98,7 @@ function Period() {
 
 	return (
 		<nav>
-			<ul className={'flex flex-row w-full overflow-auto ' + styles.navmenu}>
+			<ul className="flex flex-row w-full overflow-auto navmenu">
 				<li>
 					<span
 						className={range == 'annual' ? active : inactive}

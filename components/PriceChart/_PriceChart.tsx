@@ -6,7 +6,7 @@ import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
 
 const getChartUrl = (id: number, time: string) => {
-	const url = 'https://stockanalysis.com/wp-json/sa/';
+	const url = 'https://stockanalysis17jun2.local/wp-json/sa/';
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
@@ -26,12 +26,12 @@ export const PriceChart = ({ info }: { info: Info }) => {
 	const [chartTime, setChartTime] = useState('');
 
 	useEffect(() => {
-		const brandNew = info.quote.brandNew ?? null;
-		const daysFrom = info.quote.daysFrom ?? null;
+		const brandNew = (info.quote && info.quote.brandNew) ?? null;
+		const daysFrom = (info.quote && info.quote.daysFrom) ?? null;
 
 		const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
 		setChartTime(show);
-	}, [info.quote.brandNew, info.quote.daysFrom]);
+	}, [info.quote]);
 
 	useEffect(() => {
 		const source = Axios.CancelToken.source();

@@ -4,7 +4,7 @@ export const LayoutFullWidth: FC = ({ children }) => {
 	return (
 		<>
 			<div>
-				<main>{children}</main>
+				<main id="main">{children}</main>
 			</div>
 		</>
 	);

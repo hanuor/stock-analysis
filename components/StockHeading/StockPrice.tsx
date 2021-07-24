@@ -112,7 +112,9 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 
 	return (
 		<div className="max-w-[50%]">
-			<span className="text-4xl font-bold">{quote.extP}</span>{' '}
+			<span className="text-4xl font-bold" suppressHydrationWarning>
+				{quote.extP}
+			</span>{' '}
 			<span
 				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
 			>

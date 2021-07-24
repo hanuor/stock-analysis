@@ -38,7 +38,7 @@ export default function LandingPage() {
 				canonical="pro/"
 			/>
 			<main>
-				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4">
+				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
 						<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-5 text-gray-800">
 							Stock Analysis Pro
@@ -52,7 +52,7 @@ export default function LandingPage() {
 					</div>
 				</header>
 
-				<section className="max-w-screen-md mx-auto sm:flex flex-row justify-around mt-[-20px] sm:mt-[-65px]">
+				<section className="max-w-screen-md mx-auto sm:flex flex-row justify-around mt-[-20px] md:mt-[-65px]">
 					<div className="bg-white mx-auto w-[90%] sm:max-w-[44%]">
 						<table className="border border-gray-200 w-full">
 							<thead>

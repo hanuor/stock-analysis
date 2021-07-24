@@ -1,7 +1,13 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { FinancialReport, FinancialsMapType } from 'types/Financials';
 import { Bar, defaults } from 'react-chartjs-2';
-import { formatY, formatNumber, formatYear } from './FinancialTable.functions';
+import {
+	formatY,
+	formatNumber,
+	formatYear,
+	countDecimals,
+	reducePrecisionFix,
+} from './FinancialTable.functions';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
@@ -29,7 +35,8 @@ export const HoverChart = ({
 	const type = row.format;
 
 	const y = rowdata.map((curr, index) => {
-		const previous = row.format === 'growth' ? rowdata[index + 1] : null;
+		const offset = range === 'quarterly' ? 4 : 1;
+		const previous = row.format === 'growth' ? rowdata[index + offset] : null;
 		const revenue = row.format === 'margin' ? data.revenue[index] : null;
 		const current = curr as number;
 
@@ -96,6 +103,92 @@ export const HoverChart = ({
 					},
 				],
 			}}
+			plugins={[
+				{
+					afterDatasetsDraw: function (chart: any) {
+						const chartInstance = chart;
+						const ctx = chartInstance.ctx;
+
+						ctx.font =
+							'13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+						const fontSize = 12;
+						ctx.textAlign = 'start';
+						ctx.textBaseline = 'bottom';
+
+						chartInstance.data.datasets.forEach(function (
+							dataset: any,
+							i: any
+						) {
+							const meta = chartInstance.getDatasetMeta(i);
+							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
+
+							const length = chart.scales.y._labelItems.length - 1;
+
+							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
+
+							let x = chart.scales.y._labelItems[length].translation[0];
+
+							const y = meta.data[last].y - 7.5;
+
+							let str: any;
+
+							if (dataset.data[last] == '0') {
+								return;
+							}
+							// retrieve the stock price, data.
+							if (type == 'reduce_precision') {
+								str = reducePrecisionFix(dataset.data[last]);
+							} else {
+								str = formatY(dataset.data[last], type);
+							}
+
+							// begin drawing and styling
+							ctx.strokeStyle = '#2c6288';
+							ctx.fillStyle = '#2c6288';
+							ctx.lineWidth = '3.5 ';
+							ctx.lineJoin = 'miter';
+
+							// calculate the width of the box and height is based on fontsize.
+
+							let widthOffset = 2.6;
+
+							if (str[0] == '-') {
+								widthOffset = 3.6;
+							}
+
+							const numberOfDecimals = countDecimals(str);
+
+							if (numberOfDecimals == 2 && str.length > 3) {
+								widthOffset = 3.4;
+							}
+
+							const width = ctx.measureText(str).width + widthOffset;
+
+							if (chartType == 'line') {
+								x = x - 15.5;
+							}
+
+							const height = fontSize + 2.8;
+
+							ctx.beginPath();
+							ctx.moveTo(x + 0.7, y + height);
+							ctx.moveTo(x - 6, y + height / 2);
+							ctx.lineTo(x + 0.7, y + height);
+							ctx.lineTo(x + 0.7 + width, y + height);
+							ctx.lineTo(x + 0.7 + width, y);
+							ctx.lineTo(x + 0.7, y);
+							ctx.fill();
+							ctx.closePath();
+							ctx.stroke();
+
+							// draw the text
+							ctx.fillStyle = '#ffffff';
+
+							ctx.fillText(str, x, meta.data[last].y + 7);
+						});
+					},
+				},
+			]}
 			options={{
 				maintainAspectRatio: false,
 				scales: {
@@ -166,6 +259,19 @@ export const HoverChart = ({
 						bodyFontStyle: 400,
 						padding: 10,
 						displayColors: false,
+						callbacks: {
+							label: function (context: { parsed: { y: string } }) {
+								const value = context.parsed.y || '';
+								if (
+									type === 'growth' ||
+									type === 'percentage' ||
+									type === 'margin'
+								) {
+									return `${value}%`;
+								}
+								return value;
+							},
+						},
 					},
 				},
 			}}

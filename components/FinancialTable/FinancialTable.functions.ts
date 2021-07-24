@@ -161,6 +161,28 @@ export function formatYear(date: string | number) {
 	return year;
 }
 
+export function countDecimals(value: string) {
+	const float = parseFloat(value);
+	if (Math.floor(float.valueOf()) === float.valueOf()) return 0;
+
+	const str = value.toString();
+	if (str.indexOf('.') !== -1 && str.indexOf('-') !== -1) {
+		return str.split('-')[1] || 0;
+	} else if (str.indexOf('.') !== -1) {
+		return str.split('.')[1].length || 0;
+	}
+	return str.split('-')[1] || 0;
+}
+
+export function reducePrecisionFix(value: number) {
+	if (value > 10000000 || value < -10000000) {
+		const divided: number = value / 1000000;
+		// divided = divided.toFixed(0);
+		return new Intl.NumberFormat('en-US').format(divided);
+	}
+	return value;
+}
+
 // Show numbers in thousands, millions or raw
 function getDivider(divider: string) {
 	switch (divider) {

@@ -7,6 +7,56 @@
 		@apply text-gray-900;
 	}
 
+	.skip-nav {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+
+	.skip-nav:focus {
+		background: white;
+		clip: auto;
+		height: auto;
+		left: 10px;
+		padding: 0.65rem 0.8rem;
+		position: fixed;
+		top: 10px;
+		width: auto;
+		z-index: 1001;
+	}
+
+	#main {
+		scroll-margin-top: 68px;
+	}
+
+	.navmenu a::before,
+	.navmenu li span::before {
+		display: block;
+		content: attr(data-title);
+		font-weight: 600;
+		height: 0;
+		overflow: hidden;
+		visibility: hidden;
+	}
+
+	.navmenu {
+		background-image: linear-gradient(to right, white, white),
+			linear-gradient(to right, white, white),
+			linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0)),
+			linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0));
+		background-position: left center, right center, left center, right center;
+		background-repeat: no-repeat;
+		background-color: white;
+		background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+		background-attachment: local, local, scroll, scroll;
+		@apply flex flex-row overflow-x-auto sm:overflow-visible;
+	}
+
 	.contain {
 		/* Container for the main content, but not if full-width on mobile */
 		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
@@ -34,11 +84,15 @@
 	}
 
 	.text-page {
-		@apply text-base md:text-lg text-gray-900;
+		@apply text-base md:text-lg;
+	}
+
+	.text-page .article-header {
+		@apply mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-3 md:pb-3;
 	}
 
 	.text-page h1 {
-		@apply text-3xl md:text-4xl font-bold mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-4 md:pb-5;
+		@apply text-3xl md:text-4xl font-bold mb-3;
 	}
 
 	.text-page h2 {
@@ -55,6 +109,10 @@
 
 	.text-page a {
 		@apply bll;
+	}
+
+	.text-page .article-header a {
+		@apply text-gray-700 hover:text-black;
 	}
 
 	.text-page ul {
@@ -128,7 +186,7 @@
 	}
 
 	.dropd {
-		@apply max-h-60 w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-200;
+		@apply max-h-[265px] w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-200;
 	}
 
 	.dropd.active {

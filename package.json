@@ -15,7 +15,6 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.2.0",
 		"@next/bundle-analyzer": "^11.0.1",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tippyjs/react": "^4.2.5",

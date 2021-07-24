@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const HeaderNavigation = ({ device }: { device: string }) => {
 	const menuDesktop = 'flex flex-row space-x-5 text-lg';
 	const menuMobile =
-		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200';
+		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200 bg-white relative z-50';
 
 	return (
 		<>

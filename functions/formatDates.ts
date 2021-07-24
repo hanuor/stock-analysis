@@ -13,7 +13,6 @@ export const formatDateTimestamp = (string: string) => {
 export const formatDateClean = (string: string) => {
 	const datetime = new Date(string);
 	const date = datetime.toLocaleString('en-US', {
-		timeZone: 'America/New_York',
 		day: 'numeric',
 		year: 'numeric',
 		month: 'short',

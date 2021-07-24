@@ -34,6 +34,8 @@ module.exports = {
 			lg: '1024px',
 			xl: '1200px',
 			'2xl': '1536px',
+			landscape: { raw: '(orientation: landscape)' },
+			// => @media (orientation: landscape) { ... }
 		},
 		extend: {
 			gridTemplateColumns: {

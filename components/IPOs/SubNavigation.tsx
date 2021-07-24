@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import styles from 'styles/TabMenu.module.css';
-import { useNavState } from 'hooks/useNavState';
+import { navState } from 'state/navState';
 
 export const SubNavigation = () => {
-	const path = useNavState();
+	const path = navState((state) => state.path);
 
 	const active =
 		'py-1.5 px-3.5 xs:px-4 block font-semibold bg-[#eee] text-gray-900';
@@ -14,7 +13,7 @@ export const SubNavigation = () => {
 		return (
 			<div>
 				<nav className="mb-1 sm:mb-2 lg:mb-3">
-					<ul className={`flex space-x-1 ${styles.navmenu} overflow-auto`}>
+					<ul className="space-x-1 navmenu">
 						<li>
 							<Link href="/ipos/" prefetch={false}>
 								<a
