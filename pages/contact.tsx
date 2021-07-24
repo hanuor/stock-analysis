@@ -1,11 +1,15 @@
-import Link from 'next/link';
-import { useState } from 'react';
-import { Switch } from '@headlessui/react';
+import { FormEvent, useState } from 'react';
 import { ArticleLayout } from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
+import { Success } from 'components/Alerts/Success';
+import { Error } from 'components/Alerts/Error';
+import { Warning } from 'components/Alerts/Warning';
+import Axios from 'axios';
+import { SpinnerIcon } from 'components/Icons/Spinner';
+import { validateEmailAddress, validateLength } from 'functions/validation';
 
-function classNames(...classes: Array<string>) {
-	return classes.filter(Boolean).join(' ');
+interface MessageData {
+	[key: string]: string;
 }
 
 export default function Contact() {
@@ -47,18 +51,82 @@ export default function Contact() {
 }
 
 function ContactForm() {
-	const [agreed, setAgreed] = useState(false);
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [message, setMessage] = useState('');
+	const [subject, setSubject] = useState('');
+	const [responseType, setResponseType] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
+	const [warning, setWarning] = useState<string | null>(null);
+
+	const url =
+		'https://stockanalysis.com/wp-json/contact-form-7/v1/contact-forms/61220/feedback';
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault();
+
+		setResponseType(null);
+		setWarning(null);
+
+		if (!validateEmailAddress(email)) {
+			return setWarning('Please enter a valid email address.');
+		}
+
+		if (!validateLength(message, 10)) {
+			return setWarning(
+				'Your message is too short to be meaningful. Add more details.'
+			);
+		}
+
+		setLoading(true);
+		try {
+			const messageData: MessageData = {
+				'your-name': name || 'No Name',
+				'your-email': email,
+				'your-subject': subject || 'No Subject',
+				'your-message': message,
+			};
+
+			const form = new FormData();
+
+			for (const field in messageData) {
+				if (messageData.hasOwnProperty(field)) {
+					form.append(field, messageData[field]);
+				}
+			}
+
+			const res = await Axios.post(url, form);
+			const data = res.data;
+
+			if (data.status === 'mail_sent') {
+				setResponseType('success');
+				setName('');
+				setEmail('');
+				setSubject('');
+				setMessage('');
+			} else {
+				setResponseType('error');
+			}
+		} catch (err) {
+			console.error({ err });
+			setResponseType('error');
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
-		<div className="bg-white overflow-hidden">
+		<div className="bg-white">
 			<div className="relative px-2 mx-auto">
+				{warning && <Warning message={warning} />}
 				<div className="mt-4">
 					<form
 						action="#"
 						method="POST"
-						className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+						className="space-y-6"
+						onSubmit={handleSubmit}
 					>
-						<div className="sm:col-span-2">
+						<div>
 							<label
 								htmlFor="name"
 								className="block text-sm font-medium text-gray-700"
@@ -72,10 +140,12 @@ function ContactForm() {
 									id="name"
 									autoComplete="given-name"
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									value={name}
+									onChange={(event) => setName(event.target.value)}
 								/>
 							</div>
 						</div>
-						<div className="sm:col-span-2">
+						<div>
 							<label
 								htmlFor="email"
 								className="block text-sm font-medium text-gray-700"
@@ -86,13 +156,37 @@ function ContactForm() {
 								<input
 									name="email"
 									type="email"
+									id="email"
 									autoComplete="email"
+									required
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									value={email}
+									onChange={(event) => setEmail(event.target.value)}
 								/>
 							</div>
 						</div>
 
-						<div className="sm:col-span-2">
+						<div>
+							<label
+								htmlFor="subject"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Subject
+							</label>
+							<div className="mt-1">
+								<input
+									name="subject"
+									type="text"
+									id="subject"
+									autoComplete="off"
+									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									value={subject}
+									onChange={(event) => setSubject(event.target.value)}
+								/>
+							</div>
+						</div>
+
+						<div>
 							<label
 								htmlFor="message"
 								className="block text-sm font-medium text-gray-700"
@@ -103,55 +197,40 @@ function ContactForm() {
 								<textarea
 									id="message"
 									name="message"
+									required
 									rows={4}
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-									defaultValue={''}
+									value={message}
+									onChange={(event) => setMessage(event.target.value)}
 								/>
 							</div>
 						</div>
-						<div className="sm:col-span-2">
-							<div className="flex items-start">
-								<div className="flex-shrink-0">
-									<Switch
-										checked={agreed}
-										onChange={setAgreed}
-										className={classNames(
-											agreed ? 'bg-blue-600' : 'bg-gray-200',
-											'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
-										)}
-									>
-										<span className="sr-only">Agree to policies</span>
-										<span
-											aria-hidden="true"
-											className={classNames(
-												agreed ? 'translate-x-5' : 'translate-x-0',
-												'inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
-											)}
-										/>
-									</Switch>
-								</div>
-								<div className="ml-3">
-									<p className="text-base text-gray-500">
-										By selecting this, you agree to the{' '}
-										<Link href="/privacy-policy/" prefetch={false}>
-											<a className="font-medium link">
-												Privacy Policy.
-											</a>
-										</Link>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div className="sm:col-span-2">
+						<div className="pt-1">
 							<button
 								type="submit"
 								className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 							>
-								Send Message
+								{loading ? (
+									<>
+										<SpinnerIcon /> Sending...
+									</>
+								) : (
+									'Send Message'
+								)}
 							</button>
 						</div>
 					</form>
 				</div>
+
+				{responseType && (
+					<div className="my-8">
+						{responseType === 'success' ? (
+							<Success message="Your message was sent successfully. We will get back to you soon." />
+						) : (
+							<Error message="There was an error sending your message. Please try again, or send an email directly to support@stockanalysis.com." />
+						)}
+					</div>
+				)}
 			</div>
 		</div>
 	);

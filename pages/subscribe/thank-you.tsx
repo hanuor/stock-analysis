@@ -10,7 +10,7 @@ export default function ThankYou() {
 				noindex={true}
 			/>
 			<LayoutFullWidth>
-				<div className="py-20 max-w-screen-md mx-auto px-6">
+				<div className="py-20 max-w-screen-md mx-auto px-5 xs:px-6">
 					<h1 className="hh1 text-4xl">Thank you!</h1>
 					<p className="text-base md:text-xl mb-5">
 						Thank you for your interest in the Stock Analysis newsletter!
