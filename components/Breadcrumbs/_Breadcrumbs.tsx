@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useNavState } from 'hooks/useNavState';
+import { navState } from 'state/navState';
 
 type PathObject = {
 	one: string | null;
@@ -10,6 +10,9 @@ type PathObject = {
 
 const capitalize = (word: string) =>
 	word.charAt(0).toUpperCase() + word.slice(1);
+
+const validBit = (bit: string) =>
+	bit.charAt(0) !== '#' && bit.charAt(0) !== '?' && bit.charAt(0) !== '%';
 
 const formatPageTitle = (word: string) => {
 	const split = word.split('-');
@@ -27,7 +30,7 @@ const formatPageTitle = (word: string) => {
 const Break = () => <span className="px-1 sm:px-2">&raquo;</span>;
 
 const LevelOne = ({ path }: { path: PathObject }) => {
-	if (path.one && path.one !== '#main') {
+	if (path.one && validBit(path.one)) {
 		if (path.one === 'ipos') {
 			if (path.two) {
 				return (
@@ -61,7 +64,7 @@ const LevelOne = ({ path }: { path: PathObject }) => {
 };
 
 const LevelTwo = ({ path }: { path: PathObject }) => {
-	if (path.two && path.two !== '#main') {
+	if (path.two && validBit(path.two)) {
 		if (path.one === 'stocks') {
 			if (path.three) {
 				return (
@@ -91,7 +94,7 @@ const LevelTwo = ({ path }: { path: PathObject }) => {
 };
 
 const LevelThree = ({ path }: { path: PathObject }) => {
-	if (path.three && path.three !== '#main') {
+	if (path.three && validBit(path.three)) {
 		if (path.four) {
 			return (
 				<Link
@@ -108,14 +111,14 @@ const LevelThree = ({ path }: { path: PathObject }) => {
 };
 
 const LevelFour = ({ path }: { path: PathObject }) => {
-	if (path.four && path.four !== '#main') {
+	if (path.four && validBit(path.four)) {
 		return <>{formatPageTitle(path.four)}</>;
 	}
 	return null;
 };
 
 export const Breadcrumbs = () => {
-	const path = useNavState();
+	const path = navState((state) => state.path);
 
 	return (
 		<nav>

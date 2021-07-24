@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { useNavState } from 'hooks/useNavState';
+import { navState } from 'state/navState';
 
 export const IPONavigation = () => {
-	const path = useNavState();
+	const path = navState((state) => state.path);
 
 	const active =
 		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900';

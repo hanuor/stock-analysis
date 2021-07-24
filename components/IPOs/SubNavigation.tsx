@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { useNavState } from 'hooks/useNavState';
+import { navState } from 'state/navState';
 
 export const SubNavigation = () => {
-	const path = useNavState();
+	const path = navState((state) => state.path);
 
 	const active =
 		'py-1.5 px-3.5 xs:px-4 block font-semibold bg-[#eee] text-gray-900';
