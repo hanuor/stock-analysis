@@ -5,11 +5,15 @@ import { navState } from 'state/navState';
 export const FooterDianomi = () => {
 	const path = navState((state) => state.path);
 
-	if (path.one === 'login' || path.one === 'pro') {
+	if (
+		path.one === 'login' ||
+		path.one === 'pro' ||
+		path.one === 'contact' ||
+		path.one === 'privacy-policy' ||
+		path.one === 'terms-of-use'
+	) {
 		return <></>;
 	}
-
-	console.log('footer ad rendering');
 
 	return (
 		<>
