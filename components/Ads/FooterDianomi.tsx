@@ -26,3 +26,4 @@ export const FooterDianomi = () => {
 		</>
 	);
 };
+export default FooterDianomi;

@@ -2,7 +2,11 @@
 import { useUserInfo } from 'hooks/useUserInfo';
 import { useNavState } from 'hooks/useNavState';
 import Link from 'next/link';
-import { FooterDianomi } from 'components/Ads/FooterDianomi';
+import dynamic from 'next/dynamic';
+
+const FooterDianomi = dynamic(() => import('components/Ads/FooterDianomi'), {
+	ssr: false,
+});
 
 interface IconProps {
 	className: string;
