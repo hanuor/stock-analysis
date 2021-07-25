@@ -84,12 +84,14 @@ const navigation = {
 
 export const Footer = () => {
 	const isLoggedIn = authState((state) => state.isLoggedIn);
+	const isPro = authState((state) => state.isPro);
+	const status = authState((state) => state.status);
 	// eslint-disable-next-line no-unused-vars
 	const path = useNavState();
 
 	return (
 		<>
-			{!isLoggedIn && <FooterDianomi />}
+			{status === 'completed' && !isPro && <FooterDianomi />}
 
 			<footer
 				className="bg-gray-800 clear-both mt-10"

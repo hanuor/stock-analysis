@@ -175,11 +175,11 @@
 	}
 
 	.news-article {
-		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 last:pb-0 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5;
+		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 last:pb-1 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5;
 	}
 
 	.news-video {
-		@apply flex flex-col bg-white p-4 sm:px-0 sm:py-6 first:pt-3 sm:first:pt-4 shadow sm:shadow-none;
+		@apply flex flex-col bg-white p-4 sm:px-0 sm:py-6 first:pt-3 last:pb-1 sm:first:pt-4 shadow sm:shadow-none;
 	}
 
 	.news-ticker {

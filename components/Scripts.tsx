@@ -2,9 +2,9 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import Script from 'next/script';
 
 export const Scripts = () => {
-	const { isLoggedIn, status } = useUserInfo();
+	const { isPro, status } = useUserInfo();
 
-	if (isLoggedIn || status !== 'completed') {
+	if (isPro || status !== 'completed') {
 		return null;
 	}
 

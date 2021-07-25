@@ -68,7 +68,8 @@ export function useUserInfo() {
 		} else {
 			setStatus('completed');
 		}
-	}, [isLoggedIn, setAvatar, setEmail, setIsLoggedIn, setIsPro]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return { email, isLoggedIn, setIsLoggedIn, isPro, setIsPro, status };
 }

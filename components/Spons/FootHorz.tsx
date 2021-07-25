@@ -5,17 +5,12 @@ import { authState } from 'state/authState';
 // Dianomi ad in the footer
 export const FooterDianomi = () => {
 	const path = navState((state) => state.path);
-	const isLoggedIn = authState((state) => state.isLoggedIn);
 	const isPro = authState((state) => state.isPro);
 	const status = authState((state) => state.status);
-
-	console.log(status);
-	console.log(isPro);
 
 	if (
 		status === 'completed' &&
 		!isPro &&
-		!isLoggedIn &&
 		path.one !== 'login' &&
 		path.one !== 'pro' &&
 		path.one !== 'contact' &&
