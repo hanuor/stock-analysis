@@ -4,6 +4,7 @@ import 'styles/globals.css';
 import NProgress from 'nprogress';
 import { Header } from 'components/Layout/Header/_Header';
 import { Footer } from 'components/Layout/Footer/_Footer';
+import { Scripts } from 'components/Scripts';
 
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -18,6 +19,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
+			<Scripts />
 			<Header />
 			<Component {...pageProps} />
 			<Footer />

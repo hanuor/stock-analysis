@@ -9,6 +9,8 @@ export function useUserInfo() {
 	const isPro = authState((state) => state.isPro);
 	const setIsPro = authState((state) => state.setIsPro);
 	const setAvatar = authState((state) => state.setAvatar);
+	const status = authState((state) => state.status);
+	const setStatus = authState((state) => state.setStatus);
 
 	useEffect(() => {
 		async function checkAuth(
@@ -17,6 +19,7 @@ export function useUserInfo() {
 			hasAvatar: boolean
 		) {
 			try {
+				setStatus('loading');
 				const response = await fetch(
 					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&a=${hasAvatar}`
 				);
@@ -42,6 +45,8 @@ export function useUserInfo() {
 				}
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setStatus('completed');
 			}
 		}
 
@@ -58,10 +63,12 @@ export function useUserInfo() {
 			setAvatar(avatar);
 		}
 
-		if (token) {
+		if (token && status === 'unchecked') {
 			checkAuth(token, email, hasAvatar);
+		} else {
+			setStatus('completed');
 		}
 	}, [isLoggedIn, setAvatar, setEmail, setIsLoggedIn, setIsPro]);
 
-	return { email, isLoggedIn, setIsLoggedIn, isPro, setIsPro };
+	return { email, isLoggedIn, setIsLoggedIn, isPro, setIsPro, status };
 }

@@ -1,10 +1,11 @@
 /* eslint-disable react/display-name */
-import { useUserInfo } from 'hooks/useUserInfo';
+// import { useUserInfo } from 'hooks/useUserInfo';
 import { useNavState } from 'hooks/useNavState';
+import { authState } from 'state/authState';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-const FooterDianomi = dynamic(() => import('components/Ads/FooterDianomi'), {
+const FooterDianomi = dynamic(() => import('components/Spons/FootHorz'), {
 	ssr: false,
 });
 
@@ -82,16 +83,16 @@ const navigation = {
 };
 
 export const Footer = () => {
-	const { isLoggedIn } = useUserInfo();
+	const isLoggedIn = authState((state) => state.isLoggedIn);
 	// eslint-disable-next-line no-unused-vars
 	const path = useNavState();
 
 	return (
 		<>
-			<FooterDianomi />
+			{!isLoggedIn && <FooterDianomi />}
 
 			<footer
-				className="bg-gray-800 clear-both mt-8"
+				className="bg-gray-800 clear-both mt-10"
 				aria-labelledby="footerHeading"
 			>
 				<h2 id="footerHeading" className="sr-only">
