@@ -28,21 +28,28 @@ export const LiteYouTubeEmbed = ({ id, title }: Props) => {
 		setIframe(true);
 	};
 
-	const inactive = styles['yt-lite'];
+	const inactive =
+		styles['yt-lite'] +
+		' focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-brand_light rounded-sm';
 	const active = [styles['yt-lite'], styles['lyt-activated']].join(' ');
 
 	return (
 		<>
 			<div
 				onClick={addIframe}
+				onKeyDown={(event) => {
+					if (event.key === 'Enter') {
+						addIframe();
+					}
+				}}
 				className={iframe ? active : inactive}
 				data-title={videoTitle}
 				style={{ backgroundImage: `url(${posterUrl})` }}
+				tabIndex={0}
 			>
 				<div className={styles['lty-playbtn']}></div>
 				{iframe && (
 					<iframe
-						className=""
 						title={videoTitle}
 						width="560"
 						height="315"

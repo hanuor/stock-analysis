@@ -20,7 +20,9 @@ export const Profile = ({ info, data }: Props) => {
 				{data.description}{' '}
 				{info.type === 'stocks' && (
 					<Link href={`/stocks/${info.symbol}/company/`} prefetch={false}>
-						<a className="bll">[Read more...]</a>
+						<a className="bll" aria-hidden="true" tabIndex={-1}>
+							[Read more...]
+						</a>
 					</Link>
 				)}
 			</p>

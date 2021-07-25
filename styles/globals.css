@@ -67,6 +67,15 @@
 		@apply px-0 mx-0 w-auto max-w-none;
 	}
 
+	.breadcrumbs ol {
+		@apply flex flex-wrap text-sm sm:text-small text-gray-600 sm:mb-0.5;
+	}
+
+	nav.breadcrumbs li:not(:first-child)::before {
+		margin: 0 6px;
+		content: '»';
+	}
+
 	.bll {
 		@apply text-blue-link hover:text-gray-900;
 	}
