@@ -37,9 +37,9 @@ export const redOrGreen = (value: string, id: string) => {
 	} // Inverse colors
 
 	if (change > 0) {
-		return 'text-green-600';
+		return 'text-green-700';
 	} else if (change < 0) {
-		return 'text-red-500';
+		return 'text-red-600';
 	} else {
 		return 'inherit';
 	}

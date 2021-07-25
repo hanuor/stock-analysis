@@ -95,7 +95,7 @@ export default function Login() {
 		<>
 			<SEO title="Log in to Stock Analysis" canonical="login/" />
 			<LayoutFullWidth>
-				<div className="bg-gray-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+				<div className="flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
 					<div className="sm:mx-auto sm:w-full sm:max-w-md">
 						<Link href="/" prefetch={false}>
 							<a>
@@ -114,7 +114,7 @@ export default function Login() {
 					</div>
 
 					<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-						<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+						<div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10 border border-gray-300">
 							{error && (
 								<div className="border border-red-300 bg-red-50 p-2 mb-4 rounded-md">
 									Error: {error}

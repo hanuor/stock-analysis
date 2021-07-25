@@ -30,7 +30,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 				canonical="ipos/calendar/"
 			/>
 			<div className="contain">
-				<main className="w-full py-6">
+				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation />
