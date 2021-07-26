@@ -109,7 +109,7 @@ export class Axis extends React.Component<AxisProps> {
 				axisZoomCallback={axisZoomCallback}
 				className={className}
 				zoomCursorClassName={zoomCursorClassName}
-				inverted={inverted}
+				inverted={!inverted}
 				onContextMenu={onContextMenu}
 				onDoubleClick={onDoubleClick}
 			/>

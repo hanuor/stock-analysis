@@ -145,7 +145,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			}
 		};
 		const disablePan = false;
-		const disableZoom = false;
+		const disableZoom = true;
 
 		const candlesAppearance = {
 			fill: function fill(d: IOHLCData) {
