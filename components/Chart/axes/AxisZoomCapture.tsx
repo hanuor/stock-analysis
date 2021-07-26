@@ -141,7 +141,7 @@ export class AxisZoomCapture extends React.Component<
 		}
 		this.dragHappened = true;
 
-		const { getMouseDelta, inverted = true } = this.props;
+		const { getMouseDelta, inverted = false } = this.props;
 
 		const { startPosition } = this.state;
 		if (startPosition !== null) {
@@ -151,7 +151,7 @@ export class AxisZoomCapture extends React.Component<
 			const mouseXY = pointer(e, container);
 
 			const diff = getMouseDelta(startXY, mouseXY);
-
+			console.log(inverted);
 			const center = mean(startScale.range());
 			if (center === undefined) {
 				return;
