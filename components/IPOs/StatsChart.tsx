@@ -16,6 +16,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 	return (
 		<div className="mt-4 mb-3 sm:mb-4 border border-gray-200 h-[300px] sm:h-[390px] p-1 sm:p-2">
 			<Bar
+				type="bar"
 				ref={chartRef}
 				data={{
 					labels: x,

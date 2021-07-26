@@ -81,6 +81,7 @@ export const HoverChart = ({
 
 	return (
 		<Bar
+			type="bar"
 			data={{
 				labels: xaxis,
 				datasets: [

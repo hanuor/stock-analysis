@@ -64,6 +64,7 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 			)}
 			<div className="h-72 border border-gray-200 rounded-sm p-1 xs:px-2 bp:px-3">
 				<Bar
+					type="bar"
 					data={{
 						labels: data.financialChart[0],
 						datasets: [

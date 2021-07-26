@@ -77,6 +77,7 @@ export const AnalystWidget = ({ data }: { data: Overview }) => {
 
 				<div className="h-48">
 					<Bar
+						type="bar"
 						data={{
 							labels: [
 								'Sell',
