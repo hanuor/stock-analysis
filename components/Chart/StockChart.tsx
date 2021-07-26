@@ -337,7 +337,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
 					<XAxis showTickLabel={true} />
 					<YAxis
-						showGridLines={true}
+						showGridLines={false}
 						tickFormat={this.yAxisTickDisplay}
 						getMaxTicks={maxValueCallback}
 					/>
