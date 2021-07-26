@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { mappedSlidingWindow } from '../utils';
-export default function () {
+export default function HeikinAshi() {
 	let source = (x) => x;
 	const calculator = (data) => {
 		const algorithm = mappedSlidingWindow()

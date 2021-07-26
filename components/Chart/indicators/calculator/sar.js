@@ -15,7 +15,7 @@ function calc(prev, now) {
 		fallingEp,
 	};
 }
-export default function () {
+export default function Sar() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { accelerationFactor, maxAccelerationFactor } = options;

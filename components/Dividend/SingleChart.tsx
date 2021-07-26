@@ -28,7 +28,6 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 	return (
 		<div className="h-72 border border-gray-200 p-0.5 xs:p-1">
 			<Bar
-				type="bar"
 				data={{
 					labels: x,
 					datasets: [

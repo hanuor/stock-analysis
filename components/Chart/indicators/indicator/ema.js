@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { ema } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'EMA';
-export default function () {
+export default function Ema() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.ema);

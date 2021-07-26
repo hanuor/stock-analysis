@@ -96,7 +96,7 @@ function Regular({ quote }: { quote: Quote }) {
 	return (
 		<div>
 			<span className="text-4xl font-bold">{quote.priceD}</span>{' '}
-			<span className={`text-2xl ${color} font-semibold`}>
+			<span className={`text-2xl reg ${color} font-semibold`}>
 				{`${quote.change} (${quote.changePc})`}
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
@@ -116,7 +116,7 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 			<span
 				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
 			>
-				{quote.extC} ({quote.extCP})
+				{`${quote.extC} (${quote.extCP})`}
 			</span>
 			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">
 				{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}
@@ -140,8 +140,8 @@ function ExtendedClose({ quote }: { quote: Quote }) {
 			<span className="text-3xl font-semibold text-gray-700">
 				{quote.priceD}
 			</span>{' '}
-			<span className={`block sm:inline text-lg xs:text-xl ${color}`}>
-				{quote.change} ({quote.changePc})
+			<span className={`block sm:inline text-lg xs:text-xl reg ${color}`}>
+				{`${quote.change} (${quote.changePc})`}
 			</span>
 			<div className="text-sm text-gray-700 mt-1">
 				<span className="block sm:inline font-semibold mr-1">

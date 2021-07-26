@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { compare } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'Compare';
-export default function () {
+export default function Compare() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.compare);

@@ -3,7 +3,7 @@ import { rebind } from '../utils';
 import { kagi } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'Kagi';
-export default function () {
+export default function Kagi() {
 	const base = baseIndicator().type(ALGORITHM_TYPE);
 	const underlyingAlgorithm = kagi();
 	const indicator = underlyingAlgorithm;

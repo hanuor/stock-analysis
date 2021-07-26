@@ -3,7 +3,7 @@ import { merge, rebind } from '../utils';
 import { sto } from '../calculator';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'STO';
-export default function () {
+export default function StochasticOscillator() {
 	const base = baseIndicator().type(ALGORITHM_TYPE);
 	const underlyingAlgorithm = sto();
 	const mergedAlgorithm = merge()

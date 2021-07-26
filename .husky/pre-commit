@@ -1,14 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo '🏗️👷 Styling, testing and building before committing'
-
-# Check Prettier standards
-npm run check-format ||
-(
-    echo '🤢 Prettier Check Failed. Format files and try again.';
-    false;
-)
+echo '🏗️👷 Testing and building before committing'
 
 # Check ESLint Standards
 npm run check-lint ||

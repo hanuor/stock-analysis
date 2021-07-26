@@ -3,7 +3,7 @@ import { elderRay } from '../calculator';
 import { merge, rebind } from '../utils';
 import baseIndicator from './baseIndicator';
 const ALGORITHM_TYPE = 'ElderRay';
-export default function () {
+export default function ElderRay() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
 		.accessor((d) => d.elderRay);

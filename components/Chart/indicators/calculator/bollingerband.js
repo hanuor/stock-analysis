@@ -28,7 +28,7 @@ import { deviation, mean } from 'd3-array';
 import { path, slidingWindow, zipper } from '../utils';
 import ema from './ema';
 import { BollingerBand as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function Bollingerband() {
 	let options = defaultOptions;
 	const calculator = (data) => {
 		const { windowSize, multiplier, movingAverageType, sourcePath } = options;

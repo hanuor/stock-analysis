@@ -28,7 +28,7 @@ import { mean, zip } from 'd3-array';
 import { slidingWindow } from '../utils';
 import ema from './ema';
 import { ElderRay as defaultOptions } from './defaultOptionsForComputation';
-export default function () {
+export default function ElderRayComponent() {
 	let options = defaultOptions;
 	let ohlc = (d) => ({
 		open: d.open,
