@@ -145,7 +145,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			}
 		};
 		const disablePan = false;
-		const disableZoom = true;
+		const disableZoom = false;
 
 		const candlesAppearance = {
 			fill: function fill(d: IOHLCData) {
@@ -308,36 +308,10 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 				xExtents={xExtents}
 				zoomAnchor={lastVisibleItemBasedZoomAnchor}
 			>
-				<Chart
-					id={4}
-					height={100}
-					origin={(w, h) => [0, h - 100]}
-					yExtents={volChartExtents}
-				>
-					<BarSeries
-						widthRatio={0.5}
-						clip={true}
-						yAccessor={(d) => d.volume}
-						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 1.05}
-						rectHeight={15}
-						fill={volumeColor}
-						orient="right"
-						edgeAt="right"
-						fontSize={11}
-						lineStroke={openCloseColor}
-						displayFormat={format('.4~s')}
-						yAccessor={volumeSeries}
-						yAxisPad={0}
-					/>
-				</Chart>
 				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
 					<XAxis showTickLabel={true} />
 					<YAxis
-						showGridLines={false}
+						showGridLines={true}
 						tickFormat={this.yAxisTickDisplay}
 						getMaxTicks={maxValueCallback}
 					/>
@@ -457,6 +431,32 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					) : (
 						<> </>
 					)}
+				</Chart>
+				<Chart
+					id={2}
+					height={100}
+					origin={(w, h) => [0, h - 100]}
+					yExtents={volChartExtents}
+				>
+					<BarSeries
+						widthRatio={0.5}
+						clip={true}
+						yAccessor={(d) => d.volume}
+						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
+					/>
+					<EdgeIndicator
+						itemType="last"
+						rectWidth={margin.right - 1.05}
+						rectHeight={15}
+						fill={volumeColor}
+						orient="right"
+						edgeAt="right"
+						fontSize={11}
+						lineStroke={openCloseColor}
+						displayFormat={format('.4~s')}
+						yAccessor={volumeSeries}
+						yAxisPad={0}
+					/>
 				</Chart>
 
 				{isBrowser == true ? <CrossHairCursor /> : <> </>}
