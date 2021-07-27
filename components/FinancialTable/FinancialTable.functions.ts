@@ -1,3 +1,5 @@
+import { formatNumber } from 'functions/numbers/formatNumber';
+
 export const getPeriodLabel = (range: string) => {
 	switch (range) {
 		case 'annual':
@@ -37,9 +39,9 @@ export const redOrGreen = (value: string, id: string) => {
 	} // Inverse colors
 
 	if (change > 0) {
-		return 'text-green-600';
+		return 'text-green-700';
 	} else if (change < 0) {
-		return 'text-red-500';
+		return 'text-red-600';
 	} else {
 		return 'inherit';
 	}
@@ -50,26 +52,37 @@ export const setBorder = (rowname: string) => {
 };
 
 // Format the Y axis on hover charts
-export const formatY = (value: number, format?: string) => {
-	if (!format && (value > 10000000 || value < -10000000)) {
-		return new Intl.NumberFormat('en-US').format(value / 1000000);
+export const formatY = (
+	value: number,
+	format?: string,
+	ymin?: number,
+	ymax?: number
+) => {
+	if (
+		!format &&
+		((ymax && (ymax > 10000000 || ymax < -10000000)) ||
+			(ymin && (ymin > 10000000 || ymin < -10000000)))
+	) {
+		return formatNumber(value / 1000000, 0, 0);
 	}
+
 	if (
 		format === 'reduce_precision' &&
 		(value > 10000000 || value < -10000000)
 	) {
-		return new Intl.NumberFormat('en-US').format(value / 1000000);
+		return formatNumber(value / 1000000, 0, 0); // new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
+
 	if (format === 'growth' || format === 'margin') {
-		return value.toFixed(0) + '%';
+		return formatNumber(value, 0, 0, '%');
 	}
 	if (format === 'ratio' || format === 'pershare') {
-		return value.toFixed(2);
+		return formatNumber(value, 2, 2);
 	}
 	return value;
 };
 
-interface FormatNumber {
+interface FormatCell {
 	type: string;
 	current: number;
 	previous: number | null | string;
@@ -78,29 +91,23 @@ interface FormatNumber {
 }
 
 // Format the number in the cells
-export function formatNumber({
+export function formatCell({
 	type,
 	current,
 	previous,
 	revenue,
 	divider,
-}: FormatNumber) {
+}: FormatCell) {
 	const numbersIn: number = getDivider(divider);
 	const decimals = divider === 'raw' ? 3 : 2;
 
 	switch (type) {
 		case 'standard':
-			return new Intl.NumberFormat('en-US', {
-				maximumFractionDigits: 2,
-			}).format(current / numbersIn);
+			return formatNumber(current / numbersIn, 0, 2);
 
 		case 'reduce_precision': {
 			if (current) {
-				const rawnum: number | any = current / numbersIn;
-				const num = rawnum.toFixed(0) * numbersIn;
-				return new Intl.NumberFormat('en-US', {
-					maximumFractionDigits: 2,
-				}).format(num / numbersIn);
+				return formatNumber(current / numbersIn, 0, 0);
 			}
 			return '-';
 		}
@@ -176,9 +183,8 @@ export function countDecimals(value: string) {
 
 export function reducePrecisionFix(value: number) {
 	if (value > 10000000 || value < -10000000) {
-		const divided: number = value / 1000000;
-		// divided = divided.toFixed(0);
-		return new Intl.NumberFormat('en-US').format(divided);
+		const divided = value / 1000000;
+		return formatNumber(divided, 0, 0);
 	}
 	return value;
 }

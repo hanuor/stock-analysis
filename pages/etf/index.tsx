@@ -4,7 +4,7 @@ import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
 import { SymbolTable } from 'components/Tables/SymbolTable';
 import { ETFLink } from 'components/Links';
-import abbreviateNumber from 'functions/abbreviateNumber';
+import { abbreviateNumber } from 'functions/numbers/abbreviateNumber';
 
 interface IStock {
 	s: string;

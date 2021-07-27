@@ -6,7 +6,7 @@ import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
 
 const getChartUrl = (id: number, time: string) => {
-	const url = 'https://stockanalysis17jun2.local/wp-json/sa/';
+	const url = 'https://stockanalysis.com/wp-json/sa/';
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
@@ -71,7 +71,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 
 	return (
 		<div className="border border-gray-200 rounded-sm lg:border-0 p-0.5 xs:p-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0">
-			<div className="flex flex-row justify-between space-x-2 items-center py-1 sm:pt-0 px-1.5 sm:px-0 overflow-x-auto">
+			<div className="flex flex-row justify-between space-x-2 items-center py-1 sm:pt-0.5 px-1.5 sm:px-0 overflow-x-auto">
 				<Controls chartTime={chartTime} setChartTime={setChartTime} />
 				{chartData && chartData.length > 0 && (
 					<PriceChange

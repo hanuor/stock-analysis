@@ -10,22 +10,23 @@ interface Props {
 export const NewsArticle = ({ item, related }: Props) => {
 	return (
 		<div className="news-article">
-			<div className="sm:mt-1">
-				<a
-					href={item.url}
-					target="_blank"
-					rel="nofollow noopener noreferrer"
-				>
-					<img
-						loading="lazy"
-						src={item.image}
-						width={640}
-						height={360}
-						alt=""
-						className="rounded"
-					/>
-				</a>
-			</div>
+			<a
+				href={item.url}
+				target="_blank"
+				rel="nofollow noopener noreferrer"
+				aria-hidden="true"
+				tabIndex={-1}
+				className="sm:mt-1"
+			>
+				<img
+					loading="lazy"
+					src={item.image}
+					width={640}
+					height={360}
+					alt=""
+					className="rounded"
+				/>
+			</a>
 			<div className="flex flex-col">
 				<h3 className="hh3 mb-2 mt-3 sm:mt-0 leading-snug sm:leading-tight sm:order-2 hover:text-blue-brand_sharp">
 					<a

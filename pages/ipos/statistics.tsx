@@ -32,7 +32,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				canonical="ipos/statistics/"
 			/>
 			<div className="contain">
-				<main className="w-full py-5 xs:py-6">
+				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs />
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation />

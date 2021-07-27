@@ -222,6 +222,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				type="search"
 				aria-label="Search"
 				role="combobox"
+				aria-expanded={open}
 				autoComplete="off"
 				autoCorrect="off"
 				spellCheck="false"

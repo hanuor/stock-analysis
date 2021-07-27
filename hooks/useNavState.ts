@@ -2,6 +2,23 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { navState } from 'state/navState';
 
+// Validate that the URL piece is a valid route
+const validate = (bit: string) => {
+	if (!bit) {
+		return null;
+	}
+
+	if (
+		bit.charAt(0) !== '#' &&
+		bit.charAt(0) !== '?' &&
+		bit.charAt(0) !== '%'
+	) {
+		return bit;
+	}
+
+	return null;
+};
+
 export const useNavState = () => {
 	const router = useRouter();
 	const path = navState((state) => state.path);
@@ -10,10 +27,10 @@ export const useNavState = () => {
 	useEffect(() => {
 		const route = router.asPath;
 		const split = route.split('/');
-		const one = split[1] || null;
-		const two = split[2] || null;
-		const three = split[3] || null;
-		const four = split[4] || null;
+		const one = validate(split[1]);
+		const two = validate(split[2]);
+		const three = validate(split[3]);
+		const four = validate(split[4]);
 
 		setPath({
 			one,

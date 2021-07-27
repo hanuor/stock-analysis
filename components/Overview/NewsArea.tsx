@@ -10,9 +10,8 @@ export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 	const [type, setType] = useState('all');
 	const [firstRender, setFirstRender] = useState(true);
 
-	const common = ' outline-none focus:outline-none';
-	const active = 'text-gray-900 font-semibold' + common;
-	const inactive = 'bll' + common;
+	const active = 'text-gray-900 font-semibold';
+	const inactive = 'bll';
 
 	const originalData = news;
 
@@ -64,7 +63,7 @@ export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 		<>
 			<div className="px-4 md:px-0 mt-6 lg:mt-0">
 				<h2 className="hh2 mb-2">News</h2>
-				<div className="text-smaller xs:text-base">
+				<div className="text-smaller xs:text-base mb-0.5">
 					<ul className="flex flex-row justify-between bp:justify-start bp:space-x-5 whitespace-nowrap">
 						<li>
 							<button
