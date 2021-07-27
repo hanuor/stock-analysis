@@ -50,7 +50,6 @@ interface StateProps {
 
 class StockChart extends React.Component<StockChartProps, StateProps> {
 	private readonly dateFormat = timeFormat('%Y-%m-%d');
-	// private margin = { left: 0, right: 62, top: 3, bottom: 24 };
 	private readonly pricesDisplayFormat = format('.2f');
 	private readonly pricesBelowOneDisplayFormat = format('.3~f');
 	private readonly yAxisTickDisplay = format('.2~f');
