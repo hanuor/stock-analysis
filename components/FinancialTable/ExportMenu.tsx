@@ -6,7 +6,7 @@ import {
 import exportFromJSON, { ExportType } from 'export-from-json';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
-import { formatNumber } from './FinancialTable.functions';
+import { formatCell } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
@@ -70,7 +70,7 @@ export const ExportMenu = ({ map, financials, statement, symbol }: Props) => {
 				const current = item as number;
 
 				newRow.push(
-					formatNumber({
+					formatCell({
 						type: row.format || 'standard',
 						current: current,
 						previous: prev,

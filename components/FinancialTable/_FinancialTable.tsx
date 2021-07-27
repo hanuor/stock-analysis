@@ -9,7 +9,7 @@ import { useState, forwardRef } from 'react';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
 import {
-	formatNumber,
+	formatCell,
 	formatYear,
 	redOrGreen,
 	getPeriodLabel,
@@ -173,7 +173,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				const prev = format === 'growth' ? rowdata[index + offset] : null;
 				const rev = format === 'margin' ? revenuedata[index] : null;
 
-				const titleTag = formatNumber({
+				const titleTag = formatCell({
 					type: row.format || 'standard',
 					current: cell,
 					previous: prev,
@@ -181,7 +181,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 					divider: 'raw',
 				});
 
-				const cellContent = formatNumber({
+				const cellContent = formatCell({
 					type: row.format || 'standard',
 					current: cell,
 					previous: prev,
