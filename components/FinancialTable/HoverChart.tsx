@@ -126,7 +126,10 @@ export const HoverChart = ({
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
 
-							let x = chart.scales.y._labelItems[length].translation[0];
+							let x =
+								meta.vScale._labelItems[
+									meta.vScale._labelItems.length - 1
+								].translation[0] - 0.5;
 
 							const y = meta.data[last].y - 7.5;
 
