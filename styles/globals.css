@@ -97,15 +97,15 @@
 	}
 
 	.text-page .article-header {
-		@apply mb-4 md:mb-5 border-blue-brand_sharp border-b-2 pb-3 md:pb-3;
+		@apply mb-4 md:mb-6 border-blue-brand_sharp border-b-2 pb-3 md:pb-3;
 	}
 
 	.text-page h1 {
-		@apply text-3xl md:text-4xl font-bold mb-3;
+		@apply text-3xl md:text-4xl font-bold mb-3 text-gray-800;
 	}
 
 	.text-page h2 {
-		@apply text-2xl md:text-3xl font-bold mb-3 md:mb-4;
+		@apply text-2xl md:text-3xl font-bold mb-5 md:mb-6;
 	}
 
 	.text-page h3 {
@@ -131,15 +131,11 @@
 
 	.text-page ol {
 		list-style: decimal;
-		@apply ml-6 mb-5;
+		@apply ml-6 md:ml-8 mb-5;
 	}
 
 	.text-page li {
 		@apply mb-3;
-	}
-
-	.text-page .right-image {
-		@apply max-w-[140px] sm:max-w-none float-right ml-5 mb-4 mr-1;
 	}
 
 	.text-page table {
@@ -156,6 +152,18 @@
 
 	.text-page table tr td {
 		@apply py-2 sm:px-3;
+	}
+
+	.text-page img {
+		@apply my-6 md:my-7 mx-auto;
+	}
+
+	.text-page img.add-border {
+		@apply border border-gray-200;
+	}
+
+	.text-page .summary {
+		@apply border border-gray-300 bg-gray-50 rounded p-4 mb-6 md:mb-8;
 	}
 
 	.profilewrap {
