@@ -1,7 +1,6 @@
 export const HeaderLogo = ({ className }: { className: string }) => {
 	return (
 		<svg
-			version="1.0"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 900 900"
 			className={className}
