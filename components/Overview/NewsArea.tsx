@@ -1,52 +1,82 @@
 import { useState, useEffect } from 'react';
 import { NewsFeed } from 'components/News/_NewsFeed';
-import Axios from 'axios';
-import loadStockTwits from 'functions/loadStockTwits';
+import { loadStockTwits } from 'functions/loadStockTwits';
 import { News } from 'types/News';
 import { Info } from 'types/Info';
 
-export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
+interface Props {
+	info: Info;
+	news: News[];
+	updated: number;
+}
+
+const fetchNews = async (url: string) => {
+	try {
+		const response = await fetch(url);
+		const data = await response.json();
+		if (response.ok) {
+			return data;
+		} else {
+			return null;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const NewsArea = ({ info, news, updated }: Props) => {
 	const [data, setData] = useState(news);
+	const [original, setOriginal] = useState(news);
+	const [timestamp, setTimestamp] = useState(updated);
 	const [type, setType] = useState('all');
 	const [firstRender, setFirstRender] = useState(true);
 
-	const active = 'text-gray-900 font-semibold';
-	const inactive = 'bll';
+	const updatedTime = new Date(timestamp * 1000);
+	const currentTime = new Date();
 
-	const originalData = news;
+	const minutesBetween =
+		(currentTime.getTime() - updatedTime.getTime()) / 1000 / 60;
 
+	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
-		const url = `https://stockanalysis.com/wp-json/sa/news?i=${info.id}&f=${type}`;
-		const source = Axios.CancelToken.source();
+		const url = `${process.env.NEXT_PUBLIC_API_URL}/news-fresh?i=${info.id}`;
 
-		const fetchNews = async () => {
-			try {
-				const resp = await Axios.get(url, {
-					cancelToken: source.token,
-					timeout: 5000,
-				});
-				const newData = await resp.data;
-				setData(newData);
-			} catch {
-				console.log('There was an error fetching news of type: ' + type);
+		async function fetchData() {
+			const fresh = await fetchNews(url);
+			if (news[0].title !== fresh[0].title) {
+				setData(fresh);
+				setOriginal(fresh);
 			}
-		};
+		}
+
+		if (minutesBetween > 60) {
+			setTimestamp(currentTime.getTime());
+			fetchData();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	// Fetch data if a menu item has been clicked (videos, press releases, conversation)
+	useEffect(() => {
+		const url = `${process.env.NEXT_PUBLIC_API_URL}/news?i=${info.id}&f=${type}`;
+
+		async function fetchData() {
+			const fresh = await fetchNews(url);
+			setData(fresh);
+		}
 
 		if (firstRender) {
 			setFirstRender(false);
 		} else {
 			if (type === 'all') {
-				setData(originalData);
+				setData(original);
 			} else if (type === 'v' || type === 'pr') {
-				fetchNews();
+				fetchData();
 			} else if (type === 'chat') {
 				loadStockTwits(info.ticker);
 			}
 		}
 
-		return () => {
-			source.cancel('Unmounted');
-		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type]);
 
@@ -67,7 +97,7 @@ export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 					<ul className="flex flex-row justify-between bp:justify-start bp:space-x-5 whitespace-nowrap">
 						<li>
 							<button
-								className={type === 'all' ? active : inactive}
+								className={type === 'all' ? 'font-semibold' : 'bll'}
 								onClick={() => setType('all')}
 							>
 								All
@@ -75,7 +105,7 @@ export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 						</li>
 						<li>
 							<button
-								className={type === 'v' ? active : inactive}
+								className={type === 'v' ? 'font-semibold' : 'bll'}
 								onClick={() => setType('v')}
 							>
 								Videos
@@ -84,7 +114,7 @@ export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 						{info.type === 'stocks' && (
 							<li>
 								<button
-									className={type === 'pr' ? active : inactive}
+									className={type === 'pr' ? 'font-semibold' : 'bll'}
 									onClick={() => setType('pr')}
 								>
 									Press
@@ -94,7 +124,7 @@ export const NewsArea = ({ info, news }: { info: Info; news: News[] }) => {
 						)}
 						<li>
 							<button
-								className={type === 'chat' ? active : inactive}
+								className={type === 'chat' ? 'font-semibold' : 'bll'}
 								onClick={() => setType('chat')}
 							>
 								Conversation
