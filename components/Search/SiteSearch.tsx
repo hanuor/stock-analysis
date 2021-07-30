@@ -222,7 +222,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
 					nav ? ' bg-gray-50 focus:bg-white' : 'lg:text-[17px]'
 				}`}
-				type="search"
+				type="text"
 				aria-label="Search"
 				role="combobox"
 				aria-expanded={open}
