@@ -28,17 +28,18 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			try {
 				setLoading(true);
 				const resA = await fetch(
-					'https://stockanalysis.com/wp-json/sa/trending/'
+					'https://stockanalysisx.com/wp-json/sa/trending/'
 				);
 				const trendingData = await resA.json();
 				setTrending(trendingData);
 				const resB = await fetch(
-					'https://stockanalysis.com/wp-json/sa/search/'
+					'https://stockanalysisx.com/wp-json/sa/search/'
 				);
 				const indexData = await resB.json();
 				setIndex(indexData);
 			} catch (error) {
-				console.error(error);
+				throw Error(error.message);
+				// console.error(error);
 			} finally {
 				setLoading(false);
 			}
@@ -89,11 +90,11 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 				const allResults = exact.concat(matches);
 				setResults(allResults);
-				setOpen(true);
+				// setOpen(true);
 			}, 150);
 		} else if (fetched) {
 			setResults(trending);
-			setOpen(true);
+			// setOpen(true);
 		}
 
 		return () => {
@@ -165,10 +166,10 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 			case 'Enter':
 				{
-					e.preventDefault();
 					const activeResult: HTMLLinkElement | null =
 						document.querySelector('.activeresult') ?? null;
 					if (activeResult) {
+						e.preventDefault();
 						const selected = activeResult.href;
 						const selectedUrl = new URL(selected);
 						const selectedPath = selectedUrl.pathname;
@@ -227,18 +228,20 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				autoCorrect="off"
 				spellCheck="false"
 				aria-autocomplete="list"
-				name="search"
+				name="q"
 				placeholder="Company or stock ticker..."
 				ref={inputRef}
 				value={query}
-				onClick={() => fetchIndex()}
 				onChange={(e) => setQuery(e.target.value)}
+				onMouseEnter={() => {
+					!fetched && fetchIndex();
+				}}
+				onClick={() => {
+					!fetched && fetchIndex();
+				}}
 				onFocus={() => {
-					if (!fetched) {
-						fetchIndex();
-					} else {
-						setOpen(true);
-					}
+					setOpen(true);
+					!fetched && fetchIndex();
 				}}
 			/>
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
@@ -262,9 +265,11 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 									))}
 								</ul>
 							) : (
-								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
-									No results found.
-								</h4>
+								!loading && (
+									<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+										No results found.
+									</h4>
+								)
 							)}
 						</div>
 						<style global jsx>{`

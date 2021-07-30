@@ -62,9 +62,7 @@ export const Header = () => {
 					</Link>
 				</div>
 				<div className="flex-grow">
-					<form role="search">
-						<HeaderSearch />
-					</form>
+					<HeaderSearch />
 				</div>
 				<div className="lg:hidden">
 					<button

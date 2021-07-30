@@ -13,9 +13,11 @@ export const Hero = () => (
 					in the S&P500 index. See stock price quotes, news, financial
 					statements and more.
 				</p>
-				<div className="flex relative mx-auto text-left mb-5 max-w-[95%] md:max-w-[75%] lg:max-w-lg">
-					<SiteSearch nav={false} />
-				</div>
+				<form action="/search/" method="get" role="search">
+					<div className="flex relative mx-auto text-left mb-5 max-w-[95%] md:max-w-[75%] lg:max-w-lg">
+						<SiteSearch nav={false} />
+					</div>
+				</form>
 				<p className="text-sm xs:text-base md:text-lg lg:text-[19px]">
 					Example searches:{' '}
 					<Link href="/stocks/aapl/" prefetch={false}>
