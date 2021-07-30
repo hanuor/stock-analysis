@@ -19,27 +19,29 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [trending, setTrending] = useState([]);
+	const [error, setError] = useState(false);
 	let num = 1;
 
 	// Fetch the site index
 	async function fetchIndex() {
+		setError(false);
 		setFetched(true);
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
 				const resA = await fetch(
-					'https://stockanalysisx.com/wp-json/sa/trending/'
+					'https://stockanalysis.com/wp-json/sa/trending/'
 				);
 				const trendingData = await resA.json();
 				setTrending(trendingData);
 				const resB = await fetch(
-					'https://stockanalysisx.com/wp-json/sa/search/'
+					'https://stockanalysis.com/wp-json/sa/search/'
 				);
 				const indexData = await resB.json();
 				setIndex(indexData);
 			} catch (error) {
-				throw Error(error.message);
-				// console.error(error);
+				setError(true);
+				return console.error(error);
 			} finally {
 				setLoading(false);
 			}
@@ -245,16 +247,16 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				}}
 			/>
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
-				{open && (
+				{open && !error && (
 					<>
 						<div className="searchresults">
-							{query.length === 0 && (
+							{!loading && query.length === 0 && (
 								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
 									Trending
 								</h4>
 							)}
 							{results.length ? (
-								<ul>
+								<ul role="listbox">
 									{results.map((item, index) => (
 										<SingleResult
 											key={index}
