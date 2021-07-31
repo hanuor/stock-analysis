@@ -1,5 +1,5 @@
 import { Stock } from 'components/Layout/StockLayout';
-import StockChart from 'components/Chart/StockChart';
+// import StockChart from 'components/Chart/StockChart';
 import { SEO } from 'components/SEO';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
@@ -7,6 +7,11 @@ import { getStockInfo } from 'functions/callBackEnd';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const StockChart = dynamic(() => import('components/Chart/StockChart'), {
+	ssr: false,
+});
 
 interface ChartProps {
 	info: Info;
@@ -26,13 +31,13 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 			/>
 			<Stock info={info}>
 				<div className="px-2 sm:contain">
-					<div className="">
+					<div className="py-2">
 						<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 							<Buttons state={time} dispatch={setTime} />
 							<SelectPeriod dispatcher={setPeriod} />
 							<SelectType dispatcher={setType} />
 						</div>
-						<div className="max-h-[400px] xs:max-h-[450px] bp:max-h-[550px] sm:max-h-[600px]">
+						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 							<StockChart
 								stockId={info.id}
 								period={period}
@@ -55,7 +60,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
-	const info = await getStockInfo(symbol); // Mögulega rangt, náði ekki að verifya
+	const info = await getStockInfo(symbol);
 
 	return {
 		props: {
