@@ -392,6 +392,7 @@ export class EventCapture extends React.Component<
 
 	public handleDrag = (e: any) => {
 		const { onDrag } = this.props;
+
 		if (onDrag === undefined) {
 			return;
 		}
@@ -552,8 +553,8 @@ export class EventCapture extends React.Component<
 			} else {
 				mouseXY = pointers(e, this.ref.current)[0];
 				this.lastNewPos = mouseXY;
-				dx = panOrigin[0] - mouseXY[0];
-				dy = panOrigin[1] - mouseXY[1];
+				dx = mouseXY[0] - panOrigin[0];
+				dy = mouseXY[1] - panOrigin[1];
 			}
 
 			this.dx = dx;
@@ -616,7 +617,6 @@ export class EventCapture extends React.Component<
 
 	public handleTouchStart = (e: React.TouchEvent) => {
 		this.mouseInteraction = false;
-
 		const {
 			pan: panEnabled,
 			chartConfig,
