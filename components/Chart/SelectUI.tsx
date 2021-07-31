@@ -32,8 +32,8 @@ export const SelectType = (props: SelectProps) => {
 		<div>
 			<select
 				onChange={(e) => props.dispatcher(e.target.value)}
-				id="period"
-				name="period"
+				id="type"
+				name="type"
 				className="block pl-3 sm:border-l border-gray-300 pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="Day"
 			>
@@ -45,8 +45,7 @@ export const SelectType = (props: SelectProps) => {
 };
 
 export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
-	const common =
-		'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md focus:outline-none';
+	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md';
 	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
 	const inactive =
 		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow';
@@ -54,8 +53,8 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 		<>
 			<select
 				onChange={(e) => dispatch(e.target.value)}
-				id="period"
-				name="period"
+				id="range"
+				name="range"
 				className="block sm:hidden pl-3 border-r border-gray-300 pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="1Y"
 			>

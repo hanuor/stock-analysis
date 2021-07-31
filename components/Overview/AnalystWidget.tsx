@@ -24,12 +24,20 @@ function PriceTarget({ target }: { target: string[] }) {
 	} else if (updown === 'downside') {
 		return (
 			<>
-				<div className="text-red-600">{priceTarget}</div>
-				<div>({difference} downside)</div>
+				<div className="text-red-600 text-4xl text-center font-semibold mb-0.5">
+					{priceTarget}
+				</div>
+				<div className="text-xl text-center mb-1.5">
+					({difference} downside)
+				</div>
 			</>
 		);
 	} else {
-		return <div className="text-gray-800">{priceTarget}</div>;
+		return (
+			<div className="text-gray-800 text-4xl text-center font-semibold mb-0.5">
+				{priceTarget}
+			</div>
+		);
 	}
 }
 
@@ -134,6 +142,24 @@ export const AnalystWidget = ({ data }: { data: Overview }) => {
 							plugins: {
 								legend: {
 									display: false,
+								},
+								tooltip: {
+									borderWidth: 1,
+									titleFont: {
+										size: 17,
+										weight: '600',
+									},
+									bodyFont: {
+										size: 15,
+										weight: '400',
+									},
+									padding: {
+										top: 12,
+										right: 15,
+										bottom: 12,
+										left: 15,
+									},
+									displayColors: false,
 								},
 							},
 						}}

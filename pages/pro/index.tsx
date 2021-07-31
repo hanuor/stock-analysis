@@ -135,7 +135,7 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 sm:px-4 text-lg">
-										Financial history: Limited to 10-15 years.
+										Financial history: Limited to 10 years.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">

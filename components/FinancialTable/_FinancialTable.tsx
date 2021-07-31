@@ -45,12 +45,9 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		return <span>Loading...</span>;
 	}
 
-	const data =
-		statement === 'ratios' && range === 'quarterly'
-			? financials.trailing
-			: financials[range as keyof FinancialsType]; // The data for the selected financial statement
+	const data = financials[range as keyof FinancialsType];
 
-	const paywall = range === 'annual' ? 15 : 40;
+	const paywall = range === 'annual' ? 10 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
 
 	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
@@ -151,6 +148,9 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		let total = 0;
 
 		let rowdata = data[dataid as keyof FinancialReport];
+		if (!rowdata) {
+			return null;
+		}
 		let revenuedata = data.revenue;
 
 		if (fullcount > showcount) {
