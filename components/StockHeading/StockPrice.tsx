@@ -3,6 +3,7 @@ import { SunIcon } from 'components/Icons/Sun';
 import { useQuery } from 'react-query';
 import { Info, IpoInfo } from 'types/Info';
 import { Quote } from 'types/Quote';
+import { isTradingHours } from 'functions/datetime/isTradingHours';
 
 async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 	const id = queryKey[1];
@@ -15,8 +16,11 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 }
 
 export default function StockPrice({ info }: { info: Info }) {
+	const tradingHours = isTradingHours();
+
 	const { data } = useQuery(['q', info.id], queryQuote, {
-		refetchInterval: 5000,
+		refetchInterval: tradingHours ? 5000 : false,
+		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
 	});
@@ -117,6 +121,7 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 			</span>{' '}
 			<span
 				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
+				suppressHydrationWarning
 			>
 				{`${quote.extC} (${quote.extCP})`}
 			</span>
