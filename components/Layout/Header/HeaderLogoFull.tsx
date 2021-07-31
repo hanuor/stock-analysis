@@ -1,7 +1,6 @@
 export const HeaderLogoFull = () => {
 	return (
 		<svg
-			version="1.0"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 3060 928"
 			className="hidden lg:flex lg:h-12 lg:w-32"

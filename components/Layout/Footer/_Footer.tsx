@@ -242,13 +242,13 @@ export const Footer = () => {
 									name="meta_adtracking"
 									value="Footer"
 								/>
-								<label htmlFor="emailAddress" className="sr-only">
+								<label htmlFor="email-footer" className="sr-only">
 									Email address
 								</label>
 								<input
 									type="email"
 									name="email"
-									id="email"
+									id="email-footer"
 									autoComplete="email"
 									className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
 									placeholder="Enter your email"

@@ -19,10 +19,12 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [trending, setTrending] = useState([]);
+	const [error, setError] = useState(false);
 	let num = 1;
 
 	// Fetch the site index
 	async function fetchIndex() {
+		setError(false);
 		setFetched(true);
 		if (!loading && !index.length) {
 			try {
@@ -38,7 +40,8 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				const indexData = await resB.json();
 				setIndex(indexData);
 			} catch (error) {
-				console.error(error);
+				setError(true);
+				return console.error(error);
 			} finally {
 				setLoading(false);
 			}
@@ -89,11 +92,11 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 				const allResults = exact.concat(matches);
 				setResults(allResults);
-				setOpen(true);
+				// setOpen(true);
 			}, 150);
 		} else if (fetched) {
 			setResults(trending);
-			setOpen(true);
+			// setOpen(true);
 		}
 
 		return () => {
@@ -165,10 +168,10 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 			case 'Enter':
 				{
-					e.preventDefault();
 					const activeResult: HTMLLinkElement | null =
 						document.querySelector('.activeresult') ?? null;
 					if (activeResult) {
+						e.preventDefault();
 						const selected = activeResult.href;
 						const selectedUrl = new URL(selected);
 						const selectedPath = selectedUrl.pathname;
@@ -219,39 +222,40 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
 					nav ? ' bg-gray-50 focus:bg-white' : 'lg:text-[17px]'
 				}`}
-				type="search"
+				type="text"
 				aria-label="Search"
 				role="combobox"
 				aria-expanded={open}
 				autoComplete="off"
-				autoCorrect="off"
 				spellCheck="false"
 				aria-autocomplete="list"
-				name="search"
+				name="q"
 				placeholder="Company or stock ticker..."
 				ref={inputRef}
 				value={query}
-				onClick={() => fetchIndex()}
 				onChange={(e) => setQuery(e.target.value)}
+				onMouseEnter={() => {
+					!fetched && fetchIndex();
+				}}
+				onClick={() => {
+					!fetched && fetchIndex();
+				}}
 				onFocus={() => {
-					if (!fetched) {
-						fetchIndex();
-					} else {
-						setOpen(true);
-					}
+					setOpen(true);
+					!fetched && fetchIndex();
 				}}
 			/>
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
-				{open && (
+				{open && !error && (
 					<>
 						<div className="searchresults">
-							{query.length === 0 && (
+							{!loading && query.length === 0 && (
 								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
 									Trending
 								</h4>
 							)}
 							{results.length ? (
-								<ul>
+								<ul role="listbox">
 									{results.map((item, index) => (
 										<SingleResult
 											key={index}
@@ -262,9 +266,11 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 									))}
 								</ul>
 							) : (
-								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
-									No results found.
-								</h4>
+								!loading && (
+									<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+										No results found.
+									</h4>
+								)
 							)}
 						</div>
 						<style global jsx>{`

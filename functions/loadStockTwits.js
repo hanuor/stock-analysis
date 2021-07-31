@@ -1,6 +1,6 @@
 /* eslint-disable no-invalid-this */
 // Load the StockTwits widget
-const loadStockTwits = (symbol) => {
+export const loadStockTwits = (symbol) => {
 	// Add the stocktwits div to the container
 	const wrap = document.getElementById('altwrap');
 	wrap.innerHTML = '<div id="stw"></div>';
@@ -182,5 +182,3 @@ const loadStockTwits = (symbol) => {
 		},
 	});
 };
-
-export default loadStockTwits;
