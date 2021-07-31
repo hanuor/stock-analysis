@@ -13,6 +13,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 	const [entries, setEntries] = useState<Filing[]>([]);
 	const [updated, setUpdated] = useState<string>('');
 	const [loaded, setLoaded] = useState(false);
+	const [fetched, setFetched] = useState(false);
 
 	useEffect(() => {
 		if (filings) {
@@ -28,24 +29,24 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 	useEffect(() => {
 		const source = Axios.CancelToken.source();
 
-		if (loaded) {
+		if (loaded && !fetched) {
 			const fetchSec = async () => {
+				const url = `${process.env.NEXT_PUBLIC_API_URL}/sec?cik=${cik}&c=10&i=${id}&json=1`;
+
 				try {
-					const res = await Axios.get(
-						`https://stockanalysis.com/wp-json/sa/sec?cik=${cik}&c=10&i=${id}&json=1`,
-						{
-							cancelToken: source.token,
-							timeout: 5000,
-						}
-					);
+					setFetched(true);
+					const res = await Axios.get(url, {
+						cancelToken: source.token,
+						timeout: 5000,
+					});
 					const newSec = res.data;
 
 					if (
 						!entries.length ||
-						(newSec && newSec[0][0].time !== entries[0].time)
+						(newSec && newSec.filings[0].time !== entries[0].time)
 					) {
-						setEntries(newSec[0]);
-						setUpdated(newSec[1]);
+						setEntries(newSec.filings);
+						setUpdated(newSec.updated);
 					}
 				} catch (err) {
 					if (!Axios.isCancel(err)) {
@@ -58,7 +59,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 			const timestamp = Date.parse(updated);
 			const diff = (now - timestamp) / 1000;
 
-			if (!entries.length || diff > 12 * 60 * 60) {
+			if (!entries.length || diff > 12 * 60 * 60 || isNaN(diff)) {
 				fetchSec();
 			}
 		}

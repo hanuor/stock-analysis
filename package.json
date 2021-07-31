@@ -48,7 +48,7 @@
 		"@types/d3-shape": "^3.0.1",
 		"@types/d3-time-format": "^4.0.0",
 		"@types/lodash.flattendeep": "^4.4.6",
-		"@types/node": "^16.3.2",
+		"@types/node": "^16.4.8",
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "^17.0.13",
 		"@types/react-dom": "^17.0.5",

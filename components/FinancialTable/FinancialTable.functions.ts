@@ -76,6 +76,9 @@ export const formatY = (
 	if (format === 'growth' || format === 'margin') {
 		return formatNumber(value, 0, 0, '%');
 	}
+	if (format === 'percentage') {
+		return formatNumber(value, 0, 2, '%');
+	}
 	if (format === 'ratio' || format === 'pershare') {
 		return formatNumber(value, 2, 2);
 	}
@@ -153,6 +156,71 @@ export function formatCell({
 
 		default:
 			return '';
+	}
+}
+
+// Format the number in the cells
+export function formatCellExport({
+	type,
+	current,
+	previous,
+	revenue,
+	divider,
+}: FormatCell) {
+	const decimals = 3;
+
+	switch (type) {
+		case 'standard':
+			return current;
+
+		case 'reduce_precision': {
+			if (current) {
+				return current;
+			}
+			return;
+		}
+
+		case 'growth': {
+			if (
+				current &&
+				previous &&
+				typeof current === 'number' &&
+				typeof previous === 'number' &&
+				current > 0 &&
+				previous > 0
+			) {
+				return parseFloat((current / previous - 1).toFixed(decimals));
+			}
+			return;
+		}
+
+		case 'margin': {
+			if (current && revenue) {
+				return parseFloat((current / revenue).toFixed(decimals));
+			}
+			return;
+		}
+
+		case 'percentage': {
+			return current;
+		}
+
+		case 'pershare': {
+			if (current) {
+				return current;
+			}
+			return;
+		}
+
+		case 'ratio': {
+			if (current) {
+				return current;
+			}
+			return;
+		}
+
+		default:
+			return;
 	}
 }
 

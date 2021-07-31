@@ -6,7 +6,7 @@ import {
 import exportFromJSON, { ExportType } from 'export-from-json';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
-import { formatCell } from './FinancialTable.functions';
+import { formatCellExport } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
@@ -24,13 +24,9 @@ export const ExportMenu = ({ map, financials, statement, symbol }: Props) => {
 
 	// Map the data (the export-from-json library needs the data in a specific format)
 	const exportData = (type: ExportType) => {
-		// Get the info required to map the data
-		const rawdata =
-			statement === 'ratios' && range === 'quarterly'
-				? financials.trailing
-				: financials[range as keyof FinancialsType];
+		const rawdata = financials[range as keyof FinancialsType];
 
-		const paywall = range === 'annual' ? 15 : 40;
+		const paywall = range === 'annual' ? 10 : 40;
 		const fullcount = rawdata.datekey.length;
 		const showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 		const DATA_MAP = map;
@@ -56,50 +52,54 @@ export const ExportMenu = ({ map, financials, statement, symbol }: Props) => {
 		// Map the rows
 		const newArray: object[] = [];
 		DATA_MAP.map((row) => {
-			let newRow = leftRight ? [] : [row.title];
+			let newRow: any[] = leftRight ? [] : [row.title];
 			const dataid = row.data || row.id;
 			const format = row.format || 'standard';
 			const offset = range === 'annual' ? 1 : 4;
 
 			const rowdata = rawdata[dataid as keyof FinancialReport];
-			const revenuedata = rawdata.revenue;
 
-			rowdata.map((item, index) => {
-				const prev = format === 'growth' ? rowdata[index + offset] : null;
-				const rev = format === 'margin' ? revenuedata[index] : null;
-				const current = item as number;
+			if (rowdata) {
+				const revenuedata = rawdata.revenue;
 
-				newRow.push(
-					formatCell({
-						type: row.format || 'standard',
-						current: current,
-						previous: prev,
-						revenue: rev,
-						divider: 'raw',
-					})
-				);
-			});
+				rowdata.map((item, index) => {
+					const prev =
+						format === 'growth' ? rowdata[index + offset] : null;
+					const rev = format === 'margin' ? revenuedata[index] : null;
+					const current = item as number;
 
-			// Limit columns if paywalled
-			if (fullcount > showcount) {
-				newRow = newRow.slice(0, showcount + 1);
+					newRow.push(
+						formatCellExport({
+							type: row.format || 'standard',
+							current: current,
+							previous: prev,
+							revenue: rev,
+							divider: 'raw',
+						})
+					);
+				});
+
+				// Limit columns if paywalled
+				if (fullcount > showcount) {
+					newRow = newRow.slice(0, showcount + 1);
+				}
+
+				if (leftRight) {
+					newRow.push(row.title);
+					newRow = newRow.reverse();
+				}
+
+				interface RowData {
+					[key: string]: string;
+				}
+
+				const newObject: RowData = {};
+				for (let i = 0; i < showcount + 1; i++) {
+					newObject[columns[i] as keyof RowData] = newRow[i];
+				}
+
+				newArray.push(newObject);
 			}
-
-			if (leftRight) {
-				newRow.push(row.title);
-				newRow = newRow.reverse();
-			}
-
-			interface RowData {
-				[key: string]: string;
-			}
-
-			const newObject: RowData = {};
-			for (let i = 0; i < showcount + 1; i++) {
-				newObject[columns[i] as keyof RowData] = newRow[i];
-			}
-
-			newArray.push(newObject);
 		});
 
 		const data = newArray;

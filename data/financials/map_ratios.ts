@@ -210,7 +210,7 @@ export const MAP_RATIOS = [
 		tooltip:
 			'The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.',
 		formula:
-			'Buyback Yield = - (Share Issuance and Repurchase / Market Cap) * 100%',
+			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%',
 	},
 	{
 		id: 'totalreturn',
