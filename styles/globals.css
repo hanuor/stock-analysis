@@ -207,11 +207,23 @@
 	}
 
 	.dropd {
-		@apply max-h-[265px] w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-200;
+		@apply max-h-[265px] w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
 	}
 
 	.dropd.active {
 		@apply opacity-100;
+	}
+
+	.m-menu {
+		@apply bg-white shadow-xl absolute w-full opacity-0 transition-opacity duration-1000;
+	}
+
+	/* .m-menu.inactive {
+		@apply opacity-0;
+	} */
+
+	.m-menu.active {
+		@apply block opacity-100;
 	}
 }
 

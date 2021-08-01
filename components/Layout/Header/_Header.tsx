@@ -4,17 +4,14 @@ import { HeaderLogo } from 'components/Layout/Header/HeaderLogo';
 import { HeaderLogoFull } from 'components/Layout/Header/HeaderLogoFull';
 import { HeaderSearch } from 'components/Layout/Header/HeaderSearch';
 import { HeaderLogin } from 'components/Layout/Header/HeaderLogin';
-
-import {
-	HeaderNavigation,
-	HamburgerIcon,
-	CloseIcon,
-} from 'components/Layout/Header/HeaderNavigation';
+import { HamburgerIcon } from 'components/Icons/Hamburger';
+import { CloseIcon } from 'components/Icons/Close';
+import { HeaderNavigation } from 'components/Layout/Header/HeaderNavigation';
 
 export const Header = () => {
 	const noderef = useRef<HTMLDivElement>(null);
 	const [open, setOpen] = useState(false);
-	const [menu, setMenu] = useState('hidden lg:flex');
+	const [menu, setMenu] = useState('m-menu');
 
 	function clickMenu() {
 		setOpen((open) => !open);
@@ -35,10 +32,10 @@ export const Header = () => {
 
 	useEffect(() => {
 		if (open) {
-			setMenu('block bg-white shadow-xl absolute w-full');
+			setMenu('m-menu active');
 			document.addEventListener('mousedown', clickOutside);
 		} else {
-			setMenu('hidden');
+			setMenu('m-menu');
 			document.removeEventListener('mousedown', clickOutside);
 		}
 
@@ -57,7 +54,7 @@ export const Header = () => {
 					<Link href="/" prefetch={false}>
 						<a className="flex" aria-label="Stock Analysis home page">
 							<HeaderLogo className="h-8 w-8 lg:hidden" />
-							<HeaderLogoFull />
+							<HeaderLogoFull className="hidden lg:flex lg:h-12 lg:w-32" />
 						</a>
 					</Link>
 				</div>
@@ -73,23 +70,27 @@ export const Header = () => {
 						}`}
 						onClick={clickMenu}
 					>
-						{open ? <CloseIcon /> : <HamburgerIcon />}
+						{open ? (
+							<CloseIcon classes="h-6 w-6" />
+						) : (
+							<HamburgerIcon classes="h-6 w-6" />
+						)}
 						<span className="text-xs">{open ? 'Close' : 'Menu'}</span>
 					</button>
 				</div>
 				<div className="hidden lg:flex">
-					<HeaderNavigation device="desktop" />
+					<HeaderNavigation device="desktop" setOpen={setOpen} />
 				</div>
 				<div className="hidden lg:flex">
-					<HeaderLogin />
+					<HeaderLogin setOpen={setOpen} />
 				</div>
 			</div>
 			<div className="relative lg:hidden">
 				<div ref={noderef} className={menu}>
 					{open && (
 						<>
-							<HeaderNavigation device="mobile" />
-							<HeaderLogin />
+							<HeaderNavigation device="mobile" setOpen={setOpen} />
+							<HeaderLogin setOpen={setOpen} />
 						</>
 					)}
 				</div>
