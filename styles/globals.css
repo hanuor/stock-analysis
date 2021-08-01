@@ -215,12 +215,8 @@
 	}
 
 	.m-menu {
-		@apply bg-white shadow-xl absolute w-full opacity-0 transition-opacity duration-1000;
+		@apply bg-white shadow-xl absolute w-full opacity-0 transition-opacity duration-150;
 	}
-
-	/* .m-menu.inactive {
-		@apply opacity-0;
-	} */
 
 	.m-menu.active {
 		@apply block opacity-100;

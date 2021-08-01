@@ -3,7 +3,7 @@ import StockChart from 'components/Chart/StockChart';
 import { SEO } from 'components/SEO';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
-import { getEtfInfo } from 'functions/callBackEnd';
+import { getPageData } from 'functions/callBackEnd';
 import { useState } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
@@ -55,7 +55,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
-	const info = await getEtfInfo(symbol); // Mögulega rangt, náði ekki að verifya
+	const { info } = await getPageData('chartpage', symbol);
 
 	return {
 		props: {

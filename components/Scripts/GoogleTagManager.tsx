@@ -1,7 +1,7 @@
 import { useUserInfo } from 'hooks/useUserInfo';
 import Script from 'next/script';
 
-export const Scripts = () => {
+export const GoogleTagManager = () => {
 	const { isPro, status } = useUserInfo();
 
 	if (isPro || status !== 'completed') {

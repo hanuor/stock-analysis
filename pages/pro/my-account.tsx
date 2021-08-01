@@ -5,6 +5,7 @@ import { LoginPrompt } from 'components/LoginPrompt';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
+import { CrispChat } from 'components/Scripts/CrispChat';
 
 type StringOrNull = string | null | undefined;
 
@@ -50,6 +51,7 @@ export default function MyAccount() {
 	return (
 		<>
 			<SEO title="My Account" canonical="pro/my-account/" noindex={true} />
+			<CrispChat />
 			<LayoutFullWidth>
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
 					{isLoggedIn ? (
