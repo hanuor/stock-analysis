@@ -5,7 +5,7 @@ import {
 	FinancialReport,
 } from 'types/Financials';
 import { Info } from 'types/Info';
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useMemo } from 'react';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
 import {
@@ -14,6 +14,8 @@ import {
 	redOrGreen,
 	getPeriodLabel,
 	getPeriodTooltip,
+	sliceData,
+	reverseData,
 } from './FinancialTable.functions';
 import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
@@ -38,19 +40,29 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
+	const reversed = financialsState((state) => state.reversed);
+	const setReversed = financialsState((state) => state.setReversed);
 	const isPro = authState((state) => state.isPro);
 	const [hover, setHover] = useState(false);
 
-	if (!financials || Object.keys(financials).length === 0) {
-		return <span>Loading...</span>;
-	}
+	let data = financials[range as keyof FinancialsType];
 
-	const data = financials[range as keyof FinancialsType];
-
+	// Slice data if paywalled
 	const paywall = range === 'annual' ? 10 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
 
 	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
+
+	data = useMemo(() => sliceData(data, showcount), [data, showcount]);
+
+	// Switch left/right direction of data
+	if (leftRight === 'right' && !reversed) {
+		data = reverseData(data);
+		setReversed(true);
+	} else if (leftRight === 'left' && reversed) {
+		data = reverseData(data);
+		setReversed(false);
+	}
 
 	// Remove initial empty columns in ratios statement
 	if (statement === 'ratios' && data) {
@@ -81,13 +93,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	const DATA_MAP = map;
 
 	const headerRow = () => {
-		let headerdata = data.datekey;
-		if (fullcount > showcount) {
-			headerdata = headerdata.slice(0, showcount);
-		}
-		if (leftRight) {
-			headerdata = headerdata.reverse();
-		}
+		const headerdata = data.datekey;
 
 		return headerdata.map((cell, index) => {
 			return (
@@ -143,25 +149,14 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		let offset = range === 'quarterly' ? 4 : 1;
 		let total = 0;
 
-		let rowdata = data[dataid as keyof FinancialReport];
+		const rowdata = data[dataid as keyof FinancialReport];
 		if (!rowdata) {
 			return null;
 		}
-		let revenuedata = data.revenue;
+		const revenuedata = data.revenue;
 
-		if (fullcount > showcount) {
-			if (statement === 'income_statement') {
-				revenuedata = revenuedata.slice(0, showcount);
-			}
-			rowdata = rowdata.slice(0, showcount);
-		}
-
-		if (leftRight) {
+		if (leftRight === 'right') {
 			offset = -offset;
-			if (statement === 'income_statement') {
-				revenuedata = revenuedata.reverse();
-			}
-			rowdata = rowdata.reverse();
 		}
 
 		const dataRows = rowdata.map((cell, index) => {

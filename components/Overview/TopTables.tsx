@@ -10,7 +10,7 @@ const cssCellRight =
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
-		<table className="text-small w-[48%] lg:w-auto text-gray-900">
+		<table className="text-small w-[48%] lg:w-auto lg:min-w-[210px] text-gray-900">
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Market Cap</td>
@@ -64,7 +64,7 @@ export const QuoteTable = ({
 	const previous = !quote || !quote.brandNew ? 'Previous Close' : 'IPO Price';
 
 	return (
-		<table className="text-small w-[48%] lg:w-auto text-gray-900">
+		<table className="text-small w-[48%] lg:w-auto lg:min-w-[210px] text-gray-900">
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Volume</td>

@@ -92,11 +92,9 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 				const allResults = exact.concat(matches);
 				setResults(allResults);
-				// setOpen(true);
 			}, 150);
 		} else if (fetched) {
 			setResults(trending);
-			// setOpen(true);
 		}
 
 		return () => {
