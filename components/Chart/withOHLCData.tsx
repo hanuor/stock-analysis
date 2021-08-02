@@ -93,15 +93,16 @@ export function withOHLCData(dataSet = 'DAILY') {
 								'Error: There was an error loading the data for the chart |',
 								error
 							);
+							return (
+								<div className="h-full flex justify-center items-center mt-4 bg-gray-50 border border-gray-200 text-3xl font-semibold rounded-sm">
+									Unable to load the data for this chart.
+								</div>
+							);
 						});
 				}
 
 				if (data === undefined) {
-					return (
-						<div className="h-full flex justify-center items-center mt-4 bg-gray-50 border border-gray-200 text-3xl font-semibold rounded-sm">
-							Unable to load the data for this chart.
-						</div>
-					);
+					return <div></div>;
 				}
 
 				return (
