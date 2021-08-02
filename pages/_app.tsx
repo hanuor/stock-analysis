@@ -4,7 +4,7 @@ import 'styles/globals.css';
 import NProgress from 'nprogress';
 import { Header } from 'components/Layout/Header/_Header';
 import { Footer } from 'components/Layout/Footer/_Footer';
-import { Scripts } from 'components/Scripts';
+import { GoogleTagManager } from 'components/Scripts/GoogleTagManager';
 
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // comment
 
@@ -19,7 +19,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
-			<Scripts />
+			<GoogleTagManager />
 			<Header />
 			<Component {...pageProps} />
 			<Footer />

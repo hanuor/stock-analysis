@@ -1,9 +1,9 @@
-export const HeaderLogoFull = () => {
+export const HeaderLogoFull = ({ className }: { className: string }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 3060 928"
-			className="hidden lg:flex lg:h-12 lg:w-32"
+			className={className}
 		>
 			<g transform="matrix(.1 0 0 -.1 0 928)">
 				<path

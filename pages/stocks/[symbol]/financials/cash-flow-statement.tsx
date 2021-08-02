@@ -48,6 +48,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		'cash_flow_statement',
 		symbol
 	);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
+
 	const key = `${symbol}_cash_flow_statement`;
 
 	return {

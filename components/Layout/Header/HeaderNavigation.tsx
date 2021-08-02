@@ -1,6 +1,11 @@
 import Link from 'next/link';
 
-export const HeaderNavigation = ({ device }: { device: string }) => {
+interface Props {
+	device: string;
+	setOpen: (open: boolean) => void;
+}
+
+export const HeaderNavigation = ({ device, setOpen }: Props) => {
 	const menuDesktop = 'flex flex-row space-x-5 text-lg';
 	const menuMobile =
 		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200 bg-white relative z-50';
@@ -9,71 +14,58 @@ export const HeaderNavigation = ({ device }: { device: string }) => {
 		<>
 			<nav>
 				<ul className={device == 'desktop' ? menuDesktop : menuMobile}>
-					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
+					<li>
 						<Link href="/stocks/" prefetch={false}>
-							<a>Stocks</a>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								Stocks
+							</a>
 						</Link>
 					</li>
-					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
+					<li>
 						<Link href="/ipos/" prefetch={false}>
-							<a>IPOs</a>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								IPOs
+							</a>
 						</Link>
 					</li>
-					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
+					<li>
 						<Link href="/etf/" prefetch={false}>
-							<a>ETFs</a>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								ETFs
+							</a>
 						</Link>
 					</li>
-					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
+					<li>
 						<Link href="/news/" prefetch={false}>
-							<a>News</a>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								News
+							</a>
 						</Link>
 					</li>
-					<li className="pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700">
+					<li>
 						<Link href="/actions/" prefetch={false}>
-							<a>Actions</a>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								Actions
+							</a>
 						</Link>
 					</li>
 				</ul>
 			</nav>
 		</>
-	);
-};
-
-export const HamburgerIcon = () => {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			className="h-6 w-6"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M4 6h16M4 12h16M4 18h16"
-			/>
-		</svg>
-	);
-};
-
-export const CloseIcon = () => {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			className="h-6 w-6"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M6 18L18 6M6 6l12 12"
-			/>
-		</svg>
 	);
 };

@@ -1,23 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { navState } from 'state/navState';
-
-// Validate that the URL piece is a valid route
-const validate = (bit: string) => {
-	if (!bit) {
-		return null;
-	}
-
-	if (
-		bit.charAt(0) !== '#' &&
-		bit.charAt(0) !== '?' &&
-		bit.charAt(0) !== '%'
-	) {
-		return bit;
-	}
-
-	return null;
-};
+import { validateUrlBit } from 'functions/validation';
 
 export const useNavState = () => {
 	const router = useRouter();
@@ -27,10 +11,10 @@ export const useNavState = () => {
 	useEffect(() => {
 		const route = router.asPath;
 		const split = route.split('/');
-		const one = validate(split[1]);
-		const two = validate(split[2]);
-		const three = validate(split[3]);
-		const four = validate(split[4]);
+		const one = validateUrlBit(split[1]);
+		const two = validateUrlBit(split[2]);
+		const three = validateUrlBit(split[3]);
+		const four = validateUrlBit(split[4]);
 
 		setPath({
 			one,
