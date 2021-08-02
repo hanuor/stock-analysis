@@ -7,6 +7,7 @@ import { getPageData } from 'functions/callBackEnd';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
+import { Unavailable } from 'components/Unavailable';
 
 interface ChartProps {
 	info: Info;
@@ -33,12 +34,16 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 							<SelectType dispatcher={setType} />
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
-							<StockChart
-								stockId={info.id}
-								period={period}
-								time={time}
-								type={type}
-							/>
+							{info.state !== 'upcomingipo' ? (
+								<StockChart
+									stockId={info.id}
+									period={period}
+									time={time}
+									type={type}
+								/>
+							) : (
+								<Unavailable message="The chart is not available for this stock." />
+							)}
 						</div>
 					</div>
 				</div>
