@@ -23,7 +23,7 @@ export default function Ratios({ info, data }: Props) {
 				canonical={`stocks/${info.symbol}/financials/ratios/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
-				<SubNavigation symbol={info.symbol} statement="ratios" />
+				<SubNavigation info={info} statement="ratios" />
 				<FinancialTable
 					statement="ratios"
 					financials={data}

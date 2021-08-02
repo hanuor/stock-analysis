@@ -23,10 +23,7 @@ export default function CashFlowStatement({ info, data }: Props) {
 				canonical={`stocks/${info.symbol}/financials/cash-flow-statement/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
-				<SubNavigation
-					symbol={info.symbol}
-					statement="cash_flow_statement"
-				/>
+				<SubNavigation info={info} statement="cash_flow_statement" />
 				<FinancialTable
 					statement="cash_flow_statement"
 					financials={data}

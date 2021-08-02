@@ -17,7 +17,7 @@ export default function StockHeading({ info }: { info: Info }) {
 				<StockPrice info={info} />
 			</QueryClientProvider>
 			{info.type === 'stocks' ? (
-				<TabNavigation symbol={info.symbol} />
+				<TabNavigation info={info} />
 			) : (
 				<TabNavigationETF symbol={info.symbol} />
 			)}

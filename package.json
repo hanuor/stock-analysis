@@ -11,8 +11,7 @@
 		"check-format": "prettier --check .",
 		"check-lint": "eslint . --ext ts --ext tsx --ext js",
 		"format": "prettier --write .",
-		"test-all": "npm run check-lint && npm run check-types && npm run build",
-		"prepare": "husky install"
+		"test-all": "npm run check-lint && npm run check-types && npm run build"
 	},
 	"dependencies": {
 		"@tailwindcss/forms": "^0.3.2",
@@ -62,7 +61,6 @@
 		"eslint-config-next": "^11.0.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-react": "^7.24.0",
-		"husky": "^7.0.0",
 		"next-transpile-modules": "^8.0.0",
 		"postcss-flexbugs-fixes": "^5.0.2",
 		"postcss-import": "^14.0.1",

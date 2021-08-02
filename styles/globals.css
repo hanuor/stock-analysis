@@ -57,6 +57,18 @@
 		@apply flex flex-row overflow-x-auto sm:overflow-visible;
 	}
 
+	.navmenu li a {
+		@apply text-[15px] xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5;
+	}
+
+	.navmenu li a.active {
+		@apply text-gray-900 bg-[#eee] font-semibold;
+	}
+
+	.navmenu li a.inactive {
+		@apply bll hover:text-gray-900 hover:bg-gray-100 transition duration-100;
+	}
+
 	.contain {
 		/* Container for the main content, but not if full-width on mobile */
 		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;

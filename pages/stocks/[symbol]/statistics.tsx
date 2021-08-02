@@ -54,11 +54,12 @@ const StatisticsPage = ({ info, data }: Props) => {
 							data={data.ratios}
 							map={MAP_STATISTICS}
 						/>
-
-						<Button
-							text="Financial Ratio History"
-							url={`/stocks/${info.symbol}/financials/ratios/`}
-						/>
+						{!info.exceptions.hideRatios && (
+							<Button
+								text="Financial Ratio History"
+								url={`/stocks/${info.symbol}/financials/ratios/`}
+							/>
+						)}
 					</div>
 
 					<div>

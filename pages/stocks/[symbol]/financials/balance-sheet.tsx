@@ -23,7 +23,7 @@ export default function BalanceSheet({ info, data }: Props) {
 				canonical={`stocks/${info.symbol}/financials/balance-sheet/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
-				<SubNavigation symbol={info.symbol} statement="balance_sheet" />
+				<SubNavigation info={info} statement="balance_sheet" />
 				<FinancialTable
 					statement="balance_sheet"
 					financials={data}
