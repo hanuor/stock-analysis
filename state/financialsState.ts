@@ -3,11 +3,11 @@ import create from 'zustand';
 interface FinancialsState {
 	range: string;
 	divider: string;
-	leftRight: string;
+	leftRight: 'left' | 'right';
 	reversed: boolean;
 	setRange: (newRange: string) => void;
 	setDivider: (newDivider: string) => void;
-	setLeftRight: (newLeftRight: string) => void;
+	setLeftRight: (newLeftRight: 'left' | 'right') => void;
 	setReversed: (newReversed: boolean) => void;
 }
 

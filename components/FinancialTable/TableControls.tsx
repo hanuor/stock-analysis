@@ -84,6 +84,7 @@ export const TableControls = ({
 							financials={financials}
 							statement={statement}
 							symbol={symbol}
+							clickExport={clickExport}
 						/>
 					)}
 				</div>

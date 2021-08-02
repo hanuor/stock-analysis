@@ -6,7 +6,11 @@ import {
 import exportFromJSON, { ExportType } from 'export-from-json';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
-import { formatCellExport } from './FinancialTable.functions';
+import {
+	formatCellExport,
+	sliceData,
+	reverseData,
+} from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
@@ -15,36 +19,55 @@ interface Props {
 	financials: FinancialsType;
 	statement: string;
 	symbol: string;
+	clickExport: () => void;
 }
 
-export const ExportMenu = ({ map, financials, statement, symbol }: Props) => {
+export const ExportMenu = ({
+	map,
+	financials,
+	statement,
+	symbol,
+	clickExport,
+}: Props) => {
 	const range = financialsState((state) => state.range);
 	const leftRight = financialsState((state) => state.leftRight);
+	const reversed = financialsState((state) => state.reversed);
 	const isPro = authState((state) => state.isPro);
 
 	// Map the data (the export-from-json library needs the data in a specific format)
 	const exportData = (type: ExportType) => {
-		const rawdata = financials[range as keyof FinancialsType];
+		clickExport();
+		let rawdata = financials[range as keyof FinancialsType];
 
 		const paywall = range === 'annual' ? 10 : 40;
 		const fullcount = rawdata.datekey.length;
 		const showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 		const DATA_MAP = map;
 
+		rawdata = sliceData(rawdata, showcount);
+		// console.log(rawdata);
+
+		// if (leftRight === 'left') {
+		// 	rawdata = reverseData(rawdata);
+		// }
+
+		console.log(rawdata);
+
 		// Map the columns
-		let dataColumns = leftRight ? [] : ['Indicator'];
+		// let dataColumns = ['Indicator'];
+		let dataColumns = leftRight === 'right' ? [] : ['Indicator'];
 		rawdata.datekey.map((cell) => {
 			dataColumns.push(cell);
 		});
 
 		// Limit columns if paywalled
-		if (fullcount > showcount) {
-			dataColumns = dataColumns.slice(0, showcount + 1);
-		}
+		// if (fullcount > showcount) {
+		// 	dataColumns = dataColumns.slice(0, showcount + 1);
+		// }
 
-		if (leftRight) {
-			dataColumns.push('Indicator');
+		if (leftRight === 'right') {
 			dataColumns = dataColumns.reverse();
+			dataColumns.unshift('Indicator');
 		}
 
 		const columns = dataColumns;
@@ -80,13 +103,15 @@ export const ExportMenu = ({ map, financials, statement, symbol }: Props) => {
 				});
 
 				// Limit columns if paywalled
-				if (fullcount > showcount) {
-					newRow = newRow.slice(0, showcount + 1);
-				}
+				// if (fullcount > showcount) {
+				// 	newRow = newRow.slice(0, showcount + 1);
+				// }
 
-				if (leftRight) {
+				if (leftRight === 'right') {
 					newRow.push(row.title);
 					newRow = newRow.reverse();
+				} else {
+					newRow.unshift(row.title);
 				}
 
 				interface RowData {
