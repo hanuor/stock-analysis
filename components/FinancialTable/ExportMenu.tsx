@@ -6,11 +6,7 @@ import {
 import exportFromJSON, { ExportType } from 'export-from-json';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
-import {
-	formatCellExport,
-	sliceData,
-	reverseData,
-} from './FinancialTable.functions';
+import { formatCellExport, sliceData } from './FinancialTable.functions';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
@@ -31,7 +27,6 @@ export const ExportMenu = ({
 }: Props) => {
 	const range = financialsState((state) => state.range);
 	const leftRight = financialsState((state) => state.leftRight);
-	const reversed = financialsState((state) => state.reversed);
 	const isPro = authState((state) => state.isPro);
 
 	// Map the data (the export-from-json library needs the data in a specific format)
