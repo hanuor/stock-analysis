@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	if (info === 'redirect') {
 		return {
 			redirect: {
-				destination: `/stocks/${data}/`,
+				destination: data,
 				statusCode: 301,
 			},
 		};
