@@ -1,3 +1,4 @@
+import { FinancialReport } from 'types/Financials';
 import { formatNumber } from 'functions/numbers/formatNumber';
 
 export const getPeriodLabel = (range: string) => {
@@ -270,4 +271,26 @@ function getDivider(divider: string) {
 			return 1;
 	}
 	return 1000;
+}
+
+// Slice financial data if paywalled
+export function sliceData(data: FinancialReport, showcount: number) {
+	const sliced = {} as FinancialReport;
+
+	Object.keys(data).forEach((key) => {
+		sliced[key] = data[key].slice(0, showcount);
+	});
+
+	return sliced;
+}
+
+// Reverse left/right order of financial data
+export function reverseData(data: FinancialReport) {
+	const reversed = {} as FinancialReport;
+
+	Object.keys(data).forEach((key) => {
+		reversed[key] = data[key].reverse();
+	});
+
+	return reversed;
 }

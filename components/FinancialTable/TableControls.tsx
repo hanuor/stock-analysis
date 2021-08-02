@@ -56,7 +56,11 @@ export const TableControls = ({
 	}, [exportOpen]);
 
 	const clickLeftRight = () => {
-		setLeftRight(!leftRight);
+		if (leftRight === 'left') {
+			setLeftRight('right');
+		} else {
+			setLeftRight('left');
+		}
 	};
 
 	return (

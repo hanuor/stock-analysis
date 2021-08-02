@@ -5,9 +5,7 @@ export interface FinancialsType {
 }
 
 export interface FinancialReport {
-	datekey: string[];
-	marketcap: number[];
-	revenue: number[];
+	[key: string]: any[];
 }
 
 export interface FinancialsMapType {
