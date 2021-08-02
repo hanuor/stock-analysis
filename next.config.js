@@ -13,7 +13,4 @@ const withTM = require('next-transpile-modules')([
 
 module.exports = withTM({
 	trailingSlash: true,
-	images: {
-		domains: ['storage.googleapis.com'],
-	},
 });

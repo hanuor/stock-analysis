@@ -12,8 +12,13 @@ export interface Info {
 	fiscalYear: string;
 	currency: string;
 	state: string;
+	daysSince?: number;
 	archived: boolean;
 	ipoInfo?: IpoInfo | null;
+	exceptions: {
+		hideRatios: boolean;
+		hideChart: boolean;
+	};
 }
 
 export interface IpoInfo {

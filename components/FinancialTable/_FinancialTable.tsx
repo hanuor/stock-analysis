@@ -53,7 +53,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 
 	// Remove initial empty columns in ratios statement
-	if (statement === 'ratios') {
+	if (statement === 'ratios' && data) {
 		const marketCapData = data.marketcap;
 		const marketCapValid = marketCapData.filter(
 			(item) => item != null
@@ -67,12 +67,8 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	if (showcount === 0) {
 		return (
 			<>
-				<div className="px-4 lg:px-6 mx-auto">
-					<TableTitle
-						statement={statement}
-						currency={info.currency}
-						fiscalYear={info.fiscalYear}
-					/>
+				<div className="">
+					<TableTitle statement={statement} />
 					<span className="text-xl">
 						No {range} {statement.replace(/_/g, ' ')} data found for this
 						stock.

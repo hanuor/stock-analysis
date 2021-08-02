@@ -80,17 +80,29 @@ export function withOHLCData(dataSet = 'DAILY') {
 				if (period != newState.period) {
 					Axios.get(
 						`https://stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
-					).then((res) => {
-						const forDateParse = res.data.map(fixDataHeaders);
-						const data = forDateParse.map(parseData());
-						const period = newState.period;
-						this.setState({ period });
-						this.setState({ data });
-					});
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders);
+							const data = forDateParse.map(parseData());
+							const period = newState.period;
+							this.setState({ period });
+							this.setState({ data });
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							);
+							return (
+								<div className="h-full flex justify-center items-center mt-4 bg-gray-50 border border-gray-200 text-3xl font-semibold rounded-sm">
+									Unable to load the data for this chart.
+								</div>
+							);
+						});
 				}
 
 				if (data === undefined) {
-					return <div className="center"></div>;
+					return <div></div>;
 				}
 
 				return (
