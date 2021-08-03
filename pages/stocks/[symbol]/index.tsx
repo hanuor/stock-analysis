@@ -49,9 +49,15 @@ const StockOverview = ({ info, data, news }: Props) => {
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
 				</div>
-				<div className="lg:order-1">
-					<NewsArea info={info} news={news.data} updated={news.updated} />
-				</div>
+				{news && (
+					<div className="lg:order-1">
+						<NewsArea
+							info={info}
+							news={news.data}
+							updated={news.updated}
+						/>
+					</div>
+				)}
 			</div>
 		</Stock>
 	);
