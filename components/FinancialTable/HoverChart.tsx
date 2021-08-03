@@ -122,8 +122,6 @@ export const HoverChart = ({
 							const meta = chartInstance.getDatasetMeta(i);
 							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
 
-							const length = chart.scales.y._labelItems.length - 1;
-
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
 
 							let x =
@@ -134,7 +132,7 @@ export const HoverChart = ({
 							const y = meta.data[last].y - 7.5;
 
 							let str: any;
-
+							console.log(type);
 							if (dataset.data[last] == '0') {
 								return;
 							}
