@@ -3,7 +3,7 @@ import { FinancialReport, FinancialsMapType } from 'types/Financials';
 import { Bar, defaults } from 'react-chartjs-2';
 import {
 	formatY,
-	formatNumber,
+	formatCell,
 	formatYear,
 	countDecimals,
 	reducePrecisionFix,
@@ -19,6 +19,7 @@ interface Props {
 	range: string;
 	ticker: string;
 	divider: string;
+	leftRight: 'left' | 'right';
 }
 
 export const HoverChart = ({
@@ -28,6 +29,7 @@ export const HoverChart = ({
 	range,
 	ticker,
 	divider,
+	leftRight,
 }: Props) => {
 	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
 	const dataid = row.data || row.id;
@@ -42,7 +44,7 @@ export const HoverChart = ({
 
 		const cellContent =
 			type && type !== 'reduce_precision'
-				? formatNumber({
+				? formatCell({
 						type,
 						current,
 						previous,
@@ -66,8 +68,8 @@ export const HoverChart = ({
 	const xdata = xdatadraft;
 	const ydata = y.slice(0, count);
 
-	const xaxis = xdata.reverse();
-	const yaxis = ydata.reverse();
+	const xaxis = leftRight === 'left' ? xdata.reverse() : xdata;
+	const yaxis = leftRight === 'left' ? ydata.reverse() : ydata;
 
 	// Cut zero values from start of data array
 	const ylength = yaxis.length;
@@ -79,6 +81,9 @@ export const HoverChart = ({
 			break;
 		}
 	}
+
+	const ymin = yaxis[0];
+	const ymax = yaxis[yaxis.length - 1];
 
 	const chartType = type === 'ratio' || type === 'percentage' ? 'line' : 'bar';
 	const bgColor =
@@ -140,7 +145,7 @@ export const HoverChart = ({
 							if (type == 'reduce_precision') {
 								str = reducePrecisionFix(dataset.data[last]);
 							} else {
-								str = formatY(dataset.data[last], type);
+								str = formatY(dataset.data[last], type, ymin, ymax);
 							}
 
 							// begin drawing and styling
@@ -212,7 +217,7 @@ export const HoverChart = ({
 								size: 13,
 							},
 							callback: function (value: number) {
-								return formatY(value, row.format);
+								return formatY(value, row.format, ymin, ymax);
 							},
 						},
 						grid: {
@@ -262,15 +267,25 @@ export const HoverChart = ({
 						displayColors: false,
 						callbacks: {
 							label: function (context: { parsed: { y: string } }) {
-								const value = context.parsed.y || '';
+								const value = parseFloat(context.parsed.y) || 0;
 								if (
 									type === 'growth' ||
 									type === 'percentage' ||
 									type === 'margin'
 								) {
-									return `${value}%`;
+									return `${value.toFixed(3)}%`;
+								} else if (type === 'ratio') {
+									return `${value.toFixed(3)}`;
+								} else if (
+									!type &&
+									(value > 10000000 || value < -10000000)
+								) {
+									return new Intl.NumberFormat('en-US', {
+										maximumFractionDigits: 0,
+									}).format(value);
+								} else {
+									return value;
 								}
-								return value;
 							},
 						},
 					},

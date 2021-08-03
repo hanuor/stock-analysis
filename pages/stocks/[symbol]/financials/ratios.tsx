@@ -23,7 +23,7 @@ export default function Ratios({ info, data }: Props) {
 				canonical={`stocks/${info.symbol}/financials/ratios/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
-				<SubNavigation symbol={info.symbol} statement="ratios" />
+				<SubNavigation info={info} statement="ratios" />
 				<FinancialTable
 					statement="ratios"
 					financials={data}
@@ -42,6 +42,16 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data } = await getStockFinancials('ratios', symbol);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
+
 	const key = `${symbol}_ratios`;
 
 	return {

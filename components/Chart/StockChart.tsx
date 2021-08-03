@@ -50,7 +50,6 @@ interface StateProps {
 
 class StockChart extends React.Component<StockChartProps, StateProps> {
 	private readonly dateFormat = timeFormat('%Y-%m-%d');
-	// private margin = { left: 0, right: 62, top: 3, bottom: 24 };
 	private readonly pricesDisplayFormat = format('.2f');
 	private readonly pricesBelowOneDisplayFormat = format('.3~f');
 	private readonly yAxisTickDisplay = format('.2~f');
@@ -308,32 +307,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 				xExtents={xExtents}
 				zoomAnchor={lastVisibleItemBasedZoomAnchor}
 			>
-				<Chart
-					id={4}
-					height={100}
-					origin={(w, h) => [0, h - 100]}
-					yExtents={volChartExtents}
-				>
-					<BarSeries
-						widthRatio={0.5}
-						clip={true}
-						yAccessor={(d) => d.volume}
-						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 1.05}
-						rectHeight={15}
-						fill={volumeColor}
-						orient="right"
-						edgeAt="right"
-						fontSize={11}
-						lineStroke={openCloseColor}
-						displayFormat={format('.4~s')}
-						yAccessor={volumeSeries}
-						yAxisPad={0}
-					/>
-				</Chart>
 				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
 					<XAxis showTickLabel={true} />
 					<YAxis
@@ -368,7 +341,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					/>
 
 					<MouseCoordinateY
-						rectWidth={margin.right - 15}
+						rectWidth={margin.right / 1.01225}
 						displayFormat={this.pricesDisplayFormat}
 					/>
 
@@ -457,6 +430,32 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					) : (
 						<> </>
 					)}
+				</Chart>
+				<Chart
+					id={2}
+					height={100}
+					origin={(w, h) => [0, h - 100]}
+					yExtents={volChartExtents}
+				>
+					<BarSeries
+						widthRatio={0.5}
+						clip={true}
+						yAccessor={(d) => d.volume}
+						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
+					/>
+					<EdgeIndicator
+						itemType="last"
+						rectWidth={margin.right - 1.05}
+						rectHeight={15}
+						fill={volumeColor}
+						orient="right"
+						edgeAt="right"
+						fontSize={11}
+						lineStroke={openCloseColor}
+						displayFormat={format('.4~s')}
+						yAccessor={volumeSeries}
+						yAxisPad={0}
+					/>
 				</Chart>
 
 				{isBrowser == true ? <CrossHairCursor /> : <> </>}

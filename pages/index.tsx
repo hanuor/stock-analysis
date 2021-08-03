@@ -55,7 +55,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 					gainers={data.gainers}
 					losers={data.losers}
 				/>
-				<div className="mx-auto flex flex-col space-y-6 pb-12 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-4 lg:max-w-[1200px]">
+				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-4 lg:max-w-[1200px]">
 					<LatestNews news={data.news} />
 					<IPOwidgets
 						recent={data.recentIpos}

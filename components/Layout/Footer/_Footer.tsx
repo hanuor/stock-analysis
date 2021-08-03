@@ -1,7 +1,13 @@
 /* eslint-disable react/display-name */
-import { useUserInfo } from 'hooks/useUserInfo';
+// import { useUserInfo } from 'hooks/useUserInfo';
 import { useNavState } from 'hooks/useNavState';
+import { authState } from 'state/authState';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const FooterDianomi = dynamic(() => import('components/Spons/FootHorz'), {
+	ssr: false,
+});
 
 interface IconProps {
 	className: string;
@@ -77,203 +83,212 @@ const navigation = {
 };
 
 export const Footer = () => {
-	const { isLoggedIn } = useUserInfo();
+	const isLoggedIn = authState((state) => state.isLoggedIn);
+	const isPro = authState((state) => state.isPro);
+	const status = authState((state) => state.status);
 	// eslint-disable-next-line no-unused-vars
 	const path = useNavState();
 
 	return (
-		<footer
-			className="bg-gray-800 clear-both"
-			aria-labelledby="footerHeading"
-		>
-			<h2 id="footerHeading" className="sr-only">
-				Footer
-			</h2>
-			<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
-				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
-					<div className="grid grid-cols-2 gap-8 xl:col-span-2">
-						<div className="md:grid md:grid-cols-2 md:gap-8">
-							<div>
-								<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-									Sections
-								</h3>
-								<ul className="mt-4 space-y-4">
-									{navigation.sections.map((item) => (
-										<li key={item.name}>
-											<Link href={item.href} prefetch={false}>
+		<>
+			{status === 'completed' && !isPro && <FooterDianomi />}
+
+			<footer
+				className="bg-gray-800 clear-both mt-10"
+				aria-labelledby="footerHeading"
+			>
+				<h2 id="footerHeading" className="sr-only">
+					Footer
+				</h2>
+				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
+					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
+						<div className="grid grid-cols-2 gap-8 xl:col-span-2">
+							<div className="md:grid md:grid-cols-2 md:gap-8">
+								<div>
+									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+										Sections
+									</h3>
+									<ul className="mt-4 space-y-4">
+										{navigation.sections.map((item) => (
+											<li key={item.name}>
+												<Link href={item.href} prefetch={false}>
+													<a className="text-base text-gray-300 hover:text-white">
+														{item.name}
+													</a>
+												</Link>
+											</li>
+										))}
+									</ul>
+								</div>
+								<div className="mt-12 md:mt-0">
+									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+										Support
+									</h3>
+									<ul className="mt-4 space-y-4">
+										<li>
+											<Link href="/contact/" prefetch={false}>
 												<a className="text-base text-gray-300 hover:text-white">
-													{item.name}
+													Contact
 												</a>
 											</Link>
 										</li>
-									))}
-								</ul>
+										{isLoggedIn ? (
+											<>
+												<li>
+													<Link href="/login/" prefetch={false}>
+														<a className="text-base text-gray-300 hover:text-white">
+															Log out
+														</a>
+													</Link>
+												</li>
+												<li>
+													<Link
+														href="/my-account/"
+														prefetch={false}
+													>
+														<a className="text-base text-gray-300 hover:text-white">
+															My Account
+														</a>
+													</Link>
+												</li>
+											</>
+										) : (
+											<>
+												<li>
+													<Link href="/login/" prefetch={false}>
+														<a className="text-base text-gray-300 hover:text-white">
+															Login
+														</a>
+													</Link>
+												</li>
+												<li>
+													<Link href="/pro/" prefetch={false}>
+														<a className="text-base text-gray-300 hover:text-white">
+															Free Trial
+														</a>
+													</Link>
+												</li>
+											</>
+										)}
+									</ul>
+								</div>
 							</div>
-							<div className="mt-12 md:mt-0">
-								<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-									Support
-								</h3>
-								<ul className="mt-4 space-y-4">
-									<li>
-										<Link href="/contact/" prefetch={false}>
-											<a className="text-base text-gray-300 hover:text-white">
-												Contact
-											</a>
-										</Link>
-									</li>
-									{isLoggedIn ? (
-										<>
-											<li>
-												<Link href="/login/" prefetch={false}>
+							<div className="md:grid md:grid-cols-2 md:gap-8">
+								<div>
+									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+										Company
+									</h3>
+									<ul className="mt-4 space-y-4">
+										{navigation.company.map((item) => (
+											<li key={item.name}>
+												<Link href={item.href} prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
-														Log out
+														{item.name}
 													</a>
 												</Link>
 											</li>
-											<li>
-												<Link href="/my-account/" prefetch={false}>
+										))}
+									</ul>
+								</div>
+								<div className="mt-12 md:mt-0">
+									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+										Legal
+									</h3>
+									<ul className="mt-4 space-y-4">
+										{navigation.legal.map((item) => (
+											<li key={item.name}>
+												<Link href={item.href} prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
-														My Account
+														{item.name}
 													</a>
 												</Link>
 											</li>
-										</>
-									) : (
-										<>
-											<li>
-												<Link href="/login/" prefetch={false}>
-													<a className="text-base text-gray-300 hover:text-white">
-														Login
-													</a>
-												</Link>
-											</li>
-											<li>
-												<Link href="/pro/" prefetch={false}>
-													<a className="text-base text-gray-300 hover:text-white">
-														Free Trial
-													</a>
-												</Link>
-											</li>
-										</>
-									)}
-								</ul>
+										))}
+									</ul>
+								</div>
 							</div>
 						</div>
-						<div className="md:grid md:grid-cols-2 md:gap-8">
-							<div>
-								<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-									Company
-								</h3>
-								<ul className="mt-4 space-y-4">
-									{navigation.company.map((item) => (
-										<li key={item.name}>
-											<Link href={item.href} prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">
-													{item.name}
-												</a>
-											</Link>
-										</li>
-									))}
-								</ul>
-							</div>
-							<div className="mt-12 md:mt-0">
-								<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-									Legal
-								</h3>
-								<ul className="mt-4 space-y-4">
-									{navigation.legal.map((item) => (
-										<li key={item.name}>
-											<Link href={item.href} prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">
-													{item.name}
-												</a>
-											</Link>
-										</li>
-									))}
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div className="mt-8 xl:mt-0">
-						<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-							Subscribe to the newsletter
-						</h3>
-						<p className="mt-4 text-base text-gray-300">
-							The latest updates, straight to your inbox.
-						</p>
-						<form
-							className="mt-4 sm:flex sm:max-w-md"
-							method="post"
-							acceptCharset="UTF-8"
-							action="https://www.aweber.com/scripts/addlead.pl"
-						>
-							<input
-								type="hidden"
-								name="meta_web_form_id"
-								value="734113215"
-							/>
-							<input
-								type="hidden"
-								name="listname"
-								value="awlist5254312"
-							/>
-							<input
-								type="hidden"
-								name="redirect"
-								value="https://stockanalysis.com/thank-you/"
-								id="redirect_756a76620e2e180d07c2981f91a5fa1e"
-							/>
-							<input
-								type="hidden"
-								name="meta_adtracking"
-								value="Footer"
-							/>
-							<label htmlFor="emailAddress" className="sr-only">
-								Email address
-							</label>
-							<input
-								type="email"
-								name="email"
-								id="email"
-								autoComplete="email"
-								className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
-								placeholder="Enter your email"
-							/>
-							<div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-								<input
-									name="submit"
-									type="submit"
-									className="w-full bg-blue-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-									value="Subscribe"
-								/>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
-					<div className="flex space-x-6 md:order-2">
-						{navigation.social.map((item) => (
-							<a
-								key={item.name}
-								href={item.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-gray-400 hover:text-gray-300"
+						<div className="mt-8 xl:mt-0">
+							<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+								Subscribe to the newsletter
+							</h3>
+							<p className="mt-4 text-base text-gray-300">
+								The latest updates, straight to your inbox.
+							</p>
+							<form
+								className="mt-4 sm:flex sm:max-w-md"
+								method="post"
+								acceptCharset="UTF-8"
+								action="https://www.aweber.com/scripts/addlead.pl"
 							>
-								<span className="sr-only">{item.name}</span>
-								<item.icon className="h-8 w-8" />
-							</a>
-						))}
+								<input
+									type="hidden"
+									name="meta_web_form_id"
+									value="734113215"
+								/>
+								<input
+									type="hidden"
+									name="listname"
+									value="awlist5254312"
+								/>
+								<input
+									type="hidden"
+									name="redirect"
+									value="https://stockanalysis.com/thank-you/"
+									id="redirect_756a76620e2e180d07c2981f91a5fa1e"
+								/>
+								<input
+									type="hidden"
+									name="meta_adtracking"
+									value="Footer"
+								/>
+								<label htmlFor="email-footer" className="sr-only">
+									Email address
+								</label>
+								<input
+									type="email"
+									name="email"
+									id="email-footer"
+									autoComplete="email"
+									className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
+									placeholder="Enter your email"
+								/>
+								<div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+									<input
+										name="submit"
+										type="submit"
+										className="w-full bg-blue-brand_light border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-brand_sharp transition duration-200 cursor-pointer"
+										value="Subscribe"
+									/>
+								</div>
+							</form>
+						</div>
 					</div>
-					<p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-						&copy; 2021 Stock Analysis. All rights reserved.
-					</p>
+					<div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+						<div className="flex space-x-6 md:order-2">
+							{navigation.social.map((item) => (
+								<a
+									key={item.name}
+									href={item.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-gray-400 hover:text-gray-300"
+								>
+									<span className="sr-only">{item.name}</span>
+									<item.icon className="h-8 w-8" />
+								</a>
+							))}
+						</div>
+						<p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+							&copy; 2021 Stock Analysis. All rights reserved.
+						</p>
+					</div>
+					<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
+						Real-time quotes provided by IEX Cloud. Other market data is
+						delayed by at least 15 minutes.
+					</div>
 				</div>
-				<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
-					Real-time quotes provided by IEX Cloud. Other market data is
-					delayed by at least 15 minutes.
-				</div>
-			</div>
-		</footer>
+			</footer>
+		</>
 	);
 };

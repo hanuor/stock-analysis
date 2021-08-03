@@ -2,6 +2,7 @@ import { timeParse } from 'd3-time-format';
 import * as React from 'react';
 import { IOHLCData } from './iOHLCData';
 import Axios from 'axios';
+import { Unavailable } from 'components/Unavailable';
 
 const parseDate = timeParse('%Y-%m-%d');
 
@@ -80,17 +81,27 @@ export function withOHLCData(dataSet = 'DAILY') {
 				if (period != newState.period) {
 					Axios.get(
 						`https://stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
-					).then((res) => {
-						const forDateParse = res.data.map(fixDataHeaders);
-						const data = forDateParse.map(parseData());
-						const period = newState.period;
-						this.setState({ period });
-						this.setState({ data });
-					});
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders);
+							const data = forDateParse.map(parseData());
+							const period = newState.period;
+							this.setState({ period });
+							this.setState({ data });
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							);
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							);
+						});
 				}
 
 				if (data === undefined) {
-					return <div className="center"></div>;
+					return <div></div>;
 				}
 
 				return (

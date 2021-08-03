@@ -25,7 +25,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 				canonical="ipos/news/"
 			/>
 			<div className="">
-				<main className="w-full py-5 xs:py-6">
+				<main className="w-full pt-5 xs:pt-6">
 					<div className="contain">
 						<Breadcrumbs />
 						<h1 className="hh1">IPO News</h1>

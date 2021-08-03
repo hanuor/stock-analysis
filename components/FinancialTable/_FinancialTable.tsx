@@ -5,15 +5,17 @@ import {
 	FinancialReport,
 } from 'types/Financials';
 import { Info } from 'types/Info';
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useMemo } from 'react';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
 import {
-	formatNumber,
+	formatCell,
 	formatYear,
 	redOrGreen,
 	getPeriodLabel,
 	getPeriodTooltip,
+	sliceData,
+	reverseData,
 } from './FinancialTable.functions';
 import { HoverChartIcon } from 'components/Icons/HoverChart';
 import styles from './FinancialTable.module.css';
@@ -38,25 +40,31 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
+	const reversed = financialsState((state) => state.reversed);
+	const setReversed = financialsState((state) => state.setReversed);
 	const isPro = authState((state) => state.isPro);
 	const [hover, setHover] = useState(false);
 
-	if (!financials || Object.keys(financials).length === 0) {
-		return <span>Loading...</span>;
-	}
+	let data = financials[range as keyof FinancialsType];
 
-	const data =
-		statement === 'ratios' && range === 'quarterly'
-			? financials.trailing
-			: financials[range as keyof FinancialsType]; // The data for the selected financial statement
-
-	const paywall = range === 'annual' ? 15 : 40;
+	// Slice data if paywalled
+	const paywall = range === 'annual' ? 10 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
 
 	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
 
+	data = useMemo(() => sliceData(data, showcount), [data, showcount]);
+
+	if (
+		(leftRight === 'right' && !reversed) ||
+		(leftRight === 'left' && reversed)
+	) {
+		data = reverseData(data);
+		setReversed(!reversed);
+	}
+
 	// Remove initial empty columns in ratios statement
-	if (statement === 'ratios') {
+	if (statement === 'ratios' && data) {
 		const marketCapData = data.marketcap;
 		const marketCapValid = marketCapData.filter(
 			(item) => item != null
@@ -70,12 +78,8 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	if (showcount === 0) {
 		return (
 			<>
-				<div className="px-4 lg:px-6 mx-auto">
-					<TableTitle
-						statement={statement}
-						currency={info.currency}
-						fiscalYear={info.fiscalYear}
-					/>
+				<div className="">
+					<TableTitle statement={statement} />
 					<span className="text-xl">
 						No {range} {statement.replace(/_/g, ' ')} data found for this
 						stock.
@@ -88,13 +92,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	const DATA_MAP = map;
 
 	const headerRow = () => {
-		let headerdata = data.datekey;
-		if (fullcount > showcount) {
-			headerdata = headerdata.slice(0, showcount);
-		}
-		if (leftRight) {
-			headerdata = headerdata.reverse();
-		}
+		const headerdata = data.datekey;
 
 		return headerdata.map((cell, index) => {
 			return (
@@ -150,22 +148,14 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		let offset = range === 'quarterly' ? 4 : 1;
 		let total = 0;
 
-		let rowdata = data[dataid as keyof FinancialReport];
-		let revenuedata = data.revenue;
-
-		if (fullcount > showcount) {
-			if (statement === 'income_statement') {
-				revenuedata = revenuedata.slice(0, showcount);
-			}
-			rowdata = rowdata.slice(0, showcount);
+		const rowdata = data[dataid as keyof FinancialReport];
+		if (!rowdata) {
+			return null;
 		}
+		const revenuedata = data.revenue;
 
-		if (leftRight) {
+		if (leftRight === 'right') {
 			offset = -offset;
-			if (statement === 'income_statement') {
-				revenuedata = revenuedata.reverse();
-			}
-			rowdata = rowdata.reverse();
 		}
 
 		const dataRows = rowdata.map((cell, index) => {
@@ -173,7 +163,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				const prev = format === 'growth' ? rowdata[index + offset] : null;
 				const rev = format === 'margin' ? revenuedata[index] : null;
 
-				const titleTag = formatNumber({
+				const titleTag = formatCell({
 					type: row.format || 'standard',
 					current: cell,
 					previous: prev,
@@ -181,7 +171,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 					divider: 'raw',
 				});
 
-				const cellContent = formatNumber({
+				const cellContent = formatCell({
 					type: row.format || 'standard',
 					current: cell,
 					previous: prev,
@@ -202,7 +192,11 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 
 				return (
 					<td key={index} title={titleTag} className={cellClass()}>
-						{cellContent}
+						{cellContent !== '-' ? (
+							<span title={titleTag}>{cellContent}</span>
+						) : (
+							'-'
+						)}
 					</td>
 				);
 			}
@@ -264,6 +258,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 											range={range}
 											ticker={info.ticker}
 											divider={divider}
+											leftRight={leftRight}
 										/>
 									)}
 								</div>
@@ -296,12 +291,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 					currency={info.currency}
 					fiscalYear={info.fiscalYear}
 				/>
-				<TableControls
-					map={map}
-					financials={financials}
-					statement={statement}
-					symbol={info.symbol}
-				/>
+				<TableControls statement={statement} symbol={info.symbol} />
 			</div>
 			<div
 				className={
@@ -310,7 +300,10 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				}
 			>
 				{paywalled && <div className="flex flex-row"></div>}
-				<table className={[styles.table, styles.table_financial].join(' ')}>
+				<table
+					className={[styles.table, styles.table_financial].join(' ')}
+					id="financial-table"
+				>
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">

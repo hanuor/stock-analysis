@@ -1,7 +1,6 @@
-import { FC } from 'react';
 import { authState } from 'state/authState';
 
-export const Logout: FC = () => {
+export const Logout = ({ setOpen }: { setOpen?: (open: boolean) => void }) => {
 	const setIsLoggedIn = authState((state) => state.setIsLoggedIn);
 	const setIsPro = authState((state) => state.setIsPro);
 	const setEmail = authState((state) => state.setEmail);
@@ -17,6 +16,8 @@ export const Logout: FC = () => {
 		setEmail(null);
 		setAvatar(null);
 
+		setOpen && setOpen(false);
+
 		try {
 			await fetch(
 				`https://stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`,
@@ -28,7 +29,10 @@ export const Logout: FC = () => {
 	}
 
 	return (
-		<span onClick={() => handleLogout()} className="cursor-pointer">
+		<span
+			onClick={() => handleLogout()}
+			className="block lg:inline cursor-pointer py-2 px-3 "
+		>
 			Log Out
 		</span>
 	);

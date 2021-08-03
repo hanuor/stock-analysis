@@ -8,17 +8,15 @@ export function useUserInfo() {
 	const setIsLoggedIn = authState((state) => state.setIsLoggedIn);
 	const isPro = authState((state) => state.isPro);
 	const setIsPro = authState((state) => state.setIsPro);
-	const setAvatar = authState((state) => state.setAvatar);
+	const status = authState((state) => state.status);
+	const setStatus = authState((state) => state.setStatus);
 
 	useEffect(() => {
-		async function checkAuth(
-			token: string | null,
-			email: string | null,
-			hasAvatar: boolean
-		) {
+		async function checkAuth(token: string | null, email: string | null) {
 			try {
+				setStatus('loading');
 				const response = await fetch(
-					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&a=${hasAvatar}`
+					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}`
 				);
 
 				if (response.ok) {
@@ -28,40 +26,34 @@ export function useUserInfo() {
 						setIsLoggedIn(true);
 						setEmail(data.e);
 						setIsPro(data.p);
-
-						if (data.a) {
-							localStorage.setItem('avatar', data.a);
-						}
 					} else {
 						setIsLoggedIn(false);
 						setIsPro(false);
-						setAvatar('');
 					}
 				} else {
 					throw new Error('Network response not ok.');
 				}
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setStatus('completed');
 			}
 		}
 
 		const email = localStorage.getItem('email');
-		const avatar = localStorage.getItem('avatar');
-		const hasAvatar = avatar ? true : false;
 		const token = localStorage.getItem('auth');
 
 		if (email) {
 			setEmail(email);
 		}
 
-		if (avatar) {
-			setAvatar(avatar);
+		if (token && status === 'unchecked') {
+			checkAuth(token, email);
+		} else {
+			setStatus('completed');
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-		if (token) {
-			checkAuth(token, email, hasAvatar);
-		}
-	}, [isLoggedIn, setAvatar, setEmail, setIsLoggedIn, setIsPro]);
-
-	return { email, isLoggedIn, setIsLoggedIn, isPro, setIsPro };
+	return { email, isLoggedIn, setIsLoggedIn, isPro, setIsPro, status };
 }

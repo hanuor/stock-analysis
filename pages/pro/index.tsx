@@ -1,6 +1,7 @@
 import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { CrispChat } from 'components/Scripts/CrispChat';
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -19,10 +20,10 @@ export default function LandingPage() {
 
 		paddleJs.onload = () => {
 			// eslint-disable-next-line no-undef
-			window.Paddle.Environment.set('sandbox');
+			// window.Paddle.Environment.set('sandbox');
 			// eslint-disable-next-line no-undef
 			// eslint-disable-next-line new-cap
-			window.Paddle.Setup({ vendor: 2545 });
+			window.Paddle.Setup({ vendor: 128917 });
 		};
 	}, []);
 
@@ -37,6 +38,7 @@ export default function LandingPage() {
 				description="Get unlimited access to all of our financial data, including full financial history, full ETF holdings, and more."
 				canonical="pro/"
 			/>
+			<CrispChat />
 			<main>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
@@ -103,7 +105,7 @@ export default function LandingPage() {
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												window.Paddle.Checkout.open({
-													product: 13309,
+													product: 649892,
 													successCallback: checkoutComplete,
 												});
 											}}
@@ -135,7 +137,7 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 sm:px-4 text-lg">
-										Financial history: Limited to 10-15 years.
+										Financial history: Limited to 10 years.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">

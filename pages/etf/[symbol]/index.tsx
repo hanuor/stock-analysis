@@ -16,7 +16,7 @@ import { DividendWidget } from 'components/Overview/DividendWidget';
 interface Props {
 	info: Info;
 	data: Overview;
-	news: News[];
+	news: { data: News[]; updated: number };
 }
 
 const EtfOverview = ({ info, data, news }: Props) => {
@@ -53,7 +53,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 					)}
 				</div>
 				<div className="lg:order-1">
-					<NewsArea info={info} news={news} />
+					<NewsArea info={info} news={news.data} updated={news.updated} />
 				</div>
 			</div>
 		</Stock>
@@ -68,6 +68,15 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data, news } = await getPageData('overview', symbol);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
 
 	return {
 		props: {

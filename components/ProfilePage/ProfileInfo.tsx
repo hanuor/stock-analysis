@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import { CompanyInfo, Logo } from 'types/Company';
-import Image from 'next/image';
 
 interface Props {
 	info: CompanyInfo;
@@ -21,12 +21,13 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 					</tr>
 					{logo.src && (
 						<tr>
-							<td colSpan={2} className="text-center">
-								<Image
+							<td colSpan={2}>
+								<img
 									src={logo.src}
 									width={logo.width}
 									height={logo.height}
 									alt={logo.alt}
+									className="mx-auto py-1"
 								/>
 							</td>
 						</tr>
@@ -82,7 +83,7 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 						</tr>
 					)}
 					{info.employees && (
-						<tr className="border-b border-gray-200">
+						<tr className={info.ceo && 'border-b border-gray-200'}>
 							<td className="py-1.5 lg:py-2 px-1 font-semibold">
 								Employees
 							</td>
@@ -92,7 +93,7 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 						</tr>
 					)}
 					{info.ceo && (
-						<tr className="">
+						<tr>
 							<td className="py-1.5 lg:py-2 px-1 font-semibold">CEO</td>
 							<td className="text-right py-1.5 lg:py-2 px-1">
 								{info.ceo}
@@ -100,13 +101,6 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 						</tr>
 					)}
 				</tbody>
-				<style jsx>
-					{`
-						table tr:last-child {
-							border-bottom: 0;
-						}
-					`}
-				</style>
 			</table>
 		</div>
 	);

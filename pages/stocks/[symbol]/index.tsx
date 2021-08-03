@@ -16,7 +16,7 @@ import { AnalystWidget } from 'components/Overview/AnalystWidget';
 interface Props {
 	info: Info;
 	data: Overview;
-	news: News[];
+	news: { data: News[]; updated: number };
 }
 
 const StockOverview = ({ info, data, news }: Props) => {
@@ -49,9 +49,15 @@ const StockOverview = ({ info, data, news }: Props) => {
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
 				</div>
-				<div className="lg:order-1">
-					<NewsArea info={info} news={news} />
-				</div>
+				{news && (
+					<div className="lg:order-1">
+						<NewsArea
+							info={info}
+							news={news.data}
+							updated={news.updated}
+						/>
+					</div>
+				)}
 			</div>
 		</Stock>
 	);
@@ -66,6 +72,15 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data, news } = await getPageData('overview', symbol);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
 
 	return {
 		props: {

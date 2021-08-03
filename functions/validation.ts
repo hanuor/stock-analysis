@@ -9,3 +9,20 @@ export const validateEmailAddress = (emailAddress: string) => {
 export const validateLength = (str: string, min: number) => {
 	return str.length >= min;
 };
+
+// Validate that a URL bit is valid, no ?/&/#
+export const validateUrlBit = (bit: string | null | undefined) => {
+	if (!bit) {
+		return null;
+	}
+
+	if (
+		bit.charAt(0) === '#' &&
+		bit.charAt(0) === '?' &&
+		bit.charAt(0) === '%'
+	) {
+		return null;
+	}
+
+	return bit;
+};

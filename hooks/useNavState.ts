@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { navState } from 'state/navState';
+import { validateUrlBit } from 'functions/validation';
 
 export const useNavState = () => {
 	const router = useRouter();
@@ -10,10 +11,10 @@ export const useNavState = () => {
 	useEffect(() => {
 		const route = router.asPath;
 		const split = route.split('/');
-		const one = split[1] || null;
-		const two = split[2] || null;
-		const three = split[3] || null;
-		const four = split[4] || null;
+		const one = validateUrlBit(split[1]);
+		const two = validateUrlBit(split[2]);
+		const three = validateUrlBit(split[3]);
+		const four = validateUrlBit(split[4]);
 
 		setPath({
 			one,

@@ -23,7 +23,7 @@ export default function IncomeStatement({ info, data }: Props) {
 				canonical={`stocks/${info.symbol}/financials/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
-				<SubNavigation symbol={info.symbol} statement="income_statement" />
+				<SubNavigation info={info} statement="income_statement" />
 				<FinancialTable
 					statement="income_statement"
 					financials={data}
@@ -42,6 +42,16 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data } = await getStockFinancials('income_statement', symbol);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
+
 	const key = `${symbol}_income_statement`;
 
 	return {

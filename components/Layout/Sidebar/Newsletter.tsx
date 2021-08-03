@@ -29,13 +29,13 @@ export const NewsletterWidget = () => {
 						id="redirect_1c682bd70a6bff87ede4346cfeb23687"
 					/>
 					<input type="hidden" name="meta_adtracking" value="Sidebar" />
-					<label htmlFor="email" className="sr-only">
+					<label htmlFor="email-sidebar" className="sr-only">
 						Email
 					</label>
 					<input
 						type="email"
 						name="email"
-						id="email"
+						id="email-sidebar"
 						autoComplete="email"
 						className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-base border-gray-300 rounded-md"
 						placeholder="Enter your email"

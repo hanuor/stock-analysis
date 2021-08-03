@@ -23,7 +23,7 @@ export default function BalanceSheet({ info, data }: Props) {
 				canonical={`stocks/${info.symbol}/financials/balance-sheet/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
-				<SubNavigation symbol={info.symbol} statement="balance_sheet" />
+				<SubNavigation info={info} statement="balance_sheet" />
 				<FinancialTable
 					statement="balance_sheet"
 					financials={data}
@@ -42,6 +42,16 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data } = await getStockFinancials('balance_sheet', symbol);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
+
 	const key = `${symbol}_balance_sheet`;
 
 	return {

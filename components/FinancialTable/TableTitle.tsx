@@ -2,19 +2,21 @@ import { financialsState } from 'state/financialsState';
 
 interface Props {
 	statement: string;
-	currency: string;
-	fiscalYear: string;
+	currency?: string;
+	fiscalYear?: string;
 }
 
 export const TableTitle = ({ statement, currency, fiscalYear }: Props) => {
 	return (
 		<div>
 			<TableHeader statement={statement} />
-			<TableInfo
-				statement={statement}
-				currency={currency}
-				fiscalYear={fiscalYear}
-			/>
+			{currency && fiscalYear && (
+				<TableInfo
+					statement={statement}
+					currency={currency}
+					fiscalYear={fiscalYear}
+				/>
+			)}
 		</div>
 	);
 };

@@ -54,11 +54,12 @@ const StatisticsPage = ({ info, data }: Props) => {
 							data={data.ratios}
 							map={MAP_STATISTICS}
 						/>
-
-						<Button
-							text="Financial Ratio History"
-							url={`/stocks/${info.symbol}/financials/ratios/`}
-						/>
+						{!info.exceptions.hideRatios && (
+							<Button
+								text="Financial Ratio History"
+								url={`/stocks/${info.symbol}/financials/ratios/`}
+							/>
+						)}
 					</div>
 
 					<div>
@@ -189,6 +190,15 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
 	const { info, data } = await getPageData('statistics', symbol);
+
+	if (info === 'redirect') {
+		return {
+			redirect: {
+				destination: data,
+				statusCode: 301,
+			},
+		};
+	}
 
 	return {
 		props: {

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
+import { Info } from 'types/Info';
 
 // styles
 const common =
@@ -8,26 +9,26 @@ const inactive = common + ' bll hover:text-gray-900 hover:bg-[#eee]';
 const active = common + ' text-gray-900 bg-[#eee] font-semibold';
 
 interface Props {
-	symbol: string;
+	info: Info;
 	statement: string;
 }
 
-export const SubNavigation = ({ symbol, statement }: Props) => {
+export const SubNavigation = ({ info, statement }: Props) => {
 	return (
 		<div className="flex flex-col md:flex-row md:justify-between mb-2 md:mb-3 space-y-3 md:space-y-0">
-			<Statement symbol={symbol} statement={statement} />
+			<Statement info={info} statement={statement} />
 			<Period />
 		</div>
 	);
 };
 
-function Statement({ symbol, statement }: Props) {
+function Statement({ info, statement }: Props) {
 	return (
 		<nav>
 			<ul className="w-full navmenu">
 				<li>
 					<Link
-						href={`/stocks/${symbol}/financials/`}
+						href={`/stocks/${info.symbol}/financials/`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -43,7 +44,7 @@ function Statement({ symbol, statement }: Props) {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${symbol}/financials/balance-sheet`}
+						href={`/stocks/${info.symbol}/financials/balance-sheet`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -59,7 +60,7 @@ function Statement({ symbol, statement }: Props) {
 				</li>
 				<li>
 					<Link
-						href={`/stocks/${symbol}/financials/cash-flow-statement/`}
+						href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
 						prefetch={false}
 						scroll={false}
 					>
@@ -73,20 +74,22 @@ function Statement({ symbol, statement }: Props) {
 						</a>
 					</Link>
 				</li>
-				<li>
-					<Link
-						href={`/stocks/${symbol}/financials/ratios/`}
-						prefetch={false}
-						scroll={false}
-					>
-						<a
-							className={statement == 'ratios' ? active : inactive}
-							data-title="Ratios"
+				{!info.exceptions.hideRatios && (
+					<li>
+						<Link
+							href={`/stocks/${info.symbol}/financials/ratios/`}
+							prefetch={false}
+							scroll={false}
 						>
-							Ratios
-						</a>
-					</Link>
-				</li>
+							<a
+								className={statement == 'ratios' ? active : inactive}
+								data-title="Ratios"
+							>
+								Ratios
+							</a>
+						</Link>
+					</li>
+				)}
 			</ul>
 		</nav>
 	);

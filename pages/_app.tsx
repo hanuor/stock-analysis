@@ -4,8 +4,9 @@ import 'styles/globals.css';
 import NProgress from 'nprogress';
 import { Header } from 'components/Layout/Header/_Header';
 import { Footer } from 'components/Layout/Footer/_Footer';
+import { GoogleTagManager } from 'components/Scripts/GoogleTagManager';
 
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // comment
 
 NProgress.configure({ showSpinner: false });
 Router.events.on('routeChangeStart', (url) => {
@@ -18,6 +19,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
+			<GoogleTagManager />
 			<Header />
 			<Component {...pageProps} />
 			<Footer />
