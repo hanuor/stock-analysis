@@ -137,8 +137,11 @@ export const HoverChart = ({
 							const y = meta.data[last].y - 7.5;
 
 							let str: any;
-							console.log(type);
-							if (dataset.data[last] == '0') {
+
+							if (
+								isNaN(dataset.data[last]) ||
+								dataset.data[last] == '0'
+							) {
 								return;
 							}
 							// retrieve the stock price, data.
