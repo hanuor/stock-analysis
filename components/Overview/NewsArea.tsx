@@ -43,7 +43,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 		async function fetchData() {
 			const fresh = await fetchNews(url);
-			if (news[0].title !== fresh[0].title) {
+			if (news[0] && news[0].title !== fresh[0].title) {
 				setData(fresh);
 				setOriginal(fresh);
 			}

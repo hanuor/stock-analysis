@@ -20,10 +20,10 @@ export default function LandingPage() {
 
 		paddleJs.onload = () => {
 			// eslint-disable-next-line no-undef
-			window.Paddle.Environment.set('sandbox');
+			// window.Paddle.Environment.set('sandbox');
 			// eslint-disable-next-line no-undef
 			// eslint-disable-next-line new-cap
-			window.Paddle.Setup({ vendor: 2545 });
+			window.Paddle.Setup({ vendor: 128917 });
 		};
 	}, []);
 
@@ -105,7 +105,7 @@ export default function LandingPage() {
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												window.Paddle.Checkout.open({
-													product: 13309,
+													product: 649892,
 													successCallback: checkoutComplete,
 												});
 											}}
