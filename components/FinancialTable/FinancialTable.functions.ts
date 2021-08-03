@@ -277,11 +277,14 @@ function getDivider(divider: string) {
 export function sliceData(data: FinancialReport, showcount: number) {
 	const sliced = {} as FinancialReport;
 
-	Object.keys(data).forEach((key) => {
-		sliced[key] = data[key].slice(0, showcount);
-	});
+	if (data) {
+		Object.keys(data).forEach((key) => {
+			sliced[key] = data[key].slice(0, showcount);
+		});
 
-	return sliced;
+		return sliced;
+	}
+	return data;
 }
 
 // Reverse left/right order of financial data
