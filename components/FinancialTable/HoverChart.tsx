@@ -19,6 +19,7 @@ interface Props {
 	range: string;
 	ticker: string;
 	divider: string;
+	leftRight: 'left' | 'right';
 }
 
 export const HoverChart = ({
@@ -28,6 +29,7 @@ export const HoverChart = ({
 	range,
 	ticker,
 	divider,
+	leftRight,
 }: Props) => {
 	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
 	const dataid = row.data || row.id;
@@ -66,8 +68,8 @@ export const HoverChart = ({
 	const xdata = xdatadraft;
 	const ydata = y.slice(0, count);
 
-	const xaxis = xdata.reverse();
-	const yaxis = ydata.reverse();
+	const xaxis = leftRight === 'left' ? xdata.reverse() : xdata;
+	const yaxis = leftRight === 'left' ? ydata.reverse() : ydata;
 
 	// Cut zero values from start of data array
 	const ylength = yaxis.length;

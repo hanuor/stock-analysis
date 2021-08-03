@@ -2,6 +2,7 @@ import { timeParse } from 'd3-time-format';
 import * as React from 'react';
 import { IOHLCData } from './iOHLCData';
 import Axios from 'axios';
+import { Unavailable } from 'components/Unavailable';
 
 const parseDate = timeParse('%Y-%m-%d');
 
@@ -94,9 +95,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 								error
 							);
 							return (
-								<div className="h-full flex justify-center items-center mt-4 bg-gray-50 border border-gray-200 text-3xl font-semibold rounded-sm">
-									Unable to load the data for this chart.
-								</div>
+								<Unavailable message="Unable to load the data for this chart." />
 							);
 						});
 				}

@@ -1,34 +1,23 @@
-import { FinancialsType, FinancialsMapType } from 'types/Financials';
 import { LeftRightIcon } from 'components/Icons/LeftRight';
 import { DropdownIcon } from 'components/Icons/Dropdown';
-import { ExportMenu } from './ExportMenu';
 import { financialsState } from 'state/financialsState';
 import { useRef, useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
-const btnStyles =
-	'bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md';
+const ExportMenu = dynamic(() => import('./ExportMenu'), {
+	ssr: false,
+});
 
 interface Props {
-	map: FinancialsMapType[];
-	financials: FinancialsType;
 	statement: string;
 	symbol: string;
 }
 
-export const TableControls = ({
-	map,
-	financials,
-	statement,
-	symbol,
-}: Props) => {
+export const TableControls = ({ statement, symbol }: Props) => {
 	const dropdownNode = useRef<HTMLDivElement>(null);
 	const [exportOpen, setExportOpen] = useState(false);
 	const leftRight = financialsState((state) => state.leftRight);
 	const setLeftRight = financialsState((state) => state.setLeftRight);
-
-	const clickExport = () => {
-		setExportOpen(!exportOpen);
-	};
 
 	const clickOutside = (e: MouseEvent) => {
 		const node = dropdownNode.current ?? null;
@@ -68,11 +57,8 @@ export const TableControls = ({
 			<div className="w-46 relative dropdown">
 				<button
 					id="expxlxs"
-					onClick={() => clickExport()}
-					className={
-						btnStyles +
-						' flex flex-row items-center py-1 px-4 font-semibold'
-					}
+					onClick={() => setExportOpen(!exportOpen)}
+					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md flex flex-row items-center py-1 px-4 font-semibold"
 				>
 					Export Financials
 					<DropdownIcon classes="w-6 h-6 ml-2 -mr-1" />
@@ -80,17 +66,16 @@ export const TableControls = ({
 				<div ref={dropdownNode}>
 					{exportOpen && (
 						<ExportMenu
-							map={map}
-							financials={financials}
 							statement={statement}
 							symbol={symbol}
+							setExportOpen={setExportOpen}
 						/>
 					)}
 				</div>
 			</div>
 			<div>
 				<button
-					className={btnStyles + ' px-3'}
+					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md px-3"
 					onClick={() => clickLeftRight()}
 				>
 					<LeftRightIcon classes="h-9 w-9" />

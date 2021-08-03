@@ -55,13 +55,12 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 
 	data = useMemo(() => sliceData(data, showcount), [data, showcount]);
 
-	// Switch left/right direction of data
-	if (leftRight === 'right' && !reversed) {
+	if (
+		(leftRight === 'right' && !reversed) ||
+		(leftRight === 'left' && reversed)
+	) {
 		data = reverseData(data);
-		setReversed(true);
-	} else if (leftRight === 'left' && reversed) {
-		data = reverseData(data);
-		setReversed(false);
+		setReversed(!reversed);
 	}
 
 	// Remove initial empty columns in ratios statement
@@ -193,7 +192,11 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 
 				return (
 					<td key={index} title={titleTag} className={cellClass()}>
-						{cellContent}
+						{cellContent !== '-' ? (
+							<span title={titleTag}>{cellContent}</span>
+						) : (
+							'-'
+						)}
 					</td>
 				);
 			}
@@ -255,6 +258,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 											range={range}
 											ticker={info.ticker}
 											divider={divider}
+											leftRight={leftRight}
 										/>
 									)}
 								</div>
@@ -287,12 +291,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 					currency={info.currency}
 					fiscalYear={info.fiscalYear}
 				/>
-				<TableControls
-					map={map}
-					financials={financials}
-					statement={statement}
-					symbol={info.symbol}
-				/>
+				<TableControls statement={statement} symbol={info.symbol} />
 			</div>
 			<div
 				className={
@@ -301,7 +300,10 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				}
 			>
 				{paywalled && <div className="flex flex-row"></div>}
-				<table className={[styles.table, styles.table_financial].join(' ')}>
+				<table
+					className={[styles.table, styles.table_financial].join(' ')}
+					id="financial-table"
+				>
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">
