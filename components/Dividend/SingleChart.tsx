@@ -148,7 +148,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 							ticks: {
 								color: '#323232',
 								font: {
-									size: 14,
+									size: 13,
 								},
 								padding: 5,
 								callback: function (value: number) {
