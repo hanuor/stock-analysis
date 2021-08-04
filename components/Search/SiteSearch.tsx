@@ -15,6 +15,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 	const [query, setQuery] = useState('');
 	const [fetched, setFetched] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [filtering, setFiltering] = useState(false);
 	const [index, setIndex] = useState([]);
 	const [results, setResults] = useState([]);
 	const [open, setOpen] = useState(false);
@@ -50,6 +51,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 	// When the search query changes, perform a search
 	useEffect(() => {
+		setFiltering(true);
 		const stopTimeout = () => {
 			if (waiting) {
 				clearTimeout(waiting);
@@ -92,6 +94,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 
 				const allResults = exact.concat(matches);
 				setResults(allResults);
+				setFiltering(false);
 			}, 150);
 		} else if (fetched) {
 			setResults(trending);
@@ -264,7 +267,8 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 									))}
 								</ul>
 							) : (
-								!loading && (
+								!loading &&
+								!filtering && (
 									<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
 										No results found.
 									</h4>
