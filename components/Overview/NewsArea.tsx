@@ -39,7 +39,10 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
-		const url = `${process.env.NEXT_PUBLIC_API_URL}/news-fresh?i=${info.id}`;
+		const url = `${
+			process.env.NEXT_PUBLIC_API_URL ||
+			'https://stockanalysis.com/wp-json/sa'
+		}/news-fresh?i=${info.id}`;
 
 		async function fetchData() {
 			const fresh = await fetchNews(url);
@@ -58,7 +61,10 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	// Fetch data if a menu item has been clicked (videos, press releases, conversation)
 	useEffect(() => {
-		const url = `${process.env.NEXT_PUBLIC_API_URL}/news?i=${info.id}&f=${type}`;
+		const url = `${
+			process.env.NEXT_PUBLIC_API_URL ||
+			'https://stockanalysis.com/wp-json/sa'
+		}/news?i=${info.id}&f=${type}`;
 
 		async function fetchData() {
 			const fresh = await fetchNews(url);

@@ -31,19 +31,19 @@ export const Title = ({ info }: { info: Info }) => {
 			<h1 className="text-2xl sm:text-[26px] font-bold text-gray-900">
 				{`${name} (${info.ticker})`}
 			</h1>
+			{info.quote && info.state !== 'upcomingipo' && (
+				<div className="text-tiny text-gray-600 mt-[1px]">
+					{`${info.quote.exchange}: ${info.ticker} · ${getQuoteSource(
+						info.quote
+					)} · USD`}
+				</div>
+			)}
 			{notice && (
 				<div className="text-base sm:text-lg text-gray-800 mt-2">
 					<span>
 						<InformationCircleIcon classes="h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1" />
 					</span>
 					<span>{notice}</span>
-				</div>
-			)}
-			{info.quote && (
-				<div className="text-tiny text-gray-600 mt-[1px]">
-					{`${info.quote.exchange}: ${info.ticker} · ${getQuoteSource(
-						info.quote
-					)} · USD`}
 				</div>
 			)}
 		</div>
