@@ -15,7 +15,7 @@ export const FooterDianomi = () => {
 	) {
 		return (
 			<>
-				<div className="max-w-[970px] min-h-[250px] mx-auto my-8 px-3 xs:px-4 lg:px-0">
+				<div className="max-w-[970px] min-h-[250px] mx-auto my-9 px-3 xs:px-4 lg:px-0">
 					<div
 						className="dianomi_context"
 						data-dianomi-context-id="443"
