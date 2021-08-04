@@ -25,7 +25,6 @@ interface Props {
 export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 	const x = useMemo(() => xdata.slice(countZero(ydata)), [xdata, ydata]);
 	const y = useMemo(() => ydata.slice(countZero(ydata)), [ydata]);
-
 	return (
 		<div className="h-72 border border-gray-200 p-0.5 xs:p-1">
 			<Bar
@@ -144,7 +143,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 							ticks: {
 								color: '#323232',
 								font: {
-									size: 14,
+									size: 13,
 								},
 								padding: 5,
 								callback: function (value: number) {
