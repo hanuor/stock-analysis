@@ -31,7 +31,10 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 
 		if (loaded && !fetched) {
 			const fetchSec = async () => {
-				const url = `${process.env.NEXT_PUBLIC_API_URL}/sec?cik=${cik}&c=10&i=${id}&json=1`;
+				const url = `${
+					process.env.NEXT_PUBLIC_API_URL ||
+					'https://stockanalysis.com/wp-json/sa'
+				}/sec?cik=${cik}&c=10&i=${id}&json=1`;
 
 				try {
 					setFetched(true);
@@ -59,7 +62,11 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 			const timestamp = Date.parse(updated);
 			const diff = (now - timestamp) / 1000;
 
-			if (!entries.length || diff > 12 * 60 * 60 || isNaN(diff)) {
+			if (
+				(entries && !entries.length) ||
+				diff > 12 * 60 * 60 ||
+				isNaN(diff)
+			) {
 				fetchSec();
 			}
 		}

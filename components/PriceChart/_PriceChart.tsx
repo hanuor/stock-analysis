@@ -6,16 +6,17 @@ import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
 
 const getChartUrl = (id: number, time: string) => {
-	const url = 'https://stockanalysis.com/wp-json/sa/';
+	const url =
+		process.env.NEXT_PUBLIC_API_URL || 'https://stockanalysis.com/wp-json/sa';
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
 	if (time === '1D' || time === '5D') {
-		apiurl = url + `c?${params}`;
+		apiurl = url + `/c?${params}`;
 	} else if (time === '5Y' || time === 'MAX') {
-		apiurl = url + `cch?${params}&p=w`;
+		apiurl = url + `/cch?${params}&p=w`;
 	} else {
-		apiurl = url + `cch?${params}&p=d`;
+		apiurl = url + `/cch?${params}&p=d`;
 	}
 
 	return apiurl;
