@@ -3,12 +3,7 @@ import { authState } from 'state/authState';
 
 export const CrispChat = () => {
 	const email = authState((state) => state.email);
-	const status = authState((state) => state.status);
 	const isLoggedIn = authState((state) => state.isLoggedIn);
-
-	if (status !== 'completed') {
-		return null;
-	}
 
 	return (
 		<>
