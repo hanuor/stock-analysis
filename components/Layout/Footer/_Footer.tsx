@@ -21,7 +21,7 @@ const navigation = {
 	],
 	company: [
 		{ name: 'About', href: '/about/' },
-		{ name: 'Archives', href: '/archives/' },
+		{ name: 'Sitemap', href: '/sitemap/' },
 	],
 	legal: [
 		{ name: 'Privacy Policy', href: '/privacy-policy/' },
