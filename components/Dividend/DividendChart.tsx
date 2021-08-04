@@ -41,7 +41,7 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 		<>
 			<div className="flex flex-row justify-between items-end mb-1">
 				<h2 className="hh2 mb-1 sm:mb-2 mt-6">Dividend Charts</h2>
-				{options.trailing && (
+				{options.trailing && data.amount.length > 1 && (
 					<div className="flex flex-row space-x-2">
 						<span
 							onClick={() => setAll()}

@@ -17,11 +17,11 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 					<td className={cssCellRight}>{data.marketCap}</td>
 				</tr>
 				<tr className={cssRows}>
-					<td className={cssCellLeft}>Revenue</td>
+					<td className={cssCellLeft}>Revenue (ttm)</td>
 					<td className={cssCellRight}>{data.revenue}</td>
 				</tr>
 				<tr className={cssRows}>
-					<td className={cssCellLeft}>Net Income</td>
+					<td className={cssCellLeft}>Net Income (ttm)</td>
 					<td className={cssCellRight}>{data.netIncome}</td>
 				</tr>
 				<tr className={cssRows}>

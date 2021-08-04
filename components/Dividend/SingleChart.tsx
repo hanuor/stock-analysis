@@ -25,6 +25,11 @@ interface Props {
 export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 	const x = useMemo(() => xdata.slice(countZero(ydata)), [xdata, ydata]);
 	const y = useMemo(() => ydata.slice(countZero(ydata)), [ydata]);
+
+	if (x.length === 0) {
+		return null;
+	}
+
 	return (
 		<div className="h-72 border border-gray-200 p-0.5 xs:p-1">
 			<Bar

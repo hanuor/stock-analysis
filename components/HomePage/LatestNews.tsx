@@ -8,7 +8,7 @@ type NewsMin = {
 };
 
 export const LatestNews = ({ news }: { news: NewsMin[] }) => (
-	<section className="mx-auto px-3 xs:px-4 sm:px-5 lg:col-span-2">
+	<section className="mx-auto px-3 xs:px-4 sm:px-5 lg:px-0 lg:col-span-2">
 		<h2 className="text-2xl font-bold">Market News</h2>
 		<table className="text-sm sm:text-base">
 			<tbody>
