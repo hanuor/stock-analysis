@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { Info, IpoInfo } from 'types/Info';
 import { Quote } from 'types/Quote';
 import { isTradingHours } from 'functions/datetime/isTradingHours';
+import { getData } from 'functions/API';
 
 async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 	const id = queryKey[1];
@@ -11,8 +12,7 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 		return null;
 	}
 
-	const res = await fetch(`https://stockanalysis.com/wp-json/sa/q?i=${id}`);
-	return res.json();
+	return await getData(`q?i=${id}`);
 }
 
 export default function StockPrice({ info }: { info: Info }) {
@@ -23,6 +23,7 @@ export default function StockPrice({ info }: { info: Info }) {
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
+		enabled: info.state !== 'upcomingipo' && !info.archived,
 	});
 
 	if (info.state === 'upcomingipo') {
@@ -127,7 +128,7 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 			</span>
 			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">
 				{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}
-				<span className="ml-1">
+				<span className="ml-1" suppressHydrationWarning>
 					<span className="block sm:inline font-semibold">
 						{quote.extS}:
 					</span>{' '}

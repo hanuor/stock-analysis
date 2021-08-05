@@ -17,12 +17,15 @@ export const Title = ({ info }: { info: Info }) => {
 		return null;
 	}
 
-	const notice =
-		info.ipoInfo !== null &&
-		typeof info.ipoInfo !== 'undefined' &&
-		info.ipoInfo.notice
-			? info.ipoInfo.notice
-			: null;
+	const noticeStyles =
+		info.state === 'upcomingipo'
+			? 'text-base sm:text-lg text-gray-800 mt-2'
+			: 'text-base text-gray-700 mt-3';
+
+	const iconStyles =
+		info.state === 'upcomingipo'
+			? 'h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1'
+			: 'h-4 xs:h-5 w-4 xs:w-5 text-blue-400 inline mb-1 mr-1';
 
 	const name = info.nameFull || info.name;
 
@@ -31,19 +34,19 @@ export const Title = ({ info }: { info: Info }) => {
 			<h1 className="text-2xl sm:text-[26px] font-bold text-gray-900">
 				{`${name} (${info.ticker})`}
 			</h1>
-			{info.quote && info.state !== 'upcomingipo' && (
+			{info.quote && info.state !== 'upcomingipo' && !info.archived && (
 				<div className="text-tiny text-gray-600 mt-[1px]">
-					{`${info.quote.exchange}: ${info.ticker} · ${getQuoteSource(
-						info.quote
-					)} · USD`}
+					{`${info.quote.exchange || info.exchange}: ${
+						info.ticker
+					} · ${getQuoteSource(info.quote)} · USD`}
 				</div>
 			)}
-			{notice && (
-				<div className="text-base sm:text-lg text-gray-800 mt-2">
+			{info.notice && (
+				<div className={noticeStyles}>
 					<span>
-						<InformationCircleIcon classes="h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1" />
+						<InformationCircleIcon classes={iconStyles} />
 					</span>
-					<span>{notice}</span>
+					<span>{info.notice}</span>
 				</div>
 			)}
 		</div>

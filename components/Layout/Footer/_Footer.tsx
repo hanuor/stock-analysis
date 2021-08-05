@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 // import { useUserInfo } from 'hooks/useUserInfo';
 import { useNavState } from 'hooks/useNavState';
-import { authState } from 'state/authState';
+import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
@@ -83,9 +83,7 @@ const navigation = {
 };
 
 export const Footer = () => {
-	const isLoggedIn = authState((state) => state.isLoggedIn);
-	const isPro = authState((state) => state.isPro);
-	const status = authState((state) => state.status);
+	const { isLoggedIn, isPro, status } = useUserInfo();
 	// eslint-disable-next-line no-unused-vars
 	const path = useNavState();
 
