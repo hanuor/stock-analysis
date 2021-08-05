@@ -13,7 +13,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 		'text-gray-900 hover:text-gray-900 hover:text-shadow' + common;
 
 	return (
-		<ul className="flex space-x-0.5 whitespace-nowrap">
+		<ul className="flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto">
 			<li>
 				<button
 					className={chartTime === '1D' ? active : inactive}
@@ -42,17 +42,6 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 					<span className="block sm:hidden lg:block xl:hidden">1M</span>
 					<span className="hidden sm:block lg:hidden xl:block">
 						1 Month
-					</span>
-				</button>
-			</li>
-			<li>
-				<button
-					className={chartTime === '6M' ? active : inactive}
-					onClick={() => setChartTime('6M')}
-				>
-					<span className="block sm:hidden lg:block xl:hidden">6M</span>
-					<span className="hidden sm:block lg:hidden xl:block">
-						6 Months
 					</span>
 				</button>
 			</li>
