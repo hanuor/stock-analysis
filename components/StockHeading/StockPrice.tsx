@@ -117,21 +117,24 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 
 	return (
 		<div className="max-w-[50%]">
-			<span className="text-4xl font-bold" suppressHydrationWarning>
+			<div
+				className="block sm:inline text-4xl font-bold"
+				suppressHydrationWarning
+			>
 				{quote.extP}
-			</span>{' '}
-			<span
-				className={`block sm:inline text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
+			</div>
+			<div
+				className={`block sm:inline sm:ml-1 text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
 				suppressHydrationWarning
 			>
 				{`${quote.extC} (${quote.extCP})`}
-			</span>
-			<div className="text-sm text-gray-700 flex items-start sm:items-center mt-1">
-				{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}
-				<span className="ml-1" suppressHydrationWarning>
-					<span className="block sm:inline font-semibold">
-						{quote.extS}:
-					</span>{' '}
+			</div>
+			<div className="mt-1 text-gray-700 sm:flex">
+				<span className="flex items-center">
+					{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}{' '}
+					<span className="ml-1 text-sm font-semibold">{quote.extS}:</span>
+				</span>
+				<span className="text-xxs xs:text-tiny bp:text-sm sm:ml-1">
 					{quote.extTF}
 				</span>
 			</div>
@@ -144,17 +147,17 @@ function ExtendedClose({ quote }: { quote: Quote }) {
 	const color = changeColor(quote.changeR);
 
 	return (
-		<div>
-			<span className="text-3xl font-semibold text-gray-700">
+		<div className="border-l border-gray-200 pl-4">
+			<div className="block sm:inline text-[1.7rem] leading-5 font-semibold text-gray-700">
 				{quote.priceD}
-			</span>{' '}
-			<span className={`block sm:inline text-lg xs:text-xl reg ${color}`}>
+			</div>{' '}
+			<div
+				className={`block sm:inline text-sm xs:text-base sm:text-lg reg mt-1.5 sm:mt-0 ${color}`}
+			>
 				{`${quote.change} (${quote.changePc})`}
-			</span>
-			<div className="text-sm text-gray-700 mt-1">
-				<span className="block sm:inline font-semibold mr-1">
-					At close:
-				</span>{' '}
+			</div>
+			<div className="text-xxs xs:text-tiny sm:text-sm text-gray-700 mt-1">
+				<span className="block sm:inline font-semibold">At close:</span>{' '}
 				{quote.timestampF}
 			</div>
 		</div>
