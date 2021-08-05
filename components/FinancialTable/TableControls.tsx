@@ -58,7 +58,7 @@ export const TableControls = ({ statement, symbol }: Props) => {
 				<button
 					id="expxlxs"
 					onClick={() => setExportOpen(!exportOpen)}
-					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md flex flex-row items-center py-1 px-4 font-semibold"
+					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:bg-white flex flex-row items-center py-1 px-4 font-semibold"
 				>
 					Export Financials
 					<DropdownIcon classes="w-6 h-6 ml-2 -mr-1" />
@@ -75,7 +75,7 @@ export const TableControls = ({ statement, symbol }: Props) => {
 			</div>
 			<div>
 				<button
-					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:outline-none focus:bg-white focus:shadow-md px-3"
+					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white px-3"
 					onClick={() => clickLeftRight()}
 				>
 					<LeftRightIcon classes="h-9 w-9" />
