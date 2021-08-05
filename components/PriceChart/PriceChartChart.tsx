@@ -170,6 +170,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 			options={{
 				maintainAspectRatio: false,
 				spanGaps: true,
+				animation: false,
 				scales: {
 					x: {
 						grid: {

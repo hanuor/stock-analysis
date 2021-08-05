@@ -85,6 +85,7 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 					}}
 					options={{
 						maintainAspectRatio: false,
+						animation: false,
 						scales: {
 							x: {
 								ticks: {

@@ -156,7 +156,7 @@ function ExtendedClose({ quote }: { quote: Quote }) {
 			>
 				{`${quote.change} (${quote.changePc})`}
 			</div>
-			<div className="text-xxs xs:text-tiny bp:text-sm text-gray-700 mt-0.5">
+			<div className="text-xxs xs:text-tiny text-gray-700 mt-0.5">
 				<span className="block sm:inline font-semibold">At close:</span>{' '}
 				{quote.timestampF}
 			</div>

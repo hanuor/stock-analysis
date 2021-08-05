@@ -115,6 +115,7 @@ export const AnalystWidget = ({ data }: { data: Overview }) => {
 						}}
 						options={{
 							maintainAspectRatio: false,
+							animation: false,
 							scales: {
 								x: {
 									ticks: {
