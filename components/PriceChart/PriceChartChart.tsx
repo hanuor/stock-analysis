@@ -23,64 +23,9 @@ interface Props {
 }
 
 export const Chart = ({ chartData, chartTime }: Props) => {
-	let label = 'Closing Price';
-	let ticks = 12;
+	const label =
+		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price';
 
-	switch (chartTime) {
-		case '1Y': {
-			ticks = 12;
-			if (window.screen.width < 450) {
-				ticks = 6;
-			}
-			break;
-		}
-
-		case '1D': {
-			ticks = 13;
-			if (window.screen.width < 450) {
-				ticks = 7;
-			}
-			label = 'Price';
-			break;
-		}
-
-		case '5D': {
-			ticks = 5;
-			label = 'Price';
-			break;
-		}
-
-		case '1M': {
-			ticks = 8;
-			break;
-		}
-
-		case '6M': {
-			ticks = 8;
-			break;
-		}
-
-		case 'YTD': {
-			ticks = 8;
-			break;
-		}
-
-		case '5Y': {
-			ticks = 5;
-			break;
-		}
-
-		case 'MAX': {
-			const firstYear = formatDateYear(chartData[0].t);
-			const lastYear = formatDateYear(chartData[chartData.length - 1].t);
-			const diff = lastYear - firstYear;
-			ticks = diff;
-			if (window.screen.width < 450 && diff > 7) {
-				ticks = 5;
-			}
-			break;
-		}
-	}
 	const timeAxis = chartData.map((item) => {
 		return item.t;
 	});
@@ -200,8 +145,10 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							font: {
 								size: 13,
 							},
-							padding: 0,
-							maxTicksLimit: ticks,
+							autoSkip: true,
+							autoSkipPadding: 20,
+							maxRotation: 0,
+							minRotation: 0,
 						},
 					},
 					y: {

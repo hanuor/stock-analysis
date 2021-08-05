@@ -66,7 +66,13 @@
 	}
 
 	.navmenu li a.inactive {
-		@apply bll hover:text-gray-900 hover:bg-gray-100 transition duration-100;
+		@apply bll hover:bg-gray-100 transition duration-100;
+	}
+
+	@media (hover: none) {
+		.navmenu li a.inactive {
+			@apply hover:bg-white hover:text-blue-link;
+		}
 	}
 
 	.contain {
