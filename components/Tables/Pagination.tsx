@@ -41,7 +41,6 @@ export const Pagination = ({
 					name="perpage"
 					className="block w-full pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 py-1.5 xs:py-2 border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md text-sm sm:text-base"
 				>
-					<option value="200">200</option>
 					<option value="500">500</option>
 					<option value="1000">1000</option>
 					<option value="10000">10000</option>

@@ -54,7 +54,7 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 			data,
 			initialState: {
 				pageIndex: 0,
-				pageSize: 200,
+				pageSize: 500,
 			},
 		},
 		useGlobalFilter,
@@ -139,6 +139,14 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 				nextPage={nextPage}
 				canNextPage={canNextPage}
 			/>
+			<div className="text-center mt-6">
+				<button
+					className="bll text-lg"
+					onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+				>
+					Back to Top &#8593;
+				</button>
+			</div>
 		</>
 	);
 };
