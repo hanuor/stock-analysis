@@ -16,7 +16,7 @@ export function useUserInfo() {
 			try {
 				setStatus('loading');
 				const response = await fetch(
-					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}`
+					`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}`
 				);
 
 				if (response.ok) {

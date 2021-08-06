@@ -31,12 +31,12 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			try {
 				setLoading(true);
 				const resA = await fetch(
-					'https://stockanalysis.com/wp-json/sa/trending/'
+					'https://api.stockanalysis.com/wp-json/sa/trending/'
 				);
 				const trendingData = await resA.json();
 				setTrending(trendingData);
 				const resB = await fetch(
-					'https://stockanalysis.com/wp-json/sa/search/'
+					'https://api.stockanalysis.com/wp-json/sa/search/'
 				);
 				const indexData = await resB.json();
 				setIndex(indexData);

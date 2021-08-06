@@ -20,7 +20,7 @@ export const Logout = ({ setOpen }: { setOpen?: (open: boolean) => void }) => {
 
 		try {
 			await fetch(
-				`https://stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`,
+				`https://api.stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`,
 				{ method: 'POST' }
 			);
 		} catch (err) {

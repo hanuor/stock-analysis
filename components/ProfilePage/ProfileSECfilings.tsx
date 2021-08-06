@@ -33,7 +33,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 			const fetchSec = async () => {
 				const url = `${
 					process.env.NEXT_PUBLIC_API_URL ||
-					'https://stockanalysis.com/wp-json/sa'
+					'https://api.stockanalysis.com/wp-json/sa'
 				}/sec?cik=${cik}&c=10&i=${id}&json=1`;
 
 				try {

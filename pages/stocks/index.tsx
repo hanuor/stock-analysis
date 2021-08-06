@@ -69,7 +69,7 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	const stocksList = await fetch(
-		'https://stockanalysis.com/wp-json/sa/index?type=stockspage'
+		'https://api.stockanalysis.com/wp-json/sa/index?type=stockspage'
 	);
 	const json = await stocksList.json();
 

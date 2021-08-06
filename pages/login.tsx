@@ -32,7 +32,7 @@ export default function Login() {
 			setLoggingIn(true);
 			setError('');
 			const res = await Axios.post(
-				'https://stockanalysis.com/wp-json/authorize/v1/auth',
+				'https://api.stockanalysis.com/wp-json/authorize/v1/auth',
 				{
 					email: username,
 					password: password,
@@ -50,7 +50,7 @@ export default function Login() {
 
 			setStatus('loading');
 			const response = await fetch(
-				`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
+				`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
 			);
 
 			if (response.ok) {
@@ -217,7 +217,7 @@ export default function Login() {
 
 									<div className="hidden xs:block text-sm">
 										<a
-											href="https://stockanalysis.com/pro-login/?action=lostpassword"
+											href="https://api.stockanalysis.com/pro-login/?action=lostpassword"
 											className="font-medium bll"
 										>
 											Forgot your password?

@@ -26,7 +26,7 @@ export default function MyAccount() {
 		async function getUserDetails() {
 			try {
 				const res = await Axios.get(
-					`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
+					`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
 				);
 				setRegisteredDate(res.data.registeredDate);
 				setStatus(res.data.status);
@@ -124,7 +124,7 @@ export default function MyAccount() {
 								<h2 className="hh2">Manage Account</h2>
 								<div>
 									<a
-										href="https://stockanalysis.com/pro-login/?action=lostpassword"
+										href="https://api.stockanalysis.com/pro-login/?action=lostpassword"
 										className="bll"
 									>
 										Reset or Change Password

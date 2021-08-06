@@ -80,7 +80,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 
 				if (period != newState.period) {
 					Axios.get(
-						`https://stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
+						`https://api.stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
 					)
 						.then((res) => {
 							const forDateParse = res.data.map(fixDataHeaders);

@@ -78,7 +78,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'term/yoy-year-over-year',
 	];
 
-	const API = 'https://stockanalysis.com/wp-json/sa';
+	const API = 'https://api.stockanalysis.com/wp-json/sa';
 	const list = await fetch(API + '/index?type=sitemap');
 	const symbols = await list.json();
 

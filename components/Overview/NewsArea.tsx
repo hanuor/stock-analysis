@@ -41,7 +41,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	useEffect(() => {
 		const url = `${
 			process.env.NEXT_PUBLIC_API_URL ||
-			'https://stockanalysis.com/wp-json/sa'
+			'https://api.stockanalysis.com/wp-json/sa'
 		}/news-fresh?i=${info.id}`;
 
 		async function fetchData() {
@@ -63,7 +63,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	useEffect(() => {
 		const url = `${
 			process.env.NEXT_PUBLIC_API_URL ||
-			'https://stockanalysis.com/wp-json/sa'
+			'https://api.stockanalysis.com/wp-json/sa'
 		}/news?i=${info.id}&f=${type}`;
 
 		async function fetchData() {
@@ -90,7 +90,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 		return (
 			<div className="px-4 md:px-0 mt-6 lg:mt-0">
 				<h2 className="hh2 mb-2">News</h2>
-				<span className="text-xl">There are no news available yet.</span>
+				<span className="text-xl">There is no news available yet.</span>
 			</div>
 		);
 	}

@@ -72,7 +72,7 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	const stocksList = await fetch(
-		'https://stockanalysis.com/wp-json/sa/index?type=etfspage'
+		'https://api.stockanalysis.com/wp-json/sa/index?type=etfspage'
 	);
 	const json = await stocksList.json();
 

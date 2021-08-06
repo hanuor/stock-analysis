@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const API = process.env.API_URL || 'https://stockanalysis.com/wp-json/sa';
+const API = process.env.API_URL || 'https://api.stockanalysis.com/wp-json/sa';
 
 export async function getStockInfo(symbol: string) {
 	const response = await Axios.get(API + `/stock?symbol=${symbol}`);

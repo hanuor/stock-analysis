@@ -60,7 +60,7 @@ function ContactForm() {
 	const [warning, setWarning] = useState<string | null>(null);
 
 	const url =
-		'https://stockanalysis.com/wp-json/contact-form-7/v1/contact-forms/61220/feedback';
+		'https://api.stockanalysis.com/wp-json/contact-form-7/v1/contact-forms/61220/feedback';
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();

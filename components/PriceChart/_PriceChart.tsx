@@ -7,7 +7,8 @@ import { Info } from 'types/Info';
 
 const getChartUrl = (id: number, time: string) => {
 	const url =
-		process.env.NEXT_PUBLIC_API_URL || 'https://stockanalysis.com/wp-json/sa';
+		process.env.NEXT_PUBLIC_API_URL ||
+		'https://api.stockanalysis.com/wp-json/sa';
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
