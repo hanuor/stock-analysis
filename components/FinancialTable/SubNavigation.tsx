@@ -4,8 +4,8 @@ import { Info } from 'types/Info';
 
 // styles
 const common =
-	'text-sm sm:text-base block py-2 sm:py-2 px-2 xs:px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap';
-const inactive = common + ' bll hover:text-gray-900 hover:bg-[#eee]';
+	'block py-2 sm:py-2 px-2 xs:px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap';
+const inactive = common + ' bll';
 const active = common + ' text-gray-900 bg-[#eee] font-semibold';
 
 interface Props {
@@ -25,7 +25,7 @@ export const SubNavigation = ({ info, statement }: Props) => {
 function Statement({ info, statement }: Props) {
 	return (
 		<nav>
-			<ul className="w-full navmenu">
+			<ul className="w-full navmenu submenu">
 				<li>
 					<Link
 						href={`/stocks/${info.symbol}/financials/`}
@@ -101,7 +101,7 @@ function Period() {
 
 	return (
 		<nav>
-			<ul className="flex flex-row w-full overflow-auto navmenu">
+			<ul className="flex flex-row w-full overflow-auto navmenu submenu">
 				<li>
 					<span
 						className={range == 'annual' ? active : inactive}
