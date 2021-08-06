@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { BreadcrumbSchema } from 'components/Breadcrumbs/BreadcrumbSchema';
+import { getSchema } from 'functions/getSchema';
 
 interface ISEO {
 	title: string;
@@ -32,6 +32,8 @@ export const SEO = ({
 	const featuredImage = image
 		? `https://stockanalysis.com${image}`
 		: 'https://stockanalysis.com/img/bear-vs-bull.jpg';
+
+	const schemaObj = canonical && title ? getSchema(canonical, title) : null;
 
 	return (
 		<Head>
@@ -74,7 +76,18 @@ export const SEO = ({
 				href="https://stockanalysis.com/apple-touch-icon.png"
 				sizes="180x180"
 			/>
-			<BreadcrumbSchema path={canonical} title={title} schema={schema} />
+			{schema && (
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+				/>
+			)}
+			{schemaObj && (
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaObj) }}
+				/>
+			)}
 		</Head>
 	);
 };

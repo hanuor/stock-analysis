@@ -1,9 +1,3 @@
-interface PathInterface {
-	path: string;
-	title: string;
-	schema: object | null;
-}
-
 const capitalize = (word: string) => {
 	const split = word.split('-');
 	if (split.length === 1) {
@@ -20,7 +14,7 @@ const capitalize = (word: string) => {
 	}
 };
 
-export const BreadcrumbSchema = ({ path, title, schema }: PathInterface) => {
+export const getSchema = (path: string, title: string) => {
 	const split = path.split('/');
 	const one = split[0] || null;
 	const two = split[1] || null;
@@ -29,20 +23,7 @@ export const BreadcrumbSchema = ({ path, title, schema }: PathInterface) => {
 
 	let obj: object | undefined;
 
-	if (!one) {
-		obj = {
-			'@context': 'https://schema.org',
-			'@type': 'Organization',
-			url: 'https://stockanalysis.com/',
-			name: 'Stock Analysis',
-			logo: 'https://stockanalysis.com/logo.png',
-			sameAs: [
-				'https://www.facebook.com/stockanalysisoff/',
-				'https://twitter.com/stock_analysisx',
-				'https://www.linkedin.com/company/stock-analysis/',
-			],
-		};
-	} else if (one === 'stocks' || one === 'etf') {
+	if (one === 'stocks' || one === 'etf') {
 		let oneC: string | undefined;
 		if (one === 'stocks') {
 			oneC = 'Stocks';
@@ -283,27 +264,9 @@ export const BreadcrumbSchema = ({ path, title, schema }: PathInterface) => {
 		}
 	}
 
-	if (obj && schema) {
-		return (
-			<>
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
-				></script>
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-				></script>
-			</>
-		);
-	} else if (obj) {
-		return (
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
-			></script>
-		);
-	} else {
-		return null;
+	if (obj) {
+		return obj;
 	}
+
+	return null;
 };
