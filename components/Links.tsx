@@ -9,8 +9,10 @@ interface ILinks {
 export const StockLink = ({ symbol, className, prefetch = false }: ILinks) => {
 	const classes = className || 'bll';
 
+	const symb = symbol.includes('.') ? symbol : `${symbol}/`;
+
 	return (
-		<Link href={`/stocks/${symbol.toLowerCase()}/`} prefetch={prefetch}>
+		<Link href={`/stocks/${symb.toLowerCase()}`} prefetch={prefetch}>
 			<a className={classes}>{symbol.toUpperCase()}</a>
 		</Link>
 	);

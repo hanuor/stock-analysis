@@ -1,23 +1,20 @@
 import { useState, useEffect } from 'react';
-import Axios from 'axios';
 import { Controls } from './PriceChartControls';
 import { PriceChange } from './PriceChange';
 import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
+import { getData } from 'functions/API';
 
 const getChartUrl = (id: number, time: string) => {
-	const url =
-		process.env.NEXT_PUBLIC_API_URL ||
-		'https://api.stockanalysis.com/wp-json/sa';
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
 	if (time === '1D' || time === '5D') {
-		apiurl = url + `/c?${params}`;
+		apiurl = `c?${params}`;
 	} else if (time === '5Y' || time === 'MAX') {
-		apiurl = url + `/cch?${params}&p=w`;
+		apiurl = `cch?${params}&p=w`;
 	} else {
-		apiurl = url + `/cch?${params}&p=d`;
+		apiurl = `cch?${params}&p=d`;
 	}
 
 	return apiurl;
@@ -36,19 +33,14 @@ export const PriceChart = ({ info }: { info: Info }) => {
 	}, [info.quote]);
 
 	useEffect(() => {
-		const source = Axios.CancelToken.source();
+		if (info.state === 'upcomingipo') {
+			return;
+		}
 
 		const fetchChartData = async (selected: string) => {
 			const url = getChartUrl(info.id, selected);
-			try {
-				const response = await Axios.get(url, {
-					cancelToken: source.token,
-					timeout: 5000,
-				});
-				setChartData(response.data);
-			} catch (error) {
-				console.error(error);
-			}
+			const data = await getData(url);
+			setChartData(data);
 		};
 
 		if (chartTime) {
@@ -56,10 +48,9 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		}
 
 		return () => {
-			source.cancel('Unmounted');
 			setChartData([]);
 		};
-	}, [chartTime, info.id]);
+	}, [chartTime, info.id, info.state]);
 
 	if (info.state === 'upcomingipo') {
 		return (

@@ -27,12 +27,14 @@ const StockOverview = ({ info, data, news }: Props) => {
 		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials and other important investing information.`;
 	}
 
+	const symbol = info.symbol.includes('.') ? info.symbol : `${info.symbol}/`;
+
 	return (
 		<Stock info={info}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
-				canonical={`stocks/${info.symbol}/`}
+				canonical={`stocks/${symbol}`}
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
@@ -71,6 +73,14 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
+	const response = await getPageData('overview', symbol);
+
+	if (response === 404) {
+		return {
+			notFound: true,
+		};
+	}
+
 	const { info, data, news } = await getPageData('overview', symbol);
 
 	if (info === 'redirect') {

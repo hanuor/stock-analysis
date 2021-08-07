@@ -45,9 +45,9 @@ function TableHeader({ statement }: { statement: string }) {
 	}
 
 	return (
-		<h1 className="text-2xl font-bold mb-3">
+		<h2 className="text-2xl font-bold mb-3">
 			{statementTitle} ({rangeTitle})
-		</h1>
+		</h2>
 	);
 }
 

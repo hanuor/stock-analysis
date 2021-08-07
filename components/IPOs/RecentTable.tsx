@@ -25,6 +25,9 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 				Header: 'Symbol',
 				accessor: 'symbol',
 				Cell: function DateCell({ cell: { value } }: CellString) {
+					if (value.startsWith('=')) {
+						return value.slice(1);
+					}
 					return <StockLink symbol={value} />;
 				},
 			},

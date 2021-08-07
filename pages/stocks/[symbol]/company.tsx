@@ -45,6 +45,7 @@ const SymbolStatistics = ({ info, data }: Props) => {
 					/>
 				</div>
 			</div>
+			<div className="clear-both min-h-5"></div>
 		</Stock>
 	);
 };

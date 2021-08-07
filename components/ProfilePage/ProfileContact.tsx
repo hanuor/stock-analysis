@@ -6,6 +6,10 @@ const address = (address: string) => {
 };
 
 export const ProfileContact = ({ contact }: { contact: Contact }) => {
+	if (!contact.address && !contact.phone && !contact.website) {
+		return null;
+	}
+
 	return (
 		<>
 			<h2 className="hh2 mt-6 xs:mt-8">Contact Details</h2>
@@ -32,7 +36,7 @@ export const ProfileContact = ({ contact }: { contact: Contact }) => {
 								</td>
 							</tr>
 						)}
-						{contact.website && (
+						{contact.website && contact.domain && (
 							<tr className="border-t border-gray-200">
 								<td className="py-2 px-0.5 font-semibold">Website</td>
 								<td className="py-2 px-0.5 text-right">

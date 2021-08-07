@@ -24,7 +24,9 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 
 	switch (type) {
 		case 's':
-			url = `/stocks/${symbol.toLowerCase()}/`;
+			url = symbol.includes('.')
+				? `/stocks/${symbol.toLowerCase()}`
+				: `/stocks/${symbol.toLowerCase()}/`;
 			tag = 'Stock';
 			break;
 
