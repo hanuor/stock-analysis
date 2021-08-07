@@ -11,7 +11,8 @@ export const FooterDianomi = () => {
 		path.one !== 'pro' &&
 		path.one !== 'contact' &&
 		path.one !== 'privacy-policy' &&
-		path.one !== 'terms-of-use'
+		path.one !== 'terms-of-use' &&
+		path.one !== 'subscribe'
 	) {
 		return (
 			<>

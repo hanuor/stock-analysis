@@ -232,7 +232,7 @@ export const Footer = () => {
 								<input
 									type="hidden"
 									name="redirect"
-									value="https://stockanalysis.com/thank-you/"
+									value="https://stockanalysis.com/subscribe/thank-you/"
 									id="redirect_756a76620e2e180d07c2981f91a5fa1e"
 								/>
 								<input

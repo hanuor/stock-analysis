@@ -25,7 +25,7 @@ export const NewsletterWidget = () => {
 					<input
 						type="hidden"
 						name="redirect"
-						value="https://stockanalysis.com/thank-you/"
+						value="https://stockanalysis.com/subscribe/thank-you/"
 						id="redirect_1c682bd70a6bff87ede4346cfeb23687"
 					/>
 					<input type="hidden" name="meta_adtracking" value="Sidebar" />
