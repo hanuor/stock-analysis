@@ -35,18 +35,21 @@ export const SEO = ({
 
 	const schemaObj = canonical && title ? getSchema(canonical, title) : null;
 
+	const ogType = schema && canonical ? 'article' : 'website';
+
 	return (
 		<Head>
 			<title>{seoTitle}</title>
 			{description && <meta name="description" content={description} />}
 			<meta name="robots" content={metaRobots} />
 			<link rel="canonical" href={canonicalUrl} />
-			<meta property="og:image" content={featuredImage} />
 			<meta property="og:title" content={seoTitle} />
 			{description && (
 				<meta property="og:description" content={description} />
 			)}
 			<meta property="og:url" content={canonicalUrl} />
+			<meta property="og:image" content={featuredImage} />
+			<meta property="og:type" content={ogType} />
 			<meta property="og:site_name" content="Stock Analysis" />
 			<meta name="twitter:card" content="summary_large_image" />
 			<meta name="twitter:site" content="@stock_analysisx" />

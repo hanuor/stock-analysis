@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const HoldingsWidget = ({ ticker, data }: Props) => {
-	if (data.list.length < 10) {
+	if (!data.list || data.list.length < 10) {
 		return null;
 	}
 

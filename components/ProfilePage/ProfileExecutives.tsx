@@ -25,16 +25,17 @@ export const ProfileExecutives = ({
 				</tr>
 			</thead>
 			<tbody>
-				{executives.map((item, index) => (
-					<tr key={index} className="border-b border-gray-200">
-						<td className="py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 font-medium text-gray-900 align-top">
-							{item.Name}
-						</td>
-						<td className="py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 text-gray-800 align-top">
-							{item.Title}
-						</td>
-					</tr>
-				))}
+				{executives &&
+					executives.map((item, index) => (
+						<tr key={index} className="border-b border-gray-200">
+							<td className="py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 font-medium text-gray-900 align-top">
+								{item.Name}
+							</td>
+							<td className="py-2.5 xs:py-3 px-2 xs:px-3 sm:px-4 text-gray-800 align-top">
+								{item.Title}
+							</td>
+						</tr>
+					))}
 			</tbody>
 		</table>
 	</>

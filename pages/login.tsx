@@ -65,7 +65,11 @@ export default function Login() {
 			}
 			setStatus('completed');
 
-			router.back();
+			if (router.query && router.query.prev === 'pwset') {
+				router.push('/');
+			} else {
+				router.back();
+			}
 		} catch (error) {
 			const msg = error.response.data.data.message;
 
@@ -236,7 +240,7 @@ export default function Login() {
 
 								<div className="block xs:hidden text-center text-sm">
 									<a
-										href="https://stockanalysis.com/pro-login/?action=lostpassword"
+										href="https://api.stockanalysis.com/pro-login/?action=lostpassword"
 										className="font-medium bll"
 									>
 										Forgot your password?
