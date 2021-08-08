@@ -4,15 +4,12 @@ import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
-import { allPostPaths, POST_PATHS } from 'functions/markdown.functions';
 import { ArticleLayout } from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
-import Image from 'next/image';
 import { CustomLink, External } from 'components/CustomLink';
 
 const components = {
 	a: CustomLink,
-	Image,
 	External,
 };
 
@@ -115,8 +112,8 @@ export default function Page({ content, meta, slug }: Props) {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const slug = params ? params.slug : '';
-	const postFile = path.join(POST_PATHS, `${slug}.mdx`);
-	const source = fs.readFileSync(postFile);
+	const filePath = path.join(process.cwd(), 'content', `${slug}.mdx`);
+	const source = fs.readFileSync(filePath);
 
 	const { content, data } = matter(source);
 
@@ -134,9 +131,39 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = allPostPaths
-		.map((path) => path.replace(/\.mdx?$/, ''))
-		.map((slug) => ({ params: { slug } }));
+	const paths = [
+		{ params: { slug: '5-ways-stock-buybacks-can-be-bad' } },
+		{ params: { slug: 'about' } },
+		{ params: { slug: 'analyst-ratings-explained' } },
+		{ params: { slug: 'average-monthly-stock-returns' } },
+		{ params: { slug: 'berkshire-class-a-and-class-b-stock' } },
+		{ params: { slug: 'can-you-beat-the-market' } },
+		{ params: { slug: 'data-disclaimer' } },
+		{ params: { slug: 'etf-vs-mutual-fund' } },
+		{ params: { slug: 'goog-vs-googl-stock' } },
+		{ params: { slug: 'how-facebook-makes-money' } },
+		{ params: { slug: 'how-often-are-dividends-paid' } },
+		{ params: { slug: 'how-to-buy-stocks-online' } },
+		{ params: { slug: 'how-to-short-stocks' } },
+		{ params: { slug: 'negative-pe-ratio' } },
+		{ params: { slug: 'peg-ratio' } },
+		{ params: { slug: 'privacy-policy' } },
+		{ params: { slug: 'recession-vs-depression' } },
+		{ params: { slug: 'revenue-vs-income' } },
+		{ params: { slug: 'safe-low-risk-investments' } },
+		{ params: { slug: 'sitemap' } },
+		{ params: { slug: 'stock-market-hours' } },
+		{ params: { slug: 'stocks-in-bankruptcy' } },
+		{ params: { slug: 'stocks-vs-bonds' } },
+		{ params: { slug: 'terms-of-use' } },
+		{ params: { slug: 'voo-vs-vti' } },
+		{ params: { slug: 'warren-buffett-money' } },
+		{ params: { slug: 'what-is-the-best-sp500-etf' } },
+		{ params: { slug: 'where-to-park-cash' } },
+		{ params: { slug: 'who-determines-recessions' } },
+		{ params: { slug: 'why-stock-buybacks-are-good' } },
+		{ params: { slug: 'youtube-stock' } },
+	];
 
 	return {
 		paths,
