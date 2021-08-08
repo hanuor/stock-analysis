@@ -32,7 +32,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 							<SelectPeriod dispatcher={setPeriod} />
 							<SelectType dispatcher={setType} />
 						</div>
-						<div className="max-h-[400px] xs:max-h-[450px] bp:max-h-[550px] sm:max-h-[600px]">
+						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 							<StockChart
 								stockId={info.id}
 								period={period}
@@ -55,24 +55,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
-	const { info, data } = await getPageData('chartpage', symbol);
-
-	if (info === 'redirect') {
-		return {
-			redirect: {
-				destination: data,
-				statusCode: 301,
-			},
-		};
-	}
-
-	return {
-		props: {
-			key: symbol,
-			info,
-		},
-		revalidate: 3600,
-	};
+	return await getPageData('chartpage', symbol, 3600);
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

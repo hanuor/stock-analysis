@@ -2,20 +2,36 @@ import Axios from 'axios';
 
 const API = process.env.API_URL || 'https://api.stockanalysis.com/wp-json/sa';
 
-export async function getPageData(page: string, symbol: string) {
-	const response = await Axios.get(API + `/${page}?symbol=${symbol}`);
-	const data = response.data;
-
-	return data;
+interface Response {
+	status: number;
+	data: any;
 }
 
-export async function getStockFinancials(page: string, symbol: string) {
+export function respond(response: Response, revalidate: number) {
+	if (response.status === 200) {
+		return {
+			props: response.data,
+			revalidate: revalidate,
+		};
+	} else {
+		return response.data;
+	}
+}
+
+export async function getPageData(page: string, symbol: string, reval: number) {
+	const response = await Axios.get(API + `/${page}?symbol=${symbol}`);
+	return respond(response.data, reval);
+}
+
+export async function getStockFinancials(
+	page: string,
+	symbol: string,
+	reval: number
+) {
 	const response = await Axios.get(
 		API + `/financials?type=${page}&symbol=${symbol}`
 	);
-	const data = response.data;
-
-	return data;
+	return respond(response.data, reval);
 }
 
 export async function getNewsData(id: number) {

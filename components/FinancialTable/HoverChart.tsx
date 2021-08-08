@@ -280,7 +280,7 @@ export const HoverChart = ({
 								} else if (type === 'ratio') {
 									return `${value.toFixed(3)}`;
 								} else if (
-									!type &&
+									(!type || type === 'reduce_precision') &&
 									(value > 10000000 || value < -10000000)
 								) {
 									return new Intl.NumberFormat('en-US', {
