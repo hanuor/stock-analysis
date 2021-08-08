@@ -3,26 +3,13 @@ import { NewsFeed } from 'components/News/_NewsFeed';
 import { loadStockTwits } from 'functions/loadStockTwits';
 import { News } from 'types/News';
 import { Info } from 'types/Info';
+import { getData } from 'functions/API';
 
 interface Props {
 	info: Info;
 	news: News[];
 	updated: number;
 }
-
-const fetchNews = async (url: string) => {
-	try {
-		const response = await fetch(url);
-		const data = await response.json();
-		if (response.ok) {
-			return data;
-		} else {
-			return null;
-		}
-	} catch (error) {
-		console.error(error);
-	}
-};
 
 export const NewsArea = ({ info, news, updated }: Props) => {
 	const [data, setData] = useState(news);
@@ -39,14 +26,9 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
-		const url = `${
-			process.env.NEXT_PUBLIC_API_URL ||
-			'https://api.stockanalysis.com/wp-json/sa'
-		}/news-fresh?i=${info.id}`;
-
 		async function fetchData() {
-			const fresh = await fetchNews(url);
-			if (news[0] && news[0].title !== fresh[0].title) {
+			const fresh = await getData(`news-fresh?i=${info.id}`);
+			if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
 				setData(fresh);
 				setOriginal(fresh);
 			}
@@ -61,13 +43,8 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	// Fetch data if a menu item has been clicked (videos, press releases, conversation)
 	useEffect(() => {
-		const url = `${
-			process.env.NEXT_PUBLIC_API_URL ||
-			'https://api.stockanalysis.com/wp-json/sa'
-		}/news?i=${info.id}&f=${type}`;
-
 		async function fetchData() {
-			const fresh = await fetchNews(url);
+			const fresh = await getData(`news?i=${info.id}&f=${type}`);
 			setData(fresh);
 		}
 

@@ -1,3 +1,7 @@
+/**
+ * This function calls the back-end to fetch data to use on the front-end
+ * @param {string} params The parameters to use in the API request, ex: "q?id=123"
+ */
 export const getData = async (params: string) => {
 	const url =
 		process.env.NEXT_PUBLIC_API_URL ||
@@ -10,5 +14,7 @@ export const getData = async (params: string) => {
 		return await response.json();
 	}
 
-	throw new Error(`getData not ok: ${response.status} ${response.statusText}`);
+	throw new Error(
+		`API/getData not ok: ${response.status} ${response.statusText}`
+	);
 };

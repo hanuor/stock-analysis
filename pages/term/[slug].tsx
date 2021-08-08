@@ -4,15 +4,12 @@ import path from 'path';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import matter from 'gray-matter';
-import { allTermPaths, TERM_PATHS } from 'functions/markdown.functions';
 import { ArticleLayout } from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
-import Image from 'next/image';
 import { CustomLink, External } from 'components/CustomLink';
 
 const components = {
 	a: CustomLink,
-	Image,
 	External,
 };
 
@@ -50,8 +47,8 @@ export default function Page({ content, meta, slug }: Props) {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const slug = params ? params.slug : '';
-	const termFile = path.join(TERM_PATHS, `${slug}.mdx`);
-	const source = fs.readFileSync(termFile);
+	const filePath = path.join(process.cwd(), 'content/term', `${slug}.mdx`);
+	const source = fs.readFileSync(filePath);
 
 	const { content, data } = matter(source);
 
@@ -69,9 +66,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = allTermPaths
-		.map((path) => path.replace(/\.mdx?$/, ''))
-		.map((slug) => ({ params: { slug } }));
+	const paths = [
+		{ params: { slug: 'balance-sheet' } },
+		{ params: { slug: 'cash-flow-statement' } },
+		{ params: { slug: 'dividend' } },
+		{ params: { slug: 'enterprise-value' } },
+		{ params: { slug: 'eps-earnings-per-share' } },
+		{ params: { slug: 'free-cash-flow' } },
+		{ params: { slug: 'gross-profit' } },
+		{ params: { slug: 'income-statement' } },
+		{ params: { slug: 'market-capitalization' } },
+		{ params: { slug: 'market-to-book-ratio' } },
+		{ params: { slug: 'net-income' } },
+		{ params: { slug: 'operating-income' } },
+		{ params: { slug: 'pe-ratio' } },
+		{ params: { slug: 'revenue' } },
+		{ params: { slug: 'roe-return-on-equity' } },
+		{ params: { slug: 'ttm-trailing-twelve-months' } },
+		{ params: { slug: 'yoy-year-over-year' } },
+	];
 
 	return {
 		paths,

@@ -1,6 +1,4 @@
-import Axios from 'axios';
-
-const API = process.env.API_URL || 'https://api.stockanalysis.com/wp-json/sa';
+import { getData } from 'functions/API';
 
 interface Response {
 	status: number;
@@ -19,8 +17,8 @@ export function respond(response: Response, revalidate: number) {
 }
 
 export async function getPageData(page: string, symbol: string, reval: number) {
-	const response = await Axios.get(API + `/${page}?symbol=${symbol}`);
-	return respond(response.data, reval);
+	const response = await getData(`${page}?symbol=${symbol}`);
+	return respond(response, reval);
 }
 
 export async function getStockFinancials(
@@ -28,43 +26,31 @@ export async function getStockFinancials(
 	symbol: string,
 	reval: number
 ) {
-	const response = await Axios.get(
-		API + `/financials?type=${page}&symbol=${symbol}`
-	);
-	return respond(response.data, reval);
+	const response = await getData(`financials?type=${page}&symbol=${symbol}`);
+	return respond(response, reval);
 }
 
 export async function getNewsData(id: number) {
-	const response = await Axios.get(API + `/news?i=${id}`);
-	const news = response.data;
-
-	return news;
+	const response = await getData(`news?i=${id}`);
+	return response;
 }
 
 export async function getMarketNews(type: string) {
-	const response = await Axios.get(API + `/news?type=${type}`);
-	const news = response.data;
-
-	return news;
+	const response = await getData(`news?type=${type}`);
+	return response;
 }
 
 export async function getHomePageData() {
-	const response = await Axios.get(API + '/homepage');
-	const data = response.data;
-
-	return data;
+	const response = await getData('homepage');
+	return response;
 }
 
 export async function getIpoData(query: string) {
-	const response = await Axios.get(API + `/ipos?q=${query}`);
-	const data = response.data;
-
-	return data;
+	const response = await getData(`ipos?q=${query}`);
+	return response;
 }
 
 export async function getActionsData(query: string) {
-	const response = await Axios.get(API + `/actions?q=${query}`);
-	const data = response.data;
-
-	return data;
+	const response = await getData(`actions?q=${query}`);
+	return response;
 }

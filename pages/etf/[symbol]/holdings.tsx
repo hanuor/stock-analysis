@@ -35,9 +35,9 @@ const Holdings = ({ info, data, news }: Props) => {
 				<div className="lg:grid grid-cols-sidebar_wide gap-8">
 					<div>
 						<div className="flex flex-row justify-between items-end mb-1">
-							<h1 className="text-xl bp:text-2xl sm:text-2xl font-bold mt-1 mb-0.5 bp:mb-1 sm:mb-2">
+							<h2 className="text-xl bp:text-2xl sm:text-2xl font-bold mt-1 mb-0.5 bp:mb-1 sm:mb-2">
 								{data.count ? <HeaderFull /> : <HeaderEmpty />}
-							</h1>
+							</h2>
 
 							{data.count && (
 								<span className="text-gray-700 text-small bp:text-smaller">
