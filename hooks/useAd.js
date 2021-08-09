@@ -3,8 +3,9 @@ import { useEffect } from 'react';
 export const useAd = () => {
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			console.log('hello');
-			const { googletag } = window;
+			const googletag = window.googletag || {};
+			googletag.cmd = googletag.cmd || [];
+
 			googletag.cmd.push(function () {
 				// Sidebar 1 -- sizes
 				const mappingA = googletag
