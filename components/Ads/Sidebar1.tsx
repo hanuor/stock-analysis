@@ -6,7 +6,9 @@ export const Sidebar1 = () => {
 	return (
 		<>
 			<div
-				className="min-h-[250px] max-h-[280px] min-w-[300px] bg-gray-50 mx-auto"
+				className={`min-h-[250px] max-h-[280px] min-w-[300px] mx-auto${
+					process.env.NODE_ENV === 'development' && ' bg-gray-100'
+				}`}
 				id="div-gpt-ad-1617185412139-0"
 			></div>
 		</>
