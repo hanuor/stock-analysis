@@ -8,7 +8,7 @@ export const Sidebar1 = () => {
 	const isPro = authState((state) => state.isPro);
 	const path = navState((state) => state.path);
 
-	if (!path.one || !path.two || path.one !== 'stocks' || path.two !== 'gm') {
+	if (!path.one || path.one !== 'stocks') {
 		return null;
 	}
 
