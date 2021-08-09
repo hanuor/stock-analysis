@@ -7,7 +7,7 @@ export const useAd = () => {
 	console.log(isNavigating);
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		if (typeof window !== 'undefined' && !isNavigating) {
 			// const googletag = (window.googletag = window.googletag || { cmd: [] });
 
 			googletag.cmd.push(function () {
