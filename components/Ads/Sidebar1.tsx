@@ -7,7 +7,7 @@ export const Sidebar1 = () => {
 		<>
 			<div className="lbl mt-4 mb-1">
 				<div
-					className="min-h-[250px] w-[300px] bg-gray-50 mx-auto"
+					className="min-h-[250px] min-w-[300px] bg-gray-50 mx-auto"
 					id="div-gpt-ad-1617185412139-0"
 				></div>
 			</div>

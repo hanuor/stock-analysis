@@ -6,7 +6,6 @@ export const useNavigating = () => {
 	const [isNavigating, setIsNavigating] = useState(false);
 
 	const changeStart = () => {
-		console.log('changeStart');
 		setIsNavigating(true);
 		googletag.cmd.push(function () {
 			googletag.destroySlots();
@@ -14,7 +13,6 @@ export const useNavigating = () => {
 	};
 
 	const changeEnd = () => {
-		console.log('changeEnd');
 		setIsNavigating(false);
 	};
 
@@ -26,7 +24,7 @@ export const useNavigating = () => {
 			router.events.off('routeChangeStart', changeStart);
 			router.events.off('routeChangeComplete', changeEnd);
 		};
-	}, []);
+	}, [router.events]);
 
 	return isNavigating;
 };
