@@ -98,9 +98,7 @@ export const Header = () => {
 					</div>
 				</div>
 			</header>
-			<div className="lbl mt-4">
-				<HeaderAd />
-			</div>
+			<HeaderAd />
 		</>
 	);
 };
