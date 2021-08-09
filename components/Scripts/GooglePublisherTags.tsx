@@ -38,10 +38,10 @@ export const GooglePublisherTags = () => {
 				strategy="lazyOnload"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
-			<Script
+			{/* <Script
 				strategy="lazyOnload"
 				src="https://biddr.brealtime.com/91455193-1695.js"
-			/>
+			/> */}
 			<Script
 				strategy="afterInteractive"
 				dangerouslySetInnerHTML={{
