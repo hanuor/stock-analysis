@@ -1,38 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigating } from 'hooks/useAdReload';
 
-export const useAd = () => {
+export const useAd = (unit, render) => {
 	const isNavigating = useNavigating();
 
-	console.log(isNavigating);
-
 	useEffect(() => {
-		if (typeof window !== 'undefined' && !isNavigating) {
-			// const googletag = (window.googletag = window.googletag || { cmd: [] });
-
+		if (typeof window !== 'undefined' && googletag && !isNavigating) {
 			googletag.cmd.push(function () {
-				// Sidebar 1 -- sizes
-				const mappingA = googletag
-					.sizeMapping()
-					.addSize(
-						[1024, 0],
-						[
-							[336, 280],
-							[300, 250],
-						]
-					)
-					.addSize([0, 0], [])
-					.build();
-
-				// Sidebar 1 -- slot
-				googletag
-					.defineSlot(
-						'/2507246/SAN//stockanalysis//misc//1',
-						[300, 250],
-						'div-gpt-ad-1617185412139-0'
-					)
-					.defineSizeMapping(mappingA)
-					.addService(googletag.pubads());
+				render(googletag);
 
 				googletag.pubads().enableSingleRequest();
 				googletag.enableServices();
@@ -42,5 +17,5 @@ export const useAd = () => {
 				googletag.display('div-gpt-ad-1617185412139-0');
 			});
 		}
-	}, []);
+	}, [isNavigating, render]);
 };
