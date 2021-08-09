@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 export const useAd = () => {
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			const googletag = window.googletag || {};
-			googletag.cmd = googletag.cmd || [];
+			// const googletag = (window.googletag = window.googletag || { cmd: [] });
 
 			googletag.cmd.push(function () {
 				// Sidebar 1 -- sizes

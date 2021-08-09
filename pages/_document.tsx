@@ -9,6 +9,11 @@ class MyDocument extends Document {
 						async
 						src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 					></script>
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `const googletag = (window.googletag = window.googletag || { cmd: [] });`,
+						}}
+					/>
 				</Head>
 				<body>
 					<Main />
