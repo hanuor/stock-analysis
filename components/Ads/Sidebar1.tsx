@@ -25,7 +25,7 @@ const sidebar1 = (googletag: any) => {
 };
 
 export const Sidebar1 = () => {
-	useAd('Sidebar1', sidebar1);
+	useAd('Sidebar1', sidebar1, 'div-gpt-ad-1617185412139-0');
 
 	return (
 		<>

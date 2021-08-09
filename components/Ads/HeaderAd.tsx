@@ -19,7 +19,7 @@ const headerAd = (googletag: any) => {
 };
 
 export const HeaderAd = () => {
-	useAd('HeaderAd', headerAd);
+	useAd('HeaderAd', headerAd, 'div-gpt-ad-1617185412139-0');
 
 	return (
 		<>

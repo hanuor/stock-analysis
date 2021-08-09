@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigating } from 'hooks/useAdReload';
 
-export const useAd = (unit, render) => {
+export const useAd = (unit, render, id) => {
 	const isNavigating = useNavigating();
 
 	useEffect(() => {
@@ -14,8 +14,8 @@ export const useAd = (unit, render) => {
 			});
 
 			googletag.cmd.push(function () {
-				googletag.display('div-gpt-ad-1617185412139-0');
+				googletag.display(id);
 			});
 		}
-	}, [isNavigating, render]);
+	}, [id, isNavigating, render]);
 };
