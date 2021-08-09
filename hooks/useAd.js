@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
+import { useNavigating } from 'hooks/useAdReload';
 
 export const useAd = () => {
+	const isNavigating = useNavigating();
+
+	console.log(isNavigating);
+
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			// const googletag = (window.googletag = window.googletag || { cmd: [] });
