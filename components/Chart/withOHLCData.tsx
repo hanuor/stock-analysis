@@ -66,19 +66,37 @@ export function withOHLCData(dataSet = 'DAILY') {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props);
 				this.state = {
-					period: '',
-					time: '',
-					stockId: 0,
-					type: '',
+					period: props.period,
+					time: props.time,
+					stockId: props.stockId,
+					type: props.type,
+					data: undefined,
 				};
+				Axios.get(
+					`https://api.stockanalysis.com/wp-json/sa/cch?i=${props.stockId}&p=${props.period}&r=MAX`
+				)
+					.then((res) => {
+						const forDateParse = res.data.map(fixDataHeaders);
+						const data = forDateParse.map(parseData());
+
+						this.setState({ data });
+					})
+					.catch((error) => {
+						console.error(
+							'Error: There was an error loading the data for the chart |',
+							error
+						);
+						return (
+							<Unavailable message="Unable to load the data for this chart." />
+						);
+					});
 			}
 
 			public render() {
-				const { data, period } = this.state;
-
+				const { data, period, stockId } = this.state;
 				const newState: WithOHLCState = this.props;
 
-				if (period != newState.period) {
+				if (period != newState.period || stockId != newState.stockId) {
 					Axios.get(
 						`https://api.stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
 					)
@@ -86,8 +104,15 @@ export function withOHLCData(dataSet = 'DAILY') {
 							const forDateParse = res.data.map(fixDataHeaders);
 							const data = forDateParse.map(parseData());
 							const period = newState.period;
-							this.setState({ period });
-							this.setState({ data });
+							const stockId = newState.stockId;
+
+							if (period != newState.period) {
+								this.setState({ period });
+								this.setState({ data });
+							} else {
+								this.setState({ stockId });
+								this.setState({ data });
+							}
 						})
 						.catch((error) => {
 							console.error(

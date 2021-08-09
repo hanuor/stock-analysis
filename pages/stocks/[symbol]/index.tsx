@@ -12,6 +12,7 @@ import { Profile } from 'components/Overview/ProfileWidget';
 import { NewsArea } from 'components/Overview/NewsArea';
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
 import { AnalystWidget } from 'components/Overview/AnalystWidget';
+import { Sidebar1 } from 'components/Ads/Sidebar1';
 
 interface Props {
 	info: Info;
@@ -47,6 +48,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-6">
+					<Sidebar1 />
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
