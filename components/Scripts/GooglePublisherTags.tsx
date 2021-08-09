@@ -8,7 +8,10 @@ export const GooglePublisherTags = () => {
 	// const ads = getAdUnitList();
 
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
+		if (
+			typeof window !== 'undefined' &&
+			typeof window.googletag !== 'undefined'
+		) {
 			const { googletag } = window;
 			googletag.cmd.push(function () {
 				// Sidebar 1 -- sizes
