@@ -32,10 +32,13 @@ export const GooglePublisherTags = () => {
 		return null;
 	}
 
+	console.log({ path });
+	console.log({ ads });
+
 	return (
 		<>
 			<Script
-				strategy="lazyOnload"
+				strategy="afterInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
 			{/* <Script
