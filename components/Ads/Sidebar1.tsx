@@ -1,11 +1,7 @@
-import { navState } from 'state/navState';
+import { useAd } from 'hooks/useAd';
 
 export const Sidebar1 = () => {
-	const path = navState((state) => state.path);
-
-	if (!path.one || path.one !== 'stocks') {
-		return null;
-	}
+	useAd();
 
 	return (
 		<>

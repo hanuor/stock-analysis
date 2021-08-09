@@ -1,17 +1,8 @@
-// import Script from 'next/script';
 import { useEffect } from 'react';
-// import { getAdUnitList } from './Ads/getAdUnitList';
 
-declare const window: any;
-
-export const GooglePublisherTags = () => {
-	// const ads = getAdUnitList();
-
+export const useAd = () => {
 	useEffect(() => {
-		if (
-			typeof window !== 'undefined' &&
-			typeof window.googletag !== 'undefined'
-		) {
+		if (typeof window !== 'undefined') {
 			console.log('hello');
 			const { googletag } = window;
 			googletag.cmd.push(function () {
@@ -47,8 +38,4 @@ export const GooglePublisherTags = () => {
 			});
 		}
 	}, []);
-
-	return <></>;
 };
-
-// googletag.pubads().disableInitialLoad();
