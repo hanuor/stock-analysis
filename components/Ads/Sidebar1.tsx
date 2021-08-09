@@ -1,9 +1,16 @@
 import { authState } from 'state/authState';
+import { navState } from 'state/navState';
+
 import Script from 'next/script';
 
 export const Sidebar1 = () => {
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
+	const path = navState((state) => state.path);
+
+	if (!path.one || !path.two || path.one !== 'stocks' || path.two !== 'gm') {
+		return null;
+	}
 
 	return (
 		<>
