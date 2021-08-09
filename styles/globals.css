@@ -250,6 +250,11 @@
 	}
 }
 
+.lbl::before {
+	content: 'Advertisement';
+	@apply block text-xs leading-3 text-gray-500 text-center mb-0.5;
+}
+
 /* NPROGRESS */
 /* Make clicks pass-through */
 #nprogress {
