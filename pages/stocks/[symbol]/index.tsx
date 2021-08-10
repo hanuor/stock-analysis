@@ -49,12 +49,8 @@ const StockOverview = ({ info, data, news }: Props) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-6">
-					<div className="hidden lg:block lbl mt-4 mb-1">
-						<Sidebar1 />
-					</div>
-					<div className="block xsm:hidden lbl mt-4">
-						<Mobile1 />
-					</div>
+					<Sidebar1 />
+					<Mobile1 />
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />

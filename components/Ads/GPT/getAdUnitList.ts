@@ -1,5 +1,12 @@
-export const getAdUnitList = (path) => {
-	let ads = [];
+type PathObject = {
+	one: string | null;
+	two: string | null;
+	three: string | null;
+	four: string | null;
+};
+
+export const getAdUnitList = (path: PathObject) => {
+	let ads: string[] = [];
 
 	if (path.one === 'stocks' || path.one === 'etf') {
 		if (!path.three) {
@@ -13,8 +20,8 @@ export const getAdUnitList = (path) => {
 		}
 	} else if (path.one === 'ipos') {
 		ads = ['header'];
-	} else if (path.one === '') {
-		ads = ['header'];
+	} else if (path.one === null) {
+		ads = [];
 	}
 
 	return ads;
