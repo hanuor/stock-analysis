@@ -13,9 +13,21 @@ export const HeaderAd = () => {
 		return null;
 	}
 
+	if (
+		path.one === null ||
+		path.one === 'login' ||
+		path.one === 'my-account' ||
+		path.one === 'pro' ||
+		path.one === 'subscribe' ||
+		path.one === 'privacy-policy' ||
+		path.one === 'terms-of-use'
+	) {
+		return null;
+	}
+
 	return (
 		<>
-			<div className="hidden md:block lbl mt-2">
+			<div className="hidden md:block lbl mt-2 -mb-4">
 				<div
 					className={`md:h-[90px] md:w-[728px] mx-auto${
 						process.env.NODE_ENV === 'development' ? ' bg-gray-200' : ''
