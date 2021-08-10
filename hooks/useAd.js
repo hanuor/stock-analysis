@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
 import { useNavigating } from 'hooks/useAdReload';
 import { Ads } from 'components/Ads/GPT/AdsList';
+import { navState } from 'state/navState';
 
 export const useAd = (unit, render, id) => {
+	const path = navState((state) => state.path);
 	const isNavigating = useNavigating();
 	const ad = Ads[unit];
 
 	useEffect(() => {
-		if (typeof window !== 'undefined' && !isNavigating) {
+		if (
+			typeof window !== 'undefined' &&
+			typeof path.one !== 'undefined' &&
+			!isNavigating
+		) {
 			const googletag = (window.googletag = window.googletag || { cmd: [] });
 
 			googletag.cmd.push(function () {

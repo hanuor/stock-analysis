@@ -7,7 +7,7 @@ export const HeaderAd = () => {
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
 
-	useAd('header');
+	// useAd('header');
 
 	if ((status === 'completed' && isPro) || path.one === null) {
 		return null;
@@ -25,6 +25,11 @@ export const HeaderAd = () => {
 		return null;
 	}
 
+	return <Unit />;
+};
+
+const Unit = () => {
+	useAd('header');
 	return (
 		<>
 			<div className="hidden md:block lbl mt-2 -mb-4">

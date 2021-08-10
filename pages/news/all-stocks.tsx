@@ -6,6 +6,7 @@ import { NewsNavigation } from 'components/News/NewsNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsFeed } from 'components/News/_NewsFeed';
 import { NewsWidget } from 'components/News/NewsWidget';
+import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 
 interface Props {
 	data: News[];
@@ -41,6 +42,7 @@ export const AllStockNews = ({ data, other }: Props) => {
 									url: '/news/press-releases/',
 								}}
 							/>
+							<Sidebar1 />
 						</aside>
 					</div>
 				</main>

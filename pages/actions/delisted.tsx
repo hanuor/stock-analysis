@@ -6,6 +6,7 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
+import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 
 type Action = {
 	date: string;
@@ -68,6 +69,7 @@ export const ActionsDelisted = ({ data }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
 							<NewsletterWidget />
+							<Sidebar1 />
 						</aside>
 					</div>
 				</main>
