@@ -7,12 +7,9 @@ export const useAd = (unit, render, id) => {
 	const ad = Ads[unit];
 
 	useEffect(() => {
-		if (
-			typeof window !== 'undefined' &&
-			typeof googletag !== 'undefined' &&
-			googletag &&
-			!isNavigating
-		) {
+		if (typeof window !== 'undefined' && !isNavigating) {
+			const googletag = (window.googletag = window.googletag || { cmd: [] });
+
 			googletag.cmd.push(function () {
 				const mapping = ad.mapping;
 				const adMapping = googletag.sizeMapping();

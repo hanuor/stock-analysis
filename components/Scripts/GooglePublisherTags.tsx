@@ -7,12 +7,12 @@ export const GooglePublisherTags = () => {
 				strategy="afterInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
-			<Script
+			{/* <Script
 				strategy="afterInteractive"
 				dangerouslySetInnerHTML={{
 					__html: `const googletag = (window.googletag = window.googletag || { cmd: [] });`,
 				}}
-			/>
+			/> */}
 		</>
 	);
 };
