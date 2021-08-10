@@ -1,7 +1,7 @@
-// import { useAd } from 'hooks/useAd';
+import { useAd } from 'hooks/useAd';
 
 export const Sidebar1 = () => {
-	// useAd('sidebar1');
+	useAd('sidebar1');
 
 	return (
 		<>
