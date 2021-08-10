@@ -3,7 +3,7 @@ import { useNavState } from 'hooks/useNavState';
 import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 // import dynamic from 'next/dynamic';
-import FooterDianomi from 'components/Ads/FootHorz';
+import FooterDianomi from 'components/Ads/Dianomi/FootHorz';
 import { GoogleTagManager } from 'components/Scripts/GoogleTagManager';
 // import { GooglePublisherTags } from 'components/Scripts/GooglePublisherTags';
 

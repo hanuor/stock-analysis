@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigating } from 'hooks/useAdReload';
-import { Ads } from 'components/Ads/AdsList';
+import { Ads } from 'components/Ads/GPT/AdsList';
 
 export const useAd = (unit, render, id) => {
 	const isNavigating = useNavigating();
