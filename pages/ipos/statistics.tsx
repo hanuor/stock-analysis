@@ -45,7 +45,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 									This page contains statistics and charts for initial
 									public offerings (IPOs) on the US stock market.
 									Annual data is available from 2000-2021 and monthly
-									data since 2019.`
+									data since 2019.
 								</p>
 							</div>
 							<div>
