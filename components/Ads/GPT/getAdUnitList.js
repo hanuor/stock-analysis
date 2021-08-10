@@ -1,24 +1,20 @@
-import { navState } from 'state/navState';
-
-export const getAdUnitList = () => {
-	const path = navState((state) => state.path);
-
-	let ads: string[] = [];
+export const getAdUnitList = (path) => {
+	let ads = [];
 
 	if (path.one === 'stocks' || path.one === 'etf') {
 		if (!path.three) {
-			ads = ['sidebar_1'];
+			ads = ['sidebar1', 'header', 'mobile1'];
 		} else if (path.three && ['holdings', 'dividend'].includes(path.three)) {
-			ads = [];
+			ads = ['header'];
 		} else if (path.three && ['financials', 'chart'].includes(path.three)) {
-			ads = [];
+			ads = ['header'];
 		} else {
-			ads = [];
+			ads = ['header'];
 		}
 	} else if (path.one === 'ipos') {
-		ads = [];
+		ads = ['header'];
 	} else if (path.one === '') {
-		ads = [];
+		ads = ['header'];
 	}
 
 	return ads;

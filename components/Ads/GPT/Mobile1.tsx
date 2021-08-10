@@ -6,7 +6,7 @@ export const Mobile1 = () => {
 	return (
 		<>
 			<div
-				className={`block xsm:hidden min-h-[250px] min-w-[300px] mx-auto${
+				className={`block xsm:hidden min-h-[250px] text-center mx-auto${
 					process.env.NODE_ENV === 'development' ? ' bg-gray-100' : ''
 				}`}
 				id="div-gpt-ad-1617185437543-0"
