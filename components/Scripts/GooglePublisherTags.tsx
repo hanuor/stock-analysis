@@ -1,9 +1,9 @@
-// import Script from 'next/script';
+import Script from 'next/script';
 
 export const GooglePublisherTags = () => {
 	return (
 		<>
-			{/* <Script
+			<Script
 				strategy="afterInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
@@ -12,7 +12,7 @@ export const GooglePublisherTags = () => {
 				dangerouslySetInnerHTML={{
 					__html: `if (typeof googletag === 'undefined') { const googletag = (window.googletag = window.googletag || { cmd: [] }); }`,
 				}}
-			/> */}
+			/>
 		</>
 	);
 };
