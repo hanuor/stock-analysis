@@ -5,7 +5,7 @@ import Link from 'next/link';
 // import dynamic from 'next/dynamic';
 import FooterDianomi from 'components/Ads/Dianomi/FootHorz';
 import { GoogleTagManager } from 'components/Scripts/GoogleTagManager';
-import { GooglePublisherTags } from 'components/Scripts/GooglePublisherTags';
+// import { GooglePublisherTags } from 'components/Scripts/GooglePublisherTags';
 
 // const FooterDianomi = dynamic(() => import('components/Spons/FootHorz'), {
 // 	ssr: false,
@@ -95,7 +95,7 @@ export const Footer = () => {
 				<>
 					<FooterDianomi />
 					<GoogleTagManager />
-					<GooglePublisherTags />
+					{/* <GooglePublisherTags /> */}
 				</>
 			)}
 

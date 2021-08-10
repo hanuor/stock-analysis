@@ -5,7 +5,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
-					{/* <script
+					<script
 						async
 						src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 					></script>
@@ -13,7 +13,7 @@ class MyDocument extends Document {
 						dangerouslySetInnerHTML={{
 							__html: `const googletag = (window.googletag = window.googletag || { cmd: [] });`,
 						}}
-					/> */}
+					/>
 				</Head>
 				<body>
 					<Main />
