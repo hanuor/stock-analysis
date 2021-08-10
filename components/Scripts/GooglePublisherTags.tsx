@@ -7,10 +7,6 @@ export const GooglePublisherTags = () => {
 				strategy="afterInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
-			<Script
-				strategy="afterInteractive"
-				src="https://biddr.brealtime.com/91455193-1695.js"
-			/>
 		</>
 	);
 };

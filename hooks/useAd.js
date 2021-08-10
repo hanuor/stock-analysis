@@ -17,8 +17,6 @@ export const useAd = (unit, render, id) => {
 			const googletag = (window.googletag = window.googletag || { cmd: [] });
 
 			googletag.cmd.push(function () {
-				googletag.pubads().disableInitialLoad();
-
 				const mapping = ad.mapping;
 				const adMapping = googletag.sizeMapping();
 				Object.keys(mapping).forEach((breakpoint) => {
