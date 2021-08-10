@@ -10,7 +10,7 @@ export const GooglePublisherTags = () => {
 			<Script
 				strategy="afterInteractive"
 				dangerouslySetInnerHTML={{
-					__html: `if (typeof googletag === 'undefined') { const googletag = (window.googletag = window.googletag || { cmd: [] }); }`,
+					__html: `const googletag = (window.googletag = window.googletag || { cmd: [] });`,
 				}}
 			/>
 		</>
