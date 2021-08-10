@@ -1,6 +1,6 @@
 import { authState } from 'state/authState';
-import { NewsAd1 } from 'components/Ads/NewsAd1';
-import { NewsAd2 } from 'components/Ads/NewsAd2';
+import { NewsAd1 } from 'components/Ads/Dianomi/NewsAd1';
+import { NewsAd2 } from 'components/Ads/Dianomi/NewsAd2';
 
 export const NewsAds = ({ index }: { index: number }) => {
 	const status = authState((state) => state.status);
