@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
+import { navState } from 'state/navState';
 
 export const useScript = (url: string) => {
+	const path = navState((state) => state.path);
+
 	useEffect(() => {
+		if (path.two === 'gm') {
+			return;
+		}
 		const script = document.createElement('script');
 
 		script.src = url;
@@ -12,5 +18,5 @@ export const useScript = (url: string) => {
 		return () => {
 			document.body.removeChild(script);
 		};
-	}, [url]);
+	}, [path.two, url]);
 };

@@ -1,19 +1,14 @@
-import { useAd } from 'hooks/useAd';
-import { navState } from 'state/navState';
 import { authState } from 'state/authState';
+import { navState } from 'state/navState';
+import { useAd } from 'hooks/useAd';
 
 export const HeaderAd = () => {
-	const path = navState((state) => state.path);
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
-
-	// useAd('header');
-
-	if ((status === 'completed' && isPro) || path.one === null) {
-		return null;
-	}
+	const path = navState((state) => state.path);
 
 	if (
+		(status === 'completed' && isPro) ||
 		path.one === null ||
 		path.one === 'login' ||
 		path.one === 'my-account' ||
