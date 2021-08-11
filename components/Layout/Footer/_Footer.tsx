@@ -86,7 +86,7 @@ export const Footer = () => {
 
 	return (
 		<>
-			{status === 'completed' && !isPro && (
+			{status === 'completed' && !isPro && path.two !== 'gm' && (
 				<>
 					<FooterDianomi />
 					<GoogleTagManager />
