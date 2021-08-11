@@ -4,7 +4,6 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import FooterDianomi from 'components/Ads/Dianomi/FootHorz';
 import { GoogleTagManager } from 'components/Scripts/GoogleTagManager';
-import { GooglePublisherTags } from 'components/Scripts/GooglePublisherTags';
 
 interface IconProps {
 	className: string;
@@ -86,11 +85,10 @@ export const Footer = () => {
 
 	return (
 		<>
-			{status === 'completed' && !isPro && path.two !== 'gm' && (
+			{status === 'completed' && !isPro && (
 				<>
-					<FooterDianomi />
 					<GoogleTagManager />
-					<GooglePublisherTags />
+					<FooterDianomi />
 				</>
 			)}
 

@@ -1,6 +1,5 @@
 import { authState } from 'state/authState';
 import { navState } from 'state/navState';
-import { useAd } from 'hooks/useAd';
 
 export const HeaderAd = () => {
 	const status = authState((state) => state.status);
@@ -20,21 +19,14 @@ export const HeaderAd = () => {
 		return null;
 	}
 
-	return <Unit />;
-};
-
-const Unit = () => {
-	useAd('header');
 	return (
-		<>
-			<div className="hidden md:block lbl mt-2 -mb-4">
-				<div
-					className={`md:h-[90px] md:w-[728px] mx-auto${
-						process.env.NODE_ENV === 'development' ? ' bg-gray-200' : ''
-					}`}
-					id="div-gpt-ad-1617185422059-0"
-				></div>
-			</div>
-		</>
+		<div className="hidden md:block lbl mt-2 -mb-3">
+			<div
+				className={`md:h-[90px] md:w-[728px] mx-auto${
+					process.env.NODE_ENV === 'development' ? ' bg-gray-200' : ''
+				}`}
+				id="div-gpt-ad-1617185422059-0"
+			></div>
+		</div>
 	);
 };
