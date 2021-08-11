@@ -4,7 +4,7 @@ import { authState } from 'state/authState';
 export const Sidebar1 = () => {
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
-	useAd('sidebar1');
+	// useAd('sidebar1');
 
 	if (status === 'completed' && isPro) {
 		return null;

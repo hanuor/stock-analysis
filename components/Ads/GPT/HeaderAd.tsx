@@ -24,7 +24,7 @@ export const HeaderAd = () => {
 };
 
 const Unit = () => {
-	useAd('header');
+	// useAd('header');
 	return (
 		<>
 			<div className="hidden md:block lbl mt-2 -mb-4">

@@ -5,7 +5,7 @@ export const Mobile1 = () => {
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
 
-	useAd('mobile1');
+	// useAd('mobile1');
 
 	if (status === 'completed' && isPro) {
 		return null;
