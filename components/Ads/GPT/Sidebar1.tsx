@@ -1,4 +1,4 @@
-import { useAd } from 'hooks/useAd';
+// import { useAd } from 'hooks/useAd';
 import { authState } from 'state/authState';
 
 export const Sidebar1 = () => {

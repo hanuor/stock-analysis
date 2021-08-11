@@ -1,6 +1,6 @@
 import { authState } from 'state/authState';
 import { navState } from 'state/navState';
-import { useAd } from 'hooks/useAd';
+// import { useAd } from 'hooks/useAd';
 
 export const HeaderAd = () => {
 	const status = authState((state) => state.status);
