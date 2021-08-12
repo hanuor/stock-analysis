@@ -1,4 +1,5 @@
 import { StockLink } from 'components/Links';
+import { Mobile1 } from 'components/Ads/GPT/Mobile1';
 
 const cellStyles =
 	'py-1.5 sm:py-2 px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
@@ -98,6 +99,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		<>
 			<section className="mx-auto flex flex-col lg:flex-row lg:justify-evenly space-y-7 px-3 xs:px-4 sm:px-5 py-7 lg:py-10 lg:max-w-[1200px] lg:space-y-0 lg:space-x-14">
 				<Table movers={gainers} type="Gainers" />
+				<Mobile1 />
 				<Table movers={losers} type="Losers" />
 			</section>
 		</>
