@@ -114,10 +114,6 @@ export const CalendarTable = ({ title, data }: Props) => {
 								{headerGroup.headers.map((column, index) => (
 									<th {...column.getHeaderProps()} key={index}>
 										{column.render('Header')}
-										{thisWeek ||
-										(nextWeek && column.Header === 'IPO Date')
-											? '*'
-											: null}
 									</th>
 								))}
 							</tr>
@@ -141,12 +137,11 @@ export const CalendarTable = ({ title, data }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			{thisWeek ||
-				(nextWeek && (
-					<span className="text-sm text-gray-600 mt-1">
-						* Upcoming IPO dates are estimated and may change
-					</span>
-				))}
+			{(thisWeek || nextWeek) && (
+				<span className="text-sm text-gray-600 mt-1">
+					* Upcoming IPO dates are estimated and may change
+				</span>
+			)}
 		</div>
 	);
 };

@@ -20,8 +20,8 @@ export const HeaderAd = () => {
 
 	const hwrap =
 		path.one !== null
-			? 'hidden md:block lbl py-1.5 -mb-3'
-			: 'hidden md:block lbl py-1.5 -mb-3 bg-gray-100';
+			? 'hidden md:block lbl py-2 -mb-3'
+			: 'hidden md:block lbl py-2 -mb-3 bg-gray-100';
 
 	return (
 		<div className={hwrap}>
