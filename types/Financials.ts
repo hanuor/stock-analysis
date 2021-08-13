@@ -8,6 +8,12 @@ export interface FinancialReport {
 	[key: string]: any[];
 }
 
+export type Statement =
+	| 'income_statement'
+	| 'balance_sheet'
+	| 'cash_flow_statement'
+	| 'ratios';
+
 export interface FinancialsMapType {
 	id: string;
 	title: string;

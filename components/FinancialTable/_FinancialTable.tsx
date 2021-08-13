@@ -3,6 +3,7 @@ import {
 	FinancialsType,
 	FinancialsMapType,
 	FinancialReport,
+	Statement,
 } from 'types/Financials';
 import { Info } from 'types/Info';
 import { useState, forwardRef, useMemo } from 'react';
@@ -23,14 +24,14 @@ import { TableTitle } from './TableTitle';
 import { TableControls } from './TableControls';
 import Paywall from './Paywall';
 import dynamic from 'next/dynamic';
-
 import { Tooltip } from './Tooltip';
 import { TooltipChart } from './TooltipChart';
+import { getValidCount } from './functions/getValidCount';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
 interface Props {
-	statement: string;
+	statement: Statement;
 	financials: FinancialsType;
 	info: Info;
 	map: FinancialsMapType[];
@@ -51,27 +52,20 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	const paywall = range === 'annual' ? 10 : 40;
 	const fullcount = data && data.datekey ? data.datekey.length : 0;
 
-	let showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many data columns
+	const validcount = getValidCount(statement, fullcount, data);
+	const showcount = !isPro && validcount > paywall ? paywall : validcount; // How many data columns
+
+	const paywalled = showcount < validcount ? 'true' : false;
 
 	data = useMemo(() => sliceData(data, showcount), [data, showcount]);
 
+	// Switch data left/right if applicable
 	if (
 		(leftRight === 'right' && !reversed) ||
 		(leftRight === 'left' && reversed)
 	) {
 		data = reverseData(data);
 		setReversed(!reversed);
-	}
-
-	// Remove initial empty columns in ratios statement
-	if (statement === 'ratios' && data) {
-		const marketCapData = data.marketcap;
-		const marketCapValid = marketCapData.filter(
-			(item) => item != null
-		).length;
-		if (marketCapValid < showcount) {
-			showcount = marketCapValid;
-		}
 	}
 
 	// If count is empty, show message
@@ -199,8 +193,9 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 						)}
 					</td>
 				);
+			} else {
+				return <td key={index}>-</td>;
 			}
-			return null;
 		});
 
 		const getRowStyles = () => {
@@ -281,8 +276,6 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		);
 	};
 
-	const paywalled = showcount < fullcount ? 'true' : false;
-
 	return (
 		<div>
 			<div className="flex flex-row justify-between items-end">
@@ -328,10 +321,10 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 						})}
 					</tbody>
 				</table>
-				{paywalled && (
+				{paywalled && !isPro && (
 					<Paywall
 						range={range}
-						fullcount={fullcount}
+						fullcount={validcount}
 						showcount={showcount}
 					/>
 				)}

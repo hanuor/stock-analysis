@@ -161,6 +161,9 @@ export const HoverChart = ({
 
 							let widthOffset = 2.6;
 
+							if (!str) {
+								str = '-';
+							}
 							if (str[0] == '-') {
 								widthOffset = 3.6;
 							}
