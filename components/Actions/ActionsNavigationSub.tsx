@@ -1,53 +1,90 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { navState } from 'state/navState';
 
-export const ActionsNavigationSub = () => {
+interface Props {
+	type?: string;
+	start: number;
+}
+
+export const ActionsNavigationSub = ({ type, start }: Props) => {
+	const [all, setAll] = useState(false);
+	const [count, setCount] = useState(3);
 	const path = navState((state) => state.path);
+
+	const current = new Date().getFullYear();
+	const diff = current - start;
+
+	const tabs = [];
+	for (let i = 0; i < diff + 1; i++) {
+		tabs.push(`${current - i}`);
+	}
+
+	useEffect(() => {
+		if (all) {
+			setCount(tabs.length);
+		} else {
+			setCount(3);
+		}
+	}, [all, tabs.length]);
 
 	return (
 		<nav className="mb-1 sm:mb-2 lg:mb-3">
-			<ul className="space-x-1 navmenu">
+			<ul className="space-x-1 navmenu submenu flex-wrap">
 				<li>
-					<Link href="/ipos/" prefetch={false}>
+					<Link
+						href={type ? `/actions/${type}/` : '/actions/'}
+						prefetch={false}
+					>
 						<a
 							data-title="Recent"
 							className={
-								!path.two || path.two === '#' ? 'active' : 'inactive'
+								!path.two || (path.two === type && !path.three)
+									? 'active'
+									: 'inactive'
 							}
 						>
 							Recent
 						</a>
 					</Link>
 				</li>
-				<li>
-					<Link href="/ipos/2021/" prefetch={false}>
-						<a
-							data-title="2021"
-							className={path.two === '2021' ? 'active' : 'inactive'}
+				{tabs.slice(0, count).map((tab) => (
+					<li key={tab}>
+						<Link
+							href={
+								type ? `/actions/${type}/${tab}/` : `/actions/${tab}/`
+							}
+							prefetch={false}
 						>
-							2021
-						</a>
-					</Link>
-				</li>
+							<a
+								data-title={tab}
+								className={
+									path.two === tab || path.three === tab
+										? 'active'
+										: 'inactive'
+								}
+							>
+								{tab}
+							</a>
+						</Link>
+					</li>
+				))}
 				<li>
-					<Link href="/ipos/2020/" prefetch={false}>
-						<a
-							data-title="2020"
-							className={path.two === '2020' ? 'active' : 'inactive'}
+					{all ? (
+						<span
+							className="inactive font-semibold"
+							onClick={() => setAll(false)}
 						>
-							2020
-						</a>
-					</Link>
-				</li>
-				<li>
-					<Link href="/ipos/2019/" prefetch={false}>
-						<a
-							data-title="2019"
-							className={path.two === '2019' ? 'active' : 'inactive'}
+							Hide &uarr;
+						</span>
+					) : (
+						<span
+							className="inactive font-semibold"
+							onClick={() => setAll(true)}
 						>
-							2019
-						</a>
-					</Link>
+							Show All &darr;
+						</span>
+					)}
 				</li>
 			</ul>
 		</nav>

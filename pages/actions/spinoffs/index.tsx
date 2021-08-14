@@ -7,6 +7,7 @@ import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 
 type Action = {
 	date: string;
@@ -71,7 +72,8 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-3">
+						<div className="py-1.5">
+							<ActionsNavigationSub type="spinoffs" start={1998} />
 							<ActionsTable
 								title="Spinoffs"
 								columndata={columns}
@@ -92,7 +94,7 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 export default ActionsSpinoffs;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('spinoffs');
+	const data = await getActionsData('spinoffs-full');
 
 	return {
 		props: {

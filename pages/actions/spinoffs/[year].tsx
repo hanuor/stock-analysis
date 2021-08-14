@@ -1,20 +1,19 @@
-import { GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
-import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 
 type Action = {
 	date: string;
-	type: string;
-	symbol: string;
 	name: string;
-	other: string;
+	oldsymbol: string;
+	newymbol: string;
 };
 
 type CellString = {
@@ -27,15 +26,15 @@ interface Props {
 	data: Action[];
 }
 
-export const ActionsAll = ({ data }: Props) => {
+export const ActionsSpinoffs = ({ data }: Props) => {
 	const columns = [
 		{
 			Header: 'Date',
 			accessor: 'date',
 		},
 		{
-			Header: 'Symbol',
-			accessor: 'symbol',
+			Header: 'Parent',
+			accessor: 'oldsymbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
 					return <StockLink symbol={value.slice(1)} />;
@@ -44,33 +43,39 @@ export const ActionsAll = ({ data }: Props) => {
 			},
 		},
 		{
-			Header: 'Type',
-			accessor: 'type',
+			Header: 'New Stock',
+			accessor: 'newsymbol',
+			Cell: function FormatCell({ cell: { value } }: CellString) {
+				if (value.startsWith('$')) {
+					return <StockLink symbol={value.slice(1)} />;
+				}
+				return value;
+			},
 		},
 		{
-			Header: 'Action',
-			accessor: 'text',
+			Header: 'New Company Name',
+			accessor: 'name',
 		},
 	];
 
 	return (
 		<>
 			<SEO
-				title="Recent Corporate Actions and Stock Changes"
-				description="The most recent corporate actions and stock changes for companies listed on the US stock market."
-				canonical="actions/"
+				title="Recent Stock Spinoffs"
+				description="Latest spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new independent company."
+				canonical="actions/spinoffs/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Corporate Actions</h1>
+					<h1 className="hh1">Stock Spinoffs</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1.5">
-							<ActionsNavigationSub start={1998} />
+						<div className="py-1.5 overflow-x-auto">
+							<ActionsNavigationSub type="spinoffs" start={1998} />
 							<ActionsTable
-								title="Actions"
+								title="Spinoffs"
 								columndata={columns}
 								rowdata={data}
 							/>
@@ -85,15 +90,33 @@ export const ActionsAll = ({ data }: Props) => {
 		</>
 	);
 };
-export default ActionsAll;
+
+export default ActionsSpinoffs;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('all');
+	const data = await getActionsData('spinoffs');
 
 	return {
 		props: {
 			data,
 		},
 		revalidate: 3600,
+	};
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	// Generate paths for all the years with existing data
+	const current = new Date().getFullYear();
+	const last = 1998;
+	const diff = current - last;
+
+	const params = [];
+	for (let i = 0; i < diff + 1; i++) {
+		params.push({ params: { year: `${last + i}` } });
+	}
+
+	return {
+		paths: params,
+		fallback: false,
 	};
 };

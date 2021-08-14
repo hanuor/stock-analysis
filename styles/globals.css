@@ -54,7 +54,7 @@
 		background-color: white;
 		background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;
 		background-attachment: local, local, scroll, scroll;
-		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto sm:overflow-visible;
+		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto;
 	}
 
 	.navmenu li a,
