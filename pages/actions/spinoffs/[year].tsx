@@ -8,6 +8,7 @@ import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
+import { ParsedUrlQuery } from 'querystring';
 
 type Action = {
 	date: string;
@@ -23,10 +24,13 @@ type CellString = {
 };
 
 interface Props {
+	year: string;
 	data: Action[];
 }
 
-export const ActionsSpinoffs = ({ data }: Props) => {
+export const ActionsSpinoffsYear = ({ year, data }: Props) => {
+	const yearData = data.filter((d) => d.date.slice(-4) === year);
+
 	const columns = [
 		{
 			Header: 'Date',
@@ -77,7 +81,7 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 							<ActionsTable
 								title="Spinoffs"
 								columndata={columns}
-								rowdata={data}
+								rowdata={yearData}
 							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
@@ -91,13 +95,19 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 	);
 };
 
-export default ActionsSpinoffs;
+export default ActionsSpinoffsYear;
 
-export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('spinoffs');
+interface IParams extends ParsedUrlQuery {
+	year: string;
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { year } = params as IParams;
+	const data = await getActionsData('spinoffs-full');
 
 	return {
 		props: {
+			year,
 			data,
 		},
 		revalidate: 3600,

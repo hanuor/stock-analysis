@@ -43,7 +43,7 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 			data,
 			initialState: {
 				pageIndex: 0,
-				pageSize: 200,
+				pageSize: 500,
 			},
 		},
 		useGlobalFilter,
@@ -115,16 +115,18 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			<Pagination
-				previousPage={previousPage}
-				canPreviousPage={canPreviousPage}
-				pageIndex={pageIndex}
-				pageOptions={pageOptions}
-				pageSize={pageSize}
-				setPageSize={setPageSize}
-				nextPage={nextPage}
-				canNextPage={canNextPage}
-			/>
+			{rows.length > 500 && (
+				<Pagination
+					previousPage={previousPage}
+					canPreviousPage={canPreviousPage}
+					pageIndex={pageIndex}
+					pageOptions={pageOptions}
+					pageSize={pageSize}
+					setPageSize={setPageSize}
+					nextPage={nextPage}
+					canNextPage={canNextPage}
+				/>
+			)}
 		</>
 	);
 };
