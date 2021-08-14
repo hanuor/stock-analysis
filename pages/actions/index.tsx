@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
@@ -66,7 +67,8 @@ export const ActionsAll = ({ data }: Props) => {
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-3">
+						<div className="py-1.5">
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Actions"
 								columndata={columns}

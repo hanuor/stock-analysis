@@ -1,4 +1,3 @@
-import styles from './Actions.module.css';
 import {
 	useTable,
 	usePagination,
@@ -67,10 +66,7 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 				</div>
 			</div>
 			<div className="overflow-x-auto">
-				<table
-					{...getTableProps()}
-					className={`${styles.actionstable} ${styles.striped}`}
-				>
+				<table {...getTableProps()} className="actionstable striped">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr {...headerGroup.getHeaderGroupProps()} key={index}>

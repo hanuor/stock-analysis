@@ -54,32 +54,36 @@
 		background-color: white;
 		background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;
 		background-attachment: local, local, scroll, scroll;
-		@apply flex flex-row overflow-x-auto sm:overflow-visible;
+		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto sm:overflow-visible;
 	}
 
-	.navmenu li a {
+	.navmenu li a,
+	.navmenu li span {
 		@apply text-sm xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5;
 	}
 
-	.navmenu.submenu,
-	.navmenu.submenu li a {
-		@apply text-sm sm:text-base;
+	.navmenu.submenu li a,
+	.navmenu.submenu li span {
+		@apply px-2.5 bp:px-3 sm:px-4 text-sm xs:text-small bp:text-base;
 	}
 
-	.navmenu.submenu li a {
-		@apply px-2.5 bp:px-3;
+	.navmenu.submenu li span {
+		@apply cursor-pointer;
 	}
 
-	.navmenu li a.active {
+	.navmenu li a.active,
+	.navmenu li span.active {
 		@apply text-gray-900 bg-[#eee] font-semibold;
 	}
 
-	.navmenu li a.inactive {
+	.navmenu li a.inactive,
+	.navmenu li span.inactive {
 		@apply bll hover:bg-gray-100 transition duration-100;
 	}
 
 	@media (hover: none) {
-		.navmenu li a.inactive {
+		.navmenu li a.inactive,
+		.navmenu li span.inactive {
 			@apply hover:bg-white hover:text-blue-link;
 		}
 	}
@@ -253,6 +257,80 @@
 .lbl::before {
 	content: 'Advertisement';
 	@apply block text-xxs leading-3 text-gray-400 text-center mb-0.5;
+}
+
+.actionstable {
+	width: 100%;
+}
+
+.actionstable tr > * {
+	padding: 0.5rem;
+	border-bottom: 1px solid #ddd;
+}
+
+.actionstable tr > *:first-child {
+	padding-left: 0.8rem;
+}
+
+.actionstable tr > *:last-child {
+	padding-left: 0.8rem;
+}
+
+.actionstable tr th {
+	text-align: left;
+	font-size: 1.05rem;
+	border-top: 1px solid #ddd;
+	white-space: nowrap;
+}
+
+.actionstable tr > *:not(:last-child) {
+	white-space: nowrap;
+}
+
+.actionstable tr:hover td {
+	background-color: #f2f9ff !important;
+}
+
+.striped tr:nth-child(odd) {
+	background-color: #f6f7f8;
+}
+
+.striped tr th {
+	font-weight: 600;
+	background-color: #ffffff;
+}
+
+@media screen and (max-width: 1200px) {
+	.actionstable tr > * {
+		padding: 0.5rem 0.3rem;
+	}
+	.actionstable tr > *:first-child {
+		padding-left: 0.6rem;
+	}
+	.actionstable tr > *:last-child {
+		padding-right: 0.6rem;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.actionstable tr th {
+		font-size: 0.95rem;
+	}
+	.actionstable tr td {
+		font-size: 0.9rem;
+	}
+	.actionstable tr td {
+		white-space: nowrap;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.actionstable tr > *:first-child {
+		padding-left: 0.5rem;
+	}
+	.actionstable tr > *:last-child {
+		padding-right: 0.5rem;
+	}
 }
 
 /* NPROGRESS */
