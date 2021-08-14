@@ -10,13 +10,6 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 	const isPro = authState((state) => state.isPro);
 	const count = rawdata.length;
 
-	let showData: Holding[];
-	if (isPro) {
-		showData = rawdata;
-	} else {
-		showData = rawdata.slice(0, 200);
-	}
-
 	type CellString = {
 		cell: {
 			value: string;
@@ -57,7 +50,7 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 		[]
 	);
 
-	const data = useMemo(() => showData, [showData]);
+	const data = useMemo(() => rawdata, [rawdata]);
 
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		useTable(
@@ -85,6 +78,10 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 					</thead>
 					<tbody {...getTableBodyProps()}>
 						{rows.map((row, index) => {
+							// Stop at 200 if not Pro member
+							if (index + 1 > 200 && !isPro) {
+								return;
+							}
 							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()} key={index}>
