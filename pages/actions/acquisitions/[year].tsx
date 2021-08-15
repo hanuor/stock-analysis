@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
@@ -8,12 +8,12 @@ import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
+import { ParsedUrlQuery } from 'querystring';
 
 type Action = {
 	date: string;
 	name: string;
-	oldsymbol: string;
-	newymbol: string;
+	symbol: string;
 };
 
 type CellString = {
@@ -23,27 +23,20 @@ type CellString = {
 };
 
 interface Props {
+	year: string;
 	data: Action[];
 }
 
-export const ActionsSpinoffs = ({ data }: Props) => {
+export const ActionsAcquisitionsYear = ({ year, data }: Props) => {
+	const yearData = data.filter((d) => d.date.slice(-4) === year);
+
 	const columns = [
 		{
 			Header: 'Date',
 			accessor: 'date',
 		},
 		{
-			Header: 'Parent',
-			accessor: 'old',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
-				}
-				return value;
-			},
-		},
-		{
-			Header: 'New Stock',
+			Header: 'Symbol',
 			accessor: 'symbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
@@ -53,41 +46,31 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 			},
 		},
 		{
-			Header: 'Parent Name',
-			accessor: 'oldname',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
-		},
-		{
-			Header: 'New Name',
+			Header: 'Company Name',
 			accessor: 'name',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
 		},
 	];
 
 	return (
 		<>
 			<SEO
-				title="Recent Stock Spinoffs"
-				description="Latest spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new independent company."
-				canonical="actions/spinoffs/"
+				title={`All ${year} Acquisitions`}
+				description="Public companies listed on the US stock market that have been acquired by other companies."
+				canonical={`actions/acquisitions/${year}/`}
 			/>
 			<div className="contain">
-				<main className="w-full py-5 xs:py-6 spinoffs">
+				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Stock Spinoffs</h1>
+					<h1 className="hh1">Acquisitions</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="spinoffs" start={1998} />
+							<ActionsNavigationSub type="acquisitions" start={1998} />
 							<ActionsTable
-								title="Spinoffs"
+								title="Stocks"
 								columndata={columns}
-								rowdata={data}
+								rowdata={yearData}
 							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
@@ -101,15 +84,38 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 	);
 };
 
-export default ActionsSpinoffs;
+export default ActionsAcquisitionsYear;
 
-export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('spinoffs');
+interface IParams extends ParsedUrlQuery {
+	year: string;
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { year } = params as IParams;
+	const data = await getActionsData('acquisitions');
 
 	return {
 		props: {
+			year,
 			data,
 		},
-		revalidate: 7200,
+		revalidate: Number(year) === new Date().getFullYear() ? 7200 : false,
+	};
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	// Generate paths for all the years with existing data
+	const current = new Date().getFullYear();
+	const last = 1998;
+	const diff = current - last;
+
+	const params = [];
+	for (let i = 0; i < diff + 1; i++) {
+		params.push({ params: { year: `${last + i}` } });
+	}
+
+	return {
+		paths: params,
+		fallback: false,
 	};
 };

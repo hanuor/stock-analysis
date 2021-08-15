@@ -3,14 +3,12 @@ import {
 	usePagination,
 	useGlobalFilter,
 	useAsyncDebounce,
-	useSortBy,
 	Column,
 } from 'react-table';
 import { useMemo } from 'react';
-import { SortUpIcon } from 'components/Icons/SortUp';
-import { SortDownIcon } from 'components/Icons/SortDown';
 import { Pagination } from 'components/Tables/Pagination';
 import { GlobalFilter } from 'components/Tables/GlobalFilter';
+import styles from './ActionsTable.module.css';
 
 interface Props {
 	title: string;
@@ -47,7 +45,6 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 			},
 		},
 		useGlobalFilter,
-		useSortBy,
 		usePagination
 	);
 
@@ -65,33 +62,14 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					/>
 				</div>
 			</div>
-			<div className="overflow-x-auto">
-				<table {...getTableProps()} className="actionstable striped">
+			<div className={`overflow-x-auto ${styles[title.toLowerCase()]}`}>
+				<table {...getTableProps()} className={styles.actionstable}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th
-										{...column.getHeaderProps(
-											column.getSortByToggleProps({
-												title: `Sort by: ${column.Header}`,
-											})
-										)}
-										key={index}
-									>
-										<span className="inline-flex flex-row items-center">
-											{column.render('Header')}
-
-											{column.isSorted ? (
-												column.isSortedDesc ? (
-													<SortDownIcon classes="h-5 w-5 text-gray-800" />
-												) : (
-													<SortUpIcon classes="h-5 w-5 text-gray-800" />
-												)
-											) : (
-												''
-											)}
-										</span>
+									<th {...column.getHeaderProps()} key={index}>
+										{column.render('Header')}
 									</th>
 								))}
 							</tr>

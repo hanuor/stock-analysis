@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
 import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
@@ -7,6 +7,8 @@ import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
+import { ParsedUrlQuery } from 'querystring';
 
 type Action = {
 	date: string;
@@ -22,10 +24,13 @@ type CellString = {
 };
 
 interface Props {
+	year: string;
 	data: Action[];
 }
 
-export const ActionsChanges = ({ data }: Props) => {
+export const ActionsChangesYear = ({ year, data }: Props) => {
+	const yearData = data.filter((d) => d.date.slice(-4) === year);
+
 	const columns = [
 		{
 			Header: 'Date',
@@ -60,9 +65,9 @@ export const ActionsChanges = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Latest Stock Symbol Changes"
+				title={`All ${year} Stock Symbol Changes`}
 				description="Latest stock ticker symbol changes. Companies change stock symbols for different reasons, including when they change their company name or complete a merger."
-				canonical="actions/changes/"
+				canonical={`actions/changes/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
@@ -71,11 +76,12 @@ export const ActionsChanges = ({ data }: Props) => {
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-3">
+						<div className="py-1.5">
+							<ActionsNavigationSub type="changes" start={1998} />
 							<ActionsTable
 								title="Changes"
 								columndata={columns}
-								rowdata={data}
+								rowdata={yearData}
 							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
@@ -88,15 +94,38 @@ export const ActionsChanges = ({ data }: Props) => {
 		</>
 	);
 };
-export default ActionsChanges;
+export default ActionsChangesYear;
 
-export const getStaticProps: GetStaticProps = async () => {
+interface IParams extends ParsedUrlQuery {
+	year: string;
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const { year } = params as IParams;
 	const data = await getActionsData('changes');
 
 	return {
 		props: {
+			year,
 			data,
 		},
-		revalidate: 3600,
+		revalidate: Number(year) === new Date().getFullYear() ? 7200 : false,
+	};
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	// Generate paths for all the years with existing data
+	const current = new Date().getFullYear();
+	const last = 1998;
+	const diff = current - last;
+
+	const params = [];
+	for (let i = 0; i < diff + 1; i++) {
+		params.push({ params: { year: `${last + i}` } });
+	}
+
+	return {
+		paths: params,
+		fallback: false,
 	};
 };

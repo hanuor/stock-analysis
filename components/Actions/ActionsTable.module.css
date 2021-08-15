@@ -1,0 +1,81 @@
+.actionstable {
+	@apply w-full overflow-x-auto;
+}
+
+.actionstable tr > * {
+	padding: 0.5rem;
+	border-bottom: 1px solid #ddd;
+}
+
+.actionstable tr > *:first-child {
+	padding-left: 0.8rem;
+}
+
+.actionstable tr > *:last-child {
+	padding-left: 0.8rem;
+}
+
+.actionstable tr th {
+	text-align: left;
+	font-size: 1.05rem;
+	border-top: 1px solid #ddd;
+	white-space: nowrap;
+}
+
+.actionstable tr > *:not(:last-child) {
+	white-space: nowrap;
+}
+
+.actionstable tr:hover td {
+	background-color: #f2f9ff !important;
+}
+
+.actionstable tr:nth-child(odd) {
+	background-color: #f6f7f8;
+}
+
+.actionstable tr th {
+	font-weight: 600;
+	background-color: #ffffff;
+}
+
+.spinoffs tr > *:nth-child(4),
+.spinoffs tr > *:nth-child(5) {
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1200px) {
+	.actionstable tr > * {
+		padding: 0.5rem 0.3rem;
+	}
+	.actionstable tr > *:first-child {
+		padding-left: 0.6rem;
+	}
+	.actionstable tr > *:last-child {
+		padding-right: 0.6rem;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.actionstable tr th {
+		font-size: 0.95rem;
+	}
+	.actionstable tr td {
+		font-size: 0.9rem;
+	}
+	.actionstable tr td {
+		white-space: nowrap;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.actionstable tr > *:first-child {
+		padding-left: 0.5rem;
+	}
+	.actionstable tr > *:last-child {
+		padding-right: 0.5rem;
+	}
+}

@@ -7,6 +7,7 @@ import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 
 type Action = {
 	date: string;
@@ -70,7 +71,8 @@ export const ActionsSplits = ({ data }: Props) => {
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-3">
+						<div className="py-1.5">
+							<ActionsNavigationSub type="splits" start={1998} />
 							<ActionsTable
 								title="Splits"
 								columndata={columns}
@@ -97,6 +99,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			data,
 		},
-		revalidate: 3600,
+		revalidate: 7200,
 	};
 };

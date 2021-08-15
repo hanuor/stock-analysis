@@ -13,8 +13,9 @@ import { ParsedUrlQuery } from 'querystring';
 type Action = {
 	date: string;
 	name: string;
-	oldsymbol: string;
-	newymbol: string;
+	splitRatio: string;
+	splitType: string;
+	symbol: string;
 };
 
 type CellString = {
@@ -28,7 +29,7 @@ interface Props {
 	data: Action[];
 }
 
-export const ActionsSpinoffsYear = ({ year, data }: Props) => {
+export const ActionsSplitsYear = ({ year, data }: Props) => {
 	const yearData = data.filter((d) => d.date.slice(-4) === year);
 
 	const columns = [
@@ -37,17 +38,7 @@ export const ActionsSpinoffsYear = ({ year, data }: Props) => {
 			accessor: 'date',
 		},
 		{
-			Header: 'Parent',
-			accessor: 'old',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
-				}
-				return value;
-			},
-		},
-		{
-			Header: 'New Stock',
+			Header: 'Symbol',
 			accessor: 'symbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
@@ -57,39 +48,37 @@ export const ActionsSpinoffsYear = ({ year, data }: Props) => {
 			},
 		},
 		{
-			Header: 'Parent Name',
-			accessor: 'oldname',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
+			Header: 'Type',
+			accessor: 'splitType',
 		},
 		{
-			Header: 'New Name',
+			Header: 'Split Ratio',
+			accessor: 'splitRatio',
+		},
+		{
+			Header: 'Company Name',
 			accessor: 'name',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
 		},
 	];
 
 	return (
 		<>
 			<SEO
-				title={`All ${year} Stock Spinoffs`}
-				description="Latest spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new independent company."
-				canonical={`actions/spinoffs/${year}/`}
+				title={`All ${year} Stock Splits`}
+				description="The most recent stock splits on the US stock market. Regular splits increase the share count and lower the stock price, while reverse splits do the opposite."
+				canonical={`actions/splits/${year}/`}
 			/>
 			<div className="contain">
-				<main className="w-full py-5 xs:py-6 spinoffs">
+				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Stock Spinoffs</h1>
+					<h1 className="hh1">Stock Splits</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1.5 overflow-x-auto">
-							<ActionsNavigationSub type="spinoffs" start={1998} />
+						<div className="py-1.5">
+							<ActionsNavigationSub type="splits" start={1998} />
 							<ActionsTable
-								title="Spinoffs"
+								title="Splits"
 								columndata={columns}
 								rowdata={yearData}
 							/>
@@ -105,7 +94,7 @@ export const ActionsSpinoffsYear = ({ year, data }: Props) => {
 	);
 };
 
-export default ActionsSpinoffsYear;
+export default ActionsSplitsYear;
 
 interface IParams extends ParsedUrlQuery {
 	year: string;
@@ -113,7 +102,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { year } = params as IParams;
-	const data = await getActionsData('spinoffs');
+	const data = await getActionsData('splits');
 
 	return {
 		props: {

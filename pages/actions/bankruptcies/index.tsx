@@ -7,6 +7,7 @@ import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 
 type Action = {
 	date: string;
@@ -24,7 +25,7 @@ interface Props {
 	data: Action[];
 }
 
-export const ActionsDelisted = ({ data }: Props) => {
+export const ActionsBankruptcies = ({ data }: Props) => {
 	const columns = [
 		{
 			Header: 'Date',
@@ -49,18 +50,19 @@ export const ActionsDelisted = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Latest Delisted Stocks"
-				description="Stocks that have been delisted from the US stock market. Some have gone bankrupt or been acquired, others have been delisted for other reasons."
-				canonical="actions/delisted/"
+				title="Latest Bankruptcies"
+				description="Stocks listed on the US stock market that have been liquidated due to bankruptcy."
+				canonical="actions/bankruptcies/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Delisted Stocks</h1>
+					<h1 className="hh1">Bankruptcies</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-3">
+						<div className="py-1.5">
+							<ActionsNavigationSub type="bankruptcies" start={1998} />
 							<ActionsTable
 								title="Stocks"
 								columndata={columns}
@@ -78,15 +80,15 @@ export const ActionsDelisted = ({ data }: Props) => {
 	);
 };
 
-export default ActionsDelisted;
+export default ActionsBankruptcies;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('delisted');
+	const data = await getActionsData('bankruptcies');
 
 	return {
 		props: {
 			data,
 		},
-		revalidate: 3600,
+		revalidate: 7200,
 	};
 };

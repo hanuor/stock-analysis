@@ -12,8 +12,7 @@ import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 type Action = {
 	date: string;
 	name: string;
-	oldsymbol: string;
-	newymbol: string;
+	symbol: string;
 };
 
 type CellString = {
@@ -26,24 +25,14 @@ interface Props {
 	data: Action[];
 }
 
-export const ActionsSpinoffs = ({ data }: Props) => {
+export const ActionsListed = ({ data }: Props) => {
 	const columns = [
 		{
 			Header: 'Date',
 			accessor: 'date',
 		},
 		{
-			Header: 'Parent',
-			accessor: 'old',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
-				}
-				return value;
-			},
-		},
-		{
-			Header: 'New Stock',
+			Header: 'Symbol',
 			accessor: 'symbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
@@ -53,39 +42,29 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 			},
 		},
 		{
-			Header: 'Parent Name',
-			accessor: 'oldname',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
-		},
-		{
-			Header: 'New Name',
+			Header: 'Company Name',
 			accessor: 'name',
-			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
 		},
 	];
 
 	return (
 		<>
 			<SEO
-				title="Recent Stock Spinoffs"
-				description="Latest spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new independent company."
-				canonical="actions/spinoffs/"
+				title="Latest Listed Stocks"
+				description="Stocks that have been listed on the US stock market. Some have done an official IPO, others a direct listing."
+				canonical="actions/listed/"
 			/>
 			<div className="contain">
-				<main className="w-full py-5 xs:py-6 spinoffs">
+				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Stock Spinoffs</h1>
+					<h1 className="hh1">Listed Stocks</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="spinoffs" start={1998} />
+							<ActionsNavigationSub type="listed" start={1998} />
 							<ActionsTable
-								title="Spinoffs"
+								title="Stocks"
 								columndata={columns}
 								rowdata={data}
 							/>
@@ -101,10 +80,10 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 	);
 };
 
-export default ActionsSpinoffs;
+export default ActionsListed;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('spinoffs');
+	const data = await getActionsData('listed');
 
 	return {
 		props: {
