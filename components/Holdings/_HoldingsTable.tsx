@@ -1,5 +1,5 @@
 import { Holding } from 'types/Holdings';
-import { useTable, usePagination, Column } from 'react-table';
+import { useTable, Column } from 'react-table';
 import { useMemo } from 'react';
 import styles from './HoldingsTable.module.css';
 import { HoldingsPaywall } from './HoldingsPaywall';
@@ -53,13 +53,10 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 	const data = useMemo(() => rawdata, [rawdata]);
 
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		useTable(
-			{
-				columns,
-				data,
-			},
-			usePagination
-		);
+		useTable({
+			columns,
+			data,
+		});
 
 	return (
 		<>
