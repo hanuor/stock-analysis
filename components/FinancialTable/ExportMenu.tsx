@@ -26,6 +26,28 @@ export const ExportMenu = ({ statement, symbol, setExportOpen }: Props) => {
 				{
 					name: symbol.toUpperCase(),
 					from: { table: 'financial-table' },
+					fixArray: (array) => {
+						if (type == 'csv') {
+							array[array.length - 1].push([
+								'\n\n' +
+									'*Showing 10 of 26 years. Export the full financial history with Stock Analysis Pro: https://stockanalysis.com/pro/',
+							]);
+						} else {
+							array[3].push(['']);
+							array[3].push([
+								'Get unlimited exports with financial history',
+							]);
+							array[4].push(['']);
+							array[4].push(['all the way back to 1995']);
+							array[5].push(['']);
+							array[5].push(['with Stock Analysis Pro:']);
+
+							array[7].push(['']);
+							array[7].push(['https://stockanalysis.com/pro/']);
+						}
+
+						return array;
+					},
 					fixValue: (value, row, col) => {
 						if (row === 0 && col !== 0) {
 							return `${value}`;
