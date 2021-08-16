@@ -76,7 +76,7 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 				canonical="actions/spinoffs/"
 			/>
 			<div className="contain">
-				<main className="w-full py-5 xs:py-6 spinoffs">
+				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
 					<h1 className="hh1">Stock Spinoffs</h1>
 					<ActionsNavigation />

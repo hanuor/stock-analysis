@@ -50,7 +50,10 @@ export async function getIpoData(query: string) {
 	return response;
 }
 
-export async function getActionsData(query: string) {
-	const response = await getData(`actions?q=${query}`);
+export async function getActionsData(query: string, year?: string) {
+	const response = year
+		? await getData(`actions?q=${query}&y=${year}`)
+		: await getData(`actions?q=${query}`);
+	// const response = await getData(`actions?q=${query}`);
 	return response;
 }

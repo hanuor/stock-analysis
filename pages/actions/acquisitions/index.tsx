@@ -5,6 +5,7 @@ import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
+import Link from 'next/link';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
@@ -43,7 +44,32 @@ export const ActionsAcquisitions = ({ data }: Props) => {
 		},
 		{
 			Header: 'Company Name',
-			accessor: 'name',
+			accessor: 'oldname',
+			Cell: function FormatCell({ cell: { value } }: CellString) {
+				return <span title={value}>{value}</span>;
+			},
+		},
+		{
+			Header: 'Acquired By',
+			accessor: 'newname',
+			Cell: function FormatCell({ cell: { value } }: CellString) {
+				if (value.includes('$')) {
+					const sliced = value.split('$');
+					const symbol = sliced[0];
+					const name = sliced[1];
+					return (
+						<Link
+							href={`/stocks/${symbol.toLowerCase()}/`}
+							prefetch={false}
+						>
+							<a className="bll" title={name}>
+								{name}
+							</a>
+						</Link>
+					);
+				}
+				return value;
+			},
 		},
 	];
 
@@ -64,7 +90,7 @@ export const ActionsAcquisitions = ({ data }: Props) => {
 						<div className="py-1.5">
 							<ActionsNavigationSub type="acquisitions" start={1998} />
 							<ActionsTable
-								title="Stocks"
+								title="Acquisitions"
 								columndata={columns}
 								rowdata={data}
 							/>

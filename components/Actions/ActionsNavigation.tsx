@@ -7,11 +7,11 @@ export const ActionsNavigation = () => {
 	const tabs = [
 		'listed',
 		'delisted',
-		'acquisitions',
-		'bankruptcies',
+		'splits',
 		'changes',
 		'spinoffs',
-		'splits',
+		'bankruptcies',
+		'acquisitions',
 	];
 
 	return (
@@ -21,7 +21,11 @@ export const ActionsNavigation = () => {
 					<Link href="/actions/" prefetch={false}>
 						<a
 							data-title="Actions"
-							className={!path.two ? 'active' : 'inactive'}
+							className={
+								!path.two || path.two.includes('20')
+									? 'active'
+									: 'inactive'
+							}
 						>
 							Actions
 						</a>
