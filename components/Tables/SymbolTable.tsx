@@ -69,15 +69,16 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 					className={[styles.table, styles.table_striped].join(' ')}
 				>
 					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
+						{headerGroups.map((headerGroup, index) => (
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+								{headerGroup.headers.map((column, index) => (
 									<th
 										{...column.getHeaderProps(
 											column.getSortByToggleProps({
 												title: `Sort by: ${column.Header}`,
 											})
 										)}
+										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}
@@ -98,13 +99,13 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{rows.map((row) => {
+						{rows.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map((cell) => {
+								<tr {...row.getRowProps()} key={index}>
+									{row.cells.map((cell, index) => {
 										return (
-											<td {...cell.getCellProps()}>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);
