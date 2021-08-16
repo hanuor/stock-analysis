@@ -227,6 +227,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				aria-label="Search"
 				role="combobox"
 				aria-expanded={open}
+				aria-controls="owned_listbox"
 				autoComplete="off"
 				spellCheck="false"
 				aria-autocomplete="list"
@@ -256,7 +257,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 								</h4>
 							)}
 							{results.length ? (
-								<ul role="listbox">
+								<ul role="listbox" id="owned_listbox">
 									{results.map((item, index) => (
 										<SingleResult
 											key={index}

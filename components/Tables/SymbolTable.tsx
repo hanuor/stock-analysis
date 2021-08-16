@@ -1,8 +1,8 @@
+/* eslint-disable react/jsx-key */
 // Used on the /stocks/ and /etf/ index pages
 import { useMemo } from 'react';
 import {
 	useTable,
-	usePagination,
 	useGlobalFilter,
 	useAsyncDebounce,
 	useSortBy,
@@ -11,7 +11,6 @@ import {
 import styles from './SymbolTable.module.css';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import { Pagination } from 'components/Tables/Pagination';
 import { GlobalFilter } from 'components/Tables/GlobalFilter';
 
 interface StockType {
@@ -38,28 +37,16 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 		getTableBodyProps,
 		headerGroups,
 		prepareRow,
-		page,
 		rows,
-		canPreviousPage,
-		canNextPage,
-		pageOptions,
-		nextPage,
-		previousPage,
-		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter },
+		state: { globalFilter },
 	} = useTable(
 		{
 			columns,
 			data,
-			initialState: {
-				pageIndex: 0,
-				pageSize: 500,
-			},
 		},
 		useGlobalFilter,
-		useSortBy,
-		usePagination
+		useSortBy
 	);
 
 	return (
@@ -82,16 +69,15 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 					className={[styles.table, styles.table_striped].join(' ')}
 				>
 					<thead>
-						{headerGroups.map((headerGroup, index) => (
-							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
-								{headerGroup.headers.map((column, index) => (
+						{headerGroups.map((headerGroup) => (
+							<tr {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map((column) => (
 									<th
 										{...column.getHeaderProps(
 											column.getSortByToggleProps({
 												title: `Sort by: ${column.Header}`,
 											})
 										)}
-										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}
@@ -112,13 +98,13 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row, index) => {
+						{rows.map((row) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} key={index}>
-									{row.cells.map((cell, index) => {
+								<tr {...row.getRowProps()}>
+									{row.cells.map((cell) => {
 										return (
-											<td {...cell.getCellProps()} key={index}>
+											<td {...cell.getCellProps()}>
 												{cell.render('Cell')}
 											</td>
 										);
@@ -128,24 +114,6 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 						})}
 					</tbody>
 				</table>
-			</div>
-			<Pagination
-				previousPage={previousPage}
-				canPreviousPage={canPreviousPage}
-				pageIndex={pageIndex}
-				pageOptions={pageOptions}
-				pageSize={pageSize}
-				setPageSize={setPageSize}
-				nextPage={nextPage}
-				canNextPage={canNextPage}
-			/>
-			<div className="text-center mt-6">
-				<button
-					className="bll text-lg"
-					onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-				>
-					Back to Top &#8593;
-				</button>
 			</div>
 		</>
 	);
