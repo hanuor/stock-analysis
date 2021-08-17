@@ -83,7 +83,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 		return (
 			<>
 				<h2 className="hh2">Latest SEC Filings</h2>
-				<table className="w-full mb-12">
+				<table className="w-full mb-12 text-smaller bp:text-base">
 					<thead>
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
 							<th
@@ -110,7 +110,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 						{entries.map((entry, index) => {
 							return (
 								<tr key={index} className="border-b border-gray-200">
-									<td className="py-3 pr-1 xs:px-2 text-gray-900 align-top">
+									<td className="py-3 pr-1 xs:px-2 text-gray-900 whitespace-nowrap align-top">
 										<span title={entry['time']}>
 											{entry['cleantime']}
 										</span>

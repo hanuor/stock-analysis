@@ -30,12 +30,6 @@ interface Props {
 }
 
 export const ActionsAllYear = ({ year, data }: Props) => {
-	const now = new Date().getFullYear();
-	const yearData =
-		Number(year) !== now
-			? data
-			: data.filter((d) => d.date.slice(-4) === year);
-
 	const columns = [
 		{
 			Header: 'Date',
@@ -80,7 +74,7 @@ export const ActionsAllYear = ({ year, data }: Props) => {
 							<ActionsTable
 								title="Actions"
 								columndata={columns}
-								rowdata={yearData}
+								rowdata={data}
 							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">

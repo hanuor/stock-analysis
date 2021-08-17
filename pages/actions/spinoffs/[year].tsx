@@ -29,8 +29,6 @@ interface Props {
 }
 
 export const ActionsSpinoffsYear = ({ year, data }: Props) => {
-	const yearData = data.filter((d) => d.date.slice(-4) === year);
-
 	const columns = [
 		{
 			Header: 'Date',
@@ -91,7 +89,7 @@ export const ActionsSpinoffsYear = ({ year, data }: Props) => {
 							<ActionsTable
 								title="Spinoffs"
 								columndata={columns}
-								rowdata={yearData}
+								rowdata={data}
 							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
@@ -113,7 +111,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { year } = params as IParams;
-	const data = await getActionsData('spinoffs');
+	const data = await getActionsData('spinoffs', year);
 
 	return {
 		props: {

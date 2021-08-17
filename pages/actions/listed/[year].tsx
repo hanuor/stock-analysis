@@ -28,8 +28,6 @@ interface Props {
 }
 
 export const ActionsListedYear = ({ year, data }: Props) => {
-	const yearData = data.filter((d) => d.date.slice(-4) === year);
-
 	const columns = [
 		{
 			Header: 'Date',
@@ -56,12 +54,12 @@ export const ActionsListedYear = ({ year, data }: Props) => {
 			<SEO
 				title={`All ${year} Listed Stocks`}
 				description="Stocks that have been listed on the US stock market. Some have done an official IPO, others a direct listing."
-				canonical={`actions/bankruptcies/${year}/`}
+				canonical={`actions/listed/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Bankruptcies</h1>
+					<h1 className="hh1">Listed</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
@@ -70,7 +68,7 @@ export const ActionsListedYear = ({ year, data }: Props) => {
 							<ActionsTable
 								title="Stocks"
 								columndata={columns}
-								rowdata={yearData}
+								rowdata={data}
 							/>
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
@@ -92,7 +90,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { year } = params as IParams;
-	const data = await getActionsData('listed');
+	const data = await getActionsData('listed', year);
 
 	return {
 		props: {

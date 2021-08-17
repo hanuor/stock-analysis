@@ -1,12 +1,10 @@
 import {
 	useTable,
-	usePagination,
 	useGlobalFilter,
 	useAsyncDebounce,
 	Column,
 } from 'react-table';
 import { useMemo } from 'react';
-import { Pagination } from 'components/Tables/Pagination';
 import { GlobalFilter } from 'components/Tables/GlobalFilter';
 import styles from './ActionsTable.module.css';
 
@@ -25,27 +23,15 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 		getTableBodyProps,
 		headerGroups,
 		prepareRow,
-		page,
 		rows,
-		canPreviousPage,
-		canNextPage,
-		pageOptions,
-		nextPage,
-		previousPage,
-		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter },
+		state: { globalFilter },
 	} = useTable(
 		{
 			columns,
 			data,
-			initialState: {
-				pageIndex: 0,
-				pageSize: 500,
-			},
 		},
-		useGlobalFilter,
-		usePagination
+		useGlobalFilter
 	);
 
 	return (
@@ -76,7 +62,7 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row, index) => {
+						{rows.map((row, index) => {
 							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()} key={index}>
@@ -93,18 +79,6 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			{rows.length > 500 && (
-				<Pagination
-					previousPage={previousPage}
-					canPreviousPage={canPreviousPage}
-					pageIndex={pageIndex}
-					pageOptions={pageOptions}
-					pageSize={pageSize}
-					setPageSize={setPageSize}
-					nextPage={nextPage}
-					canNextPage={canNextPage}
-				/>
-			)}
 		</>
 	);
 };
