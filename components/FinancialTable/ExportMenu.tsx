@@ -1,5 +1,6 @@
 import { financialsState } from 'state/financialsState';
 import ExcellentExport from 'excellentexport';
+import { authState } from 'state/authState';
 
 const menuBtn = 'shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100';
 
@@ -11,6 +12,7 @@ interface Props {
 
 export const ExportMenu = ({ statement, symbol, setExportOpen }: Props) => {
 	const range = financialsState((state) => state.range);
+	const isPro = authState((state) => state.isPro);
 
 	const exp = (type: 'csv' | 'xls' | 'xlsx') => {
 		setExportOpen(false);
@@ -27,23 +29,25 @@ export const ExportMenu = ({ statement, symbol, setExportOpen }: Props) => {
 					name: symbol.toUpperCase(),
 					from: { table: 'financial-table' },
 					fixArray: (array) => {
-						if (type == 'csv') {
-							array[array.length - 1].push([
-								'\n\n' +
-									'*Showing 10 of 26 years. Export the full financial history with Stock Analysis Pro: https://stockanalysis.com/pro/',
-							]);
-						} else {
-							array[3].push(['']);
-							array[3].push([
-								'Get unlimited exports with financial history',
-							]);
-							array[4].push(['']);
-							array[4].push(['all the way back to 1995']);
-							array[5].push(['']);
-							array[5].push(['with Stock Analysis Pro:']);
+						if (!isPro) {
+							if (type == 'csv') {
+								array[array.length - 1].push([
+									'\n\n' +
+										'*Showing 10 of 26 years. Export the full financial history with Stock Analysis Pro: https://stockanalysis.com/pro/',
+								]);
+							} else {
+								array[3].push(['']);
+								array[3].push([
+									'Get unlimited exports with financial history',
+								]);
+								array[4].push(['']);
+								array[4].push(['all the way back to 1995']);
+								array[5].push(['']);
+								array[5].push(['with Stock Analysis Pro:']);
 
-							array[7].push(['']);
-							array[7].push(['https://stockanalysis.com/pro/']);
+								array[7].push(['']);
+								array[7].push(['https://stockanalysis.com/pro/']);
+							}
 						}
 
 						return array;
