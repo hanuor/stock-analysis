@@ -56,19 +56,19 @@ export const ActionsAll = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Recent Corporate Actions and Stock Changes"
-				description="The most recent corporate actions and stock changes for companies listed on the US stock market."
+				title="Corporate Actions List - Recent and Historical"
+				description="A comprehensive list of recent and historical corporate actions and stock changes for companies listed on the US stock market."
 				canonical="actions/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Corporate Actions</h1>
+					<h1 className="hh1">Recent Corporate Actions</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Actions"
 								columndata={columns}

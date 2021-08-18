@@ -1,37 +1,59 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { navState } from 'state/navState';
+import { actionsState } from 'state/actionsState';
 
-interface Props {
-	type?: string;
-	start: number;
-}
-
-export const ActionsNavigationSub = ({ type, start }: Props) => {
-	const [all, setAll] = useState(false);
-	const [count, setCount] = useState(3);
+export const ActionsNavigationSub = () => {
 	const path = navState((state) => state.path);
+	const all = actionsState((state) => state.all);
+	const setAll = actionsState((state) => state.setAll);
+	const [count, setCount] = useState<number>(3);
 
-	const current = new Date().getFullYear();
-	const diff = current - start;
+	const type =
+		path.two && !path.two.includes('20') && !path.two.includes('19')
+			? path.two
+			: '';
 
-	const tabs = [];
-	for (let i = 0; i < diff + 1; i++) {
-		tabs.push(`${current - i}`);
-	}
+	const tabs = [
+		'2021',
+		'2020',
+		'2019',
+		'2018',
+		'2017',
+		'2016',
+		'2015',
+		'2014',
+		'2013',
+		'2012',
+		'2011',
+		'2010',
+		'2009',
+		'2008',
+		'2007',
+		'2006',
+		'2005',
+		'2004',
+		'2003',
+		'2002',
+		'2001',
+		'2000',
+		'1999',
+		'1998',
+	];
+	const length = tabs.length;
 
 	useEffect(() => {
 		if (all) {
-			setCount(tabs.length);
+			setCount(length);
 		} else {
 			setCount(3);
 		}
-	}, [all, tabs.length]);
+	}, [all, length]);
 
 	return (
 		<nav className="mb-1 sm:mb-2 lg:mb-3">
 			<ul className="space-x-1 navmenu submenu flex-wrap">
-				<li>
+				<li className="mb-0.5">
 					<Link
 						href={type ? `/actions/${type}/` : '/actions/'}
 						prefetch={false}
@@ -48,8 +70,22 @@ export const ActionsNavigationSub = ({ type, start }: Props) => {
 						</a>
 					</Link>
 				</li>
+				{type && (
+					<li className="mb-0.5">
+						<Link href={`/actions/${type}/statistics/`} prefetch={false}>
+							<a
+								data-title="Statistics"
+								className={
+									path.three === 'statistics' ? 'active' : 'inactive'
+								}
+							>
+								Statistics
+							</a>
+						</Link>
+					</li>
+				)}
 				{tabs.slice(0, count).map((tab) => (
-					<li key={tab}>
+					<li key={tab} className="mb-0.5">
 						<Link
 							href={
 								type ? `/actions/${type}/${tab}/` : `/actions/${tab}/`
@@ -75,14 +111,14 @@ export const ActionsNavigationSub = ({ type, start }: Props) => {
 							className="inactive font-semibold"
 							onClick={() => setAll(false)}
 						>
-							Hide &uarr;
+							Show Less &uarr;
 						</span>
 					) : (
 						<span
 							className="inactive font-semibold"
 							onClick={() => setAll(true)}
 						>
-							Show All &darr;
+							2018-1998 &darr;
 						</span>
 					)}
 				</li>

@@ -52,21 +52,21 @@ export const ActionsListedYear = ({ year, data }: Props) => {
 	return (
 		<>
 			<SEO
-				title={`All ${year} Listed Stocks`}
-				description="Stocks that have been listed on the US stock market. Some have done an official IPO, others a direct listing."
+				title={`Stocks Listed in ${year}`}
+				description={`All stocks listed on the US stock market in ${year}. This includes common shares of companies listed on the main US exchanges.`}
 				canonical={`actions/listed/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Listed</h1>
+					<h1 className="hh1">{`${year} Listed Stocks`}</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="listed" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
-								title="Stocks"
+								title="Listings"
 								columndata={columns}
 								rowdata={data}
 							/>

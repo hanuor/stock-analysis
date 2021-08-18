@@ -30,6 +30,10 @@ interface Props {
 }
 
 export const ActionsAllYear = ({ year, data }: Props) => {
+	if (Number(year) === new Date().getFullYear()) {
+		data = data.filter((d) => d.date.slice(-4) === year);
+	}
+
 	const columns = [
 		{
 			Header: 'Date',
@@ -58,19 +62,19 @@ export const ActionsAllYear = ({ year, data }: Props) => {
 	return (
 		<>
 			<SEO
-				title={`${year} Corporate Actions`}
-				description="The most recent corporate actions and stock changes for companies listed on the US stock market."
+				title={`All ${year} Corporate Actions`}
+				description={`A list of all corporate actions in the year ${year}. It includes public companies with stocks listed on the main US exchanges.`}
 				canonical={`actions/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Corporate Actions</h1>
+					<h1 className="hh1">{`${year} Corporate Actions`}</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Actions"
 								columndata={columns}

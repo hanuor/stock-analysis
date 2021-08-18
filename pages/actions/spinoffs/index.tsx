@@ -53,14 +53,14 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 			},
 		},
 		{
-			Header: 'Parent Name',
+			Header: 'Parent Company',
 			accessor: 'oldname',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				return <span title={value}>{value}</span>;
 			},
 		},
 		{
-			Header: 'New Name',
+			Header: 'New Company',
 			accessor: 'name',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				return <span title={value}>{value}</span>;
@@ -71,19 +71,19 @@ export const ActionsSpinoffs = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Recent Stock Spinoffs"
-				description="Latest spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new independent company."
+				title={`Recent Stock Spinoffs: 1998-${new Date().getFullYear()}`}
+				description="Recent and historical spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new, independent company."
 				canonical="actions/spinoffs/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Stock Spinoffs</h1>
+					<h1 className="hh1">Recent Stock Spinoffs</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="spinoffs" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Spinoffs"
 								columndata={columns}

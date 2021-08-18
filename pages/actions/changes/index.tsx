@@ -61,19 +61,19 @@ export const ActionsChanges = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Latest Stock Symbol Changes"
-				description="Latest stock ticker symbol changes. Companies change stock symbols for different reasons, including when they change their company name or complete a merger."
+				title={`All Stock Ticker Symbol Changes From 1998 to ${new Date().getFullYear()}`}
+				description="A list of recent and historical stock ticker symbol changes. It is updated daily, with history that goes all the way back to 1998."
 				canonical="actions/changes/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Stock Symbol Changes</h1>
+					<h1 className="hh1">Recent Stock Symbol Changes</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="changes" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Changes"
 								columndata={columns}

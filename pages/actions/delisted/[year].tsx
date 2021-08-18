@@ -53,20 +53,20 @@ export const ActionsDelistedYear = ({ year, data }: Props) => {
 		<>
 			<SEO
 				title={`All ${year} Delisted Stocks`}
-				description="Stocks that have been delisted from the US stock market. Some have gone bankrupt or been acquired, others have been delisted for other reasons."
+				description={`A list of stocks that were delisted in the year ${year}. The list includes public companies trading on the main US exchanges (NYSE and NASDAQ).`}
 				canonical={`actions/delisted/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Delisted Stocks</h1>
+					<h1 className="hh1">{`${year} Delisted Stocks`}</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="delisted" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
-								title="Stocks"
+								title="Delistings"
 								columndata={columns}
 								rowdata={data}
 							/>

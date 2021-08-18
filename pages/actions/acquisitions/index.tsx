@@ -76,19 +76,19 @@ export const ActionsAcquisitions = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Latest Acquisitions"
-				description="Public companies listed on the US stock market that have been acquired by other companies."
+				title="Recent Mergers and Acquisitions"
+				description={`A list of recent and historical mergers and acquisitions on the US stock market, including detailed history from 1998 to ${new Date().getFullYear()}.`}
 				canonical="actions/acquisitions/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Acquisitions</h1>
+					<h1 className="hh1">Recent Mergers & Acquisitions</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="acquisitions" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Acquisitions"
 								columndata={columns}

@@ -7,7 +7,7 @@ export function getValidCount(
 ) {
 	let validcount = fullcount;
 
-	if (statement === 'ratios') {
+	if (statement === 'ratios' && data) {
 		const valid = data.marketcap.filter((item) => item != null).length;
 
 		if (valid < fullcount) {
@@ -15,7 +15,7 @@ export function getValidCount(
 		}
 	}
 
-	if (statement === 'balance_sheet') {
+	if (statement === 'balance_sheet' && data) {
 		const valid = data.assets.filter((item) => item != null).length;
 
 		if (valid < fullcount) {

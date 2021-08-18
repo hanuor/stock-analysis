@@ -1,13 +1,9 @@
 import { GetStaticProps } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
-import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { ActionsLayout } from 'components/Actions/ActionsLayout';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
-import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
-import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 
 type Action = {
 	date: string;
@@ -50,32 +46,17 @@ export const ActionsBankruptcies = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Latest Bankruptcies"
-				description="Stocks listed on the US stock market that have been liquidated due to bankruptcy."
+				title="Recent Stock Bankruptcies"
+				description="A list of recent and historical bankruptcy liquidations of public companies listed on the US stock market."
 				canonical="actions/bankruptcies/"
 			/>
-			<div className="contain">
-				<main className="w-full py-5 xs:py-6">
-					<Breadcrumbs />
-					<h1 className="hh1">Bankruptcies</h1>
-					<ActionsNavigation />
-
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1.5">
-							<ActionsNavigationSub type="bankruptcies" start={1998} />
-							<ActionsTable
-								title="Stocks"
-								columndata={columns}
-								rowdata={data}
-							/>
-						</div>
-						<aside className="flex flex-col space-y-10 py-6">
-							<NewsletterWidget />
-							<Sidebar1 />
-						</aside>
-					</div>
-				</main>
-			</div>
+			<ActionsLayout title="Recent Bankruptcies">
+				<ActionsTable
+					title="Bankruptcies"
+					columndata={columns}
+					rowdata={data}
+				/>
+			</ActionsLayout>
 		</>
 	);
 };

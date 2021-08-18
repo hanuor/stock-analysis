@@ -5,6 +5,7 @@ import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { ActionsTable } from 'components/Actions/ActionsTable';
+import Link from 'next/link';
 import { StockLink } from 'components/Links';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
@@ -45,28 +46,53 @@ export const ActionsAcquisitionsYear = ({ year, data }: Props) => {
 		},
 		{
 			Header: 'Company Name',
-			accessor: 'name',
+			accessor: 'oldname',
+			Cell: function FormatCell({ cell: { value } }: CellString) {
+				return <span title={value}>{value}</span>;
+			},
+		},
+		{
+			Header: 'Acquired By',
+			accessor: 'newname',
+			Cell: function FormatCell({ cell: { value } }: CellString) {
+				if (value.includes('$')) {
+					const sliced = value.split('$');
+					const symbol = sliced[0];
+					const name = sliced[1];
+					return (
+						<Link
+							href={`/stocks/${symbol.toLowerCase()}/`}
+							prefetch={false}
+						>
+							<a className="bll" title={name}>
+								{name}
+							</a>
+						</Link>
+					);
+				}
+				return value;
+			},
 		},
 	];
 
 	return (
 		<>
 			<SEO
-				title={`All ${year} Acquisitions`}
-				description="Public companies listed on the US stock market that have been acquired by other companies."
+				title={`List of ${year} Mergers & Acquisitions`}
+				description={`A list of all public company mergers and acquisitions on the US stock market in the year ${year}.`}
 				canonical={`actions/acquisitions/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Acquisitions</h1>
+					<h1 className="hh1">{`${year} Mergers & Acquisitions`}</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="acquisitions" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
-								title="Stocks"
+								title="Acquisitions"
 								columndata={columns}
 								rowdata={data}
 							/>

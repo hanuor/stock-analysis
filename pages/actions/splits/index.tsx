@@ -60,19 +60,19 @@ export const ActionsSplits = ({ data }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Recent Stock Splits"
-				description="The most recent stock splits on the US stock market. Regular splits increase the share count and lower the stock price, while reverse splits do the opposite."
+				title="All Recent Stock Splits - A Complete List"
+				description="The most recent stock splits on the US stock market, including both regular (forward) splits and reverse splits."
 				canonical="actions/splits/"
 			/>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Stock Splits</h1>
+					<h1 className="hh1">Recent Stock Splits</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="splits" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
 								title="Splits"
 								columndata={columns}

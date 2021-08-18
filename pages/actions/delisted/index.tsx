@@ -57,14 +57,14 @@ export const ActionsDelisted = ({ data }: Props) => {
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
 					<Breadcrumbs />
-					<h1 className="hh1">Delisted Stocks</h1>
+					<h1 className="hh1">Recently Delisted Stocks</h1>
 					<ActionsNavigation />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1.5">
-							<ActionsNavigationSub type="delisted" start={1998} />
+							<ActionsNavigationSub />
 							<ActionsTable
-								title="Stocks"
+								title="Delistings"
 								columndata={columns}
 								rowdata={data}
 							/>
