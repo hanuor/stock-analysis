@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Stock } from 'components/Layout/StockLayout';
 import StockChart from 'components/Chart/StockChart';
 import { SEO } from 'components/SEO';
@@ -27,10 +28,10 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 			<Stock info={info}>
 				<div className="px-2 sm:contain">
 					<div className="">
-						<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
+						<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 md:py-1 text-sm bp:text-base">
 							<Buttons state={time} dispatch={setTime} />
-							<SelectPeriod dispatcher={setPeriod} />
-							<SelectType dispatcher={setType} />
+							{/* <SelectPeriod dispatcher={setPeriod} />
+							<SelectType dispatcher={setType} /> */}
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 							<StockChart
