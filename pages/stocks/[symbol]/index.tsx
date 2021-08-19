@@ -37,7 +37,6 @@ const StockOverview = ({ info, data, news }: Props) => {
 				title={`${info.name} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
 				canonical={`stocks/${symbol}`}
-				key={`stocks/${symbol}`}
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">

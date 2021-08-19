@@ -1,17 +1,15 @@
-import styles from './Actions.module.css';
 import {
 	useTable,
-	usePagination,
 	useGlobalFilter,
 	useAsyncDebounce,
-	useSortBy,
 	Column,
 } from 'react-table';
 import { useMemo } from 'react';
-import { SortUpIcon } from 'components/Icons/SortUp';
-import { SortDownIcon } from 'components/Icons/SortDown';
-import { Pagination } from 'components/Tables/Pagination';
 import { GlobalFilter } from 'components/Tables/GlobalFilter';
+import { ActionsPaywall } from './ActionsPaywall';
+import styles from './ActionsTable.module.css';
+import { authState } from 'state/authState';
+import { navState } from 'state/navState';
 
 interface Props {
 	title: string;
@@ -20,6 +18,21 @@ interface Props {
 }
 
 export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
+	const isPro = authState((state) => state.isPro);
+	const path = navState((state) => state.path);
+
+	const count = rowdata.length;
+	const last = path.three ?? path.two ?? path.one;
+	const current = new Date().getFullYear();
+
+	const showPaywall =
+		!isPro &&
+		Number(last) !== current &&
+		(last?.includes('20') || last?.includes('19')) &&
+		count > 100
+			? true
+			: false;
+
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => rowdata, [rowdata]);
 
@@ -28,28 +41,15 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 		getTableBodyProps,
 		headerGroups,
 		prepareRow,
-		page,
 		rows,
-		canPreviousPage,
-		canNextPage,
-		pageOptions,
-		nextPage,
-		previousPage,
-		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter },
+		state: { globalFilter },
 	} = useTable(
 		{
 			columns,
 			data,
-			initialState: {
-				pageIndex: 0,
-				pageSize: 200,
-			},
 		},
-		useGlobalFilter,
-		useSortBy,
-		usePagination
+		useGlobalFilter
 	);
 
 	return (
@@ -66,43 +66,25 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					/>
 				</div>
 			</div>
-			<div className="overflow-x-auto">
-				<table
-					{...getTableProps()}
-					className={`${styles.actionstable} ${styles.striped}`}
-				>
+			<div className={`overflow-x-auto ${styles[title.toLowerCase()]}`}>
+				<table {...getTableProps()} className={styles.actionstable}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th
-										{...column.getHeaderProps(
-											column.getSortByToggleProps({
-												title: `Sort by: ${column.Header}`,
-											})
-										)}
-										key={index}
-									>
-										<span className="inline-flex flex-row items-center">
-											{column.render('Header')}
-
-											{column.isSorted ? (
-												column.isSortedDesc ? (
-													<SortDownIcon classes="h-5 w-5 text-gray-800" />
-												) : (
-													<SortUpIcon classes="h-5 w-5 text-gray-800" />
-												)
-											) : (
-												''
-											)}
-										</span>
+									<th {...column.getHeaderProps()} key={index}>
+										{column.render('Header')}
 									</th>
 								))}
 							</tr>
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row, index) => {
+						{rows.map((row, index) => {
+							// End early if paywalled
+							if (index + 1 > 100 && showPaywall) {
+								return;
+							}
 							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()} key={index}>
@@ -119,16 +101,7 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			<Pagination
-				previousPage={previousPage}
-				canPreviousPage={canPreviousPage}
-				pageIndex={pageIndex}
-				pageOptions={pageOptions}
-				pageSize={pageSize}
-				setPageSize={setPageSize}
-				nextPage={nextPage}
-				canNextPage={canNextPage}
-			/>
+			{showPaywall && <ActionsPaywall total={count} title={title} />}
 		</>
 	);
 };

@@ -1,5 +1,5 @@
 .actionstable {
-	width: 100%;
+	@apply w-full overflow-x-auto;
 }
 
 .actionstable tr > * {
@@ -30,13 +30,28 @@
 	background-color: #f2f9ff !important;
 }
 
-.striped tr:nth-child(odd) {
+.actionstable tr:nth-child(odd) {
 	background-color: #f6f7f8;
 }
 
-.striped tr th {
+.actionstable tr th {
 	font-weight: 600;
 	background-color: #ffffff;
+}
+
+.acquisitions tr > *:nth-child(3),
+.acquisitions tr > *:nth-child(4) {
+	max-width: 230px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.spinoffs tr > *:nth-child(4),
+.spinoffs tr > *:nth-child(5) {
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 1200px) {

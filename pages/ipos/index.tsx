@@ -25,7 +25,6 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 				title="All Recent IPOs"
 				description="Detailed information on all the recent IPOs (initial public offerings) on the stock market. Includes an IPO calendar, news and more."
 				canonical="ipos/"
-				key="ipos/"
 			/>
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">

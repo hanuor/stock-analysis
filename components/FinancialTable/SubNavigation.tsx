@@ -2,12 +2,6 @@ import Link from 'next/link';
 import { financialsState } from 'state/financialsState';
 import { Info } from 'types/Info';
 
-// styles
-const common =
-	'block py-2 sm:py-2 px-2 xs:px-2.5 sm:px-4 lg:px-5 cursor-pointer whitespace-nowrap';
-const inactive = common + ' bll';
-const active = common + ' text-gray-900 bg-[#eee] font-semibold';
-
 interface Props {
 	info: Info;
 	statement: string;
@@ -25,7 +19,7 @@ export const SubNavigation = ({ info, statement }: Props) => {
 function Statement({ info, statement }: Props) {
 	return (
 		<nav>
-			<ul className="w-full navmenu submenu">
+			<ul className="navmenu submenu">
 				<li>
 					<Link
 						href={`/stocks/${info.symbol}/financials/`}
@@ -34,7 +28,7 @@ function Statement({ info, statement }: Props) {
 					>
 						<a
 							className={
-								statement == 'income_statement' ? active : inactive
+								statement == 'income_statement' ? 'active' : 'inactive'
 							}
 							data-title="Income"
 						>
@@ -50,7 +44,7 @@ function Statement({ info, statement }: Props) {
 					>
 						<a
 							className={
-								statement == 'balance_sheet' ? active : inactive
+								statement == 'balance_sheet' ? 'active' : 'inactive'
 							}
 							data-title="Balance Sheet"
 						>
@@ -66,7 +60,9 @@ function Statement({ info, statement }: Props) {
 					>
 						<a
 							className={
-								statement == 'cash_flow_statement' ? active : inactive
+								statement == 'cash_flow_statement'
+									? 'active'
+									: 'inactive'
 							}
 							data-title="Cash Flow"
 						>
@@ -82,7 +78,9 @@ function Statement({ info, statement }: Props) {
 							scroll={false}
 						>
 							<a
-								className={statement == 'ratios' ? active : inactive}
+								className={
+									statement == 'ratios' ? 'active' : 'inactive'
+								}
 								data-title="Ratios"
 							>
 								Ratios
@@ -101,10 +99,10 @@ function Period() {
 
 	return (
 		<nav>
-			<ul className="flex flex-row w-full overflow-auto navmenu submenu">
+			<ul className="navmenu submenu">
 				<li>
 					<span
-						className={range == 'annual' ? active : inactive}
+						className={range == 'annual' ? 'active' : 'inactive'}
 						onClick={function () {
 							setRange('annual');
 						}}
@@ -115,7 +113,7 @@ function Period() {
 				</li>
 				<li>
 					<span
-						className={range == 'quarterly' ? active : inactive}
+						className={range == 'quarterly' ? 'active' : 'inactive'}
 						onClick={function () {
 							if (range !== 'quarterly') {
 								setRange('quarterly');
@@ -128,7 +126,7 @@ function Period() {
 				</li>
 				<li>
 					<span
-						className={range == 'trailing' ? active : inactive}
+						className={range == 'trailing' ? 'active' : 'inactive'}
 						onClick={function () {
 							setRange('trailing');
 						}}
