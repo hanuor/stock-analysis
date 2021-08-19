@@ -209,6 +209,97 @@ export const getSchema = (path: string, title: string) => {
 				],
 			};
 		}
+	} else if (one === 'actions') {
+		if (!two) {
+			obj = {
+				'@context': 'https://schema.org',
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{
+						'@type': 'ListItem',
+						position: 1,
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+					},
+					{
+						'@type': 'ListItem',
+						position: 2,
+						item: {
+							name: 'Corporate Actions',
+						},
+					},
+				],
+			};
+		} else if (two) {
+			if (!three) {
+				obj = {
+					'@context': 'https://schema.org',
+					'@type': 'BreadcrumbList',
+					itemListElement: [
+						{
+							'@type': 'ListItem',
+							position: 1,
+							item: {
+								'@id': 'https://stockanalysis.com/',
+								name: 'Home',
+							},
+						},
+						{
+							'@type': 'ListItem',
+							position: 2,
+							item: {
+								'@id': 'https://stockanalysis.com/actions/',
+								name: 'Actions',
+							},
+						},
+						{
+							'@type': 'ListItem',
+							position: 3,
+							item: {
+								name: capitalize(two),
+							},
+						},
+					],
+				};
+			} else {
+				obj = {
+					'@context': 'https://schema.org',
+					'@type': 'BreadcrumbList',
+					itemListElement: [
+						{
+							'@type': 'ListItem',
+							position: 1,
+							item: {
+								'@id': 'https://stockanalysis.com/',
+								name: 'Home',
+							},
+						},
+						{
+							'@type': 'ListItem',
+							position: 2,
+							item: {
+								'@id': 'https://stockanalysis.com/actions/',
+								name: 'Actions',
+							},
+						},
+						{
+							'@type': 'ListItem',
+							position: 3,
+							item: {
+								'@id': `https://stockanalysis.com/actions/${two}/`,
+								name: capitalize(two),
+							},
+						},
+						{
+							'@type': 'ListItem',
+							position: 4,
+							item: {
+								name: capitalize(three),
+							},
+						},
+					],
+				};
+			}
+		}
 	} else {
 		if (one && !two) {
 			obj = {

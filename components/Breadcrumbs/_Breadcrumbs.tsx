@@ -96,6 +96,20 @@ const LevelTwo = ({ path }: { path: PathObject }) => {
 			}
 			return <li>{path.two.toUpperCase()}</li>;
 		}
+		if (path.one === 'actions') {
+			if (path.three) {
+				return (
+					<li>
+						<Link
+							href={`/actions/${path.two.toLowerCase()}/`}
+							prefetch={false}
+						>
+							<a>{formatPageTitle(path.two)}</a>
+						</Link>
+					</li>
+				);
+			}
+		}
 		return <li>{formatPageTitle(path.two)}</li>;
 	}
 	return null;

@@ -85,12 +85,14 @@ export const Footer = () => {
 
 	return (
 		<>
-			{status === 'completed' && !isPro && (
-				<>
-					<GoogleTagManager />
-					<FooterDianomi />
-				</>
-			)}
+			{status === 'completed' &&
+				!isPro &&
+				process.env.NODE_ENV !== 'development' && (
+					<>
+						<GoogleTagManager />
+						<FooterDianomi />
+					</>
+				)}
 
 			<footer
 				className="bg-gray-800 clear-both mt-10"

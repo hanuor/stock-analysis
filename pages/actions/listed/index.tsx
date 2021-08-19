@@ -6,7 +6,7 @@ import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { CellString, ActionProps } from 'components/Actions/actions.types';
 
-export const ActionsAll = ({ data }: ActionProps) => {
+export const ActionsListed = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
@@ -23,37 +23,38 @@ export const ActionsAll = ({ data }: ActionProps) => {
 			},
 		},
 		{
-			Header: 'Type',
-			accessor: 'type',
-		},
-		{
-			Header: 'Action',
-			accessor: 'text',
+			Header: 'Company Name',
+			accessor: 'name',
 		},
 	];
 
 	return (
 		<>
 			<SEO
-				title="Corporate Actions List - Recent and Historical"
-				description="A comprehensive list of recent and historical corporate actions and stock changes for companies listed on the US stock market."
-				canonical="actions/"
+				title="Most Recently Listed Stocks"
+				description="Recent and historical listings on the US stock market. Includes both IPOs and stocks listed for other reasons."
+				canonical="actions/listed/"
 			/>
-			<ActionsLayout title="Recent Corporate Actions">
-				<ActionsTable title="Actions" columndata={columns} rowdata={data} />
+			<ActionsLayout title="Recently Listed Stocks">
+				<ActionsTable
+					title="Listings"
+					columndata={columns}
+					rowdata={data}
+				/>
 			</ActionsLayout>
 		</>
 	);
 };
-export default ActionsAll;
+
+export default ActionsListed;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('all');
+	const data = await getActionsData('listed');
 
 	return {
 		props: {
 			data,
 		},
-		revalidate: 3600,
+		revalidate: 7200,
 	};
 };

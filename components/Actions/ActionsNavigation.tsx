@@ -4,77 +4,66 @@ import { navState } from 'state/navState';
 export const ActionsNavigation = () => {
 	const path = navState((state) => state.path);
 
-	const active =
-		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900';
-	const inactive =
-		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bll hover:text-gray-900 hover:bg-[#eee] transition duration-100';
+	const tabs = [
+		'listed',
+		'delisted',
+		'splits',
+		'changes',
+		'spinoffs',
+		'bankruptcies',
+		'acquisitions',
+	];
 
 	return (
-		<div className="mb-1">
-			<div>
-				<nav className="border-b-[3px] border-blue-brand_sharp mb-1.5">
-					<ul className="navmenu">
-						<li>
-							<Link href="/actions/" prefetch={false}>
+		<nav className="border-b-[3px] border-blue-brand_sharp">
+			<ul className="navmenu">
+				<li>
+					<Link
+						href={`/actions/${
+							path.three && path.three !== 'statistics'
+								? `${path.three}/`
+								: ''
+						}`}
+						prefetch={false}
+					>
+						<a
+							data-title="Actions"
+							className={
+								!path.two || path.two.includes('20')
+									? 'active'
+									: 'inactive'
+							}
+						>
+							Actions
+						</a>
+					</Link>
+				</li>
+				{tabs.map((tab) => {
+					let append = '';
+					const last = path.three ?? path.two ?? path.one;
+					if (
+						(last?.includes('20') ||
+							last?.includes('19') ||
+							last === 'statistics') &&
+						path.two !== tab
+					) {
+						append = `${last}/`;
+					}
+
+					return (
+						<li key={tab}>
+							<Link href={`/actions/${tab}/${append}`} prefetch={false}>
 								<a
-									data-title="Actions"
-									className={
-										!path.two || path.two === '#' ? active : inactive
-									}
+									data-title={tab[0].toUpperCase() + tab.slice(1)}
+									className={path.two === tab ? 'active' : 'inactive'}
 								>
-									Actions
+									{tab[0].toUpperCase() + tab.slice(1)}
 								</a>
 							</Link>
 						</li>
-						<li>
-							<Link href="/actions/changes/" prefetch={false}>
-								<a
-									data-title="Changes"
-									className={
-										path.two === 'changes' ? active : inactive
-									}
-								>
-									Changes
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/actions/spinoffs/" prefetch={false}>
-								<a
-									data-title="Spinoffs"
-									className={
-										path.two === 'spinoffs' ? active : inactive
-									}
-								>
-									Spinoffs
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/actions/splits/" prefetch={false}>
-								<a
-									data-title="Splits"
-									className={path.two === 'splits' ? active : inactive}
-								>
-									Splits
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/actions/delisted/" prefetch={false}>
-								<a
-									data-title="Delisted"
-									className={
-										path.two === 'delisted' ? active : inactive
-									}
-								>
-									Delisted
-								</a>
-							</Link>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+					);
+				})}
+			</ul>
+		</nav>
 	);
 };

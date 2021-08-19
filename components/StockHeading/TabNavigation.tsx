@@ -7,7 +7,7 @@ export const TabNavigation = ({ info }: { info: Info }) => {
 
 	return (
 		<nav className="border-b-2 border-blue-brand_sharp w-full">
-			<ul className="w-full navmenu">
+			<ul className="navmenu">
 				<li>
 					<Link
 						href={`/stocks/${info.symbol}/`}

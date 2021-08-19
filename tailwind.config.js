@@ -39,7 +39,7 @@ module.exports = {
 		},
 		extend: {
 			gridTemplateColumns: {
-				sidebar: '1fr 336px',
+				sidebar: 'minmax(0, 1fr) 336px',
 				sidebar_wide: '1fr 336px',
 				overview: '1fr 1fr 3fr',
 				news: '1fr 2fr',

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { SearchIcon } from 'components/Icons/Search';
 import { SingleResult } from './SingleResult';
 import { useRouter } from 'next/router';
+import { getData } from 'functions/API';
 
 interface SearchItem {
 	s: string;
@@ -30,15 +31,9 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
-				const resA = await fetch(
-					'https://api.stockanalysis.com/wp-json/sa/trending/'
-				);
-				const trendingData = await resA.json();
+				const trendingData = await getData('trending/');
 				setTrending(trendingData);
-				const resB = await fetch(
-					'https://api.stockanalysis.com/wp-json/sa/search/'
-				);
-				const indexData = await resB.json();
+				const indexData = await getData('search/');
 				setIndex(indexData);
 			} catch (error) {
 				setError(true);

@@ -39,7 +39,6 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 				title={title}
 				description={description}
 				canonical={`ipos/${year}/`}
-				key={`ipos/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">

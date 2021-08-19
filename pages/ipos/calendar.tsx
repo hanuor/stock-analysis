@@ -29,7 +29,6 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 				title="IPO Calendar - All Upcoming IPOs"
 				description="All upcoming initial public offerings (IPOs) on the stock market. Includes estimated IPO dates, offering price, how many shares are offered and more."
 				canonical="ipos/calendar/"
-				key="ipos/calendar/"
 			/>
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
