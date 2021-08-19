@@ -1,34 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { SEO } from 'components/SEO';
 import { getActionsData } from 'functions/callBackEnd';
-import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { ActionsLayout } from 'components/Actions/ActionsLayout';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import Link from 'next/link';
 import { StockLink } from 'components/Links';
-import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
-import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 import { ParsedUrlQuery } from 'querystring';
+import { CellString, ActionProps } from 'components/Actions/actions.types';
 
-type Action = {
-	date: string;
-	name: string;
-	symbol: string;
-};
-
-type CellString = {
-	cell: {
-		value: string;
-	};
-};
-
-interface Props {
-	year: string;
-	data: Action[];
-}
-
-export const ActionsAcquisitionsYear = ({ year, data }: Props) => {
+export const ActionsAcquisitionsYear = ({ year, data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
@@ -82,28 +62,13 @@ export const ActionsAcquisitionsYear = ({ year, data }: Props) => {
 				description={`A list of all public company mergers and acquisitions on the US stock market in the year ${year}.`}
 				canonical={`actions/acquisitions/${year}/`}
 			/>
-			<div className="contain">
-				<main className="w-full py-5 xs:py-6">
-					<Breadcrumbs />
-					<h1 className="hh1">{`${year} Mergers & Acquisitions`}</h1>
-					<ActionsNavigation />
-
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1.5">
-							<ActionsNavigationSub />
-							<ActionsTable
-								title="Acquisitions"
-								columndata={columns}
-								rowdata={data}
-							/>
-						</div>
-						<aside className="flex flex-col space-y-10 py-6">
-							<NewsletterWidget />
-							<Sidebar1 />
-						</aside>
-					</div>
-				</main>
-			</div>
+			<ActionsLayout title={`${year} Mergers & Acquisitions`}>
+				<ActionsTable
+					title="Acquisitions"
+					columndata={columns}
+					rowdata={data}
+				/>
+			</ActionsLayout>
 		</>
 	);
 };

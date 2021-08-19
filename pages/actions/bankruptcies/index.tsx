@@ -4,24 +4,9 @@ import { getActionsData } from 'functions/callBackEnd';
 import { ActionsLayout } from 'components/Actions/ActionsLayout';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
+import { CellString, ActionProps } from 'components/Actions/actions.types';
 
-type Action = {
-	date: string;
-	name: string;
-	symbol: string;
-};
-
-type CellString = {
-	cell: {
-		value: string;
-	};
-};
-
-interface Props {
-	data: Action[];
-}
-
-export const ActionsBankruptcies = ({ data }: Props) => {
+export const ActionsBankruptcies = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',

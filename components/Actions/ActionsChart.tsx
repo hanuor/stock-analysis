@@ -1,19 +1,21 @@
 import { Bar, defaults } from 'react-chartjs-2';
 import { useRef } from 'react';
+import Link from 'next/link';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 interface Props {
-	heading: string;
+	heading?: string;
 	intro?: string;
 	title: string;
+	link?: string;
 	data: {
 		[key: string]: number;
 	};
 }
 
-export const ActionsChart = ({ heading, intro, title, data }: Props) => {
+export const ActionsChart = ({ heading, intro, title, link, data }: Props) => {
 	const chartRef = useRef<any>();
 
 	const x = Object.keys(data).map((key) => {
@@ -24,10 +26,21 @@ export const ActionsChart = ({ heading, intro, title, data }: Props) => {
 		return value;
 	});
 
+	const text = link ? (
+		<div className="text-lg mb-4">
+			{intro}{' '}
+			<Link href={link} prefetch={false}>
+				<a className="bll">See full list.</a>
+			</Link>
+		</div>
+	) : (
+		<p className="text-lg mb-4">{intro}</p>
+	);
+
 	return (
 		<>
-			<h2 className="hh2">{heading}</h2>
-			{intro && <p className="text-lg mb-4">{intro}</p>}
+			{heading && <h2 className="hh2">{heading}</h2>}
+			{text}
 			<div className="h-80 border border-gray-200 p-1 mb-6">
 				<Bar
 					ref={chartRef}
@@ -121,7 +134,7 @@ export const ActionsChart = ({ heading, intro, title, data }: Props) => {
 								) {
 									const instance = chartRef.current.$context.chart;
 									const ctx = instance.ctx;
-									const size = x.length > 12 ? '13px' : '14px';
+									const size = x.length > 12 ? '12px' : '14px';
 
 									ctx.font =
 										size +

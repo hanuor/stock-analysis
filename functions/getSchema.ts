@@ -293,7 +293,7 @@ export const getSchema = (path: string, title: string) => {
 							'@type': 'ListItem',
 							position: 4,
 							item: {
-								name: three,
+								name: capitalize(three),
 							},
 						},
 					],

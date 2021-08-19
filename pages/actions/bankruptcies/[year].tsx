@@ -5,25 +5,9 @@ import { ActionsLayout } from 'components/Actions/ActionsLayout';
 import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { ParsedUrlQuery } from 'querystring';
+import { CellString, ActionProps } from 'components/Actions/actions.types';
 
-type Action = {
-	date: string;
-	name: string;
-	symbol: string;
-};
-
-type CellString = {
-	cell: {
-		value: string;
-	};
-};
-
-interface Props {
-	year: string;
-	data: Action[];
-}
-
-export const ActionsBankruptciesYear = ({ year, data }: Props) => {
+export const ActionsBankruptciesYear = ({ year, data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',

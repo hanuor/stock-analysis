@@ -12,7 +12,7 @@ import {
 } from 'components/Actions/actions.functions';
 import { ActionStatisticsProps } from 'components/Actions/actions.types';
 
-export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
+export const DelistedStatistics = ({ data }: ActionStatisticsProps) => {
 	const [showAll, setShowAll] = useState(false);
 	const current = new Date().getFullYear();
 	const total = sumObjectValues(data.annual);
@@ -24,42 +24,43 @@ export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
 	return (
 		<>
 			<SEO
-				title="Bankruptcy Statistics and Charts"
-				description={`Statistics and charts for public company bankruptcies on the US stock market. Detailed data is available from 1998-${current}`}
-				canonical="actions/bankruptcies/statistics/"
+				title="Delisting Statistics and Charts"
+				description={`Statistics and charts for delistings of stocks listed on the US stock market. Detailed data is available from 1998-${current}`}
+				canonical="actions/delisted/statistics/"
 			/>
-			<ActionsLayout title="Bankruptcy Statistics">
+			<ActionsLayout title="Delisting Statistics">
 				<p className="text-lg mb-4">
-					This page shows statistics and charts for public company
-					bankruptcy liquidations on the US stock market.
+					This page shows statistics and charts for delistings on the US
+					stock market. It focuses on common shares that were listed on the
+					main US exchanges (NYSE and NASDAQ).
 				</p>
 				<ActionsChart
-					heading={`Bankruptcies Per Year 1998-${current}`}
+					heading={`Delistings Per Year 1998-${current}`}
 					intro={`
-					There have been ${total} public company bankruptcy liquidations
-					since 1998. The most was in ${annual.most.key}, when ${annual.most.value} public companies went
-					bankrupt. The least was in ${annual.least.key} with only ${annual.least.value} bankruptcies.`}
-					title={`Bankruptcies 1998-${current}`}
+					There have been ${total} stock delistings
+					since 1998. The most was in ${annual.most.key}, when ${annual.most.value} public companies were delisted. The least was in ${annual.least.key} with only ${annual.least.value} delistings.`}
+					title={`Delistings 1998-${current}`}
 					data={data.annual}
 				/>
 
 				<ActionsChart
-					heading="Average Bankruptcies Per Month"
+					heading="Average Delistings Per Month"
 					intro={`In an average year, ${getFullMonth(
 						monthly.most.key
-					)} tends to have the highest number of bankruptcy
-					liquidations, while ${getFullMonth(monthly.least.key)} has the lowest number.`}
-					title="Bankruptcies Per Month"
+					)} tends to have the highest number of delistings, while ${getFullMonth(
+						monthly.least.key
+					)} has the lowest number.`}
+					title="Delistings Per Month"
 					data={data.monthly}
 				/>
 
 				<ActionsChart
-					heading={`Bankruptcies in ${current}`}
+					heading={`Delistings in ${current}`}
 					intro={`There have been ${sumObjectValues(
 						data.years[current]
-					)} bankruptcies in ${current}, so far.`}
-					title={`Monthly Bankruptcies in ${current}`}
-					link={`/actions/bankruptcies/${current}/`}
+					)} delistings in ${current}, so far.`}
+					title={`Monthly Delistings in ${current}`}
+					link={`/actions/delisted/${current}/`}
 					data={data.years[current]}
 				/>
 
@@ -67,9 +68,9 @@ export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
 					heading={`${current - 1}`}
 					intro={`There were ${sumObjectValues(
 						data.years[current - 1]
-					)} bankruptcies in ${current - 1}.`}
-					title={`${current - 1} Bankruptcies`}
-					link={`/actions/bankruptcies/${current - 1}/`}
+					)} delistings in ${current - 1}.`}
+					title={`${current - 1} Delistings`}
+					link={`/actions/delisted/${current - 1}/`}
 					data={data.years[current - 1]}
 				/>
 
@@ -77,9 +78,9 @@ export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
 					heading={`${current - 2}`}
 					intro={`There were ${sumObjectValues(
 						data.years[current - 2]
-					)} bankruptcies in ${current - 2}.`}
-					title={`${current - 2} Bankruptcies`}
-					link={`/actions/bankruptcies/${current - 2}/`}
+					)} delistings in ${current - 2}.`}
+					title={`${current - 2} Delistings`}
+					link={`/actions/delisted/${current - 2}/`}
 					data={data.years[current - 2]}
 				/>
 
@@ -98,9 +99,9 @@ export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
 								heading={`${year}`}
 								intro={`There were ${sumObjectValues(
 									data.years[year]
-								)} bankruptcies in ${year}.`}
-								title={`${year} Bankruptcies`}
-								link={`/actions/bankruptcies/${year}/`}
+								)} delistings in ${year}.`}
+								title={`${year} Delistings`}
+								link={`/actions/delisted/${year}/`}
 								data={data.years[year]}
 							/>
 						);
@@ -110,10 +111,10 @@ export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
 	);
 };
 
-export default BankruptcyStatistics;
+export default DelistedStatistics;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('bankruptcies', 'stats');
+	const data = await getActionsData('delisted', 'stats');
 
 	return {
 		props: {
