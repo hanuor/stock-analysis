@@ -7,7 +7,7 @@ export const ActionsNavigationSub = () => {
 	const path = navState((state) => state.path);
 	const all = actionsState((state) => state.all);
 	const setAll = actionsState((state) => state.setAll);
-	const [count, setCount] = useState<number>(3);
+	const [count, setCount] = useState<number>(2);
 
 	const type =
 		path.two && !path.two.includes('20') && !path.two.includes('19')
@@ -46,13 +46,13 @@ export const ActionsNavigationSub = () => {
 		if (all) {
 			setCount(length);
 		} else {
-			setCount(3);
+			setCount(2);
 		}
 	}, [all, length]);
 
 	return (
-		<nav className="mb-1 sm:mb-2 lg:mb-3">
-			<ul className="space-x-1 navmenu submenu flex-wrap">
+		<nav className="mb-2 lg:mb-3">
+			<ul className="md:space-x-1 navmenu submenu tight flex-wrap">
 				<li className="mb-0.5">
 					<Link
 						href={type ? `/actions/${type}/` : '/actions/'}

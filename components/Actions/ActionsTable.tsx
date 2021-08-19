@@ -6,7 +6,10 @@ import {
 } from 'react-table';
 import { useMemo } from 'react';
 import { GlobalFilter } from 'components/Tables/GlobalFilter';
+import { ActionsPaywall } from './ActionsPaywall';
 import styles from './ActionsTable.module.css';
+import { authState } from 'state/authState';
+import { navState } from 'state/navState';
 
 interface Props {
 	title: string;
@@ -15,6 +18,21 @@ interface Props {
 }
 
 export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
+	const isPro = authState((state) => state.isPro);
+	const path = navState((state) => state.path);
+
+	const count = rowdata.length;
+	const last = path.three ?? path.two ?? path.one;
+	const current = new Date().getFullYear();
+
+	const showPaywall =
+		!isPro &&
+		Number(last) !== current &&
+		(last?.includes('20') || last?.includes('19')) &&
+		count > 100
+			? true
+			: false;
+
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => rowdata, [rowdata]);
 
@@ -63,6 +81,10 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</thead>
 					<tbody {...getTableBodyProps()}>
 						{rows.map((row, index) => {
+							// End early if paywalled
+							if (index + 1 > 100 && showPaywall) {
+								return;
+							}
 							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()} key={index}>
@@ -79,6 +101,7 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</tbody>
 				</table>
 			</div>
+			{showPaywall && <ActionsPaywall total={count} title={title} />}
 		</>
 	);
 };

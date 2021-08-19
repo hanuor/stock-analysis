@@ -29,7 +29,7 @@ export const ListedStatistics = ({ data }: ActionStatisticsProps) => {
 				canonical="actions/listed/statistics/"
 			/>
 			<ActionsLayout title="Stock Listing Statistics">
-				<p className="text-lg mb-4">
+				<p className="text-base sm:text-lg mb-3 sm:mb-4">
 					This page shows statistics and charts for new common stock
 					listings on the US stock market. It focuses on common shares that
 					were listed on the main US exchanges (NYSE and NASDAQ). These

@@ -67,6 +67,10 @@
 		@apply px-2.5 bp:px-3 sm:px-4 text-sm xs:text-small bp:text-base;
 	}
 
+	.navmenu.submenu.tight li a {
+		@apply text-tiny xs:text-small bp:text-base px-1.5 xs:px-2 bp:px-2.5 sm:px-4;
+	}
+
 	.navmenu.submenu li span {
 		@apply cursor-pointer;
 	}

@@ -27,21 +27,21 @@ export const ActionsChart = ({ heading, intro, title, link, data }: Props) => {
 	});
 
 	const text = link ? (
-		<div className="text-lg mb-4">
+		<div className="text-base sm:text-lg mb-4">
 			{intro}{' '}
 			<Link href={link} prefetch={false}>
 				<a className="bll">See full list.</a>
 			</Link>
 		</div>
 	) : (
-		<p className="text-lg mb-4">{intro}</p>
+		<p className="text-base sm:text-lg mb-4">{intro}</p>
 	);
 
 	return (
 		<>
 			{heading && <h2 className="hh2">{heading}</h2>}
 			{text}
-			<div className="h-80 border border-gray-200 p-1 mb-6">
+			<div className="h-72 sm:h-80 border border-gray-200 p-1 mb-5 sm:mb-6">
 				<Bar
 					ref={chartRef}
 					data={{

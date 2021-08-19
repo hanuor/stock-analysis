@@ -29,7 +29,7 @@ export const BankruptcyStatistics = ({ data }: ActionStatisticsProps) => {
 				canonical="actions/bankruptcies/statistics/"
 			/>
 			<ActionsLayout title="Bankruptcy Statistics">
-				<p className="text-lg mb-4">
+				<p className="text-base sm:text-lg mb-3 sm:mb-4">
 					This page shows statistics and charts for public company
 					bankruptcy liquidations on the US stock market.
 				</p>

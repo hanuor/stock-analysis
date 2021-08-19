@@ -29,9 +29,9 @@ export const AcquisitionsStatistics = ({ data }: ActionStatisticsProps) => {
 				canonical="actions/acquisitions/statistics/"
 			/>
 			<ActionsLayout title="Merger & Acquisition Statistics">
-				<p className="text-lg mb-4">
-					This page shows statistics and charts for mergers and
-					acquisitions of public companies listed on the US stock market.
+				<p className="text-base sm:text-lg mb-3 sm:mb-4">
+					This page shows statistics for mergers and acquisitions of public
+					companies listed on the US stock market.
 				</p>
 				<ActionsChart
 					heading={`Acquisitions Per Year 1998-${current}`}
