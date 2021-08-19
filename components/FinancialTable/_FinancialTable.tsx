@@ -284,7 +284,12 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 					currency={info.currency}
 					fiscalYear={info.fiscalYear}
 				/>
-				<TableControls statement={statement} symbol={info.symbol} />
+				<TableControls
+					statement={statement}
+					symbol={info.symbol}
+					fullcount={validcount}
+					showcount={showcount}
+				/>
 			</div>
 			<div
 				className={

@@ -11,9 +11,16 @@ const ExportMenu = dynamic(() => import('./ExportMenu'), {
 interface Props {
 	statement: string;
 	symbol: string;
+	fullcount: number;
+	showcount: number;
 }
 
-export const TableControls = ({ statement, symbol }: Props) => {
+export const TableControls = ({
+	statement,
+	symbol,
+	fullcount,
+	showcount,
+}: Props) => {
 	const dropdownNode = useRef<HTMLDivElement>(null);
 	const [exportOpen, setExportOpen] = useState(false);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -69,6 +76,8 @@ export const TableControls = ({ statement, symbol }: Props) => {
 							statement={statement}
 							symbol={symbol}
 							setExportOpen={setExportOpen}
+							fullcount={fullcount}
+							showcount={showcount}
 						/>
 					)}
 				</div>
