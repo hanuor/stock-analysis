@@ -222,7 +222,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 				windowSize: sma200LabelNumber(this.props.period),
 			},
 		];
-
+		console.log(this.props.period);
 		const calculatedData = sma200(sma50(initialData));
 
 		const { xScaleProvider } = this;
