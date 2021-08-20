@@ -31,9 +31,9 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true);
-				const trendingData = await getData('trending/');
+				const trendingData = await getData('search?q=trending');
 				setTrending(trendingData);
-				const indexData = await getData('search/');
+				const indexData = await getData('search?q=index');
 				setIndex(indexData);
 			} catch (error) {
 				setError(true);
