@@ -17,7 +17,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [period, setPeriod] = useState<string>('d');
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
-	console.log(period);
 
 	return (
 		<>
