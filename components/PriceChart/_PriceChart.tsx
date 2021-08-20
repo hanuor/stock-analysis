@@ -5,11 +5,11 @@ import { Chart } from './PriceChartChart';
 import { Info } from 'types/Info';
 import { getData } from 'functions/API';
 
-const getChartUrl = (id: number, time: string) => {
+const getChartUrl = (id: number, time: string, override: boolean) => {
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
-	if (time === '1D' || time === '5D') {
+	if (time === '1D' || time === '5D' || override) {
 		apiurl = `c?${params}`;
 	} else if (time === '5Y' || time === 'MAX') {
 		apiurl = `cch?${params}&p=w`;
@@ -38,7 +38,11 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		}
 
 		const fetchChartData = async (selected: string) => {
-			const url = getChartUrl(info.id, selected);
+			const url = getChartUrl(
+				info.id,
+				selected,
+				info.exceptions.overrideChart
+			);
 			const data = await getData(url);
 			setChartData(data);
 		};
@@ -50,7 +54,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		return () => {
 			setChartData([]);
 		};
-	}, [chartTime, info.id, info.state]);
+	}, [chartTime, info.exceptions.overrideChart, info.id, info.state]);
 
 	if (info.state === 'upcomingipo') {
 		return (

@@ -19,6 +19,7 @@ export interface Info {
 	exceptions: {
 		hideRatios: boolean;
 		hideChart: boolean;
+		overrideChart: boolean;
 	};
 }
 

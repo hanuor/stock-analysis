@@ -282,10 +282,7 @@ export const HoverChart = ({
 									return `${value.toFixed(3)}%`;
 								} else if (type === 'ratio') {
 									return `${value.toFixed(3)}`;
-								} else if (
-									(!type || type === 'reduce_precision') &&
-									(value > 10000000 || value < -10000000)
-								) {
+								} else if (!type || type === 'reduce_precision') {
 									return new Intl.NumberFormat('en-US', {
 										maximumFractionDigits: 0,
 									}).format(value);

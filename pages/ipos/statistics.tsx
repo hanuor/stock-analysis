@@ -53,7 +53,9 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<p className="text-base sm:text-lg text-gray-900">
 									{`There have been ${data.total.toLocaleString(
 										'en-US'
-									)} IPOs between 2000 and 2021. The most was in the full year 2020, with a total of 480 IPOs. The least was in 2009, with only 62 IPOs. The year 2021 is on track to beat the previous year's record.`}
+									)} IPOs between 2000 and 2021. The least was in 2009 with only 62. The full year 2020 was an all-time record with 480 IPOs, but 2021 has already beat that record with ${
+										data.year2021
+									} IPOs and counting.`}
 								</p>
 								<StatsChartAnnual
 									title="Annual IPOs, 2000-2021"
