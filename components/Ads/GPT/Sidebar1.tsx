@@ -1,10 +1,16 @@
 import { authState } from 'state/authState';
+import { navState } from 'state/navState';
 
 export const Sidebar1 = () => {
+	const path = navState((state) => state.path);
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
 
 	if (status === 'completed' && isPro) {
+		return null;
+	}
+
+	if (path.one === 'privacy-policy' || path.one === 'terms-of-use') {
 		return null;
 	}
 
