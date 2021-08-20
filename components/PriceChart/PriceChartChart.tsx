@@ -1,15 +1,21 @@
-import { Line, defaults } from 'react-chartjs-2';
 import {
-	formatDateTimestamp,
-	formatDateClean,
-	formatDateMinute,
-	formatDateDay,
-	formatDateMonth,
-	formatDateYear,
-} from 'functions/formatDates';
+	LineController,
+	LineElement,
+	PointElement,
+	Title,
+	Tooltip,
+	TimeSeriesScale,
+	TimeScale,
+} from 'chart.js';
 
-defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+import { formatDateTimestamp, formatDateClean } from 'functions/formatDates';
+import { ReactChart } from 'chartjs-react';
+import 'chartjs-adapter-date-fns';
+
+interface Props {
+	chartData: ChartDataType[];
+	chartTime: string;
+}
 
 type ChartDataType = {
 	t: string;
@@ -17,25 +23,38 @@ type ChartDataType = {
 	o?: number;
 };
 
-interface Props {
-	chartData: ChartDataType[];
-	chartTime: string;
-}
+ReactChart.register(
+	LineController,
+	PointElement,
+	LineElement,
+	TimeSeriesScale,
+	Tooltip,
+	Title,
+	TimeScale
+);
 
 export const Chart = ({ chartData, chartTime }: Props) => {
 	const label =
 		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price';
 
+	const axisType = chartTime == '5D' ? 'timeseries' : 'time';
+	const axisTimeUnit = chartTime == '5D' ? 'day' : false;
+
 	const timeAxis = chartData.map((item) => {
-		return item.t;
+		const dateObj = new Date(item.t);
+		const epoch = dateObj.getTime();
+		return epoch;
 	});
 
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
 
+	// const axis = axisBottom().scale(scale);
+
 	return (
-		<Line
+		<ReactChart
+			type="line"
 			data={{
 				labels: timeAxis,
 				datasets: [
@@ -47,11 +66,13 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						pointRadius: 0,
 						tension: 0.01,
 						borderWidth: 3,
+						spanGaps: true,
 					},
 				],
 			}}
 			plugins={[
 				{
+					id: '1',
 					afterDatasetsDraw: function (chart: any) {
 						const chartInstance = chart;
 						const ctx = chartInstance.ctx;
@@ -66,6 +87,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							i: any
 						) {
 							const meta = chartInstance.getDatasetMeta(i);
+
 							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
@@ -114,39 +136,42 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 			]}
 			options={{
 				maintainAspectRatio: false,
-				spanGaps: true,
 				animation: false,
 				scales: {
 					x: {
 						grid: {
 							display: false,
 						},
-						ticks: {
-							callback: function (index: number) {
-								if (
-									chartTime === '1Y' ||
-									chartTime === '6M' ||
-									chartTime === 'YTD'
-								) {
-									return formatDateMonth(timeAxis[index]);
-								} else if (chartTime === '1D') {
-									return formatDateMinute(timeAxis[index]);
-								} else if (chartTime === '5D') {
-									return formatDateDay(timeAxis[index]);
-								} else if (chartTime === '1M') {
-									return formatDateDay(timeAxis[index]);
-								} else if (chartTime === '5Y' || chartTime === 'MAX') {
-									return formatDateYear(timeAxis[index]);
-								} else {
-									return formatDateClean(timeAxis[index]);
-								}
+						type: axisType, // Setja fast time unit
+						time: {
+							unit: axisTimeUnit,
+
+							displayFormats: {
+								quarter: 'MMM YYYY',
+								minute: 'HH:MM',
+								hour: 'HH:MM a',
 							},
+						},
+						ticks: {
 							color: '#323232',
+							source: 'auto',
+							callback: function (value: any, index: any, values: any) {
+								if (chartTime == '5D') {
+									if (
+										values.length > 1 &&
+										values.length > 4 &&
+										(index == 0 || index == 1)
+									) {
+										return '';
+									}
+								}
+
+								return value;
+							},
 							font: {
 								size: 13,
 							},
-							autoSkip: true,
-							autoSkipPadding: 20,
+
 							maxRotation: 0,
 							minRotation: 0,
 						},
@@ -188,22 +213,28 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						},
 						displayColors: false,
 						callbacks: {
-							title: function (tooltipItem: { label: string }[]) {
+							title: function (tooltipItem) {
 								if (chartTime === '1Y') {
-									return formatDateClean(tooltipItem[0].label);
+									return formatDateClean(
+										new Date(tooltipItem[0].parsed.x).toString()
+									);
 								} else if (chartTime === '1D' || chartTime === '5D') {
-									return formatDateTimestamp(tooltipItem[0].label);
+									return formatDateTimestamp(
+										new Date(tooltipItem[0].parsed.x).toString()
+									);
 								} else if (chartTime === '5Y' || chartTime === 'MAX') {
 									return (
-										'Week of ' + formatDateClean(tooltipItem[0].label)
+										'Week of ' +
+										formatDateClean(
+											new Date(tooltipItem[0].parsed.x).toString()
+										)
 									);
 								}
-								return formatDateClean(tooltipItem[0].label);
+								return formatDateClean(
+									new Date(tooltipItem[0].parsed.x).toString()
+								);
 							},
-							label: function (context: {
-								dataset: { label: string };
-								parsed: { y: string };
-							}) {
+							label: function (context) {
 								let currlabel = context.dataset.label || '';
 								const value = context.parsed.y || '';
 								if (currlabel && value) {
