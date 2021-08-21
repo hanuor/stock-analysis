@@ -64,15 +64,9 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 				<table {...getTableProps()} className={styles.table}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
-							<tr
-								{...headerGroup.getHeaderGroupProps()}
-								key={data[index].symbol}
-							>
+							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th
-										{...column.getHeaderProps()}
-										key={data[index].symbol}
-									>
+									<th {...column.getHeaderProps()} key={index}>
 										{column.render('Header')}
 									</th>
 								))}
@@ -87,13 +81,10 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 							}
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} key={data[index].symbol}>
+								<tr {...row.getRowProps()} key={index}>
 									{row.cells.map((cell, index) => {
 										return (
-											<td
-												{...cell.getCellProps()}
-												key={data[index].symbol}
-											>
+											<td {...cell.getCellProps()} key={index}>
 												{cell.render('Cell')}
 											</td>
 										);
