@@ -263,6 +263,18 @@
 	@apply block text-xxs leading-3 text-gray-400 text-center mb-0.5;
 }
 
+.ccpa-msg-added {
+	@apply max-w-3xl mx-auto text-base text-center text-gray-400 border-t border-gray-700 pt-5 pb-6 lg:pb-1;
+}
+
+.ccpa-msg-added a {
+	@apply font-semibold;
+}
+
+.ccpa-msg-added a:hover {
+	@apply text-gray-300;
+}
+
 /* NPROGRESS */
 /* Make clicks pass-through */
 #nprogress {
