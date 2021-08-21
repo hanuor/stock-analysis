@@ -2,6 +2,14 @@
 	width: 100%;
 }
 
+.table a {
+	color: rgba(30, 115, 186);
+}
+
+.table a:hover {
+	color: rgba(17, 24, 39);
+}
+
 .table tr > * {
 	padding: 0.5rem;
 	border-bottom: 1px solid #ddd;

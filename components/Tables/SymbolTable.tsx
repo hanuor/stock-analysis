@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 // Used on the /stocks/ and /etf/ index pages
 import { useMemo } from 'react';
 import {
@@ -33,8 +32,6 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 	const data = useMemo(() => rowdata, [rowdata]);
 
 	const {
-		getTableProps,
-		getTableBodyProps,
 		headerGroups,
 		prepareRow,
 		rows,
@@ -64,20 +61,15 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 				</div>
 			</div>
 			<div className="overflow-x-auto">
-				<table
-					{...getTableProps()}
-					className={[styles.table, styles.table_striped].join(' ')}
-				>
+				<table className={[styles.table, styles.table_striped].join(' ')}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
-							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
 									<th
-										{...column.getHeaderProps(
-											column.getSortByToggleProps({
-												title: `Sort by: ${column.Header}`,
-											})
-										)}
+										{...column.getSortByToggleProps({
+											title: `Sort by: ${column.Header}`,
+										})}
 										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
@@ -98,18 +90,14 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 							</tr>
 						))}
 					</thead>
-					<tbody {...getTableBodyProps()}>
+					<tbody>
 						{rows.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} key={index}>
-									{row.cells.map((cell, index) => {
-										return (
-											<td {...cell.getCellProps()} key={index}>
-												{cell.render('Cell')}
-											</td>
-										);
-									})}
+								<tr key={index}>
+									{row.cells.map((cell, index) => (
+										<td key={index}>{cell.render('Cell')}</td>
+									))}
 								</tr>
 							);
 						})}

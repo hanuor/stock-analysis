@@ -4,8 +4,22 @@ import { Column } from 'react-table';
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
 import { SymbolTable } from 'components/Tables/SymbolTable';
-import { StockLink } from 'components/Links';
-import { abbreviateNumber } from 'functions/numbers/abbreviateNumber';
+import Link from 'next/link';
+
+const formatter = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 2,
+	maximumFractionDigits: 2,
+});
+
+const abbreviate = (num: number) => {
+	if (num > 1000000000) {
+		return formatter.format(num / 1000000000) + 'B';
+	} else if (num > 1000000) {
+		return formatter.format(num / 1000000) + 'M';
+	} else {
+		return formatter.format(num);
+	}
+};
 
 interface IStock {
 	s: string;
@@ -36,7 +50,12 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 			Header: 'Symbol',
 			accessor: 's',
 			Cell: function FormatCell({ cell: { value } }: ICellString) {
-				return <StockLink symbol={value} />;
+				const symb = value.includes('.') ? value : `${value}/`;
+				return (
+					<Link href={`/stocks/${symb.toLowerCase()}`} prefetch={false}>
+						<a>{value}</a>
+					</Link>
+				);
 			},
 		},
 		{
@@ -45,13 +64,13 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 		},
 		{
 			Header: 'Industry',
-			accessor: 'ind',
+			accessor: 'i',
 		},
 		{
 			Header: 'Market Cap',
-			accessor: 'mcap',
+			accessor: 'm',
 			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
-				return abbreviateNumber(value, 2, true);
+				return abbreviate(value);
 			},
 		},
 	];
