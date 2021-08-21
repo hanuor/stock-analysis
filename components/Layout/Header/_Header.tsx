@@ -7,7 +7,7 @@ import { HeaderLogin } from 'components/Layout/Header/HeaderLogin';
 import { HamburgerIcon } from 'components/Icons/Hamburger';
 import { CloseIcon } from 'components/Icons/Close';
 import { HeaderNavigation } from 'components/Layout/Header/HeaderNavigation';
-import { HeaderAd } from 'components/Ads/GPT/HeaderAd';
+// import { HeaderAd } from 'components/Ads/GPT/HeaderAd';
 
 export const Header = () => {
 	const noderef = useRef<HTMLDivElement>(null);
@@ -98,7 +98,7 @@ export const Header = () => {
 					</div>
 				</div>
 			</header>
-			<HeaderAd />
+			{/* <HeaderAd /> */}
 		</>
 	);
 };

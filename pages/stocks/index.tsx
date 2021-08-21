@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import { getData } from 'functions/API';
 import { Column } from 'react-table';
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
@@ -68,14 +69,11 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const stocksList = await fetch(
-		'https://api.stockanalysis.com/wp-json/sa/index?type=stockspage'
-	);
-	const json = await stocksList.json();
+	const stocks = await getData('index?type=stockspage');
 
 	return {
 		props: {
-			stocks: json,
+			stocks,
 		},
 		revalidate: 2 * 60 * 60,
 	};
