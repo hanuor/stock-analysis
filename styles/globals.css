@@ -47,14 +47,37 @@
 	.navmenu {
 		background-image: linear-gradient(to right, white, white),
 			linear-gradient(to right, white, white),
-			linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0)),
-			linear-gradient(to left, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+			linear-gradient(
+				to right,
+				rgba(150, 150, 150, 0.15),
+				rgba(255, 255, 255, 0)
+			),
+			linear-gradient(
+				to left,
+				rgba(150, 150, 150, 0.15),
+				rgba(255, 255, 255, 0)
+			);
 		background-position: left center, right center, left center, right center;
 		background-repeat: no-repeat;
 		background-color: white;
 		background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;
 		background-attachment: local, local, scroll, scroll;
 		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto;
+	}
+
+	.navmenu.submenu {
+		background-image: none;
+	}
+
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.navmenu::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.navmenu {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
 	}
 
 	.navmenu li a,

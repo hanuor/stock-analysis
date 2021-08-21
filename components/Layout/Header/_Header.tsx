@@ -47,7 +47,7 @@ export const Header = () => {
 
 	return (
 		<>
-			<header className="bg-white shadow-md sticky landscape:static landscape:md:sticky top-0 z-50">
+			<header className="bg-white shadow-md sticky landscape:static landscape:lg:sticky top-0 z-50">
 				<a href="#main" className="skip-nav">
 					Skip to main content
 				</a>
