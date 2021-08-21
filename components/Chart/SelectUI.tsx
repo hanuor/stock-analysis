@@ -67,7 +67,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<option value="MAX">MAX</option>
 			</select>
 
-			<ul className="hidden sm:flex flex-row whitespace-nowrap overflow-x-auto">
+			<ul className="hidden sm:flex flex-row whitespace-nowrap overflow-x-auto pl-1">
 				<li>
 					<button
 						onClick={() => dispatch('1M')}

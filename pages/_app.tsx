@@ -5,8 +5,6 @@ import NProgress from 'nprogress';
 import { Header } from 'components/Layout/Header/_Header';
 import { Footer } from 'components/Layout/Footer/_Footer';
 
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // commentt
-
 NProgress.configure({ showSpinner: false });
 Router.events.on('routeChangeStart', (url) => {
 	NProgress.start();

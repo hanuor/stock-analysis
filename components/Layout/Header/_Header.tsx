@@ -7,7 +7,7 @@ import { HeaderLogin } from 'components/Layout/Header/HeaderLogin';
 import { HamburgerIcon } from 'components/Icons/Hamburger';
 import { CloseIcon } from 'components/Icons/Close';
 import { HeaderNavigation } from 'components/Layout/Header/HeaderNavigation';
-import { HeaderAd } from 'components/Ads/GPT/HeaderAd';
+// import { HeaderAd } from 'components/Ads/GPT/HeaderAd';
 
 export const Header = () => {
 	const noderef = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ export const Header = () => {
 
 	return (
 		<>
-			<header className="bg-white shadow-md sticky landscape:static landscape:md:sticky top-0 z-50">
+			<header className="bg-white shadow-md sticky landscape:static landscape:lg:sticky top-0 z-50">
 				<a href="#main" className="skip-nav">
 					Skip to main content
 				</a>
@@ -98,7 +98,7 @@ export const Header = () => {
 					</div>
 				</div>
 			</header>
-			<HeaderAd />
+			{/* <HeaderAd /> */}
 		</>
 	);
 };
