@@ -1,4 +1,4 @@
-import type { AppProps, NextWebVitalsMetric } from 'next/app';
+import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import 'styles/globals.css';
 import NProgress from 'nprogress';
@@ -23,8 +23,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 	);
 }
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-	console.log(metric);
-}
+// export function reportWebVitals(metric: any) {
+// 	console.log(metric);
+// }
 
 export default MyApp;
