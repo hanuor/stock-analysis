@@ -77,10 +77,7 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 
 	return (
 		<div className="overflow-x-auto">
-			<table
-				{...getTableProps()}
-				className={`${styles.ipotable} ${styles.striped}`}
-			>
+			<table {...getTableProps()} className={styles.ipotable}>
 				<thead>
 					{headerGroups.map((headerGroup, index) => (
 						<tr {...headerGroup.getHeaderGroupProps()} key={index}>
