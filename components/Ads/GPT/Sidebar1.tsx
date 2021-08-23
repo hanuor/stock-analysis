@@ -1,10 +1,12 @@
 import { authState } from 'state/authState';
 import { navState } from 'state/navState';
+import { useScript } from 'hooks/useScript';
 
 export const Sidebar1 = () => {
 	const path = navState((state) => state.path);
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
+	useScript('https://www.dianomi.com/js/contextfeed.js');
 
 	if (status === 'completed' && isPro) {
 		return null;
@@ -15,13 +17,8 @@ export const Sidebar1 = () => {
 	}
 
 	return (
-		<div className="hidden lg:block lbl mt-4 mb-1">
-			<div
-				className={`hidden lg:block min-h-[250px] text-center mx-auto${
-					process.env.NODE_ENV === 'development' ? ' bg-gray-100' : ''
-				}`}
-				id="div-gpt-ad-1617185412139-0"
-			></div>
+		<div className="min-h-[250px] mt-3 mb-1">
+			<div className="dianomi_context" data-dianomi-context-id="420"></div>
 		</div>
 	);
 };
