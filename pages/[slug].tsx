@@ -7,12 +7,10 @@ import matter from 'gray-matter';
 import { ArticleLayout } from 'components/Layout/ArticleLayout';
 import { SEO } from 'components/SEO';
 import { CustomLink, External } from 'components/CustomLink';
-import { ChangeConsent } from 'components/Ads/ChangeConsent';
 
 const components = {
 	a: CustomLink,
 	External,
-	ChangeConsent,
 };
 
 interface Props {
