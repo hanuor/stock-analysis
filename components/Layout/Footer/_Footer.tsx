@@ -288,7 +288,6 @@ export const Footer = () => {
 						Real-time quotes provided by IEX Cloud. Other market data is
 						delayed by at least 15 minutes.
 					</div>
-					<div id="choice-footer-msg"></div>
 				</div>
 			</footer>
 		</>
