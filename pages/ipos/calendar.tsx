@@ -10,7 +10,6 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
-import { Mobile1 } from 'components/Ads/GPT/Mobile1';
 
 interface Props {
 	data: {
@@ -47,7 +46,6 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								title="Upcoming High-Profile IPOs"
 								data={data.highprofile}
 							/>
-							<Mobile1 />
 							<CalendarTable
 								title="More Upcoming IPOs"
 								data={data.unknown}
