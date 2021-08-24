@@ -2,6 +2,7 @@
  * This function calls the back-end to fetch data to use on the front-end
  * @param {string} params The parameters to use in the API request, ex: "q?id=123"
  */
+
 export const getData = async (params: string) => {
 	const url =
 		process.env.NEXT_PUBLIC_API_URL ||

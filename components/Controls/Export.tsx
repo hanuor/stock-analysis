@@ -49,6 +49,7 @@ export function Export({ title, buttons }: Props) {
 									<ExportItemRestricted
 										key={index}
 										title={button.title}
+										type={button.type}
 									/>
 								) : (
 									<ExportItem
