@@ -5,6 +5,9 @@
 .ipotable tr th {
 	text-align: left;
 	font-size: 1.05rem;
+	font-weight: 600;
+	border-top: 1px solid #ddd;
+	background-color: #ffffff;
 }
 
 .ipotable tr > * {
@@ -33,13 +36,8 @@
 	background-color: #f2f9ff !important;
 }
 
-.striped tr:nth-child(odd) {
+.ipotable tr:nth-child(odd) {
 	background-color: #f6f7f8;
-}
-
-.striped tr th {
-	font-weight: 600;
-	background-color: #ffffff;
 }
 
 .ipotable tr > *:nth-child(3) {
