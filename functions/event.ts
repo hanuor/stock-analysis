@@ -6,7 +6,7 @@
 
 export function event(category: string, label: string) {
 	console.log({ label });
-	window.gtag('event', 'click', {
+	gtag('event', 'click', {
 		event_category: category,
 		event_label: label,
 	});
