@@ -10,7 +10,7 @@ export default function Restricted({ title }: ExportItemProps) {
 
 	return (
 		<div
-			className="bg-gray-100 text-gray-900 flex justify-between items-center px-4 py-2 text-sm"
+			className="text-gray-700 flex justify-between items-center px-4 py-2 text-sm"
 			onClick={() => router.push('/pro/')}
 			title="This feature is available for Pro members."
 		>
