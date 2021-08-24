@@ -146,9 +146,10 @@ export default function Login() {
 							<Link href="/pro/" prefetch={false}>
 								<a
 									className="bll"
-									onClick={() =>
-										event('free-trial', 'free-trial-login-page')
-									}
+									onClick={() => {
+										console.log('boo');
+										event('free-trial', 'free-trial-login-page');
+									}}
 								>
 									start your free 30-day trial
 								</a>
