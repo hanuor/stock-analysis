@@ -17,7 +17,12 @@ export const ActionsPaywall = ({
 				Showing 100 of {total} {title.toLowerCase()}
 			</h4>
 			<div className="text-xl">Subscribe to see the full list</div>
-			<Button text="Start Free Trial" url="/pro/" className="w-44" />
+			<Button
+				text="Start Free Trial"
+				url="/pro/"
+				className="w-44"
+				id="free-trial-actions-below"
+			/>
 		</div>
 	);
 };

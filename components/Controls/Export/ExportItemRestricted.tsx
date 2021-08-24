@@ -7,12 +7,13 @@ const Restricted = dynamic(() => import('./Restricted'), {
 
 interface ExportItemProps {
 	title: string;
+	type: string;
 }
 
-export const ExportItemRestricted = ({ title }: ExportItemProps) => {
+export const ExportItemRestricted = ({ title, type }: ExportItemProps) => {
 	return (
 		<Menu.Item>
-			<Restricted title={title} />
+			<Restricted title={title} type={type} />
 		</Menu.Item>
 	);
 };
