@@ -14,6 +14,8 @@
 		"test-all": "npm run check-lint && npm run check-types && npm run build"
 	},
 	"dependencies": {
+		"@headlessui/react": "^1.4.0",
+		"@heroicons/react": "^1.0.4",
 		"@tailwindcss/forms": "^0.3.2",
 		"@tippyjs/react": "^4.2.5",
 		"axios": "^0.21.1",

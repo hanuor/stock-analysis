@@ -13,7 +13,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 		'text-gray-900 hover:text-gray-900 hover:text-shadow' + common;
 
 	return (
-		<ul className="flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto">
+		<ul className="flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto hide-scroll">
 			<li>
 				<button
 					className={chartTime === '1D' ? active : inactive}
