@@ -48,6 +48,7 @@
 		"@types/d3-selection": "^3.0.0",
 		"@types/d3-shape": "^3.0.1",
 		"@types/d3-time-format": "^4.0.0",
+		"@types/gtag.js": "^0.0.7",
 		"@types/lodash.flattendeep": "^4.4.6",
 		"@types/node": "^16.4.8",
 		"@types/nprogress": "^0.2.0",

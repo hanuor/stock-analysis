@@ -1,6 +1,7 @@
 import { authState } from 'state/authState';
 import Link from 'next/link';
 import { Logout } from 'components/Logout';
+import { event } from 'functions/event';
 
 interface Props {
 	setOpen: (open: boolean) => void;
@@ -32,8 +33,10 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 				<Link href="/pro/" prefetch={false}>
 					<a
 						className="block lg:inline-block py-2 px-4 lg:py-1 lg:px-3 flex-1 bg-blue-brand_light lg:flex-none text-white lg:rounded-sm lg:font-normal hover:bg-blue-brand_sharp transition duration-200"
-						onClick={() => setOpen(false)}
-						id="free-trial-header"
+						onClick={() => {
+							setOpen(false);
+							event('free-trial', 'free-trial-header');
+						}}
 					>
 						Free Trial
 					</a>
