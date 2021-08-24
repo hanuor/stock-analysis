@@ -18,7 +18,7 @@ export function Filter({
 	}, 100);
 
 	return (
-		<div className="min-w-[80px]">
+		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px]">
 			<label htmlFor="filter" className="sr-only">
 				Filter results
 			</label>

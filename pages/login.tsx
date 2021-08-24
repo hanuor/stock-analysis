@@ -143,7 +143,9 @@ export default function Login() {
 						<p className="mt-2 text-center font-medium text-smaller text-gray-600">
 							Or{' '}
 							<Link href="/pro/" prefetch={false}>
-								<a className="bll">start your free 30-day trial</a>
+								<a className="bll" id="free-trial-login">
+									start your free 30-day trial
+								</a>
 							</Link>
 						</p>
 					</div>
