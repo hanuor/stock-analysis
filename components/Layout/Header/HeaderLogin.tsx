@@ -35,6 +35,7 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 						className="block lg:inline-block py-2 px-4 lg:py-1 lg:px-3 flex-1 bg-blue-brand_light lg:flex-none text-white lg:rounded-sm lg:font-normal hover:bg-blue-brand_sharp transition duration-200"
 						onClick={() => {
 							setOpen(false);
+							console.log('boo');
 							event('free-trial', 'free-trial-header');
 						}}
 					>

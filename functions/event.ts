@@ -5,11 +5,9 @@
  */
 
 export function event(category: string, label: string) {
-	if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
-		console.log({ label });
-		window.gtag('event', 'click', {
-			event_category: category,
-			event_label: label,
-		});
-	}
+	console.log({ label });
+	window.gtag('event', 'click', {
+		event_category: category,
+		event_label: label,
+	});
 }
