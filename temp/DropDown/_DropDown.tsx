@@ -3,6 +3,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { MenuItem } from './MenuItem';
 import { MenuItemRestricted } from './MenuItemRestricted';
+import { authState } from 'state/authState';
 
 type Button = {
 	title: string;
@@ -16,10 +17,12 @@ interface Props {
 }
 
 export function DropDown({ title, buttons }: Props) {
+	const isPro = authState((state) => state.isPro);
+
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
-				<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
+				<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
 					{title}
 					<ChevronDownIcon
 						className="-mr-1 ml-2 h-5 w-5"
@@ -41,7 +44,7 @@ export function DropDown({ title, buttons }: Props) {
 					<div className="py-1">
 						{buttons &&
 							buttons.map((button, index) =>
-								button.restricted ? (
+								button.restricted && !isPro ? (
 									<MenuItemRestricted
 										key={index}
 										title={button.title}

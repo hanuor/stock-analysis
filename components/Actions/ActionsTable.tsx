@@ -5,7 +5,7 @@ import {
 	Column,
 } from 'react-table';
 import { useMemo } from 'react';
-import { Controls } from '../Controls/_Controls';
+import { Controls } from 'components/Controls/_Controls';
 import { ActionsPaywall } from './ActionsPaywall';
 import styles from './ActionsTable.module.css';
 import { authState } from 'state/authState';
@@ -37,8 +37,6 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 	const data = useMemo(() => rowdata, [rowdata]);
 
 	const {
-		getTableProps,
-		getTableBodyProps,
 		headerGroups,
 		prepareRow,
 		rows,
@@ -62,19 +60,17 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 				setGlobalFilter={setGlobalFilter}
 			/>
 			<div className={`overflow-x-auto ${styles[title.toLowerCase()]}`}>
-				<table {...getTableProps()} className={styles.actionstable}>
+				<table className={styles.actionstable} id="actions-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
-							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th {...column.getHeaderProps()} key={index}>
-										{column.render('Header')}
-									</th>
+									<th key={index}>{column.render('Header')}</th>
 								))}
 							</tr>
 						))}
 					</thead>
-					<tbody {...getTableBodyProps()}>
+					<tbody>
 						{rows.map((row, index) => {
 							// End early if paywalled
 							if (index + 1 > 100 && showPaywall) {
@@ -82,13 +78,9 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 							}
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} key={index}>
+								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return (
-											<td {...cell.getCellProps()} key={index}>
-												{cell.render('Cell')}
-											</td>
-										);
+										return <td key={index}>{cell.render('Cell')}</td>;
 									})}
 								</tr>
 							);

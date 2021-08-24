@@ -1,8 +1,7 @@
+import 'regenerator-runtime/runtime';
 import { FilterValue } from 'react-table';
-// import { Export } from './Export';
-import { DropDown } from 'components/DropDown/_DropDown';
+import { Export } from './Export';
 import { Filter } from './Filter';
-// import { GlobalFilter } from 'components/Tables/GlobalFilter';
 
 interface Props {
 	count: number;
@@ -20,43 +19,26 @@ export const Controls = ({
 	setGlobalFilter,
 }: Props) => {
 	return (
-		<div className="flex items-center border-t border-gray-200 space-x-6 py-2">
+		<div className="flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1">
 			<div className="mr-auto">
-				<h2 className="text-2xl font-semibold">
+				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
 					{count} {title}
 				</h2>
 			</div>
-			<div>
-				<DropDown
-					title="View"
-					buttons={[
-						{ title: '100', restricted: false, active: true },
-						{ title: '200', restricted: true, active: false },
-						{ title: '500', restricted: true, active: false },
-						{ title: 'All', restricted: true, active: false },
-					]}
-				/>
-			</div>
-			<div>
-				<DropDown
+			<div className="hidden sm:block">
+				<Export
 					title="Export"
 					buttons={[
-						{ title: 'Export to Excel', restricted: false },
-						{ title: 'Export to CSV', restricted: true },
+						{ title: 'Export to Excel', type: 'xlsx', restricted: false },
+						{ title: 'Export to CSV', type: 'csv', restricted: true },
 					]}
 				/>
 			</div>
-			<div className="flex space-x-1">
-				<Filter />
-				<DropDown
-					title="Filter By"
-					buttons={[
-						{ title: 'All', restricted: false },
-						{ title: 'Date', restricted: true },
-						{ title: 'Symbol', restricted: true },
-						{ title: 'Name', restricted: true },
-						{ title: 'Acquirer', restricted: true },
-					]}
+			<div>
+				<Filter
+					useAsyncDebounce={useAsyncDebounce}
+					globalFilter={globalFilter}
+					setGlobalFilter={setGlobalFilter}
 				/>
 			</div>
 		</div>

@@ -1,6 +1,24 @@
-export function Filter() {
+import { useState } from 'react';
+import { FilterValue } from 'react-table';
+
+interface Props {
+	useAsyncDebounce: (value: any, wait: number) => any;
+	globalFilter: any;
+	setGlobalFilter: (filterValue: FilterValue) => void;
+}
+
+export function Filter({
+	useAsyncDebounce,
+	globalFilter,
+	setGlobalFilter,
+}: Props) {
+	const [value, setValue] = useState(globalFilter);
+	const onChange = useAsyncDebounce((value: any) => {
+		setGlobalFilter(value || undefined);
+	}, 100);
+
 	return (
-		<div>
+		<div className="min-w-[80px]">
 			<label htmlFor="filter" className="sr-only">
 				Filter results
 			</label>
@@ -8,7 +26,12 @@ export function Filter() {
 				type="text"
 				name="filter"
 				id="filter"
-				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md"
+				value={value || ''}
+				onChange={(e) => {
+					setValue(e.target.value);
+					onChange(e.target.value);
+				}}
 				placeholder="Filter..."
 			/>
 		</div>
