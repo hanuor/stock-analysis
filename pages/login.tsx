@@ -10,7 +10,6 @@ import { Logout } from 'components/Logout';
 import Axios from 'axios';
 import { authState } from 'state/authState';
 import { CrispChat } from 'components/Scripts/CrispChat';
-import { event } from 'functions/event';
 
 export default function Login() {
 	const { isLoggedIn, setIsLoggedIn } = useUserInfo();
@@ -144,13 +143,7 @@ export default function Login() {
 						<p className="mt-2 text-center font-medium text-smaller text-gray-600">
 							Or{' '}
 							<Link href="/pro/" prefetch={false}>
-								<a
-									className="bll"
-									onClick={() => {
-										console.log('boo');
-										event('free-trial', 'free-trial-login-page');
-									}}
-								>
+								<a className="bll" id="free-trial-login">
 									start your free 30-day trial
 								</a>
 							</Link>
