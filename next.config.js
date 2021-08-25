@@ -20,6 +20,11 @@ module.exports = {
 				destination: '/ipos/2019/',
 				permanent: true,
 			},
+			{
+				source: '/ipos/2020-list/%20',
+				destination: '/ipos/2020/',
+				permanent: true,
+			},
 		];
 	},
 };
