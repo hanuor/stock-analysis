@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { formatDateClean } from 'functions/formatDates';
 import { format } from 'd3-format';
+import { Unavailable } from 'components/Unavailable';
 
 const countZero = (cutter: number[]) => {
 	let count = 0;
@@ -25,6 +26,20 @@ interface Props {
 export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 	const x = useMemo(() => xdata.slice(countZero(ydata)), [xdata, ydata]);
 	const y = useMemo(() => ydata.slice(countZero(ydata)), [ydata]);
+
+	if (
+		typeof window !== 'undefined' &&
+		typeof window.ResizeObserver === 'undefined'
+	) {
+		return (
+			<div className="h-72">
+				<Unavailable
+					message="This chart does not work in your browser. Please update to the latest browser version."
+					small={true}
+				/>
+			</div>
+		);
+	}
 
 	if (x.length === 0) {
 		return null;
