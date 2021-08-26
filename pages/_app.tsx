@@ -10,7 +10,20 @@ Router.events.on('routeChangeStart', (url) => {
 	NProgress.start();
 });
 
-Router.events.on('routeChangeComplete', () => NProgress.done());
+declare global {
+	// eslint-disable-next-line no-unused-vars
+	interface Window {
+		dianomiReloadContext: any;
+	}
+}
+
+Router.events.on('routeChangeComplete', () => {
+	NProgress.done();
+	// Reload Dianomi ads
+	if (typeof window.dianomiReloadContext !== 'undefined') {
+		window.dianomiReloadContext();
+	}
+});
 Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {

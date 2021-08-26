@@ -1,10 +1,15 @@
+import { authState } from 'state/authState';
 import { navState } from 'state/navState';
-import { useScript } from 'hooks/useScript';
 
 // Dianomi ad in the footer
 export const FooterDianomi = () => {
 	const path = navState((state) => state.path);
-	useScript('https://www.dianomi.com/js/contextfeed.js');
+	const status = authState((state) => state.status);
+	const isPro = authState((state) => state.isPro);
+
+	if (status === 'completed' && isPro) {
+		return null;
+	}
 
 	if (
 		path.one !== 'login' &&
