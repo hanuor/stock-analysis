@@ -3,7 +3,6 @@ import { useNavState } from 'hooks/useNavState';
 import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import FooterDianomi from 'components/Ads/Dianomi/FootHorz';
-import { GoogleTagManager } from 'components/Scripts/GoogleTagManager';
 
 interface IconProps {
 	className: string;
@@ -79,21 +78,13 @@ const navigation = {
 };
 
 export const Footer = () => {
-	const { isLoggedIn, isPro, status } = useUserInfo();
+	const { isLoggedIn } = useUserInfo();
 	// eslint-disable-next-line no-unused-vars
 	const path = useNavState();
 
 	return (
 		<>
-			{status === 'completed' &&
-				!isPro &&
-				process.env.NODE_ENV !== 'development' && (
-					<>
-						<GoogleTagManager />
-						<FooterDianomi />
-					</>
-				)}
-
+			<FooterDianomi />
 			<footer className="bg-gray-800 clear-both mt-10">
 				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
