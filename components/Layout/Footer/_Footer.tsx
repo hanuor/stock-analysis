@@ -94,21 +94,15 @@ export const Footer = () => {
 					</>
 				)}
 
-			<footer
-				className="bg-gray-800 clear-both mt-10"
-				aria-labelledby="footerHeading"
-			>
-				<h2 id="footerHeading" className="sr-only">
-					Footer
-				</h2>
+			<footer className="bg-gray-800 clear-both mt-10">
 				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 						<div className="grid grid-cols-2 gap-8 xl:col-span-2">
 							<div className="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
 										Sections
-									</h3>
+									</h4>
 									<ul className="mt-4 space-y-4">
 										{navigation.sections.map((item) => (
 											<li key={item.name}>
@@ -122,9 +116,9 @@ export const Footer = () => {
 									</ul>
 								</div>
 								<div className="mt-12 md:mt-0">
-									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
 										Support
-									</h3>
+									</h4>
 									<ul className="mt-4 space-y-4">
 										<li>
 											<Link href="/contact/" prefetch={false}>
@@ -176,9 +170,9 @@ export const Footer = () => {
 							</div>
 							<div className="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
 										Company
-									</h3>
+									</h4>
 									<ul className="mt-4 space-y-4">
 										{navigation.company.map((item) => (
 											<li key={item.name}>
@@ -192,9 +186,9 @@ export const Footer = () => {
 									</ul>
 								</div>
 								<div className="mt-12 md:mt-0">
-									<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
 										Legal
-									</h3>
+									</h4>
 									<ul className="mt-4 space-y-4">
 										{navigation.legal.map((item) => (
 											<li key={item.name}>
@@ -210,9 +204,9 @@ export const Footer = () => {
 							</div>
 						</div>
 						<div className="mt-8 xl:mt-0">
-							<h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+							<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
 								Subscribe to the newsletter
-							</h3>
+							</h4>
 							<p className="mt-4 text-base text-gray-300">
 								The latest updates, straight to your inbox.
 							</p>

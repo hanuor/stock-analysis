@@ -3,9 +3,9 @@ import { MailIcon } from 'components/Icons/Mail';
 export const NewsletterWidget = () => {
 	return (
 		<div className="bg-gray-100 overflow-hidden rounded-lg p-6 text-center">
-			<h4 className="text-2xl font-bold mb-4">
+			<h3 className="text-2xl font-bold mb-4">
 				The Stock Analysis Newsletter
-			</h4>
+			</h3>
 			<p className="text-xl mb-5">Get the latest updates in your inbox.</p>
 			<form
 				method="post"

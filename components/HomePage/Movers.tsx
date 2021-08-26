@@ -64,11 +64,12 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		return (
 			<div className="flex-grow">
 				<div className="flex flex-row justify-between items-end mb-1">
-					<h2 className="text-lg xs:text-xl bp:text-2xl font-bold mb-0.5 bp:mb-1">
+					<h2 className="text-xl bp:text-2xl font-bold mb-0.5 bp:mb-1">
 						{titlePrefix} {type}
 					</h2>
 					<span className="text-xs xs:text-sm text-gray-600">
-						Updated {date}
+						<span className="hidden sm:inline">Updated </span>
+						{date}
 					</span>
 				</div>
 				<table className="border border-gray-200 w-full">
