@@ -1,5 +1,14 @@
-export const Unavailable = ({ message }: { message: string }) => (
-	<div className="h-full flex justify-center items-center mt-4 bg-gray-50 border border-gray-200 text-3xl font-semibold rounded-sm">
+interface UnavailableI {
+	message: string;
+	small?: boolean;
+}
+
+export const Unavailable = ({ message, small }: UnavailableI) => (
+	<div
+		className={`h-full flex justify-center items-center text-center p-4 md:p-12 bg-gray-50 border border-gray-200 ${
+			small ? 'text-xl' : 'text-3xl'
+		} font-semibold rounded-sm`}
+	>
 		{message}
 	</div>
 );
