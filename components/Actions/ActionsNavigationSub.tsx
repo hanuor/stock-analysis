@@ -46,7 +46,7 @@ export const ActionsNavigationSub = () => {
 		if (all) {
 			setCount(length);
 		} else {
-			setCount(2);
+			setCount(1);
 		}
 	}, [all, length]);
 
@@ -118,7 +118,7 @@ export const ActionsNavigationSub = () => {
 							className="inactive font-semibold"
 							onClick={() => setAll(true)}
 						>
-							2018-1998 &darr;
+							2020-1998 &darr;
 						</span>
 					)}
 				</li>

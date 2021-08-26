@@ -7,6 +7,7 @@ import {
 	formatDateMonth,
 	formatDateYear,
 } from 'functions/formatDates';
+import { Unavailable } from 'components/Unavailable';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
@@ -23,6 +24,18 @@ interface Props {
 }
 
 export const Chart = ({ chartData, chartTime }: Props) => {
+	if (
+		typeof window !== 'undefined' &&
+		typeof window.ResizeObserver === 'undefined'
+	) {
+		return (
+			<Unavailable
+				message="This chart does not work in your browser. Please update to the latest browser version."
+				small={true}
+			/>
+		);
+	}
+
 	const label =
 		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price';
 

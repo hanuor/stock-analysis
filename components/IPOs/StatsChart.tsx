@@ -1,5 +1,6 @@
 import { Bar, defaults } from 'react-chartjs-2';
 import { useRef } from 'react';
+import { Unavailable } from 'components/Unavailable';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
@@ -12,6 +13,20 @@ interface Props {
 
 export const StatsChart = ({ title, x, y }: Props) => {
 	const chartRef = useRef<any>();
+
+	if (
+		typeof window !== 'undefined' &&
+		typeof window.ResizeObserver === 'undefined'
+	) {
+		return (
+			<div className="mt-4 mb-3 sm:mb-4 h-[300px] sm:h-[390px]">
+				<Unavailable
+					message="This chart does not work in your browser. Please update to the latest browser version."
+					small={true}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className="mt-4 mb-3 sm:mb-4 border border-gray-200 h-[300px] sm:h-[390px] p-1 sm:p-2">

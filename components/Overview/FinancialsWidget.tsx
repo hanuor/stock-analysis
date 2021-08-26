@@ -1,11 +1,7 @@
 import { Button } from 'components/Button';
-import { Bar, defaults } from 'react-chartjs-2';
 import { Info } from 'types/Info';
 import { Overview } from 'types/Overview';
-
-defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
-defaults.color = '#222222';
+import { FinancialsWidgetChart } from './FinancialsWidgetChart';
 
 interface Props {
 	info: Info;
@@ -63,93 +59,11 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 				<p className="mb-3 text-gray-900">{data.financialIntro}</p>
 			)}
 			<div className="h-72 border border-gray-200 rounded-sm p-1 xs:px-2 bp:px-3">
-				<Bar
-					data={{
-						labels: data.financialChart[0],
-						datasets: [
-							{
-								label: 'Revenue',
-								backgroundColor: '#2C6288',
-								data: data.financialChart[1],
-								categoryPercentage: 0.8,
-								barPercentage: 0.85,
-							},
-							{
-								label: 'Earnings',
-								backgroundColor: colors,
-								data: data.financialChart[2],
-								categoryPercentage: 0.8,
-								barPercentage: 0.85,
-							},
-						],
-					}}
-					options={{
-						maintainAspectRatio: false,
-						animation: false,
-						scales: {
-							x: {
-								ticks: {
-									font: {
-										size: 14,
-									},
-								},
-								grid: {
-									display: false,
-								},
-							},
-							y: {
-								position: 'right',
-								ticks: {
-									font: {
-										size: 14,
-									},
-									padding: 0,
-									beginAtZero: true,
-									callback: function (value: number) {
-										const newvalue = value / 1000000;
-										return newvalue
-											.toString()
-											.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-									},
-								},
-								grid: {
-									drawBorder: false,
-								},
-							},
-						},
-						plugins: {
-							legend: {
-								labels: {
-									font: {
-										size: 15,
-									},
-									padding: 12,
-									position: 'bottom',
-									align: 'start',
-								},
-							},
-							tooltip: {
-								borderWidth: 1,
-								titleFont: {
-									size: 17,
-									weight: '600',
-								},
-								bodyFont: {
-									size: 15,
-									weight: '400',
-								},
-								padding: {
-									top: 12,
-									right: 15,
-									bottom: 12,
-									left: 15,
-								},
-								displayColors: false,
-							},
-						},
-					}}
-					plugins={[padLegend, colorEarnings]}
-					key={Math.random()}
+				<FinancialsWidgetChart
+					data={data}
+					colors={colors}
+					padLegend={padLegend}
+					colorEarnings={colorEarnings}
 				/>
 			</div>
 			{info.currency !== 'USD' && (
