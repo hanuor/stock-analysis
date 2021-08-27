@@ -47,11 +47,11 @@ const StockOverview = ({ info, data, news }: Props) => {
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
-				<div className="px-4 md:px-0 lg:order-2 space-y-6">
-					{news && news.data.length > 5 && <Sidebar1 />}
+				<div className="px-4 lg:pt-1 md:px-0 lg:order-2 space-y-6">
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
+					{news && news.data.length > 10 && <Sidebar1 />}
 				</div>
 				{news && (
 					<div className="lg:order-1">

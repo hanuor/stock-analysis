@@ -72,22 +72,19 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 
 	const tableInstance = useTable({ columns, data }, useSortBy);
 
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		tableInstance;
+	const { headerGroups, rows, prepareRow } = tableInstance;
 
 	return (
 		<div className="overflow-x-auto">
-			<table {...getTableProps()} className={styles.ipotable}>
+			<table className={styles.ipotable + ' mt-1.5'}>
 				<thead>
 					{headerGroups.map((headerGroup, index) => (
-						<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+						<tr key={index}>
 							{headerGroup.headers.map((column, index) => (
 								<th
-									{...column.getHeaderProps(
-										column.getSortByToggleProps({
-											title: `Sort by: ${column.Header}`,
-										})
-									)}
+									{...column.getSortByToggleProps({
+										title: `Sort by: ${column.Header}`,
+									})}
 									key={index}
 								>
 									<span className="inline-flex flex-row items-center">
@@ -108,17 +105,13 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 						</tr>
 					))}
 				</thead>
-				<tbody {...getTableBodyProps()}>
+				<tbody>
 					{rows.map((row, index) => {
 						prepareRow(row);
 						return (
-							<tr {...row.getRowProps()} key={index}>
+							<tr key={index}>
 								{row.cells.map((cell, index) => {
-									return (
-										<td {...cell.getCellProps()} key={index}>
-											{cell.render('Cell')}
-										</td>
-									);
+									return <td key={index}>{cell.render('Cell')}</td>;
 								})}
 							</tr>
 						);
