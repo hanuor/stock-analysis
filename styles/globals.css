@@ -283,7 +283,11 @@
 	}
 }
 
-.lbl::before {
+.profile-table tr:not(:last-child) {
+	@apply border-b border-gray-200;
+}
+
+/* .lbl::before {
 	content: 'Advertisement';
 	@apply block text-xxs leading-3 text-gray-400 text-center mb-0.5;
 }
@@ -298,7 +302,7 @@
 
 .ccpa-msg-added a:hover {
 	@apply text-gray-300;
-}
+} */
 
 /* NPROGRESS */
 /* Make clicks pass-through */
