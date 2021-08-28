@@ -28,11 +28,7 @@ export const TabNavigation = ({
 
 	return (
 		<nav className="border-b-2 border-blue-brand_sharp w-full">
-			<ul
-				className="navmenu"
-				ref={menuref}
-				onScroll={(e) => handleScroll(e)}
-			>
+			<ul className="navmenu" ref={menuref} onScroll={handleScroll}>
 				<Tab symbol={symbol} title="Overview" append="" />
 				<Tab symbol={symbol} title="Financials" append="financials" />
 				<Tab symbol={symbol} title="Statistics" append="statistics" />

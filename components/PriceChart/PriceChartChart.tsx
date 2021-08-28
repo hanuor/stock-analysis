@@ -214,13 +214,20 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 								return formatDateClean(tooltipItem[0].label);
 							},
 							label: function (context: {
+								label: string;
 								dataset: { label: string };
 								parsed: { y: string };
 							}) {
 								let currlabel = context.dataset.label || '';
 								const value = context.parsed.y || '';
 								if (currlabel && value) {
-									currlabel = label + ': ' + value;
+									if (
+										context.label === timeAxis[timeAxis.length - 1]
+									) {
+										currlabel = 'Latest Price: ' + value;
+									} else {
+										currlabel = label + ': ' + value;
+									}
 								}
 								return currlabel;
 							},

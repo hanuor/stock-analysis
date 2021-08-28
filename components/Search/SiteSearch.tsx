@@ -3,6 +3,7 @@ import { SearchIcon } from 'components/Icons/Search';
 import { SingleResult } from './SingleResult';
 import { useRouter } from 'next/router';
 import { getData } from 'functions/API';
+import { CloseIcon } from 'components/Icons/Close';
 
 interface SearchItem {
 	s: string;
@@ -195,6 +196,15 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 		setOpen(false);
 	}
 
+	function clearInput(e: any) {
+		e.preventDefault();
+		setQuery('');
+		const keyref = inputRef.current ?? null;
+		if (keyref) {
+			keyref.focus();
+		}
+	}
+
 	useEffect(() => {
 		if (open) {
 			document.addEventListener('keydown', keyClick);
@@ -242,6 +252,13 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 					!fetched && fetchIndex();
 				}}
 			/>
+			{query && query.length > 0 && (
+				<div className="absolute flex right-[10px]">
+					<button aria-label="Clear" title="Clear" onClick={clearInput}>
+						<CloseIcon classes="h-5 w-5 text-gray-600 hover:text-blue-500" />
+					</button>
+				</div>
+			)}
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
 				{open && !error && (
 					<>

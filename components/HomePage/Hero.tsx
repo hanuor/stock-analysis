@@ -14,7 +14,7 @@ export const Hero = () => (
 					statements and more.
 				</p>
 				<form action="/search/" method="get" role="search">
-					<div className="flex relative mx-auto text-left mb-5 max-w-[95%] md:max-w-[75%] lg:max-w-lg">
+					<div className="flex items-center relative mx-auto text-left mb-5 max-w-[95%] md:max-w-[75%] lg:max-w-lg">
 						<SiteSearch nav={false} />
 					</div>
 				</form>
