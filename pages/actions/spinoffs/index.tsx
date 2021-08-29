@@ -57,9 +57,12 @@ export const ActionsSpinoffs = ({ data }: ActionProps) => {
 			/>
 			<ActionsLayout title="Recent Stock Spinoffs">
 				<ActionsTable
+					key="Spinoffs"
 					title="Spinoffs"
 					columndata={columns}
-					rowdata={data}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="spinoffs"
 				/>
 			</ActionsLayout>
 		</>

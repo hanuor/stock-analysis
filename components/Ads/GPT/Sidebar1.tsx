@@ -15,8 +15,9 @@ export const Sidebar1 = () => {
 	}
 
 	return (
-		<div className="min-h-[250px] mt-3">
-			<div className="dianomi_context" data-dianomi-context-id="420"></div>
-		</div>
+		<>
+			{/* prettier-ignore */}
+			<div className="min-h-[250px] mt-3"><div className="dianomi_context" data-dianomi-context-id="420"></div></div>
+		</>
 	);
 };

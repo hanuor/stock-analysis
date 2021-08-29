@@ -6,10 +6,9 @@ import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { ParsedUrlQuery } from 'querystring';
 import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { ActionsPaywall } from 'components/Actions/ActionsPaywall';
 
 export const ActionsSplitsYear = ({ year, data }: ActionProps) => {
-	const yearData = data.filter((d) => d.date.slice(-4) === year);
-
 	const columns = [
 		{
 			Header: 'Date',
@@ -48,9 +47,18 @@ export const ActionsSplitsYear = ({ year, data }: ActionProps) => {
 			/>
 			<ActionsLayout title={`${year} Stock Splits`}>
 				<ActionsTable
+					key={`Splits-${year}`}
 					title="Splits"
 					columndata={columns}
-					rowdata={yearData}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="splits"
+					year={year}
+				/>
+				<ActionsPaywall
+					count={data.data.length}
+					fullCount={data.fullCount}
+					title="Stock Splits"
 				/>
 			</ActionsLayout>
 		</>

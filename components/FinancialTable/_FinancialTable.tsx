@@ -27,6 +27,7 @@ import dynamic from 'next/dynamic';
 import { Tooltip } from './Tooltip';
 import { TooltipChart } from './TooltipChart';
 import { getValidCount } from './functions/getValidCount';
+import { Unavailable } from 'components/Unavailable';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
@@ -74,10 +75,13 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 			<>
 				<div className="">
 					<TableTitle statement={statement} />
-					<span className="text-xl">
-						No {range} {statement.replace(/_/g, ' ')} data found for this
-						stock.
-					</span>
+					<Unavailable
+						message={`No ${range} ${statement.replace(
+							/_/g,
+							' '
+						)} data found for this stock.`}
+						classes="min-h-[300px] lg:min-h-[500px]"
+					/>
 				</div>
 			</>
 		);

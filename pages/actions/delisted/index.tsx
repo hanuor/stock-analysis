@@ -37,9 +37,12 @@ export const ActionsDelisted = ({ data }: ActionProps) => {
 			/>
 			<ActionsLayout title="Recently Delisted Stocks">
 				<ActionsTable
+					key="Delistings"
 					title="Delistings"
 					columndata={columns}
-					rowdata={data}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="delisted"
 				/>
 			</ActionsLayout>
 		</>

@@ -46,7 +46,14 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 				canonical="actions/changes/"
 			/>
 			<ActionsLayout title="Recent Stock Symbol Changes">
-				<ActionsTable title="Changes" columndata={columns} rowdata={data} />
+				<ActionsTable
+					key="Changes"
+					title="Changes"
+					columndata={columns}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="changes"
+				/>
 			</ActionsLayout>
 		</>
 	);

@@ -37,9 +37,12 @@ export const ActionsBankruptcies = ({ data }: ActionProps) => {
 			/>
 			<ActionsLayout title="Recent Bankruptcies">
 				<ActionsTable
+					key="Bankruptcies"
 					title="Bankruptcies"
 					columndata={columns}
-					rowdata={data}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="bankruptcies"
 				/>
 			</ActionsLayout>
 		</>
