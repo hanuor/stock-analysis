@@ -12,7 +12,10 @@ export type CellString = {
 
 export interface ActionProps {
 	year?: string;
-	data: Action[];
+	data: {
+		data: Action[];
+		fullCount: number;
+	};
 }
 
 export interface ActionStatisticsProps {

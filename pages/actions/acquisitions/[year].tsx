@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { StockLink } from 'components/Links';
 import { ParsedUrlQuery } from 'querystring';
 import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { ActionsPaywall } from 'components/Actions/ActionsPaywall';
 
 export const ActionsAcquisitionsYear = ({ year, data }: ActionProps) => {
 	const columns = [
@@ -64,9 +65,18 @@ export const ActionsAcquisitionsYear = ({ year, data }: ActionProps) => {
 			/>
 			<ActionsLayout title={`${year} Mergers & Acquisitions`}>
 				<ActionsTable
+					key={`Acquisitions-${year}`}
 					title="Acquisitions"
 					columndata={columns}
-					rowdata={data}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="acquisitions"
+					year={year}
+				/>
+				<ActionsPaywall
+					count={data.data.length}
+					fullCount={data.fullCount}
+					title="Acquisitions"
 				/>
 			</ActionsLayout>
 		</>

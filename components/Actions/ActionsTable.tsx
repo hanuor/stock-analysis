@@ -4,37 +4,59 @@ import {
 	useAsyncDebounce,
 	Column,
 } from 'react-table';
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Controls } from 'components/Controls/_Controls';
-import { ActionsPaywall } from './ActionsPaywall';
 import styles from './ActionsTable.module.css';
 import { authState } from 'state/authState';
-import { navState } from 'state/navState';
+import { getActionsData } from 'functions/callBackEnd';
 
 interface Props {
 	title: string;
 	columndata: Column<object>[];
 	rowdata: object[];
+	fullCount: number;
+	type: string;
+	year?: string;
 }
 
-export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
+export const ActionsTable = ({
+	title,
+	columndata,
+	rowdata,
+	fullCount,
+	type,
+	year,
+}: Props) => {
+	const [dataRows, setDataRows] = useState(rowdata);
 	const isPro = authState((state) => state.isPro);
-	const path = navState((state) => state.path);
 
 	const count = rowdata.length;
-	const last = path.three ?? path.two ?? path.one;
-	const current = new Date().getFullYear();
 
-	const showPaywall =
-		!isPro &&
-		Number(last) !== current &&
-		(last?.includes('20') || last?.includes('19')) &&
-		count > 100
-			? true
-			: false;
+	// If pro user and data is limited, fetch the full data
+	useEffect(() => {
+		async function fetchFullActions() {
+			const res = await getActionsData(
+				type,
+				year,
+				process.env.NEXT_PUBLIC_PROKEY
+			);
+
+			if (res.data && res.data.length > count) {
+				setDataRows(res.data);
+			} else {
+				throw new Error(
+					'Unable to fetch full data, response was invalid or empty array'
+				);
+			}
+		}
+
+		if (isPro && fullCount > count) {
+			fetchFullActions();
+		}
+	}, [fullCount, isPro, count, year, type]);
 
 	const columns = useMemo(() => columndata, [columndata]);
-	const data = useMemo(() => rowdata, [rowdata]);
+	const data = useMemo(() => dataRows, [dataRows]);
 
 	const {
 		headerGroups,
@@ -53,7 +75,7 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 	return (
 		<>
 			<Controls
-				count={rows.length}
+				count={fullCount}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={globalFilter}
@@ -72,10 +94,6 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</thead>
 					<tbody>
 						{rows.map((row, index) => {
-							// End early if paywalled
-							if (index + 1 > 100 && showPaywall) {
-								return;
-							}
 							prepareRow(row);
 							return (
 								<tr key={index}>
@@ -88,7 +106,6 @@ export const ActionsTable = ({ title, columndata, rowdata }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			{showPaywall && <ActionsPaywall total={count} title={title} />}
 		</>
 	);
 };

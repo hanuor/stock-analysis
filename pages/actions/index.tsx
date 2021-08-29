@@ -40,7 +40,14 @@ export const ActionsAll = ({ data }: ActionProps) => {
 				canonical="actions/"
 			/>
 			<ActionsLayout title="Recent Corporate Actions">
-				<ActionsTable title="Actions" columndata={columns} rowdata={data} />
+				<ActionsTable
+					key="Actions"
+					title="Actions"
+					columndata={columns}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="all"
+				/>
 			</ActionsLayout>
 		</>
 	);

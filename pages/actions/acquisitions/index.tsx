@@ -63,9 +63,12 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 			/>
 			<ActionsLayout title="Recent Mergers & Acquisitions">
 				<ActionsTable
+					key="Acquisitions"
 					title="Acquisitions"
 					columndata={columns}
-					rowdata={data}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="acquisitions"
 				/>
 			</ActionsLayout>
 		</>

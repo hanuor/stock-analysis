@@ -6,10 +6,11 @@ import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { ParsedUrlQuery } from 'querystring';
 import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { ActionsPaywall } from 'components/Actions/ActionsPaywall';
 
 export const ActionsAllYear = ({ year, data }: ActionProps) => {
 	if (Number(year) === new Date().getFullYear()) {
-		data = data.filter((d) => d.date.slice(-4) === year);
+		data.data = data.data.filter((d) => d.date.slice(-4) === year);
 	}
 
 	const columns = [
@@ -45,7 +46,20 @@ export const ActionsAllYear = ({ year, data }: ActionProps) => {
 				canonical={`actions/${year}/`}
 			/>
 			<ActionsLayout title={`${year} Corporate Actions`}>
-				<ActionsTable title="Actions" columndata={columns} rowdata={data} />
+				<ActionsTable
+					key={`Actions-${year}`}
+					title="Actions"
+					columndata={columns}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="all"
+					year={year}
+				/>
+				<ActionsPaywall
+					count={data.data.length}
+					fullCount={data.fullCount}
+					title="Actions"
+				/>
 			</ActionsLayout>
 		</>
 	);

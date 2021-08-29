@@ -6,6 +6,7 @@ import { ActionsTable } from 'components/Actions/ActionsTable';
 import { StockLink } from 'components/Links';
 import { ParsedUrlQuery } from 'querystring';
 import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { ActionsPaywall } from 'components/Actions/ActionsPaywall';
 
 export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 	const columns = [
@@ -47,7 +48,20 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 				canonical={`actions/changes/${year}/`}
 			/>
 			<ActionsLayout title={`${year} Symbol Changes`}>
-				<ActionsTable title="Changes" columndata={columns} rowdata={data} />
+				<ActionsTable
+					key={`Changes-${year}`}
+					title="Changes"
+					columndata={columns}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="changes"
+					year={year}
+				/>
+				<ActionsPaywall
+					count={data.data.length}
+					fullCount={data.fullCount}
+					title="Symbol Changes"
+				/>
 			</ActionsLayout>
 		</>
 	);
