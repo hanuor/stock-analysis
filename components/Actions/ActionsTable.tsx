@@ -8,7 +8,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Controls } from 'components/Controls/_Controls';
 import styles from './ActionsTable.module.css';
 import { authState } from 'state/authState';
-import { getActionsData } from 'functions/callBackEnd';
+import { getActionsDataFull } from 'functions/callBackEnd';
 
 interface Props {
 	title: string;
@@ -35,11 +35,7 @@ export const ActionsTable = ({
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullActions() {
-			const res = await getActionsData(
-				type,
-				year,
-				process.env.NEXT_PUBLIC_PROKEY
-			);
+			const res = await getActionsDataFull(type, year);
 
 			if (res.data && res.data.length > count) {
 				setDataRows(res.data);

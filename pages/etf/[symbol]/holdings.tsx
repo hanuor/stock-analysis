@@ -8,6 +8,7 @@ import { SEO } from 'components/SEO';
 import { getPageData } from 'functions/callBackEnd';
 import { HoldingsTable } from 'components/Holdings/_HoldingsTable';
 import { NewsWidget } from 'components/News/NewsWidget';
+import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall';
 
 interface Props {
 	info: Info;
@@ -47,7 +48,15 @@ const Holdings = ({ info, data, news }: Props) => {
 							)}
 						</div>
 						{data.count ? (
-							<HoldingsTable rawdata={data.list} />
+							<>
+								<HoldingsTable
+									key={info.symbol}
+									symbol={info.symbol}
+									rawdata={data.list}
+									fullCount={data.count}
+								/>
+								<HoldingsPaywall total={data.count} />
+							</>
 						) : (
 							<div className="text-lg">
 								No holdings were found for the {info.ticker} ETF

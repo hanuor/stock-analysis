@@ -1,20 +1,47 @@
 import { Holding } from 'types/Holdings';
 import { useTable, Column } from 'react-table';
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import styles from './HoldingsTable.module.css';
-import { HoldingsPaywall } from './HoldingsPaywall';
 import { StockLink, ETFLink } from 'components/Links';
 import { authState } from 'state/authState';
+import { getPageDataFull } from 'functions/callBackEnd';
 
-export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
+type CellString = {
+	cell: {
+		value: string;
+	};
+};
+
+interface Props {
+	symbol: string;
+	rawdata: Holding[];
+	fullCount: number;
+}
+
+export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
+	const [dataRows, setdataRows] = useState(rawdata);
 	const isPro = authState((state) => state.isPro);
+
 	const count = rawdata.length;
 
-	type CellString = {
-		cell: {
-			value: string;
-		};
-	};
+	// If pro user and data is limited, fetch the full data
+	useEffect(() => {
+		async function fetchFullHoldings() {
+			const res = await getPageDataFull('holdings', symbol);
+
+			if (res && res.data.list && res.data.list.length > count) {
+				setdataRows(res.data.list);
+			} else {
+				throw new Error(
+					'Unable to fetch full data, response was invalid or empty array'
+				);
+			}
+		}
+
+		if (isPro && fullCount > count) {
+			fetchFullHoldings();
+		}
+	}, [count, fullCount, isPro, symbol]);
 
 	const columns: Column[] = useMemo(
 		() => [
@@ -50,44 +77,33 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 		[]
 	);
 
-	const data = useMemo(() => rawdata, [rawdata]);
+	const data = useMemo(() => dataRows, [dataRows]);
 
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		useTable({
-			columns,
-			data,
-		});
+	const { headerGroups, rows, prepareRow } = useTable({
+		columns,
+		data,
+	});
 
 	return (
 		<>
 			<div className="overflow-x-auto">
-				<table {...getTableProps()} className={styles.table}>
+				<table className={styles.table}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
-							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th {...column.getHeaderProps()} key={index}>
-										{column.render('Header')}
-									</th>
+									<th key={index}>{column.render('Header')}</th>
 								))}
 							</tr>
 						))}
 					</thead>
-					<tbody {...getTableBodyProps()}>
+					<tbody>
 						{rows.map((row, index) => {
-							// Stop at 200 if not Pro member
-							if (index + 1 > 200 && !isPro) {
-								return;
-							}
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} key={index}>
+								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return (
-											<td {...cell.getCellProps()} key={index}>
-												{cell.render('Cell')}
-											</td>
-										);
+										return <td key={index}>{cell.render('Cell')}</td>;
 									})}
 								</tr>
 							);
@@ -95,7 +111,6 @@ export const HoldingsTable = ({ rawdata }: { rawdata: Holding[] }) => {
 					</tbody>
 				</table>
 			</div>
-			{!isPro && <HoldingsPaywall total={count} />}
 		</>
 	);
 };

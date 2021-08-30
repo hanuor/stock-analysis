@@ -42,7 +42,7 @@ export default function LandingPage() {
 			<main>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
-						<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-5 text-gray-800">
+						<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-8 text-gray-800">
 							Stock Analysis Pro
 						</h1>
 

@@ -1,7 +1,10 @@
+import { authState } from 'state/authState';
 import { Button } from 'components/Button';
 
 export const HoldingsPaywall = ({ total }: { total: number }) => {
-	if (total < 200) {
+	const isPro = authState((state) => state.isPro);
+
+	if (isPro || total < 200) {
 		return null;
 	}
 

@@ -79,7 +79,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 					/>
 				)}
 			</div>
-			<div className="h-[240px] sm:h-[300px]">
+			<div className="h-[240px] sm:h-[300px] overflow-x-auto hide-scroll">
 				{chartData && chartData.length > 0 && (
 					<Chart chartData={chartData} chartTime={chartTime} />
 				)}
