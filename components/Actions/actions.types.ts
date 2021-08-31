@@ -18,22 +18,6 @@ export interface ActionProps {
 	};
 }
 
-export interface ActionStatisticsProps {
-	data: {
-		annual: {
-			[key: string]: number;
-		};
-		monthly: {
-			[key: string]: number;
-		};
-		years: {
-			[key: string]: {
-				[key: string]: number;
-			};
-		};
-	};
-}
-
 export interface ActionSplitsProps {
 	data: {
 		annual: {

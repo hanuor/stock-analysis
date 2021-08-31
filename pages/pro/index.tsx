@@ -1,6 +1,7 @@
 import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { CrispChat } from 'components/Scripts/CrispChat';
 
 declare global {
@@ -78,7 +79,7 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 sm:px-4 text-lg">
-										Financial history: Up to 26 years and growing.
+										Financial history: Up to 30 years and growing.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">
@@ -160,7 +161,7 @@ export default function LandingPage() {
 					</div>
 				</section>
 
-				<section className="bg-gray-100 mt-16 sm:mt-24 py-8 md:py-10 border-t border-gray-200 px-5">
+				<section className="bg-gray-100 mt-16 sm:mt-24 py-8 md:pt-10 md:pb-12 border-t border-gray-200 px-5 -mb-10">
 					<div className="max-w-[750px] mx-auto">
 						<h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-5">
 							Common Questions
@@ -184,9 +185,11 @@ export default function LandingPage() {
 						<p className="text-lg mb-5">
 							You can send an email to support@stockanalysis.com or send
 							a message via the{' '}
-							<a href="<?= DOMAIN . '/contact/' ?>">contact form</a>. You
-							can also click the chat widget button in the bottom right
-							corner.
+							<Link href="/contact/">
+								<a className="bll">contact form</a>
+							</Link>
+							. You can also click the chat widget button in the bottom
+							right corner.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
@@ -207,7 +210,8 @@ export default function LandingPage() {
 						<p className="text-lg mb-5">
 							Your card will not be charged until after 30 days. If you
 							cancel before the 30 days then you will not be charged at
-							all.
+							all. We will also send you an email reminder before the
+							trial runs out.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">

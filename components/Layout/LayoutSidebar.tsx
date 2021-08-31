@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 
 interface Props {
 	heading: string;
@@ -21,7 +20,6 @@ export const LayoutSidebar = ({ heading, children }: Props) => {
 					<div className="py-2">{children}</div>
 					<aside className="flex flex-col space-y-10 py-6">
 						<NewsletterWidget />
-						<Sidebar1 />
 					</aside>
 				</div>
 			</main>

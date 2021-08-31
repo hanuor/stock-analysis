@@ -3,7 +3,6 @@ import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
 import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
-import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 
 interface Props {
 	title: string;
@@ -26,7 +25,6 @@ export const ActionsLayout = ({ title, children }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
 							<NewsletterWidget />
-							<Sidebar1 />
 						</aside>
 					</div>
 				</main>

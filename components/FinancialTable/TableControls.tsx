@@ -88,7 +88,7 @@ export const TableControls = ({
 					onClick={() => clickLeftRight()}
 					id="financials-leftright"
 				>
-					<LeftRightIcon classes="h-9 w-9" />
+					<LeftRightIcon classes="h-9 w-9 pointer-events-none" />
 				</button>
 			</div>
 		</div>
