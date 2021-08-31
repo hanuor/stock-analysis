@@ -90,10 +90,18 @@ export const ExportMenu = ({
 
 	return (
 		<div className="absolute right-0 flex flex-col w-full shadow-lg border border-gray-200 rounded-md dropdown-menu">
-			<button className={menuBtn} onClick={() => exp('xlsx')}>
+			<button
+				className={menuBtn}
+				onClick={() => exp('xlsx')}
+				id="financials-export-excel"
+			>
 				Export to Excel
 			</button>
-			<button className={menuBtn} onClick={() => exp('csv')}>
+			<button
+				className={menuBtn}
+				onClick={() => exp('csv')}
+				id="financials-export-csv"
+			>
 				Export to CSV
 			</button>
 		</div>

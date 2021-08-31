@@ -1,11 +1,11 @@
 import create from 'zustand';
 
 interface FinancialsState {
-	range: string;
+	range: 'annual' | 'quarterly' | 'trailing';
 	divider: string;
 	leftRight: 'left' | 'right';
 	reversed: boolean;
-	setRange: (newRange: string) => void;
+	setRange: (newRange: 'annual' | 'quarterly' | 'trailing') => void;
 	setDivider: (newDivider: string) => void;
 	setLeftRight: (newLeftRight: 'left' | 'right') => void;
 	setReversed: (newReversed: boolean) => void;

@@ -254,9 +254,19 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 			/>
 			{query && query.length > 0 && (
 				<div className="absolute flex right-[10px]">
-					<button aria-label="Clear" title="Clear" onClick={clearInput}>
+					<span
+						aria-label="Clear"
+						title="Clear"
+						tabIndex={0}
+						onClick={clearInput}
+						onKeyPress={(e) => {
+							if (e.key === 'Enter') {
+								clearInput(e);
+							}
+						}}
+					>
 						<CloseIcon classes="h-5 w-5 text-gray-600 hover:text-blue-500" />
-					</button>
+					</span>
 				</div>
 			)}
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>

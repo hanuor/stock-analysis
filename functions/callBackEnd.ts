@@ -42,6 +42,16 @@ export async function getStockFinancials(
 	return respond(response, reval);
 }
 
+export async function getStockFinancialsFull(statement: string, id: number) {
+	const response = await getData(
+		`financials?type=${statement}&i=${id}&f=${PRO_KEY}`
+	);
+	if (response.status === 200) {
+		return response.data;
+	}
+	return [];
+}
+
 export async function getNewsData(id: number) {
 	const response = await getData(`news?i=${id}`);
 	return response;
