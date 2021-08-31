@@ -9,7 +9,8 @@ import {
 } from 'chart.js';
 
 import { formatDateTimestamp, formatDateClean } from 'functions/formatDates';
-import { ReactChart } from 'chartjs-react';
+import { ReactChart } from './ReactChartWrapper/ReactChart';
+
 import 'chartjs-adapter-date-fns';
 
 interface Props {
@@ -154,24 +155,13 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						},
 						ticks: {
 							color: '#323232',
-							source: 'auto',
-							callback: function (value: any, index: any, values: any) {
-								if (chartTime == '5D') {
-									if (
-										values.length > 1 &&
-										values.length > 4 &&
-										(index == 0 || index == 1)
-									) {
-										return '';
-									}
-								}
+							source: 'data',
 
-								return value;
-							},
 							font: {
 								size: 13,
 							},
-
+							autoSkip: true,
+							autoSkipPadding: 50,
 							maxRotation: 0,
 							minRotation: 0,
 						},
