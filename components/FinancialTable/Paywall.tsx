@@ -20,7 +20,7 @@ export default function Paywall({ range, fullcount, showcount }: Props) {
 			</div>
 			<Link href="/pro/" prefetch={false}>
 				<a
-					className="bg-gray-500 text-white py-3 px-5 text-xl font-semibold"
+					className="bg-blue-brand_light hover:bg-blue-brand_sharp text-white py-3 px-5 text-xl font-semibold rounded-sm"
 					id="free-trial-financials-table"
 				>
 					Start Free Trial

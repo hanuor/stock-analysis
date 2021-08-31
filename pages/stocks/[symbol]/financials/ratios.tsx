@@ -12,9 +12,14 @@ import { MAP_RATIOS } from 'data/financials/map_ratios';
 interface Props {
 	info: Info;
 	data: FinancialsType;
+	counts: {
+		annual: number;
+		quarterly: number;
+		trailing: number;
+	};
 }
 
-export default function Ratios({ info, data }: Props) {
+export default function Ratios({ info, data, counts }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -29,6 +34,7 @@ export default function Ratios({ info, data }: Props) {
 					financials={data}
 					map={MAP_RATIOS}
 					info={info}
+					counts={counts}
 				/>
 			</div>
 		</Stock>

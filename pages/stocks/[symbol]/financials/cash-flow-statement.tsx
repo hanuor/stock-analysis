@@ -12,9 +12,14 @@ import { MAP_CASH_FLOW_STATEMENT } from 'data/financials/map_cash_flow_statement
 interface Props {
 	info: Info;
 	data: FinancialsType;
+	counts: {
+		annual: number;
+		quarterly: number;
+		trailing: number;
+	};
 }
 
-export default function CashFlowStatement({ info, data }: Props) {
+export default function CashFlowStatement({ info, data, counts }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -29,6 +34,7 @@ export default function CashFlowStatement({ info, data }: Props) {
 					financials={data}
 					map={MAP_CASH_FLOW_STATEMENT}
 					info={info}
+					counts={counts}
 				/>
 			</div>
 		</Stock>

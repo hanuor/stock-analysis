@@ -12,9 +12,14 @@ import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement';
 interface Props {
 	info: Info;
 	data: FinancialsType;
+	counts: {
+		annual: number;
+		quarterly: number;
+		trailing: number;
+	};
 }
 
-export default function IncomeStatement({ info, data }: Props) {
+export default function IncomeStatement({ info, data, counts }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -29,6 +34,7 @@ export default function IncomeStatement({ info, data }: Props) {
 					financials={data}
 					map={MAP_INCOME_STATEMENT}
 					info={info}
+					counts={counts}
 				/>
 			</div>
 		</Stock>
