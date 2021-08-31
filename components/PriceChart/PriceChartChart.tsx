@@ -40,6 +40,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 
 	const axisType = chartTime == '5D' ? 'timeseries' : 'time';
 	const axisTimeUnit = chartTime == '5D' ? 'day' : false;
+	const axisSource = chartTime == '5D' ? 'data' : 'auto';
 
 	const timeAxis = chartData.map((item) => {
 		const dateObj = new Date(item.t);
@@ -50,8 +51,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
-
-	// const axis = axisBottom().scale(scale);
+	console.log(chartData);
 
 	return (
 		<ReactChart
@@ -155,13 +155,13 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						},
 						ticks: {
 							color: '#323232',
-							source: 'data',
+							source: axisSource,
 
 							font: {
 								size: 13,
 							},
 							autoSkip: true,
-							autoSkipPadding: 50,
+
 							maxRotation: 0,
 							minRotation: 0,
 						},
