@@ -12,7 +12,6 @@ import { Profile } from 'components/Overview/ProfileWidget';
 import { NewsArea } from 'components/Overview/NewsArea';
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
 import { AnalystWidget } from 'components/Overview/AnalystWidget';
-import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
 
 interface Props {
 	info: Info;
@@ -51,7 +50,6 @@ const StockOverview = ({ info, data, news }: Props) => {
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
-					{news && news.data.length > 10 && <Sidebar1 />}
 				</div>
 				{news && (
 					<div className="lg:order-1">
