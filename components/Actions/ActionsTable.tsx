@@ -9,6 +9,7 @@ import { Controls } from 'components/Controls/_Controls';
 import styles from './ActionsTable.module.css';
 import { authState } from 'state/authState';
 import { getActionsDataFull } from 'functions/callBackEnd';
+import { actionsState } from 'state/actionsState';
 
 interface Props {
 	title: string;
@@ -54,13 +55,10 @@ export const ActionsTable = ({
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => dataRows, [dataRows]);
 
-	const {
-		headerGroups,
-		prepareRow,
-		rows,
-		setGlobalFilter,
-		state: { globalFilter },
-	} = useTable(
+	const filter = actionsState((state) => state.filter);
+	const setFilter = actionsState((state) => state.setFilter);
+
+	const { headerGroups, prepareRow, rows, setGlobalFilter } = useTable(
 		{
 			columns,
 			data,
@@ -68,14 +66,19 @@ export const ActionsTable = ({
 		useGlobalFilter
 	);
 
+	const setDualFilter = (filterValue: string) => {
+		setGlobalFilter(filterValue);
+		setFilter(filterValue);
+	};
+
 	return (
 		<>
 			<Controls
 				count={fullCount}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
-				globalFilter={globalFilter}
-				setGlobalFilter={setGlobalFilter}
+				globalFilter={filter}
+				setGlobalFilter={setDualFilter}
 			/>
 			<div className="overflow-x-auto">
 				<table className={styles.actionstable} id="actions-table">
