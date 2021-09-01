@@ -3,17 +3,22 @@ import { Dispatch, SetStateAction } from 'react';
 interface ButtonUIProps {
 	state: string;
 	dispatch: Dispatch<SetStateAction<string>>;
+	setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 interface SelectProps {
 	dispatcher: Dispatch<SetStateAction<string>>;
+	setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export const SelectPeriod = (props: SelectProps) => {
 	return (
 		<div>
 			<select
-				onChange={(e) => props.dispatcher(e.target.value)}
+				onChange={(e) => {
+					props.dispatcher(e.target.value);
+					props.setLoading(true);
+				}}
 				id="period"
 				name="period"
 				className="block pl-3 sm:border-l border-r border-gray-300 pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
@@ -44,7 +49,7 @@ export const SelectType = (props: SelectProps) => {
 	);
 };
 
-export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
+export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md';
 	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
 	const inactive =
@@ -70,7 +75,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 			<ul className="hidden sm:flex flex-row whitespace-nowrap overflow-x-auto pl-1">
 				<li>
 					<button
-						onClick={() => dispatch('1M')}
+						onClick={() => {
+							dispatch('1M');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === '1M' ? active : inactive}
 					>
@@ -79,7 +87,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('6M')}
+						onClick={() => {
+							dispatch('6M');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === '6M' ? active : inactive}
 					>
@@ -89,7 +100,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 
 				<li>
 					<button
-						onClick={() => dispatch('YTD')}
+						onClick={() => {
+							dispatch('YTD');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === 'YTD' ? active : inactive}
 					>
@@ -98,7 +112,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('1Y')}
+						onClick={() => {
+							dispatch('1Y');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === '1Y' ? active : inactive}
 					>
@@ -107,7 +124,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('3Y')}
+						onClick={() => {
+							dispatch('3Y');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === '3Y' ? active : inactive}
 					>
@@ -116,7 +136,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('5Y')}
+						onClick={() => {
+							dispatch('5Y');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === '5Y' ? active : inactive}
 					>
@@ -125,7 +148,10 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('MAX')}
+						onClick={() => {
+							dispatch('MAX');
+							setLoading(true);
+						}}
 						type="button"
 						className={state === 'MAX' ? active : inactive}
 					>

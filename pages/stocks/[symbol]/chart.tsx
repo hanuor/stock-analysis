@@ -20,6 +20,7 @@ interface ChartProps {
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [period, setPeriod] = useState<string>('d');
+	const [loading, setLoading] = useState<boolean>(true);
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
 
@@ -34,8 +35,15 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				<div className="px-2 sm:contain">
 					<div className="py-2">
 						<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
-							<Buttons state={time} dispatch={setTime} />
-							<SelectPeriod dispatcher={setPeriod} />
+							<Buttons
+								state={time}
+								dispatch={setTime}
+								setLoading={setLoading}
+							/>
+							<SelectPeriod
+								dispatcher={setPeriod}
+								setLoading={setLoading}
+							/>
 							<SelectType dispatcher={setType} />
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
@@ -45,6 +53,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 									period={period}
 									time={time}
 									type={type}
+									setLoading={setLoading}
 								/>
 							) : (
 								<Unavailable message="The chart is not available for this stock." />

@@ -45,6 +45,7 @@ interface WithOHLCDataProps {
 	readonly time: string;
 	readonly type: string;
 	readonly stockId: number;
+	readonly setLoading: (arg: boolean) => void;
 }
 
 interface WithOHLCState {
@@ -80,6 +81,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 						const data = forDateParse.map(parseData());
 
 						this.setState({ data });
+						props.setLoading(false);
 					})
 					.catch((error) => {
 						console.error(
