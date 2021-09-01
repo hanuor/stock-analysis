@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
+import { Loading } from 'components/Loading';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
 import { getPageData } from 'functions/callBackEnd';
@@ -44,9 +45,10 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 								dispatcher={setPeriod}
 								setLoading={setLoading}
 							/>
-							<SelectType dispatcher={setType} />
+							<SelectType dispatcher={setType} setLoading={setLoading} />
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+							{loading ? <Loading /> : null}
 							{info.state !== 'upcomingipo' ? (
 								<StockChart
 									stockId={info.id}
