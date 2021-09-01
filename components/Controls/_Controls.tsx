@@ -29,7 +29,7 @@ export const Controls = ({
 				<Export
 					title="Export"
 					buttons={[
-						{ title: 'Export to Excel', type: 'xlsx', restricted: false },
+						{ title: 'Export to Excel', type: 'xlsx', restricted: true },
 						{ title: 'Export to CSV', type: 'csv', restricted: true },
 					]}
 				/>

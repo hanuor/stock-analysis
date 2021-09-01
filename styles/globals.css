@@ -4,7 +4,7 @@
 
 @layer base {
 	body {
-		@apply text-gray-900;
+		@apply text-gray-900 bg-white;
 	}
 
 	.skip-nav {
