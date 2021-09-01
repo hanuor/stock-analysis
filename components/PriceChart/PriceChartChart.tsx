@@ -24,6 +24,7 @@ interface Props {
 }
 
 export const Chart = ({ chartData, chartTime }: Props) => {
+	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
 		typeof window.ResizeObserver === 'undefined'
@@ -162,6 +163,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
+							maxTicksLimit: chartTime === '1Y' ? 7 : 5,
 						},
 					},
 					y: {

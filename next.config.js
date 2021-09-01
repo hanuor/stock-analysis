@@ -25,6 +25,16 @@ module.exports = {
 				destination: '/ipos/2020/',
 				permanent: true,
 			},
+			{
+				source: '/stocks/wp-login.php',
+				destination: '/stocks/',
+				permanent: true,
+			},
+			{
+				source: '/etf/wp-login.php',
+				destination: '/etf/',
+				permanent: true,
+			},
 		];
 	},
 };

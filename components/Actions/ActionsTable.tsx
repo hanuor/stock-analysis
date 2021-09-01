@@ -77,7 +77,7 @@ export const ActionsTable = ({
 				globalFilter={globalFilter}
 				setGlobalFilter={setGlobalFilter}
 			/>
-			<div className={`overflow-x-auto ${styles[title.toLowerCase()]}`}>
+			<div className="overflow-x-auto">
 				<table className={styles.actionstable} id="actions-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (

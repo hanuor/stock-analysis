@@ -20,6 +20,19 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 			{
 				Header: 'IPO Date',
 				accessor: 'date',
+				sortType: (a, b) => {
+					const ad = new Date(a.values.date).getTime();
+					const bd = new Date(b.values.date).getTime();
+					if (ad < bd) {
+						return 1;
+					}
+					if (ad > bd) {
+						return -1;
+					} else {
+						return 0;
+					}
+				},
+				sortInverted: true,
 			},
 			{
 				Header: 'Symbol',

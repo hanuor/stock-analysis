@@ -182,8 +182,8 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		};
 		const volumeColor = (data: IOHLCData) => {
 			return data.close > data.open
-				? 'rgba(38, 166, 154, 1)'
-				: 'rgba(239, 83, 80, 1)';
+				? 'rgba(38, 166, 154, 0.9)'
+				: 'rgba(239, 83, 80, 0.9)';
 		};
 		const volumeSeries = (data: IOHLCData) => {
 			return data.volume;
@@ -441,7 +441,11 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 						widthRatio={0.5}
 						clip={true}
 						yAccessor={(d) => d.volume}
-						fillStyle={(d) => (d.close > d.open ? '#6BA583' : 'red')}
+						fillStyle={(d) =>
+							d.close > d.open
+								? 'rgba(38, 166, 154, 0.8)'
+								: 'rgba(239, 83, 80, 0.8)'
+						}
 					/>
 					<EdgeIndicator
 						itemType="last"
