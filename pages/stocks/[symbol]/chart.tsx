@@ -49,14 +49,18 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 							{info.state !== 'upcomingipo' ? (
-								<StockChart
-									stockId={info.id}
-									period={period}
-									time={time}
-									type={type}
-									setLoading={setLoading}
-									loading={loading}
-								/>
+								<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+									{loading && <Loading />}
+
+									<StockChart
+										stockId={info.id}
+										period={period}
+										time={time}
+										type={type}
+										setLoading={setLoading}
+										loading={loading}
+									/>
+								</div>
 							) : (
 								<Unavailable message="The chart is not available for this stock." />
 							)}
