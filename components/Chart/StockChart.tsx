@@ -21,6 +21,7 @@ import { MouseCoordinateY } from './coordinates/MouseCoordinateY';
 import { discontinuousTimeScaleProviderBuilder } from './scales/discontinuousTimeScaleProvider';
 import { lastVisibleItemBasedZoomAnchor } from './core/zoom';
 import { sma } from './indicators/indicator';
+import { Loading } from 'components/Loading';
 
 interface StockChartProps {
 	readonly data: IOHLCData[];
@@ -33,6 +34,7 @@ interface StockChartProps {
 	readonly time: string;
 	readonly stockId: number;
 	readonly setLoading: (arg: boolean) => void;
+	readonly loading: boolean;
 }
 
 interface TooltipOptions {
@@ -291,181 +293,192 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		const gridHeight = height - margin.top - margin.bottom;
 
 		const chartHeight = gridHeight;
-
-		return (
-			<ChartCanvas
-				height={height}
-				ratio={ratio}
-				width={width}
-				margin={this.state.margin}
-				data={data}
-				displayXAccessor={displayXAccessor}
-				seriesName="Data"
-				disablePan={disablePan}
-				disableZoom={disableZoom}
-				xScale={xScale}
-				xAccessor={xAccessor}
-				xExtents={xExtents}
-				zoomAnchor={lastVisibleItemBasedZoomAnchor}
-			>
-				<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
-					<XAxis showTickLabel={true} />
-					<YAxis
-						showGridLines={true}
-						tickFormat={this.yAxisTickDisplay}
-						getMaxTicks={maxValueCallback}
-					/>
-					{type == 'candlestick' ? (
-						<CandlestickSeries {...candlesAppearance} />
-					) : (
-						<>
-							<LineSeries
-								yAccessor={(d) => d.close}
-								strokeStyle={'#000000'}
-							/>
-							<CurrentCoordinate
-								yAccessor={(d) => d.close}
-								fillStyle={priceOrCandleStickColor}
-							/>
-						</>
-					)}
-
-					<LineSeries yAccessor={(d) => d.ma1} strokeStyle={ma1color} />
-					<CurrentCoordinate
-						yAccessor={(d) => d.ma1}
-						fillStyle={ma1color}
-					/>
-					<LineSeries yAccessor={(d) => d.ma2} strokeStyle={ma2color} />
-					<CurrentCoordinate
-						yAccessor={(d) => d.ma2}
-						fillStyle={ma2color}
-					/>
-
-					<MouseCoordinateY
-						rectWidth={margin.right / 1.01225}
-						displayFormat={this.pricesDisplayFormat}
-					/>
-
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right / 1.05}
-						rectHeight={15}
-						fill={ma2color}
-						orient="right"
-						edgeAt="right"
-						fontSize={11}
-						lineStroke={ma2color}
-						displayFormat={priceFormatDecider}
-						yAccessor={sma200.accessor()}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right / 1.05}
-						rectHeight={15}
-						hideLine={true}
-						fill={ma1color}
-						orient="right"
-						edgeAt="right"
-						fontSize={11}
-						lineStroke={ma1color}
-						displayFormat={priceFormatDecider}
-						yAccessor={sma50.accessor()}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right / 1.01225}
-						fill={priceOrCandleStickColor}
-						lineStroke={priceOrCandleStickColor}
-						displayFormat={priceFormatDecider}
-						yAccessor={yEdgeIndicator}
-						fontSize={13}
-					/>
-					<OHLCTooltipCustom origin={[5, 15]} />
-					<MovingAverageTooltipCustom
-						origin={[8, 24]}
-						options={movingAverageTooltipOptions}
-					/>
-					{isBrowser == true ? (
-						<HoverTooltipCustom
-							yAccessor={sma50.accessor()}
-							tooltip={{
-								content: ({ currentItem, xAccessor }) => ({
-									x: this.dateFormat(xAccessor(currentItem)),
-									y: [
-										{
-											label: 'Open',
-											value:
-												currentItem.open &&
-												this.pricesDisplayFormat(currentItem.open),
-										},
-										{
-											label: 'High',
-											value:
-												currentItem.high &&
-												this.pricesDisplayFormat(currentItem.high),
-										},
-										{
-											label: 'Low',
-											value:
-												currentItem.low &&
-												this.pricesDisplayFormat(currentItem.low),
-										},
-										{
-											label: 'Close',
-											value:
-												currentItem.close &&
-												this.pricesDisplayFormat(currentItem.close),
-										},
-										{
-											label: 'Volume',
-											value:
-												currentItem.volume &&
-												this.volumeDisplayFormat(
-													currentItem.volume
-												),
-										},
-									],
-								}),
-							}}
-						/>
-					) : (
-						<> </>
-					)}
-				</Chart>
-				<Chart
-					id={2}
-					height={100}
-					origin={(w, h) => [0, h - 100]}
-					yExtents={volChartExtents}
+		if (this.props.loading) {
+			console.log(this.props.loading);
+			return <Loading />;
+		} else
+			return (
+				<ChartCanvas
+					height={height}
+					ratio={ratio}
+					width={width}
+					margin={this.state.margin}
+					data={data}
+					displayXAccessor={displayXAccessor}
+					seriesName="Data"
+					disablePan={disablePan}
+					disableZoom={disableZoom}
+					xScale={xScale}
+					xAccessor={xAccessor}
+					xExtents={xExtents}
+					zoomAnchor={lastVisibleItemBasedZoomAnchor}
 				>
-					<BarSeries
-						widthRatio={0.5}
-						clip={true}
-						yAccessor={(d) => d.volume}
-						fillStyle={(d) =>
-							d.close > d.open
-								? 'rgba(38, 166, 154, 0.8)'
-								: 'rgba(239, 83, 80, 0.8)'
-						}
-					/>
-					<EdgeIndicator
-						itemType="last"
-						rectWidth={margin.right - 1.05}
-						rectHeight={15}
-						fill={volumeColor}
-						orient="right"
-						edgeAt="right"
-						fontSize={11}
-						lineStroke={openCloseColor}
-						displayFormat={format('.4~s')}
-						yAccessor={volumeSeries}
-						yAxisPad={0}
-					/>
-				</Chart>
+					<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
+						<XAxis showTickLabel={true} />
+						<YAxis
+							showGridLines={true}
+							tickFormat={this.yAxisTickDisplay}
+							getMaxTicks={maxValueCallback}
+						/>
+						{type == 'candlestick' ? (
+							<CandlestickSeries {...candlesAppearance} />
+						) : (
+							<>
+								<LineSeries
+									yAccessor={(d) => d.close}
+									strokeStyle={'#000000'}
+								/>
+								<CurrentCoordinate
+									yAccessor={(d) => d.close}
+									fillStyle={priceOrCandleStickColor}
+								/>
+							</>
+						)}
 
-				{isBrowser == true ? <CrossHairCursor /> : <> </>}
-			</ChartCanvas>
-		);
+						<LineSeries yAccessor={(d) => d.ma1} strokeStyle={ma1color} />
+						<CurrentCoordinate
+							yAccessor={(d) => d.ma1}
+							fillStyle={ma1color}
+						/>
+						<LineSeries yAccessor={(d) => d.ma2} strokeStyle={ma2color} />
+						<CurrentCoordinate
+							yAccessor={(d) => d.ma2}
+							fillStyle={ma2color}
+						/>
+
+						<MouseCoordinateY
+							rectWidth={margin.right / 1.01225}
+							displayFormat={this.pricesDisplayFormat}
+						/>
+
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right / 1.05}
+							rectHeight={15}
+							fill={ma2color}
+							orient="right"
+							edgeAt="right"
+							fontSize={11}
+							lineStroke={ma2color}
+							displayFormat={priceFormatDecider}
+							yAccessor={sma200.accessor()}
+						/>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right / 1.05}
+							rectHeight={15}
+							hideLine={true}
+							fill={ma1color}
+							orient="right"
+							edgeAt="right"
+							fontSize={11}
+							lineStroke={ma1color}
+							displayFormat={priceFormatDecider}
+							yAccessor={sma50.accessor()}
+						/>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right / 1.01225}
+							fill={priceOrCandleStickColor}
+							lineStroke={priceOrCandleStickColor}
+							displayFormat={priceFormatDecider}
+							yAccessor={yEdgeIndicator}
+							fontSize={13}
+						/>
+						<OHLCTooltipCustom origin={[5, 15]} />
+						<MovingAverageTooltipCustom
+							origin={[8, 24]}
+							options={movingAverageTooltipOptions}
+						/>
+						{isBrowser == true ? (
+							<HoverTooltipCustom
+								yAccessor={sma50.accessor()}
+								tooltip={{
+									content: ({ currentItem, xAccessor }) => ({
+										x: this.dateFormat(xAccessor(currentItem)),
+										y: [
+											{
+												label: 'Open',
+												value:
+													currentItem.open &&
+													this.pricesDisplayFormat(
+														currentItem.open
+													),
+											},
+											{
+												label: 'High',
+												value:
+													currentItem.high &&
+													this.pricesDisplayFormat(
+														currentItem.high
+													),
+											},
+											{
+												label: 'Low',
+												value:
+													currentItem.low &&
+													this.pricesDisplayFormat(
+														currentItem.low
+													),
+											},
+											{
+												label: 'Close',
+												value:
+													currentItem.close &&
+													this.pricesDisplayFormat(
+														currentItem.close
+													),
+											},
+											{
+												label: 'Volume',
+												value:
+													currentItem.volume &&
+													this.volumeDisplayFormat(
+														currentItem.volume
+													),
+											},
+										],
+									}),
+								}}
+							/>
+						) : (
+							<> </>
+						)}
+					</Chart>
+					<Chart
+						id={2}
+						height={100}
+						origin={(w, h) => [0, h - 100]}
+						yExtents={volChartExtents}
+					>
+						<BarSeries
+							widthRatio={0.5}
+							clip={true}
+							yAccessor={(d) => d.volume}
+							fillStyle={(d) =>
+								d.close > d.open
+									? 'rgba(38, 166, 154, 0.8)'
+									: 'rgba(239, 83, 80, 0.8)'
+							}
+						/>
+						<EdgeIndicator
+							itemType="last"
+							rectWidth={margin.right - 1.05}
+							rectHeight={15}
+							fill={volumeColor}
+							orient="right"
+							edgeAt="right"
+							fontSize={11}
+							lineStroke={openCloseColor}
+							displayFormat={format('.4~s')}
+							yAccessor={volumeSeries}
+							yAxisPad={0}
+						/>
+					</Chart>
+
+					{isBrowser == true ? <CrossHairCursor /> : <> </>}
+				</ChartCanvas>
+			);
 	}
 }
 export default withOHLCData()(

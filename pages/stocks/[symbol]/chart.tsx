@@ -48,7 +48,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 							<SelectType dispatcher={setType} setLoading={setLoading} />
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
-							{loading ? <Loading /> : null}
 							{info.state !== 'upcomingipo' ? (
 								<StockChart
 									stockId={info.id}
@@ -56,6 +55,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 									time={time}
 									type={type}
 									setLoading={setLoading}
+									loading={loading}
 								/>
 							) : (
 								<Unavailable message="The chart is not available for this stock." />

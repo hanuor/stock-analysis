@@ -77,7 +77,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('1M');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === '1M' ? active : inactive}
@@ -89,7 +88,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('6M');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === '6M' ? active : inactive}
@@ -102,7 +100,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('YTD');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === 'YTD' ? active : inactive}
@@ -114,7 +111,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('1Y');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === '1Y' ? active : inactive}
@@ -126,7 +122,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('3Y');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === '3Y' ? active : inactive}
@@ -138,7 +133,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('5Y');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === '5Y' ? active : inactive}
@@ -150,7 +144,6 @@ export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
 					<button
 						onClick={() => {
 							dispatch('MAX');
-							setLoading(true);
 						}}
 						type="button"
 						className={state === 'MAX' ? active : inactive}
