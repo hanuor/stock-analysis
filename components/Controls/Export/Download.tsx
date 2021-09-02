@@ -4,9 +4,10 @@ import { navState } from 'state/navState';
 interface Props {
 	title: string;
 	type: 'csv' | 'xlsx';
+	tableId: string;
 }
 
-export default function Download({ title, type }: Props) {
+export default function Download({ title, type, tableId }: Props) {
 	const path = navState((state) => state.path);
 
 	const fileName = `${path.one}-${path.two}${
@@ -22,8 +23,8 @@ export default function Download({ title, type }: Props) {
 			},
 			[
 				{
-					name: 'NAME',
-					from: { table: 'actions-table' },
+					name: 'Export',
+					from: { table: tableId },
 					fixValue: (value) => {
 						if (value.includes('href=')) {
 							// Grab value between > and 2nd <

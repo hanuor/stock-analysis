@@ -9,7 +9,7 @@ export const HoldingsPaywall = ({ total }: { total: number }) => {
 	}
 
 	return (
-		<div className="border border-gray-200 mt-7 p-6 text-center">
+		<div className="border border-gray-200 mt-4 p-6 text-center">
 			<h4 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-3">
 				Showing 200 of {total} holdings
 			</h4>

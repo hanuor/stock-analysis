@@ -4,10 +4,10 @@ import Link from 'next/link';
 export const NewsletterWidget = () => {
 	return (
 		<div className="border border-gray-200 bg-gray-50 rounded p-6 lg:px-7 text-center">
-			<h3 className="text-2xl font-bold mb-4">
+			<h3 className="text-[1.4rem] font-bold mb-4">
 				The Stock Analysis Newsletter
 			</h3>
-			<p className="text-xl mb-5">Get the latest updates in your inbox.</p>
+			<p className="text-lg mb-5">Get the latest updates in your inbox.</p>
 			<form
 				method="post"
 				acceptCharset="UTF-8"
@@ -47,7 +47,7 @@ export const NewsletterWidget = () => {
 					name="submit"
 					type="submit"
 					value="Subscribe Now"
-					className="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-xl font-semibold rounded-sm shadow-sm text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
+					className="w-full inline-flex justify-center items-center px-6 py-2 border border-transparent text-lg font-semibold rounded-sm shadow-sm text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
 				/>
 				<div className="text-sm mt-1.5">
 					Read the{' '}

@@ -20,6 +20,8 @@
 	text-align: left;
 	border-top: 1px solid #ddd;
 	white-space: nowrap;
+	font-weight: 600;
+	font-size: 1.05rem;
 }
 
 .table tr:nth-child(odd) {

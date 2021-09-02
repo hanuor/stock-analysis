@@ -1,10 +1,16 @@
 import { Holding } from 'types/Holdings';
-import { useTable, Column } from 'react-table';
+import {
+	useTable,
+	useGlobalFilter,
+	useAsyncDebounce,
+	Column,
+} from 'react-table';
 import { useState, useEffect, useMemo } from 'react';
 import styles from './HoldingsTable.module.css';
 import { StockLink, ETFLink } from 'components/Links';
 import { authState } from 'state/authState';
 import { getPageDataFull } from 'functions/callBackEnd';
+import { Controls } from 'components/Controls/_Controls';
 
 type CellString = {
 	cell: {
@@ -79,15 +85,32 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 
 	const data = useMemo(() => dataRows, [dataRows]);
 
-	const { headerGroups, rows, prepareRow } = useTable({
-		columns,
-		data,
-	});
+	const {
+		headerGroups,
+		rows,
+		prepareRow,
+		setGlobalFilter,
+		state: { globalFilter },
+	} = useTable(
+		{
+			columns,
+			data,
+		},
+		useGlobalFilter
+	);
 
 	return (
 		<>
+			<Controls
+				count={fullCount}
+				title="Holdings"
+				useAsyncDebounce={useAsyncDebounce}
+				globalFilter={globalFilter}
+				setGlobalFilter={setGlobalFilter}
+				tableId="holdings-table"
+			/>
 			<div className="overflow-x-auto">
-				<table className={styles.table}>
+				<table className={styles.table} id="holdings-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
