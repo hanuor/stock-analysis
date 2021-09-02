@@ -16,9 +16,11 @@ export function Filter({
 	const onChange = useAsyncDebounce((value: any) => {
 		setGlobalFilter(value || undefined);
 	}, 100);
+
 	useEffect(() => {
-		onChange(value);
+		if (value) onChange(value);
 	}, []);
+
 	return (
 		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px]">
 			<label htmlFor="filter" className="sr-only">
