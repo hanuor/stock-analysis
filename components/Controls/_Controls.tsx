@@ -9,6 +9,7 @@ interface Props {
 	useAsyncDebounce: (value: any, wait: number) => any;
 	globalFilter: any;
 	setGlobalFilter: (filterValue: FilterValue) => void;
+	tableId: string;
 }
 
 export const Controls = ({
@@ -17,6 +18,7 @@ export const Controls = ({
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
+	tableId,
 }: Props) => {
 	return (
 		<div className="flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1">
@@ -32,6 +34,7 @@ export const Controls = ({
 						{ title: 'Export to Excel', type: 'xlsx', restricted: true },
 						{ title: 'Export to CSV', type: 'csv', restricted: true },
 					]}
+					tableId={tableId}
 				/>
 			</div>
 			<div>
