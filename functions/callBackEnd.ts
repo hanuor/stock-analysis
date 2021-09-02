@@ -23,8 +23,8 @@ export async function getPageData(page: string, symbol: string, reval: number) {
 	return respond(response, reval);
 }
 
-export async function getPageDataFull(page: string, symbol: string) {
-	const url = `${page}?symbol=${symbol}&f=${PRO_KEY}`;
+export async function getPageDataFull(page: string, id: number) {
+	const url = `${page}?i=${id}&f=${PRO_KEY}`;
 	const response = await getData(url);
 
 	if (response.status === 200) {

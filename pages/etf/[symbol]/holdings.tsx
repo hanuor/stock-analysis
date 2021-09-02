@@ -35,6 +35,7 @@ const Holdings = ({ info, data, news }: Props) => {
 									symbol={info.symbol}
 									rawdata={data.list}
 									fullCount={data.count}
+									id={info.id}
 								/>
 								<div className="text-gray-700 text-small mt-1">
 									As of {data.updated}
