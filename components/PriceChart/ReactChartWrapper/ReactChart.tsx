@@ -9,7 +9,6 @@ import type {
 	UpdateMode,
 } from 'chart.js';
 
-import { generateID } from './utils/generate-id/generateID';
 import { noop } from './utils/noop';
 
 export interface ChartProps {
