@@ -54,7 +54,8 @@ export const ActionsTable = ({
 
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => dataRows, [dataRows]);
-
+	console.log(columns);
+	console.log(data);
 	const filter = actionsState((state) => state.filter);
 	const setFilter = actionsState((state) => state.setFilter);
 
