@@ -97,39 +97,29 @@ export const CalendarTable = ({ title, data }: Props) => {
 		return <NoIpos title={title} />;
 	}
 
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		tableInstance;
+	const { headerGroups, rows, prepareRow } = tableInstance;
 
 	return (
 		<div>
 			<h2 className="hh2 mb-2 sm:mb-3">{title}</h2>
 			<div className="overflow-x-auto">
-				<table
-					{...getTableProps()}
-					className={`${styles.ipotable} ${styles.striped}`}
-				>
+				<table className={styles.ipotable}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
-							<tr {...headerGroup.getHeaderGroupProps()} key={index}>
+							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th {...column.getHeaderProps()} key={index}>
-										{column.render('Header')}
-									</th>
+									<th key={index}>{column.render('Header')}</th>
 								))}
 							</tr>
 						))}
 					</thead>
-					<tbody {...getTableBodyProps()}>
+					<tbody>
 						{rows.map((row, index) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} key={index}>
+								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return (
-											<td {...cell.getCellProps()} key={index}>
-												{cell.render('Cell')}
-											</td>
-										);
+										return <td key={index}>{cell.render('Cell')}</td>;
 									})}
 								</tr>
 							);

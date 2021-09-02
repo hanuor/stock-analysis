@@ -70,20 +70,6 @@ export const ActionsNavigationSub = () => {
 						</a>
 					</Link>
 				</li>
-				{type && (
-					<li className="mb-0.5">
-						<Link href={`/actions/${type}/statistics/`} prefetch={false}>
-							<a
-								data-title="Statistics"
-								className={
-									path.three === 'statistics' ? 'active' : 'inactive'
-								}
-							>
-								Statistics
-							</a>
-						</Link>
-					</li>
-				)}
 				{tabs.slice(0, count).map((tab) => (
 					<li key={tab} className="mb-0.5">
 						<Link
@@ -118,7 +104,7 @@ export const ActionsNavigationSub = () => {
 							className="inactive font-semibold"
 							onClick={() => setAll(true)}
 						>
-							2018-1998 &darr;
+							2019-1998 &darr;
 						</span>
 					)}
 				</li>

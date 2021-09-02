@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { Stock } from 'components/Layout/StockLayout';
-import StockChart from 'components/Chart/StockChart';
 import { SEO } from 'components/SEO';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
@@ -8,6 +8,11 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
 import { Unavailable } from 'components/Unavailable';
+import dynamic from 'next/dynamic';
+
+const StockChart = dynamic(() => import('components/Chart/StockChart'), {
+	ssr: false,
+});
 
 interface ChartProps {
 	info: Info;

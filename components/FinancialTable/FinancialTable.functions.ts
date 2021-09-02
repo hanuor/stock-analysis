@@ -83,7 +83,7 @@ export const formatY = (
 	if (format === 'ratio' || format === 'pershare') {
 		return formatNumber(value, 2, 2);
 	}
-	return value;
+	return formatNumber(value, 0, 0);
 };
 
 interface FormatCell {

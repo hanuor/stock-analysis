@@ -6,7 +6,7 @@ import {
 	Statement,
 } from 'types/Financials';
 import { Info } from 'types/Info';
-import { useState, forwardRef, useMemo } from 'react';
+import { useState, useEffect, forwardRef, useMemo } from 'react';
 import { financialsState } from 'state/financialsState';
 import { authState } from 'state/authState';
 import {
@@ -26,7 +26,8 @@ import Paywall from './Paywall';
 import dynamic from 'next/dynamic';
 import { Tooltip } from './Tooltip';
 import { TooltipChart } from './TooltipChart';
-import { getValidCount } from './functions/getValidCount';
+import { Unavailable } from 'components/Unavailable';
+import { getStockFinancialsFull } from 'functions/callBackEnd';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
@@ -35,9 +36,20 @@ interface Props {
 	financials: FinancialsType;
 	info: Info;
 	map: FinancialsMapType[];
+	counts: {
+		annual: number;
+		quarterly: number;
+		trailing: number;
+	};
 }
 
-export const FinancialTable = ({ statement, financials, info, map }: Props) => {
+export const FinancialTable = ({
+	statement,
+	financials,
+	info,
+	map,
+	counts,
+}: Props) => {
 	const range = financialsState((state) => state.range);
 	const divider = financialsState((state) => state.divider);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -45,19 +57,46 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 	const setReversed = financialsState((state) => state.setReversed);
 	const isPro = authState((state) => state.isPro);
 	const [hover, setHover] = useState(false);
+	const [fullData, setFullData] = useState<FinancialsType>();
+	const [dataRows, setDataRows] = useState(
+		financials[range as keyof FinancialsType]
+	);
 
-	let data = financials[range as keyof FinancialsType];
-
-	// Slice data if paywalled
+	// Check if financial data is paywalled
 	const paywall = range === 'annual' ? 10 : 40;
-	const fullcount = data && data.datekey ? data.datekey.length : 0;
+	const fullcount = counts[range]; // The total number of years/quarters available
+	const showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many years/quarter to show
+	const paywalled = showcount < fullcount ? 'true' : false;
 
-	const validcount = getValidCount(statement, fullcount, data);
-	const showcount = !isPro && validcount > paywall ? paywall : validcount; // How many data columns
+	useEffect(() => {
+		setDataRows(financials[range as keyof FinancialsType]);
+	}, [financials, range]);
 
-	const paywalled = showcount < validcount ? 'true' : false;
+	// If pro user and data is limited, fetch the full data
+	useEffect(() => {
+		async function fetchFullFinancials() {
+			const res = fullData
+				? fullData
+				: await getStockFinancialsFull(statement, info.id);
+			if (res && res[range]?.datekey?.length > paywall) {
+				setFullData(res);
+				setDataRows(res[range]);
+			} else {
+				throw new Error(
+					'Unable to fetch full data, response was invalid or empty array'
+				);
+			}
+		}
 
-	data = useMemo(() => sliceData(data, showcount), [data, showcount]);
+		if (isPro && fullcount > paywall) {
+			fetchFullFinancials();
+		}
+	}, [info.id, isPro, fullcount, paywall, statement, range, fullData]);
+
+	let data = useMemo(
+		() => sliceData(dataRows, showcount),
+		[dataRows, showcount]
+	);
 
 	// Switch data left/right if applicable
 	if (
@@ -74,16 +113,23 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 			<>
 				<div className="">
 					<TableTitle statement={statement} />
-					<span className="text-xl">
-						No {range} {statement.replace(/_/g, ' ')} data found for this
-						stock.
-					</span>
+					<Unavailable
+						message={`No ${range} ${statement.replace(
+							/_/g,
+							' '
+						)} data found for this stock.`}
+						classes="min-h-[300px] lg:min-h-[500px]"
+					/>
 				</div>
 			</>
 		);
 	}
 
 	const DATA_MAP = map;
+
+	if (!data) {
+		return <p>Loading...</p>;
+	}
 
 	const headerRow = () => {
 		const headerdata = data.datekey;
@@ -107,7 +153,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 		const margin = indent ? ' ml-3' : '';
 
 		return (
-			<span ref={ref} className={'cursor-help' + margin}>
+			<span ref={ref} className={margin}>
 				{title}
 			</span>
 		);
@@ -287,7 +333,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				<TableControls
 					statement={statement}
 					symbol={info.symbol}
-					fullcount={validcount}
+					fullcount={fullcount}
 					showcount={showcount}
 				/>
 			</div>
@@ -329,7 +375,7 @@ export const FinancialTable = ({ statement, financials, info, map }: Props) => {
 				{paywalled && !isPro && (
 					<Paywall
 						range={range}
-						fullcount={validcount}
+						fullcount={fullcount}
 						showcount={showcount}
 					/>
 				)}

@@ -1,5 +1,7 @@
 import { getData } from 'functions/API';
 
+const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null;
+
 interface Response {
 	status: number;
 	data: any;
@@ -21,6 +23,16 @@ export async function getPageData(page: string, symbol: string, reval: number) {
 	return respond(response, reval);
 }
 
+export async function getPageDataFull(page: string, id: number) {
+	const url = `${page}?i=${id}&f=${PRO_KEY}`;
+	const response = await getData(url);
+
+	if (response.status === 200) {
+		return response.data;
+	}
+	return [];
+}
+
 export async function getStockFinancials(
 	page: string,
 	symbol: string,
@@ -28,6 +40,16 @@ export async function getStockFinancials(
 ) {
 	const response = await getData(`financials?type=${page}&symbol=${symbol}`);
 	return respond(response, reval);
+}
+
+export async function getStockFinancialsFull(statement: string, id: number) {
+	const response = await getData(
+		`financials?type=${statement}&i=${id}&f=${PRO_KEY}`
+	);
+	if (response.status === 200) {
+		return response.data;
+	}
+	return [];
 }
 
 export async function getNewsData(id: number) {
@@ -51,9 +73,12 @@ export async function getIpoData(query: string) {
 }
 
 export async function getActionsData(query: string, year?: string) {
-	const response = year
-		? await getData(`actions?q=${query}&y=${year}`)
-		: await getData(`actions?q=${query}`);
-	// const response = await getData(`actions?q=${query}`);
+	const url = year ? `actions?q=${query}&y=${year}` : `actions?q=${query}`;
+	const response = await getData(url);
+	return response;
+}
+
+export async function getActionsDataFull(query: string, year?: string) {
+	const response = await getData(`actions?q=${query}&y=${year}&f=${PRO_KEY}`);
 	return response;
 }

@@ -44,7 +44,14 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 				canonical="actions/splits/"
 			/>
 			<ActionsLayout title="Recent Stock Splits">
-				<ActionsTable title="Splits" columndata={columns} rowdata={data} />
+				<ActionsTable
+					key="Splits"
+					title="Splits"
+					columndata={columns}
+					rowdata={data.data}
+					fullCount={data.fullCount}
+					type="splits"
+				/>
 			</ActionsLayout>
 		</>
 	);

@@ -1,23 +1,31 @@
 import { Button } from 'components/Button';
+import { authState } from 'state/authState';
 
-export const ActionsPaywall = ({
-	total,
-	title,
-}: {
-	total: number;
+interface Props {
+	count: number;
+	fullCount: number;
 	title: string;
-}) => {
-	if (total < 100) {
+}
+
+export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
+	const isPro = authState((state) => state.isPro);
+
+	if (isPro || count === fullCount) {
 		return null;
 	}
 
 	return (
 		<div className="border border-gray-200 mt-7 p-6 text-center">
 			<h4 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-3">
-				Showing 100 of {total} {title.toLowerCase()}
+				Showing {count} of {fullCount} {title.toLowerCase()}
 			</h4>
 			<div className="text-xl">Subscribe to see the full list</div>
-			<Button text="Start Free Trial" url="/pro/" className="w-44" />
+			<Button
+				text="Start Free Trial"
+				url="/pro/"
+				className="w-44"
+				id="free-trial-actions-below"
+			/>
 		</div>
 	);
 };

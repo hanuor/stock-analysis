@@ -1,10 +1,25 @@
 import { GetStaticProps } from 'next';
+import { getData } from 'functions/API';
 import { Column } from 'react-table';
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SEO } from 'components/SEO';
 import { SymbolTable } from 'components/Tables/SymbolTable';
-import { ETFLink } from 'components/Links';
-import { abbreviateNumber } from 'functions/numbers/abbreviateNumber';
+import Link from 'next/link';
+
+const formatter = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 2,
+	maximumFractionDigits: 2,
+});
+
+const abbreviate = (num: number) => {
+	if (num > 1000000000) {
+		return formatter.format(num / 1000000000) + 'B';
+	} else if (num > 1000000) {
+		return formatter.format(num / 1000000) + 'M';
+	} else {
+		return formatter.format(num);
+	}
+};
 
 interface IStock {
 	s: string;
@@ -35,25 +50,26 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 			Header: 'Symbol',
 			accessor: 's',
 			Cell: function FormatCell({ cell: { value } }: ICellString) {
-				return <ETFLink symbol={value} />;
+				return (
+					<Link href={`/etf/${value.toLowerCase()}/`} prefetch={false}>
+						<a>{value}</a>
+					</Link>
+				);
 			},
 		},
 		{
 			Header: 'Fund Name',
 			accessor: 'n',
-			Cell: function FormatCell({ cell: { value } }: ICellString) {
-				return <span className="namecol">{value}</span>;
-			},
 		},
 		{
 			Header: 'Asset Class',
-			accessor: 'cls',
+			accessor: 'c',
 		},
 		{
 			Header: 'Assets',
-			accessor: 'aum',
+			accessor: 'a',
 			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
-				return abbreviateNumber(value * 1000, 2, true);
+				return abbreviate(value * 1000);
 			},
 		},
 	];
@@ -71,14 +87,11 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const stocksList = await fetch(
-		'https://api.stockanalysis.com/wp-json/sa/index?type=etfspage'
-	);
-	const json = await stocksList.json();
+	const etfs = await getData('index?type=etfspage');
 
 	return {
 		props: {
-			stocks: json,
+			stocks: etfs,
 		},
 		revalidate: 24 * 60 * 60,
 	};

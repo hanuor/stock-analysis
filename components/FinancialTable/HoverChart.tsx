@@ -8,6 +8,7 @@ import {
 	countDecimals,
 	reducePrecisionFix,
 } from './FinancialTable.functions';
+import { Unavailable } from 'components/Unavailable';
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
@@ -31,6 +32,19 @@ export const HoverChart = ({
 	divider,
 	leftRight,
 }: Props) => {
+	if (
+		typeof window !== 'undefined' &&
+		typeof window.ResizeObserver === 'undefined'
+	) {
+		return (
+			<Unavailable
+				message="This chart does not work in your browser. Please update to the latest browser version."
+				small={true}
+				classes="whitespace-normal"
+			/>
+		);
+	}
+
 	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
 	const dataid = row.data || row.id;
 	const rowdata = data[dataid as keyof FinancialReport];
@@ -282,10 +296,7 @@ export const HoverChart = ({
 									return `${value.toFixed(3)}%`;
 								} else if (type === 'ratio') {
 									return `${value.toFixed(3)}`;
-								} else if (
-									(!type || type === 'reduce_precision') &&
-									(value > 10000000 || value < -10000000)
-								) {
+								} else if (!type || type === 'reduce_precision') {
 									return new Intl.NumberFormat('en-US', {
 										maximumFractionDigits: 0,
 									}).format(value);

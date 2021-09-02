@@ -7,8 +7,9 @@ import {
 	TimeSeriesScale,
 	TimeScale,
 } from 'chart.js';
-
 import { formatDateTimestamp, formatDateClean } from 'functions/formatDates';
+import { Unavailable } from 'components/Unavailable';
+
 import { ReactChart } from './ReactChartWrapper/ReactChart';
 
 import 'chartjs-adapter-date-fns';
@@ -35,6 +36,19 @@ ReactChart.register(
 );
 
 export const Chart = ({ chartData, chartTime }: Props) => {
+	// Chart.js causes critical errors on older Safari versions
+	if (
+		typeof window !== 'undefined' &&
+		typeof window.ResizeObserver === 'undefined'
+	) {
+		return (
+			<Unavailable
+				message="This chart does not work in your browser. Please update to the latest browser version."
+				small={true}
+			/>
+		);
+	}
+
 	const label =
 		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price';
 
@@ -164,6 +178,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 
 							maxRotation: 0,
 							minRotation: 0,
+							maxTicksLimit: chartTime === '1Y' ? 7 : 5,
 						},
 					},
 					y: {
@@ -228,7 +243,13 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 								let currlabel = context.dataset.label || '';
 								const value = context.parsed.y || '';
 								if (currlabel && value) {
-									currlabel = label + ': ' + value;
+									if (
+										context.label === timeAxis[timeAxis.length - 1]
+									) {
+										currlabel = 'Latest Price: ' + value;
+									} else {
+										currlabel = label + ': ' + value;
+									}
 								}
 								return currlabel;
 							},

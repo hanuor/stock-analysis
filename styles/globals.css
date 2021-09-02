@@ -4,7 +4,7 @@
 
 @layer base {
 	body {
-		@apply text-gray-900;
+		@apply text-gray-900 bg-white;
 	}
 
 	.skip-nav {
@@ -47,14 +47,39 @@
 	.navmenu {
 		background-image: linear-gradient(to right, white, white),
 			linear-gradient(to right, white, white),
-			linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0)),
-			linear-gradient(to left, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0));
+			linear-gradient(
+				to right,
+				rgba(150, 150, 150, 0.15),
+				rgba(255, 255, 255, 0)
+			),
+			linear-gradient(
+				to left,
+				rgba(150, 150, 150, 0.15),
+				rgba(255, 255, 255, 0)
+			);
 		background-position: left center, right center, left center, right center;
 		background-repeat: no-repeat;
 		background-color: white;
 		background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;
 		background-attachment: local, local, scroll, scroll;
 		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto;
+	}
+
+	.navmenu.submenu {
+		background-image: none;
+	}
+
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.hide-scroll::-webkit-scrollbar,
+	.navmenu::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.hide-scroll,
+	.navmenu {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
 	}
 
 	.navmenu li a,
@@ -221,6 +246,35 @@
 		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 last:pb-1 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5;
 	}
 
+	.news-article > a {
+		@apply sm:mt-1;
+	}
+
+	.news-article > a > img {
+		@apply rounded;
+	}
+
+	.news-article > div {
+		@apply flex flex-col;
+	}
+
+	.news-article > div > h3 {
+		@apply text-xl font-bold mb-2 mt-3 sm:mt-0 leading-snug sm:leading-tight sm:order-2 hover:text-blue-brand_sharp;
+	}
+
+	.news-article > div > p {
+		@apply text-gray-800 sm:order-3 text-[0.95rem];
+	}
+
+	.news-article > div > div.news-t {
+		@apply mt-1.5 sm:mt-1 sm:order-4;
+	}
+
+	.news-article > div > div:last-child,
+	.news-video > div:last-child {
+		@apply mt-1 text-sm text-gray-700 sm:order-1 sm:mt-0;
+	}
+
 	.news-spns {
 		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 last:pb-1 shadow sm:shadow-none;
 	}
@@ -229,8 +283,64 @@
 		@apply flex flex-col bg-white p-4 sm:px-0 sm:py-6 first:pt-3 last:pb-1 sm:first:pt-4 shadow sm:shadow-none;
 	}
 
+	.news-video > h3 {
+		@apply text-xl font-bold mb-2.5 xs:mb-3 leading-snug sm:leading-tight sm:order-2;
+	}
+
+	.news-video > div.news-e {
+		@apply mb-3 sm:order-3 lg:pr-2;
+	}
+
+	.news-video > p {
+		@apply text-gray-800 sm:order-4 text-[0.95rem];
+	}
+
+	.news-video > div.news-t {
+		@apply mt-1.5 sm:mt-1 sm:order-5;
+	}
+
 	.news-ticker {
 		@apply inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll;
+	}
+
+	.price-chart {
+		@apply flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto hide-scroll;
+	}
+
+	.price-chart > li > button {
+		@apply text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md;
+	}
+
+	.price-chart > li > button.inactive {
+		@apply text-gray-900 hover:text-gray-900 hover:text-shadow;
+	}
+
+	.price-chart > li > button.active {
+		@apply bp:bg-gray-100 text-gray-800 font-semibold;
+	}
+
+	.price-chart > li > button > span:first-child {
+		@apply block sm:hidden lg:block xl:hidden;
+	}
+
+	.price-chart > li > button > span:last-child {
+		@apply hidden sm:block lg:hidden xl:block;
+	}
+
+	.top-table {
+		@apply text-small w-[48%] lg:w-auto lg:min-w-[210px] text-gray-900;
+	}
+
+	.top-table tr {
+		@apply flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0;
+	}
+
+	.top-table tr td {
+		@apply py-[1px] sm:py-2 px-1 whitespace-nowrap;
+	}
+
+	.top-table tr td:last-child {
+		@apply text-left sm:text-right text-base sm:text-small font-semibold;
 	}
 
 	.green-quote {
@@ -258,10 +368,26 @@
 	}
 }
 
-.lbl::before {
+.profile-table tr:not(:last-child) {
+	@apply border-b border-gray-200;
+}
+
+/* .lbl::before {
 	content: 'Advertisement';
 	@apply block text-xxs leading-3 text-gray-400 text-center mb-0.5;
 }
+
+.ccpa-msg-added {
+	@apply max-w-3xl mx-auto text-base text-center text-gray-400 border-t border-gray-700 pt-5 pb-6 lg:pb-1;
+}
+
+.ccpa-msg-added a {
+	@apply font-semibold;
+}
+
+.ccpa-msg-added a:hover {
+	@apply text-gray-300;
+} */
 
 /* NPROGRESS */
 /* Make clicks pass-through */

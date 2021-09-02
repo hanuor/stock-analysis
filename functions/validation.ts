@@ -17,8 +17,8 @@ export const validateUrlBit = (bit: string | null | undefined) => {
 	}
 
 	if (
-		bit.charAt(0) === '#' &&
-		bit.charAt(0) === '?' &&
+		bit.charAt(0) === '#' ||
+		bit.charAt(0) === '?' ||
 		bit.charAt(0) === '%'
 	) {
 		return null;

@@ -93,7 +93,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 			}
 
 			public render() {
-				const { data, period, stockId } = this.state;
+				let { data, period, stockId } = this.state;
 				const newState: WithOHLCState = this.props;
 
 				if (period != newState.period || stockId != newState.stockId) {
@@ -102,14 +102,14 @@ export function withOHLCData(dataSet = 'DAILY') {
 					)
 						.then((res) => {
 							const forDateParse = res.data.map(fixDataHeaders);
-							const data = forDateParse.map(parseData());
-							const period = newState.period;
-							const stockId = newState.stockId;
+							data = forDateParse.map(parseData());
 
 							if (period != newState.period) {
+								period = newState.period;
 								this.setState({ period });
 								this.setState({ data });
 							} else {
+								stockId = newState.stockId;
 								this.setState({ stockId });
 								this.setState({ data });
 							}

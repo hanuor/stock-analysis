@@ -82,7 +82,7 @@ export default function MyAccount() {
 								{nextPaymentDate && (
 									<div>Next Billing Date: {nextPaymentDate}</div>
 								)}
-								{nextPaymentAmount && (
+								{nextPaymentAmount && nextPaymentAmount !== '0' && (
 									<div>
 										Amount: {nextPaymentAmount}{' '}
 										{paymentCurrency && paymentCurrency}

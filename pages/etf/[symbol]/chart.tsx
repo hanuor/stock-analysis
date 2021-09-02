@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { Stock } from 'components/Layout/StockLayout';
-import StockChart from 'components/Chart/StockChart';
 import { SEO } from 'components/SEO';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
@@ -7,6 +7,11 @@ import { getPageData } from 'functions/callBackEnd';
 import { useState } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import dynamic from 'next/dynamic';
+
+const StockChart = dynamic(() => import('components/Chart/StockChart'), {
+	ssr: false,
+});
 
 interface ChartProps {
 	info: Info;
@@ -27,7 +32,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 			<Stock info={info}>
 				<div className="px-2 sm:contain">
 					<div className="">
-						<div className="flex flex-row justify-between items-center border border-gray-200 mb-3 text-sm bp:text-base">
+						<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 							<Buttons state={time} dispatch={setTime} />
 							<SelectPeriod dispatcher={setPeriod} />
 							<SelectType dispatcher={setType} />

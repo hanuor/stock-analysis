@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface Props {
 	range: string;
 	fullcount: number;
@@ -16,9 +18,14 @@ export default function Paywall({ range, fullcount, showcount }: Props) {
 			<div className="text-lg mb-3">
 				{diff} more {type} are available
 			</div>
-			<button className="bg-gray-500 text-white py-3 px-5 text-xl font-semibold">
-				Start Free Trial
-			</button>
+			<Link href="/pro/" prefetch={false}>
+				<a
+					className="bg-blue-brand_light hover:bg-blue-brand_sharp text-white py-3 px-5 text-xl font-semibold rounded-sm"
+					id="free-trial-financials-table"
+				>
+					Start Free Trial
+				</a>
+			</Link>
 		</div>
 	);
 }

@@ -12,9 +12,14 @@ import { MAP_BALANCE_SHEET } from 'data/financials/map_balance_sheet';
 interface Props {
 	info: Info;
 	data: FinancialsType;
+	counts: {
+		annual: number;
+		quarterly: number;
+		trailing: number;
+	};
 }
 
-export default function BalanceSheet({ info, data }: Props) {
+export default function BalanceSheet({ info, data, counts }: Props) {
 	return (
 		<Stock info={info}>
 			<SEO
@@ -29,6 +34,7 @@ export default function BalanceSheet({ info, data }: Props) {
 					financials={data}
 					map={MAP_BALANCE_SHEET}
 					info={info}
+					counts={counts}
 				/>
 			</div>
 		</Stock>

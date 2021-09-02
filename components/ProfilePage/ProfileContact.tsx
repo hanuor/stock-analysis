@@ -1,5 +1,4 @@
 import { Contact } from 'types/Company';
-import { External } from 'components/CustomLink';
 
 const address = (address: string) => {
 	return { __html: address };
@@ -40,10 +39,14 @@ export const ProfileContact = ({ contact }: { contact: Contact }) => {
 							<tr className="border-t border-gray-200">
 								<td className="py-2 px-0.5 font-semibold">Website</td>
 								<td className="py-2 px-0.5 text-right">
-									<External
-										url={contact.website}
-										text={contact.domain}
-									/>
+									<a
+										href={contact.website}
+										target="_blank"
+										rel="noopener noreferrer nofollow"
+										className="bll"
+									>
+										{contact.domain}
+									</a>
 								</td>
 							</tr>
 						)}

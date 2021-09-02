@@ -130,9 +130,14 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 				{`${quote.extC} (${quote.extCP})`}
 			</div>
 			<div className="mt-1 text-gray-700 sm:flex">
-				<span className="flex items-center">
+				<span className="flex items-center" suppressHydrationWarning>
 					{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}{' '}
-					<span className="ml-1 text-sm font-semibold">{quote.extS}:</span>
+					<span
+						className="ml-1 text-sm font-semibold"
+						suppressHydrationWarning
+					>
+						{quote.extS}:
+					</span>
 				</span>
 				<span className="text-xxs xs:text-tiny bp:text-sm sm:ml-1">
 					{quote.extTF}

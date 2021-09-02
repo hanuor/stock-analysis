@@ -6,7 +6,7 @@ import { NewsNavigation } from 'components/News/NewsNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsFeed } from 'components/News/_NewsFeed';
 import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/GPT/Sidebar1';
+import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 
 interface Props {
 	data: News[];
@@ -34,6 +34,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 							<NewsFeed data={data} related="Stocks" />
 						</div>
 						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
+							<NewsletterWidget />
 							<NewsWidget
 								title="Stock News"
 								news={other}
@@ -42,7 +43,6 @@ export const AllPressReleases = ({ data, other }: Props) => {
 									url: '/news/all-stocks/',
 								}}
 							/>
-							<Sidebar1 />
 						</aside>
 					</div>
 				</main>
