@@ -64,7 +64,6 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
-	console.log(chartData);
 
 	return (
 		<ReactChart
