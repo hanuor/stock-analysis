@@ -7,12 +7,17 @@ import {
 	TimeSeriesScale,
 	TimeScale,
 } from 'chart.js';
-import { formatDateTimestamp, formatDateClean } from 'functions/formatDates';
+import {
+	formatDateTimestamp,
+	formatDateClean,
+	formatDateMinute,
+	formatDateDay,
+	formatDateMonth,
+	formatDateYear,
+} from 'functions/formatDates';
 import { Unavailable } from 'components/Unavailable';
 
 import { ReactChart } from './ReactChartWrapper/ReactChart';
-
-import 'chartjs-adapter-date-fns';
 
 interface Props {
 	chartData: ChartDataType[];
@@ -52,14 +57,8 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 	const label =
 		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price';
 
-	const axisType = chartTime == '5D' ? 'timeseries' : 'time';
-	const axisTimeUnit = chartTime == '5D' ? 'day' : false;
-	const axisSource = chartTime == '5D' ? 'data' : 'auto';
-
 	const timeAxis = chartData.map((item) => {
-		const dateObj = new Date(item.t);
-		const epoch = dateObj.getTime();
-		return epoch;
+		return item.t;
 	});
 
 	const priceAxis = chartData.map((item) => {
@@ -157,25 +156,37 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						grid: {
 							display: false,
 						},
-						type: axisType, // Setja fast time unit
-						time: {
-							unit: axisTimeUnit,
 
-							displayFormats: {
-								quarter: 'MMM YYYY',
-								minute: 'HH:MM',
-								hour: 'HH:MM a',
-							},
-						},
 						ticks: {
-							color: '#323232',
-							source: axisSource,
+							callback: function (index: number | string) {
+								if (typeof index == 'string') {
+									index = parseInt(index);
+								}
 
+								if (
+									chartTime === '1Y' ||
+									chartTime === '6M' ||
+									chartTime === 'YTD'
+								) {
+									return formatDateMonth(timeAxis[index]);
+								} else if (chartTime === '1D') {
+									return formatDateMinute(timeAxis[index]);
+								} else if (chartTime === '5D') {
+									return formatDateDay(timeAxis[index]);
+								} else if (chartTime === '1M') {
+									return formatDateDay(timeAxis[index]);
+								} else if (chartTime === '5Y' || chartTime === 'MAX') {
+									return formatDateYear(timeAxis[index]);
+								} else {
+									return formatDateClean(timeAxis[index]);
+								}
+							},
+							color: '#323232',
 							font: {
 								size: 13,
 							},
 							autoSkip: true,
-
+							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
 							maxTicksLimit: chartTime === '1Y' ? 7 : 5,
@@ -218,28 +229,23 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						},
 						displayColors: false,
 						callbacks: {
-							title: function (tooltipItem) {
+							title: function (tooltipItem: { label: string }[]) {
 								if (chartTime === '1Y') {
-									return formatDateClean(
-										new Date(tooltipItem[0].parsed.x).toString()
-									);
+									return formatDateClean(tooltipItem[0].label);
 								} else if (chartTime === '1D' || chartTime === '5D') {
-									return formatDateTimestamp(
-										new Date(tooltipItem[0].parsed.x).toString()
-									);
+									return formatDateTimestamp(tooltipItem[0].label);
 								} else if (chartTime === '5Y' || chartTime === 'MAX') {
 									return (
-										'Week of ' +
-										formatDateClean(
-											new Date(tooltipItem[0].parsed.x).toString()
-										)
+										'Week of ' + formatDateClean(tooltipItem[0].label)
 									);
 								}
-								return formatDateClean(
-									new Date(tooltipItem[0].parsed.x).toString()
-								);
+								return formatDateClean(tooltipItem[0].label);
 							},
-							label: function (context) {
+							label: function (context: {
+								label: string;
+								dataset: { label?: string | undefined };
+								parsed: { y: number };
+							}) {
 								let currlabel = context.dataset.label || '';
 								const value = context.parsed.y || '';
 								if (currlabel && value) {

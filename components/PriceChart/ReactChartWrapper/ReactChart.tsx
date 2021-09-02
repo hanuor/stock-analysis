@@ -37,7 +37,7 @@ export const ReactChart = ({
 		update: noop,
 		destroy: noop,
 	} as Chart);
-	const [CHART_ID] = useState(id || generateID('Chart'));
+	const [CHART_ID] = useState(id || '1');
 
 	useEffect(() => {
 		chartInstance.current.data = data;
