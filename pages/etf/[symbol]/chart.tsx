@@ -6,6 +6,7 @@ import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
 import { getPageData } from 'functions/callBackEnd';
 import { useState } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { Loading } from 'components/Loading';
 import { ParsedUrlQuery } from 'querystring';
 import dynamic from 'next/dynamic';
 
@@ -21,6 +22,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [period, setPeriod] = useState<string>('d');
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
+	const [loading, setLoading] = useState<boolean>(true);
 
 	return (
 		<>
@@ -38,12 +40,17 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 							<SelectType dispatcher={setType} />
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
-							<StockChart
-								stockId={info.id}
-								period={period}
-								time={time}
-								type={type}
-							/>
+							<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+								{loading && <Loading />}
+								<StockChart
+									stockId={info.id}
+									period={period}
+									time={time}
+									type={type}
+									setLoading={setLoading}
+									loading={loading}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
