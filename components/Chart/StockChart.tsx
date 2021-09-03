@@ -21,7 +21,6 @@ import { MouseCoordinateY } from './coordinates/MouseCoordinateY';
 import { discontinuousTimeScaleProviderBuilder } from './scales/discontinuousTimeScaleProvider';
 import { lastVisibleItemBasedZoomAnchor } from './core/zoom';
 import { sma } from './indicators/indicator';
-import { Loading } from 'components/Loading';
 
 interface StockChartProps {
 	readonly data: IOHLCData[];

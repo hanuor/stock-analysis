@@ -3,12 +3,10 @@ import { Dispatch, SetStateAction } from 'react';
 interface ButtonUIProps {
 	state: string;
 	dispatch: Dispatch<SetStateAction<string>>;
-	setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 interface SelectProps {
 	dispatcher: Dispatch<SetStateAction<string>>;
-	setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export const SelectPeriod = (props: SelectProps) => {
@@ -17,7 +15,6 @@ export const SelectPeriod = (props: SelectProps) => {
 			<select
 				onChange={(e) => {
 					props.dispatcher(e.target.value);
-					props.setLoading(true);
 				}}
 				id="period"
 				name="period"
@@ -49,7 +46,7 @@ export const SelectType = (props: SelectProps) => {
 	);
 };
 
-export const Buttons = ({ state, dispatch, setLoading }: ButtonUIProps) => {
+export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md';
 	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
 	const inactive =

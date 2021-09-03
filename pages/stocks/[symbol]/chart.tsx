@@ -36,16 +36,9 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				<div className="px-2 sm:contain">
 					<div className="py-2">
 						<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
-							<Buttons
-								state={time}
-								dispatch={setTime}
-								setLoading={setLoading}
-							/>
-							<SelectPeriod
-								dispatcher={setPeriod}
-								setLoading={setLoading}
-							/>
-							<SelectType dispatcher={setType} setLoading={setLoading} />
+							<Buttons state={time} dispatch={setTime} />
+							<SelectPeriod dispatcher={setPeriod} />
+							<SelectType dispatcher={setType} />
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 							{info.state !== 'upcomingipo' ? (
