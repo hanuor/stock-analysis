@@ -7,12 +7,15 @@ export const CrispChat = () => {
 
 	return (
 		<>
-			<Script strategy="lazyOnload">
+			<Script strategy="lazyOnload" id="crisp-chat">
 				{`window.$crisp=[];window.CRISP_WEBSITE_ID="462df10f-fb43-4ca4-9537-e0af8a974bba";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`}
 			</Script>
 
 			{isLoggedIn && (
-				<Script strategy="lazyOnload">{`$crisp.push(["set", "user:email", "${email}"])`}</Script>
+				<Script
+					strategy="lazyOnload"
+					id="crisp-chat-info"
+				>{`$crisp.push(["set", "user:email", "${email}"])`}</Script>
 			)}
 		</>
 	);
