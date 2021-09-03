@@ -2,10 +2,9 @@ import {
 	LineController,
 	LineElement,
 	PointElement,
-	Title,
 	Tooltip,
-	TimeSeriesScale,
-	TimeScale,
+	LinearScale,
+	CategoryScale,
 } from 'chart.js';
 import {
 	formatDateTimestamp,
@@ -34,10 +33,9 @@ ReactChart.register(
 	LineController,
 	PointElement,
 	LineElement,
-	TimeSeriesScale,
 	Tooltip,
-	Title,
-	TimeScale
+	LinearScale,
+	CategoryScale
 );
 
 export const Chart = ({ chartData, chartTime, id }: Props) => {
@@ -182,6 +180,8 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 							},
 							color: '#323232',
 							font: {
+								family:
+									'-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 								size: 13,
 							},
 							autoSkip: true,
@@ -196,6 +196,8 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 						ticks: {
 							color: '#555555',
 							font: {
+								family:
+									'-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 								size: 12.5,
 							},
 						},

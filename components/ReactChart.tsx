@@ -44,7 +44,8 @@ export const ReactChart = ({
 		chartInstance.current.options = options;
 
 		chartInstance.current.update(updateMode);
-	}, [data, options, updateMode]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, options]);
 
 	const nodeRef = useCallback<(instance: HTMLCanvasElement | null) => void>(
 		(node) => {
@@ -59,9 +60,10 @@ export const ReactChart = ({
 				});
 			}
 		},
-		[data, options, plugins, type]
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[]
 	);
-	
+
 	return <canvas ref={nodeRef} height={height} width={width} id={CHART_ID} />;
 };
 
