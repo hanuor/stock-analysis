@@ -16,19 +16,19 @@ import {
 	formatDateYear,
 } from 'functions/formatDates';
 import { Unavailable } from 'components/Unavailable';
-
-import { ReactChart } from './ReactChartWrapper/ReactChart';
-
-interface Props {
-	chartData: ChartDataType[];
-	chartTime: string;
-}
+import { ReactChart } from 'components/ReactChart';
 
 type ChartDataType = {
 	t: string;
 	c: number;
 	o?: number;
 };
+
+interface Props {
+	chartData: ChartDataType[];
+	chartTime: string;
+	id: number;
+}
 
 ReactChart.register(
 	LineController,
@@ -40,7 +40,7 @@ ReactChart.register(
 	TimeScale
 );
 
-export const Chart = ({ chartData, chartTime }: Props) => {
+export const Chart = ({ chartData, chartTime, id }: Props) => {
 	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
@@ -64,9 +64,10 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
-
+	
 	return (
 		<ReactChart
+			id={id.toString()}
 			type="line"
 			data={{
 				labels: timeAxis,
@@ -155,7 +156,6 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						grid: {
 							display: false,
 						},
-
 						ticks: {
 							callback: function (index: number | string) {
 								if (typeof index == 'string') {
@@ -188,7 +188,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
-							maxTicksLimit: chartTime === '1Y' ? 7 : 5,
+							maxTicksLimit: chartTime === '5D' ? 5 : undefined,
 						},
 					},
 					y: {
