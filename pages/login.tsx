@@ -9,7 +9,6 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import { Logout } from 'components/Logout';
 import Axios from 'axios';
 import { authState } from 'state/authState';
-import { CrispChat } from 'components/Scripts/CrispChat';
 
 export default function Login() {
 	const { isLoggedIn, setIsLoggedIn } = useUserInfo();
@@ -70,7 +69,7 @@ export default function Login() {
 			} else {
 				router.back();
 			}
-		} catch (error) {
+		} catch (error: any) {
 			const msg = error.response.data.data.message;
 
 			switch (msg) {
@@ -89,7 +88,6 @@ export default function Login() {
 		return (
 			<>
 				<SEO title="Log in to Stock Analysis" canonical="login/" />
-				<CrispChat />
 				<LayoutFullWidth>
 					<div className="bg-gray-50 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
 						<div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
