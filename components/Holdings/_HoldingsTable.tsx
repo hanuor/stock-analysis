@@ -1,10 +1,16 @@
 import { Holding } from 'types/Holdings';
-import { useTable, Column } from 'react-table';
+import {
+	useTable,
+	useGlobalFilter,
+	useAsyncDebounce,
+	Column,
+} from 'react-table';
 import { useState, useEffect, useMemo } from 'react';
 import styles from './HoldingsTable.module.css';
 import { StockLink, ETFLink } from 'components/Links';
 import { authState } from 'state/authState';
 import { getPageDataFull } from 'functions/callBackEnd';
+import { Controls } from 'components/Controls/_Controls';
 
 type CellString = {
 	cell: {
@@ -16,9 +22,10 @@ interface Props {
 	symbol: string;
 	rawdata: Holding[];
 	fullCount: number;
+	id: number;
 }
 
-export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
+export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 	const [dataRows, setdataRows] = useState(rawdata);
 	const isPro = authState((state) => state.isPro);
 
@@ -27,7 +34,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullHoldings() {
-			const res = await getPageDataFull('holdings', symbol);
+			const res = await getPageDataFull('holdings', id);
 
 			if (res && res.data.list && res.data.list.length > count) {
 				setdataRows(res.data.list);
@@ -41,7 +48,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 		if (isPro && fullCount > count) {
 			fetchFullHoldings();
 		}
-	}, [count, fullCount, isPro, symbol]);
+	}, [count, fullCount, isPro, id]);
 
 	const columns: Column[] = useMemo(
 		() => [
@@ -79,15 +86,32 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 
 	const data = useMemo(() => dataRows, [dataRows]);
 
-	const { headerGroups, rows, prepareRow } = useTable({
-		columns,
-		data,
-	});
+	const {
+		headerGroups,
+		rows,
+		prepareRow,
+		setGlobalFilter,
+		state: { globalFilter },
+	} = useTable(
+		{
+			columns,
+			data,
+		},
+		useGlobalFilter
+	);
 
 	return (
 		<>
+			<Controls
+				count={fullCount}
+				title="Holdings"
+				useAsyncDebounce={useAsyncDebounce}
+				globalFilter={globalFilter}
+				setGlobalFilter={setGlobalFilter}
+				tableId="holdings-table"
+			/>
 			<div className="overflow-x-auto">
-				<table className={styles.table}>
+				<table className={styles.table} id="holdings-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

@@ -15,9 +15,10 @@ type Button = {
 interface Props {
 	title: string;
 	buttons: Button[];
+	tableId: string;
 }
 
-export function Export({ title, buttons }: Props) {
+export function Export({ title, buttons, tableId }: Props) {
 	const isPro = authState((state) => state.isPro);
 
 	return (
@@ -56,6 +57,7 @@ export function Export({ title, buttons }: Props) {
 										key={index}
 										title={button.title}
 										type={button.type}
+										tableId={tableId}
 									/>
 								)
 							)}

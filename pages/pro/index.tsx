@@ -1,7 +1,6 @@
 import { SEO } from 'components/SEO';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { CrispChat } from 'components/Scripts/CrispChat';
 
 declare global {
@@ -184,12 +183,8 @@ export default function LandingPage() {
 
 						<p className="text-lg mb-5">
 							You can send an email to support@stockanalysis.com or send
-							a message via the{' '}
-							<Link href="/contact/">
-								<a className="bll">contact form</a>
-							</Link>
-							. You can also click the chat widget button in the bottom
-							right corner.
+							a message via the contact form. You can also click the chat
+							widget button in the bottom right corner.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">

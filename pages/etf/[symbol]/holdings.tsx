@@ -9,6 +9,7 @@ import { getPageData } from 'functions/callBackEnd';
 import { HoldingsTable } from 'components/Holdings/_HoldingsTable';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall';
+import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 
 interface Props {
 	info: Info;
@@ -17,14 +18,6 @@ interface Props {
 }
 
 const Holdings = ({ info, data, news }: Props) => {
-	const HeaderFull = () => (
-		<>
-			{info.ticker} Holdings - {data.count}
-		</>
-	);
-
-	const HeaderEmpty = () => <>{info.ticker} Holdings</>;
-
 	return (
 		<Stock info={info}>
 			<SEO
@@ -32,21 +25,9 @@ const Holdings = ({ info, data, news }: Props) => {
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
 				canonical={`etf/${info.symbol}/holdings/`}
 			/>
-			<div className="contain mt-3 sm:mt-4">
-				<div className="lg:grid grid-cols-sidebar_wide gap-8">
+			<div className="contain mt-3 sm:mt-4 lg:mt-5">
+				<div className="lg:grid grid-cols-sidebar_wide gap-10">
 					<div>
-						<div className="flex flex-row justify-between items-end mb-1">
-							<h2 className="text-xl bp:text-2xl sm:text-2xl font-bold mt-1 mb-0.5 bp:mb-1 sm:mb-2">
-								{data.count ? <HeaderFull /> : <HeaderEmpty />}
-							</h2>
-
-							{data.count && (
-								<span className="text-gray-700 text-small bp:text-smaller">
-									<span className="hidden sm:inline">Updated </span>
-									{data.updated}
-								</span>
-							)}
-						</div>
 						{data.count ? (
 							<>
 								<HoldingsTable
@@ -54,16 +35,27 @@ const Holdings = ({ info, data, news }: Props) => {
 									symbol={info.symbol}
 									rawdata={data.list}
 									fullCount={data.count}
+									id={info.id}
 								/>
+								<div className="text-gray-700 text-small mt-1">
+									As of {data.updated}
+								</div>
 								<HoldingsPaywall total={data.count} />
 							</>
 						) : (
-							<div className="text-lg">
-								No holdings were found for the {info.ticker} ETF
+							<div>
+								<h2 className="text-xl bp:text-2xl sm:text-2xl font-bold mt-1 mb-0.5 bp:mb-1 sm:mb-1">
+									{info.ticker} Holdings
+								</h2>
+
+								<span className="text-lg mt-2">
+									No holdings were found for the {info.ticker} ETF
+								</span>
 							</div>
 						)}
 					</div>
-					<aside className="mt-7 lg:mt-5">
+					<aside className="mt-7 lg:mt-0 space-y-8">
+						<NewsletterWidget />
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}

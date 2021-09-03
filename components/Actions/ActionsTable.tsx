@@ -79,6 +79,7 @@ export const ActionsTable = ({
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={filter}
 				setGlobalFilter={setDualFilter}
+				tableId="actions-table"
 			/>
 			<div className="overflow-x-auto">
 				<table className={styles.actionstable} id="actions-table">

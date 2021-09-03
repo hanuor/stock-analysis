@@ -1,7 +1,7 @@
 import { StockLink } from 'components/Links';
 
 const cellStyles =
-	'py-1.5 sm:py-2 px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
+	'py-1.5 sm:py-2 px-1.5 xs:px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
 
 interface Mover {
 	s: string;
@@ -46,7 +46,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 							{item.n}
 						</td>
 
-						<td className={cellStyles + ' text-right border-r'}>
+						<td className={cellStyles + ' text-right border-r hidden tiny:table-cell'}>
 							${item.p}
 						</td>
 						<td className={cellStyles + ' text-right ' + redOrGreen}>
@@ -81,7 +81,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 							<th className={cellStyles + ' text-left border-r'}>
 								Name
 							</th>
-							<th className={cellStyles + ' text-right border-r'}>
+							<th className={cellStyles + ' text-right border-r hidden tiny:table-cell'}>
 								Price
 							</th>
 							<th className={cellStyles + ' text-right'}>Change</th>
