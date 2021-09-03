@@ -352,7 +352,7 @@
 	}
 
 	.dropd {
-		@apply max-h-[265px] w-full bg-white absolute top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
+		@apply max-h-[265px] w-full bg-white absolute top-9 xs:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
 	}
 
 	.dropd.active {

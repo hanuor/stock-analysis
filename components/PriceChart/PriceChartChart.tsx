@@ -47,7 +47,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
-
+	
 	return (
 		<Line
 			data={{
@@ -163,7 +163,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
-							maxTicksLimit: chartTime === '1Y' ? 7 : 5,
+							maxTicksLimit: chartTime === '5D' && 5,
 						},
 					},
 					y: {
