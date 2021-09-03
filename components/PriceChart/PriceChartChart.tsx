@@ -188,7 +188,7 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
-							maxTicksLimit: chartTime === '5D' ? 5 : undefined,
+							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime) ? 5 : undefined,
 						},
 					},
 					y: {
