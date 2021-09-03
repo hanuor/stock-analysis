@@ -45,6 +45,7 @@ interface WithOHLCDataProps {
 	readonly time: string;
 	readonly type: string;
 	readonly stockId: number;
+	readonly setLoading: (arg: boolean) => void;
 }
 
 interface WithOHLCState {
@@ -78,14 +79,16 @@ export function withOHLCData(dataSet = 'DAILY') {
 					.then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
 						const data = forDateParse.map(parseData());
-
+						console.log('yes');
 						this.setState({ data });
+						props.setLoading(false);
 					})
 					.catch((error) => {
 						console.error(
 							'Error: There was an error loading the data for the chart |',
 							error
 						);
+						props.setLoading(false);
 						return (
 							<Unavailable message="Unable to load the data for this chart." />
 						);
@@ -113,12 +116,14 @@ export function withOHLCData(dataSet = 'DAILY') {
 								this.setState({ stockId });
 								this.setState({ data });
 							}
+							this.props.setLoading(false);
 						})
 						.catch((error) => {
 							console.error(
 								'Error: There was an error loading the data for the chart |',
 								error
 							);
+							this.props.setLoading(false);
 							return (
 								<Unavailable message="Unable to load the data for this chart." />
 							);
