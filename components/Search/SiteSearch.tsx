@@ -225,8 +225,8 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 		<>
 			<SearchIcon />
 			<input
-				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
-					nav ? ' bg-gray-50 focus:bg-white' : 'lg:text-[17px]'
+				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-7 tiny:pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
+					nav ? 'bg-gray-50 focus:bg-white' : 'lg:text-[17px]'
 				}`}
 				type="text"
 				aria-label="Search"
@@ -237,7 +237,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				spellCheck="false"
 				aria-autocomplete="list"
 				name="q"
-				placeholder="Company or stock ticker..."
+				placeholder="Company or stock..."
 				ref={inputRef}
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}
@@ -253,7 +253,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				}}
 			/>
 			{query && query.length > 0 && (
-				<div className="absolute flex right-[10px]">
+				<div className="absolute flex right-[7px] xs:right-[10px]">
 					<span
 						aria-label="Clear"
 						title="Clear"
@@ -265,7 +265,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 							}
 						}}
 					>
-						<CloseIcon classes="h-5 w-5 text-gray-600 hover:text-blue-500" />
+						<CloseIcon classes="h-4 w-4 xs:h-5 xs:w-5 text-gray-600 hover:text-blue-500" />
 					</span>
 				</div>
 			)}

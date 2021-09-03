@@ -11,8 +11,8 @@ import {
 import styles from './SymbolTable.module.css';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import { GlobalFilter } from 'components/Tables/GlobalFilter';
 import { tableState } from 'state/tableState';
+import { Controls } from 'components/Controls/_Controls';
 
 interface StockType {
 	s: string;
@@ -36,12 +36,12 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 	const setTableSize = tableState((state) => state.setTableSize);
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => rowdata, [rowdata]);
+	const count = rowdata.length;
 
 	const {
 		headerGroups,
 		prepareRow,
 		page,
-		rows,
 		canPreviousPage,
 		canNextPage,
 		pageOptions,
@@ -66,20 +66,16 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 
 	return (
 		<>
-			<div className="flex flex-row items-end justify-between space-x-4 mb-2 px-0.5 xs:px-1">
-				<span className="text-lg xs:text-xl sm:text-2xl font-semibold mb-1 whitespace-nowrap">
-					{rows.length} {title}
-				</span>
-				<div>
-					<GlobalFilter
-						useAsyncDebounce={useAsyncDebounce}
-						globalFilter={globalFilter}
-						setGlobalFilter={setGlobalFilter}
-					/>
-				</div>
-			</div>
+			<Controls
+				count={count}
+				title={title}
+				useAsyncDebounce={useAsyncDebounce}
+				globalFilter={globalFilter}
+				setGlobalFilter={setGlobalFilter}
+				tableId="symbol-table"
+			/>
 			<div className="overflow-x-auto">
-				<table className={styles.table}>
+				<table className={styles.table} id="symbol-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

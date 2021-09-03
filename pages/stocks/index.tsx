@@ -57,10 +57,12 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 					</Link>
 				);
 			},
+			sortInverted: true,
 		},
 		{
 			Header: 'Company Name',
 			accessor: 'n',
+			sortType: 'string'
 		},
 		{
 			Header: 'Industry',
@@ -72,6 +74,7 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
 				return abbreviate(value);
 			},
+			sortInverted: true,
 		},
 	];
 
