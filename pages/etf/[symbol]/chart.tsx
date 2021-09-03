@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
-import { Loading } from 'components/Loading';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
 import { getPageData } from 'functions/callBackEnd';
 import { useState } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { Loading } from 'components/Loading';
 import { ParsedUrlQuery } from 'querystring';
 import dynamic from 'next/dynamic';
 
@@ -20,9 +20,9 @@ interface ChartProps {
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [period, setPeriod] = useState<string>('d');
-	const [loading, setLoading] = useState<boolean>(true);
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
+	const [loading, setLoading] = useState<boolean>(true);
 
 	return (
 		<>
