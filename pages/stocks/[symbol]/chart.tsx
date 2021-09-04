@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Stock } from 'components/Layout/StockLayout';
 import { SEO } from 'components/SEO';
+import { Loading } from 'components/Loading';
 import { Info } from 'types/Info';
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
 import { getPageData } from 'functions/callBackEnd';
@@ -20,6 +21,7 @@ interface ChartProps {
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [period, setPeriod] = useState<string>('d');
+	const [loading, setLoading] = useState<boolean>(true);
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
 
@@ -40,12 +42,18 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 						</div>
 						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 							{info.state !== 'upcomingipo' ? (
-								<StockChart
-									stockId={info.id}
-									period={period}
-									time={time}
-									type={type}
-								/>
+								<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+									{loading && <Loading />}
+
+									<StockChart
+										stockId={info.id}
+										period={period}
+										time={time}
+										type={type}
+										setLoading={setLoading}
+										loading={loading}
+									/>
+								</div>
 							) : (
 								<Unavailable message="The chart is not available for this stock." />
 							)}

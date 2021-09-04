@@ -10,7 +10,7 @@ interface Props {
 export default function Download({ title, type, tableId }: Props) {
 	const path = navState((state) => state.path);
 
-	const fileName = `${path.one}-${path.two}${
+	const fileName = `${path.one}${path.two ? '-' + path.two : ''}${
 		path.three ? '-' + path.three : ''
 	}`;
 
@@ -26,7 +26,7 @@ export default function Download({ title, type, tableId }: Props) {
 					name: 'Export',
 					from: { table: tableId },
 					fixValue: (value) => {
-						if (value.includes('href=')) {
+						if (value.includes('href=') || value.includes('class=')) {
 							// Grab value between > and 2nd <
 							const start = value.indexOf('>') + 1;
 							const end = value.indexOf('<', 1);

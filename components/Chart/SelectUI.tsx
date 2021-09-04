@@ -13,10 +13,12 @@ export const SelectPeriod = (props: SelectProps) => {
 	return (
 		<div>
 			<select
-				onChange={(e) => props.dispatcher(e.target.value)}
+				onChange={(e) => {
+					props.dispatcher(e.target.value);
+				}}
 				id="period"
 				name="period"
-				className="block pl-3 sm:border-l border-r border-gray-300 pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block pl-2 tiny:pl-3 sm:border-l border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="Day"
 			>
 				<option value="d">Day</option>
@@ -34,7 +36,7 @@ export const SelectType = (props: SelectProps) => {
 				onChange={(e) => props.dispatcher(e.target.value)}
 				id="type"
 				name="type"
-				className="block pl-3 sm:border-l border-gray-300 pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block pl-2 tiny:pl-3 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="Day"
 			>
 				<option value="candlestick">Candles</option>
@@ -55,7 +57,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				onChange={(e) => dispatch(e.target.value)}
 				id="range"
 				name="range"
-				className="block sm:hidden pl-3 border-r border-gray-300 pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block sm:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="1Y"
 			>
 				<option value="1M">1 Month</option>
@@ -70,7 +72,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 			<ul className="hidden sm:flex flex-row whitespace-nowrap overflow-x-auto pl-1">
 				<li>
 					<button
-						onClick={() => dispatch('1M')}
+						onClick={() => {
+							dispatch('1M');
+						}}
 						type="button"
 						className={state === '1M' ? active : inactive}
 					>
@@ -79,7 +83,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('6M')}
+						onClick={() => {
+							dispatch('6M');
+						}}
 						type="button"
 						className={state === '6M' ? active : inactive}
 					>
@@ -89,7 +95,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 
 				<li>
 					<button
-						onClick={() => dispatch('YTD')}
+						onClick={() => {
+							dispatch('YTD');
+						}}
 						type="button"
 						className={state === 'YTD' ? active : inactive}
 					>
@@ -98,7 +106,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('1Y')}
+						onClick={() => {
+							dispatch('1Y');
+						}}
 						type="button"
 						className={state === '1Y' ? active : inactive}
 					>
@@ -107,7 +117,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('3Y')}
+						onClick={() => {
+							dispatch('3Y');
+						}}
 						type="button"
 						className={state === '3Y' ? active : inactive}
 					>
@@ -116,7 +128,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('5Y')}
+						onClick={() => {
+							dispatch('5Y');
+						}}
 						type="button"
 						className={state === '5Y' ? active : inactive}
 					>
@@ -125,7 +139,9 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 				<li>
 					<button
-						onClick={() => dispatch('MAX')}
+						onClick={() => {
+							dispatch('MAX');
+						}}
 						type="button"
 						className={state === 'MAX' ? active : inactive}
 					>

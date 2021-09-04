@@ -50,11 +50,11 @@ export const Header = () => {
 				<a href="#main" className="skip-nav">
 					Skip to main content
 				</a>
-				<div className="mx-auto px-3.5 lg:px-4 flex items-center py-2 space-x-3 sm:space-x-4 lg:space-x-8 xl:max-w-screen-xl">
+				<div className="mx-auto px-2 tiny:px-3 xs:px-3.5 lg:px-4 flex items-center py-2 space-x-1.5 tiny:space-x-2.5 xs:space-x-3 sm:space-x-4 lg:space-x-8 xl:max-w-screen-xl">
 					<div>
 						<Link href="/" prefetch={false}>
 							<a className="flex" aria-label="Stock Analysis home page">
-								<HeaderLogo className="h-8 w-8 lg:hidden" />
+								<HeaderLogo className="h-7 w-7 xs:h-8 xs:w-8 lg:hidden" />
 								<HeaderLogoFull className="hidden lg:flex lg:h-12 lg:w-32" />
 							</a>
 						</Link>
@@ -72,9 +72,9 @@ export const Header = () => {
 							onClick={clickMenu}
 						>
 							{open ? (
-								<CloseIcon classes="h-6 w-6" />
+								<CloseIcon classes="h-5 w-5 xs:h-6 xs:w-6" />
 							) : (
-								<HamburgerIcon classes="h-6 w-6" />
+								<HamburgerIcon classes="h-5 w-5 xs:h-6 xs:w-6" />
 							)}
 							<span className="text-xxs">{open ? 'Close' : 'Menu'}</span>
 						</button>
