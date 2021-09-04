@@ -78,7 +78,12 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 sm:px-4 text-lg">
-										Financial history: Up to 26 years and growing.
+										Unlimited exports to excel and csv files.
+									</td>
+								</tr>
+								<tr className="border-b border-gray-200">
+									<td className="p-3 sm:px-4 text-lg">
+										Financial history: Up to 30 years and growing.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">
@@ -96,7 +101,7 @@ export default function LandingPage() {
 										More features coming soon.
 									</td>
 								</tr>
-								<tr className="">
+								<tr>
 									<td className="p-3 sm:px-4 text-lg">No ads.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
@@ -137,7 +142,7 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 sm:px-4 text-lg">
-										Financial history: Limited to 10 years.
+										Limited financial history.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">
