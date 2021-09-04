@@ -78,7 +78,7 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 sm:px-4 text-lg">
-										Ulimited exports to excel and csv files.
+										Unlimited exports to excel and csv files.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">
