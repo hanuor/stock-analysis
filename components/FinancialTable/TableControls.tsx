@@ -57,7 +57,7 @@ export const TableControls = ({
 		<div className="hidden sm:flex sm:flex-row sm:space-x-2 pb-2">
 			<div className="w-46 relative dropdown">
 				<button
-					id="financials-export"
+					id="tag-finpage-export"
 					onClick={() => setExportOpen(!exportOpen)}
 					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:bg-white flex flex-row items-center py-1 px-4 font-semibold"
 				>
@@ -79,7 +79,7 @@ export const TableControls = ({
 				<button
 					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white px-3"
 					onClick={() => clickLeftRight()}
-					id="financials-leftright"
+					id="tag-finpage-leftright"
 				>
 					<LeftRightIcon classes="h-9 w-9 pointer-events-none" />
 				</button>
