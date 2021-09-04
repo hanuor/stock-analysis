@@ -2,24 +2,18 @@ import { LeftRightIcon } from 'components/Icons/LeftRight';
 import { DropdownIcon } from 'components/Icons/Dropdown';
 import { financialsState } from 'state/financialsState';
 import { useRef, useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-
-const ExportMenu = dynamic(() => import('./ExportMenu'), {
-	ssr: false,
-});
+import { ExportMenu } from './ExportMenu/_ExportMenu';
 
 interface Props {
-	statement: string;
 	symbol: string;
-	fullcount: number;
-	showcount: number;
+	statement: string;
+	range: string;
 }
 
 export const TableControls = ({
-	statement,
 	symbol,
-	fullcount,
-	showcount,
+	statement,
+	range,
 }: Props) => {
 	const dropdownNode = useRef<HTMLDivElement>(null);
 	const [exportOpen, setExportOpen] = useState(false);
@@ -63,7 +57,7 @@ export const TableControls = ({
 		<div className="hidden sm:flex sm:flex-row sm:space-x-2 pb-2">
 			<div className="w-46 relative dropdown">
 				<button
-					id="expxlxs financials-export"
+					id="financials-export"
 					onClick={() => setExportOpen(!exportOpen)}
 					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:bg-white flex flex-row items-center py-1 px-4 font-semibold"
 				>
@@ -73,11 +67,10 @@ export const TableControls = ({
 				<div ref={dropdownNode}>
 					{exportOpen && (
 						<ExportMenu
-							statement={statement}
 							symbol={symbol}
+							statement={statement}
+							range={range}
 							setExportOpen={setExportOpen}
-							fullcount={fullcount}
-							showcount={showcount}
 						/>
 					)}
 				</div>

@@ -18,7 +18,7 @@ export const HoldingsPaywall = ({ total }: { total: number }) => {
 				text="Start Free Trial"
 				url="/pro/"
 				className="w-44"
-				id="free-trial-holdings-below"
+				id="tag-upgr-holdings-below"
 			/>
 		</div>
 	);

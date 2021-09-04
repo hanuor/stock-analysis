@@ -19,7 +19,7 @@ export function Filter({
 
 	useEffect(() => {
 		if (value) onChange(value);
-	}, []);
+	}, [onChange, value]);
 
 	return (
 		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px]">
