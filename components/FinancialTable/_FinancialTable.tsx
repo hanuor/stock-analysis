@@ -331,10 +331,9 @@ export const FinancialTable = ({
 					fiscalYear={info.fiscalYear}
 				/>
 				<TableControls
-					statement={statement}
 					symbol={info.symbol}
-					fullcount={fullcount}
-					showcount={showcount}
+					statement={statement}
+					range={range}
 				/>
 			</div>
 			<div

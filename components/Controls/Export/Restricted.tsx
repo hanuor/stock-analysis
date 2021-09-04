@@ -8,7 +8,7 @@ interface ExportItemProps {
 
 export default function Restricted({ title, type }: ExportItemProps) {
 	const router = useRouter();
-	const id = `free-trial-controls-export-${type.toLowerCase()}`;
+	const id = `tag-upgr-controls-export-${type.toLowerCase()}`;
 
 	return (
 		<div

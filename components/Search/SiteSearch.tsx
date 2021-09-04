@@ -237,7 +237,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				spellCheck="false"
 				aria-autocomplete="list"
 				name="q"
-				placeholder="Company or stock..."
+				placeholder="Company or stock symbol..."
 				ref={inputRef}
 				value={query}
 				onChange={(e) => setQuery(e.target.value)}

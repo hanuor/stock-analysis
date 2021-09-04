@@ -24,7 +24,7 @@ export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 				text="Start Free Trial"
 				url="/pro/"
 				className="w-44"
-				id="free-trial-actions-below"
+				id="tag-upgr-actions-below"
 			/>
 		</div>
 	);
