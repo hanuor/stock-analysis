@@ -1,4 +1,11 @@
-import { Line, defaults } from 'react-chartjs-2';
+import {
+	LineController,
+	LineElement,
+	PointElement,
+	Tooltip,
+	LinearScale,
+	CategoryScale,
+} from 'chart.js';
 import {
 	formatDateTimestamp,
 	formatDateClean,
@@ -8,9 +15,7 @@ import {
 	formatDateYear,
 } from 'functions/formatDates';
 import { Unavailable } from 'components/Unavailable';
-
-defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+import { ReactChart } from 'components/ReactChart';
 
 type ChartDataType = {
 	t: string;
@@ -21,9 +26,19 @@ type ChartDataType = {
 interface Props {
 	chartData: ChartDataType[];
 	chartTime: string;
+	id: number;
 }
 
-export const Chart = ({ chartData, chartTime }: Props) => {
+ReactChart.register(
+	LineController,
+	PointElement,
+	LineElement,
+	Tooltip,
+	LinearScale,
+	CategoryScale
+);
+
+export const Chart = ({ chartData, chartTime, id }: Props) => {
 	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
@@ -49,7 +64,9 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 	});
 	
 	return (
-		<Line
+		<ReactChart
+			id={id.toString()}
+			type="line"
 			data={{
 				labels: timeAxis,
 				datasets: [
@@ -61,11 +78,13 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						pointRadius: 0,
 						tension: 0.01,
 						borderWidth: 3,
+						spanGaps: true,
 					},
 				],
 			}}
 			plugins={[
 				{
+					id: '1',
 					afterDatasetsDraw: function (chart: any) {
 						const chartInstance = chart;
 						const ctx = chartInstance.ctx;
@@ -80,6 +99,7 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							i: any
 						) {
 							const meta = chartInstance.getDatasetMeta(i);
+
 							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
@@ -128,7 +148,6 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 			]}
 			options={{
 				maintainAspectRatio: false,
-				spanGaps: true,
 				animation: false,
 				scales: {
 					x: {
@@ -136,7 +155,11 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							display: false,
 						},
 						ticks: {
-							callback: function (index: number) {
+							callback: function (index: number | string) {
+								if (typeof index == 'string') {
+									index = parseInt(index);
+								}
+
 								if (
 									chartTime === '1Y' ||
 									chartTime === '6M' ||
@@ -157,13 +180,15 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							},
 							color: '#323232',
 							font: {
+								family:
+									'-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 								size: 13,
 							},
 							autoSkip: true,
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
-							maxTicksLimit: chartTime === '5D' && 5,
+							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime) ? 5 : undefined,
 						},
 					},
 					y: {
@@ -171,6 +196,8 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 						ticks: {
 							color: '#555555',
 							font: {
+								family:
+									'-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 								size: 12.5,
 							},
 						},
@@ -217,8 +244,8 @@ export const Chart = ({ chartData, chartTime }: Props) => {
 							},
 							label: function (context: {
 								label: string;
-								dataset: { label: string };
-								parsed: { y: string };
+								dataset: { label?: string | undefined };
+								parsed: { y: number };
 							}) {
 								let currlabel = context.dataset.label || '';
 								const value = context.parsed.y || '';
