@@ -10,11 +10,7 @@ interface Props {
 	range: string;
 }
 
-export const TableControls = ({
-	symbol,
-	statement,
-	range,
-}: Props) => {
+export const TableControls = ({ symbol, statement, range }: Props) => {
 	const dropdownNode = useRef<HTMLDivElement>(null);
 	const [exportOpen, setExportOpen] = useState(false);
 	const leftRight = financialsState((state) => state.leftRight);
@@ -57,7 +53,7 @@ export const TableControls = ({
 		<div className="hidden sm:flex sm:flex-row sm:space-x-2 pb-2">
 			<div className="w-46 relative dropdown">
 				<button
-					id="tag-finpage-export"
+					id="tag-feat-fin-export"
 					onClick={() => setExportOpen(!exportOpen)}
 					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white focus:bg-white flex flex-row items-center py-1 px-4 font-semibold"
 				>

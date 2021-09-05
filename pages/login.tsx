@@ -125,7 +125,7 @@ export default function Login() {
 			<SEO
 				title="Log in to Stock Analysis"
 				description="Log in to your Stock Analysis Pro account using your email and password."
-				canonical="login/"
+				canonical="/login/"
 			/>
 			<LayoutFullWidth>
 				<div className="flex flex-col justify-center py-5 xs:py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
