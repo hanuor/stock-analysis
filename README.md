@@ -1,8 +1,6 @@
 <div align="center">
-	<a href="https://stockanalysis.com">
-		<img src="https://stockanalysis.com/logo.png" width="150" height="150">
+		<img src="https://stockanalysis.com/logo.png" width="120" height="120" />
 		<h1 align="center">Stock Analysis</h1>
-	</a>
 </div>
 
 ## Introduction
@@ -15,16 +13,16 @@ The site is running on React/NextJS and is written in Javascript and Typescript.
 
 ## Key goals
 
-* Be the fastest finance website on the internet.
-* Have the best user experience of all the investing sites.
-* Be super easy to use and understand. Things should "just work" and feel intuitive to use.
-* The data and info should always be up-to-date and accurate.
+-  Be the fastest finance website on the internet.
+-  Have the best user experience of all the investing sites.
+-  Be super easy to use and understand. Things should "just work" and feel intuitive to use.
+-  The data and info should always be up-to-date and accurate.
 
 ## How to contribute
 
 Anyone is welcome to contribute to this project.
 
-If you help drive significant improvements to the site, then you will get a free Stock Analysis Pro account as long as you remain an active contributor.
+If you help drive significant improvements to the site, then you will get a free Stock Analysis Pro account as long as you remain an active contributor. Send an email to kris@stockanalysis.com for more info about that.
 
 ### How to start
 
