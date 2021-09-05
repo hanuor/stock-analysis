@@ -21,11 +21,11 @@ interface Props {
 
 const EtfOverview = ({ info, data, news }: Props) => {
 	return (
-		<Stock info={info}>
+		<Stock info={info} url={`/etf/${info.symbol}/`}>
 			<SEO
 				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
 				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
-				canonical={`etf/${info.symbol}/`}
+				canonical={`/etf/${info.symbol}/`}
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">

@@ -59,9 +59,12 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 			<SEO
 				title="Recent Mergers and Acquisitions"
 				description={`A list of recent and historical mergers and acquisitions on the US stock market, including detailed history from 1998 to ${new Date().getFullYear()}.`}
-				canonical="actions/acquisitions/"
+				canonical="/actions/acquisitions/"
 			/>
-			<ActionsLayout title="Recent Mergers & Acquisitions">
+			<ActionsLayout
+				title="Mergers & Acquisitions"
+				url="/actions/acquisitions/"
+			>
 				<ActionsTable
 					key="Acquisitions"
 					title="Acquisitions"

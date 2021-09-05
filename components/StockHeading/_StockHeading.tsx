@@ -8,10 +8,16 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
 
-export default function StockHeading({ info }: { info: Info }) {
+export default function StockHeading({
+	info,
+	url,
+}: {
+	info: Info;
+	url: string;
+}) {
 	return (
 		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-2">
-			<Breadcrumbs />
+			<Breadcrumbs url={url} />
 			<Title info={info} />
 			<QueryClientProvider client={queryClient}>
 				<StockPrice info={info} />

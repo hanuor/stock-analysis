@@ -43,9 +43,12 @@ export const ActionsAllYear = ({ year, data }: ActionProps) => {
 			<SEO
 				title={`All ${year} Corporate Actions`}
 				description={`A list of all corporate actions in the year ${year}. It includes public companies with stocks listed on the main US exchanges.`}
-				canonical={`actions/${year}/`}
+				canonical={`/actions/${year}/`}
 			/>
-			<ActionsLayout title={`${year} Corporate Actions`}>
+			<ActionsLayout
+				title={`${year} Corporate Actions`}
+				url={`/actions/${year}/`}
+			>
 				<ActionsTable
 					key={`Actions-${year}`}
 					title="Actions"

@@ -21,11 +21,11 @@ interface Props {
 
 export default function Ratios({ info, data, counts }: Props) {
 	return (
-		<Stock info={info}>
+		<Stock info={info} url={`/stocks/${info.symbol}/financials/ratios/`}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Financial Ratios and Metrics`}
 				description={`Financial ratios and metrics for ${info.name} stock (${info.ticker}). Includes annual, quarterly and trailing numbers with full history and charts.`}
-				canonical={`stocks/${info.symbol}/financials/ratios/`}
+				canonical={`/stocks/${info.symbol}/financials/ratios/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="ratios" />

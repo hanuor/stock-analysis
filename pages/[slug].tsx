@@ -93,9 +93,10 @@ export default function Page({ content, meta, slug }: Props) {
 			<SEO
 				title={meta.title}
 				description={meta.description}
-				canonical={`${slug}/`}
+				canonical={`/${slug}/`}
 				image={meta.image}
 				schema={schema}
+				type="article"
 			/>
 			<ArticleLayout meta={meta}>
 				<div>

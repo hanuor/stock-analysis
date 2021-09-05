@@ -33,9 +33,9 @@ export const ActionsDelisted = ({ data }: ActionProps) => {
 			<SEO
 				title="Latest Delisted Stocks"
 				description="Stocks that have been delisted from the US stock market. Some have gone bankrupt or been acquired, others have been delisted for other reasons."
-				canonical="actions/delisted/"
+				canonical="/actions/delisted/"
 			/>
-			<ActionsLayout title="Recently Delisted Stocks">
+			<ActionsLayout title="Delisted Stocks" url="/actions/delisted/">
 				<ActionsTable
 					key="Delistings"
 					title="Delistings"

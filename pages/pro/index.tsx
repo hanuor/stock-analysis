@@ -36,7 +36,7 @@ export default function LandingPage() {
 			<SEO
 				title="Stock Analysis Pro: Free 30-Day Trial"
 				description="Get unlimited access to all of our financial data, including full financial history, full ETF holdings, and more."
-				canonical="pro/"
+				canonical="/pro/"
 			/>
 			<CrispChat />
 			<main>

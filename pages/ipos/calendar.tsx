@@ -27,11 +27,11 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 			<SEO
 				title="IPO Calendar - All Upcoming IPOs"
 				description="All upcoming initial public offerings (IPOs) on the stock market. Includes estimated IPO dates, offering price, how many shares are offered and more."
-				canonical="ipos/calendar/"
+				canonical="/ipos/calendar/"
 			/>
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
-					<Breadcrumbs />
+					<Breadcrumbs url="/ipos/calendar/" />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">

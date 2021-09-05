@@ -75,11 +75,11 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 	];
 
 	return (
-		<LayoutSidebar heading="All ETFs">
+		<LayoutSidebar heading="All ETFs" url="/etf/">
 			<SEO
 				title="List of ETF Symbols"
 				description="An overview of the ETF symbols currently listed on the site. Explore the ETF pages to learn about the fund’s price history, key information and more."
-				canonical="etf/"
+				canonical="/etf/"
 			/>
 			<SymbolTable title="ETFs" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>

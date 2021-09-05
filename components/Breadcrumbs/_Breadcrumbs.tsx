@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { navState } from 'state/navState';
+import { validateUrlBit } from 'functions/validation';
 
 type PathObject = {
 	one: string | null;
@@ -141,8 +141,18 @@ const LevelFour = ({ path }: { path: PathObject }) => {
 	return null;
 };
 
-export const Breadcrumbs = () => {
-	const path = navState((state) => state.path);
+export const Breadcrumbs = ({ url }: { url: string }) => {
+	if (!url) {
+		return null;
+	}
+
+	const split = url.split('/');
+	const one = validateUrlBit(split[1]);
+	const two = validateUrlBit(split[2]);
+	const three = validateUrlBit(split[3]);
+	const four = validateUrlBit(split[4]);
+
+	const path = { one, two, three, four };
 
 	return (
 		<nav aria-label="breadcrumbs" className="breadcrumbs">

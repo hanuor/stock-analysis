@@ -1,6 +1,5 @@
-import styles from './LiteYouTubeEmbed.module.css';
+// Adapted from here: https://github.com/ibrahimcesar/react-lite-youtube-embed
 import { useState } from 'react';
-// Taken from here: https://github.com/ibrahimcesar/react-lite-youtube-embed
 
 interface Props {
 	id: string;
@@ -29,9 +28,8 @@ export const LiteYouTubeEmbed = ({ id, title }: Props) => {
 	};
 
 	const inactive =
-		styles['yt-lite'] +
-		' focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-brand_light rounded-sm';
-	const active = [styles['yt-lite'], styles['lyt-activated']].join(' ');
+		'yt-lite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-brand_light rounded-sm';
+	const active = 'yt-lite lyt-activated';
 
 	return (
 		<>
@@ -47,7 +45,7 @@ export const LiteYouTubeEmbed = ({ id, title }: Props) => {
 				style={{ backgroundImage: `url(${posterUrl})` }}
 				tabIndex={0}
 			>
-				<div className={styles['lty-playbtn']}></div>
+				<div className="lty-playbtn"></div>
 				{iframe && (
 					<iframe
 						title={videoTitle}

@@ -56,14 +56,14 @@ export default function ExportButtons({
 			<button
 				className="flex items-center justify-between shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100"
 				onClick={() => executeExport('xlsx')}
-				id="financials-export-excel"
+				id="tag-feat-fin-export-excel"
 			>
 				Export to Excel
 			</button>
 			<button
 				className="flex items-center justify-between shadow-sm py-2 px-3 text-left bg-white hover:bg-gray-100"
 				onClick={() => executeExport('csv')}
-				id="financials-export-csv"
+				id="tag-feat-fin-export-csv"
 			>
 				Export to CSV
 			</button>

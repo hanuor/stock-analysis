@@ -5,13 +5,14 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 interface Props {
 	heading: string;
 	children: ReactNode;
+	url: string;
 }
 
-export const LayoutSidebar = ({ heading, children }: Props) => {
+export const LayoutSidebar = ({ heading, children, url }: Props) => {
 	return (
 		<div className="contain">
 			<main id="main" className="w-full py-5 xs:py-6">
-				<Breadcrumbs />
+				<Breadcrumbs url={url} />
 				<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">
 					{heading}
 				</h1>

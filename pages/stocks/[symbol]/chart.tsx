@@ -26,42 +26,40 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [type, setType] = useState<string>('candlestick');
 
 	return (
-		<>
+		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
 			<SEO
 				title={`${info.name} (${info.ticker}) Stock Chart`}
 				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
-				canonical={`stocks/${info.symbol}/chart/`}
+				canonical={`/stocks/${info.symbol}/chart/`}
 			/>
-			<Stock info={info}>
-				<div className="px-2 sm:contain">
-					<div className="py-2">
-						<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
-							<Buttons state={time} dispatch={setTime} />
-							<SelectPeriod dispatcher={setPeriod} />
-							<SelectType dispatcher={setType} />
-						</div>
-						<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
-							{info.state !== 'upcomingipo' ? (
-								<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
-									{loading && <Loading />}
+			<div className="px-2 sm:contain">
+				<div className="py-2">
+					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
+						<Buttons state={time} dispatch={setTime} />
+						<SelectPeriod dispatcher={setPeriod} />
+						<SelectType dispatcher={setType} />
+					</div>
+					<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+						{info.state !== 'upcomingipo' ? (
+							<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+								{loading && <Loading />}
 
-									<StockChart
-										stockId={info.id}
-										period={period}
-										time={time}
-										type={type}
-										setLoading={setLoading}
-										loading={loading}
-									/>
-								</div>
-							) : (
-								<Unavailable message="The chart is not available for this stock." />
-							)}
-						</div>
+								<StockChart
+									stockId={info.id}
+									period={period}
+									time={time}
+									type={type}
+									setLoading={setLoading}
+									loading={loading}
+								/>
+							</div>
+						) : (
+							<Unavailable message="The chart is not available for this stock." />
+						)}
 					</div>
 				</div>
-			</Stock>
-		</>
+			</div>
+		</Stock>
 	);
 };
 

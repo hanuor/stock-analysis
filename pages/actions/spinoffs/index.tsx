@@ -53,9 +53,9 @@ export const ActionsSpinoffs = ({ data }: ActionProps) => {
 			<SEO
 				title={`Recent Stock Spinoffs: 1998-${new Date().getFullYear()}`}
 				description="Recent and historical spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new, independent company."
-				canonical="actions/spinoffs/"
+				canonical="/actions/spinoffs/"
 			/>
-			<ActionsLayout title="Recent Stock Spinoffs">
+			<ActionsLayout title="Stock Spinoffs" url="/actions/spinoffs/">
 				<ActionsTable
 					key="Spinoffs"
 					title="Spinoffs"

@@ -35,9 +35,12 @@ export const ActionsDelistedYear = ({ year, data }: ActionProps) => {
 			<SEO
 				title={`All ${year} Delisted Stocks`}
 				description={`A list of stocks that were delisted in the year ${year}. The list includes public companies trading on the main US exchanges (NYSE and NASDAQ).`}
-				canonical={`actions/delisted/${year}/`}
+				canonical={`/actions/delisted/${year}/`}
 			/>
-			<ActionsLayout title={`${year} Delisted Stocks`}>
+			<ActionsLayout
+				title={`${year} Delisted Stocks`}
+				url={`/actions/delisted/${year}/`}
+			>
 				<ActionsTable
 					key={`Delistings-${year}`}
 					title="Delistings"

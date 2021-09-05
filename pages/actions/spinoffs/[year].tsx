@@ -55,9 +55,12 @@ export const ActionsSpinoffsYear = ({ year, data }: ActionProps) => {
 			<SEO
 				title={`All ${year} Stock Spinoffs`}
 				description={`A list of all US-listed public company stock spinoffs in the year 2021. It includes common shares listed on the NYSE and NASDAQ.`}
-				canonical={`actions/spinoffs/${year}/`}
+				canonical={`/actions/spinoffs/${year}/`}
 			/>
-			<ActionsLayout title={`${year} Stock Spinoffs`}>
+			<ActionsLayout
+				title={`${year} Stock Spinoffs`}
+				url={`/actions/spinoffs/${year}/`}
+			>
 				<ActionsTable
 					key={`Spinoffs-${year}`}
 					title="Spinoffs"

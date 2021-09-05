@@ -6,7 +6,7 @@ export default function ThankYou() {
 		<>
 			<SEO
 				title="Thank you!"
-				canonical="subscribe/thank-you/"
+				canonical="/subscribe/thank-you/"
 				noindex={true}
 			/>
 			<LayoutFullWidth>
