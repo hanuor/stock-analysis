@@ -7,23 +7,41 @@
 
 ## Introduction
 
-This is the public repo for the front-end of [Stock Analysis](https://stockanalysis.com/). We want to build the world's best free investing website.
+This is the public code repository for [StockAnalysis.com](https://stockanalysis.com/). We want to build the world's best free investing website.
 
 ## About the project
 
-The site is running on React/NextJS and is written in Typescript. The front-end communicates with a headless WordPress back-end.
+The site is running on React/NextJS and is written in Javascript and Typescript. It's styled with Tailwind CSS.
+
+## Key goals
+
+* Be the fastest finance website on the internet.
+* Have the best user experience of all the investing sites.
+* Be super easy to use and understand. Things should "just work" and feel intuitive to use.
+* The data and info should always be up-to-date and accurate.
 
 ## How to contribute
 
-You can easily start your own instance of the site by cloning the repository and running "npm install" and "npm run dev".
+Anyone is welcome to contribute to this project.
 
-### Here's one easy way to do it:
+If you help drive significant improvements to the site, then you will get a free Stock Analysis Pro account as long as you remain an active contributor.
 
-1. First, make sure you have Visual Studio Code, Git and Node.js installed (they're all free).
+### How to start
 
-If you are interested in helping us develop the site, then send an email to kris@stockanalysis.com and I will help set you up with the required permissions and API keys.
+You can easily download the code and run the site on your own computer by cloning the repository and running "npm install" and "npm run dev".
 
-I can also set up new API routes on the back-end if you want to build new front-end features. We are subscribed to multiple different premium data providers.
+**Here are the steps to do it:**
+
+1. First, make sure you have [Visual Studio Code](https://code.visualstudio.com/), [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/) installed (they're all free)
+2. Create a folder on your desktop called "StockAnalysis"
+3. Open Visual Studio Code. Click "File" and "Open Folder" -- then find the folder you created and click "Select Folder"
+4. Hit CMD+J or CTRL+J to open the terminal in VS Code
+5. Write this exact command and hit enter: `git clone https://github.com/stockanalysisdev/stock-analysis.git .` (make sure to include the period at the end)
+6. Write this command and hit enter: `npm install`
+7. Write this command and hit enter: `npm run dev`
+8. You should now be able to open the site in your web browser with this URL: `http://localhost:3001`
+
+Congrats! You now have the site running locally on your own computer, with the site's code ready to edit from Visual Studio Code.
 
 ## License
 
