@@ -6,7 +6,7 @@ export default function ThankYou() {
 		<>
 			<SEO
 				title="Confirmed!"
-				canonical="subscribe/confirmed/"
+				canonical="/subscribe/confirmed/"
 				noindex={true}
 			/>
 			<LayoutFullWidth>

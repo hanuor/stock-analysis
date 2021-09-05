@@ -19,11 +19,11 @@ interface Props {
 
 const Holdings = ({ info, data, news }: Props) => {
 	return (
-		<Stock info={info}>
+		<Stock info={info} url={`/etf/${info.symbol}/holdings/`}>
 			<SEO
 				title={`${info.ticker} ETF Holdings - ${info.name}`}
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
-				canonical={`etf/${info.symbol}/holdings/`}
+				canonical={`/etf/${info.symbol}/holdings/`}
 			/>
 			<div className="contain mt-3 sm:mt-4 lg:mt-5">
 				<div className="lg:grid grid-cols-sidebar_wide gap-10">

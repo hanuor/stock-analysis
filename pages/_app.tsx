@@ -1,6 +1,6 @@
+import 'styles/globals.css';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
-import 'styles/globals.css';
 import NProgress from 'nprogress';
 import { Header } from 'components/Layout/Header/_Header';
 import { Footer } from 'components/Layout/Footer/_Footer';

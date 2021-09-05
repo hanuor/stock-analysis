@@ -7,14 +7,15 @@ import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 interface Props {
 	title: string;
 	children: ReactNode;
+	url: string;
 }
 
-export const ActionsLayout = ({ title, children }: Props) => {
+export const ActionsLayout = ({ title, children, url }: Props) => {
 	return (
 		<>
 			<div className="contain">
 				<main className="w-full py-5 xs:py-6">
-					<Breadcrumbs />
+					<Breadcrumbs url={url} />
 					<h1 className="hh1">{title}</h1>
 					<ActionsNavigation />
 

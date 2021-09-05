@@ -37,9 +37,9 @@ export const ActionsAll = ({ data }: ActionProps) => {
 			<SEO
 				title="Corporate Actions List - Recent and Historical"
 				description="A comprehensive list of recent and historical corporate actions and stock changes for companies listed on the US stock market."
-				canonical="actions/"
+				canonical="/actions/"
 			/>
-			<ActionsLayout title="Recent Corporate Actions">
+			<ActionsLayout title="Corporate Actions" url="/actions/">
 				<ActionsTable
 					key="Actions"
 					title="Actions"

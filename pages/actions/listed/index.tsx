@@ -33,9 +33,9 @@ export const ActionsListed = ({ data }: ActionProps) => {
 			<SEO
 				title="Most Recently Listed Stocks"
 				description="Recent and historical listings on the US stock market. Includes both IPOs and stocks listed for other reasons."
-				canonical="actions/listed/"
+				canonical="/actions/listed/"
 			/>
-			<ActionsLayout title="Recently Listed Stocks">
+			<ActionsLayout title="Listed Stocks" url="/actions/listed/">
 				<ActionsTable
 					key="listings"
 					title="Listings"

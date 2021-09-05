@@ -18,7 +18,7 @@ export default function Contact() {
 			<SEO
 				title="Contact Us"
 				description="This page contains a contact form. Use this form if you have questions or suggestions about the content on this site."
-				canonical="contact/"
+				canonical="/contact/"
 			/>
 			<ArticleLayout
 				meta={{

@@ -19,12 +19,12 @@ export const AllStockNews = ({ data, other }: Props) => {
 			<SEO
 				title="All Stock News"
 				description="The latest news on individual stocks on the US stock market, gathered from trusted finance and investing websites."
-				canonical="news/all-stocks/"
+				canonical="/news/all-stocks/"
 			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">
-						<Breadcrumbs />
+						<Breadcrumbs url="/news/all-stocks/" />
 						<h1 className="hh1">All Stock News</h1>
 						<NewsNavigation />
 					</div>

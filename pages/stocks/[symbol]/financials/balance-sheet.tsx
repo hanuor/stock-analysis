@@ -21,11 +21,14 @@ interface Props {
 
 export default function BalanceSheet({ info, data, counts }: Props) {
 	return (
-		<Stock info={info}>
+		<Stock
+			info={info}
+			url={`/stocks/${info.symbol}/financials/balance-sheet/`}
+		>
 			<SEO
 				title={`${info.name} (${info.ticker}) Balance Sheet`}
 				description={`Detailed balance sheet for ${info.name} stock (${info.ticker}), including cash, debt, assets, liabilities, and book value.`}
-				canonical={`stocks/${info.symbol}/financials/balance-sheet/`}
+				canonical={`/stocks/${info.symbol}/financials/balance-sheet/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="balance_sheet" />

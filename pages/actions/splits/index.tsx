@@ -41,9 +41,9 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 			<SEO
 				title="All Recent Stock Splits - A Complete List"
 				description="The most recent stock splits on the US stock market, including both regular (forward) splits and reverse splits."
-				canonical="actions/splits/"
+				canonical="/actions/splits/"
 			/>
-			<ActionsLayout title="Recent Stock Splits">
+			<ActionsLayout title="Stock Splits" url="/actions/splits/">
 				<ActionsTable
 					key="Splits"
 					title="Splits"

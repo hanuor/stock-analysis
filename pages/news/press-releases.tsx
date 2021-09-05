@@ -19,12 +19,12 @@ export const AllPressReleases = ({ data, other }: Props) => {
 			<SEO
 				title="Press Releases From Publicly Traded Companies"
 				description="Press releases for publicly traded companies on the US stock market. Includes important company events, earnings releases and more."
-				canonical="news/press-releases/"
+				canonical="/news/press-releases/"
 			/>
 			<div className="">
 				<main className="w-full py-5 xs:py-6">
 					<div className="contain">
-						<Breadcrumbs />
+						<Breadcrumbs url="/news/press-releases/" />
 						<h1 className="hh1">Press Releases</h1>
 						<NewsNavigation />
 					</div>

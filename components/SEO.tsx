@@ -8,6 +8,7 @@ interface ISEO {
 	noindex?: boolean;
 	image?: string;
 	schema?: object | null;
+	type?: string | null;
 }
 
 export const SEO = ({
@@ -17,6 +18,7 @@ export const SEO = ({
 	noindex = false,
 	image,
 	schema = null,
+	type = null,
 }: ISEO) => {
 	const seoTitle =
 		title === 'Stock Analysis | Free Online Stock Information for Investors'
@@ -27,7 +29,7 @@ export const SEO = ({
 		? 'noindex, nofollow'
 		: 'max-snippet:-1,max-image-preview:large,max-video-preview:-1';
 
-	const canonicalUrl = 'https://stockanalysis.com/' + canonical;
+	const canonicalUrl = 'https://stockanalysis.com' + canonical;
 
 	const featuredImage = image
 		? `https://stockanalysis.com${image}`
@@ -35,7 +37,7 @@ export const SEO = ({
 
 	const schemaObj = canonical && title ? getSchema(canonical, title) : null;
 
-	const ogType = schema && canonical ? 'article' : 'website';
+	const ogType = type ? type : 'website';
 
 	return (
 		<Head>

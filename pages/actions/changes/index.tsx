@@ -43,9 +43,9 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 			<SEO
 				title={`All Stock Ticker Symbol Changes From 1998 to ${new Date().getFullYear()}`}
 				description="A list of recent and historical stock ticker symbol changes. It is updated daily, with history that goes all the way back to 1998."
-				canonical="actions/changes/"
+				canonical="/actions/changes/"
 			/>
-			<ActionsLayout title="Recent Stock Symbol Changes">
+			<ActionsLayout title="Stock Symbol Changes" url="/actions/changes/">
 				<ActionsTable
 					key="Changes"
 					title="Changes"

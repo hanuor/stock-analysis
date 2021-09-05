@@ -37,11 +37,11 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 			<SEO
 				title={title}
 				description={description}
-				canonical={`ipos/${year}/`}
+				canonical={`/ipos/${year}/`}
 			/>
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
-					<Breadcrumbs />
+					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">{year} IPOs</h1>
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">

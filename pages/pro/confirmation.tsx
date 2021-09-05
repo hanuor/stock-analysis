@@ -6,7 +6,7 @@ export default function FreeTrial() {
 		<>
 			<SEO
 				title="Confirmation"
-				canonical="pro/confirmation/"
+				canonical="/pro/confirmation/"
 				noindex={true}
 			/>
 			<UserLayout>

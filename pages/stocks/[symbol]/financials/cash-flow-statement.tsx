@@ -21,11 +21,14 @@ interface Props {
 
 export default function CashFlowStatement({ info, data, counts }: Props) {
 	return (
-		<Stock info={info}>
+		<Stock
+			info={info}
+			url={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
+		>
 			<SEO
 				title={`${info.name} (${info.ticker}) Cash Flow Statement`}
 				description={`Detailed cash flow statements for ${info.name} stock (${info.ticker}), including operating cash flow, capex and free cash flow.`}
-				canonical={`stocks/${info.symbol}/financials/cash-flow-statement/`}
+				canonical={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="cash_flow_statement" />

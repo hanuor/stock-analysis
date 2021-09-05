@@ -17,7 +17,7 @@ export default function Search() {
 
 	return (
 		<>
-			<SEO title="Search Results" canonical="search/" noindex={true} />
+			<SEO title="Search Results" canonical="/search/" noindex={true} />
 			<Script
 				src="https://cse.google.com/cse.js?cx=009497841191786531325:usl8eczm65r"
 				strategy="afterInteractive"

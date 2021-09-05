@@ -70,8 +70,11 @@ export const ActionsNavigationSub = () => {
 						</a>
 					</Link>
 				</li>
-				{tabs.slice(0, count).map((tab) => (
-					<li key={tab} className="mb-0.5">
+				{tabs.map((tab, index) => (
+					<li
+						key={tab}
+						className={`mb-0.5${index > count ? ' hidden' : ''}`}
+					>
 						<Link
 							href={
 								type ? `/actions/${type}/${tab}/` : `/actions/${tab}/`
@@ -104,7 +107,7 @@ export const ActionsNavigationSub = () => {
 							className="inactive font-semibold"
 							onClick={() => setAll(true)}
 						>
-							2019-1998 &darr;
+							Show All &darr;
 						</span>
 					)}
 				</li>

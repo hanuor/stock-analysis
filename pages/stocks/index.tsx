@@ -62,7 +62,7 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 		{
 			Header: 'Company Name',
 			accessor: 'n',
-			sortType: 'string'
+			sortType: 'string',
 		},
 		{
 			Header: 'Industry',
@@ -79,11 +79,11 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 	];
 
 	return (
-		<LayoutSidebar heading="All Stock Symbols">
+		<LayoutSidebar heading="All Stock Symbols" url="/stocks/">
 			<SEO
 				title="List of All Stock Ticker Symbols"
 				description="An overview of all the stock ticker symbols listed. Explore the stock pages to learn about the company’s price history, financials, key stats, and more."
-				canonical="stocks/"
+				canonical="/stocks/"
 			/>
 			<SymbolTable title="Stocks" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
