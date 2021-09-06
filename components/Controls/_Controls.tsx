@@ -10,6 +10,7 @@ interface Props {
 	globalFilter: any;
 	setGlobalFilter: (filterValue: FilterValue) => void;
 	tableId: string;
+	append?: string;
 }
 
 export const Controls = ({
@@ -19,12 +20,13 @@ export const Controls = ({
 	globalFilter,
 	setGlobalFilter,
 	tableId,
+	append = '',
 }: Props) => {
 	return (
 		<div className="flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1">
 			<div className="mr-auto">
 				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
-					{count} {title}
+					{`${append}${count} ${title}`}
 				</h2>
 			</div>
 			<div className="hidden sm:block">

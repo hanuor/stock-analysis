@@ -15,6 +15,7 @@ module.exports = {
 	plugins: ['react', '@typescript-eslint'],
 	rules: {
 		'require-jsdoc': 'off',
+		'@next/next/next-script-for-ga': 'off',
 	},
 	settings: {
 		react: {

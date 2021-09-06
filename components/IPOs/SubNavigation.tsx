@@ -4,11 +4,6 @@ import { navState } from 'state/navState';
 export const SubNavigation = () => {
 	const path = navState((state) => state.path);
 
-	// const active =
-	// 	'py-1.5 px-3.5 xs:px-4 block font-semibold bg-[#eee] text-gray-900';
-	// const inactive =
-	// 	'py-1.5 px-3.5 xs:px-4 block bll hover:bg-[#eee] hover:text-gray-700 transition duration-100';
-
 	if (!path.two || ['#', '2021', '2020', '2019'].includes(path.two)) {
 		return (
 			<div>
