@@ -1,5 +1,5 @@
 <div align="center">
-		<img src="https://stockanalysis.com/logo.png" width="120" height="120" />
+		<a href="https://stockanalysis.com/" target="_blank"><img src="https://stockanalysis.com/logo.png" width="120" height="120" /></a>
 		<h1 align="center">Stock Analysis</h1>
 </div>
 

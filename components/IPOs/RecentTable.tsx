@@ -1,10 +1,16 @@
-import { useTable, useSortBy, Column } from 'react-table';
-import styles from './Table.module.css';
+import {
+	useTable,
+	useSortBy,
+	useGlobalFilter,
+	useAsyncDebounce,
+	Column,
+} from 'react-table';
 import { StockLink } from 'components/Links';
 import { useMemo } from 'react';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { IpoRecent } from 'types/IpoRecent';
+import { Controls } from 'components/Controls/_Controls';
 
 interface CellString {
 	cell: { value: string };
@@ -83,54 +89,77 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 
 	const data = useMemo(() => rawdata, [rawdata]);
 
-	const tableInstance = useTable({ columns, data }, useSortBy);
+	const tableInstance = useTable(
+		{ columns, data },
+		useGlobalFilter,
+		useSortBy
+	);
 
-	const { headerGroups, rows, prepareRow } = tableInstance;
+	const {
+		headerGroups,
+		rows,
+		prepareRow,
+		setGlobalFilter,
+		state: { globalFilter },
+	} = tableInstance;
 
 	return (
-		<div className="overflow-x-auto">
-			<table className={styles.ipotable + ' mt-1.5'}>
-				<thead>
-					{headerGroups.map((headerGroup, index) => (
-						<tr key={index}>
-							{headerGroup.headers.map((column, index) => (
-								<th
-									{...column.getSortByToggleProps({
-										title: `Sort by: ${column.Header}`,
-									})}
-									key={index}
-								>
-									<span className="inline-flex flex-row items-center">
-										{column.render('Header')}
-
-										{column.isSorted ? (
-											column.isSortedDesc ? (
-												<SortDownIcon classes="h-5 w-5 text-gray-800" />
-											) : (
-												<SortUpIcon classes="h-5 w-5 text-gray-800" />
-											)
-										) : (
-											''
-										)}
-									</span>
-								</th>
-							))}
-						</tr>
-					))}
-				</thead>
-				<tbody>
-					{rows.map((row, index) => {
-						prepareRow(row);
-						return (
+		<>
+			<div className="mt-3 sm:mt-0">
+				<Controls
+					count={rawdata.length}
+					title="IPOs"
+					useAsyncDebounce={useAsyncDebounce}
+					globalFilter={globalFilter}
+					setGlobalFilter={setGlobalFilter}
+					tableId="ipo-table"
+					append={rawdata.length === 200 ? 'Last ' : ''}
+				/>
+			</div>
+			<div className="overflow-x-auto">
+				<table className="ipotable" id="ipo-table">
+					<thead>
+						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
-								{row.cells.map((cell, index) => {
-									return <td key={index}>{cell.render('Cell')}</td>;
-								})}
+								{headerGroup.headers.map((column, index) => (
+									<th
+										{...column.getSortByToggleProps({
+											title: `Sort by: ${column.Header}`,
+										})}
+										key={index}
+									>
+										<span className="inline-flex flex-row items-center">
+											{column.render('Header')}
+
+											{column.isSorted ? (
+												column.isSortedDesc ? (
+													<SortDownIcon classes="h-5 w-5 text-gray-800" />
+												) : (
+													<SortUpIcon classes="h-5 w-5 text-gray-800" />
+												)
+											) : (
+												''
+											)}
+										</span>
+									</th>
+								))}
 							</tr>
-						);
-					})}
-				</tbody>
-			</table>
-		</div>
+						))}
+					</thead>
+					<tbody>
+						{rows.map((row, index) => {
+							prepareRow(row);
+							return (
+								<tr key={index}>
+									{row.cells.map((cell, index) => {
+										return <td key={index}>{cell.render('Cell')}</td>;
+									})}
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+		</>
 	);
 };

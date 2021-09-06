@@ -1,7 +1,13 @@
-import { Column, useTable } from 'react-table';
-import styles from './Table.module.css';
+import {
+	Column,
+	useTable,
+	useGlobalFilter,
+	useAsyncDebounce,
+} from 'react-table';
 import { StockLink } from 'components/Links';
 import { IpoUpcoming } from 'types/IpoUpcoming';
+import { Controls } from 'components/Controls/_Controls';
+import { Export } from 'components/Controls/Export';
 
 type CellString = {
 	cell: {
@@ -86,24 +92,67 @@ const NoIpos = ({ title }: { title: string }) => {
 interface Props {
 	title: string;
 	data: IpoUpcoming[];
+	tableId: string;
 }
 
-export const CalendarTable = ({ title, data }: Props) => {
-	const tableInstance = useTable({ columns, data });
+export const CalendarTable = ({ title, data, tableId }: Props) => {
+	const tableInstance = useTable({ columns, data }, useGlobalFilter);
+	const {
+		headerGroups,
+		rows,
+		prepareRow,
+		setGlobalFilter,
+		state: { globalFilter },
+	} = tableInstance;
+
 	const thisWeek = title === 'This Week' ? true : false;
 	const nextWeek = title === 'Next Week or Later' ? true : false;
 
-	if (data.length === 0) {
+	const count = data.length;
+
+	if (count === 0) {
 		return <NoIpos title={title} />;
 	}
 
-	const { headerGroups, rows, prepareRow } = tableInstance;
-
 	return (
 		<div>
-			<h2 className="hh2 mb-2 sm:mb-3">{title}</h2>
+			{tableId === 'more-upcoming' ? (
+				<>
+					<h2 className="hh2 mb-2 sm:mb-3">{title}</h2>
+					<Controls
+						count={count}
+						title="IPOs"
+						useAsyncDebounce={useAsyncDebounce}
+						globalFilter={globalFilter}
+						setGlobalFilter={setGlobalFilter}
+						tableId={tableId}
+					/>
+				</>
+			) : (
+				<div className="flex justify-between">
+					<h2 className="hh2 mb-2 sm:mb-3">{title}</h2>
+					<div className="hidden sm:block">
+						<Export
+							title="Export"
+							buttons={[
+								{
+									title: 'Export to Excel',
+									type: 'xlsx',
+									restricted: true,
+								},
+								{
+									title: 'Export to CSV',
+									type: 'csv',
+									restricted: true,
+								},
+							]}
+							tableId={tableId}
+						/>
+					</div>
+				</div>
+			)}
 			<div className="overflow-x-auto">
-				<table className={styles.ipotable}>
+				<table className="ipotable" id={tableId}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

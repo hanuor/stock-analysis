@@ -11,6 +11,7 @@ import { InfoTable } from 'components/Dividend/InfoTable';
 import { HistoryTable } from 'components/Dividend/HistoryTable';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { DividendChart } from 'components/Dividend/DividendChart';
+import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 
 interface Props {
 	info: Info;
@@ -43,7 +44,8 @@ const Dividend = ({ info, data, news }: Props) => {
 							ticker={info.ticker}
 						/>
 					</div>
-					<aside className="mt-7 lg:mt-5">
+					<aside className="mt-7 lg:mt-0 space-y-8">
+						<NewsletterWidget />
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}

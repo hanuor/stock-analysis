@@ -9,6 +9,7 @@ import { IPONavigation } from 'components/IPOs/IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
+import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 
 interface Props {
 	data: {
@@ -36,22 +37,30 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="flex flex-col space-y-5 sm:space-y-7 py-4">
-							<CalendarTable title="This Week" data={data.thisweek} />
+							<CalendarTable
+								title="This Week"
+								data={data.thisweek}
+								tableId="this-week"
+							/>
 							<CalendarTable
 								title="Next Week or Later"
 								data={data.nextweek}
+								tableId="next-week"
 							/>
 							<CalendarTable
 								title="Upcoming High-Profile IPOs"
 								data={data.highprofile}
+								tableId="high-profile"
 							/>
 							<CalendarTable
 								title="More Upcoming IPOs"
 								data={data.unknown}
+								tableId="more-upcoming"
 							/>
 						</div>
-						<aside className="flex flex-col space-y-10 pt-4 pb-6 lg:py-6">
+						<aside className="flex flex-col space-y-10 pt-4 pb-6">
 							<RecentTableMin recent={recent} />
+							<NewsletterWidget />
 							<NewsWidget
 								title="IPO News"
 								news={news}
