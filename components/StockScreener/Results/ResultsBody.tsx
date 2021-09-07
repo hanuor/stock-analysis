@@ -1,9 +1,16 @@
 import {
 	ScreenerData,
 	CellString,
+	CellNumber,
 } from 'components/StockScreener/screener.types';
 import Link from 'next/link';
+import { abbreviate } from 'components/StockScreener/screener.functions';
 import { ResultsTable } from './ResultsTable';
+
+const formatter = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 2,
+	maximumFractionDigits: 2,
+});
 
 const COLUMNS = [
 	{
@@ -41,6 +48,9 @@ const COLUMNS = [
 	{
 		Header: 'Market Cap',
 		accessor: 'm',
+		Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			return abbreviate(value, formatter);
+		},
 	},
 	{
 		Header: 'PE Ratio',

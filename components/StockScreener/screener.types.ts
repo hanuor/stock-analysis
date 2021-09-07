@@ -16,3 +16,9 @@ export type CellString = {
 		value: string;
 	};
 };
+
+export type CellNumber = {
+	cell: {
+		value: number;
+	};
+};
