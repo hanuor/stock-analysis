@@ -8,7 +8,6 @@ import {
 	useSortBy,
 	Column,
 } from 'react-table';
-import styles from './SymbolTable.module.css';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { GlobalFilter } from 'components/Tables/GlobalFilter';
@@ -79,7 +78,7 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 				</div>
 			</div>
 			<div className="overflow-x-auto">
-				<table className={styles.table}>
+				<table className="symbol-table index">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

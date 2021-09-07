@@ -366,10 +366,99 @@
 	.m-menu.active {
 		@apply block opacity-100;
 	}
-}
 
-.profile-table tr:not(:last-child) {
-	@apply border-b border-gray-200;
+	.profile-table tr:not(:last-child) {
+		@apply border-b border-gray-200;
+	}
+
+	/* SYMBOL TABLE + SCREENER */
+
+	.symbol-table {
+		@apply w-full;
+	}
+
+	.symbol-table a {
+		@apply bll;
+	}
+
+	.symbol-table tr > * {
+		@apply p-2;
+		border-bottom: 1px solid #ddd;
+	}
+
+	.symbol-table tr > *:first-child {
+		padding-left: 0.8rem;
+	}
+
+	.symbol-table tr > *:last-child {
+		padding-right: 0.8rem;
+	}
+
+	.symbol-table tr th {
+		background-color: #ffffff;
+		text-align: left;
+		border-top: 1px solid #ddd;
+		white-space: nowrap;
+	}
+
+	.symbol-table tr:nth-child(odd) {
+		background-color: #f6f7f8;
+	}
+
+	.symbol-table tr:hover td {
+		background-color: #f2f9ff !important;
+	}
+
+	/* INDEX TABLES */
+	.symbol-table.index tr > *:nth-child(n + 4) {
+		text-align: right;
+	}
+
+	.symbol-table.index tr td:not(:nth-child(2)) {
+		white-space: nowrap;
+	}
+
+	@media screen and (max-width: 1200px) {
+		.symbol-table tr > * {
+			padding: 0.5em 0.3em;
+		}
+		.symbol-table tr > *:first-child {
+			padding-left: 0.6rem;
+		}
+		.symbol-table tr > *:last-child {
+			padding-right: 0.6rem;
+		}
+	}
+
+	@media screen and (max-width: 600px) {
+		.symbol-table tr th {
+			font-size: 0.95rem;
+		}
+		.symbol-table tr td {
+			font-size: 0.9rem;
+		}
+		.symbol-table tr td {
+			white-space: nowrap;
+		}
+		.symbol-table.index tr td:nth-child(2) {
+			max-width: 280px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+
+	@media screen and (max-width: 400px) {
+		.symbol-table tr > *:first-child {
+			padding-left: 0.5rem;
+		}
+		.symbol-table tr > *:last-child {
+			padding-right: 0.5rem;
+		}
+		.symbol-table.index tr td:nth-child(2) {
+			max-width: 260px;
+		}
+	}
 }
 
 /* .lbl::before {
