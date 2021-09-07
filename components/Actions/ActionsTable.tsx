@@ -29,6 +29,8 @@ export const ActionsTable = ({
 	year,
 }: Props) => {
 	const [dataRows, setDataRows] = useState(rowdata);
+	const filter = actionsState((state) => state.filter);
+	const setFilter = actionsState((state) => state.setFilter);
 	const isPro = authState((state) => state.isPro);
 
 	const count = rowdata.length;
@@ -40,6 +42,10 @@ export const ActionsTable = ({
 
 			if (res.data && res.data.length > count) {
 				setDataRows(res.data);
+				if (filter) {
+					setFilter(filter);
+					setGlobalFilter(filter);
+				}
 			} else {
 				throw new Error(
 					'Unable to fetch full data, response was invalid or empty array'
@@ -50,13 +56,11 @@ export const ActionsTable = ({
 		if (isPro && fullCount > count) {
 			fetchFullActions();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fullCount, isPro, count, year, type]);
 
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => dataRows, [dataRows]);
-
-	const filter = actionsState((state) => state.filter);
-	const setFilter = actionsState((state) => state.setFilter);
 
 	const { headerGroups, prepareRow, rows, setGlobalFilter } = useTable(
 		{
