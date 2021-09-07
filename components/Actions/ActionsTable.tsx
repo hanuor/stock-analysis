@@ -43,8 +43,8 @@ export const ActionsTable = ({
 			if (res.data && res.data.length > count) {
 				setDataRows(res.data);
 				if (filter) {
-					setFilter('STG');
-					setGlobalFilter('STG');
+					setFilter(filter);
+					setGlobalFilter(filter);
 				}
 			} else {
 				throw new Error(
@@ -56,6 +56,7 @@ export const ActionsTable = ({
 		if (isPro && fullCount > count) {
 			fetchFullActions();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fullCount, isPro, count, year, type]);
 
 	const columns = useMemo(() => columndata, [columndata]);
