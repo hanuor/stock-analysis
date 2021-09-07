@@ -1,8 +1,9 @@
+import { SingleStock } from 'components/StockScreener/screener.types';
 import { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
 
 interface Props {
-	rowdata: any;
+	rowdata: SingleStock[];
 	cols: any;
 }
 
@@ -24,7 +25,7 @@ export function ResultsTable({ rowdata, cols }: Props) {
 
 	return (
 		<div className="overflow-x-auto">
-			<table>
+			<table className="symbol-table w-full mt-3">
 				<thead>
 					{headerGroups.map((headerGroup, index) => (
 						<tr key={index}>

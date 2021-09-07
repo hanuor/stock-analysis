@@ -1,15 +1,38 @@
-import { getData } from 'functions/API';
-import { useState, useEffect } from 'react';
+import {
+	ScreenerData,
+	CellString,
+} from 'components/StockScreener/screener.types';
+import Link from 'next/link';
 import { ResultsTable } from './ResultsTable';
 
 const COLUMNS = [
 	{
 		Header: 'Symbol',
 		accessor: 's',
+		Cell: function FormatCell({ cell: { value } }: CellString) {
+			const symb = value.includes('.') ? value : `${value}/`;
+			return (
+				<Link href={`/stocks/${symb.toLowerCase()}`} prefetch={false}>
+					<a>{value}</a>
+				</Link>
+			);
+		},
 	},
 	{
 		Header: 'Company Name',
 		accessor: 'n',
+	},
+	{
+		Header: 'Price',
+		accessor: 'p',
+	},
+	{
+		Header: 'Change',
+		accessor: 'c',
+	},
+	{
+		Header: 'Volume',
+		accessor: 'v',
 	},
 	{
 		Header: 'Industry',
@@ -19,32 +42,12 @@ const COLUMNS = [
 		Header: 'Market Cap',
 		accessor: 'm',
 	},
+	{
+		Header: 'PE Ratio',
+		accessor: 'pe',
+	},
 ];
 
-interface StockType {
-	s: string;
-	n: string;
-	cls?: string;
-	aum?: number;
-	ind?: string;
-	mcap?: number;
-}
-
-export function ResultsBody() {
-	const [stocks, setStocks] = useState<StockType[]>();
-
-	useEffect(() => {
-		async function fetchData() {
-			const res = await getData('index?type=stockspage');
-			setStocks(res);
-		}
-
-		fetchData();
-	}, []);
-
-	if (stocks) {
-		return <ResultsTable rowdata={stocks} cols={COLUMNS} />;
-	} else {
-		return null;
-	}
+export function ResultsBody({ stocks }: ScreenerData) {
+	return <ResultsTable rowdata={stocks} cols={COLUMNS} />;
 }

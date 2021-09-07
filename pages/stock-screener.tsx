@@ -1,8 +1,11 @@
+import { GetStaticProps } from 'next';
+import { ScreenerData } from 'components/StockScreener/screener.types';
+import { getData } from 'functions/API';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { SEO } from 'components/SEO';
 import { StockScreener } from 'components/StockScreener/_StockScreener';
 
-export default function StockScreenerPage() {
+export default function StockScreenerPage({ stocks }: ScreenerData) {
 	return (
 		<>
 			<SEO
@@ -12,9 +15,20 @@ export default function StockScreenerPage() {
 			/>
 			<LayoutFullWidth>
 				<div className="contain my-6">
-					<StockScreener />
+					<StockScreener stocks={stocks} />
 				</div>
 			</LayoutFullWidth>
 		</>
 	);
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+	const stocks = await getData('screener?type=initial');
+
+	return {
+		props: {
+			stocks,
+		},
+		revalidate: 6 * 60 * 60,
+	};
+};
