@@ -5,6 +5,11 @@ export const Hero = () => (
 	<>
 		<section className="bg-gray-100 py-12 md:py-28 lg:py-44 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 			<div className="mx-auto max-w-[850px] text-center">
+				<div className="mx-auto my-4 text-xl font-semibold bll">
+					<Link href="/stock-screener" prefetch={false}>
+						<a>Stock Screener</a>
+					</Link>
+				</div>
 				<h1 className="text-2xl xs:text-3xl md:text-4xl lg:text-[42px] font-bold mb-5 lg:mb-7">
 					Search for a stock to start your analysis
 				</h1>
