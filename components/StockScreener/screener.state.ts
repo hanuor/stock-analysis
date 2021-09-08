@@ -1,23 +1,18 @@
 import create from 'zustand';
-import { SingleStock } from 'components/StockScreener/screener.types';
+import {
+	SingleStock,
+	ColumnId,
+	FilterValue,
+} from 'components/StockScreener/screener.types';
 import { mergeColumns } from 'components/StockScreener/screener.functions';
-
-// Merge two arrays of objects by the 's' key
-// const merge = (a: SingleStock[], b: SingleStock[]) => {
-// 	console.log({ a });
-// 	console.log({ b });
-// 	const merged = a.map((item) => {
-// 		const match = b.find((i) => i.s === item.s);
-// 		return match ? { ...item, ...match } : item;
-// 	});
-// 	console.log(merged);
-// 	return merged;
-// };
 
 interface ScreenerState {
 	data: SingleStock[];
 	setData: (data: SingleStock[]) => void;
-	addDataColumn: (newColumn: SingleStock[], columnId: string) => void;
+	addDataColumn: (newColumn: SingleStock[], columnId: ColumnId) => void;
+	filters: FilterValue[];
+	addFilter: (filter: ColumnId, value: string) => void;
+	removeFilter: (filter: string) => void;
 	tablePage: number;
 	setTablePage: (newTablePage: number) => void;
 	tableSize: number;
@@ -33,9 +28,22 @@ export const screenerState = create<ScreenerState>((set) => ({
 	data: [],
 	setData: (newData: SingleStock[]) =>
 		set((state) => ({ ...state, data: newData })),
-	addDataColumn: (newColumn: SingleStock[], columnId: string) =>
+	addDataColumn: (newColumn: SingleStock[], columnId: ColumnId) =>
 		set((state) => ({
 			data: mergeColumns(state.data, newColumn, columnId),
+		})),
+
+	// Filters
+	filters: [],
+	addFilter: (newFilter: ColumnId, value: string) =>
+		set((state) => ({
+			...state,
+			filters: [...state.filters, { column: newFilter, value: value }],
+		})),
+	removeFilter: (filter: string) =>
+		set((state) => ({
+			...state,
+			filters: state.filters.filter((f) => f.column !== filter),
 		})),
 
 	// Pagination

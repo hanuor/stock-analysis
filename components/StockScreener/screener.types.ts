@@ -1,19 +1,27 @@
-export type ColumnId = {
-	columnId: 's' | 'n' | 'm' | 'p' | 'c' | 'i' | 'v' | 'pe' | 'exchange';
-};
+export type ColumnId =
+	| 's'
+	| 'n'
+	| 'm'
+	| 'p'
+	| 'c'
+	| 'i'
+	| 'v'
+	| 'pe'
+	| 'exchange'
+	| 'sector'
+	| 'country'
+	| 'currency'
+	| 'dy'
+	| 'fpe'
+	| 'revenue'
+	| 'netincome'
+	| 'eps'
+	| 'analysts'
+	| 'pt';
+
 export type SingleStock = {
-	[key: string]: string;
-	// s: string;
-	// ColumnId: string;
-	// s: string;
-	// n?: string;
-	// m?: string;
-	// p?: number;
-	// c?: string;
-	// i?: string;
-	// v?: number;
-	// pe?: number;
-	// exchange?: number;
+	// eslint-disable-next-line no-unused-vars
+	[key in ColumnId]: string;
 };
 
 export interface ScreenerData {
@@ -30,4 +38,9 @@ export type CellNumber = {
 	cell: {
 		value: number;
 	};
+};
+
+export type FilterValue = {
+	column: ColumnId;
+	value: string;
 };

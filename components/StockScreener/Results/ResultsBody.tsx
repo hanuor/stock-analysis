@@ -1,6 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import {
-	ScreenerData,
 	CellString,
 	CellNumber,
 } from 'components/StockScreener/screener.types';
@@ -88,12 +87,12 @@ const COLUMNS = [
 	},
 ];
 
-export function ResultsBody({ stocks }: ScreenerData) {
+export function ResultsBody() {
 	const showColumns = screenerState((state) => state.showColumns);
 
 	const displayColumns = COLUMNS.filter((column) =>
 		showColumns.includes(column.accessor)
 	);
 
-	return <ResultsTable rowdata={stocks} cols={displayColumns} />;
+	return <ResultsTable cols={displayColumns} />;
 }

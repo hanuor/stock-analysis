@@ -1,5 +1,4 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { SingleStock } from 'components/StockScreener/screener.types';
 import { useMemo } from 'react';
 import {
 	useTable,
@@ -12,20 +11,22 @@ import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { Controls } from 'components/Controls/_Controls';
 import { TablePagination } from './TablePagination';
+import { filterItems } from 'components/StockScreener/screener.functions';
 
 interface Props {
-	rowdata: SingleStock[];
 	cols: any;
 }
 
-export function ResultsTable({ rowdata, cols }: Props) {
+export function ResultsTable({ cols }: Props) {
 	const data = screenerState((state) => state.data);
+	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
-	const rows = useMemo(() => data, [data]);
+
+	const rows = useMemo(() => filterItems(data, filters), [data, filters]);
 	const columns = useMemo(() => cols, [cols]);
-	const count = rowdata.length;
+	const count = data.length;
 
 	const {
 		headerGroups,
@@ -56,6 +57,7 @@ export function ResultsTable({ rowdata, cols }: Props) {
 		usePagination
 	);
 
+	console.log('rendering');
 	return (
 		<>
 			<div className="overflow-x-auto">

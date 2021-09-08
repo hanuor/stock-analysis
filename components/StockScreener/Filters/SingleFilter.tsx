@@ -1,11 +1,12 @@
 import { screenerState } from 'components/StockScreener/screener.state';
+import { ColumnId } from 'components/StockScreener/screener.types';
 import { getData } from 'functions/API';
 
 interface Props {
 	filter: {
 		name: string;
-		options?: string[];
-		columnId: string;
+		columnId: ColumnId;
+		options: string[];
 	};
 }
 
@@ -13,19 +14,27 @@ export function SingleFilter({ filter }: Props) {
 	const addDataColumn = screenerState((state) => state.addDataColumn);
 	const addColumn = screenerState((state) => state.addColumn);
 	const removeColumn = screenerState((state) => state.removeColumn);
+	const addFilter = screenerState((state) => state.addFilter);
+	const removeFilter = screenerState((state) => state.removeFilter);
 
-	async function fetchNewColumn(value: string) {
-		const fetched = await getData(`screener?type=${value}`);
-		addDataColumn(fetched, filter.columnId);
+	const id = filter.columnId;
+
+	// Fetch the data for the selected column and add it to the main data array
+	async function fetchNewColumn(column: ColumnId, value: string) {
+		const fetched = await getData(`screener?type=${column}`);
+		addDataColumn(fetched, id);
+		addFilter(id, value);
 	}
 
+	// React to the select dropdown and add/remove columns
 	function handleSelection(e: React.ChangeEvent<HTMLSelectElement>) {
-		if (filter.columnId) {
+		if (id) {
 			if (e.target.value === 'Any') {
-				removeColumn(filter.columnId);
+				removeColumn(id);
+				removeFilter(id);
 			} else {
-				fetchNewColumn(filter.columnId);
-				addColumn(filter.columnId);
+				fetchNewColumn(id, e.target.value);
+				addColumn(id);
 			}
 		}
 	}
