@@ -1,4 +1,4 @@
-export function StockScreenerFilterMenu() {
+export function FilterMenu() {
 	return (
 		<>
 			<div className="flex border-t border-b border-gray-200 bg-gray-50 py-1 px-3 overflow-x-auto">

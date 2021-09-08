@@ -1,6 +1,8 @@
 import { SingleStock } from 'components/StockScreener/screener.types';
 import { useMemo } from 'react';
-import { useTable, usePagination } from 'react-table';
+import { useTable, useSortBy, usePagination } from 'react-table';
+import { SortUpIcon } from 'components/Icons/SortUp';
+import { SortDownIcon } from 'components/Icons/SortDown';
 
 interface Props {
 	rowdata: SingleStock[];
@@ -20,17 +22,38 @@ export function ResultsTable({ rowdata, cols }: Props) {
 				pageSize: 25,
 			},
 		},
+		useSortBy,
 		usePagination
 	);
 
 	return (
 		<div className="overflow-x-auto">
+			<div>{rowdata.length} results</div>
 			<table className="symbol-table w-full mt-3">
 				<thead>
 					{headerGroups.map((headerGroup, index) => (
 						<tr key={index}>
 							{headerGroup.headers.map((column, index) => (
-								<th key={index}>{column.render('Header')}</th>
+								<th
+									{...column.getSortByToggleProps({
+										title: `Sort by: ${column.Header}`,
+									})}
+									key={index}
+								>
+									<span className="inline-flex flex-row items-center">
+										{column.render('Header')}
+
+										{column.isSorted ? (
+											column.isSortedDesc ? (
+												<SortDownIcon classes="h-5 w-5 text-gray-800" />
+											) : (
+												<SortUpIcon classes="h-5 w-5 text-gray-800" />
+											)
+										) : (
+											''
+										)}
+									</span>
+								</th>
 							))}
 						</tr>
 					))}
