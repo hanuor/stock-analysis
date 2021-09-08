@@ -1,11 +1,19 @@
+import { screenerState } from 'components/StockScreener/screener.state';
 import { GetStaticProps } from 'next';
 import { ScreenerData } from 'components/StockScreener/screener.types';
 import { getData } from 'functions/API';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { SEO } from 'components/SEO';
 import { StockScreener } from 'components/StockScreener/_StockScreener';
+import { useEffect } from 'react';
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
+	const setData = screenerState((state) => state.setData);
+
+	useEffect(() => {
+		setData(stocks);
+	}, [setData, stocks]);
+
 	return (
 		<>
 			<SEO
@@ -15,6 +23,7 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 			/>
 			<LayoutFullWidth>
 				<div className="contain my-6">
+					<h1 className="hh1">Stock Screener</h1>
 					<StockScreener stocks={stocks} />
 				</div>
 			</LayoutFullWidth>

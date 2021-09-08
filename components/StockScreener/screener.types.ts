@@ -1,10 +1,19 @@
+export type ColumnId = {
+	columnId: 's' | 'n' | 'm' | 'p' | 'c' | 'i' | 'v' | 'pe' | 'exchange';
+};
 export type SingleStock = {
-	s: string;
-	n: string;
-	cls?: string;
-	aum?: number;
-	ind?: string;
-	mcap?: number;
+	[key: string]: string;
+	// s: string;
+	// ColumnId: string;
+	// s: string;
+	// n?: string;
+	// m?: string;
+	// p?: number;
+	// c?: string;
+	// i?: string;
+	// v?: number;
+	// pe?: number;
+	// exchange?: number;
 };
 
 export interface ScreenerData {

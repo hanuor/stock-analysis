@@ -1,13 +1,22 @@
+import { screenerState } from 'components/StockScreener/screener.state';
 import {
 	ScreenerData,
 	CellString,
 	CellNumber,
 } from 'components/StockScreener/screener.types';
 import Link from 'next/link';
-import { abbreviate } from 'components/StockScreener/screener.functions';
+import {
+	abbreviate,
+	formatNum,
+} from 'components/StockScreener/screener.functions';
 import { ResultsTable } from './ResultsTable';
 
-const formatter = new Intl.NumberFormat('en-US', {
+const format0dec = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 0,
+	maximumFractionDigits: 0,
+});
+
+const format2dec = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
 	maximumFractionDigits: 2,
 });
@@ -30,34 +39,61 @@ const COLUMNS = [
 		accessor: 'n',
 	},
 	{
+		Header: 'Exchange',
+		accessor: 'exchange',
+		show: false,
+	},
+	{
+		Header: 'Market Cap',
+		accessor: 'm',
+		Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			return abbreviate(value, format2dec);
+		},
+	},
+	{
 		Header: 'Price',
 		accessor: 'p',
 	},
 	{
 		Header: 'Change',
 		accessor: 'c',
-	},
-	{
-		Header: 'Volume',
-		accessor: 'v',
+		Cell: ({ cell: { value } }: CellNumber) => {
+			const formatted = formatNum(value, format2dec) + '%';
+			if (value > 0) {
+				return <span className="text-[green]">{formatted}</span>;
+			} else if (value < 0) {
+				return <span className="text-[red]">{formatted}</span>;
+			} else {
+				return <span className="text-gray-800">{formatted}</span>;
+			}
+		},
 	},
 	{
 		Header: 'Industry',
 		accessor: 'i',
 	},
 	{
-		Header: 'Market Cap',
-		accessor: 'm',
+		Header: 'Volume',
+		accessor: 'v',
 		Cell: function FormatCell({ cell: { value } }: CellNumber) {
-			return abbreviate(value, formatter);
+			return formatNum(value, format0dec);
 		},
 	},
 	{
 		Header: 'PE Ratio',
 		accessor: 'pe',
+		Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			return formatNum(value, format2dec);
+		},
 	},
 ];
 
 export function ResultsBody({ stocks }: ScreenerData) {
-	return <ResultsTable rowdata={stocks} cols={COLUMNS} />;
+	const showColumns = screenerState((state) => state.showColumns);
+
+	const displayColumns = COLUMNS.filter((column) =>
+		showColumns.includes(column.accessor)
+	);
+
+	return <ResultsTable rowdata={stocks} cols={displayColumns} />;
 }

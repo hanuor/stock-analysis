@@ -1,8 +1,17 @@
+import { screenerState } from 'components/StockScreener/screener.state';
 import { SingleStock } from 'components/StockScreener/screener.types';
 import { useMemo } from 'react';
-import { useTable, useSortBy, usePagination } from 'react-table';
+import {
+	useTable,
+	useSortBy,
+	usePagination,
+	useGlobalFilter,
+	useAsyncDebounce,
+} from 'react-table';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
+import { Controls } from 'components/Controls/_Controls';
+import { TablePagination } from './TablePagination';
 
 interface Props {
 	rowdata: SingleStock[];
@@ -10,67 +19,107 @@ interface Props {
 }
 
 export function ResultsTable({ rowdata, cols }: Props) {
-	const data = useMemo(() => rowdata, [rowdata]);
+	const data = screenerState((state) => state.data);
+	const tablePage = screenerState((state) => state.tablePage);
+	const tableSize = screenerState((state) => state.tableSize);
+	const showColumns = screenerState((state) => state.showColumns);
+	const rows = useMemo(() => data, [data]);
 	const columns = useMemo(() => cols, [cols]);
+	const count = rowdata.length;
 
-	const { headerGroups, page, prepareRow } = useTable(
+	const {
+		headerGroups,
+		prepareRow,
+		page,
+		canPreviousPage,
+		canNextPage,
+		pageOptions,
+		nextPage,
+		previousPage,
+		setPageSize,
+		setGlobalFilter,
+		state: { pageIndex, pageSize, globalFilter },
+	} = useTable(
 		{
 			columns,
-			data,
+			data: rows,
 			initialState: {
-				pageIndex: 0,
-				pageSize: 25,
+				pageIndex: tablePage,
+				pageSize: tableSize,
+				hiddenColumns: columns
+					.filter((col: any) => !showColumns.includes(col.accessor))
+					.map((col: any) => col.accessor),
 			},
 		},
+		useGlobalFilter,
 		useSortBy,
 		usePagination
 	);
 
 	return (
-		<div className="overflow-x-auto">
-			<div>{rowdata.length} results</div>
-			<table className="symbol-table w-full mt-3">
-				<thead>
-					{headerGroups.map((headerGroup, index) => (
-						<tr key={index}>
-							{headerGroup.headers.map((column, index) => (
-								<th
-									{...column.getSortByToggleProps({
-										title: `Sort by: ${column.Header}`,
-									})}
-									key={index}
-								>
-									<span className="inline-flex flex-row items-center">
-										{column.render('Header')}
-
-										{column.isSorted ? (
-											column.isSortedDesc ? (
-												<SortDownIcon classes="h-5 w-5 text-gray-800" />
-											) : (
-												<SortUpIcon classes="h-5 w-5 text-gray-800" />
-											)
-										) : (
-											''
-										)}
-									</span>
-								</th>
-							))}
-						</tr>
-					))}
-				</thead>
-				<tbody>
-					{page.map((row, index) => {
-						prepareRow(row);
-						return (
+		<>
+			<div className="overflow-x-auto">
+				<Controls
+					count={count}
+					title="Matches"
+					useAsyncDebounce={useAsyncDebounce}
+					globalFilter={globalFilter}
+					setGlobalFilter={setGlobalFilter}
+					tableId="screener-table"
+				/>
+				<table className="symbol-table w-full" id="screener-table">
+					<thead>
+						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
-								{row.cells.map((cell, index) => {
-									return <td key={index}>{cell.render('Cell')}</td>;
-								})}
+								{headerGroup.headers.map((column, index) => (
+									<th
+										{...column.getSortByToggleProps({
+											title: `Sort by: ${column.Header}`,
+										})}
+										key={index}
+									>
+										<span className="inline-flex flex-row items-center">
+											{column.render('Header')}
+
+											{column.isSorted ? (
+												column.isSortedDesc ? (
+													<SortDownIcon classes="h-5 w-5 text-gray-800" />
+												) : (
+													<SortUpIcon classes="h-5 w-5 text-gray-800" />
+												)
+											) : (
+												''
+											)}
+										</span>
+									</th>
+								))}
 							</tr>
-						);
-					})}
-				</tbody>
-			</table>
-		</div>
+						))}
+					</thead>
+					<tbody>
+						{page.map((row, index) => {
+							prepareRow(row);
+							return (
+								<tr key={index}>
+									{row.cells.map((cell, index) => {
+										return <td key={index}>{cell.render('Cell')}</td>;
+									})}
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+			<TablePagination
+				previousPage={previousPage}
+				canPreviousPage={canPreviousPage}
+				pageIndex={pageIndex}
+				pageOptions={pageOptions}
+				pageSize={pageSize}
+				setPageSize={setPageSize}
+				nextPage={nextPage}
+				canNextPage={canNextPage}
+			/>
+		</>
 	);
 }
