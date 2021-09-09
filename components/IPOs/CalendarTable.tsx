@@ -105,8 +105,8 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 
 	return (
 		<div>
-			<div className="flex space-x-6">
-				<h2 className="hh2 mb-2 sm:mb-3 mr-auto">
+			<div className="flex items-end space-x-6 mb-1.5">
+				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0.5 mr-auto">
 					{title} ({count})
 				</h2>
 				<div className="hidden sm:block">
