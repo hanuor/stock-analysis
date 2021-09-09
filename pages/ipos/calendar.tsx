@@ -38,12 +38,12 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="flex flex-col space-y-5 sm:space-y-7 py-4">
 							<CalendarTable
-								title="This Week"
+								title="IPOs This Week"
 								data={data.thisweek}
 								tableId="this-week"
 							/>
 							<CalendarTable
-								title="Next Week or Later"
+								title="Next Week"
 								data={data.nextweek}
 								tableId="next-week"
 							/>
