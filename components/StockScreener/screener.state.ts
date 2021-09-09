@@ -13,14 +13,18 @@ interface ScreenerState {
 	filters: FilterValue[];
 	addFilter: (filter: ColumnId, value: string) => void;
 	removeFilter: (filter: string) => void;
-	tablePage: number;
-	setTablePage: (newTablePage: number) => void;
-	tableSize: number;
-	setTableSize: (tableSize: number) => void;
+	filterMenu: string;
+	setFilterMenu: (newMenu: string) => void;
+	resultsMenu: string;
+	setResultsMenu: (newMenu: string) => void;
 	showColumns: string[];
 	addColumn: (newColumn: string) => void;
 	removeColumn: (columns: string) => void;
 	setShowColumns: (newColumns: string[]) => void;
+	tablePage: number;
+	setTablePage: (newTablePage: number) => void;
+	tableSize: number;
+	setTableSize: (tableSize: number) => void;
 }
 
 export const screenerState = create<ScreenerState>((set) => ({
@@ -46,11 +50,13 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filters: state.filters.filter((f) => f.column !== filter),
 		})),
 
-	// Pagination
-	tablePage: 0,
-	setTablePage: (newTablePage) => set({ tablePage: newTablePage }),
-	tableSize: 25,
-	setTableSize: (newTableSize) => set({ tableSize: newTableSize }),
+	// Filter Menu
+	filterMenu: 'General',
+	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu }),
+
+	// Results Menu
+	resultsMenu: 'General',
+	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
 	showColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
@@ -63,4 +69,10 @@ export const screenerState = create<ScreenerState>((set) => ({
 			showColumns: state.showColumns.filter((c) => c !== column),
 		})),
 	setShowColumns: (newColumns) => set({ showColumns: newColumns }),
+
+	// Pagination
+	tablePage: 0,
+	setTablePage: (newTablePage) => set({ tablePage: newTablePage }),
+	tableSize: 25,
+	setTableSize: (newTableSize) => set({ tableSize: newTableSize }),
 }));

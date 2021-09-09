@@ -1,21 +1,19 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { ColumnId } from 'components/StockScreener/screener.types';
+import { FilterProps } from 'components/StockScreener/Filters/filters.map';
 import { getData } from 'functions/API';
 
-interface Props {
-	filter: {
-		name: string;
-		columnId: ColumnId;
-		options: string[];
-	};
-}
-
-export function SingleFilter({ filter }: Props) {
+export function SingleFilter({ filter }: { filter: FilterProps }) {
 	const addDataColumn = screenerState((state) => state.addDataColumn);
 	const addColumn = screenerState((state) => state.addColumn);
 	const removeColumn = screenerState((state) => state.removeColumn);
 	const addFilter = screenerState((state) => state.addFilter);
 	const removeFilter = screenerState((state) => state.removeFilter);
+	const filterMenu = screenerState((state) => state.filterMenu);
+
+	if (filterMenu !== filter.category && filterMenu !== 'All') {
+		return null;
+	}
 
 	const id = filter.columnId;
 

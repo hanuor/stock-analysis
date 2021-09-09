@@ -1,21 +1,26 @@
+import { screenerState } from 'components/StockScreener/screener.state';
+import { FilterMenuItem } from 'components/StockScreener/Filters/FilterMenuItem';
+
 export function FilterMenu() {
+	const filters = screenerState((state) => state.filters);
+
 	return (
 		<>
-			<div className="flex border-t border-b border-gray-200 bg-gray-50 py-1 px-3 overflow-x-auto">
-				<h3 className="font-semibold mr-5">Filter</h3>
+			<div className="flex items-center border-t border-b border-gray-200 bg-gray-50 px-3 overflow-x-auto">
+				<h3 className="font-semibold mr-5">
+					{filters.length ? `Filters (${filters.length})` : 'Filter'}
+				</h3>
 				<div className="mx-auto">
-					<ul className="flex space-x-4">
-						<li>
-							<strong>General</strong>
-						</li>
-						<li>Company</li>
-						<li>Financials</li>
-						<li>Valuation</li>
-						<li>Dividends</li>
-						<li>Analysts</li>
-						<li>Technicals</li>
-						<li>Other</li>
-						<li>All</li>
+					<ul className="flex space-x-2 filter-menu">
+						<FilterMenuItem name="General" />
+						<FilterMenuItem name="Company" />
+						<FilterMenuItem name="Financials" />
+						<FilterMenuItem name="Valuation" />
+						<FilterMenuItem name="Dividends" />
+						<FilterMenuItem name="Analysts" />
+						<FilterMenuItem name="Technicals" />
+						<FilterMenuItem name="Other" />
+						<FilterMenuItem name="All" />
 					</ul>
 				</div>
 			</div>
