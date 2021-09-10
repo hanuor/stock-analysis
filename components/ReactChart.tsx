@@ -12,7 +12,7 @@ import type {
 
 const noop = () => {};
 
-export interface ChartProps {
+export interface ReactChartProps {
 	id: string;
 	data: ChartData;
 	options: ChartOptions;
@@ -33,7 +33,7 @@ export const ReactChart = ({
 	updateMode,
 	height,
 	width,
-}: ChartProps) => {
+}: ReactChartProps) => {
 	const chartInstance = useRef<Chart>({
 		update: noop,
 		destroy: noop,
