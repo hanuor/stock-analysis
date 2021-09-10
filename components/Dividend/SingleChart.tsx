@@ -1,8 +1,16 @@
 import { useMemo } from 'react';
-import { Bar } from 'react-chartjs-2';
 import { formatDateClean } from 'functions/formatDates';
 import { format } from 'd3-format';
 import { Unavailable } from 'components/Unavailable';
+import {
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	Title,
+	CategoryScale,
+} from 'chart.js';
+import { ReactChart } from 'components/ReactChart';
 
 const countZero = (cutter: number[]) => {
 	let count = 0;
@@ -22,6 +30,18 @@ interface Props {
 	type: string;
 	title: string;
 }
+
+ReactChart.register(
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	CategoryScale,
+	Title
+);
+
+ReactChart.defaults.font.family =
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 	const x = useMemo(() => xdata.slice(countZero(ydata)), [xdata, ydata]);
@@ -47,7 +67,9 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 
 	return (
 		<div className="h-72 border border-gray-200 p-0.5 xs:p-1">
-			<Bar
+			<ReactChart
+				id={'1'}
+				type="bar"
 				data={{
 					labels: x,
 					datasets: [
@@ -62,6 +84,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 				}}
 				plugins={[
 					{
+						id: '1',
 						afterDatasetsDraw: function (chart: any) {
 							const chartInstance = chart;
 							const ctx = chartInstance.ctx;
@@ -166,8 +189,11 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 									size: 13,
 								},
 								padding: 5,
-								callback: function (value: number) {
+								callback: function (value: number | string) {
 									if (type === 'amount') {
+										if (typeof value === 'string') {
+											value = parseFloat(value);
+										}
 										const newvalue = value.toFixed(2);
 										return '$' + newvalue;
 									}
@@ -188,14 +214,12 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 							text: title,
 							font: {
 								size: 18,
-								weight: 500,
+								weight: '500',
 							},
 							color: '#333',
 							padding: {
 								top: 10,
-								right: 40,
 								bottom: 12,
-								left: 5,
 							},
 						},
 						tooltip: {
@@ -212,9 +236,6 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 								size: 15,
 								weight: '400',
 							},
-							bodyFontColor: '#333',
-							bodyFontSize: 14,
-							bodyFontStyle: 400,
 							padding: {
 								top: 10,
 								right: 15,

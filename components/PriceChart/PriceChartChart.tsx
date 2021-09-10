@@ -38,6 +38,9 @@ ReactChart.register(
 	CategoryScale
 );
 
+ReactChart.defaults.font.family =
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+
 export const Chart = ({ chartData, chartTime, id }: Props) => {
 	// Chart.js causes critical errors on older Safari versions
 	if (
@@ -62,7 +65,7 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 	const priceAxis = chartData.map((item) => {
 		return item.c;
 	});
-	
+
 	return (
 		<ReactChart
 			id={id.toString()}
@@ -180,15 +183,15 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 							},
 							color: '#323232',
 							font: {
-								family:
-									'-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 								size: 13,
 							},
 							autoSkip: true,
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
-							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime) ? 5 : undefined,
+							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime)
+								? 5
+								: undefined,
 						},
 					},
 					y: {
@@ -196,8 +199,6 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 						ticks: {
 							color: '#555555',
 							font: {
-								family:
-									'-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 								size: 12.5,
 							},
 						},

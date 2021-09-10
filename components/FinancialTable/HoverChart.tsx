@@ -1,6 +1,20 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { FinancialReport, FinancialsMapType } from 'types/Financials';
-import { Bar, defaults } from 'react-chartjs-2';
+
+import {
+	BarController,
+	BarElement,
+	Tooltip,
+	LineElement,
+	PointElement,
+	LineController,
+	LinearScale,
+	Title,
+	CategoryScale,
+	defaults,
+	Filler,
+} from 'chart.js';
+import { ReactChart } from 'components/ReactChart';
 import {
 	formatY,
 	formatCell,
@@ -44,6 +58,21 @@ export const HoverChart = ({
 			/>
 		);
 	}
+	ReactChart.register(
+		BarController,
+		BarElement,
+		Tooltip,
+		LinearScale,
+		CategoryScale,
+		LineElement,
+		LineController,
+		PointElement,
+		Title,
+		Filler
+	);
+
+	ReactChart.defaults.font.family =
+		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
 	const dataid = row.data || row.id;
@@ -105,14 +134,18 @@ export const HoverChart = ({
 			? 'rgba(44, 98, 136, 0.4)'
 			: 'rgba(44, 98, 136, 1)';
 
+	const padding = chartType == 'line' ? 15 : 0;
+
 	return (
-		<Bar
+		<ReactChart
+			id={'1'}
+			type={chartType}
 			data={{
 				labels: xaxis,
 				datasets: [
 					{
-						type: chartType,
 						data: yaxis,
+						type: chartType,
 						backgroundColor: bgColor,
 						borderColor: 'rgba(44, 98, 136, 1)',
 						fill: true,
@@ -124,6 +157,7 @@ export const HoverChart = ({
 			}}
 			plugins={[
 				{
+					id: '1',
 					afterDatasetsDraw: function (chart: any) {
 						const chartInstance = chart;
 						const ctx = chartInstance.ctx;
@@ -133,17 +167,18 @@ export const HoverChart = ({
 						const fontSize = 12;
 						ctx.textAlign = 'start';
 						ctx.textBaseline = 'bottom';
-
+						console.log(ctx);
 						chartInstance.data.datasets.forEach(function (
 							dataset: any,
 							i: any
 						) {
 							const meta = chartInstance.getDatasetMeta(i);
+							console.log(meta);
 							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
 
-							let x =
+							const x =
 								meta.vScale._labelItems[
 									meta.vScale._labelItems.length - 1
 								].translation[0] - 0.5;
@@ -173,7 +208,7 @@ export const HoverChart = ({
 
 							// calculate the width of the box and height is based on fontsize.
 
-							let widthOffset = 2.6;
+							let widthOffset = 1.5;
 
 							if (!str) {
 								str = '-';
@@ -185,13 +220,13 @@ export const HoverChart = ({
 							const numberOfDecimals = countDecimals(str);
 
 							if (numberOfDecimals == 2 && str.length > 3) {
-								widthOffset = 3.4;
+								widthOffset = 2;
 							}
 
 							const width = ctx.measureText(str).width + widthOffset;
 
 							if (chartType == 'line') {
-								x = x - 15.5;
+								// x = x - 15.5; Need to fix
 							}
 
 							const height = fontSize + 2.8;
@@ -217,6 +252,11 @@ export const HoverChart = ({
 			]}
 			options={{
 				maintainAspectRatio: false,
+				layout: {
+					padding: {
+						right: padding,
+					},
+				},
 				scales: {
 					x: {
 						ticks: {
@@ -236,7 +276,10 @@ export const HoverChart = ({
 							font: {
 								size: 13,
 							},
-							callback: function (value: number) {
+							callback: function (value: number | string) {
+								if (typeof value == 'string') {
+									value = parseFloat(value);
+								}
 								return formatY(value, row.format, ymin, ymax);
 							},
 						},
@@ -261,9 +304,7 @@ export const HoverChart = ({
 						color: '#333',
 						padding: {
 							top: 4,
-							right: 0,
 							bottom: 12,
-							left: 0,
 						},
 					},
 					tooltip: {
@@ -280,28 +321,25 @@ export const HoverChart = ({
 							size: 14,
 							weight: '400',
 						},
-						bodyFontColor: '#333',
-						bodyFontSize: 14,
-						bodyFontStyle: 400,
 						padding: 10,
 						displayColors: false,
 						callbacks: {
-							label: function (context: { parsed: { y: string } }) {
-								const value = parseFloat(context.parsed.y) || 0;
+							label: function (context: { parsed: { y: any } }) {
+								const val = parseFloat(context.parsed.y) || 0;
 								if (
 									type === 'growth' ||
 									type === 'percentage' ||
 									type === 'margin'
 								) {
-									return `${value.toFixed(3)}%`;
+									return `${val.toFixed(3)}%`;
 								} else if (type === 'ratio') {
-									return `${value.toFixed(3)}`;
+									return `${val.toFixed(3)}`;
 								} else if (!type || type === 'reduce_precision') {
 									return new Intl.NumberFormat('en-US', {
 										maximumFractionDigits: 0,
-									}).format(value);
+									}).format(val);
 								} else {
-									return value;
+									return val.toString();
 								}
 							},
 						},
