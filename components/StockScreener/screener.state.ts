@@ -17,6 +17,8 @@ interface ScreenerState {
 	setFilterMenu: (newMenu: string) => void;
 	resultsMenu: string;
 	setResultsMenu: (newMenu: string) => void;
+	fetchedColumns: string[];
+	addFetchedColumn: (newColumn: string) => void;
 	showColumns: string[];
 	addColumn: (newColumn: string) => void;
 	removeColumn: (columns: string) => void;
@@ -59,6 +61,11 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
+	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
+	addFetchedColumn: (newColumn: any) =>
+		set((state) => ({
+			fetchedColumns: [...state.fetchedColumns, newColumn],
+		})),
 	showColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
 	addColumn: (newColumn: any) =>
 		set((state) => ({

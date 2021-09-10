@@ -5,15 +5,39 @@ export interface FilterProps {
 	columnId: ColumnId;
 	category: string;
 	options: string[];
-	filter?: any;
+	filterType?: string;
 }
 
 export const FiltersMap: FilterProps[] = [
 	{
+		name: 'Market Cap',
+		columnId: 'm',
+		category: 'General',
+		options: [
+			'Any',
+			'Mega-Cap: 200B+',
+			'Large-Cap: 10-200B',
+			'Mid-Cap: 2-10B',
+		],
+	},
+	{
+		name: 'PE Ratio',
+		columnId: 'pe',
+		category: 'General',
+		options: [],
+	},
+	{
+		name: 'Forward PE',
+		columnId: 'fpe',
+		category: 'General',
+		options: [],
+	},
+	{
 		name: 'Exchange',
 		columnId: 'exchange',
-		category: 'Company',
-		options: ['NASDAQ', 'NYSE', 'NYSEAMERICAN'],
+		category: 'General',
+		filterType: 'match',
+		options: ['Any', 'NASDAQ', 'NYSE', 'NYSEAMERICAN'],
 	},
 	{
 		name: 'Industry',
@@ -34,33 +58,39 @@ export const FiltersMap: FilterProps[] = [
 		options: [],
 	},
 	{
-		name: 'Currency',
-		columnId: 'currency',
-		category: 'Company',
+		name: 'Stock Price',
+		columnId: 'pe',
+		category: 'General',
 		options: [],
 	},
 	{
-		name: 'Market Cap',
-		columnId: 'm',
+		name: 'Price Change',
+		columnId: 'pe',
+		category: 'General',
+		options: [],
+	},
+	{
+		name: 'Volume',
+		columnId: 'pe',
 		category: 'General',
 		options: [],
 	},
 	{
 		name: 'Dividend Yield',
 		columnId: 'dy',
-		category: 'Dividends',
+		category: 'General',
 		options: [],
 	},
 	{
-		name: 'PE Ratio',
-		columnId: 'pe',
-		category: 'Valuation',
+		name: 'Analyst Rating',
+		columnId: 'analysts',
+		category: 'General',
 		options: [],
 	},
 	{
-		name: 'Forward PE',
-		columnId: 'fpe',
-		category: 'Valuation',
+		name: 'Price Target',
+		columnId: 'pt',
+		category: 'General',
 		options: [],
 	},
 	{
@@ -79,18 +109,6 @@ export const FiltersMap: FilterProps[] = [
 		name: 'Earnings Per Share',
 		columnId: 'eps',
 		category: 'Financials',
-		options: [],
-	},
-	{
-		name: 'Analysts',
-		columnId: 'analysts',
-		category: 'Analysts',
-		options: [],
-	},
-	{
-		name: 'Price Target',
-		columnId: 'pt',
-		category: 'Analysts',
 		options: [],
 	},
 ];
