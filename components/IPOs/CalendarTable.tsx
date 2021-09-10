@@ -54,7 +54,7 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'This Week': {
 			return (
 				<div>
-					<h2 className="hh2 mb-2">{title}</h2>
+					<h2 className="hh2 mb-2">{title} (0)</h2>
 					<p className="text-lg text-gray-900">
 						There are no upcoming IPOs remaining for the current week.
 					</p>
@@ -65,7 +65,7 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'Next Week': {
 			return (
 				<div>
-					<h2 className="hh2">{title}</h2>
+					<h2 className="hh2">{title} (0)</h2>
 					<p className="text-lg text-gray-900">
 						There are no upcoming IPOs scheduled for next week.
 					</p>
@@ -95,7 +95,7 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 	} = tableInstance;
 
 	const thisWeek = title === 'IPOs This Week' ? true : false;
-	const nextWeek = title === 'Next Week' ? true : false;
+	const nextWeek = title === 'Next Week or Later' ? true : false;
 
 	const count = data.length;
 

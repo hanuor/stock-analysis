@@ -27,7 +27,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 		<>
 			<SEO
 				title="IPO Calendar - All Upcoming IPOs"
-				description="All upcoming initial public offerings (IPOs) on the stock market. Includes estimated IPO dates, offering price, how many shares are offered and more."
+				description="An IPO calendar with all upcoming initial public offerings (IPOs) on the stock market. Includes IPO dates, prices, how many shares are offered and more."
 				canonical="/ipos/calendar/"
 			/>
 			<div className="contain">
@@ -43,7 +43,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								tableId="this-week"
 							/>
 							<CalendarTable
-								title="Next Week"
+								title="Next Week or Later"
 								data={data.nextweek}
 								tableId="next-week"
 							/>

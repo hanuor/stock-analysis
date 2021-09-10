@@ -6,6 +6,7 @@ export const HoverChartIcon = () => (
 		fill="none"
 		strokeLinecap="round"
 		strokeLinejoin="round"
+		style={{ maxWidth: '40px' }}
 	>
 		<path stroke="none" d="M0 0h24v24H0z" />
 		<rect x="3" y="12" width="6" height="8" rx="1" />

@@ -9,6 +9,7 @@ export const LockIcon = ({ classes }: IProps) => (
 		fill="none"
 		viewBox="0 0 24 24"
 		stroke="currentColor"
+		style={{ maxWidth: '40px' }}
 	>
 		<path
 			strokeLinecap="round"
