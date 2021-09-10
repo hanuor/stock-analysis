@@ -1,9 +1,13 @@
-import { Bar, defaults } from 'react-chartjs-2';
-import { useRef } from 'react';
+import {
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	Title,
+	CategoryScale,
+} from 'chart.js';
+import { ReactChart } from 'components/ReactChart';
 import { Unavailable } from 'components/Unavailable';
-
-defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 interface Props {
 	title: string;
@@ -12,8 +16,6 @@ interface Props {
 }
 
 export const StatsChart = ({ title, x, y }: Props) => {
-	const chartRef = useRef<any>();
-
 	if (
 		typeof window !== 'undefined' &&
 		typeof window.ResizeObserver === 'undefined'
@@ -28,10 +30,23 @@ export const StatsChart = ({ title, x, y }: Props) => {
 		);
 	}
 
+	ReactChart.register(
+		BarController,
+		BarElement,
+		Tooltip,
+		LinearScale,
+		CategoryScale,
+		Title
+	);
+
+	ReactChart.defaults.font.family =
+		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+
 	return (
 		<div className="mt-4 mb-3 sm:mb-4 border border-gray-200 h-[300px] sm:h-[390px] p-1 sm:p-2">
-			<Bar
-				ref={chartRef}
+			<ReactChart
+				id={'1'}
+				type="bar"
 				data={{
 					labels: x,
 					datasets: [
@@ -87,9 +102,8 @@ export const StatsChart = ({ title, x, y }: Props) => {
 							color: '#333',
 							padding: {
 								top: 10,
-								right: 5,
+
 								bottom: 12,
-								left: 5,
 							},
 						},
 						tooltip: {
@@ -102,8 +116,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 								size: 15,
 								weight: '400',
 							},
-							bodyFontSize: 14,
-							bodyFontStyle: 400,
+
 							padding: {
 								top: 6,
 								right: 15,
@@ -122,12 +135,12 @@ export const StatsChart = ({ title, x, y }: Props) => {
 					},
 					animation: {
 						duration: 1,
-						onProgress: function () {
+						onProgress: function (animation) {
 							if (
 								typeof window !== 'undefined' &&
 								window.innerWidth > 500
 							) {
-								const instance = chartRef.current.$context.chart;
+								const instance = animation.chart;
 								const ctx = instance.ctx;
 								const size = x.length > 12 ? '13px' : '14 px';
 
@@ -148,7 +161,8 @@ export const StatsChart = ({ title, x, y }: Props) => {
 										index: number
 									) {
 										const data = y[index];
-										ctx.fillText(data, bar.x, bar.y - 5);
+
+										ctx.fillText(data.toString(), bar.x, bar.y - 5);
 									});
 								});
 							}

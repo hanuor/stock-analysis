@@ -4,6 +4,7 @@ export const HeaderLogoFull = ({ className }: { className: string }) => {
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 3060 928"
 			className={className}
+			style={{ maxWidth: '200px' }}
 		>
 			<g transform="matrix(.1 0 0 -.1 0 928)">
 				<path

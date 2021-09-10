@@ -1,6 +1,6 @@
 // Adapted from: https://github.com/xr0master/chartjs-react (MIT License)
 import React, { useEffect, useRef, useCallback, useState } from 'react';
-import { Chart } from 'chart.js';
+import { Chart, defaults } from 'chart.js';
 
 import type {
 	ChartOptions,
@@ -12,7 +12,7 @@ import type {
 
 const noop = () => {};
 
-export interface ChartProps {
+export interface ReactChartProps {
 	id: string;
 	data: ChartData;
 	options: ChartOptions;
@@ -21,6 +21,7 @@ export interface ChartProps {
 	updateMode?: UpdateMode;
 	height?: number;
 	width?: number;
+	defaultsFont?: string;
 }
 
 export const ReactChart = ({
@@ -32,7 +33,7 @@ export const ReactChart = ({
 	updateMode,
 	height,
 	width,
-}: ChartProps) => {
+}: ReactChartProps) => {
 	const chartInstance = useRef<Chart>({
 		update: noop,
 		destroy: noop,
@@ -42,9 +43,8 @@ export const ReactChart = ({
 	useEffect(() => {
 		chartInstance.current.data = data;
 		chartInstance.current.options = options;
-
 		chartInstance.current.update(updateMode);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, options]);
 
 	const nodeRef = useCallback<(instance: HTMLCanvasElement | null) => void>(
@@ -68,3 +68,4 @@ export const ReactChart = ({
 };
 
 ReactChart.register = Chart.register || noop;
+ReactChart.defaults = defaults || noop;

@@ -1,9 +1,13 @@
-import { Bar, defaults } from 'react-chartjs-2';
+import {
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	Title,
+	CategoryScale,
+} from 'chart.js';
+import { ReactChart } from 'components/ReactChart';
 import { Unavailable } from 'components/Unavailable';
-
-defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
-defaults.color = '#222222';
 
 interface AnalystWidgetChartI {
 	ratings: {
@@ -29,8 +33,22 @@ export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
 		);
 	}
 
+	ReactChart.register(
+		BarController,
+		BarElement,
+		Tooltip,
+		LinearScale,
+		CategoryScale,
+		Title
+	);
+
+	ReactChart.defaults.font.family =
+		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+
 	return (
-		<Bar
+		<ReactChart
+			id={'1'}
+			type="bar"
 			data={{
 				labels: ['Sell', 'Underweight', 'Hold', 'Buy', 'Strong Buy'],
 				datasets: [

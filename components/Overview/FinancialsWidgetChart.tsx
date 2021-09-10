@@ -1,9 +1,14 @@
-import { Bar, defaults } from 'react-chartjs-2';
+import {
+	BarController,
+	BarElement,
+	Tooltip,
+	Legend,
+	LinearScale,
+	Title,
+	CategoryScale,
+} from 'chart.js';
+import { ReactChart } from 'components/ReactChart';
 import { Unavailable } from 'components/Unavailable';
-
-defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
-defaults.color = '#222222';
 
 interface FinancialsWidgetChartI {
 	data: {
@@ -46,9 +51,24 @@ export function FinancialsWidgetChart({
 			/>
 		);
 	}
+	ReactChart.register(
+		BarController,
+		BarElement,
+		Tooltip,
+		LinearScale,
+		CategoryScale,
+		Title,
+		Legend,
+		padLegend,
+		colorEarnings
+	);
 
+	ReactChart.defaults.font.family =
+		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 	return (
-		<Bar
+		<ReactChart
+			id={'1'}
+			type="bar"
 			data={{
 				labels: data.financialChart[0],
 				datasets: [
@@ -77,6 +97,7 @@ export function FinancialsWidgetChart({
 							font: {
 								size: 14,
 							},
+							maxRotation: 0,
 						},
 						grid: {
 							display: false,
@@ -84,13 +105,15 @@ export function FinancialsWidgetChart({
 					},
 					y: {
 						position: 'right',
+						suggestedMin: 0,
 						ticks: {
 							font: {
 								size: 14,
 							},
 							padding: 0,
-							beginAtZero: true,
-							callback: function (value: number) {
+
+							// beginAtZero: true,
+							callback: function (value: any) {
 								const newvalue = value / 1000000;
 								return newvalue
 									.toString()
@@ -104,13 +127,13 @@ export function FinancialsWidgetChart({
 				},
 				plugins: {
 					legend: {
+						position: 'top',
+						align: 'start',
 						labels: {
 							font: {
 								size: 15,
 							},
 							padding: 12,
-							position: 'bottom',
-							align: 'start',
 						},
 					},
 					tooltip: {
@@ -133,8 +156,6 @@ export function FinancialsWidgetChart({
 					},
 				},
 			}}
-			plugins={[padLegend, colorEarnings]}
-			key={Math.random()}
 		/>
 	);
 }
