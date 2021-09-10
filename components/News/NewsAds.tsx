@@ -6,7 +6,7 @@ export const NewsAds = ({ index }: { index: number }) => {
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
 
-	if (status === 'completed' && !isPro && process.env.NEXT_PUBLIC_GTM_ID) {
+	if (status === 'completed' && !isPro) {
 		if (index === 3) {
 			return <NewsAd1 />;
 		}
