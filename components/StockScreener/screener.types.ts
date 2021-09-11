@@ -40,7 +40,14 @@ export type CellNumber = {
 	};
 };
 
-export type FilterValue = {
-	column: ColumnId;
+export type FilterOption = {
+	name: string;
 	value: string;
+};
+
+export type FilterValue = {
+	columnId: ColumnId;
+	name: string;
+	value: string;
+	filterType: 'numeric' | 'stringmatch';
 };

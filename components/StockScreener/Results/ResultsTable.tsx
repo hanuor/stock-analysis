@@ -11,7 +11,7 @@ import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { Controls } from 'components/Controls/_Controls';
 import { TablePagination } from './TablePagination';
-import { filterItems } from 'components/StockScreener/screener.functions';
+import { filterItems } from 'components/StockScreener/functions/filterItems';
 
 interface Props {
 	cols: any;
@@ -26,7 +26,7 @@ export function ResultsTable({ cols }: Props) {
 
 	const rows = useMemo(() => filterItems(data, filters), [data, filters]);
 	const columns = useMemo(() => cols, [cols]);
-	const count = data.length;
+	const count = rows.length;
 
 	const {
 		headerGroups,
@@ -57,7 +57,8 @@ export function ResultsTable({ cols }: Props) {
 		usePagination
 	);
 
-	console.log('rendering');
+	// console.log(filters);
+	// console.log('rendering');
 	return (
 		<>
 			<div className="overflow-x-auto">

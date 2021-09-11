@@ -4,10 +4,8 @@ import {
 	CellNumber,
 } from 'components/StockScreener/screener.types';
 import Link from 'next/link';
-import {
-	abbreviate,
-	formatNum,
-} from 'components/StockScreener/screener.functions';
+import { abbreviate } from 'components/StockScreener/functions/abbreviate';
+import { formatNum } from 'components/StockScreener/functions/formatNum';
 import { ResultsTable } from './ResultsTable';
 
 const format0dec = new Intl.NumberFormat('en-US', {

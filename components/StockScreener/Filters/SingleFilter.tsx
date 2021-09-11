@@ -1,6 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { FilterProps } from 'components/StockScreener/Filters/filters.map';
-import { FilterDropdown } from 'components/StockScreener/Filters/FilterDropdown';
+import { SingleFilterMenu } from 'components/StockScreener/Filters/SingleFilterMenu';
 import { getData } from 'functions/API';
 
 export function SingleFilter({ filter }: { filter: FilterProps }) {
@@ -25,10 +25,10 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 
 	return (
 		<>
-			<div className="inline-flex items-center justify-between border border-gray-100 px-2 py-1">
+			<div className="inline-flex items-center justify-between space-x-2 border border-gray-100 px-2 py-1 whitespace-nowrap">
 				<div>{filter.name}</div>
 				<div onMouseEnter={() => fetchColumn(filter.columnId)}>
-					<FilterDropdown filter={filter} />
+					<SingleFilterMenu filter={filter} />
 				</div>
 			</div>
 		</>

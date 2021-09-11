@@ -7,7 +7,7 @@ export function ResultsMenu() {
 				<h3 className="font-semibold mr-5">Analyze</h3>
 				<div className="mx-auto">
 					<ul className="flex space-x-2 filter-menu">
-						<ResultsMenuItem name="Custom" />
+						<ResultsMenuItem name="Filtered" />
 						<ResultsMenuItem name="General" />
 						<ResultsMenuItem name="Company" />
 						<ResultsMenuItem name="Financials" />

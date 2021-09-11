@@ -4,24 +4,31 @@ import {
 	ColumnId,
 	FilterValue,
 } from 'components/StockScreener/screener.types';
-import { mergeColumns } from 'components/StockScreener/screener.functions';
+import { mergeColumns } from 'components/StockScreener/functions/mergeColumns';
 
 interface ScreenerState {
 	data: SingleStock[];
 	setData: (data: SingleStock[]) => void;
 	addDataColumn: (newColumn: SingleStock[], columnId: ColumnId) => void;
 	filters: FilterValue[];
-	addFilter: (filter: ColumnId, value: string) => void;
-	removeFilter: (filter: string) => void;
+	addFilter: (
+		filter: ColumnId,
+		name: string,
+		value: string,
+		type: 'numeric' | 'stringmatch'
+	) => void;
+	removeFilter: (filter: ColumnId) => void;
 	filterMenu: string;
 	setFilterMenu: (newMenu: string) => void;
 	resultsMenu: string;
 	setResultsMenu: (newMenu: string) => void;
+	defaultColumns: string[];
 	fetchedColumns: string[];
-	addFetchedColumn: (newColumn: string) => void;
 	showColumns: string[];
-	addColumn: (newColumn: string) => void;
-	removeColumn: (columns: string) => void;
+	filteredColumns: string[];
+	addFetchedColumn: (newColumn: string) => void;
+	addFilteredColumn: (newColumn: string) => void;
+	removeFilteredColumn: (columns: string) => void;
 	setShowColumns: (newColumns: string[]) => void;
 	tablePage: number;
 	setTablePage: (newTablePage: number) => void;
@@ -41,19 +48,27 @@ export const screenerState = create<ScreenerState>((set) => ({
 
 	// Filters
 	filters: [],
-	addFilter: (newFilter: ColumnId, value: string) =>
+	addFilter: (
+		newFilter: ColumnId,
+		name: string,
+		value: string,
+		type: 'numeric' | 'stringmatch'
+	) =>
 		set((state) => ({
 			...state,
-			filters: [...state.filters, { column: newFilter, value: value }],
+			filters: [
+				...state.filters,
+				{ columnId: newFilter, name: name, value: value, filterType: type },
+			],
 		})),
 	removeFilter: (filter: string) =>
 		set((state) => ({
 			...state,
-			filters: state.filters.filter((f) => f.column !== filter),
+			filters: state.filters.filter((f) => f.columnId !== filter),
 		})),
 
 	// Filter Menu
-	filterMenu: 'General',
+	filterMenu: 'Popular',
 	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu }),
 
 	// Results Menu
@@ -61,19 +76,21 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
-	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
+	defaultColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // Loaded by default, shown under "General"
+	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // All data columns that have been fetched
+	showColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // Columns that are currently showing
+	filteredColumns: ['s', 'n'], // All data columns that are being filtered
 	addFetchedColumn: (newColumn: any) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn],
 		})),
-	showColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
-	addColumn: (newColumn: any) =>
+	addFilteredColumn: (newColumn: any) =>
 		set((state) => ({
-			showColumns: [...state.showColumns, newColumn],
+			filteredColumns: [...state.filteredColumns, newColumn],
 		})),
-	removeColumn: (column: any) =>
+	removeFilteredColumn: (column: any) =>
 		set((state) => ({
-			showColumns: state.showColumns.filter((c) => c !== column),
+			filteredColumns: state.filteredColumns.filter((c) => c !== column),
 		})),
 	setShowColumns: (newColumns) => set({ showColumns: newColumns }),
 

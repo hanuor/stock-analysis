@@ -7,12 +7,10 @@ export function FilterMenu() {
 	return (
 		<>
 			<div className="flex items-center border-t border-b border-gray-200 bg-gray-50 px-3 overflow-x-auto">
-				<h3 className="font-semibold mr-5">
-					{filters.length ? `Filters (${filters.length})` : 'Filter'}
-				</h3>
+				<h3 className="font-semibold mr-5">Filters ({filters.length})</h3>
 				<div className="mx-auto">
 					<ul className="flex space-x-2 filter-menu">
-						<FilterMenuItem name="General" />
+						<FilterMenuItem name="Popular" />
 						<FilterMenuItem name="Company" />
 						<FilterMenuItem name="Financials" />
 						<FilterMenuItem name="Valuation" />
