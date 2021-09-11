@@ -52,7 +52,7 @@ const columns: Column[] = [
 
 const NoIpos = ({ title }: { title: string }) => {
 	switch (title) {
-		case 'This Week': {
+		case 'IPOs This Week': {
 			return (
 				<div>
 					<h2 className="hh2 mb-2">{title} (0)</h2>
@@ -63,7 +63,7 @@ const NoIpos = ({ title }: { title: string }) => {
 			);
 		}
 
-		case 'Next Week': {
+		case 'Next Week or Later': {
 			return (
 				<div>
 					<h2 className="hh2">{title} (0)</h2>
