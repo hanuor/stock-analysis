@@ -409,6 +409,10 @@
 		background-color: #f2f9ff !important;
 	}
 
+	#screener-table tr > *:first-child {
+		width: 100px;
+	}
+
 	/* INDEX TABLES */
 	.symbol-table.index tr > *:nth-child(n + 4) {
 		text-align: right;

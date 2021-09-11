@@ -18,7 +18,7 @@ const format2dec = new Intl.NumberFormat('en-US', {
 	maximumFractionDigits: 2,
 });
 
-const COLUMNS = [
+const COLUMNS: any = [
 	{
 		Header: 'Symbol',
 		accessor: 's',
@@ -36,16 +36,28 @@ const COLUMNS = [
 		accessor: 'n',
 	},
 	{
-		Header: 'Exchange',
-		accessor: 'exchange',
-		show: false,
-	},
-	{
 		Header: 'Market Cap',
 		accessor: 'm',
 		Cell: function FormatCell({ cell: { value } }: CellNumber) {
 			return abbreviate(value, format2dec);
 		},
+	},
+	{
+		Header: 'Enterprise Value',
+		accessor: 'ev',
+	},
+	{
+		Header: 'Sector',
+		accessor: 'sector',
+	},
+	{
+		Header: 'Industry',
+		accessor: 'i',
+	},
+	{
+		Header: 'Exchange',
+		accessor: 'exchange',
+		show: false,
 	},
 	{
 		Header: 'Price',
@@ -66,10 +78,6 @@ const COLUMNS = [
 		},
 	},
 	{
-		Header: 'Industry',
-		accessor: 'i',
-	},
-	{
 		Header: 'Volume',
 		accessor: 'v',
 		Cell: function FormatCell({ cell: { value } }: CellNumber) {
@@ -83,12 +91,56 @@ const COLUMNS = [
 			return formatNum(value, format2dec);
 		},
 	},
+	{
+		Header: 'Country',
+		accessor: 'country',
+	},
+	{
+		Header: 'Employees',
+		accessor: 'employees',
+	},
+	{
+		Header: 'Founded',
+		accessor: 'founded',
+	},
+	{
+		Header: 'Ipo Date',
+		accessor: 'ipoDate',
+	},
+	{
+		Header: 'Revenue',
+		accessor: 'revenue',
+	},
+	{
+		Header: 'Net Income',
+		accessor: 'netIncome',
+	},
+	{
+		Header: 'EPS',
+		accessor: 'eps',
+	},
+	{
+		Header: 'Forward PE',
+		accessor: 'fpe',
+	},
+	{
+		Header: 'Price / Sales',
+		accessor: 'ps',
+	},
+	{
+		Header: 'Price / Book',
+		accessor: 'pb',
+	},
+	{
+		Header: 'Price / FCF',
+		accessor: 'pfcf',
+	},
 ];
 
 export function ResultsBody() {
 	const showColumns = screenerState((state) => state.showColumns);
 
-	const displayColumns = COLUMNS.filter((column) =>
+	const displayColumns = COLUMNS.filter((column: any) =>
 		showColumns.includes(column.accessor)
 	);
 

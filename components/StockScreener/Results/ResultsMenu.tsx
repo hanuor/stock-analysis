@@ -14,8 +14,7 @@ export function ResultsMenu() {
 						<ResultsMenuItem name="Valuation" />
 						<ResultsMenuItem name="Dividends" />
 						<ResultsMenuItem name="Analysts" />
-						<ResultsMenuItem name="Technicals" />
-						<ResultsMenuItem name="Other" />
+						<ResultsMenuItem name="Custom" />
 					</ul>
 				</div>
 			</div>

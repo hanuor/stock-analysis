@@ -1,7 +1,10 @@
 import { screenerState } from 'components/StockScreener/screener.state';
+import { ColumnId, ColumnName } from 'components/StockScreener/screener.types';
+import { columnsMap } from 'components/StockScreener/Results/columns.map';
+import { getData } from 'functions/API';
 
 type Props = {
-	name: string;
+	name: ColumnName;
 };
 
 export function ResultsMenuItem({ name }: Props) {
@@ -9,18 +12,44 @@ export function ResultsMenuItem({ name }: Props) {
 	const resultsMenu = screenerState((state) => state.resultsMenu);
 	const setResultsMenu = screenerState((state) => state.setResultsMenu);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
+	const defaultColumns = screenerState((state) => state.defaultColumns);
+	const fetchedColumns = screenerState((state) => state.fetchedColumns);
 	const filteredColumns = screenerState((state) => state.filteredColumns);
+	const addFetchedColumn = screenerState((state) => state.addFetchedColumn);
+	const addDataColumn = screenerState((state) => state.addDataColumn);
 
-	let display = name;
+	let display = name.toString();
 	if (name === 'Filtered') {
 		display = `${name} (${filters.length})`;
 	}
 
-	function handleFilter(name: string) {
+	function fetchManyColumns(columns: ColumnId[]) {
+		columns.forEach(async (columnId) => {
+			if (!fetchedColumns.includes(columnId)) {
+				addFetchedColumn(columnId);
+				const fetched = await getData(`screener?type=${columnId}`);
+				addDataColumn(fetched, columnId);
+			}
+		});
+	}
+
+	// When hovering over a results tab, fetch the required columns
+	function handleHover(name: ColumnName) {
+		if (name !== 'Filtered' && name !== 'General') {
+			fetchManyColumns(columnsMap[name]);
+		}
+	}
+
+	function handleFilter(name: ColumnName) {
 		setResultsMenu(name);
 
 		if (name === 'Filtered') {
 			setShowColumns(filteredColumns);
+		} else if (name === 'General') {
+			setShowColumns(defaultColumns);
+		} else {
+			console.log(columnsMap[name]);
+			setShowColumns(columnsMap[name]);
 		}
 	}
 
@@ -40,6 +69,7 @@ export function ResultsMenuItem({ name }: Props) {
 				className="inactive"
 				data-title={display}
 				onClick={() => handleFilter(name)}
+				onMouseOver={() => handleHover(name)}
 			>
 				{display}
 			</div>
