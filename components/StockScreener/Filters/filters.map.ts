@@ -124,7 +124,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Income',
-		columnId: 'netincome',
+		columnId: 'netIncome',
 		category: 'Financials',
 		filterType: 'numeric',
 		options: [],

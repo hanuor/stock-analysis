@@ -1,4 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
+import { ColumnId } from 'components/StockScreener/screener.types';
 import { FilterProps } from 'components/StockScreener/Filters/filters.map';
 import { SingleFilterMenu } from 'components/StockScreener/Filters/SingleFilterMenu';
 import { getData } from 'functions/API';
@@ -15,7 +16,7 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 
 	const id = filter.columnId;
 
-	async function fetchColumn(columnId: string) {
+	async function fetchColumn(columnId: ColumnId) {
 		if (!fetchedColumns.includes(columnId)) {
 			addFetchedColumn(id);
 			const fetched = await getData(`screener?type=${columnId}`);
