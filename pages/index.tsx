@@ -44,7 +44,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 		<>
 			<SEO
 				title="Stock Analysis | Free Online Stock Information for Investors"
-				description="Stock Analysis has everything you need to analyze stocks, including detailed financial data, news, charts and information on new and upcoming IPOs."
+				description="Stock Analysis has everything you need to analyze stocks, including detailed financial data, statistics, news and charts."
 				canonical="/"
 				schema={{
 					'@context': 'https://schema.org',
