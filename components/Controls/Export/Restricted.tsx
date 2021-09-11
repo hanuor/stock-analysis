@@ -12,7 +12,7 @@ export default function Restricted({ title, type }: ExportItemProps) {
 
 	return (
 		<div
-			className="text-gray-700 hover:bg-gray-100 flex justify-between items-center px-4 py-2 text-sm"
+			className="text-gray-700 hover:bg-gray-100 flex justify-between items-center px-4 py-2 text-sm cursor-pointer"
 			onClick={() => router.push('/pro/')}
 			title="This feature is available for Pro members."
 			id={id}
