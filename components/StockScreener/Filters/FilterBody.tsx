@@ -1,4 +1,4 @@
-import { FiltersMap } from './filters.map';
+import { FiltersMap } from 'components/StockScreener/maps/filters.map';
 import { SingleFilter } from './SingleFilter';
 
 export function FilterBody() {

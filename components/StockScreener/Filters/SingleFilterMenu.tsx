@@ -2,7 +2,7 @@ import { screenerState } from 'components/StockScreener/screener.state';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
-import { FilterProps } from 'components/StockScreener/Filters/filters.map';
+import { FilterProps } from 'components/StockScreener/maps/filters.map';
 import { isFilterSelected } from 'components/StockScreener/functions/isFilterSelected';
 
 export function SingleFilterMenu({ filter }: { filter: FilterProps }) {

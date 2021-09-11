@@ -1,6 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { ColumnId, ColumnName } from 'components/StockScreener/screener.types';
-import { columnsMap } from 'components/StockScreener/Results/columns.map';
+import { resultColumns } from 'components/StockScreener/maps/resultColumns.map';
 import { getData } from 'functions/API';
 
 type Props = {
@@ -36,7 +36,7 @@ export function ResultsMenuItem({ name }: Props) {
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
-			fetchManyColumns(columnsMap[name]);
+			fetchManyColumns(resultColumns[name]);
 		}
 	}
 
@@ -48,8 +48,7 @@ export function ResultsMenuItem({ name }: Props) {
 		} else if (name === 'General') {
 			setShowColumns(defaultColumns);
 		} else {
-			console.log(columnsMap[name]);
-			setShowColumns(columnsMap[name]);
+			setShowColumns(resultColumns[name]);
 		}
 	}
 

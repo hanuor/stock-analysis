@@ -103,7 +103,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Analyst Rating',
-		columnId: 'analysts',
+		columnId: 'ar',
 		category: 'Popular',
 		filterType: 'stringmatch',
 		options: [],

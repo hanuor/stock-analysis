@@ -23,9 +23,14 @@ export type ColumnId =
 	| 'ps' // price to sales ratio
 	| 'pb' // price to book ratio
 	| 'pfcf' // price to free cash flow ratio
+	| 'div' // dividend amount
 	| 'dy' // dividend yield
-	| 'analysts' // analyst ratings
-	| 'pt'; // price target
+	| 'pr' // payout ratio
+	| 'dg' // dividend growth
+	| 'ar' // analyst ratings
+	| 'ac' // analyst rating count
+	| 'pt' // price target
+	| 'ptc'; // price target change (%)
 
 // Results columns
 export type ColumnName =

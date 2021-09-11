@@ -1,6 +1,6 @@
 import { ColumnsMap } from 'components/StockScreener/screener.types';
 
-export const columnsMap: ColumnsMap = {
+export const resultColumns: ColumnsMap = {
 	Filtered: [],
 	General: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
 	Company: [
@@ -16,7 +16,7 @@ export const columnsMap: ColumnsMap = {
 	],
 	Financials: ['s', 'n', 'm', 'revenue', 'netIncome', 'eps'],
 	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
-	Dividends: [],
-	Analysts: [],
-	Custom: [],
+	Dividends: ['s', 'n', 'm', 'div', 'dy', 'pr', 'dg'],
+	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'pt', 'ptc'],
+	Custom: ['s', 'n'],
 };
