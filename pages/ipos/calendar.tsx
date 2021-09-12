@@ -15,6 +15,7 @@ interface Props {
 	data: {
 		thisweek: IpoUpcoming[];
 		nextweek: IpoUpcoming[];
+		later: IpoUpcoming[];
 		highprofile: IpoUpcoming[];
 		unknown: IpoUpcoming[];
 	};
@@ -43,9 +44,14 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								tableId="this-week"
 							/>
 							<CalendarTable
-								title="Next Week or Later"
+								title="Next Week"
 								data={data.nextweek}
 								tableId="next-week"
+							/>
+							<CalendarTable
+								title="Scheduled for Later"
+								data={data.later}
+								tableId="later"
 							/>
 							<CalendarTable
 								title="Upcoming High-Profile IPOs"
