@@ -38,7 +38,11 @@ const columns = COLUMNS_MAP.map((column) => {
 
 			case 'abbreviate': {
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return abbreviate(value, format2dec);
+					return (
+						<div className="text-right">
+							{abbreviate(value, format2dec)}
+						</div>
+					);
 				};
 				break;
 			}

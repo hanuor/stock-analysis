@@ -9,7 +9,7 @@ import {
 } from 'react-table';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import { Controls } from 'components/Controls/_Controls';
+import { ResultsControls } from './Controls/ResultsControls';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
 
@@ -57,12 +57,10 @@ export function ResultsTable({ cols }: Props) {
 		usePagination
 	);
 
-	// console.log(filters);
-	// console.log('rendering');
 	return (
 		<>
 			<div className="overflow-x-auto">
-				<Controls
+				<ResultsControls
 					count={count}
 					title="Matches"
 					useAsyncDebounce={useAsyncDebounce}

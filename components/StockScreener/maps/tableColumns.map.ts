@@ -20,11 +20,6 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'n',
 	},
 	{
-		Header: 'Market Cap',
-		accessor: 'm',
-		format: 'abbreviate',
-	},
-	{
 		Header: 'Enterprise Value',
 		accessor: 'ev',
 	},
@@ -35,6 +30,11 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Industry',
 		accessor: 'i',
+	},
+	{
+		Header: 'Market Cap',
+		accessor: 'm',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Exchange',

@@ -5,12 +5,14 @@ interface Props {
 	useAsyncDebounce: (value: any, wait: number) => any;
 	globalFilter: any;
 	setGlobalFilter: (filterValue: FilterValue) => void;
+	filterText?: string;
 }
 
 export function Filter({
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
+	filterText = 'Filter...',
 }: Props) {
 	const [value, setValue] = useState(globalFilter);
 	const onChange = useAsyncDebounce((value: any) => {
@@ -36,7 +38,7 @@ export function Filter({
 					setValue(e.target.value);
 					onChange(e.target.value);
 				}}
-				placeholder="Filter..."
+				placeholder={filterText}
 			/>
 		</div>
 	);
