@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { MoonIcon } from 'components/Icons/Moon';
 import { SunIcon } from 'components/Icons/Sun';
 import { useQuery } from 'react-query';
@@ -16,6 +17,8 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 }
 
 export default function StockPrice({ info }: { info: Info }) {
+	const [displayQuote, setDisplayQuote] = useState(info.quote);
+
 	const tradingHours = isTradingHours();
 
 	const { data } = useQuery(['q', info.id], queryQuote, {
@@ -25,6 +28,12 @@ export default function StockPrice({ info }: { info: Info }) {
 		initialDataUpdatedAt: Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
 	});
+
+	useEffect(() => {
+		if (data) {
+			setDisplayQuote(data);
+		}
+	}, [data]);
 
 	if (info.state === 'upcomingipo') {
 		return (
@@ -37,8 +46,6 @@ export default function StockPrice({ info }: { info: Info }) {
 	if (!data && !info.quote) {
 		return null;
 	}
-
-	const displayQuote = data || info.quote;
 
 	// Check if extended hours trading
 	const extendedHours = displayQuote.ext ? true : false;
@@ -117,27 +124,16 @@ function Extended({ quote, market }: { quote: Quote; market: string }) {
 
 	return (
 		<div className="max-w-[50%]">
-			<div
-				className="block sm:inline text-4xl font-bold"
-				suppressHydrationWarning
-			>
-				{quote.extP}
-			</div>
+			<div className="block sm:inline text-4xl font-bold">{quote.extP}</div>
 			<div
 				className={`block sm:inline sm:ml-1 text-lg xs:text-xl sm:text-2xl font-semibold ${color}`}
-				suppressHydrationWarning
 			>
 				{`${quote.extC} (${quote.extCP})`}
 			</div>
 			<div className="mt-1 text-gray-700 sm:flex">
-				<span className="flex items-center" suppressHydrationWarning>
+				<span className="flex items-center">
 					{market == 'preMarket' ? <SunIcon /> : <MoonIcon />}{' '}
-					<span
-						className="ml-1 text-sm font-semibold"
-						suppressHydrationWarning
-					>
-						{quote.extS}:
-					</span>
+					<span className="ml-1 text-sm font-semibold">{quote.extS}:</span>
 				</span>
 				<span className="text-xxs xs:text-tiny bp:text-sm sm:ml-1">
 					{quote.extTF}
