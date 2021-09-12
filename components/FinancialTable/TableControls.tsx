@@ -75,7 +75,7 @@ export const TableControls = ({ symbol, statement, range }: Props) => {
 				<button
 					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white px-3"
 					onClick={() => clickLeftRight()}
-					id="tag-finpage-leftright"
+					id="tag-feat-fin-leftright"
 				>
 					<LeftRightIcon classes="h-9 w-9 pointer-events-none" />
 				</button>

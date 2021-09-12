@@ -81,6 +81,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 						<li>
 							<button
 								className={type === 'all' ? 'font-semibold' : 'bll'}
+								id="tag-feat-news-menu-all"
 								onClick={() => setType('all')}
 							>
 								All
@@ -89,6 +90,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 						<li>
 							<button
 								className={type === 'v' ? 'font-semibold' : 'bll'}
+								id="tag-feat-news-menu-videos"
 								onClick={() => setType('v')}
 							>
 								Videos
@@ -98,6 +100,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 							<li>
 								<button
 									className={type === 'pr' ? 'font-semibold' : 'bll'}
+									id="tag-feat-news-menu-press"
 									onClick={() => setType('pr')}
 								>
 									Press
@@ -108,6 +111,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 						<li>
 							<button
 								className={type === 'chat' ? 'font-semibold' : 'bll'}
+								id="tag-feat-news-menu-chat"
 								onClick={() => setType('chat')}
 							>
 								Conversation
