@@ -57,13 +57,13 @@ const NoIpos = ({ title }: { title: string }) => {
 				<div>
 					<h2 className="hh2 mb-2">{title} (0)</h2>
 					<p className="text-lg text-gray-900">
-						There are no upcoming IPOs remaining for the current week.
+						There are no upcoming IPOs remaining for this week.
 					</p>
 				</div>
 			);
 		}
 
-		case 'Next Week or Later': {
+		case 'Next Week': {
 			return (
 				<div>
 					<h2 className="hh2">{title} (0)</h2>
@@ -96,7 +96,7 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 	} = tableInstance;
 
 	const thisWeek = title === 'IPOs This Week' ? true : false;
-	const nextWeek = title === 'Next Week or Later' ? true : false;
+	const nextWeek = title === 'Next Week' ? true : false;
 
 	const count = data.length;
 
@@ -165,8 +165,8 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 				</table>
 			</div>
 			{(thisWeek || nextWeek) && (
-				<span className="text-sm text-gray-600 mt-1">
-					* Upcoming IPO dates are estimated and may change
+				<span className="text-sm text-gray-600 mt-1 ml-1">
+					Upcoming IPO dates are estimated and may change.
 				</span>
 			)}
 		</div>

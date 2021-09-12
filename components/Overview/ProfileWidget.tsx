@@ -15,7 +15,7 @@ interface Props {
 export const Profile = ({ info, data }: Props) => {
 	return (
 		<div className="text-gray-900">
-			<h2 className="hh2 mb-2">About {info.ticker}</h2>
+			<h2 className="hh2 mb-2">{`About ${info.ticker}`}</h2>
 			<p>
 				{data.description}{' '}
 				{info.type === 'stocks' && (

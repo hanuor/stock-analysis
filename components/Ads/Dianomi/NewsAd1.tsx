@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-export const NewsAd1 = () => {
+export function NewsAd1() {
 	return (
 		<>
 			<div className="news-spns">
@@ -16,4 +16,4 @@ export const NewsAd1 = () => {
 			</div>
 		</>
 	);
-};
+}
