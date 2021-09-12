@@ -7,12 +7,12 @@ interface Props {
 	index: number;
 	item: News;
 	related?: string;
+	count: number;
 }
 
-export const NewsArticle = ({ index, item, related }: Props) => {
+export const NewsArticle = ({ index, item, related, count }: Props) => {
 	return (
 		<>
-			{(index === 3 || index === 10) && <NewsAds index={index} />}
 			<div className="news-article">
 				<a
 					href={item.url}
@@ -52,6 +52,9 @@ export const NewsArticle = ({ index, item, related }: Props) => {
 					</div>
 				</div>
 			</div>
+			{(index === 2 || (count < 3 && count === index + 1)) && (
+				<NewsAds index={index} count={count} />
+			)}
 		</>
 	);
 };
