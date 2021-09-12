@@ -63,7 +63,7 @@ const NoIpos = ({ title }: { title: string }) => {
 			);
 		}
 
-		case 'Next Week or Later': {
+		case 'Next Week': {
 			return (
 				<div>
 					<h2 className="hh2">{title} (0)</h2>
