@@ -6,7 +6,7 @@ export const resultColumns: ColumnsMap = {
 	Company: [
 		's',
 		'n',
-		'sector',
+		'se',
 		'i',
 		'country',
 		'exchange',

@@ -30,7 +30,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Sector',
-		accessor: 'sector',
+		accessor: 'se',
 	},
 	{
 		Header: 'Industry',

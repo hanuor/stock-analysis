@@ -9,7 +9,7 @@ export type ColumnId =
 	| 'i' // industry
 	| 'v' // volume
 	| 'pe' // pe ratio
-	| 'sector' // sector
+	| 'se' // se
 	| 'exchange' // exchange
 	| 'country' // country
 	| 'employees' // employees

@@ -26,7 +26,7 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 
 	return (
 		<>
-			<div className="inline-flex items-center justify-between whitespace-nowrap border-t border-l px-3 py-2">
+			<div className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1.5 py-2">
 				<div>{filter.name}</div>
 				<div onMouseEnter={() => fetchColumn(filter.columnId)}>
 					<SingleFilterMenu filter={filter} />

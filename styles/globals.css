@@ -409,8 +409,26 @@
 		background-color: #f2f9ff !important;
 	}
 
+	#screener-table tr > th {
+		@apply font-semibold;
+	}
+
+	#screener-table tr > * {
+		max-width: 220px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
 	#screener-table tr > *:first-child {
 		width: 100px;
+	}
+
+	#screener-table tr > *:nth-child(2) {
+		width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	/* INDEX TABLES */
