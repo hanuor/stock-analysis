@@ -6,7 +6,7 @@ import {
 export interface FilterProps {
 	name: string;
 	columnId: ColumnId;
-	category: string;
+	category: string[];
 	options: FilterOption[];
 	filterType: 'numeric' | 'stringmatch';
 }
@@ -15,7 +15,7 @@ export const FiltersMap: FilterProps[] = [
 	{
 		name: 'Market Cap',
 		columnId: 'm',
-		category: 'Popular',
+		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
 			{ name: 'Any', value: 'Any' },
@@ -29,21 +29,21 @@ export const FiltersMap: FilterProps[] = [
 	{
 		name: 'PE Ratio',
 		columnId: 'pe',
-		category: 'Popular',
+		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Forward PE',
 		columnId: 'fpe',
-		category: 'Popular',
+		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Exchange',
 		columnId: 'exchange',
-		category: 'Popular',
+		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
 			{ name: 'Any', value: 'Any' },
@@ -55,84 +55,84 @@ export const FiltersMap: FilterProps[] = [
 	{
 		name: 'Industry',
 		columnId: 'i',
-		category: 'Popular',
+		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [],
 	},
 	{
 		name: 'Sector',
 		columnId: 'sector',
-		category: 'Popular',
+		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [],
 	},
 	{
 		name: 'Country',
 		columnId: 'country',
-		category: 'Popular',
+		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [],
 	},
 	{
 		name: 'Stock Price',
 		columnId: 'pe',
-		category: 'Popular',
+		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Price Change',
 		columnId: 'pe',
-		category: 'Popular',
+		category: ['Popular'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Volume',
 		columnId: 'pe',
-		category: 'Popular',
+		category: ['Popular'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Dividend Yield',
 		columnId: 'dy',
-		category: 'Popular',
+		category: ['Popular', 'Dividends'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Analyst Rating',
 		columnId: 'ar',
-		category: 'Popular',
+		category: ['Popular', 'Analysts'],
 		filterType: 'stringmatch',
 		options: [],
 	},
 	{
 		name: 'Price Target',
 		columnId: 'pt',
-		category: 'Popular',
+		category: ['Popular', 'Analysts'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Revenue',
 		columnId: 'revenue',
-		category: 'Financials',
+		category: ['Financials', 'Popular'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
 		name: 'Net Income',
 		columnId: 'netIncome',
-		category: 'Financials',
+		category: ['Financials'],
 		filterType: 'numeric',
 		options: [],
 	},
 	{
-		name: 'Earnings Per Share',
+		name: 'EPS',
 		columnId: 'eps',
-		category: 'Financials',
+		category: ['Financials'],
 		filterType: 'numeric',
 		options: [],
 	},

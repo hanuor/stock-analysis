@@ -55,23 +55,23 @@ export function ResultsMenuItem({ name }: Props) {
 	if (resultsMenu === name) {
 		return (
 			<li>
-				<div className="active" data-title={display}>
+				<span className="active" data-title={display}>
 					{display}
-				</div>
+				</span>
 			</li>
 		);
 	}
 
 	return (
 		<li>
-			<div
+			<span
 				className="inactive"
 				data-title={display}
 				onClick={() => handleFilter(name)}
 				onMouseOver={() => handleHover(name)}
 			>
 				{display}
-			</div>
+			</span>
 		</li>
 	);
 }

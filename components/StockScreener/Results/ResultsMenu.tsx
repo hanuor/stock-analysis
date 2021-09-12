@@ -3,10 +3,10 @@ import { ResultsMenuItem } from 'components/StockScreener/Results/ResultsMenuIte
 export function ResultsMenu() {
 	return (
 		<>
-			<div className="flex items-center border-t border-b border-gray-200 bg-gray-50 px-3 overflow-x-auto">
-				<h3 className="font-semibold mr-5">Analyze</h3>
-				<div className="mx-auto">
-					<ul className="flex space-x-2 filter-menu">
+			<div className="border-b-[2px] border-t-[1px] pt-5 border-blue-brand_sharp flex items-end whitespace-nowrap">
+				<h3 className="text-xl font-semibold ml-1 mb-2 mr-5">Analyze</h3>
+				<nav>
+					<ul className="navmenu">
 						<ResultsMenuItem name="Filtered" />
 						<ResultsMenuItem name="General" />
 						<ResultsMenuItem name="Company" />
@@ -16,7 +16,7 @@ export function ResultsMenu() {
 						<ResultsMenuItem name="Analysts" />
 						<ResultsMenuItem name="Custom" />
 					</ul>
-				</div>
+				</nav>
 			</div>
 		</>
 	);

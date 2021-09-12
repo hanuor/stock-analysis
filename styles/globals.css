@@ -107,7 +107,7 @@
 
 	.navmenu li a.inactive,
 	.navmenu li span.inactive {
-		@apply bll hover:bg-gray-100 transition duration-100;
+		@apply bll hover:bg-gray-100 transition duration-100 cursor-pointer;
 	}
 
 	@media (hover: none) {
@@ -551,24 +551,6 @@
 		.ipotable tr > *:nth-child(3) {
 			max-width: 155px;
 		}
-	}
-
-	/* FILTER MENU */
-	.filter-menu .active {
-		@apply p-1 font-semibold;
-	}
-
-	.filter-menu .inactive {
-		@apply p-1 cursor-pointer;
-	}
-
-	.filter-menu li div::before {
-		display: block;
-		content: attr(data-title);
-		font-weight: 600;
-		height: 0;
-		overflow: hidden;
-		visibility: hidden;
 	}
 }
 

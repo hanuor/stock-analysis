@@ -97,6 +97,6 @@ export const screenerState = create<ScreenerState>((set) => ({
 	// Pagination
 	tablePage: 0,
 	setTablePage: (newTablePage) => set({ tablePage: newTablePage }),
-	tableSize: 25,
+	tableSize: 20,
 	setTableSize: (newTableSize) => set({ tableSize: newTableSize }),
 }));

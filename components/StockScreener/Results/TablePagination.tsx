@@ -52,9 +52,9 @@ export function TablePagination({
 					name="perpage"
 					className="block w-full pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 py-1.5 xs:py-2 border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md text-sm sm:text-base"
 				>
-					<option value="25">25</option>
-					<option value="50">50</option>
+					<option value="20">20</option>
 					<option value="100">100</option>
+					<option value="200">200</option>
 				</select>
 			</div>
 			<button

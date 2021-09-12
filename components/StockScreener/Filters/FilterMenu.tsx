@@ -3,13 +3,14 @@ import { FilterMenuItem } from 'components/StockScreener/Filters/FilterMenuItem'
 
 export function FilterMenu() {
 	const filters = screenerState((state) => state.filters);
-
 	return (
 		<>
-			<div className="flex items-center border-t border-b border-gray-200 bg-gray-50 px-3 overflow-x-auto">
-				<h3 className="font-semibold mr-5">Filters ({filters.length})</h3>
-				<div className="mx-auto">
-					<ul className="flex space-x-2 filter-menu">
+			<div className="border-b-[3px] border-blue-brand_sharp flex items-end whitespace-nowrap">
+				<h3 className="text-xl font-semibold ml-1 mb-2 mr-8 text-gray-700">
+					Filter ({filters.length})
+				</h3>
+				<nav>
+					<ul className="navmenu">
 						<FilterMenuItem name="Popular" />
 						<FilterMenuItem name="Company" />
 						<FilterMenuItem name="Financials" />
@@ -20,7 +21,7 @@ export function FilterMenu() {
 						<FilterMenuItem name="Other" />
 						<FilterMenuItem name="All" />
 					</ul>
-				</div>
+				</nav>
 			</div>
 		</>
 	);

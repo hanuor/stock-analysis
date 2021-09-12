@@ -11,22 +11,22 @@ export function FilterMenuItem({ name }: Props) {
 	if (filterMenu === name) {
 		return (
 			<li>
-				<div className="active" data-title={name}>
+				<span className="active" data-title={name}>
 					{name}
-				</div>
+				</span>
 			</li>
 		);
 	}
 
 	return (
 		<li>
-			<div
+			<span
 				className="inactive"
 				data-title={name}
 				onClick={() => setFilterMenu(name)}
 			>
 				{name}
-			</div>
+			</span>
 		</li>
 	);
 }

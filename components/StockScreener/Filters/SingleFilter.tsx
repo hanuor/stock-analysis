@@ -10,7 +10,7 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 	const addDataColumn = screenerState((state) => state.addDataColumn);
 	const filterMenu = screenerState((state) => state.filterMenu);
 
-	if (filterMenu !== filter.category && filterMenu !== 'All') {
+	if (!filter.category.includes(filterMenu) && filterMenu !== 'All') {
 		return null;
 	}
 
@@ -26,7 +26,7 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 
 	return (
 		<>
-			<div className="inline-flex items-center justify-between space-x-2 border border-gray-100 px-2 py-1 whitespace-nowrap">
+			<div className="inline-flex items-center justify-between whitespace-nowrap border-t border-l px-3 py-2">
 				<div>{filter.name}</div>
 				<div onMouseEnter={() => fetchColumn(filter.columnId)}>
 					<SingleFilterMenu filter={filter} />
