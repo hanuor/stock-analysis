@@ -72,11 +72,12 @@ export type CellNumber = {
 export type FilterOption = {
 	name: string;
 	value: string;
+	div?: boolean; // Set true to add a divider in the dropdown
 };
 
 export type FilterValue = {
 	columnId: ColumnId;
 	name: string;
 	value: string;
-	filterType: 'numeric' | 'stringmatch';
+	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
 };

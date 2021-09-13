@@ -3,6 +3,8 @@ import {
 	FilterValue,
 } from 'components/StockScreener/screener.types';
 import { numericMatch } from './filters/numericMatch';
+import { dateMatch } from './filters/dateMatch';
+import { dateMatchYear } from './filters/dateMatchYear';
 
 // Execute the filtering of the items in the filters array
 export function filterItems(data: SingleStock[], filters: FilterValue[]) {
@@ -35,6 +37,16 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 			// Numeric
 			else if (filter.filterType === 'numeric') {
 				matched = numericMatch(stock, filter.columnId, filter.value);
+			}
+
+			// Date
+			else if (filter.filterType === 'date') {
+				matched = dateMatch(stock, filter.columnId, filter.value);
+			}
+
+			// Date - Year
+			else if (filter.filterType === 'dateYear') {
+				matched = dateMatchYear(stock, filter.columnId, filter.value);
 			}
 
 			return matched;

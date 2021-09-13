@@ -19,12 +19,18 @@ const format2dec = new Intl.NumberFormat('en-US', {
 	maximumFractionDigits: 2,
 });
 
+function formatHeader(text: string) {
+	return <div className="ml-auto">{text}</div>;
+}
+
 const columns = COLUMNS_MAP.map((column) => {
 	// If column has a "format" property, use it to format the value
 	if (column.format) {
+		let header;
 		let cell;
 		switch (column.format) {
 			case 'linkSymbol': {
+				header = column.Header;
 				cell = function FormatCell({ cell: { value } }: CellString) {
 					const symb = value.includes('.') ? value : `${value}/`;
 					return (
@@ -37,6 +43,7 @@ const columns = COLUMNS_MAP.map((column) => {
 			}
 
 			case 'abbreviate': {
+				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
 					return (
 						<div className="text-right">
@@ -48,34 +55,68 @@ const columns = COLUMNS_MAP.map((column) => {
 			}
 
 			case 'changePcColor': {
+				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
 					const formatted = formatNum(value, format2dec) + '%';
 					if (value > 0) {
-						return <span className="text-[green]">{formatted}</span>;
+						return (
+							<div className="text-right text-[green]">{formatted}</div>
+						);
 					} else if (value < 0) {
-						return <span className="text-[red]">{formatted}</span>;
+						return (
+							<div className="text-right text-[red]">{formatted}</div>
+						);
 					} else {
-						return <span className="text-gray-800">{formatted}</span>;
+						return (
+							<div className="text-right text-gray-800">{formatted}</div>
+						);
 					}
 				};
 				break;
 			}
 
 			case 'format2dec': {
+				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return formatNum(value, format2dec);
+					return (
+						<div className="text-right">
+							{formatNum(value, format2dec)}
+						</div>
+					);
 				};
 				break;
 			}
 
 			case 'format0dec': {
+				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return formatNum(value, format0dec);
+					return (
+						<div className="text-right">
+							{formatNum(value, format0dec)}
+						</div>
+					);
+				};
+				break;
+			}
+
+			case 'amount': {
+				header = formatHeader(column.Header);
+				cell = function FormatCell({ cell: { value } }: CellNumber) {
+					return <div className="text-right">{value}</div>;
+				};
+				break;
+			}
+
+			case 'align': {
+				header = formatHeader(column.Header);
+				cell = function FormatCell({ cell: { value } }: CellNumber) {
+					return <div className="text-right">{value}</div>;
 				};
 				break;
 			}
 
 			default:
+				header = column.Header;
 				cell = function FormatCell({ cell: { value } }: any) {
 					return value;
 				};
@@ -83,8 +124,9 @@ const columns = COLUMNS_MAP.map((column) => {
 		}
 
 		return {
-			Header: column.Header,
+			Header: header,
 			accessor: column.accessor,
+			name: column.Header,
 			Cell: cell,
 		};
 	}

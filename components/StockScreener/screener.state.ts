@@ -15,7 +15,7 @@ interface ScreenerState {
 		filter: ColumnId,
 		name: string,
 		value: string,
-		type: 'numeric' | 'stringmatch'
+		type: 'numeric' | 'stringmatch' | 'date' | 'dateYear'
 	) => void;
 	removeFilter: (filter: ColumnId) => void;
 	filterMenu: string;
@@ -52,7 +52,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		newFilter: ColumnId,
 		name: string,
 		value: string,
-		type: 'numeric' | 'stringmatch'
+		type: 'numeric' | 'stringmatch' | 'date' | 'dateYear'
 	) =>
 		set((state) => ({
 			...state,

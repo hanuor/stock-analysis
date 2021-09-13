@@ -3,6 +3,8 @@ type Column = {
 	accessor: string;
 	format?:
 		| 'linkSymbol'
+		| 'amount'
+		| 'align'
 		| 'abbreviate'
 		| 'format0dec'
 		| 'format2dec'
@@ -43,6 +45,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Price',
 		accessor: 'p',
+		format: 'amount',
 	},
 	{
 		Header: 'Change',
@@ -71,10 +74,12 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Founded',
 		accessor: 'founded',
+		format: 'align',
 	},
 	{
-		Header: 'Ipo Date',
+		Header: 'IPO Date',
 		accessor: 'ipoDate',
+		format: 'align',
 	},
 	{
 		Header: 'Revenue',
@@ -107,14 +112,17 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Analyst Ratings',
 		accessor: 'ar',
+		format: 'align',
 	},
 	{
 		Header: 'Count',
 		accessor: 'ac',
+		format: 'align',
 	},
 	{
 		Header: 'Price Target',
 		accessor: 'pt',
+		format: 'align',
 	},
 	{
 		Header: 'Difference (%)',

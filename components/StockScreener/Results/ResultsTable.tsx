@@ -72,14 +72,16 @@ export function ResultsTable({ cols }: Props) {
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
-								{headerGroup.headers.map((column, index) => (
+								{headerGroup.headers.map((column: any, index) => (
 									<th
 										{...column.getSortByToggleProps({
-											title: `Sort by: ${column.Header}`,
+											title: `Sort by: ${
+												column.name || column.Header
+											}`,
 										})}
 										key={index}
 									>
-										<span className="inline-flex flex-row items-center">
+										<span className="flex flex-row items-center">
 											{column.render('Header')}
 
 											{column.isSorted ? (

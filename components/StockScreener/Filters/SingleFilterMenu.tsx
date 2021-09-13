@@ -85,7 +85,9 @@ export function SingleFilterMenu({ filter }: { filter: FilterProps }) {
 							filter.options.map((option) => (
 								<Menu.Item key={option.value}>
 									<div
-										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900"
+										className={`block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900${
+											option.div ? ' border-b border-gray-200' : ''
+										}`}
 										onClick={() =>
 											handleSelection(option.name, option.value)
 										}
