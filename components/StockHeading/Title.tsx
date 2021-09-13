@@ -1,10 +1,11 @@
 import { Info } from 'types/Info';
 import { Quote } from 'types/Quote';
 import { InformationCircleIcon } from 'components/Icons/InformationCircle';
+import { isTradingHoursOpen } from 'functions/datetime/isTradingHours';
 
 const getQuoteSource = (quote: Quote) => {
 	if (
-		(quote.status === 'open' || quote.status === 'closed') &&
+		(isTradingHoursOpen() || quote.status === 'closed') &&
 		quote.exchange !== 'OTCMKTS'
 	) {
 		return 'IEX Real-Time Price';
