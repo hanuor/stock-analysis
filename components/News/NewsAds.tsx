@@ -1,18 +1,30 @@
 import { authState } from 'state/authState';
-import { NewsAd1 } from 'components/Ads/Dianomi/NewsAd1';
-// import { NewsAd2 } from 'components/Ads/Dianomi/NewsAd2';
+
+import dynamic from 'next/dynamic';
+const NewsAd1 = dynamic(() => import('components/Ads/Dianomi/NewsAd1'), {
+	ssr: false,
+});
+
+import useInView from 'react-cool-inview';
 
 export function NewsAds({ index, count }: { index: number; count: number }) {
 	const status = authState((state) => state.status);
 	const isPro = authState((state) => state.isPro);
+	const { observe, inView } = useInView({
+		rootMargin: '500px 0px',
+		onEnter: ({ unobserve }) => {
+			unobserve();
+		},
+	});
 
 	if (status === 'completed' && !isPro) {
 		if (index === 2 || (count < 3 && count === index + 1)) {
-			return <NewsAd1 />;
+			return (
+				<div className="news-spns" ref={observe}>
+					{inView && <NewsAd1 />}
+				</div>
+			);
 		}
-		// if (index === 10) {
-		// 	return <NewsAd2 />;
-		// }
 	}
 
 	return null;
