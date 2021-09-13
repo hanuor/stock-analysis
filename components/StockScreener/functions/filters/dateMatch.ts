@@ -13,7 +13,11 @@ function changeDate(date: Date, abbr: string) {
 		date.setMonth(date.getMonth() - Number(str));
 	}
 
-	console.log(date);
+	if (abbr.includes('Y')) {
+		str = str.replace('Y', '');
+		date.setFullYear(date.getFullYear() - Number(str));
+	}
+
 	return date;
 }
 
@@ -64,6 +68,10 @@ export function dateMatch(
 		case 'under':
 			// If the value is under the first value, return true
 			return value.getTime() > changeDate(now, firstValue).getTime();
+
+		case 'over':
+			// If the value is under the first value, return true
+			return value.getTime() < changeDate(now, firstValue).getTime();
 	}
 
 	return false;
