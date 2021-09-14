@@ -7,34 +7,44 @@ export function CalendarStats({ data }: { data: CalendarData }) {
 		data.later.length +
 		data.unknown.length;
 
-	const count = 'font-semibold text-4xl text-gray-800';
-
 	return (
 		<div>
-			<h3 className="hh3">Calendar Statistics</h3>
+			<h2 className="hh2 text-[1.4rem] text-gray-800">
+				Calendar Statistics
+			</h2>
 			<div className="border px-6 py-4 rounded text-sm font-medium text-gray-600">
 				<div className="flex flex-wrap justify-around lg:justify-between gap-x-6 gap-y-4 text-center">
-					<div>
-						<div className={count}>{data.thisweek.length}</div>
+					<div className="flex flex-col-reverse">
 						This Week
+						<div className="font-semibold text-4xl text-gray-800">
+							{data.thisweek.length}
+						</div>
 					</div>
-					<div>
-						<div className={count}>{data.nextweek.length}</div>
+					<div className="flex flex-col-reverse">
 						Next Week
+						<div className="font-semibold text-4xl text-gray-800">
+							{data.nextweek.length}
+						</div>
 					</div>
 					{data.later?.length && (
-						<div>
-							<div className={count}>{data.later.length}</div>
+						<div className="flex flex-col-reverse">
 							Later
+							<div className="font-semibold text-4xl text-gray-800">
+								{data.later.length}
+							</div>
 						</div>
 					)}
-					<div>
-						<div className={count}>{data.unknown.length}</div>
+					<div className="flex flex-col-reverse">
 						Unscheduled
+						<div className="font-semibold text-4xl text-gray-800">
+							{data.unknown.length}
+						</div>
 					</div>
-					<div>
-						<div className={count}>{total}</div>
+					<div className="flex flex-col-reverse">
 						Total Upcoming
+						<div className="font-semibold text-4xl text-gray-800">
+							{total}
+						</div>
 					</div>
 				</div>
 			</div>

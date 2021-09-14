@@ -58,19 +58,21 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								tableId="more-upcoming"
 							/>
 						</div>
-						<aside className="flex flex-col space-y-10 pt-4 pb-6">
+						<div className="flex flex-col lg:pt-4">
 							<CalendarStats data={data} />
-							<RecentTableMin recent={recent} />
-							<NewsletterWidget />
-							<NewsWidget
-								title="IPO News"
-								news={news}
-								button={{
-									text: 'More IPO News',
-									url: '/ipos/news/',
-								}}
-							/>
-						</aside>
+							<aside className="space-y-8 lg:space-y-10 pt-6 pb-6">
+								<RecentTableMin recent={recent} />
+								<NewsletterWidget />
+								<NewsWidget
+									title="IPO News"
+									news={news}
+									button={{
+										text: 'More IPO News',
+										url: '/ipos/news/',
+									}}
+								/>
+							</aside>
+						</div>
 					</div>
 				</main>
 			</div>
