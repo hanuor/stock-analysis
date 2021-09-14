@@ -1,32 +1,36 @@
-import { authState } from 'state/authState';
+import { useEffect } from 'react';
 import { navState } from 'state/navState';
+import Script from 'next/script';
+
+declare global {
+	// eslint-disable-next-line no-unused-vars
+	interface Window {
+		dianomiReloadContext: any;
+	}
+}
 
 // Dianomi ad in the footer
 export const FooterDianomi = () => {
 	const path = navState((state) => state.path);
-	const status = authState((state) => state.status);
-	const isPro = authState((state) => state.isPro);
 
-	if (status === 'completed' && isPro) {
-		return null;
-	}
+	useEffect(() => {
+		if (typeof window.dianomiReloadContext !== 'undefined') {
+			window.dianomiReloadContext();
+		}
+	}, [path]);
 
-	if (
-		path.one !== 'login' &&
-		path.one !== 'pro' &&
-		path.one !== 'contact' &&
-		path.one !== 'privacy-policy' &&
-		path.one !== 'terms-of-use' &&
-		path.one !== 'subscribe'
-	) {
-		return (
-			<>
-				{/* prettier-ignore */}
-				<div className="max-w-[970px] min-h-[250px] mx-auto my-9 px-3 xs:px-4 lg:px-0"><div className="dianomi_context" data-dianomi-context-id="443"></div></div>
-			</>
-		);
-	}
-
-	return null;
+	return (
+		<>
+			<div
+				className="dianomi_context max-w-[970px] min-h-[270] mx-auto my-9 px-3 xs:px-4 lg:px-0"
+				data-dianomi-context-id="443"
+			></div>
+			<Script
+				strategy="lazyOnload"
+				src="https://www.dianomi.com/js/contextfeed.js"
+				id="dianomi_context_script"
+			/>
+		</>
+	);
 };
 export default FooterDianomi;
