@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/display-name */
 import { useNavState } from 'hooks/useNavState';
 import { useUserInfo } from 'hooks/useUserInfo';
-import { LazyLoadAd } from 'components/LazyLoadAd';
-import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
 import Link from 'next/link';
 
 const navigation = {
@@ -29,9 +26,6 @@ export const Footer = () => {
 
 	return (
 		<>
-			<LazyLoadAd>
-				<LoadFooter />
-			</LazyLoadAd>
 			<footer className="bg-gray-800 clear-both mt-10">
 				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">

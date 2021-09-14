@@ -276,7 +276,7 @@
 	}
 
 	.news-spns {
-		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 last:pb-1 shadow sm:shadow-none;
+		@apply bg-white p-4 sm:px-0 sm:py-6 lg:pt-6 lg:pb-4 shadow sm:shadow-none;
 	}
 
 	.news-video {

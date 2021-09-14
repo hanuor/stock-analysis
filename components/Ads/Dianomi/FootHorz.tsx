@@ -1,7 +1,6 @@
+import { useEffect } from 'react';
 import { navState } from 'state/navState';
 import Script from 'next/script';
-import { useEffect } from 'react';
-import { noAds } from 'components/Ads/noAds';
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -16,14 +15,9 @@ export const FooterDianomi = () => {
 
 	useEffect(() => {
 		if (typeof window.dianomiReloadContext !== 'undefined') {
-			console.log('reload footer');
 			window.dianomiReloadContext();
 		}
 	}, [path]);
-
-	if (noAds(path.one)) {
-		return null;
-	}
 
 	return (
 		<>
