@@ -7,40 +7,7 @@ export function CalendarStats({ data }: { data: CalendarData }) {
 		data.later.length +
 		data.unknown.length;
 
-	const title = 'text-lg';
 	const count = 'font-semibold text-lg bp:text-xl sm:text-3xl text-gray-800';
-
-	const stats = [
-		{ name: 'Today', stat: '4' },
-		{ name: 'This Week', stat: '17' },
-		{ name: 'Next Week', stat: '6' },
-		{ name: 'Later', stat: '2' },
-		{ name: 'Unscheduled', stat: '371' },
-		{ name: 'Total', stat: '402' },
-	];
-
-	// return (
-	// 	<div>
-	// 		<h2 className="hh2 text-gray-800 text-[1.4rem]">
-	// 			Calendar Statistics
-	// 		</h2>
-	// 		<dl className="mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3">
-	// 			{stats.map((item) => (
-	// 				<div
-	// 					key={item.name}
-	// 					className="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6"
-	// 				>
-	// 					<dt className="text-sm font-medium text-gray-500 truncate">
-	// 						{item.name}
-	// 					</dt>
-	// 					<dd className="mt-1 text-3xl font-semibold text-gray-900">
-	// 						{item.stat}
-	// 					</dd>
-	// 				</div>
-	// 			))}
-	// 		</dl>
-	// 	</div>
-	// );
 
 	return (
 		<div>
