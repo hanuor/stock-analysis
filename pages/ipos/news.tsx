@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next';
 import { News } from 'types/News';
-import { IpoUpcoming } from 'types/IpoUpcoming';
-import { IpoRecent } from 'types/IpoRecent';
+import { IpoUpcoming, IpoRecent } from 'types/Ipos';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { IPONavigation } from 'components/IPOs/IPONavigation';

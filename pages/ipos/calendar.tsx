@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
 import { News } from 'types/News';
-import { IpoUpcoming } from 'types/IpoUpcoming';
-import { IpoRecent } from 'types/IpoRecent';
+import { CalendarData, IpoRecent } from 'types/Ipos';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
+import { CalendarStats } from 'components/IPOs/CalendarStats';
 import { CalendarTable } from 'components/IPOs/CalendarTable';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
@@ -12,13 +12,7 @@ import { NewsWidget } from 'components/News/NewsWidget';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 
 interface Props {
-	data: {
-		thisweek: IpoUpcoming[];
-		nextweek: IpoUpcoming[];
-		later: IpoUpcoming[];
-		highprofile: IpoUpcoming[];
-		unknown: IpoUpcoming[];
-	};
+	data: CalendarData;
 	news: News[];
 	recent: IpoRecent[];
 }
@@ -64,18 +58,21 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								tableId="more-upcoming"
 							/>
 						</div>
-						<aside className="flex flex-col space-y-10 pt-4 pb-6">
-							<RecentTableMin recent={recent} />
-							<NewsletterWidget />
-							<NewsWidget
-								title="IPO News"
-								news={news}
-								button={{
-									text: 'More IPO News',
-									url: '/ipos/news/',
-								}}
-							/>
-						</aside>
+						<div className="flex flex-col lg:pt-4">
+							<CalendarStats data={data} />
+							<aside className="space-y-8 lg:space-y-10 pt-6 pb-6">
+								<RecentTableMin recent={recent} />
+								<NewsletterWidget />
+								<NewsWidget
+									title="IPO News"
+									news={news}
+									button={{
+										text: 'More IPO News',
+										url: '/ipos/news/',
+									}}
+								/>
+							</aside>
+						</div>
 					</div>
 				</main>
 			</div>

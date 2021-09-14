@@ -9,7 +9,7 @@ import { StockLink } from 'components/Links';
 import { useMemo } from 'react';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import { IpoRecent } from 'types/IpoRecent';
+import { IpoRecent } from 'types/Ipos';
 import { Controls } from 'components/Controls/_Controls';
 
 interface CellString {
