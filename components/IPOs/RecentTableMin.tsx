@@ -1,4 +1,4 @@
-import { IpoRecent } from 'types/IpoRecent';
+import { IpoRecent } from 'types/Ipos';
 import { StockLink } from 'components/Links';
 import { Button } from 'components/Button';
 

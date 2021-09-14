@@ -1,7 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { IpoRecent } from 'types/IpoRecent';
-import { IpoUpcoming } from 'types/IpoUpcoming';
+import { IpoRecent, IpoUpcoming } from 'types/Ipos';
 import { News } from 'types/News';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';

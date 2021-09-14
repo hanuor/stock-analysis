@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
 import { News } from 'types/News';
-import { IpoUpcoming } from 'types/IpoUpcoming';
-import { IpoRecent } from 'types/IpoRecent';
+import { CalendarData, IpoRecent } from 'types/Ipos';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
+import { CalendarStats } from 'components/IPOs/CalendarStats';
 import { CalendarTable } from 'components/IPOs/CalendarTable';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
@@ -12,13 +12,7 @@ import { NewsWidget } from 'components/News/NewsWidget';
 import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
 
 interface Props {
-	data: {
-		thisweek: IpoUpcoming[];
-		nextweek: IpoUpcoming[];
-		later: IpoUpcoming[];
-		highprofile: IpoUpcoming[];
-		unknown: IpoUpcoming[];
-	};
+	data: CalendarData;
 	news: News[];
 	recent: IpoRecent[];
 }
@@ -38,6 +32,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="flex flex-col space-y-5 sm:space-y-7 py-4">
+							<CalendarStats data={data} />
 							<CalendarTable
 								title="IPOs This Week"
 								data={data.thisweek}

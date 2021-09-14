@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { IpoRecent } from 'types/IpoRecent';
+import { IpoRecent } from 'types/Ipos';
 import { News } from 'types/News';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';

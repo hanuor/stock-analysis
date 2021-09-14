@@ -5,7 +5,7 @@ import {
 	useAsyncDebounce,
 } from 'react-table';
 import { StockLink } from 'components/Links';
-import { IpoUpcoming } from 'types/IpoUpcoming';
+import { IpoUpcoming } from 'types/Ipos';
 import 'regenerator-runtime/runtime';
 import { Export } from 'components/Controls/Export';
 import { Filter } from 'components/Controls//Filter';
