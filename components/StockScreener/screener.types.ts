@@ -15,9 +15,6 @@ export type ColumnId =
 	| 'employees' // employees
 	| 'founded' // founded year
 	| 'ipoDate' // ipo date
-	| 'revenue' // revenue
-	| 'netIncome' // net income
-	| 'eps' // earnings per share
 	| 'ev' // enterprise value
 	| 'fpe' // forward PE
 	| 'ps' // price to sales ratio
@@ -30,7 +27,17 @@ export type ColumnId =
 	| 'ar' // analyst ratings
 	| 'ac' // analyst rating count
 	| 'pt' // price target
-	| 'ptc'; // price target change (%)
+	| 'ptc' // price target change (%)
+	| 'revenue'
+	| 'grossProfit'
+	| 'operatingIncome'
+	| 'netIncome'
+	| 'ebit'
+	| 'ebitda'
+	| 'eps'
+	| 'ocf' // operating cash flow
+	| 'fcf' // free cash flow
+	| 'fcfps'; // free cash flow per share
 
 // Results columns
 export type ColumnName =
