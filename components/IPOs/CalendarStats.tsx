@@ -7,40 +7,33 @@ export function CalendarStats({ data }: { data: CalendarData }) {
 		data.later.length +
 		data.unknown.length;
 
-	const count = 'font-semibold text-lg bp:text-xl sm:text-3xl text-gray-800';
+	const count = 'font-semibold text-4xl text-gray-800';
 
 	return (
-		<div>
-			{/* <h2 className="hh2 text-[1.4rem] text-gray-800">
-				Calendar Statistics
-			</h2> */}
-			<div className="border p-4 rounded-sm text-base font-medium text-gray-600">
-				<div className="flex justify-between">
-					{/* <div>
-						Today
-						<div className={count}>3</div>
-					</div> */}
+		<div className="-mb-1">
+			<div className="border px-6 py-4 rounded text-sm font-medium text-gray-600">
+				<div className="flex flex-wrap justify-around lg:justify-between gap-x-6 gap-y-4 text-center">
 					<div>
-						This Week
 						<div className={count}>{data.thisweek.length}</div>
+						This Week
 					</div>
 					<div>
-						Next Week
 						<div className={count}>{data.nextweek.length}</div>
+						Next Week
 					</div>
 					{data.later?.length && (
 						<div>
-							Later
 							<div className={count}>{data.later.length}</div>
+							Later
 						</div>
 					)}
 					<div>
-						Unscheduled
 						<div className={count}>{data.unknown.length}</div>
+						Unscheduled
 					</div>
 					<div>
-						Total Pending
 						<div className={count}>{total}</div>
+						Total Upcoming
 					</div>
 				</div>
 			</div>
