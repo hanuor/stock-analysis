@@ -10,7 +10,8 @@ export function CalendarStats({ data }: { data: CalendarData }) {
 	const count = 'font-semibold text-4xl text-gray-800';
 
 	return (
-		<div className="-mb-1">
+		<div>
+			<h3 className="hh3">Calendar Statistics</h3>
 			<div className="border px-6 py-4 rounded text-sm font-medium text-gray-600">
 				<div className="flex flex-wrap justify-around lg:justify-between gap-x-6 gap-y-4 text-center">
 					<div>
