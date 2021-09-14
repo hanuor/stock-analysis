@@ -1,4 +1,4 @@
-import { IpoRecent } from 'types/IpoRecent';
+import { IpoRecent } from 'types/Ipos';
 import { StockLink } from 'components/Links';
 import { Button } from 'components/Button';
 
@@ -9,7 +9,7 @@ interface Props {
 export const RecentTableMin = ({ recent }: Props) => {
 	return (
 		<div>
-			<h3 className="hh3">Latest IPOs</h3>
+			<h3 className="hh3 mb-2.5">Latest IPOs</h3>
 			<div className="border border-gray-200 rounded">
 				<table className="w-full text-gray-900 text-[0.95rem]">
 					<thead>
