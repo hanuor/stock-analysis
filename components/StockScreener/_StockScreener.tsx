@@ -1,13 +1,13 @@
-import { FilterMenu } from './Filters/FilterMenu';
-import { FilterBody } from './Filters/FilterBody';
+import { FiltersMenu } from './Filters/FiltersMenu';
+import { FiltersBody } from './Filters/FiltersBody';
 import { ResultsMenu } from './Results/ResultsMenu';
 import { ResultsBody } from './Results/ResultsBody';
 
 export function StockScreener() {
 	return (
 		<>
-			<FilterMenu />
-			<FilterBody />
+			<FiltersMenu />
+			<FiltersBody />
 			<ResultsMenu />
 			<ResultsBody />
 		</>

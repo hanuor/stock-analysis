@@ -29,15 +29,22 @@ export type ColumnId =
 	| 'pt' // price target
 	| 'ptc' // price target change (%)
 	| 'revenue'
+	| 'revenueGrowth'
 	| 'grossProfit'
 	| 'operatingIncome'
 	| 'netIncome'
 	| 'ebit'
 	| 'ebitda'
 	| 'eps'
+	| 'epsGrowth'
 	| 'ocf' // operating cash flow
 	| 'fcf' // free cash flow
-	| 'fcfps'; // free cash flow per share
+	| 'fcfGrowth' // free cash flow growth
+	| 'fcfps' // free cash flow per share
+	| 'cash'
+	| 'debt'
+	| 'netCash'
+	| 'netCashGrowth';
 
 // Results columns
 export type ColumnName =

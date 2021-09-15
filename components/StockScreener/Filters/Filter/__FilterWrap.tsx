@@ -1,10 +1,10 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { ColumnId } from 'components/StockScreener/screener.types';
 import { FilterProps } from 'components/StockScreener/maps/filters.map';
-import { SingleFilterMenu } from 'components/StockScreener/Filters/SingleFilterMenu';
+import { FilterBody } from 'components/StockScreener/Filters/Filter/_FilterBody';
 import { getData } from 'functions/API';
 
-export function SingleFilter({ filter }: { filter: FilterProps }) {
+export function FilterWrap({ filter }: { filter: FilterProps }) {
 	const fetchedColumns = screenerState((state) => state.fetchedColumns);
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn);
 	const addDataColumn = screenerState((state) => state.addDataColumn);
@@ -29,7 +29,7 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 			<div className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1.5 py-2">
 				<div>{filter.name}</div>
 				<div onMouseEnter={() => fetchColumn(filter.columnId)}>
-					<SingleFilterMenu filter={filter} />
+					<FilterBody filter={filter} />
 				</div>
 			</div>
 		</>

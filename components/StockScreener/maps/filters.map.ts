@@ -18,7 +18,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Mega-Cap: 200B+', value: 'over-200B' },
 			{ name: 'Large-Cap: 10-200B', value: 'between-10B-200B' },
 			{ name: 'Mid-Cap: 10-20B', value: 'between-2B-10B' },
@@ -32,7 +31,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 50', value: 'over-50' },
 			{ name: 'From 30-50', value: 'between-30-50' },
 			{ name: 'From 20-30', value: 'between-20-30' },
@@ -48,7 +46,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 50', value: 'over-50' },
 			{ name: 'From 30-50', value: 'between-30-50' },
 			{ name: 'From 20-30', value: 'between-20-30' },
@@ -64,7 +61,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'NASDAQ', value: 'NASDAQ' },
 			{ name: 'NYSE', value: 'NYSE' },
 			{ name: 'NYSE AMERICAN', value: 'NYSEAMERICAN' },
@@ -76,7 +72,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Dividends'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Extreme: Over 10%', value: 'over-10' },
 			{ name: 'Very High: Over 5%', value: 'over-5' },
 			{ name: 'High: 3-5%', value: 'between-3-5' },
@@ -91,7 +86,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Communication Services', value: 'Communication Services' },
 			{ name: 'Consumer Discretionary', value: 'Consumer Discretionary' },
 			{ name: 'Consumer Staples', value: 'Consumer Staples' },
@@ -111,7 +105,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Aerospace & Defense', value: 'Aerospace & Defense' },
 			{ name: 'Air Freight & Logistics', value: 'Air Freight & Logistics' },
 			{ name: 'Airlines', value: 'Airlines' },
@@ -273,7 +266,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 1000', value: 'over-1000' },
 			{ name: 'From 500-1000', value: 'between-500-1000' },
 			{ name: 'From 100-500', value: 'between-100-500' },
@@ -292,7 +284,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
@@ -315,7 +306,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 100M', value: 'over-100M' },
 			{ name: 'Over 10M', value: 'over-10M' },
 			{ name: 'Over 1M', value: 'over-1M' },
@@ -337,7 +327,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'stringmatch',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Strong Buy', value: 'Strong Buy' },
 			{ name: 'Buy', value: 'Buy' },
 			{ name: 'Hold', value: 'Hold' },
@@ -351,7 +340,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 40', value: 'over-40' },
 			{ name: 'Over 30', value: 'over-30' },
 			{ name: 'Over 20', value: 'over-20' },
@@ -369,7 +357,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: '100%+ Above', value: 'over-100' },
 			{ name: '50%+ Above', value: 'over-50' },
 			{ name: '20%+ Above', value: 'over-20' },
@@ -390,7 +377,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'United States', value: 'United States' },
 			{ name: 'Canada', value: 'Canada' },
 			{ name: 'China', value: 'China' },
@@ -459,7 +445,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Any', value: 'Any' },
 			{ name: 'Over 500K', value: 'over-500K' },
 			{ name: 'Over 300K', value: 'over-300K' },
 			{ name: 'Over 200K', value: 'over-200K' },
@@ -479,7 +464,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'dateYear',
 		options: [
-			{ name: 'Any', value: 'Any', div: true },
 			{ name: 'Over 100 Years', value: 'over-100' },
 			{ name: 'Over 50 Years', value: 'over-50' },
 			{ name: 'Over 20 Years', value: 'over-20' },
@@ -502,7 +486,6 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'date',
 		options: [
-			{ name: 'Any', value: 'Any', div: true },
 			{ name: 'Today', value: 'today' },
 			{ name: 'Yesterday', value: 'yesterday' },
 			{ name: 'Past Week', value: 'under-7D' },
@@ -528,6 +511,20 @@ export const FiltersMap: FilterProps[] = [
 		columnId: 'revenue',
 		category: ['Financials'],
 		filterType: 'numeric',
+		options: [
+			{ name: 'Over 100B', value: 'over-100B' },
+			{ name: 'Over 10B', value: 'over-10B' },
+			{ name: 'Over 1B', value: 'over-1B' },
+			{ name: 'Over 100M', value: 'over-100M' },
+			{ name: 'Over 10M', value: 'over-10M' },
+			{ name: 'Not Zero', value: 'over-0' },
+		],
+	},
+	{
+		name: 'Revenue Growth',
+		columnId: 'revenueGrowth',
+		category: ['Financials', 'Popular'],
+		filterType: 'numeric',
 		options: [],
 	},
 	{
@@ -538,7 +535,7 @@ export const FiltersMap: FilterProps[] = [
 		options: [],
 	},
 	{
-		name: 'Operating Income',
+		name: 'Op. Income',
 		columnId: 'operatingIncome',
 		category: ['Financials'],
 		filterType: 'numeric',
@@ -559,6 +556,13 @@ export const FiltersMap: FilterProps[] = [
 		options: [],
 	},
 	{
+		name: 'EPS Growth',
+		columnId: 'epsGrowth',
+		category: ['Financials', 'Popular'],
+		filterType: 'numeric',
+		options: [],
+	},
+	{
 		name: 'EBIT',
 		columnId: 'ebit',
 		category: ['Financials'],
@@ -573,7 +577,7 @@ export const FiltersMap: FilterProps[] = [
 		options: [],
 	},
 	{
-		name: 'Operating Cash Flow',
+		name: 'Op. Cash Flow',
 		columnId: 'ocf',
 		category: ['Financials'],
 		filterType: 'numeric',
@@ -587,8 +591,43 @@ export const FiltersMap: FilterProps[] = [
 		options: [],
 	},
 	{
+		name: 'FCF Growth',
+		columnId: 'fcfGrowth',
+		category: ['Financials', 'Popular'],
+		filterType: 'numeric',
+		options: [],
+	},
+	{
 		name: 'FCF / Share',
 		columnId: 'fcfps',
+		category: ['Financials'],
+		filterType: 'numeric',
+		options: [],
+	},
+	{
+		name: 'Total Cash',
+		columnId: 'cash',
+		category: ['Financials'],
+		filterType: 'numeric',
+		options: [],
+	},
+	{
+		name: 'Total Debt',
+		columnId: 'debt',
+		category: ['Financials'],
+		filterType: 'numeric',
+		options: [],
+	},
+	{
+		name: 'Net Cash / Debt',
+		columnId: 'netCash',
+		category: ['Financials'],
+		filterType: 'numeric',
+		options: [],
+	},
+	{
+		name: 'Net Cash Growth',
+		columnId: 'netCashGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [],

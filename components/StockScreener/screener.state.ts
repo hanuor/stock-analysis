@@ -18,8 +18,13 @@ interface ScreenerState {
 		type: 'numeric' | 'stringmatch' | 'date' | 'dateYear'
 	) => void;
 	removeFilter: (filter: ColumnId) => void;
+
+	// Filter menu
 	filterMenu: string;
 	setFilterMenu: (newMenu: string) => void;
+	openFilter: ColumnId | '';
+	setOpenFilter: (newFilter: ColumnId | '') => void;
+
 	resultsMenu: string;
 	setResultsMenu: (newMenu: string) => void;
 	defaultColumns: ColumnId[];
@@ -70,6 +75,8 @@ export const screenerState = create<ScreenerState>((set) => ({
 	// Filter Menu
 	filterMenu: 'Popular',
 	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu }),
+	openFilter: '', // The filter menu that is open
+	setOpenFilter: (newFilter: ColumnId | '') => set({ openFilter: newFilter }),
 
 	// Results Menu
 	resultsMenu: 'General',

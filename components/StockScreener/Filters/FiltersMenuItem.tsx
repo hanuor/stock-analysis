@@ -4,7 +4,7 @@ type Props = {
 	name: string;
 };
 
-export function FilterMenuItem({ name }: Props) {
+export function FiltersMenuItem({ name }: Props) {
 	const filterMenu = screenerState((state) => state.filterMenu);
 	const setFilterMenu = screenerState((state) => state.setFilterMenu);
 
