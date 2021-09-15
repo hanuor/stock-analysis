@@ -523,7 +523,7 @@ export const FiltersMap: FilterProps[] = [
 	{
 		name: 'Revenue Growth',
 		columnId: 'revenueGrowth',
-		category: ['Financials', 'Popular'],
+		category: ['Financials'],
 		filterType: 'numeric',
 		options: [],
 	},
@@ -558,7 +558,7 @@ export const FiltersMap: FilterProps[] = [
 	{
 		name: 'EPS Growth',
 		columnId: 'epsGrowth',
-		category: ['Financials', 'Popular'],
+		category: ['Financials'],
 		filterType: 'numeric',
 		options: [],
 	},
@@ -593,7 +593,7 @@ export const FiltersMap: FilterProps[] = [
 	{
 		name: 'FCF Growth',
 		columnId: 'fcfGrowth',
-		category: ['Financials', 'Popular'],
+		category: ['Financials'],
 		filterType: 'numeric',
 		options: [],
 	},

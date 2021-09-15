@@ -8,8 +8,14 @@ type Props = {
 };
 
 export function FilterButton({ active, id }: Props) {
+	const filters = screenerState((state) => state.filters);
 	const openFilter = screenerState((state) => state.openFilter);
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
+
+	function findName() {
+		const name = filters.find((filter) => filter.columnId === id)?.name;
+		return name ?? 'Filter';
+	}
 
 	function handleClick() {
 		if (id === openFilter) {
@@ -19,7 +25,7 @@ export function FilterButton({ active, id }: Props) {
 		}
 	}
 
-	const buttonText = active ? active : 'Any';
+	const buttonText = active ? findName() : 'Any';
 
 	return (
 		<div

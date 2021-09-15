@@ -8,7 +8,7 @@ export function mergeColumns(
 ): any {
 	const combined: any = existing.map((stock: SingleStock) => {
 		const newStock = newColumns.find((newStock: SingleStock) => {
-			return stock.s === newStock.s;
+			return stock ? stock.s === newStock.s : false;
 		});
 		if (newStock) {
 			return { ...stock, [columnId]: newStock[columnId] };

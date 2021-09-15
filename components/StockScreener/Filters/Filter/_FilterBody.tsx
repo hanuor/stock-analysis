@@ -37,6 +37,8 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 		};
 	}, [id, openFilter, ref, setOpenFilter]);
 
+	console.log(filters);
+
 	return (
 		<div ref={ref} className="relative inline-block text-left">
 			<div>
@@ -64,7 +66,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 						</div>
 					</div>
 					<div>
-						<CustomChoice />
+						<CustomChoice columnId={filter.columnId} name={filter.name} />
 					</div>
 					{filter?.options &&
 						filter.options.map((option) => (

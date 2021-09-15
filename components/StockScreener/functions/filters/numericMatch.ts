@@ -21,7 +21,7 @@ export function numericMatch(
 	const secondValue = filterBits[2] ?? null;
 
 	// If there is no compare, or no value, then return false
-	if (!compare || !firstValue) {
+	if (!stock || !compare || !firstValue) {
 		return false;
 	}
 

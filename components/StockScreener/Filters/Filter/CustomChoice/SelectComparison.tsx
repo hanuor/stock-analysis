@@ -1,28 +1,32 @@
-import { Fragment, useState } from 'react';
+import { Dispatch, Fragment, SetStateAction } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+
+function capitalize(word: string) {
+	return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ');
 }
 
-const options = [
-	{ id: 'over', name: 'Over' },
-	{ id: 'under', name: 'Under' },
-	{ id: 'between', name: 'Between' },
-	{ id: 'exactly', name: 'Exactly' },
-];
+const options = ['over', 'under', 'between', 'exactly'];
 
-export function SelectComparison() {
-	const [selected, setSelected] = useState(options[0]);
+type Props = {
+	compare: string;
+	setCompare: Dispatch<SetStateAction<string>>;
+};
 
+export function SelectComparison({ compare, setCompare }: Props) {
 	return (
-		<Listbox value={selected} onChange={setSelected}>
+		<Listbox value={compare} onChange={setCompare}>
 			{({ open }) => (
 				<>
 					<div className="relative">
 						<Listbox.Button className="relative w-full pl-2 pr-8 py-2 text-left cursor-default focus:outline-none focus:ring-0 text-sm">
-							<span className="block truncate">{selected.name}</span>
+							<span className="block truncate">
+								{capitalize(compare)}
+							</span>
 							<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 								<ChevronDownIcon
 									className="h-5 w-5 text-gray-400"
@@ -41,7 +45,7 @@ export function SelectComparison() {
 							<Listbox.Options className="absolute z-10 mt-1 w-[6rem] bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
 								{options.map((option) => (
 									<Listbox.Option
-										key={option.id}
+										key={option}
 										className={({ active }) =>
 											classNames(
 												active
@@ -62,7 +66,7 @@ export function SelectComparison() {
 														'block truncate'
 													)}
 												>
-													{option.name}
+													{capitalize(option)}
 												</span>
 											</>
 										)}
