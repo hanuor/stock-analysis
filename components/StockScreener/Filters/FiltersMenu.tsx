@@ -6,7 +6,10 @@ export function FiltersMenu() {
 	return (
 		<>
 			<div className="border-b-[3px] border-blue-brand_sharp flex items-end whitespace-nowrap">
-				<h3 className="text-xl font-semibold ml-1 mb-2 mr-8 text-gray-700">
+				<h3
+					className="text-xl font-semibold ml-1 mb-2 mr-5 text-gray-700 dont-move"
+					data-title="Filters (20)"
+				>
 					Filter ({filters.length})
 				</h3>
 				<nav>

@@ -104,5 +104,11 @@ export type FilterValue = {
 	filterType: FilterType;
 };
 
+export type FilterObject = {
+	compare: ComparisonOption;
+	first: string;
+	second: string;
+};
+
 export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear';
 export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly';

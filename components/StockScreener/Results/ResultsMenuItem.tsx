@@ -19,8 +19,10 @@ export function ResultsMenuItem({ name }: Props) {
 	const addDataColumn = screenerState((state) => state.addDataColumn);
 
 	let display = name.toString();
+	let dataTitle = name.toString();
 	if (name === 'Filtered') {
 		display = `${name} (${filters.length})`;
+		dataTitle = `${name} (20)`;
 	}
 
 	function fetchManyColumns(columns: ColumnId[]) {
@@ -55,7 +57,7 @@ export function ResultsMenuItem({ name }: Props) {
 	if (resultsMenu === name) {
 		return (
 			<li>
-				<span className="active" data-title={display}>
+				<span className="active" data-title={dataTitle}>
 					{display}
 				</span>
 			</li>
@@ -66,7 +68,7 @@ export function ResultsMenuItem({ name }: Props) {
 		<li>
 			<span
 				className="inactive"
-				data-title={display}
+				data-title={dataTitle}
 				onClick={() => handleFilter(name)}
 				onMouseOver={() => handleHover(name)}
 			>

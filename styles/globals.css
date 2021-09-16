@@ -82,6 +82,16 @@
 		scrollbar-width: none; /* Firefox */
 	}
 
+	/* Prevent layout shift when element changes slightly */
+	.dont-move::before {
+		display: block;
+		content: attr(data-title);
+		font-weight: 600;
+		height: 0;
+		overflow: hidden;
+		visibility: hidden;
+	}
+
 	.navmenu li a,
 	.navmenu li span {
 		@apply text-sm xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5;

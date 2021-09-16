@@ -47,11 +47,9 @@ export function PresetChoice({ option, columnId, type, active }: Props) {
 	}
 
 	return (
-		<div>
+		<div className="border-b border-gray-100 last:border-0">
 			<div
-				className={`block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 cursor-default${
-					option.div ? ' border-b border-gray-200 c' : ''
-				}`}
+				className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-default"
 				onClick={() => handleSelection(option.name, option.value)}
 			>
 				{option.name}

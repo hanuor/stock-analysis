@@ -24,13 +24,13 @@ export function SelectComparison({ compare, setCompare }: Props) {
 			{({ open }) => (
 				<>
 					<div className="relative">
-						<Listbox.Button className="relative w-full pl-2 pr-8 py-2 text-left cursor-default focus:outline-none focus:ring-0 text-sm">
+						<Listbox.Button className="relative w-full pl-2 pr-7 py-2 text-left cursor-default focus:outline-none focus:ring-0 text-smaller font-semibold text-gray-800">
 							<span className="block truncate">
 								{capitalize(compare)}
 							</span>
 							<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 								<ChevronDownIcon
-									className="h-5 w-5 text-gray-400"
+									className="h-5 w-5 text-gray-700"
 									aria-hidden="true"
 								/>
 							</span>

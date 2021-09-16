@@ -3,9 +3,9 @@
 // over-10M --> over, 10000000
 
 import { ComparisonOption } from 'components/StockScreener/screener.types';
-import { fillNumber } from '../fillNumber';
+import { fillNumber } from './fillNumber';
 
-export function getFilterFromString(string: string) {
+export function getFilterFromString(string: string, fill = false) {
 	// Split the string
 	const explode = string.split('-');
 
@@ -14,11 +14,13 @@ export function getFilterFromString(string: string) {
 
 	// Second bit is the "first" value
 	let first = explode[1] as string;
-	first = fillNumber(first);
+	if (fill && first !== '') {
+		first = fillNumber(first);
+	}
 
 	// Third bit is the "second" value
-	let second = explode[2] ? explode[2] : undefined;
-	if (second) {
+	let second = (explode[2] as string) || '';
+	if (fill && second !== '') {
 		second = fillNumber(second);
 	}
 
