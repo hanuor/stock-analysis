@@ -1,6 +1,7 @@
 import { Dispatch, Fragment, SetStateAction } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { ComparisonOption } from 'components/StockScreener/screener.types';
 
 function capitalize(word: string) {
 	return word.charAt(0).toUpperCase() + word.slice(1);
@@ -13,8 +14,8 @@ function classNames(...classes: string[]) {
 const options = ['over', 'under', 'between', 'exactly'];
 
 type Props = {
-	compare: string;
-	setCompare: Dispatch<SetStateAction<string>>;
+	compare: ComparisonOption;
+	setCompare: Dispatch<SetStateAction<ComparisonOption>>;
 };
 
 export function SelectComparison({ compare, setCompare }: Props) {

@@ -1,9 +1,26 @@
-export function getFilterFromString(string: string) {
-	const equalValue = string.charAt(0) === '=' ? true : false;
-	const explode = string.split('-');
-	const compareValue = explode[0] ?? null;
-	const firstValue = explode[1] ? Number(explode[1]) : undefined;
-	const secondValue = explode[2] ? Number(explode[2]) : undefined;
+// Filter parameters are stored as a string in the format "over-10M", "from-2M-10M", etc.
+// This function parses such a string into its individual components:
+// over-10M --> over, 10000000
 
-	return { compareValue, firstValue, secondValue, equalValue };
+import { ComparisonOption } from 'components/StockScreener/screener.types';
+import { fillNumber } from '../fillNumber';
+
+export function getFilterFromString(string: string) {
+	// Split the string
+	const explode = string.split('-');
+
+	// First bit is the "compare" value
+	const compare = explode[0] as ComparisonOption;
+
+	// Second bit is the "first" value
+	let first = explode[1] as string;
+	first = fillNumber(first);
+
+	// Third bit is the "second" value
+	let second = explode[2] ? explode[2] : undefined;
+	if (second) {
+		second = fillNumber(second);
+	}
+
+	return { compare, first, second };
 }

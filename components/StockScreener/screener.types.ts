@@ -83,6 +83,14 @@ export type CellNumber = {
 	};
 };
 
+export type FilterProps = {
+	name: string;
+	columnId: ColumnId;
+	category: string[];
+	options: FilterOption[];
+	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+};
+
 export type FilterOption = {
 	name: string;
 	value: string;
@@ -93,5 +101,8 @@ export type FilterValue = {
 	columnId: ColumnId;
 	name: string;
 	value: string;
-	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+	filterType: FilterType;
 };
+
+export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly';

@@ -11,12 +11,7 @@ interface ScreenerState {
 	setData: (data: SingleStock[]) => void;
 	addDataColumn: (newColumn: SingleStock[], columnId: ColumnId) => void;
 	filters: FilterValue[];
-	addFilter: (
-		filter: ColumnId,
-		name: string,
-		value: string,
-		type: 'numeric' | 'stringmatch' | 'date' | 'dateYear'
-	) => void;
+	addFilter: (newFilter: FilterValue) => void;
 	removeFilter: (filter: ColumnId) => void;
 
 	// Filter menu
@@ -53,18 +48,10 @@ export const screenerState = create<ScreenerState>((set) => ({
 
 	// Filters
 	filters: [],
-	addFilter: (
-		newFilter: ColumnId,
-		name: string,
-		value: string,
-		type: 'numeric' | 'stringmatch' | 'date' | 'dateYear'
-	) =>
+	addFilter: (newFilter: FilterValue) =>
 		set((state) => ({
 			...state,
-			filters: [
-				...state.filters,
-				{ columnId: newFilter, name: name, value: value, filterType: type },
-			],
+			filters: [...state.filters, newFilter],
 		})),
 	removeFilter: (filter: string) =>
 		set((state) => ({

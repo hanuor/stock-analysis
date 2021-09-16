@@ -2,12 +2,13 @@ import { screenerState } from 'components/StockScreener/screener.state';
 import {
 	FilterOption,
 	ColumnId,
+	FilterType,
 } from 'components/StockScreener/screener.types';
 
 type Props = {
 	option: FilterOption;
 	columnId: ColumnId;
-	type: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+	type: FilterType;
 	active: string | false;
 };
 
@@ -40,7 +41,7 @@ export function PresetChoice({ option, columnId, type, active }: Props) {
 			}
 			// Add new filters
 			addFilteredColumn(id);
-			addFilter(id, name, value, type);
+			addFilter({ columnId, name, value, filterType: type });
 			setOpenFilter('');
 		}
 	}

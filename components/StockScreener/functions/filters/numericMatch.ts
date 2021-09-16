@@ -1,13 +1,5 @@
 import { ColumnId, SingleStock } from 'components/StockScreener/screener.types';
-
-function fillNumber(abbr: string) {
-	let str = abbr;
-	str = str.replace('X', '-'); // X is a placeholder for the minus symbol
-	str = str.replace('B', '000000000');
-	str = str.replace('M', '000000');
-	str = str.replace('K', '000');
-	return str;
-}
+import { getFilterFromString } from './getFilterFromString';
 
 export function numericMatch(
 	stock: SingleStock,
@@ -15,20 +7,15 @@ export function numericMatch(
 	filter: string
 ) {
 	// Explode the filter value string to get the individiaul items
-	const filterBits = filter.split('-');
-	const compare = filterBits[0] ?? null;
-	const firstValue = filterBits[1] ?? null;
-	const secondValue = filterBits[2] ?? null;
+	const { compare, first, second } = getFilterFromString(filter);
 
 	// If there is no compare, or no value, then return false
-	if (!stock || !compare || !firstValue) {
+	if (!stock || !compare || !first) {
 		return false;
 	}
 
 	// Format the values before comparing
 	const value = stock[columnId];
-	const first = fillNumber(firstValue);
-	const second = secondValue ? fillNumber(secondValue) : null;
 
 	// Three comparison types: over, under and between
 	switch (compare) {

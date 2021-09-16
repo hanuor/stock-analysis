@@ -1,6 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { ColumnId } from 'components/StockScreener/screener.types';
-import { FilterProps } from 'components/StockScreener/maps/filters.map';
+import { ColumnId, FilterProps } from 'components/StockScreener/screener.types';
 import { FilterBody } from 'components/StockScreener/Filters/Filter/_FilterBody';
 import { getData } from 'functions/API';
 

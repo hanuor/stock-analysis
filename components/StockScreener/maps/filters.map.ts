@@ -1,15 +1,4 @@
-import {
-	ColumnId,
-	FilterOption,
-} from 'components/StockScreener/screener.types';
-
-export interface FilterProps {
-	name: string;
-	columnId: ColumnId;
-	category: string[];
-	options: FilterOption[];
-	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
-}
+import { FilterProps } from 'components/StockScreener/screener.types';
 
 export const FiltersMap: FilterProps[] = [
 	{
