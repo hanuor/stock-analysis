@@ -81,7 +81,7 @@ export const ActionsTable = ({
 	return (
 		<>
 			<Controls
-				count={fullCount}
+				count={rows.length}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={filter}
