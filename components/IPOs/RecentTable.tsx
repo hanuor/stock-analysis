@@ -49,10 +49,42 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 					}
 					return <StockLink symbol={value} />;
 				},
+				sortType: (a, b) => {
+					let ad = a.values.symbol;
+					let bd = b.values.symbol;
+					if (ad.startsWith('=')) {
+						ad = ad.slice(1);
+					}
+					if (bd.startsWith('=')) {
+						bd = bd.slice(1);
+					}
+					if (ad < bd) {
+						return 1;
+					}
+					if (ad > bd) {
+						return -1;
+					} else {
+						return 0;
+					}
+				},
+				sortInverted: true,
 			},
 			{
 				Header: 'Name',
 				accessor: 'name',
+				sortType: (a, b) => {
+					const ad = a.values.name.toUpperCase();
+					const bd = b.values.name.toUpperCase();
+					if (ad < bd) {
+						return 1;
+					}
+					if (ad > bd) {
+						return -1;
+					} else {
+						return 0;
+					}
+				},
+				sortInverted: true,
 			},
 			{
 				Header: 'IPO Price',
