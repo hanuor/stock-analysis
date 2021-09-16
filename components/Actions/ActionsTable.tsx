@@ -3,6 +3,7 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce,
 	Column,
+	useFilters,
 } from 'react-table';
 import { useState, useEffect, useMemo } from 'react';
 import { Controls } from 'components/Controls/_Controls';
@@ -30,7 +31,7 @@ export const ActionsTable = ({
 }: Props) => {
 	const [dataRows, setDataRows] = useState(rowdata);
 	const filter = actionsState((state) => state.filter);
-	const setFilter = actionsState((state) => state.setFilter);
+	const setParamFilter = actionsState((state) => state.setFilter);
 	const isPro = authState((state) => state.isPro);
 
 	const count = rowdata.length;
@@ -43,7 +44,7 @@ export const ActionsTable = ({
 			if (res.data && res.data.length > count) {
 				setDataRows(res.data);
 				if (filter) {
-					setFilter(filter);
+					setParamFilter(filter);
 					setGlobalFilter(filter);
 				}
 			} else {
@@ -62,27 +63,30 @@ export const ActionsTable = ({
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => dataRows, [dataRows]);
 
-	const { headerGroups, prepareRow, rows, setGlobalFilter } = useTable(
-		{
-			columns,
-			data,
-		},
-		useGlobalFilter
-	);
+	const { headerGroups, prepareRow, rows, setGlobalFilter, setFilter } =
+		useTable(
+			{
+				columns,
+				data,
+			},
+			useFilters,
+			useGlobalFilter
+		);
 
 	const setDualFilter = (filterValue: string) => {
 		setGlobalFilter(filterValue);
-		setFilter(filterValue);
+		setParamFilter(filterValue);
 	};
 
 	return (
 		<>
 			<Controls
-				count={fullCount}
+				count={rows.length}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={filter}
 				setGlobalFilter={setDualFilter}
+				setColumnFilter={type == 'splits' ? setFilter : undefined}
 				tableId="actions-table"
 			/>
 			<div className="overflow-x-auto">
