@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { actionsState } from 'state/actionsState';
 
 interface Props {
 	setColumnFilter: (columId: string, updater: any) => void;
@@ -8,6 +9,13 @@ interface Props {
 
 export default function SplitsFilter({ setColumnFilter }: Props) {
 	const [title, setTitle] = useState('All Splits');
+	const setIsFiltered = actionsState((state) => state.setIsFiltered);
+
+	useEffect(() => {
+		return () => {
+			setIsFiltered(false);
+		};
+	}, [setIsFiltered]);
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
@@ -38,6 +46,7 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 								onClick={() => {
 									setColumnFilter('splitType', '');
 									setTitle('All Splits');
+									setIsFiltered(false);
 								}}
 							>
 								All Splits
@@ -49,6 +58,7 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 								onClick={() => {
 									setColumnFilter('splitType', 'Forward');
 									setTitle('Forward');
+									setIsFiltered(true);
 								}}
 							>
 								Forward Splits
@@ -60,6 +70,7 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 								onClick={() => {
 									setColumnFilter('splitType', 'Reverse');
 									setTitle('Reverse');
+									setIsFiltered(true);
 								}}
 							>
 								Reverse Splits

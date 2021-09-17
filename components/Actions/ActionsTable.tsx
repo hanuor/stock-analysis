@@ -32,6 +32,7 @@ export const ActionsTable = ({
 	const [dataRows, setDataRows] = useState(rowdata);
 	const filter = actionsState((state) => state.filter);
 	const setParamFilter = actionsState((state) => state.setFilter);
+	const isFiltered = actionsState((state) => state.isFiltered);
 	const isPro = authState((state) => state.isPro);
 
 	const count = rowdata.length;
@@ -81,7 +82,7 @@ export const ActionsTable = ({
 	return (
 		<>
 			<Controls
-				count={filter ? rows.length : fullCount}
+				count={filter || isFiltered ? rows.length : fullCount}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={filter}
