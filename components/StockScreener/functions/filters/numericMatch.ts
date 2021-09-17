@@ -23,6 +23,9 @@ export function numericMatch(
 			if (!first) {
 				return true;
 			}
+			if (Number(first) === 0) {
+				return value > first;
+			}
 			return value >= first;
 
 		case 'under':

@@ -8,7 +8,8 @@ type Column = {
 		| 'abbreviate'
 		| 'format0dec'
 		| 'format2dec'
-		| 'changePcColor';
+		| 'changePcColor'
+		| 'percentage';
 };
 
 export const COLUMNS_MAP: Column[] = [
@@ -144,5 +145,108 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Growth (1Y)',
 		accessor: 'dg',
+	},
+	{
+		Header: 'Revenue Growth (1Y)',
+		accessor: 'revenueGrowth',
+		format: 'percentage',
+	},
+	{
+		Header: 'Gross Profit',
+		accessor: 'grossProfit',
+	},
+	{
+		Header: 'Op. Income',
+		accessor: 'operatingIncome',
+	},
+	{
+		Header: 'Net Income',
+		accessor: 'netIncome',
+	},
+	{
+		Header: 'Net Income Growth',
+		accessor: 'netIncomeGrowth',
+		format: 'percentage',
+	},
+	{
+		Header: 'EPS',
+		accessor: 'eps',
+	},
+	{
+		Header: 'EPS Growth',
+		accessor: 'epsGrowth',
+		format: 'percentage',
+	},
+	{
+		Header: 'EBIT',
+		accessor: 'ebit',
+	},
+	{
+		Header: 'EBITDA',
+		accessor: 'ebitda',
+	},
+	{
+		Header: 'Op. Cash Flow',
+		accessor: 'ocf',
+	},
+	{
+		Header: 'Free Cash Flow',
+		accessor: 'fcf',
+	},
+	{
+		Header: 'FCF Growth',
+		accessor: 'fcfGrowth',
+		format: 'percentage',
+	},
+	{
+		Header: 'FCF / Share',
+		accessor: 'fcfps',
+	},
+	{
+		Header: 'Total Cash',
+		accessor: 'cash',
+	},
+	{
+		Header: 'Total Debt',
+		accessor: 'debt',
+	},
+	{
+		Header: 'Net Cash / Debt',
+		accessor: 'netCash',
+	},
+	{
+		Header: 'Net Cash Growth',
+		accessor: 'netCashGrowth',
+		format: 'percentage',
+	},
+	{
+		Header: 'Gross Margin',
+		accessor: 'grossMargin',
+		format: 'percentage',
+	},
+	{
+		Header: 'Operating Margin',
+		accessor: 'operatingMargin',
+		format: 'percentage',
+	},
+	{
+		Header: 'Profit Margin',
+		accessor: 'profitMargin',
+		format: 'percentage',
+	},
+	{
+		Header: 'FCF Margin',
+		accessor: 'fcfMargin',
+		format: 'percentage',
+	},
+	{
+		Header: 'EBITDA Margin',
+		accessor: 'ebitdaMargin',
+		format: 'percentage',
+	},
+	{
+		Header: 'EBIT Margin',
+		accessor: 'ebitMargin',
+		format: 'percentage',
 	},
 ];

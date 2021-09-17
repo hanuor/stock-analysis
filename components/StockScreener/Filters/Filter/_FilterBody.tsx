@@ -4,13 +4,14 @@ import { FilterProps } from 'components/StockScreener/screener.types';
 import { isFilterSelected } from 'components/StockScreener/functions/isFilterSelected';
 import { FilterButton } from './FilterButton';
 import { CloseCircleIcon } from 'components/Icons/CloseCircle';
-import { NumericFilter } from './NumericFilter';
-import { StringFilter } from './StringFilter';
+import { NumericFilter } from './FilterTypes/NumericFilter';
+import { StringFilter } from './FilterTypes/StringFilter';
 
 /**
- * The wrapper for an individual filter with button + dropdown (such as PE ratio)
+ * FilterBody
+ * The wrapper component for an individual filter with button + dropdown (such as PE ratio)
  * @param {FilterProps} filter The properties for the filter
- * @return {void}
+ * @return Component
  */
 
 export function FilterBody({ filter }: { filter: FilterProps }) {
@@ -21,6 +22,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 	const removeFilter = screenerState((state) => state.removeFilter);
 
 	const id = filter.columnId;
+	const type = filter.filterType;
 	const active = isFilterSelected(id, filters);
 
 	// Close dropdown if clicked outside of filter dropdown
@@ -41,8 +43,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 		};
 	}, [id, openFilter, ref, setOpenFilter]);
 
-	const Filter =
-		filter.filterType === 'numeric' ? NumericFilter : StringFilter;
+	const Filter = type === 'numeric' ? NumericFilter : StringFilter;
 
 	return (
 		<div ref={ref} className="relative inline-block text-left">

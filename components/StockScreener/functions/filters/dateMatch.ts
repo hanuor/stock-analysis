@@ -29,7 +29,7 @@ export function dateMatch(
 	// Explode the filter value string to get the individiaul items
 	const filterBits = filter.split('-');
 	const compare = filterBits[0] ?? null;
-	const firstValue = filterBits[1] ?? null;
+	const first = filterBits[1] ?? null;
 
 	// Check if the date exists in the data
 	const raw = stock[columnId];
@@ -41,7 +41,7 @@ export function dateMatch(
 	const value = new Date(raw);
 
 	// If there is no compare, or no value, then return false
-	if (!compare || !firstValue || !value) {
+	if (!compare || !value) {
 		return false;
 	}
 
@@ -52,12 +52,16 @@ export function dateMatch(
 	// Four comparison types: this, last, over, under
 	switch (compare) {
 		case 'today':
-			// If the value is today, return true
-			return value.getDate() === now.getDate();
+			return (
+				value.getDate() === now.getDate() &&
+				value.getMonth() == now.getMonth() &&
+				value.getFullYear() == now.getFullYear()
+			);
 
 		case 'yesterday':
-			// If the value is yesterday, return true
-			return value.getDate() === now.getDate() - 1;
+			const yesterday = new Date(now);
+			yesterday.setDate(yesterday.getDate() - 1);
+			return value.toDateString() === yesterday.toDateString();
 
 		case 'this':
 			return value.getFullYear() === year;
@@ -67,12 +71,11 @@ export function dateMatch(
 
 		case 'under':
 			// If the value is under the first value, return true
-			return value.getTime() > changeDate(now, firstValue).getTime();
+			return value.getTime() > changeDate(now, first).getTime();
 
 		case 'over':
 			// If the value is under the first value, return true
-			return value.getTime() < changeDate(now, firstValue).getTime();
+			return value.getTime() < changeDate(now, first).getTime();
 	}
-
 	return false;
 }

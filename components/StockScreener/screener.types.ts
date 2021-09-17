@@ -1,50 +1,50 @@
 // All possible columns
 // The IDs are shortened to minimize data payload size
-export type ColumnId =
-	| 's' // symbol
-	| 'n' // company name
-	| 'm' // market cap
-	| 'p' // stock price
-	| 'c' // stock price change (%)
-	| 'i' // industry
-	| 'v' // volume
-	| 'pe' // pe ratio
-	| 'se' // se
-	| 'exchange' // exchange
-	| 'country' // country
-	| 'employees' // employees
-	| 'founded' // founded year
-	| 'ipoDate' // ipo date
-	| 'ev' // enterprise value
-	| 'fpe' // forward PE
-	| 'ps' // price to sales ratio
-	| 'pb' // price to book ratio
-	| 'pfcf' // price to free cash flow ratio
-	| 'div' // dividend amount
-	| 'dy' // dividend yield
-	| 'pr' // payout ratio
-	| 'dg' // dividend growth
-	| 'ar' // analyst ratings
-	| 'ac' // analyst rating count
-	| 'pt' // price target
-	| 'ptc' // price target change (%)
-	| 'revenue'
-	| 'revenueGrowth'
-	| 'grossProfit'
-	| 'operatingIncome'
-	| 'netIncome'
-	| 'ebit'
-	| 'ebitda'
-	| 'eps'
-	| 'epsGrowth'
-	| 'ocf' // operating cash flow
-	| 'fcf' // free cash flow
-	| 'fcfGrowth' // free cash flow growth
-	| 'fcfps' // free cash flow per share
-	| 'cash'
-	| 'debt'
-	| 'netCash'
-	| 'netCashGrowth';
+export type ColumnId = string;
+// | 's' // symbol
+// | 'n' // company name
+// | 'm' // market cap
+// | 'p' // stock price
+// | 'c' // stock price change (%)
+// | 'i' // industry
+// | 'v' // volume
+// | 'pe' // pe ratio
+// | 'se' // se
+// | 'exchange' // exchange
+// | 'country' // country
+// | 'employees' // employees
+// | 'founded' // founded year
+// | 'ipoDate' // ipo date
+// | 'ev' // enterprise value
+// | 'fpe' // forward PE
+// | 'ps' // price to sales ratio
+// | 'pb' // price to book ratio
+// | 'pfcf' // price to free cash flow ratio
+// | 'div' // dividend amount
+// | 'dy' // dividend yield
+// | 'pr' // payout ratio
+// | 'dg' // dividend growth
+// | 'ar' // analyst ratings
+// | 'ac' // analyst rating count
+// | 'pt' // price target
+// | 'ptc' // price target change (%)
+// | 'revenue'
+// | 'revenueGrowth'
+// | 'grossProfit'
+// | 'operatingIncome'
+// | 'netIncome'
+// | 'ebit'
+// | 'ebitda'
+// | 'eps'
+// | 'epsGrowth'
+// | 'ocf' // operating cash flow
+// | 'fcf' // free cash flow
+// | 'fcfGrowth' // free cash flow growth
+// | 'fcfps' // free cash flow per share
+// | 'cash'
+// | 'debt'
+// | 'netCash'
+// | 'netCashGrowth';
 
 // Results columns
 export type ColumnName =
@@ -89,6 +89,7 @@ export type FilterProps = {
 	category: string[];
 	options: FilterOption[];
 	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+	numberType?: 'percentage';
 };
 
 export type FilterOption = {
@@ -102,6 +103,7 @@ export type FilterValue = {
 	name: string;
 	value: string;
 	filterType: FilterType;
+	numberType?: 'percentage';
 };
 
 export type FilterObject = {

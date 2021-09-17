@@ -1,18 +1,16 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import {
 	FilterOption,
-	ColumnId,
-	FilterType,
+	FilterProps,
 } from 'components/StockScreener/screener.types';
 
 type Props = {
 	option: FilterOption;
-	columnId: ColumnId;
-	type: FilterType;
+	filter: FilterProps;
 	active: string | false;
 };
 
-export function PresetChoice({ option, columnId, type, active }: Props) {
+export function PresetChoice({ option, filter, active }: Props) {
 	const addFilteredColumn = screenerState((state) => state.addFilteredColumn);
 	const removeFilteredColumn = screenerState(
 		(state) => state.removeFilteredColumn
@@ -24,7 +22,8 @@ export function PresetChoice({ option, columnId, type, active }: Props) {
 	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
 
-	const id = columnId;
+	const id = filter.columnId;
+	const type = filter.filterType;
 
 	function handleSelection(name: string, value: string) {
 		if (id) {
@@ -36,12 +35,20 @@ export function PresetChoice({ option, columnId, type, active }: Props) {
 			// If viewing the filtered columns, make them update right away
 			if (resultsMenu === 'Filtered') {
 				const newColumns = [...filteredColumns]; // Need to copy the array in order for state to update
-				newColumns.push(id);
+				// newColumns.push(id);
 				setShowColumns(newColumns);
 			}
 			// Add new filters
-			addFilteredColumn(id);
-			addFilter({ columnId, name, value, filterType: type });
+			if (!filteredColumns.includes(id)) {
+				addFilteredColumn(id);
+			}
+			addFilter({
+				columnId: id,
+				name,
+				value,
+				filterType: type,
+				numberType: filter.numberType,
+			});
 			setOpenFilter('');
 		}
 	}

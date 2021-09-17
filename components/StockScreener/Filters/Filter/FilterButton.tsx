@@ -14,8 +14,9 @@ export function FilterButton({ active, id }: Props) {
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
 
 	function findName() {
-		const value = filters.find((filter) => filter.columnId === id)?.value;
-		return value ? createLabelFromString(value) : 'Filter';
+		const filter = filters.find((filter) => filter.columnId === id);
+		const value = filter?.value;
+		return value ? createLabelFromString(value, filter) : 'Filter';
 	}
 
 	function handleClick() {

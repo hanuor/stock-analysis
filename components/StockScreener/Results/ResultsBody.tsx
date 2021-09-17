@@ -102,7 +102,11 @@ const columns = COLUMNS_MAP.map((column) => {
 			case 'amount': {
 				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return <div className="text-right">{value}</div>;
+					return (
+						<div className="text-right">
+							{formatNum(value, format2dec)}
+						</div>
+					);
 				};
 				break;
 			}
@@ -111,6 +115,18 @@ const columns = COLUMNS_MAP.map((column) => {
 				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
 					return <div className="text-right">{value}</div>;
+				};
+				break;
+			}
+
+			case 'percentage': {
+				header = formatHeader(column.Header);
+				cell = function FormatCell({ cell: { value } }: CellNumber) {
+					return (
+						<div className="text-right">
+							{formatNum(value, format2dec, '%')}
+						</div>
+					);
 				};
 				break;
 			}

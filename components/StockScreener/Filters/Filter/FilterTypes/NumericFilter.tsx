@@ -1,6 +1,6 @@
 import { FilterProps } from 'components/StockScreener/screener.types';
-import { CustomChoice } from './CustomChoice/_CustomChoice';
-import { PresetChoice } from './PresetChoice';
+import { CustomChoice } from '../CustomChoice/_CustomChoice';
+import { PresetChoice } from '../PresetChoice';
 
 type Props = {
 	filter: FilterProps;
@@ -11,18 +11,18 @@ export function NumericFilter({ filter, active }: Props) {
 	return (
 		<div className="py-1">
 			<CustomChoice filter={filter} />
-			<div className="max-h-[250px] overflow-y-auto overflow-x-hidden overscroll-contain">
-				{filter?.options &&
-					filter.options.map((option) => (
+			{filter?.options && filter.options.length > 0 && (
+				<div className="max-h-[250px] overflow-y-auto overflow-x-hidden overscroll-contain border-t border-gray-200">
+					{filter.options.map((option) => (
 						<PresetChoice
 							key={option.value}
 							option={option}
-							columnId={filter.columnId}
-							type={filter.filterType}
+							filter={filter}
 							active={active}
 						/>
 					))}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }

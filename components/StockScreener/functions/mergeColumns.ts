@@ -10,10 +10,10 @@ export function mergeColumns(
 		const newStock = newColumns.find((newStock: SingleStock) => {
 			return stock ? stock.s === newStock.s : false;
 		});
-		if (newStock) {
+		if (newStock && newStock[columnId]) {
 			return { ...stock, [columnId]: newStock[columnId] };
 		} else {
-			return;
+			return { ...stock, [columnId]: null };
 		}
 	});
 
