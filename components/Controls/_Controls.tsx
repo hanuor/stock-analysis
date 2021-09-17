@@ -2,7 +2,12 @@ import 'regenerator-runtime/runtime';
 import { FilterValue } from 'react-table';
 import { Export } from './Export';
 import { Filter } from './Filter';
-import { SplitsFilter } from './SplitsFilter';
+import dynamic from 'next/dynamic';
+
+// Load dynamically if rarely used
+const SplitsFilter = dynamic(() => import('components/Controls/SplitsFilter'), {
+	ssr: false,
+});
 
 interface Props {
 	count: number;
@@ -32,6 +37,11 @@ export const Controls = ({
 					{`${append}${count} ${title}`}
 				</h2>
 			</div>
+			{setColumnFilter && (
+				<div className="hidden sm:block">
+					<SplitsFilter setColumnFilter={setColumnFilter} />
+				</div>
+			)}
 			<div className="hidden sm:block">
 				<Export
 					title="Export"
@@ -42,11 +52,6 @@ export const Controls = ({
 					tableId={tableId}
 				/>
 			</div>
-			{setColumnFilter && (
-				<div className="hidden sm:block">
-					<SplitsFilter setColumnFilter={setColumnFilter} />
-				</div>
-			)}
 			<div>
 				<Filter
 					useAsyncDebounce={useAsyncDebounce}

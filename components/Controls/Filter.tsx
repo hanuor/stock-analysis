@@ -23,7 +23,7 @@ export function Filter({
 	}, [onChange, value]);
 
 	return (
-		<div className="relative min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px]">
+		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px] relative flex items-center">
 			<label htmlFor="filter" className="sr-only">
 				Filter results
 			</label>
@@ -40,7 +40,7 @@ export function Filter({
 				placeholder="Filter..."
 			/>
 			{globalFilter && globalFilter.length > 0 && (
-				<div className="absolute flex top-[10px] right-[7px] xs:right-[10px]">
+				<div className="absolute right-[7px] xs:right-[10px]">
 					<span
 						aria-label="Clear"
 						title="Clear"
