@@ -3,12 +3,15 @@ import {
 	useTable,
 	useGlobalFilter,
 	useAsyncDebounce,
+	useSortBy,
 } from 'react-table';
 import { StockLink } from 'components/Links';
 import { IpoUpcoming } from 'types/Ipos';
 import 'regenerator-runtime/runtime';
 import { Export } from 'components/Controls/Export';
 import { Filter } from 'components/Controls//Filter';
+import { SortUpIcon } from 'components/Icons/SortUp';
+import { SortDownIcon } from 'components/Icons/SortDown';
 
 type CellString = {
 	cell: {
@@ -23,6 +26,19 @@ const columns: Column[] = [
 		Cell: function DateCell({ cell: { value } }: CellString) {
 			return value || 'Pending';
 		},
+		sortType: (a, b) => {
+			const ad = new Date(a.values.date).getTime();
+			const bd = new Date(b.values.date).getTime();
+			if (ad < bd) {
+				return 1;
+			}
+			if (ad > bd) {
+				return -1;
+			} else {
+				return 0;
+			}
+		},
+		sortInverted: true,
 	},
 	{
 		Header: 'Symbol',
@@ -34,6 +50,19 @@ const columns: Column[] = [
 	{
 		Header: 'Name',
 		accessor: 'name',
+		sortType: (a, b) => {
+			const ad = a.values.name.toUpperCase();
+			const bd = b.values.name.toUpperCase();
+			if (ad < bd) {
+				return 1;
+			}
+			if (ad > bd) {
+				return -1;
+			} else {
+				return 0;
+			}
+		},
+		sortInverted: true,
 	},
 	{
 		Header: 'Exchange',
@@ -86,7 +115,11 @@ interface Props {
 }
 
 export const CalendarTable = ({ title, data, tableId }: Props) => {
-	const tableInstance = useTable({ columns, data }, useGlobalFilter);
+	const tableInstance = useTable(
+		{ columns, data },
+		useGlobalFilter,
+		useSortBy
+	);
 	const {
 		headerGroups,
 		rows,
@@ -145,7 +178,26 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th key={index}>{column.render('Header')}</th>
+									<th
+										{...column.getSortByToggleProps({
+											title: `Sort by: ${column.Header}`,
+										})}
+										key={index}
+									>
+										<span className="inline-flex flex-row items-center">
+											{column.render('Header')}
+
+											{column.isSorted ? (
+												column.isSortedDesc ? (
+													<SortDownIcon classes="h-5 w-5 text-gray-800" />
+												) : (
+													<SortUpIcon classes="h-5 w-5 text-gray-800" />
+												)
+											) : (
+												''
+											)}
+										</span>
+									</th>
 								))}
 							</tr>
 						))}
