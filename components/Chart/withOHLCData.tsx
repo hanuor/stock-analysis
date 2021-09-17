@@ -79,7 +79,6 @@ export function withOHLCData(dataSet = 'DAILY') {
 					.then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
 						const data = forDateParse.map(parseData());
-						console.log('yes');
 						this.setState({ data });
 						props.setLoading(false);
 					})

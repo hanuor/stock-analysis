@@ -62,6 +62,7 @@ const columns: Column[] = [
 				return 0;
 			}
 		},
+		sortInverted: true,
 	},
 	{
 		Header: 'Exchange',
