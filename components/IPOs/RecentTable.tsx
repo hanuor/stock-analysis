@@ -49,10 +49,42 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 					}
 					return <StockLink symbol={value} />;
 				},
+				sortType: (a, b) => {
+					let ad = a.values.symbol;
+					let bd = b.values.symbol;
+					if (ad.startsWith('=')) {
+						ad = ad.slice(1);
+					}
+					if (bd.startsWith('=')) {
+						bd = bd.slice(1);
+					}
+					if (ad < bd) {
+						return 1;
+					}
+					if (ad > bd) {
+						return -1;
+					} else {
+						return 0;
+					}
+				},
+				sortInverted: true,
 			},
 			{
 				Header: 'Name',
 				accessor: 'name',
+				sortType: (a, b) => {
+					const ad = a.values.name.toUpperCase();
+					const bd = b.values.name.toUpperCase();
+					if (ad < bd) {
+						return 1;
+					}
+					if (ad > bd) {
+						return -1;
+					} else {
+						return 0;
+					}
+				},
+				sortInverted: true,
 			},
 			{
 				Header: 'IPO Price',
@@ -72,7 +104,7 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 				Header: 'Return',
 				accessor: 'return',
 				sortType: 'basic',
-				Cell: ({ cell: { value } }: CellNumber) => {
+				Cell: function FormatCell({ cell: { value } }: CellNumber) {
 					const fixed = value.toFixed(2) + '%';
 					if (value > 0) {
 						return <span className="text-[green]">{fixed}</span>;

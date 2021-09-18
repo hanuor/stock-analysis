@@ -253,7 +253,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 				}}
 			/>
 			{query && query.length > 0 && (
-				<div className="absolute flex right-[7px] xs:right-[10px]">
+				<div className="absolute right-[7px] xs:right-[10px]">
 					<span
 						aria-label="Clear"
 						title="Clear"

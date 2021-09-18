@@ -36,7 +36,6 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 	const setTableSize = tableState((state) => state.setTableSize);
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => rowdata, [rowdata]);
-	const count = rowdata.length;
 
 	const {
 		headerGroups,
@@ -47,6 +46,7 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 		pageOptions,
 		nextPage,
 		previousPage,
+		rows,
 		setPageSize,
 		setGlobalFilter,
 		state: { pageIndex, pageSize, globalFilter },
@@ -67,7 +67,7 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 	return (
 		<>
 			<Controls
-				count={count}
+				count={rows.length}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={globalFilter}

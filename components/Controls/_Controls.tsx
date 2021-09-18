@@ -2,6 +2,12 @@ import 'regenerator-runtime/runtime';
 import { FilterValue } from 'react-table';
 import { Export } from './Export';
 import { Filter } from './Filter';
+import dynamic from 'next/dynamic';
+
+// Load dynamically if rarely used
+const SplitsFilter = dynamic(() => import('components/Controls/SplitsFilter'), {
+	ssr: false,
+});
 
 interface Props {
 	count: number;
@@ -11,6 +17,7 @@ interface Props {
 	setGlobalFilter: (filterValue: FilterValue) => void;
 	tableId: string;
 	append?: string;
+	setColumnFilter?: (columId: string, updater: any) => void;
 }
 
 export const Controls = ({
@@ -20,6 +27,7 @@ export const Controls = ({
 	globalFilter,
 	setGlobalFilter,
 	tableId,
+	setColumnFilter,
 	append = '',
 }: Props) => {
 	return (
@@ -29,6 +37,11 @@ export const Controls = ({
 					{`${append}${count} ${title}`}
 				</h2>
 			</div>
+			{setColumnFilter && (
+				<div className="hidden sm:block">
+					<SplitsFilter setColumnFilter={setColumnFilter} />
+				</div>
+			)}
 			<div className="hidden sm:block">
 				<Export
 					title="Export"
