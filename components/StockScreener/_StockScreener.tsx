@@ -1,13 +1,13 @@
-import { FiltersMenu } from './Filters/FiltersMenu';
-import { FiltersBody } from './Filters/FiltersBody';
-import { ResultsMenu } from './Results/ResultsMenu';
-import { ResultsBody } from './Results/ResultsBody';
+import { FiltersMenu } from './_Filters/FiltersMenu/FiltersMenu';
+import { RenderFilters } from './_Filters/FiltersBody/RenderFilters';
+import { ResultsMenu } from './_Results/ResultsMenu';
+import { ResultsBody } from './_Results/ResultsBody';
 
 export function StockScreener() {
 	return (
 		<>
 			<FiltersMenu />
-			<FiltersBody />
+			<RenderFilters />
 			<ResultsMenu />
 			<ResultsBody />
 		</>

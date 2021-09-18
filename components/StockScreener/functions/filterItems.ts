@@ -29,24 +29,24 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 
 			// String match
 			if (filter.filterType === 'stringmatch') {
-				if (stock[filter.columnId] === filter.value) {
+				if (stock[filter.id] === filter.value) {
 					matched = true;
 				}
 			}
 
 			// Numeric
 			else if (filter.filterType === 'numeric') {
-				matched = numericMatch(stock, filter.columnId, filter.value);
+				matched = numericMatch(stock, filter.id, filter.value);
 			}
 
 			// Date
 			else if (filter.filterType === 'date') {
-				matched = dateMatch(stock, filter.columnId, filter.value);
+				matched = dateMatch(stock, filter.id, filter.value);
 			}
 
 			// Date - Year
 			else if (filter.filterType === 'dateYear') {
-				matched = dateMatchYear(stock, filter.columnId, filter.value);
+				matched = dateMatchYear(stock, filter.id, filter.value);
 			}
 
 			return matched;

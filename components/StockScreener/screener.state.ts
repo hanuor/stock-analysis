@@ -1,7 +1,7 @@
 import create from 'zustand';
 import {
 	SingleStock,
-	ColumnId,
+	FilterId,
 	FilterValue,
 } from 'components/StockScreener/screener.types';
 import { mergeColumns } from 'components/StockScreener/functions/mergeColumns';
@@ -9,27 +9,27 @@ import { mergeColumns } from 'components/StockScreener/functions/mergeColumns';
 interface ScreenerState {
 	data: SingleStock[];
 	setData: (data: SingleStock[]) => void;
-	addDataColumn: (newColumn: SingleStock[], columnId: ColumnId) => void;
+	addDataColumn: (newColumn: SingleStock[], id: FilterId) => void;
 	filters: FilterValue[];
 	addFilter: (newFilter: FilterValue) => void;
-	removeFilter: (filter: ColumnId) => void;
+	removeFilter: (filter: FilterId) => void;
 
 	// Filter menu
 	filterMenu: string;
 	setFilterMenu: (newMenu: string) => void;
-	openFilter: ColumnId | '';
-	setOpenFilter: (newFilter: ColumnId | '') => void;
+	openFilter: FilterId | '';
+	setOpenFilter: (newFilter: FilterId | '') => void;
 
 	resultsMenu: string;
 	setResultsMenu: (newMenu: string) => void;
-	defaultColumns: ColumnId[];
-	fetchedColumns: ColumnId[];
-	showColumns: ColumnId[];
-	filteredColumns: ColumnId[];
+	defaultColumns: FilterId[];
+	fetchedColumns: FilterId[];
+	showColumns: FilterId[];
+	filteredColumns: FilterId[];
 	addFetchedColumn: (newColumn: string) => void;
 	addFilteredColumn: (newColumn: string) => void;
 	removeFilteredColumn: (columns: string) => void;
-	setShowColumns: (newColumns: ColumnId[]) => void;
+	setShowColumns: (newColumns: FilterId[]) => void;
 	tablePage: number;
 	setTablePage: (newTablePage: number) => void;
 	tableSize: number;
@@ -41,9 +41,9 @@ export const screenerState = create<ScreenerState>((set) => ({
 	data: [],
 	setData: (newData: SingleStock[]) =>
 		set((state) => ({ ...state, data: newData })),
-	addDataColumn: (newColumn: SingleStock[], columnId: ColumnId) =>
+	addDataColumn: (newColumn: SingleStock[], id: FilterId) =>
 		set((state) => ({
-			data: mergeColumns(state.data, newColumn, columnId),
+			data: mergeColumns(state.data, newColumn, id),
 		})),
 
 	// Filters
@@ -56,14 +56,14 @@ export const screenerState = create<ScreenerState>((set) => ({
 	removeFilter: (filter: string) =>
 		set((state) => ({
 			...state,
-			filters: state.filters.filter((f) => f.columnId !== filter),
+			filters: state.filters.filter((f) => f.id !== filter),
 		})),
 
 	// Filter Menu
 	filterMenu: 'Popular',
 	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu }),
 	openFilter: '', // The filter menu that is open
-	setOpenFilter: (newFilter: ColumnId | '') => set({ openFilter: newFilter }),
+	setOpenFilter: (newFilter: FilterId | '') => set({ openFilter: newFilter }),
 
 	// Results Menu
 	resultsMenu: 'General',
@@ -82,7 +82,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn],
 		})),
-	removeFilteredColumn: (column: ColumnId) =>
+	removeFilteredColumn: (column: FilterId) =>
 		set((state) => ({
 			filteredColumns: state.filteredColumns.filter((c) => c !== column),
 		})),

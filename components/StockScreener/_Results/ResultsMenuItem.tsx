@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { ColumnId, ColumnName } from 'components/StockScreener/screener.types';
+import { FilterId, ColumnName } from 'components/StockScreener/screener.types';
 import { resultColumns } from 'components/StockScreener/maps/resultColumns.map';
 import { getData } from 'functions/API';
 
@@ -25,12 +25,12 @@ export function ResultsMenuItem({ name }: Props) {
 		dataTitle = `${name} (20)`;
 	}
 
-	function fetchManyColumns(columns: ColumnId[]) {
-		columns.forEach(async (columnId) => {
-			if (!fetchedColumns.includes(columnId)) {
-				addFetchedColumn(columnId);
-				const fetched = await getData(`screener?type=${columnId}`);
-				addDataColumn(fetched, columnId);
+	function fetchManyColumns(columns: FilterId[]) {
+		columns.forEach(async (id) => {
+			if (!fetchedColumns.includes(id)) {
+				addFetchedColumn(id);
+				const fetched = await getData(`screener?type=${id}`);
+				addDataColumn(fetched, id);
 			}
 		});
 	}

@@ -1,4 +1,4 @@
-import { ColumnId, SingleStock } from 'components/StockScreener/screener.types';
+import { FilterId, SingleStock } from 'components/StockScreener/screener.types';
 
 function changeDate(date: Date, abbr: string) {
 	let str = abbr;
@@ -21,18 +21,14 @@ function changeDate(date: Date, abbr: string) {
 	return date;
 }
 
-export function dateMatch(
-	stock: SingleStock,
-	columnId: ColumnId,
-	filter: string
-) {
+export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 	// Explode the filter value string to get the individiaul items
 	const filterBits = filter.split('-');
 	const compare = filterBits[0] ?? null;
 	const first = filterBits[1] ?? null;
 
 	// Check if the date exists in the data
-	const raw = stock[columnId];
+	const raw = stock[id];
 	if (!raw) {
 		return false;
 	}

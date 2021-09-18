@@ -3,7 +3,7 @@ import {
 	FilterProps,
 } from 'components/StockScreener/screener.types';
 import { useEffect, useState } from 'react';
-import { PresetChoice } from '../PresetChoice';
+import { PresetChoice } from './Choices/PresetChoice';
 
 type Props = {
 	filter: FilterProps;

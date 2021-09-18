@@ -1,4 +1,4 @@
-import { ResultsMenuItem } from 'components/StockScreener/Results/ResultsMenuItem';
+import { ResultsMenuItem } from 'components/StockScreener/_Results/ResultsMenuItem';
 
 export function ResultsMenu() {
 	return (

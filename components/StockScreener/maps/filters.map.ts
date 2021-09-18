@@ -3,7 +3,7 @@ import { FilterProps } from 'components/StockScreener/screener.types';
 export const FiltersMap: FilterProps[] = [
 	{
 		name: 'Market Cap',
-		columnId: 'm',
+		id: 'm',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -16,7 +16,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Enterprise Value',
-		columnId: 'ev',
+		id: 'ev',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -36,8 +36,31 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
+		name: 'Stock Price',
+		id: 'p',
+		category: ['Popular', 'Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 1000', value: 'over-1000' },
+			{ name: 'Over 500', value: 'over-500' },
+			{ name: 'Over 100', value: 'over-100' },
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Over 1', value: 'over-1' },
+			{ name: 'From 500-1000', value: 'between-500-1000' },
+			{ name: 'From 100-500', value: 'between-100-500' },
+			{ name: 'From 50-100', value: 'between-50-100' },
+			{ name: 'From 20-50', value: 'between-20-50' },
+			{ name: 'From 10-20', value: 'between-10-20' },
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 1', value: 'under-1' },
+		],
+	},
+	{
 		name: 'PE Ratio',
-		columnId: 'pe',
+		id: 'pe',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -52,7 +75,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Forward PE',
-		columnId: 'fpe',
+		id: 'fpe',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -67,7 +90,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Exchange',
-		columnId: 'exchange',
+		id: 'exchange',
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -78,7 +101,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Dividend Yield',
-		columnId: 'dy',
+		id: 'dy',
 		category: ['Popular', 'Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -88,12 +111,12 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'High: 3-5%', value: 'between-3-5' },
 			{ name: 'Moderate: 1-3%', value: 'between-1-3' },
 			{ name: 'Low: 0-1%', value: 'between-0-1' },
-			{ name: 'Not Zero: Over 0%', value: 'over-0' },
+			{ name: 'Not Zero: Over 0%', value: 'notzero' },
 		],
 	},
 	{
 		name: 'Sector',
-		columnId: 'se',
+		id: 'se',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -112,7 +135,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Industry',
-		columnId: 'i',
+		id: 'i',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -271,32 +294,10 @@ export const FiltersMap: FilterProps[] = [
 			},
 		],
 	},
-	{
-		name: 'Stock Price',
-		columnId: 'p',
-		category: ['Popular', 'Valuation'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1000', value: 'over-1000' },
-			{ name: 'Over 500', value: 'over-500' },
-			{ name: 'Over 100', value: 'over-100' },
-			{ name: 'Over 10', value: 'over-10' },
-			{ name: 'Over 5', value: 'over-5' },
-			{ name: 'Over 1', value: 'over-1' },
-			{ name: 'From 500-1000', value: 'between-500-1000' },
-			{ name: 'From 100-500', value: 'between-100-500' },
-			{ name: 'From 50-100', value: 'between-50-100' },
-			{ name: 'From 20-50', value: 'between-20-50' },
-			{ name: 'From 10-20', value: 'between-10-20' },
-			{ name: 'Under 20', value: 'under-20' },
-			{ name: 'Under 10', value: 'under-10' },
-			{ name: 'Under 5', value: 'under-5' },
-			{ name: 'Under 1', value: 'under-1' },
-		],
-	},
+
 	{
 		name: 'Price Change',
-		columnId: 'c',
+		id: 'c',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -318,7 +319,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Volume',
-		columnId: 'v',
+		id: 'v',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -339,7 +340,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Analyst Rating',
-		columnId: 'ar',
+		id: 'ar',
 		category: ['Popular'],
 		filterType: 'stringmatch',
 		options: [
@@ -352,7 +353,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Analyst Count',
-		columnId: 'ac',
+		id: 'ac',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -369,7 +370,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Price Target',
-		columnId: 'ptc',
+		id: 'ptc',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -389,7 +390,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Country',
-		columnId: 'country',
+		id: 'country',
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -457,7 +458,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Employees',
-		columnId: 'employees',
+		id: 'employees',
 		category: ['Company'],
 		filterType: 'numeric',
 		options: [
@@ -476,7 +477,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Founded',
-		columnId: 'founded',
+		id: 'founded',
 		category: ['Company'],
 		filterType: 'dateYear',
 		options: [
@@ -498,7 +499,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'IPO Date',
-		columnId: 'ipoDate',
+		id: 'ipoDate',
 		category: ['Company'],
 		filterType: 'date',
 		options: [
@@ -524,7 +525,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Revenue',
-		columnId: 'revenue',
+		id: 'revenue',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -533,12 +534,12 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
 			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Not Zero', value: 'over-0' },
+			{ name: 'Not Zero', value: 'notzero' },
 		],
 	},
 	{
 		name: 'Revenue Growth',
-		columnId: 'revenueGrowth',
+		id: 'revenueGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -558,7 +559,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Gross Profit',
-		columnId: 'grossProfit',
+		id: 'grossProfit',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -574,7 +575,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Op. Income',
-		columnId: 'operatingIncome',
+		id: 'operatingIncome',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -590,7 +591,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Income',
-		columnId: 'netIncome',
+		id: 'netIncome',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -606,7 +607,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Income Growth',
-		columnId: 'netIncomeGrowth',
+		id: 'netIncomeGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -626,7 +627,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'EPS',
-		columnId: 'eps',
+		id: 'eps',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -641,7 +642,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'EPS Growth',
-		columnId: 'epsGrowth',
+		id: 'epsGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -661,7 +662,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'EBIT',
-		columnId: 'ebit',
+		id: 'ebit',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -677,7 +678,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'EBITDA',
-		columnId: 'ebitda',
+		id: 'ebitda',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -693,7 +694,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Op. Cash Flow',
-		columnId: 'ocf',
+		id: 'ocf',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -709,7 +710,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Free Cash Flow',
-		columnId: 'fcf',
+		id: 'fcf',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -725,7 +726,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'FCF Growth',
-		columnId: 'fcfGrowth',
+		id: 'fcfGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -745,7 +746,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'FCF / Share',
-		columnId: 'fcfps',
+		id: 'fcfps',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -760,7 +761,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Total Cash',
-		columnId: 'cash',
+		id: 'cash',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -777,7 +778,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Total Debt',
-		columnId: 'debt',
+		id: 'debt',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -794,7 +795,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Cash / Debt',
-		columnId: 'netCash',
+		id: 'netCash',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -820,7 +821,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Cash Growth',
-		columnId: 'netCashGrowth',
+		id: 'netCashGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -840,7 +841,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Gross Margin',
-		columnId: 'grossMargin',
+		id: 'grossMargin',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -860,7 +861,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Operating Margin',
-		columnId: 'operatingMargin',
+		id: 'operatingMargin',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -880,7 +881,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Profit Margin',
-		columnId: 'profitMargin',
+		id: 'profitMargin',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -900,7 +901,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'FCF Margin',
-		columnId: 'fcfMargin',
+		id: 'fcfMargin',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -920,7 +921,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'EBITDA Margin',
-		columnId: 'ebitdaMargin',
+		id: 'ebitdaMargin',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -940,7 +941,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'EBIT Margin',
-		columnId: 'ebitMargin',
+		id: 'ebitMargin',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -956,6 +957,170 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' },
+		],
+	},
+	{
+		name: 'PS Ratio',
+		id: 'ps',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 50', value: 'under-50' },
+			{ name: 'Under 30', value: 'under-30' },
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'PB Ratio',
+		id: 'pb',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 3', value: 'under-3' },
+			{ name: 'Under 2', value: 'under-2' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'P/FCF Ratio',
+		id: 'pfcf',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 3', value: 'under-3' },
+			{ name: 'Under 2', value: 'under-2' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'PEG Ratio',
+		id: 'peg',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 3', value: 'under-3' },
+			{ name: 'Under 2', value: 'under-2' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Under 0.5', value: 'under-0.5' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'EV/Sales',
+		id: 'evSales',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'EV/Earnings',
+		id: 'evEarnings',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 50', value: 'under-50' },
+			{ name: 'Under 30', value: 'under-30' },
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'EV/Ebitda',
+		id: 'evEbitda',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 50', value: 'under-50' },
+			{ name: 'Under 30', value: 'under-30' },
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'EV/Ebit',
+		id: 'evEbit',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 50', value: 'under-50' },
+			{ name: 'Under 30', value: 'under-30' },
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'EV/FCF',
+		id: 'evFcf',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Under 50', value: 'under-50' },
+			{ name: 'Under 30', value: 'under-30' },
+			{ name: 'Under 20', value: 'under-20' },
+			{ name: 'Under 10', value: 'under-10' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'Earnings Yield',
+		id: 'earningsYield',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 3%', value: 'over-3' },
+			{ name: 'Over 2%', value: 'over-2' },
+			{ name: 'Over 1%', value: 'over-1' },
+			{ name: '3-5%', value: 'between-3-5' },
+			{ name: '1-3%', value: 'between-1-3' },
+			{ name: '0-1%', value: 'between-0-1' },
+			{ name: 'Not Zero', value: 'notzero' },
+		],
+	},
+	{
+		name: 'FCF Yield',
+		id: 'fcfYield',
+		category: ['Valuation'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 3%', value: 'over-3' },
+			{ name: 'Over 2%', value: 'over-2' },
+			{ name: 'Over 1%', value: 'over-1' },
+			{ name: '3-5%', value: 'between-3-5' },
+			{ name: '1-3%', value: 'between-1-3' },
+			{ name: '0-1%', value: 'between-0-1' },
+			{ name: 'Not Zero', value: 'notzero' },
 		],
 	},
 ];

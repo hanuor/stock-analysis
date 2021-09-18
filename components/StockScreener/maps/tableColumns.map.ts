@@ -249,4 +249,40 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'ebitMargin',
 		format: 'percentage',
 	},
+	{
+		Header: 'P/FCF Ratio',
+		accessor: 'pfcf',
+	},
+	{
+		Header: 'PEG Ratio',
+		accessor: 'peg',
+	},
+	{
+		Header: 'EV/Sales',
+		accessor: 'evSales',
+	},
+	{
+		Header: 'EV/Earnings',
+		accessor: 'evEarnings',
+	},
+	{
+		Header: 'EV/Ebitda',
+		accessor: 'evEbitda',
+	},
+	{
+		Header: 'EV/Ebit',
+		accessor: 'evEbit',
+	},
+	{
+		Header: 'EV/FCF',
+		accessor: 'evFcf',
+	},
+	{
+		Header: 'Earnings Yield',
+		accessor: 'earningsYield',
+	},
+	{
+		Header: 'FCF Yield',
+		accessor: 'fcfYield',
+	},
 ];

@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { ColumnId, FilterType, NumberType } from '../screener.types';
+import { FilterId, FilterType, NumberType } from '../screener.types';
 import { isFilterSelected } from './isFilterSelected';
 
 /**
@@ -20,25 +20,25 @@ export function useModifyFilters() {
 
 	// Add a filter
 	function add(
-		columnId: ColumnId,
+		id: FilterId,
 		name: string,
 		value: string,
 		filterType: FilterType,
 		numberType?: NumberType
 	) {
 		// If filter is already selected, remove the filter first
-		if (isFilterSelected(columnId, filters)) {
-			remove(columnId);
+		if (isFilterSelected(id, filters)) {
+			remove(id);
 		}
 
 		// Add the column ID to the filtered columns
-		if (!filteredColumns.includes(columnId)) {
-			addFilteredColumn(columnId);
+		if (!filteredColumns.includes(id)) {
+			addFilteredColumn(id);
 		}
 
 		// Add the filter
 		addFilter({
-			columnId,
+			id,
 			name,
 			value,
 			filterType,
@@ -48,22 +48,22 @@ export function useModifyFilters() {
 		// If viewing the filtered columns, force them to update right away
 		if (resultsMenu === 'Filtered') {
 			const newColumns = [...filteredColumns]; // Need to copy the array in order for state to update
-			newColumns.push(columnId);
+			newColumns.push(id);
 			setShowColumns(newColumns);
 		}
 	}
 
 	// Remove a filter
-	function remove(columnId: ColumnId) {
-		removeFilter(columnId);
+	function remove(id: FilterId) {
+		removeFilter(id);
 
 		// Remove the column from the filtered columns
-		if (columnId !== 'm') {
-			removeFilteredColumn(columnId);
+		if (id !== 'm') {
+			removeFilteredColumn(id);
 
 			// If viewing the filtered columns, force them to update right away
 			if (resultsMenu === 'Filtered') {
-				const newColumns = filteredColumns.filter((c) => c !== columnId);
+				const newColumns = filteredColumns.filter((c) => c !== id);
 				setShowColumns(newColumns);
 			}
 		}

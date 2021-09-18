@@ -1,8 +1,8 @@
-import { ColumnId, SingleStock } from 'components/StockScreener/screener.types';
+import { FilterId, SingleStock } from 'components/StockScreener/screener.types';
 
 export function dateMatchYear(
 	stock: SingleStock,
-	columnId: ColumnId,
+	id: FilterId,
 	filter: string
 ) {
 	// Explode the filter value string to get the individiaul items
@@ -11,7 +11,7 @@ export function dateMatchYear(
 	const firstValue = filterBits[1] ?? null;
 
 	// Format the values before comparing
-	const value = stock[columnId];
+	const value = stock[id];
 
 	// If there is no compare, or no value, then return false
 	if (!compare || !firstValue || !value) {

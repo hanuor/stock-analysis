@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { FiltersMenuItem } from 'components/StockScreener/Filters/FiltersMenuItem';
+import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuItem';
 
 export function FiltersMenu() {
 	const filters = screenerState((state) => state.filters);

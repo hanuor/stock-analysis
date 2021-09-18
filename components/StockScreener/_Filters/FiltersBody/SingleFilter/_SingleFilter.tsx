@@ -22,8 +22,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
 	const { remove } = useModifyFilters();
 
-	const id = filter.columnId;
-	const type = filter.filterType;
+	const { id, filterType } = filter;
 	const active = isFilterSelected(id, filters);
 
 	// Close dropdown if clicked outside of filter dropdown
@@ -44,7 +43,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 		};
 	}, [id, openFilter, ref, setOpenFilter]);
 
-	const Filter = type === 'numeric' ? NumericFilter : StringFilter;
+	const Filter = filterType === 'numeric' ? NumericFilter : StringFilter;
 
 	return (
 		<div ref={ref} className="relative inline-block text-left">

@@ -13,13 +13,13 @@ type Props = {
 
 export function PresetChoice({ option, filter, active }: Props) {
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
-	const { columnId, filterType, numberType } = filter;
+	const { id, filterType, numberType } = filter;
 	const { add } = useModifyFilters();
 
 	function handleSelection(name: string, value: string) {
-		if (columnId) {
+		if (id) {
 			// Add the new filter
-			add(columnId, name, value, filterType, numberType);
+			add(id, name, value, filterType, numberType);
 
 			// Close the dropdown
 			setOpenFilter('');

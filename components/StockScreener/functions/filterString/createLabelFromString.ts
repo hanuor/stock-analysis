@@ -10,6 +10,10 @@ export function createLabelFromString(
 	value: string,
 	filter?: FilterValue
 ): string {
+	if (value === 'notzero') {
+		return 'Not Zero';
+	}
+
 	// Split the string
 	const explode = value.split('-');
 

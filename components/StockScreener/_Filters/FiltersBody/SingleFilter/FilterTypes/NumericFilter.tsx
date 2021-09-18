@@ -1,6 +1,6 @@
 import { FilterProps } from 'components/StockScreener/screener.types';
-import { CustomChoice } from '../CustomChoice/_CustomChoice';
-import { PresetChoice } from '../PresetChoice';
+import { CustomChoice } from './Choices/CustomChoice';
+import { PresetChoice } from './Choices/PresetChoice';
 
 type Props = {
 	filter: FilterProps;

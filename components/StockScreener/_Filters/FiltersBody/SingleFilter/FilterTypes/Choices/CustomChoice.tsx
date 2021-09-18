@@ -16,7 +16,7 @@ import { useModifyFilters } from 'components/StockScreener/functions/useModifyFi
  * @return {JSX.Element}
  */
 export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
-	const { columnId, name, filterType, numberType } = filter;
+	const { id, name, filterType, numberType } = filter;
 	const [compare, setCompare] = useState<ComparisonOption>('over');
 	const [first, setFirst] = useState<string>('');
 	const [second, setSecond] = useState<string>('');
@@ -26,7 +26,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 
 	// Extract the filter values in order to populate the custom choice inputs
 	useEffect(() => {
-		setActive(isFilterSelected(columnId, filters));
+		setActive(isFilterSelected(id, filters));
 
 		if (active) {
 			const filterObject = getFilterFromString(active, false);
@@ -40,13 +40,13 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, active, columnId]);
+	}, [filters, active, id]);
 
 	// Update the filter if the values in the custom choice inputs change
 	useEffect(() => {
 		// If values have been cleared, remove the filter
-		if (active && !first && !second) {
-			remove(columnId);
+		if (active && !first && !second && compare !== 'notzero') {
+			remove(id);
 			setActive(false);
 		}
 
@@ -56,7 +56,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 
 			if (filterString !== active) {
 				setActive(filterString);
-				add(columnId, name, filterString, filterType, numberType);
+				add(id, name, filterString, filterType, numberType);
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

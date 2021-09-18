@@ -1,11 +1,7 @@
-import { ColumnId, SingleStock } from 'components/StockScreener/screener.types';
+import { FilterId, SingleStock } from 'components/StockScreener/screener.types';
 import { getFilterFromString } from '../filterString/getFilterFromString';
 
-export function numericMatch(
-	stock: SingleStock,
-	columnId: ColumnId,
-	filter: string
-) {
+export function numericMatch(stock: SingleStock, id: FilterId, filter: string) {
 	// Explode the filter value string to get the individiaul items
 	const { compare, first, second } = getFilterFromString(filter, true);
 
@@ -15,7 +11,7 @@ export function numericMatch(
 	}
 
 	// Format the values before comparing
-	const value = stock[columnId];
+	const value = stock[id];
 
 	// Three comparison types: over, under and between
 	switch (compare) {
@@ -45,5 +41,8 @@ export function numericMatch(
 
 		case 'exactly':
 			return value === first;
+
+		case 'notzero':
+			return Number(value) !== 0;
 	}
 }

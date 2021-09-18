@@ -1,6 +1,6 @@
-// All possible columns
+// All possible filters
 // The IDs are shortened to minimize data payload size
-export type ColumnId = string;
+export type FilterId = string;
 // | 's' // symbol
 // | 'n' // company name
 // | 'm' // market cap
@@ -59,12 +59,12 @@ export type ColumnName =
 
 export type ColumnsMap = {
 	// eslint-disable-next-line no-unused-vars
-	[key in ColumnName]: ColumnId[];
+	[key in ColumnName]: FilterId[];
 };
 
 export type SingleStock = {
 	// eslint-disable-next-line no-unused-vars
-	[key in ColumnId]: string;
+	[key in FilterId]: string;
 };
 
 export type ScreenerData = {
@@ -85,7 +85,7 @@ export type CellNumber = {
 
 export type FilterProps = {
 	name: string;
-	columnId: ColumnId;
+	id: FilterId;
 	category: string[];
 	options: FilterOption[];
 	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
@@ -99,7 +99,7 @@ export type FilterOption = {
 };
 
 export type FilterValue = {
-	columnId: ColumnId;
+	id: FilterId;
 	name: string;
 	value: string;
 	filterType: FilterType;
@@ -114,4 +114,9 @@ export type FilterObject = {
 
 export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear';
 export type NumberType = 'percentage';
-export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly';
+export type ComparisonOption =
+	| 'over'
+	| 'under'
+	| 'between'
+	| 'exactly'
+	| 'notzero';

@@ -1,11 +1,11 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { ColumnId } from 'components/StockScreener/screener.types';
+import { FilterId } from 'components/StockScreener/screener.types';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString';
 
 type Props = {
 	active: string | false;
-	id: ColumnId;
+	id: FilterId;
 };
 
 export function FilterButton({ active, id }: Props) {
@@ -14,7 +14,7 @@ export function FilterButton({ active, id }: Props) {
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
 
 	function findName() {
-		const filter = filters.find((filter) => filter.columnId === id);
+		const filter = filters.find((filter) => filter.id === id);
 		const value = filter?.value;
 		return value ? createLabelFromString(value, filter) : false;
 	}
