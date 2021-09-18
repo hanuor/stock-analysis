@@ -23,6 +23,7 @@ export function ResultsTable({ cols }: Props) {
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
+	console.log({ showColumns });
 
 	const rows = useMemo(() => filterItems(data, filters), [data, filters]);
 	const columns = useMemo(() => cols, [cols]);

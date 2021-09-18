@@ -73,7 +73,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 	defaultColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // Loaded by default, shown under "General"
 	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // All data columns that have been fetched
 	showColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // Columns that are currently showing
-	filteredColumns: ['s', 'n'], // All data columns that are being filtered
+	filteredColumns: ['s', 'n', 'm'], // All data columns that are being filtered
 	addFetchedColumn: (newColumn: any) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn],
@@ -82,7 +82,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn],
 		})),
-	removeFilteredColumn: (column: any) =>
+	removeFilteredColumn: (column: ColumnId) =>
 		set((state) => ({
 			filteredColumns: state.filteredColumns.filter((c) => c !== column),
 		})),

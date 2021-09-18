@@ -89,7 +89,7 @@ export type FilterProps = {
 	category: string[];
 	options: FilterOption[];
 	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
-	numberType?: 'percentage';
+	numberType?: NumberType;
 };
 
 export type FilterOption = {
@@ -113,4 +113,5 @@ export type FilterObject = {
 };
 
 export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+export type NumberType = 'percentage';
 export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly';

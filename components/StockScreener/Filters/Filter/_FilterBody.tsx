@@ -6,6 +6,7 @@ import { FilterButton } from './FilterButton';
 import { CloseCircleIcon } from 'components/Icons/CloseCircle';
 import { NumericFilter } from './FilterTypes/NumericFilter';
 import { StringFilter } from './FilterTypes/StringFilter';
+import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters';
 
 /**
  * FilterBody
@@ -19,7 +20,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 	const filters = screenerState((state) => state.filters);
 	const openFilter = screenerState((state) => state.openFilter);
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
-	const removeFilter = screenerState((state) => state.removeFilter);
+	const { remove } = useModifyFilters();
 
 	const id = filter.columnId;
 	const type = filter.filterType;
@@ -52,7 +53,9 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 					<div
 						className="mr-1.5 text-gray-500 hover:text-red-500 cursor-pointer"
 						title="Clear Filter"
-						onClick={() => removeFilter(id)}
+						onClick={() => {
+							remove(id);
+						}}
 					>
 						<CloseCircleIcon classes="w-5 h-5" />
 					</div>

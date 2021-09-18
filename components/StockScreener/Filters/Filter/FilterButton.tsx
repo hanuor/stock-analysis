@@ -16,7 +16,7 @@ export function FilterButton({ active, id }: Props) {
 	function findName() {
 		const filter = filters.find((filter) => filter.columnId === id);
 		const value = filter?.value;
-		return value ? createLabelFromString(value, filter) : 'Filter';
+		return value ? createLabelFromString(value, filter) : false;
 	}
 
 	function handleClick() {

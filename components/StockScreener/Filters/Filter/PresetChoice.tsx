@@ -1,3 +1,4 @@
+import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters';
 import { screenerState } from 'components/StockScreener/screener.state';
 import {
 	FilterOption,
@@ -11,44 +12,16 @@ type Props = {
 };
 
 export function PresetChoice({ option, filter, active }: Props) {
-	const addFilteredColumn = screenerState((state) => state.addFilteredColumn);
-	const removeFilteredColumn = screenerState(
-		(state) => state.removeFilteredColumn
-	);
-	const addFilter = screenerState((state) => state.addFilter);
-	const removeFilter = screenerState((state) => state.removeFilter);
-	const resultsMenu = screenerState((state) => state.resultsMenu);
-	const setShowColumns = screenerState((state) => state.setShowColumns);
-	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const setOpenFilter = screenerState((state) => state.setOpenFilter);
-
-	const id = filter.columnId;
-	const type = filter.filterType;
+	const { columnId, filterType, numberType } = filter;
+	const { add } = useModifyFilters();
 
 	function handleSelection(name: string, value: string) {
-		if (id) {
-			// If changing an active filter, first remove the existing filter
-			if (active) {
-				removeFilter(id);
-				removeFilteredColumn(id);
-			}
-			// If viewing the filtered columns, make them update right away
-			if (resultsMenu === 'Filtered') {
-				const newColumns = [...filteredColumns]; // Need to copy the array in order for state to update
-				// newColumns.push(id);
-				setShowColumns(newColumns);
-			}
-			// Add new filters
-			if (!filteredColumns.includes(id)) {
-				addFilteredColumn(id);
-			}
-			addFilter({
-				columnId: id,
-				name,
-				value,
-				filterType: type,
-				numberType: filter.numberType,
-			});
+		if (columnId) {
+			// Add the new filter
+			add(columnId, name, value, filterType, numberType);
+
+			// Close the dropdown
 			setOpenFilter('');
 		}
 	}

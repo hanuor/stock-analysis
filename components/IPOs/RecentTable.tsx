@@ -72,7 +72,7 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 				Header: 'Return',
 				accessor: 'return',
 				sortType: 'basic',
-				Cell: ({ cell: { value } }: CellNumber) => {
+				Cell: function FormatCell({ cell: { value } }: CellNumber) {
 					const fixed = value.toFixed(2) + '%';
 					if (value > 0) {
 						return <span className="text-[green]">{fixed}</span>;
