@@ -19,7 +19,6 @@ export function FiltersMenu() {
 						<FiltersMenuItem name="Financials" />
 						<FiltersMenuItem name="Valuation" />
 						<FiltersMenuItem name="Dividends" />
-						<FiltersMenuItem name="Technicals" />
 						<FiltersMenuItem name="Other" />
 						<FiltersMenuItem name="All" />
 					</ul>

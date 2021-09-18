@@ -16,7 +16,13 @@ export function FilterButton({ active, id }: Props) {
 	function findName() {
 		const filter = filters.find((filter) => filter.id === id);
 		const value = filter?.value;
-		return value ? createLabelFromString(value, filter) : false;
+
+		if (value && filter.filterType === 'numeric') {
+			return createLabelFromString(value, filter);
+		} else if (value && filter.filterType === 'stringmatch') {
+			return value;
+		}
+		return false;
 	}
 
 	function handleClick() {
@@ -31,7 +37,7 @@ export function FilterButton({ active, id }: Props) {
 
 	return (
 		<div
-			className={`inline-flex justify-between w-[140px] rounded border border-gray-200 shadow-sm px-3 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer${
+			className={`inline-flex justify-between w-[120px] rounded border border-gray-200 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer${
 				active ? ' bg-yellow-100 px-2' : ''
 			}`}
 			onClick={handleClick}

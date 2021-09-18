@@ -97,6 +97,11 @@
 		@apply text-sm xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5;
 	}
 
+	/* .navmenu.smaller li a,
+	.navmenu.smaller li span {
+		@apply text-sm xs:text-smaller sm:px-4;
+	} */
+
 	.navmenu.submenu li a,
 	.navmenu.submenu li span {
 		@apply px-2.5 bp:px-3 sm:px-4 text-sm xs:text-small bp:text-base;

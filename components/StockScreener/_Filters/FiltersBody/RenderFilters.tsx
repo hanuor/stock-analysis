@@ -19,12 +19,12 @@ export function RenderFilters() {
 	}
 
 	return (
-		<div className="grid grid-cols-1 bp:grid-cols-2 lg:grid-cols-4 gap-x-3 text-base pt-1">
+		<div className="grid grid-cols-1 bp:grid-cols-2 lg:grid-cols-4 gap-x-2.5 text-base pt-1">
 			{FiltersMap.map((filter) => {
 				if (filter.category.includes(filterMenu) || filterMenu === 'All') {
 					return (
 						<div
-							className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1.5 py-2"
+							className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-2 text-base text-gray-800"
 							key={filter.name}
 						>
 							<div>{filter.name}</div>

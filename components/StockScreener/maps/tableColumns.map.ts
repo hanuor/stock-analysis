@@ -132,19 +132,22 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Dividend',
-		accessor: 'div',
+		accessor: 'dps',
 	},
 	{
 		Header: 'Yield (%)',
 		accessor: 'dy',
+		format: 'percentage',
 	},
 	{
 		Header: 'Payout Ratio',
 		accessor: 'pr',
+		format: 'percentage',
 	},
 	{
 		Header: 'Growth (1Y)',
 		accessor: 'dg',
+		format: 'percentage',
 	},
 	{
 		Header: 'Revenue Growth (1Y)',
@@ -250,10 +253,6 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage',
 	},
 	{
-		Header: 'P/FCF Ratio',
-		accessor: 'pfcf',
-	},
-	{
 		Header: 'PEG Ratio',
 		accessor: 'peg',
 	},
@@ -280,9 +279,46 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Earnings Yield',
 		accessor: 'earningsYield',
+		format: 'percentage',
 	},
 	{
 		Header: 'FCF Yield',
 		accessor: 'fcfYield',
+		format: 'percentage',
+	},
+	{
+		Header: 'Buyback Yield',
+		accessor: 'buybackYield',
+		format: 'percentage',
+	},
+	{
+		Header: 'Total Return',
+		accessor: 'totalReturn',
+		format: 'percentage',
+	},
+	{
+		Header: 'Average Volume',
+		accessor: 'averageVolume',
+		format: 'format0dec',
+	},
+	{
+		Header: 'Price Change 1Y',
+		accessor: 'ch1y',
+		format: 'changePcColor',
+	},
+	{
+		Header: 'Short % Float',
+		accessor: 'shortFloat',
+		format: 'percentage',
+	},
+	{
+		Header: 'Short % Shares',
+		accessor: 'shortShares',
+		format: 'percentage',
+	},
+	{
+		Header: 'Short Ratio',
+		accessor: 'shortRatio',
+		format: 'format2dec',
 	},
 ];
