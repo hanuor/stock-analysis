@@ -22,25 +22,30 @@ export function numericMatch(stock: SingleStock, id: FilterId, filter: string) {
 			if (Number(first) === 0) {
 				return value > first;
 			}
-			return value >= first;
+			return Number(value) >= Number(first);
 
 		case 'under':
 			if (!first) {
 				return true;
 			}
-			return value <= first;
+			if (!value) {
+				return false;
+			}
+			return Number(value) <= Number(first);
 
 		case 'between':
 			if (!second) {
-				return value >= first;
+				return Number(value) >= Number(first);
 			}
 			if (!first) {
-				return value <= second;
+				return Number(value) <= Number(second);
 			}
-			return value >= first && value <= second;
+			return (
+				Number(value) >= Number(first) && Number(value) <= Number(second)
+			);
 
 		case 'exactly':
-			return value === first;
+			return Number(value) === Number(first);
 
 		case 'notzero':
 			return Number(value) !== 0;

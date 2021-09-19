@@ -22,7 +22,7 @@ export function createLabelFromString(
 
 	// Second bit is the "first" value
 	let first = explode[1] as string;
-	first = first.replace('X', '-');
+	first = first?.replace('X', '-');
 
 	// Third bit is the "second" value
 	let second = explode[2] as string;
@@ -49,17 +49,23 @@ export function createLabelFromString(
 		case 'exactly':
 			return `Exactly ${first}`;
 
+		case 'future':
+			return `Next ${first}`;
+
 		case 'today':
 			return 'Today';
 
 		case 'yesterday':
 			return 'Yesterday';
 
+		case 'tomorrow':
+			return 'Tomorrow';
+
 		case 'this':
-			return 'This Year';
+			return first === 'year' ? 'This Year' : 'This Month';
 
 		case 'last':
-			return 'Last Year';
+			return first === 'year' ? 'Last Year' : 'Last Month';
 
 		default:
 			return value;

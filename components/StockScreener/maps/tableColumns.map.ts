@@ -321,4 +321,144 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'shortRatio',
 		format: 'format2dec',
 	},
+	{
+		Header: 'Beta',
+		accessor: 'beta',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Shares Out',
+		accessor: 'sharesOut',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Float',
+		accessor: 'float',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Shares Change (YoY)',
+		accessor: 'sharesYoY',
+		format: 'percentage',
+	},
+	{
+		Header: 'Shares Change (QoQ)',
+		accessor: 'sharesQoQ',
+		format: 'percentage',
+	},
+	{
+		Header: 'Owned Insiders',
+		accessor: 'sharesInsiders',
+		format: 'percentage',
+	},
+	{
+		Header: 'Owned Institutions',
+		accessor: 'sharesInstitutions',
+		format: 'percentage',
+	},
+	{
+		Header: 'Earnings Date',
+		accessor: 'earningsDate',
+		format: 'align',
+	},
+	{
+		Header: 'Ex-Div Date',
+		accessor: 'exDivDate',
+		format: 'align',
+	},
+	{
+		Header: 'Next Ex-Div',
+		accessor: 'nextDivDate',
+		format: 'align',
+	},
+	{
+		Header: 'ROE',
+		accessor: 'roe',
+		format: 'percentage',
+	},
+	{
+		Header: 'ROA',
+		accessor: 'roa',
+		format: 'percentage',
+	},
+	{
+		Header: 'ROIC',
+		accessor: 'roic',
+		format: 'percentage',
+	},
+	{
+		Header: 'Rev / Employee',
+		accessor: 'revPerEmployee',
+		format: 'format0dec',
+	},
+	{
+		Header: 'Prof / Employee',
+		accessor: 'profitPerEmployee',
+		format: 'format0dec',
+	},
+	{
+		Header: 'Asset Turnover',
+		accessor: 'assetTurnover',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Inventory Turnover',
+		accessor: 'inventoryTurnover',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Current Ratio',
+		accessor: 'currentRatio',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Quick Ratio',
+		accessor: 'quickRatio',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Debt / Equity',
+		accessor: 'debtEquity',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Debt / EBITDA',
+		accessor: 'debtEbitda',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Debt / FCF',
+		accessor: 'debtFcf',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Eff. Tax Rate',
+		accessor: 'taxRate',
+		format: 'percentage',
+	},
+	{
+		Header: 'Tax / Revenue',
+		accessor: 'taxByRevenue',
+		format: 'percentage',
+	},
+	{
+		Header: 'Book Value',
+		accessor: 'bookValue',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Working Capital',
+		accessor: 'workingCapital',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Last Split',
+		accessor: 'lastSplit',
+		format: 'align',
+	},
+	{
+		Header: 'Split Date',
+		accessor: 'splitDate',
+		format: 'align',
+	},
 ];

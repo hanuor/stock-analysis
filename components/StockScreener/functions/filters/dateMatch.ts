@@ -44,6 +44,7 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 	// Get the current datetime
 	const now = new Date();
 	const year = new Date().getFullYear();
+	const month = new Date().getMonth();
 
 	// Four comparison types: this, last, over, under
 	switch (compare) {
@@ -59,11 +60,20 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 			yesterday.setDate(yesterday.getDate() - 1);
 			return value.toDateString() === yesterday.toDateString();
 
+		case 'tomorrow':
+			const tomorrow = new Date(now);
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			return value.toDateString() === tomorrow.toDateString();
+
 		case 'this':
-			return value.getFullYear() === year;
+			return first === 'year'
+				? value.getFullYear() === year
+				: value.getFullYear() === year && value.getMonth() === month;
 
 		case 'last':
-			return value.getFullYear() === year - 1;
+			return first === 'year'
+				? value.getFullYear() === year - 1
+				: value.getFullYear() === year && value.getMonth() === month - 1;
 
 		case 'under':
 			// If the value is under the first value, return true
@@ -72,6 +82,12 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 		case 'over':
 			// If the value is under the first value, return true
 			return value.getTime() < changeDate(now, first).getTime();
+
+		case 'future':
+			return (
+				value.getTime() > now.getTime() &&
+				value.getTime() < changeDate(now, `-${first}`).getTime()
+			);
 	}
 	return false;
 }

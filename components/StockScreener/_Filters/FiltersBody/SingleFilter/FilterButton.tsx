@@ -17,7 +17,10 @@ export function FilterButton({ active, id }: Props) {
 		const filter = filters.find((filter) => filter.id === id);
 		const value = filter?.value;
 
-		if (value && filter.filterType === 'numeric') {
+		if (
+			value &&
+			(filter.filterType === 'numeric' || filter.filterType === 'date')
+		) {
 			return createLabelFromString(value, filter);
 		} else if (value && filter.filterType === 'stringmatch') {
 			return value;
