@@ -18,13 +18,13 @@ interface Props {
 }
 
 export function ResultsTable({ cols }: Props) {
-	const data = screenerState((state) => state.data);
+	const rows = screenerState((state) => state.data);
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
 
-	const rows = useMemo(() => filterItems(data, filters), [data, filters]);
+	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
 	const columns = useMemo(() => cols, [cols]);
 	const count = rows.length;
 
@@ -43,7 +43,7 @@ export function ResultsTable({ cols }: Props) {
 	} = useTable(
 		{
 			columns,
-			data: rows,
+			data,
 			initialState: {
 				pageIndex: tablePage,
 				pageSize: tableSize,

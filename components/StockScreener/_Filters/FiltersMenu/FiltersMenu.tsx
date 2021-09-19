@@ -25,7 +25,7 @@ export function FiltersMenu() {
 				</nav>
 				<input
 					type="text"
-					className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block text-sm border-gray-300 rounded-md ml-auto mb-0.5"
+					className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block text-sm border-gray-300 rounded-md ml-auto mb-1"
 					placeholder="Find filter..."
 				/>
 			</div>

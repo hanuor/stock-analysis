@@ -23,7 +23,7 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 			/>
 			<LayoutFullWidth>
 				<div className="contain my-6">
-					<h1 className="hh1">Stock Screener</h1>
+					<h1 className="hh1 mb-3">Stock Screener</h1>
 					<StockScreener />
 				</div>
 			</LayoutFullWidth>

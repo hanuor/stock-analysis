@@ -9,7 +9,8 @@ type Column = {
 		| 'format0dec'
 		| 'format2dec'
 		| 'changePcColor'
-		| 'percentage';
+		| 'percentage'
+		| 'date';
 };
 
 export const COLUMNS_MAP: Column[] = [
@@ -23,10 +24,6 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'n',
 	},
 	{
-		Header: 'Enterprise Value',
-		accessor: 'ev',
-	},
-	{
 		Header: 'Sector',
 		accessor: 'se',
 	},
@@ -37,6 +34,11 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Market Cap',
 		accessor: 'm',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Enterprise Value',
+		accessor: 'ev',
 		format: 'abbreviate',
 	},
 	{
@@ -80,35 +82,32 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'IPO Date',
 		accessor: 'ipoDate',
-		format: 'align',
+		format: 'date',
 	},
 	{
 		Header: 'Revenue',
 		accessor: 'revenue',
-	},
-	{
-		Header: 'Net Income',
-		accessor: 'netIncome',
-	},
-	{
-		Header: 'EPS',
-		accessor: 'eps',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Forward PE',
 		accessor: 'fpe',
+		format: 'format2dec',
 	},
 	{
-		Header: 'Price / Sales',
+		Header: 'P/S Ratio',
 		accessor: 'ps',
+		format: 'format2dec',
 	},
 	{
-		Header: 'Price / Book',
+		Header: 'P/B Ratio',
 		accessor: 'pb',
+		format: 'format2dec',
 	},
 	{
-		Header: 'Price / FCF',
+		Header: 'P/FCF',
 		accessor: 'pfcf',
+		format: 'format2dec',
 	},
 	{
 		Header: 'Analyst Ratings',
@@ -133,6 +132,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Dividend',
 		accessor: 'dps',
+		format: 'format2dec',
 	},
 	{
 		Header: 'Yield (%)',
@@ -165,6 +165,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Net Income',
 		accessor: 'netIncome',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Net Income Growth',
@@ -174,6 +175,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'EPS',
 		accessor: 'eps',
+		format: 'format2dec',
 	},
 	{
 		Header: 'EPS Growth',

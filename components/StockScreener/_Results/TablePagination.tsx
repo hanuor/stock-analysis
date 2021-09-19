@@ -62,6 +62,7 @@ export function TablePagination({
 			<button
 				onClick={() => {
 					nextPage();
+					setTablePage(tablePage + 1);
 				}}
 				disabled={!canNextPage}
 				className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
