@@ -8,11 +8,14 @@ import { StockScreener } from 'components/StockScreener/_StockScreener';
 import { useEffect } from 'react';
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
+	const data = screenerState((state) => state.data);
 	const setData = screenerState((state) => state.setData);
 
 	useEffect(() => {
-		setData(stocks);
-	}, [setData, stocks]);
+		if (!data.length) {
+			setData(stocks);
+		}
+	}, [data.length, setData, stocks]);
 
 	return (
 		<>
