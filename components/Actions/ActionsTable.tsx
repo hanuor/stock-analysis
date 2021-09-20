@@ -90,7 +90,7 @@ export const ActionsTable = ({
 				setColumnFilter={type == 'splits' ? setFilter : undefined}
 				tableId="actions-table"
 			/>
-			<div className="overflow-x-auto">
+			<div className={`overflow-x-auto ${styles[type]}`}>
 				<table className={styles.actionstable} id="actions-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (

@@ -46,6 +46,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 .spinoffs tr > *:nth-child(4),
 .spinoffs tr > *:nth-child(5) {
 	max-width: 200px;
