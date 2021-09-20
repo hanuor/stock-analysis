@@ -46,6 +46,16 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'exchange',
 	},
 	{
+		Header: 'Analyst Ratings',
+		accessor: 'ar',
+		format: 'align',
+	},
+	{
+		Header: 'Count',
+		accessor: 'ac',
+		format: 'align',
+	},
+	{
 		Header: 'Price',
 		accessor: 'p',
 		format: 'amount',
@@ -110,17 +120,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format2dec',
 	},
 	{
-		Header: 'Analyst Ratings',
-		accessor: 'ar',
-		format: 'align',
-	},
-	{
-		Header: 'Count',
-		accessor: 'ac',
-		format: 'align',
-	},
-	{
-		Header: 'Price Target',
+		Header: 'Target',
 		accessor: 'pt',
 		format: 'align',
 	},

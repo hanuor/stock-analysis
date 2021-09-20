@@ -22,7 +22,7 @@ export function ResultsMenuItem({ name }: Props) {
 	let dataTitle = name.toString();
 	if (name === 'Filtered') {
 		display = `${name} (${filters.length})`;
-		dataTitle = `${name} (20)`;
+		dataTitle = `${name} (5)`;
 	}
 
 	function fetchManyColumns(columns: FilterId[]) {

@@ -13,12 +13,15 @@ interface ScreenerState {
 	filters: FilterValue[];
 	addFilter: (newFilter: FilterValue) => void;
 	removeFilter: (filter: FilterId) => void;
+	clearFilters: () => void;
 
 	// Filter menu
 	filterMenu: string;
 	setFilterMenu: (newMenu: string) => void;
 	openFilter: FilterId | '';
 	setOpenFilter: (newFilter: FilterId | '') => void;
+	filterSearch: string;
+	setFilterSearch: (newSearch: string) => void;
 
 	resultsMenu: string;
 	setResultsMenu: (newMenu: string) => void;
@@ -58,12 +61,19 @@ export const screenerState = create<ScreenerState>((set) => ({
 			...state,
 			filters: state.filters.filter((f) => f.id !== filter),
 		})),
+	clearFilters: () =>
+		set(() => ({
+			filters: [],
+		})),
 
 	// Filter Menu
-	filterMenu: 'Popular',
-	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu }),
+	filterMenu: 'Active',
+	setFilterMenu: (newMenu: string) =>
+		set({ filterMenu: newMenu, filterSearch: '' }),
 	openFilter: '', // The filter menu that is open
 	setOpenFilter: (newFilter: FilterId | '') => set({ openFilter: newFilter }),
+	filterSearch: '',
+	setFilterSearch: (newSearch: string) => set({ filterSearch: newSearch }),
 
 	// Results Menu
 	resultsMenu: 'General',

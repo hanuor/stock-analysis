@@ -63,7 +63,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 			</div>
 
 			<div
-				className={`transition duration-150 origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px]${
+				className={`transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px]${
 					id === openFilter
 						? ' visible opacity-100 transform translate-y-0'
 						: ' invisible opacity-0 transform -translate-y-2'

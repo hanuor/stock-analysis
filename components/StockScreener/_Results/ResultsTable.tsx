@@ -26,7 +26,7 @@ export function ResultsTable({ cols }: Props) {
 
 	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
 	const columns = useMemo(() => cols, [cols]);
-	const count = rows.length;
+	const count = data.length;
 
 	const {
 		headerGroups,

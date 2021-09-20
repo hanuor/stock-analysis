@@ -17,6 +17,6 @@ export const resultColumns: ColumnsMap = {
 	Financials: ['s', 'n', 'm', 'revenue', 'netIncome', 'eps'],
 	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
 	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg'],
-	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'pt', 'ptc'],
+	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'p', 'pt', 'ptc'],
 	Custom: ['s', 'n', 'm'],
 };
