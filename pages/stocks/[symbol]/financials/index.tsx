@@ -23,8 +23,8 @@ export default function IncomeStatement({ info, data, counts }: Props) {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/financials/`}>
 			<SEO
-				title={`${info.name} (${info.ticker}) Financial Statements: Income`}
-				description={`Detailed financial statements for ${info.name} stock (${info.ticker}), including the income statement, balance sheet, and cash flow statement.`}
+				title={`${info.nameFull} (${info.ticker}) Financial Statements: Income`}
+				description={`Detailed financial statements for ${info.nameFull} (${info.ticker}), including the income statement, balance sheet, and cash flow statement.`}
 				canonical={`/stocks/${info.symbol}/financials/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">

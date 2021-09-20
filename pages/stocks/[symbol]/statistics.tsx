@@ -18,8 +18,8 @@ const StatisticsPage = ({ info, data }: Props) => {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/statistics/`}>
 			<SEO
-				title={`${info.name} (${info.ticker}) Stock Statistics & Valuation Metrics`}
-				description={`Detailed statistics for ${info.name} (${info.ticker}) stock, including valuation metrics, financial numbers, share information and more.`}
+				title={`${info.nameFull} (${info.ticker}) Statistics & Valuation Metrics`}
+				description={`Detailed statistics for ${info.nameFull} (${info.ticker}) stock, including valuation metrics, financial numbers, share information and more.`}
 				canonical={`/stocks/${info.symbol}/statistics/`}
 			/>
 			<div className="contain pt-1 xs:pt-1.5 lg:pt-1 pb-10 space-y-5 xs:space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-10 mt-5">
