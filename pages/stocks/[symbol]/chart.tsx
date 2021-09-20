@@ -28,8 +28,8 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
 			<SEO
-				title={`${info.name} (${info.ticker}) Stock Chart`}
-				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
+				title={`${info.nameFull} (${info.ticker}) Stock Chart`}
+				description={`Interactive ${info.nameFull} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`/stocks/${info.symbol}/chart/`}
 			/>
 			<div className="px-2 sm:contain">

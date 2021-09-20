@@ -20,11 +20,11 @@ interface Props {
 }
 
 const StockOverview = ({ info, data, news }: Props) => {
-	let description = `Get a real-time ${info.name} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`;
+	let description = `Get a real-time ${info.nameFull} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`;
 	if (info.state == 'upcomingipo') {
-		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`;
+		description = `Get the latest ${info.nameFull} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`;
 	} else if (info.archived) {
-		description = `Get the latest ${info.name} (${info.ticker}) stock price quote with news, financials and other important investing information.`;
+		description = `Get the latest ${info.nameFull} (${info.ticker}) stock price quote with news, financials and other important investing information.`;
 	}
 
 	const symbol = info.symbol.includes('.') ? info.symbol : `${info.symbol}/`;
@@ -32,7 +32,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 	return (
 		<Stock info={info} url={`/stocks/${symbol}`}>
 			<SEO
-				title={`${info.name} (${info.ticker}) Stock Price, Quote & News`}
+				title={`${info.nameFull} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
 				canonical={`/stocks/${symbol}`}
 			/>

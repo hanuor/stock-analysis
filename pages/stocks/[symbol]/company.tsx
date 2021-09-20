@@ -21,8 +21,8 @@ const SymbolStatistics = ({ info, data }: Props) => {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/company/`}>
 			<SEO
-				title={`${info.name} (${info.ticker}) Company Profile & Overview`}
-				description={`Company profile for ${info.name}, including a description, list of executives, contact details and other key facts.`}
+				title={`${info.nameFull} (${info.ticker}) Company Profile & Overview`}
+				description={`Company profile for ${info.nameFull} (${info.ticker}) with a description, list of executives, contact details and other key facts.`}
 				canonical={`/stocks/${info.symbol}/company/`}
 			/>
 			<div className="contain mt-4 sm:mt-5 lg:mt-6">

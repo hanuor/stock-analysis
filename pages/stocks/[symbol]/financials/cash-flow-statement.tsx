@@ -26,8 +26,8 @@ export default function CashFlowStatement({ info, data, counts }: Props) {
 			url={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
 		>
 			<SEO
-				title={`${info.name} (${info.ticker}) Cash Flow Statement`}
-				description={`Detailed cash flow statements for ${info.name} stock (${info.ticker}), including operating cash flow, capex and free cash flow.`}
+				title={`${info.nameFull} (${info.ticker}) Cash Flow Statement`}
+				description={`Detailed cash flow statements for ${info.nameFull} (${info.ticker}), including operating cash flow, capex and free cash flow.`}
 				canonical={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
 			/>
 			<div className="px-4 lg:px-6 mx-auto">
