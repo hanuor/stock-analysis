@@ -11,7 +11,11 @@ export function FiltersMenuItem({ name }: Props) {
 	if (filterMenu === name) {
 		return (
 			<li>
-				<span className="active" data-title={name}>
+				<span
+					className="active cursor-pointer relative"
+					data-title={name}
+					onClick={() => setFilterMenu('Active')}
+				>
 					{name}
 				</span>
 			</li>

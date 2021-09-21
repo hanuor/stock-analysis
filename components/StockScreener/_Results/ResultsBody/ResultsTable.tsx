@@ -9,7 +9,7 @@ import {
 } from 'react-table';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import { ResultsControls } from './Controls/ResultsControls';
+import { ResultsControls } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
 
@@ -59,15 +59,15 @@ export function ResultsTable({ cols }: Props) {
 
 	return (
 		<>
+			<ResultsControls
+				count={count}
+				title="Matches"
+				useAsyncDebounce={useAsyncDebounce}
+				globalFilter={globalFilter}
+				setGlobalFilter={setGlobalFilter}
+				tableId="screener-table"
+			/>
 			<div className="overflow-x-auto">
-				<ResultsControls
-					count={count}
-					title="Matches"
-					useAsyncDebounce={useAsyncDebounce}
-					globalFilter={globalFilter}
-					setGlobalFilter={setGlobalFilter}
-					tableId="screener-table"
-				/>
 				<table className="symbol-table w-full" id="screener-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
