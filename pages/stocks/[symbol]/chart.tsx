@@ -24,6 +24,14 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
+	/* document.addEventListener(
+		'touchmove',
+		function (e) {
+			console.log(e);
+			e.preventDefault();
+		},
+		{ passive: false }
+	); */
 
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>

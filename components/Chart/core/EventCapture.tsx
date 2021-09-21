@@ -199,6 +199,10 @@ export class EventCapture extends React.Component<
 			current.addEventListener('wheel', this.handleWheel, {
 				passive: false,
 			});
+
+			current.addEventListener('pointerdown', this.testPinchZoom, {
+				passive: false,
+			});
 		}
 	}
 
@@ -605,6 +609,7 @@ export class EventCapture extends React.Component<
 	};
 
 	public handleTouchMove = (e: React.TouchEvent) => {
+		console.log('yes');
 		const { onMouseMove } = this.props;
 		if (onMouseMove === undefined) {
 			return;
@@ -624,8 +629,9 @@ export class EventCapture extends React.Component<
 			xScale,
 			onPanEnd,
 		} = this.props;
-
+		console.log(e);
 		if (e.touches.length === 1) {
+			console.log('touches length = 1');
 			this.panHappened = false;
 			const touchXY = touchPosition(getTouchProps(e.touches[0]), e);
 			if (onMouseMove !== undefined) {
@@ -650,6 +656,7 @@ export class EventCapture extends React.Component<
 					.on(TOUCHEND, this.handlePanEnd, false);
 			}
 		} else if (e.touches.length === 2) {
+			console.log('touches length = 2');
 			// pinch zoom begin
 			// do nothing pinch zoom is handled in handleTouchMove
 			const { panInProgress, panStart } = this.state;
@@ -705,8 +712,13 @@ export class EventCapture extends React.Component<
 			}
 		}
 	};
-
+	public testPinchZoom = (e: any) => {
+		console.log(e);
+		console.log('ITDOESWORK');
+		console.log(e.touches);
+	};
 	public handlePinchZoom = (e: any) => {
+		console.log('pinch zoom has started');
 		const { pinchZoomStart } = this.state;
 		if (pinchZoomStart === undefined) {
 			return;
