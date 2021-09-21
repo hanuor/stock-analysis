@@ -9,6 +9,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
 import { Unavailable } from 'components/Unavailable';
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 const StockChart = dynamic(() => import('components/Chart/StockChart'), {
@@ -32,13 +33,17 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 		},
 		{ passive: false }
 	); */
-	document.addEventListener(
-		'touchmove',
-		function (e) {
-			e.preventDefault();
-		},
-		{ passive: false }
-	);
+
+	useEffect(() => {
+		document.addEventListener(
+			'touchmove',
+			function (e) {
+				e.preventDefault();
+			},
+			{ passive: false }
+		);
+	}, []);
+
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
 			<SEO
