@@ -732,6 +732,8 @@ export class EventCapture extends React.Component<
 		}
 
 		const [touch1Pos, touch2Pos] = pointers(this.ref.current!);
+		console.log('touch1' + touch1Pos);
+		console.log('touch2' + touch2Pos);
 
 		const { chartsToPan, ...initialPinch } = pinchZoomStart;
 
