@@ -715,6 +715,7 @@ export class EventCapture extends React.Component<
 		}
 	};
 	public testPinchZoom = (e: any) => {
+		e.preventDefault();
 		console.log(e);
 		console.log('ITDOESWORK');
 		console.log(e.touches);
