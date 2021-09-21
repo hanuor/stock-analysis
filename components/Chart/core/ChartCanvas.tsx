@@ -765,7 +765,9 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 	}
 
 	public handlePinchZoom = (initialPinch: any, finalPinch: any, e: any) => {
+		console.log('pinch zoom in chart canvas entered');
 		if (!this.waitingForPinchZoomAnimationFrame) {
+			console.log('if statement in chart canvas entered');
 			this.waitingForPinchZoomAnimationFrame = true;
 			const state = this.pinchZoomHelper(initialPinch, finalPinch);
 
