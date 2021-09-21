@@ -623,6 +623,7 @@ export class EventCapture extends React.Component<
 	public handleTouchStart = (e: React.TouchEvent) => {
 		this.mouseInteraction = false;
 		e.preventDefault();
+		e.stopPropagation();
 		const {
 			pan: panEnabled,
 			chartConfig,
@@ -660,6 +661,7 @@ export class EventCapture extends React.Component<
 			console.log('touches length = 2');
 			// pinch zoom begin
 			e.preventDefault();
+			e.stopPropagation();
 			// do nothing pinch zoom is handled in handleTouchMove
 			const { panInProgress, panStart } = this.state;
 
