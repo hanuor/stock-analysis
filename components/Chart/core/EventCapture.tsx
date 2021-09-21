@@ -624,6 +624,8 @@ export class EventCapture extends React.Component<
 		this.mouseInteraction = false;
 		e.preventDefault();
 		e.stopPropagation();
+
+		return;
 		const {
 			pan: panEnabled,
 			chartConfig,
@@ -718,6 +720,10 @@ export class EventCapture extends React.Component<
 	};
 	public testPinchZoom = (e: any) => {
 		e.preventDefault();
+		e.stop_propagation();
+		e.stopPropagation();
+
+		return;
 		console.log(e);
 		console.log('ITDOESWORK');
 		console.log(e.touches);
