@@ -610,6 +610,10 @@ export class EventCapture extends React.Component<
 
 	public handleTouchMove = (e: React.TouchEvent) => {
 		console.log('yes');
+		e.preventDefault();
+		e.stopPropagation();
+		return;
+		/*
 		const { onMouseMove } = this.props;
 		if (onMouseMove === undefined) {
 			return;
@@ -617,7 +621,7 @@ export class EventCapture extends React.Component<
 
 		const touch = getTouchProps(e.touches[0]);
 		const touchXY = touchPosition(touch, e);
-		onMouseMove(touchXY, 'touch', e);
+		onMouseMove(touchXY, 'touch', e);*/
 	};
 
 	public handleTouchStart = (e: React.TouchEvent) => {
