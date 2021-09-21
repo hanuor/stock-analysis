@@ -622,6 +622,7 @@ export class EventCapture extends React.Component<
 
 	public handleTouchStart = (e: React.TouchEvent) => {
 		this.mouseInteraction = false;
+		e.preventDefault();
 		const {
 			pan: panEnabled,
 			chartConfig,
