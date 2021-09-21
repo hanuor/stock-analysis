@@ -721,11 +721,13 @@ export class EventCapture extends React.Component<
 		console.log('pinch zoom has started');
 		const { pinchZoomStart } = this.state;
 		if (pinchZoomStart === undefined) {
+			console.log('pinchZoom Started undefined');
 			return;
 		}
 
 		const { xScale, zoom: zoomEnabled, onPinchZoom } = this.props;
 		if (!zoomEnabled || onPinchZoom === undefined) {
+			console.log('!zoomEnabled or onPinchZoom undefined');
 			return;
 		}
 
