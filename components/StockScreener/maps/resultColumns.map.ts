@@ -2,7 +2,7 @@ import { ColumnsMap } from 'components/StockScreener/screener.types';
 
 export const resultColumns: ColumnsMap = {
 	Filtered: [],
-	General: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'],
+	General: ['s', 'n', 'm', 'se', 'p', 'c', 'v', 'pe'],
 	Company: [
 		's',
 		'n',

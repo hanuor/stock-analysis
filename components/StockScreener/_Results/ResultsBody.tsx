@@ -52,6 +52,7 @@ const columns = COLUMNS_MAP.map((column) => {
 						</div>
 					);
 				};
+
 				break;
 			}
 
@@ -141,6 +142,14 @@ const columns = COLUMNS_MAP.map((column) => {
 					return (
 						<div className="text-right">{formatDateClean(value)}</div>
 					);
+				};
+				break;
+			}
+
+			case 'padleft': {
+				header = <div className="ml-4">{column.Header}</div>;
+				cell = function FormatCell({ cell: { value } }: CellNumber) {
+					return <div className="ml-4">{value}</div>;
 				};
 				break;
 			}

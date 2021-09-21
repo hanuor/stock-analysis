@@ -25,6 +25,8 @@ interface ScreenerState {
 
 	resultsMenu: string;
 	setResultsMenu: (newMenu: string) => void;
+
+	// Columns
 	defaultColumns: FilterId[];
 	fetchedColumns: FilterId[];
 	showColumns: FilterId[];
@@ -33,6 +35,9 @@ interface ScreenerState {
 	addFilteredColumn: (newColumn: string) => void;
 	removeFilteredColumn: (columns: string) => void;
 	setShowColumns: (newColumns: FilterId[]) => void;
+	columnDropdownOpen: boolean;
+	setColumnDropdownOpen: (open: boolean) => void;
+
 	tablePage: number;
 	setTablePage: (newTablePage: number) => void;
 	tableSize: number;
@@ -80,9 +85,9 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
-	defaultColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // Loaded by default, shown under "General"
-	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // All data columns that have been fetched
-	showColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // Columns that are currently showing
+	defaultColumns: ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'], // Loaded by default, shown under "General"
+	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'], // All data columns that have been fetched
+	showColumns: ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'], // Columns that are currently showing
 	filteredColumns: ['s', 'n', 'm'], // All data columns that are being filtered
 	addFetchedColumn: (newColumn: any) =>
 		set((state) => ({
@@ -97,6 +102,8 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filteredColumns: state.filteredColumns.filter((c) => c !== column),
 		})),
 	setShowColumns: (newColumns) => set({ showColumns: newColumns }),
+	columnDropdownOpen: false,
+	setColumnDropdownOpen: (open: boolean) => set({ columnDropdownOpen: open }),
 
 	// Pagination
 	tablePage: 0,

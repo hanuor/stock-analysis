@@ -83,12 +83,11 @@ export function ResultsTable({ cols }: Props) {
 									>
 										<span className="flex flex-row items-center">
 											{column.render('Header')}
-
 											{column.isSorted ? (
 												column.isSortedDesc ? (
-													<SortDownIcon classes="h-5 w-5 text-gray-800" />
+													<SortDownIcon classes="h-4 w-4 text-gray-800" />
 												) : (
-													<SortUpIcon classes="h-5 w-5 text-gray-800" />
+													<SortUpIcon classes="h-4 w-4 text-gray-800" />
 												)
 											) : (
 												''

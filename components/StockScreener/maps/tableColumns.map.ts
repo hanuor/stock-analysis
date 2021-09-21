@@ -10,7 +10,8 @@ type Column = {
 		| 'format2dec'
 		| 'changePcColor'
 		| 'percentage'
-		| 'date';
+		| 'date'
+		| 'padleft';
 };
 
 export const COLUMNS_MAP: Column[] = [
@@ -24,17 +25,18 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'n',
 	},
 	{
+		Header: 'Market Cap',
+		accessor: 'm',
+		format: 'abbreviate',
+	},
+	{
 		Header: 'Sector',
 		accessor: 'se',
+		format: 'padleft',
 	},
 	{
 		Header: 'Industry',
 		accessor: 'i',
-	},
-	{
-		Header: 'Market Cap',
-		accessor: 'm',
-		format: 'abbreviate',
 	},
 	{
 		Header: 'Enterprise Value',

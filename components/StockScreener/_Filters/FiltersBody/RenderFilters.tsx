@@ -2,10 +2,10 @@ import { screenerState } from 'components/StockScreener/screener.state';
 import { FilterProps } from 'components/StockScreener/screener.types';
 import { FiltersMap } from 'components/StockScreener/maps/filters.map';
 import { FilterBody } from 'components/StockScreener/_Filters/FiltersBody/SingleFilter/_SingleFilter';
-import { useFetchColumns } from 'components/StockScreener/functions/useFetchColumns';
+import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns';
 
 function FilterWrap({ f }: { f: FilterProps }) {
-	const fetchColumn = useFetchColumns();
+	const { fetchColumn } = useModifyColumns();
 
 	return (
 		<div
