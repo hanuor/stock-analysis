@@ -731,7 +731,7 @@ export class EventCapture extends React.Component<
 			return;
 		}
 
-		const [touch1Pos, touch2Pos] = pointers(this.ref.current!);
+		const [touch1Pos, touch2Pos] = pointers(e, this.ref.current);
 		console.log('touch1' + touch1Pos);
 		console.log('touch2' + touch2Pos);
 
