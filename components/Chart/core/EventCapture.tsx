@@ -264,7 +264,7 @@ export class EventCapture extends React.Component<
 		if (!pan && !zoom) {
 			return;
 		}
-
+		console.log(e);
 		const { panInProgress } = this.state;
 
 		const yZoom =
@@ -658,6 +658,7 @@ export class EventCapture extends React.Component<
 		} else if (e.touches.length === 2) {
 			console.log('touches length = 2');
 			// pinch zoom begin
+			e.preventDefault();
 			// do nothing pinch zoom is handled in handleTouchMove
 			const { panInProgress, panStart } = this.state;
 
