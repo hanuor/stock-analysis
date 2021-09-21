@@ -626,6 +626,8 @@ export class EventCapture extends React.Component<
 		e.stopPropagation();
 
 		return;
+
+		/*
 		const {
 			pan: panEnabled,
 			chartConfig,
@@ -716,7 +718,7 @@ export class EventCapture extends React.Component<
 					},
 				});
 			}
-		}
+		} */
 	};
 	public testPinchZoom = (e: any) => {
 		e.preventDefault();
@@ -724,9 +726,11 @@ export class EventCapture extends React.Component<
 		e.stopPropagation();
 
 		return;
+		/*
 		console.log(e);
 		console.log('ITDOESWORK');
 		console.log(e.touches);
+		*/
 	};
 	public handlePinchZoom = (e: any) => {
 		console.log('pinch zoom has started');
