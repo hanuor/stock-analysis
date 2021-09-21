@@ -49,7 +49,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 		});
 
 		document.addEventListener('gesturechange', function (e) {
-			g;
 			e.preventDefault();
 			// special hack to prevent zoom-to-tabs gesture in safari
 			// document.body.style.zoom = 0.99;
