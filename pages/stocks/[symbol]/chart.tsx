@@ -25,23 +25,15 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
-	/* document.addEventListener(
-		'touchmove',
-		function (e) {
-			console.log(e);
-			e.preventDefault();
-		},
-		{ passive: false }
-	); */
 
 	useEffect(() => {
-		document.addEventListener(
+		/* document.addEventListener(
 			'touchmove',
 			function (e) {
 				e.preventDefault();
 			},
 			{ passive: false }
-		);
+		); */
 		document.addEventListener('gesturestart', function (e) {
 			e.preventDefault();
 			// special hack to prevent zoom-to-tabs gesture in safari
