@@ -182,23 +182,6 @@ export class EventCapture extends React.Component<
 	}
 
 	public componentDidMount() {
-		document.addEventListener('gesturestart', function (e) {
-			e.preventDefault();
-			// special hack to prevent zoom-to-tabs gesture in safari
-			// document.body.style.zoom = 0.99;
-		});
-
-		document.addEventListener('gesturechange', function (e) {
-			e.preventDefault();
-			// special hack to prevent zoom-to-tabs gesture in safari
-			// document.body.style.zoom = 0.99;
-		});
-
-		document.addEventListener('gestureend', function (e) {
-			e.preventDefault();
-			// special hack to prevent zoom-to-tabs gesture in safari
-			// document.body.style.zoom = 0.99;
-		});
 		const { disableInteraction } = this.props;
 
 		const { current } = this.ref;
@@ -212,6 +195,23 @@ export class EventCapture extends React.Component<
 				.on(MOUSEENTER, this.handleEnter)
 				.on(MOUSELEAVE, this.handleLeave);
 
+			current.addEventListener('gesturestart', function (e) {
+				e.preventDefault();
+				// special hack to prevent zoom-to-tabs gesture in safari
+				// document.body.style.zoom = 0.99;
+			});
+
+			current.addEventListener('gesturechange', function (e) {
+				e.preventDefault();
+				// special hack to prevent zoom-to-tabs gesture in safari
+				// document.body.style.zoom = 0.99;
+			});
+
+			current.addEventListener('gestureend', function (e) {
+				e.preventDefault();
+				// special hack to prevent zoom-to-tabs gesture in safari
+				// document.body.style.zoom = 0.99;
+			});
 			// @ts-ignore
 			current.addEventListener('wheel', this.handleWheel, {
 				passive: false,
