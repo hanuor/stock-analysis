@@ -51,7 +51,7 @@ export function StringFilter({ filter, active }: Props) {
 					onChange={(e) => setSearch(e.target.value)}
 				/>
 			)}
-			<div className="max-h-[400px] overflow-y-auto overflow-x-hidden overscroll-contain">
+			<div className="max-h-[300px] lg:max-h-[400px] overflow-y-auto overflow-x-hidden overscroll-contain thin-scroll">
 				{options &&
 					options.map((option) => (
 						<PresetChoice

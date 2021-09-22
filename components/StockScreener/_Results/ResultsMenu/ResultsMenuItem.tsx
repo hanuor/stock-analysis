@@ -70,9 +70,7 @@ export function ResultsMenuItem({ name }: Props) {
 	return (
 		<li>
 			<span
-				className={`py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer${
-					name === 'Filtered' && filters.length > 0 ? ' font-medium' : ''
-				}`}
+				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
 				data-title={dataTitle}
 				onClick={() => handleFilter(name)}
 				onMouseOver={() => handleHover(name)}

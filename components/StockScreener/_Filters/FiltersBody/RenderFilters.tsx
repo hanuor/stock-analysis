@@ -24,6 +24,11 @@ export function RenderFilters() {
 	const filters = screenerState((state) => state.filters);
 	const filterMenu = screenerState((state) => state.filterMenu);
 	const filterSearch = screenerState((state) => state.filterSearch);
+	const filtersShown = screenerState((state) => state.filtersShown);
+
+	if (!filtersShown) {
+		return null;
+	}
 
 	if (filterSearch.length > 0) {
 		return (
@@ -65,7 +70,7 @@ export function RenderFilters() {
 	return (
 		<>
 			<div
-				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1 border-b lg:border-0`}
+				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1 pb-5 lg:pb-2`}
 			>
 				{FiltersMap.map((f) => {
 					if (f.category.includes(filterMenu) || filterMenu === 'All') {

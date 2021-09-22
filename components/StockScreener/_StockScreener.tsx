@@ -5,8 +5,10 @@ import { ResultsBody } from './_Results/ResultsBody/ResultsBody';
 export function StockScreener() {
 	return (
 		<>
-			<FiltersMenu />
-			<RenderFilters />
+			<div className="border rounded p-2 bg-gray-50">
+				<FiltersMenu />
+				<RenderFilters />
+			</div>
 			<ResultsBody />
 		</>
 	);

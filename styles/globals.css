@@ -45,28 +45,54 @@
 	}
 
 	.navmenu {
-		background-image: linear-gradient(to right, white, white),
-			linear-gradient(to right, white, white),
-			linear-gradient(
-				to right,
-				rgba(150, 150, 150, 0.15),
-				rgba(255, 255, 255, 0)
-			),
-			linear-gradient(
-				to left,
-				rgba(150, 150, 150, 0.15),
-				rgba(255, 255, 255, 0)
-			);
-		background-position: left center, right center, left center, right center;
-		background-repeat: no-repeat;
-		background-color: white;
-		background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;
-		background-attachment: local, local, scroll, scroll;
 		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto;
+	}
+
+	@media screen and (max-width: 600px) {
+		.navmenu:not(.noshadow) {
+			background-image: linear-gradient(to right, white, white),
+				linear-gradient(to right, white, white),
+				linear-gradient(
+					to right,
+					rgba(150, 150, 150, 0.15),
+					rgba(255, 255, 255, 0)
+				),
+				linear-gradient(
+					to left,
+					rgba(150, 150, 150, 0.15),
+					rgba(255, 255, 255, 0)
+				);
+			background-position: left center, right center, left center,
+				right center;
+			background-repeat: no-repeat;
+			background-color: white;
+			background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;
+			background-attachment: local, local, scroll, scroll;
+		}
 	}
 
 	.navmenu.submenu {
 		background-image: none;
+	}
+
+	/* Thin scrollbar */
+	.thin-scroll {
+		/* Firefox only */
+		scrollbar-width: thin;
+		scrollbar-color: #bbb #fff;
+	}
+
+	.thin-scroll::-webkit-scrollbar {
+		width: 5px; /* width of the entire scrollbar */
+	}
+
+	.thin-scroll::-webkit-scrollbar-track {
+		background: #fff; /* color of the tracking area */
+	}
+
+	.thin-scroll::-webkit-scrollbar-thumb {
+		background-color: #bbb; /* color of the scroll thumb */
+		border-radius: 0; /* roundness of the scroll thumb */
 	}
 
 	/* Hide scrollbar for Chrome, Safari and Opera */
@@ -392,6 +418,10 @@
 		@apply w-full;
 	}
 
+	.symbol-table.smaller {
+		@apply text-smaller;
+	}
+
 	.symbol-table a {
 		@apply bll;
 	}
@@ -399,6 +429,10 @@
 	.symbol-table tr > * {
 		@apply p-2;
 		border-bottom: 1px solid #ddd;
+	}
+
+	.symbol-table.smaller tr > * {
+		@apply py-[7px];
 	}
 
 	.symbol-table tr > *:first-child {

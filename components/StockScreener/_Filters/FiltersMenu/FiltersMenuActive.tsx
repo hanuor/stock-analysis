@@ -1,7 +1,7 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { CloseCircleIcon } from 'components/Icons/CloseCircle';
 import { ChevronDownIcon } from '@heroicons/react/solid';
-// import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 // TODO enable hiding functionality for dropdown icon
 export function FiltersMenuActive() {
@@ -9,6 +9,8 @@ export function FiltersMenuActive() {
 	const filterMenu = screenerState((state) => state.filterMenu);
 	const setFilterMenu = screenerState((state) => state.setFilterMenu);
 	const clearFilters = screenerState((state) => state.clearFilters);
+	const filtersShown = screenerState((state) => state.filtersShown);
+	const setFiltersShown = screenerState((state) => state.setFiltersShown);
 
 	const count = filters.length;
 
@@ -20,11 +22,24 @@ export function FiltersMenuActive() {
 	return (
 		<>
 			<div className="mb-1.5 flex items-center w-[110px]">
-				<ChevronDownIcon
-					className="h-6 w-6 text-gray-700 cursor-pointer -mb-1"
-					aria-hidden="true"
-					onClick={() => console.log('hide filter body')}
-				/>
+				{filtersShown ? (
+					<div title="Hide Filter Area">
+						<ChevronDownIcon
+							className="h-6 w-6 text-gray-700 cursor-pointer -mb-1"
+							aria-hidden="true"
+							onClick={() => setFiltersShown(false)}
+						/>
+					</div>
+				) : (
+					<div title="Show Filter Area">
+						<ChevronRightIcon
+							className="h-6 w-6 text-gray-700 cursor-pointer -mb-1"
+							aria-hidden="true"
+							onClick={() => setFiltersShown(true)}
+						/>
+					</div>
+				)}
+
 				<div className={classes} onClick={() => setFilterMenu('Active')}>
 					<span>Filters</span>
 					<div className="ml-1 dont-move" data-title="(2)">

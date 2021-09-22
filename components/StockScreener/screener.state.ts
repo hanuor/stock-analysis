@@ -10,10 +10,14 @@ interface ScreenerState {
 	data: SingleStock[];
 	setData: (data: SingleStock[]) => void;
 	addDataColumn: (newColumn: SingleStock[], id: FilterId) => void;
+
+	// Filters
 	filters: FilterValue[];
 	addFilter: (newFilter: FilterValue) => void;
 	removeFilter: (filter: FilterId) => void;
 	clearFilters: () => void;
+	filtersShown: boolean;
+	setFiltersShown: (filtersShown: boolean) => void;
 
 	// Filter menu
 	filterMenu: string;
@@ -70,15 +74,19 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set(() => ({
 			filters: [],
 		})),
+	filtersShown: true,
+	setFiltersShown: (show: boolean) =>
+		set({ filtersShown: show, filterMenu: 'Active' }),
 
 	// Filter Menu
 	filterMenu: 'Active',
 	setFilterMenu: (newMenu: string) =>
-		set({ filterMenu: newMenu, filterSearch: '' }),
+		set({ filterMenu: newMenu, filterSearch: '', filtersShown: true }),
 	openFilter: '', // The filter menu that is open
 	setOpenFilter: (newFilter: FilterId | '') => set({ openFilter: newFilter }),
 	filterSearch: '',
-	setFilterSearch: (newSearch: string) => set({ filterSearch: newSearch }),
+	setFilterSearch: (newSearch: string) =>
+		set({ filterSearch: newSearch, filtersShown: true }),
 
 	// Results Menu
 	resultsMenu: 'General',

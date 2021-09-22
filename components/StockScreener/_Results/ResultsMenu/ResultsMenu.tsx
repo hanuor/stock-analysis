@@ -23,16 +23,19 @@ export const ResultsControls = ({
 	tableId,
 }: Props) => {
 	return (
-		<div className="flex items-center border-t-2 border-blue-brand_sharp mt-5 space-x-4 bp:space-x-5 py-1.5 bp:py-2 px-1 overflow-x-auto lg:overflow-visible">
+		<div className="grid grid-cols-2 lg:flex items-center lg:space-x-4 bp:space-x-4 lg:py-2 lg:px-1 lg:overflow-visible border-t border-gray-300 mt-6">
 			<div>
 				<h2 className="text-xl bp:text-[1.3rem] font-semibold whitespace-nowrap text-gray-800">
 					{`${count} Stocks`}
 				</h2>
 			</div>
-			<div className="flex-grow">
+			<div className="lg:order-5 py-2 lg:py-0 ml-auto lg:ml-0">
+				<ColumnDropdown />
+			</div>
+			<div className="col-span-2 overflow-x-auto hide-scroll lg:flex-grow lg:order-2 border-t lg:border-0 lg:pl-5">
 				<ResultsNav />
 			</div>
-			<div className="max-w-[110px]">
+			<div className="hidden sm:block max-w-[110px] lg:order-3">
 				<Filter
 					useAsyncDebounce={useAsyncDebounce}
 					globalFilter={globalFilter}
@@ -40,7 +43,7 @@ export const ResultsControls = ({
 					filterText="Search..."
 				/>
 			</div>
-			<div className="hidden sm:block">
+			<div className="hidden sm:block lg:order-4">
 				<Export
 					title="Export"
 					buttons={[
@@ -49,9 +52,6 @@ export const ResultsControls = ({
 					]}
 					tableId={tableId}
 				/>
-			</div>
-			<div>
-				<ColumnDropdown />
 			</div>
 		</div>
 	);
