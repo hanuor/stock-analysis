@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { Unavailable } from 'components/Unavailable';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import CSS from 'csstype';
 
 const StockChart = dynamic(() => import('components/Chart/StockChart'), {
 	ssr: false,
@@ -19,6 +20,18 @@ const StockChart = dynamic(() => import('components/Chart/StockChart'), {
 interface ChartProps {
 	info: Info;
 }
+
+const h1Styles: CSS.Properties = {
+	backgroundColor: 'rgba(255, 255, 255, 0.85)',
+	position: 'absolute',
+	right: 0,
+	bottom: '2rem',
+	padding: '0.5rem',
+	fontFamily: 'sans-serif',
+	fontSize: '1.5rem',
+	boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
+	['touch-action' as any]: 'none',
+};
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [period, setPeriod] = useState<string>('d');
@@ -73,7 +86,10 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 					</div>
 					<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
 						{info.state !== 'upcomingipo' ? (
-							<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+							<div
+								style={h1Styles}
+								className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]"
+							>
 								{loading && <Loading />}
 
 								<StockChart
