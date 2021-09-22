@@ -124,10 +124,10 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Target',
 		accessor: 'pt',
-		format: 'align',
+		format: 'amount',
 	},
 	{
-		Header: 'Difference (%)',
+		Header: 'Target (%)',
 		accessor: 'ptc',
 		format: 'changePcColor',
 	},
@@ -159,10 +159,12 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Gross Profit',
 		accessor: 'grossProfit',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Op. Income',
 		accessor: 'operatingIncome',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Net Income',
@@ -187,18 +189,22 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'EBIT',
 		accessor: 'ebit',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'EBITDA',
 		accessor: 'ebitda',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Op. Cash Flow',
 		accessor: 'ocf',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Free Cash Flow',
 		accessor: 'fcf',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'FCF Growth',
@@ -208,18 +214,22 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'FCF / Share',
 		accessor: 'fcfps',
+		format: 'format2dec',
 	},
 	{
 		Header: 'Total Cash',
 		accessor: 'cash',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Total Debt',
 		accessor: 'debt',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Net Cash / Debt',
 		accessor: 'netCash',
+		format: 'abbreviate',
 	},
 	{
 		Header: 'Net Cash Growth',
@@ -259,14 +269,17 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'PEG Ratio',
 		accessor: 'peg',
+		format: 'format2dec',
 	},
 	{
 		Header: 'EV/Sales',
 		accessor: 'evSales',
+		format: 'format2dec',
 	},
 	{
 		Header: 'EV/Earnings',
 		accessor: 'evEarnings',
+		format: 'format2dec',
 	},
 	{
 		Header: 'EV/Ebitda',
@@ -275,10 +288,12 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'EV/Ebit',
 		accessor: 'evEbit',
+		format: 'format2dec',
 	},
 	{
 		Header: 'EV/FCF',
 		accessor: 'evFcf',
+		format: 'format2dec',
 	},
 	{
 		Header: 'Earnings Yield',

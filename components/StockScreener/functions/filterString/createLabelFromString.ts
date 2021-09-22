@@ -14,6 +14,8 @@ export function createLabelFromString(
 		return 'Not Zero';
 	}
 
+	value = value.replaceAll('--', '-X');
+
 	// Split the string
 	const explode = value.split('-');
 
@@ -26,6 +28,7 @@ export function createLabelFromString(
 
 	// Third bit is the "second" value
 	let second = explode[2] as string;
+	second = second?.replace('X', '-');
 
 	// Append percentage
 	if (filter?.numberType === 'percentage') {

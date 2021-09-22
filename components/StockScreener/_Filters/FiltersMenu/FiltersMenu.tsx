@@ -14,10 +14,10 @@ export function FiltersMenu() {
 			<div
 				className={`grid grid-cols-2 lg:flex justify-between items-end whitespace-nowrap overflow-x-auto${showHideBorder}`}
 			>
-				<div className="lg:order-1 pb-1 lg:pb-0">
+				<div className="lg:order-1">
 					<FiltersMenuActive />
 				</div>
-				<div className="ml-auto lg:ml-0 lg:order-3 pb-1 lg:pb-0">
+				<div className="ml-auto lg:ml-0 lg:order-3">
 					<FilterSearch />
 				</div>
 				<div

@@ -32,7 +32,7 @@ export function RenderFilters() {
 
 	if (filterSearch.length > 0) {
 		return (
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
+			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
 				{FiltersMap.map((f) => {
 					if (f.name.toLowerCase().includes(filterSearch.toLowerCase())) {
 						return <FilterWrap key={f.name} f={f} />;
@@ -48,7 +48,7 @@ export function RenderFilters() {
 
 		if (active.length === 0) {
 			return (
-				<div className="px-1 py-2 text-sm lg:text-base">
+				<div className="px-1 py-3 pb-2 text-sm lg:text-base">
 					No active filters. Find a filter using the search box above or
 					choose a filter category from the menu.
 				</div>
@@ -56,7 +56,7 @@ export function RenderFilters() {
 		}
 
 		return (
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
+			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
 				{FiltersMap.map((f) => {
 					if (active.includes(f.id)) {
 						return <FilterWrap key={f.name} f={f} />;
@@ -70,7 +70,7 @@ export function RenderFilters() {
 	return (
 		<>
 			<div
-				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1 pb-5 lg:pb-2`}
+				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1`}
 			>
 				{FiltersMap.map((f) => {
 					if (f.category.includes(filterMenu) || filterMenu === 'All') {

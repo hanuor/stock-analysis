@@ -32,8 +32,8 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 			const filterObject = getFilterFromString(active, false);
 
 			setCompare(filterObject.compare);
-			setFirst(filterObject.first);
-			setSecond(filterObject.second);
+			setFirst(filterObject.first.replace('X', '-'));
+			setSecond(filterObject.second.replace('X', '-'));
 
 			if (filterObject.compare !== 'between' && filterObject.second !== '') {
 				setSecond('');

@@ -10,6 +10,7 @@ export function useModifyFilters() {
 	const filters = screenerState((state) => state.filters);
 	const addFilter = screenerState((state) => state.addFilter);
 	const removeFilter = screenerState((state) => state.removeFilter);
+	const showColumns = screenerState((state) => state.showColumns);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
 	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const addFilteredColumn = screenerState((state) => state.addFilteredColumn);
@@ -47,7 +48,7 @@ export function useModifyFilters() {
 
 		// If viewing the filtered columns, force them to update right away
 		if (resultsMenu === 'Filtered') {
-			const newColumns = [...filteredColumns]; // Need to copy the array in order for state to update
+			const newColumns = [...showColumns]; // Need to copy the array in order for state to update
 			newColumns.push(id);
 			setShowColumns(newColumns);
 		}
@@ -63,7 +64,7 @@ export function useModifyFilters() {
 
 			// If viewing the filtered columns, force them to update right away
 			if (resultsMenu === 'Filtered') {
-				const newColumns = filteredColumns.filter((c) => c !== id);
+				const newColumns = showColumns.filter((c) => c !== id);
 				setShowColumns(newColumns);
 			}
 		}

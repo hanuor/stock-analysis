@@ -71,8 +71,10 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filters: state.filters.filter((f) => f.id !== filter),
 		})),
 	clearFilters: () =>
-		set(() => ({
+		set((state) => ({
+			...state,
 			filters: [],
+			filteredColumns: ['s', 'n', 'm'],
 		})),
 	filtersShown: true,
 	setFiltersShown: (show: boolean) =>
@@ -86,7 +88,11 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setOpenFilter: (newFilter: FilterId | '') => set({ openFilter: newFilter }),
 	filterSearch: '',
 	setFilterSearch: (newSearch: string) =>
-		set({ filterSearch: newSearch, filtersShown: true }),
+		set({
+			filterSearch: newSearch,
+			filtersShown: true,
+			filterMenu: 'Active',
+		}),
 
 	// Results Menu
 	resultsMenu: 'General',

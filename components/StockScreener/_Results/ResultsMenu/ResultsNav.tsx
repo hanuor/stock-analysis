@@ -2,7 +2,7 @@ import { ResultsMenuItem } from 'components/StockScreener/_Results/ResultsMenu/R
 
 export function ResultsNav() {
 	return (
-		<nav className="flex-grow py-3 lg:py-0">
+		<nav className="flex-grow py-3 lg:py-1">
 			<ul className="flex flex-row items-center whitespace-nowrap space-x-1 text-base">
 				<ResultsMenuItem name="General" />
 				<ResultsMenuItem name="Filtered" />

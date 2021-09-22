@@ -154,7 +154,7 @@
 	@media (hover: none) {
 		.navmenu li a.inactive,
 		.navmenu li span.inactive {
-			@apply hover:bg-white hover:text-blue-link;
+			@apply hover:bg-transparent hover:text-blue-link;
 		}
 	}
 

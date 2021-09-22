@@ -25,8 +25,8 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 				canonical="stock-screener/"
 			/>
 			<LayoutFullWidth>
-				<div className="contain my-6">
-					<h1 className="hh1 mb-3">Stock Screener</h1>
+				<div className="contain mt-5 mb-6">
+					<h1 className="hh2 mb-2.5">Stock Screener</h1>
 					<StockScreener />
 				</div>
 			</LayoutFullWidth>
