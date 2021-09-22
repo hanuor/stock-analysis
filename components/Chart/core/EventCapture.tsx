@@ -182,6 +182,23 @@ export class EventCapture extends React.Component<
 	}
 
 	public componentDidMount() {
+		document.addEventListener('gesturestart', function (e) {
+			e.preventDefault();
+			// special hack to prevent zoom-to-tabs gesture in safari
+			// document.body.style.zoom = 0.99;
+		});
+
+		document.addEventListener('gesturechange', function (e) {
+			e.preventDefault();
+			// special hack to prevent zoom-to-tabs gesture in safari
+			// document.body.style.zoom = 0.99;
+		});
+
+		document.addEventListener('gestureend', function (e) {
+			e.preventDefault();
+			// special hack to prevent zoom-to-tabs gesture in safari
+			// document.body.style.zoom = 0.99;
+		});
 		const { disableInteraction } = this.props;
 
 		const { current } = this.ref;
@@ -609,11 +626,9 @@ export class EventCapture extends React.Component<
 	};
 
 	public handleTouchMove = (e: React.TouchEvent) => {
-		console.log('yes');
 		e.preventDefault();
 		e.stopPropagation();
-		return;
-		/*
+
 		const { onMouseMove } = this.props;
 		if (onMouseMove === undefined) {
 			return;
@@ -621,17 +636,13 @@ export class EventCapture extends React.Component<
 
 		const touch = getTouchProps(e.touches[0]);
 		const touchXY = touchPosition(touch, e);
-		onMouseMove(touchXY, 'touch', e);*/
+		onMouseMove(touchXY, 'touch', e);
 	};
 
 	public handleTouchStart = (e: React.TouchEvent) => {
 		this.mouseInteraction = false;
 		e.preventDefault();
 		e.stopPropagation();
-
-		return;
-
-		/*
 		const {
 			pan: panEnabled,
 			chartConfig,
@@ -722,7 +733,7 @@ export class EventCapture extends React.Component<
 					},
 				});
 			}
-		} */
+		}
 	};
 	public testPinchZoom = (e: any) => {
 		e.preventDefault();
