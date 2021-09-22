@@ -1743,8 +1743,8 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Book Value',
-		id: 'bookValue',
+		name: 'Shareh. Equity',
+		id: 'equity',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [

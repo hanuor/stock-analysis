@@ -461,8 +461,8 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage',
 	},
 	{
-		Header: 'Book Value',
-		accessor: 'bookValue',
+		Header: 'Equity',
+		accessor: 'equity',
 		format: 'abbreviate',
 	},
 	{

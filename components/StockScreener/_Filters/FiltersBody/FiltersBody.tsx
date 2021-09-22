@@ -3,6 +3,8 @@ import { FilterProps } from 'components/StockScreener/screener.types';
 import { FiltersMap } from 'components/StockScreener/maps/filters.map';
 import { FilterBody } from 'components/StockScreener/_Filters/FiltersBody/SingleFilter/_SingleFilter';
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns';
+import { Tooltip } from 'components/Tooltip';
+import { TooltipContent } from './TooltipContent';
 
 function FilterWrap({ f }: { f: FilterProps }) {
 	const { fetchColumn } = useModifyColumns();
@@ -12,7 +14,15 @@ function FilterWrap({ f }: { f: FilterProps }) {
 			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900"
 			key={f.name}
 		>
-			<div>{f.name}</div>
+			<div>
+				<Tooltip
+					content={<TooltipContent id={f.id} />}
+					theme="light"
+					delay={150}
+				>
+					<div>{f.name}</div>
+				</Tooltip>
+			</div>
 			<div onMouseEnter={() => fetchColumn(f.id)}>
 				<FilterBody filter={f} />
 			</div>
