@@ -8,7 +8,7 @@
 		touch-action: none;
 	}
 	.touch-auto {
-		touch-action: 'auto';
+		touch-action: auto;
 	}
 	.skip-nav {
 		border: 0;
