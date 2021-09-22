@@ -194,31 +194,9 @@ export class EventCapture extends React.Component<
 			select(current)
 				.on(MOUSEENTER, this.handleEnter)
 				.on(MOUSELEAVE, this.handleLeave);
-			/*
-			current.addEventListener('gesturestart', function (e) {
-				e.preventDefault();
-				// special hack to prevent zoom-to-tabs gesture in safari
-				// document.body.style.zoom = 0.99;
-			});
 
-			current.addEventListener('gesturechange', function (e) {
-				e.preventDefault();
-				// special hack to prevent zoom-to-tabs gesture in safari
-				// document.body.style.zoom = 0.99;
-			});
-
-			current.addEventListener('gestureend', function (e) {
-				e.preventDefault();
-				// special hack to prevent zoom-to-tabs gesture in safari
-				// document.body.style.zoom = 0.99;
-			});
-			*/
 			// @ts-ignore
 			current.addEventListener('wheel', this.handleWheel, {
-				passive: false,
-			});
-
-			current.addEventListener('pointerdown', this.testPinchZoom, {
 				passive: false,
 			});
 		}
@@ -282,7 +260,7 @@ export class EventCapture extends React.Component<
 		if (!pan && !zoom) {
 			return;
 		}
-		console.log(e);
+
 		const { panInProgress } = this.state;
 
 		const yZoom =
@@ -627,9 +605,6 @@ export class EventCapture extends React.Component<
 	};
 
 	public handleTouchMove = (e: React.TouchEvent) => {
-		e.preventDefault();
-		e.stopPropagation();
-
 		const { onMouseMove } = this.props;
 		if (onMouseMove === undefined) {
 			return;
@@ -642,8 +617,6 @@ export class EventCapture extends React.Component<
 
 	public handleTouchStart = (e: React.TouchEvent) => {
 		this.mouseInteraction = false;
-		e.preventDefault();
-		e.stopPropagation();
 		const {
 			pan: panEnabled,
 			chartConfig,
@@ -651,9 +624,8 @@ export class EventCapture extends React.Component<
 			xScale,
 			onPanEnd,
 		} = this.props;
-		console.log(e);
+
 		if (e.touches.length === 1) {
-			console.log('touches length = 1');
 			this.panHappened = false;
 			const touchXY = touchPosition(getTouchProps(e.touches[0]), e);
 			if (onMouseMove !== undefined) {
@@ -678,10 +650,7 @@ export class EventCapture extends React.Component<
 					.on(TOUCHEND, this.handlePanEnd, false);
 			}
 		} else if (e.touches.length === 2) {
-			console.log('touches length = 2');
 			// pinch zoom begin
-			e.preventDefault();
-			e.stopPropagation();
 			// do nothing pinch zoom is handled in handleTouchMove
 			const { panInProgress, panStart } = this.state;
 
@@ -736,36 +705,19 @@ export class EventCapture extends React.Component<
 			}
 		}
 	};
-	public testPinchZoom = (e: any) => {
-		e.preventDefault();
-		e.stop_propagation();
-		e.stopPropagation();
 
-		return;
-		/*
-		console.log(e);
-		console.log('ITDOESWORK');
-		console.log(e.touches);
-		*/
-	};
 	public handlePinchZoom = (e: any) => {
-		console.log('pinch zoom has started');
 		const { pinchZoomStart } = this.state;
 		if (pinchZoomStart === undefined) {
-			console.log('pinchZoom Started undefined');
 			return;
 		}
 
 		const { xScale, zoom: zoomEnabled, onPinchZoom } = this.props;
 		if (!zoomEnabled || onPinchZoom === undefined) {
-			console.log('!zoomEnabled or onPinchZoom undefined');
 			return;
 		}
 
-		const [touch1Pos, touch2Pos] = pointers(e, this.ref.current);
-		console.log('touch1' + touch1Pos);
-		console.log('touch2' + touch2Pos);
-		console.log('touch!');
+		const [touch1Pos, touch2Pos] = pointers(this.ref.current!);
 
 		const { chartsToPan, ...initialPinch } = pinchZoomStart;
 

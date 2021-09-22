@@ -5,9 +5,11 @@
 @layer base {
 	body {
 		@apply text-gray-900 bg-white;
-		touch-action: 'none';
+		touch-action: none;
 	}
-
+	.touch-auto {
+		touch-action: 'auto';
+	}
 	.skip-nav {
 		border: 0;
 		clip: rect(0 0 0 0);
