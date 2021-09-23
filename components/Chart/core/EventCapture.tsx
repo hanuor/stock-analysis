@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-invalid-this */
 import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale';
-import { pointer, pointers, select } from 'd3-selection';
+import { pointer, pointers, select, touches } from 'd3-selection';
 import * as React from 'react';
 
 import {
@@ -719,7 +719,7 @@ export class EventCapture extends React.Component<
 			return;
 		}
 
-		const [touch1Pos, touch2Pos] = pointers(this.ref.current!);
+		const [touch1Pos, touch2Pos] = pointers(e, this.ref.current);
 
 		const { chartsToPan, ...initialPinch } = pinchZoomStart;
 
