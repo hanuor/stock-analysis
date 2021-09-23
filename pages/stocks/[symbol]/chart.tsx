@@ -73,7 +73,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				description={`Interactive ${info.nameFull} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`/stocks/${info.symbol}/chart/`}
 			/>
-			<div className="px-2 sm:contain">
+			<div className="touch-none px-2 sm:contain">
 				<div className="py-2">
 					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
