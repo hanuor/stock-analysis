@@ -5,7 +5,8 @@ import { getData } from 'functions/API';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { SEO } from 'components/SEO';
 import { StockScreener } from 'components/StockScreener/_StockScreener';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
 	const data = screenerState((state) => state.data);
@@ -25,8 +26,9 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 				canonical="stock-screener/"
 			/>
 			<LayoutFullWidth>
-				<div className="contain mt-5 mb-6">
-					<h1 className="hh2 mb-2.5">Stock Screener</h1>
+				<div className="contain py-5 xs:py-6">
+					<Breadcrumbs url="/stock-screener/" />
+					<h1 className="hh1">Stock Screener</h1>
 					<StockScreener />
 				</div>
 			</LayoutFullWidth>

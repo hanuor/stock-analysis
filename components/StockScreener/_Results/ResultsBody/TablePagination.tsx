@@ -1,4 +1,7 @@
+import { DropdownSelect } from 'components/DropdownSelect';
 import { screenerState } from 'components/StockScreener/screener.state';
+import { ChevronLeftIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon } from '@heroicons/react/solid';
 
 interface Props {
 	previousPage: () => void;
@@ -11,6 +14,7 @@ interface Props {
 	canNextPage: boolean;
 }
 
+// TODO make 200 rows and "show all" available for pro members later
 export function TablePagination({
 	previousPage,
 	canPreviousPage,
@@ -25,39 +29,47 @@ export function TablePagination({
 	const setTablePage = screenerState((state) => state.setTablePage);
 	const setTableSize = screenerState((state) => state.setTableSize);
 
+	const selectOptions = [
+		{ value: 20, name: '20 Rows' },
+		{ value: 50, name: '50 Rows' },
+		{ value: 100, name: '100 Rows' },
+		// { value: 200, name: '200 Rows' },
+		// { value: 9999, name: 'Show All' },
+	];
+
+	function setSelected(value: number) {
+		setPageSize(value);
+		setTableSize(value);
+		setTablePage(0);
+	}
+
 	return (
-		<nav className="mt-2.5 px-1 flex flex-row justify-between space-x-2 text-sm sm:text-base">
+		<nav className="mt-2.5 py-1 px-0.5 flex flex-row items-center justify-between space-x-1.5 bp:space-x-2 text-sm sm:text-base overflow-x-auto hide-scroll">
 			<button
 				onClick={() => {
 					previousPage();
 					setTablePage(tablePage - 2);
 				}}
 				disabled={!canPreviousPage}
-				className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+				className={`flex items-center border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 py-2 pl-1.5 pr-2.5 sm:pr-3${
+					!canPreviousPage
+						? ' cursor-default hover:bg-white'
+						: ' cursor-pointer'
+				}`}
 			>
-				{`< Previous`}
+				<ChevronLeftIcon className="w-4 h-4 -mb-px" />
+				<div className="hidden xs:inline">Previous</div>
 			</button>
-			<div className="flex flex-row items-center space-x-3 xs:space-x-4">
+			<div className="flex flex-row items-center space-x-2 bp:space-x-4 font-medium text-gray-700">
 				<span className="whitespace-nowrap">
-					<span className="hidden xs:inline">Page </span>
+					<span className="hidden bp:inline">Page </span>
 					{`${pageIndex + 1} of ${pageOptions.length}`}
 				</span>
-				<select
-					value={pageSize}
-					onChange={(e) => {
-						setPageSize(Number(e.target.value));
-						setTableSize(Number(e.target.value));
-						setTablePage(0);
-					}}
-					name="perpage"
-					className="block w-full pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 py-1.5 xs:py-2 border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md text-sm sm:text-base"
-				>
-					<option value="20">20 Rows</option>
-					<option value="50">50 Rows</option>
-					<option value="100">100 Rows</option>
-					<option value="200">200 Rows</option>
-					<option value="9999">Show All</option>
-				</select>
+				<DropdownSelect
+					selected={pageSize}
+					setSelected={setSelected}
+					selectOptions={selectOptions}
+				/>
 			</div>
 			<button
 				onClick={() => {
@@ -65,9 +77,14 @@ export function TablePagination({
 					setTablePage(tablePage + 1);
 				}}
 				disabled={!canNextPage}
-				className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+				className={`flex items-center border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 py-2 pr-1.5 pl-2.5 sm:pl-3${
+					!canNextPage
+						? ' cursor-default hover:bg-white'
+						: ' cursor-pointer'
+				}`}
 			>
-				{`Next >`}
+				<div className="hidden xs:inline">Next</div>
+				<ChevronRightIcon className="w-4 h-4 -mb-px" />
 			</button>
 		</nav>
 	);

@@ -1442,7 +1442,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Shares Institutions',
+		name: 'Shares Institut.',
 		id: 'sharesInstitutions',
 		category: ['Other'],
 		filterType: 'numeric',
