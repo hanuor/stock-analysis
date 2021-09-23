@@ -355,11 +355,14 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								yAccessor={(d) => d.ma2}
 								fillStyle={ma2color}
 							/>
-
-							<MouseCoordinateY
-								rectWidth={margin.right / 1.01225}
-								displayFormat={this.pricesDisplayFormat}
-							/>
+							{isBrowser == true ? (
+								<MouseCoordinateY
+									rectWidth={margin.right / 1.01225}
+									displayFormat={this.pricesDisplayFormat}
+								/>
+							) : (
+								<> </>
+							)}
 
 							<EdgeIndicator
 								itemType="last"

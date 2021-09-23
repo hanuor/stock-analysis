@@ -652,8 +652,6 @@ export class EventCapture extends React.Component<
 		} else if (e.touches.length === 2) {
 			// pinch zoom begin
 			// do nothing pinch zoom is handled in handleTouchMove
-
-			console.log('works');
 			const { panInProgress, panStart } = this.state;
 
 			if (
