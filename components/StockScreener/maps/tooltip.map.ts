@@ -18,13 +18,19 @@ export const TOOLTIP_MAP = [
 		id: 'earningsDate',
 		title: 'Earnings Date',
 		tooltip:
-			"The earnings date is the day that the company releases its quarterly earnings. Check the company's investor relations page to confirm the date.",
+			"The earnings date is the day that the company is estimated to release its quarterly earnings. Check the company's investor relations page to confirm the date.",
 	},
 	{
 		id: 'exDivDate',
 		title: 'Ex-Dividend Date',
 		tooltip:
 			'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.',
+	},
+	{
+		id: 'nextDivDate',
+		title: 'Next Ex-Dividend Date',
+		tooltip:
+			"The date of the stock's next ex-dividend date. Only shareholders that buy the stock before this date will receive the next dividend payment.",
 	},
 	{
 		id: 'sharesOut',
@@ -36,7 +42,7 @@ export const TOOLTIP_MAP = [
 		id: 'sharesYoY',
 		title: 'Shares Change (YoY)',
 		tooltip:
-			'The change in the number of shares outstanding, comparing the most recent quarter to the same quarter a year ago.',
+			'The change in the number of shares outstanding compared to one year ago.',
 	},
 	{
 		id: 'sharesQoQ',
@@ -74,21 +80,21 @@ export const TOOLTIP_MAP = [
 		title: 'Forward PE',
 		tooltip:
 			'The forward price-to-earnings (P/E) ratio is like the PE ratio, except that it uses the estimated earnings over the next year instead of historical earnings.',
-		formula: 'Forward PE = Stock Price / 1Y Forward EPS',
+		formula: 'Forward PE = Stock Price / Forward EPS (1Y)',
 	},
 	{
 		id: 'ps',
 		title: 'PS Ratio',
 		tooltip:
 			'The price-to-sales (P/S) ratio is a commonly used valuation metric. It shows how expensive a stock is compared to revenue.',
-		formula: 'PS Ratio = Market Capitalization / Revenue',
+		formula: 'PS Ratio = Market Cap / Revenue',
 	},
 	{
 		id: 'pb',
 		title: 'PB Ratio',
 		tooltip:
 			"The price-to-book (P/B) ratio measures a stock's price relative to book value. Book value is also called Shareholders' equity.",
-		formula: "PB Ratio = Market Capitalization / Shareholders' Equity",
+		formula: "PB Ratio = Market Cap / Shareholders' Equity",
 	},
 	{
 		id: 'pfcf',
@@ -96,7 +102,7 @@ export const TOOLTIP_MAP = [
 
 		tooltip:
 			'The price to free cash flow (P/FCF) ratio is similar to the P/E ratio, except it uses free cash flow instead of accounting earnings.',
-		formula: 'P/FCF Ratio = Market Capitalization / Free Cash Flow',
+		formula: 'P/FCF Ratio = Market Cap / Free Cash Flow',
 	},
 	{
 		id: 'peg',
@@ -109,8 +115,8 @@ export const TOOLTIP_MAP = [
 		id: 'evEarnings',
 		title: 'EV/Earnings Ratio',
 		tooltip:
-			"The enterprise value to earnings (EV/Sales) ratio measures valuation, but the price is adjusted for the company's levels of cash and debt.",
-		formula: 'EV/Earnings Ratio = Enterprise Value / Net Income (ttm)',
+			"The enterprise value to earnings (EV/Earnings) ratio measures valuation, but the price is adjusted for the company's levels of cash and debt.",
+		formula: 'EV/Earnings Ratio = Enterprise Value / Net Income',
 	},
 	{
 		id: 'evSales',
@@ -202,29 +208,39 @@ export const TOOLTIP_MAP = [
 		title: 'Revenue Per Employee',
 		tooltip:
 			'The amount of revenue that the company generates per each employee.',
-		formula: 'Revenue Per Employee = Total Revenue / Employee Count',
+		formula: 'Revenue Per Employee = Revenue / Employee Count',
 	},
 	{
-		id: 'profitsperemployee',
+		id: 'profitPerEmployee',
 		title: 'Profits Per Employee',
 		tooltip: 'The amount of net income generated per each employee.',
-		formula: 'Profits Per Employee = Total Net Income / Employee Count',
+		formula: 'Profits Per Employee = Net Income / Employee Count',
 	},
 	{
 		id: 'employees',
 		title: 'Employees',
-		tooltip:
-			"The company's number of employees as of the latest quarterly report.",
+		tooltip: "The company's last reported total number of employees.",
 	},
 	{
-		id: 'assetturnover',
+		id: 'founded',
+		title: 'Founded',
+		tooltip: 'The year that the company was originally founded in.',
+	},
+	{
+		id: 'ipoDate',
+		title: 'IPO Date',
+		tooltip:
+			"The date of the company's Initial Public Offering (IPO), or when it originally started trading on the stock exchange.",
+	},
+	{
+		id: 'assetTurnover',
 		title: 'Asset Turnover',
 		tooltip:
 			"The asset turnover ratio measures the amount of sales relative to a company's assets. It indicates how efficiently the company uses its assets to generate revenue.",
 		formula: 'Asset Turnover Ratio = Revenue / Average Assets',
 	},
 	{
-		id: 'inventoryturnover',
+		id: 'inventoryTurnover',
 		title: 'Inventory Turnover',
 		tooltip:
 			'The inventory turnover ratio measures how many times inventory has been sold and replaced during a time period.',
@@ -238,16 +254,63 @@ export const TOOLTIP_MAP = [
 		formula: 'Effective Tax Rate = (Income Tax / Pretax Income) * 100%',
 	},
 	{
+		id: 'taxByRevenue',
+		title: 'Taxes / Revenue (%)',
+		tooltip:
+			"Tax / revenue is the percentage of the company's revenue paid as corporate income tax.",
+		formula: 'Taxes / Revenue = (Income Tax / Revenue) * 100%',
+	},
+	{
 		id: 'beta',
 		title: 'Beta (1Y)',
 		tooltip:
 			'Beta measures the price volatility of a stock in comparison to the overall stock market. A value higher than 1 indicates greater volatility, while a value under 1 indicates less volatility.',
 	},
 	{
+		id: 'c',
+		title: 'Price Change (1D)',
+		tooltip:
+			'The percentage change in the stock price on the current or latest trading day.',
+	},
+	{
 		id: 'ch1y',
 		title: '52-Week Price Change',
 		tooltip:
 			'The percentage change in the stock price compared to 1 year ago.',
+	},
+	{
+		id: 'ar',
+		title: 'Analyst Rating',
+		tooltip: 'The average rating of analysts for the stock.',
+	},
+	{
+		id: 'ac',
+		title: 'Analyst Count',
+		tooltip:
+			'The number of analysts that have given a rating and price target for the stock.',
+	},
+	{
+		id: 'pt',
+		title: 'Price Target',
+		tooltip:
+			'The average 12-month price target given to the stock by stock analysts.',
+	},
+	{
+		id: 'ptc',
+		title: 'Price Target Difference',
+		tooltip:
+			'The difference between the average 12-month analyst price target and the current stock price.',
+	},
+	{
+		id: 'exchange',
+		title: 'Stock Exchange',
+		tooltip: 'The stock exchange that the stock is listed on.',
+	},
+	{
+		id: 'country',
+		title: 'Country',
+		tooltip:
+			'The country that the company is from and/or has its primary headquarters.',
 	},
 	{
 		id: 'v',
@@ -281,9 +344,17 @@ export const TOOLTIP_MAP = [
 	},
 	{
 		id: 'revenue',
-		title: 'Revenue',
+		title: 'Revenue (ttm)',
 		tooltip:
 			'Revenue is the amount of money a company receives from its main business activities, such as sales of products or services. Revenue is also called sales.',
+	},
+	{
+		id: 'revenueGrowth',
+		title: 'Revenue Growth (YoY)',
+		tooltip:
+			"Revenue growth is how much a company's trailing 12-month revenue has increased compared to the previous 12-month period, expressed as a percentage.",
+		formula:
+			'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%',
 	},
 	{
 		id: 'grossProfit',
@@ -308,6 +379,14 @@ export const TOOLTIP_MAP = [
 		formula: 'Net Income = Revenue - All Expenses',
 	},
 	{
+		id: 'netIncomeGrowth',
+		title: 'Net Income Growth (YoY)',
+		tooltip:
+			"Net income growth is how much a company's trailing 12-month earnings have increased or decreased compared to the 12-month period a year ago.",
+		formula:
+			'Net Income Growth = ((Current Net Income / Previous Net Income) - 1) * 100%',
+	},
+	{
 		id: 'ebitda',
 		title: 'EBITDA',
 		tooltip:
@@ -326,8 +405,15 @@ export const TOOLTIP_MAP = [
 		id: 'eps',
 		title: 'EPS (Diluted)',
 		tooltip:
-			'Earnings per share is the portion of a company\'s profit that is allocated to each individual stock. Diluted EPS is calculated by dividing net income by "diluted" shares outstanding.',
-		formula: 'Diluted EPS = Net Income / Shares Outstanding (Diluted)',
+			"Earnings per share (EPS) is the portion of a company's profit that is allocated to each individual stock. EPS is calculated by dividing net income by shares outstanding.",
+		formula: 'EPS = Net Income / Shares Outstanding',
+	},
+	{
+		id: 'epsGrowth',
+		title: 'EPS Growth (YoY)',
+		tooltip:
+			"EPS growth is how much a company's trailing 12-month earnings per share have changed compared to the 12-month period a year ago.",
+		formula: 'EPS Growth = ((Current EPS / Previous EPS) - 1) * 100%',
 	},
 	{
 		id: 'cash',
@@ -350,6 +436,12 @@ export const TOOLTIP_MAP = [
 		tooltip:
 			'Net Cash / Debt is an indicator of the financial position of a company. It is calculated by taking the total amount of cash and cash equivalents and subtracting the total debt.',
 		formula: 'Net Cash / Debt = Total Cash - Total Debt',
+	},
+	{
+		id: 'netCashGrowth',
+		title: 'Net Cash / Debt Growth (YoY)',
+		tooltip:
+			'Net cash/debt growth is the change in net cash position of the company in one year.',
 	},
 	{
 		id: 'equity',
@@ -377,6 +469,13 @@ export const TOOLTIP_MAP = [
 		tooltip:
 			'Free cash flow is the cash remaining after the company spends on everything required to maintain and grow the business. It is calculated by subtracting capital expenditures from operating cash flow.',
 		formula: 'Free Cash Flow = Operating Cash Flow - Capital Expenditures',
+	},
+	{
+		id: 'fcfGrowth',
+		title: 'FCF Growth (YoY)',
+		tooltip:
+			"Free Cash Flow (FCF) growth is how much the company's trailing 12-month free cash flow has increased or decreased compared to the 12-month period a year ago.",
+		formula: 'FCF Growth = ((Current FCF / Previous FCF) - 1) * 100%',
 	},
 	{
 		id: 'fcfps',
@@ -431,7 +530,7 @@ export const TOOLTIP_MAP = [
 		id: 'dps',
 		title: 'Dividend Per Share',
 		tooltip:
-			'Total amount paid to each outstanding share in dividends during the period.',
+			'Total amount paid to each outstanding share in dividends during the last 12 months.',
 	},
 	{
 		id: 'dy',
@@ -439,7 +538,25 @@ export const TOOLTIP_MAP = [
 		tooltip:
 			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
 		formula:
-			'Dividend Yield = (Annual Dividends Per Share / (Market Cap / Shares Outstanding)) * 100%',
+			'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%',
+	},
+	{
+		id: 'p',
+		title: 'Stock Price',
+		tooltip:
+			'The stock price is the current price of a single share, in US dollars.',
+	},
+	{
+		id: 'se',
+		title: 'Sector',
+		tooltip:
+			'The sector that the company is in, according to the Global Industry Classification Standard (GICS).',
+	},
+	{
+		id: 'i',
+		title: 'Industry',
+		tooltip:
+			'The industry that the company is in, according to the Global Industry Classification Standard (GICS).',
 	},
 	{
 		id: 'earningsYield',
@@ -457,9 +574,9 @@ export const TOOLTIP_MAP = [
 	},
 	{
 		id: 'dg',
-		title: 'Dividend Growth',
+		title: 'Dividend Growth (1Y)',
 		tooltip:
-			'The change in dividend payments per share, compared to the previous period.',
+			'The percentage change in dividends paid per share, compared to one year ago.',
 		formula:
 			'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%',
 	},
@@ -470,6 +587,21 @@ export const TOOLTIP_MAP = [
 			"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
 		formula:
 			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%',
+	},
+	{
+		id: 'buybackYield',
+		title: 'Buyback Yield / Dilution',
+		tooltip:
+			'The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.',
+		formula:
+			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%',
+	},
+	{
+		id: 'totalReturn',
+		title: 'Total Shareholder Return',
+		tooltip:
+			'The total shareholder return is how much the company is returning to shareholders via dividends and share buybacks combined. It is calculated by adding up the dividend yield and buyback yield',
+		formula: 'Total Shareholder Return = Dividend Yield + Buyback Yield',
 	},
 	{
 		id: 'splitDate',

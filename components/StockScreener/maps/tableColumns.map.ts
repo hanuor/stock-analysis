@@ -147,7 +147,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage',
 	},
 	{
-		Header: 'Growth (1Y)',
+		Header: 'Div. Growth',
 		accessor: 'dg',
 		format: 'percentage',
 	},

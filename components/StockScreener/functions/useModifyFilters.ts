@@ -12,7 +12,6 @@ export function useModifyFilters() {
 	const removeFilter = screenerState((state) => state.removeFilter);
 	const showColumns = screenerState((state) => state.showColumns);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
-	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const addFilteredColumn = screenerState((state) => state.addFilteredColumn);
 	const removeFilteredColumn = screenerState(
 		(state) => state.removeFilteredColumn
@@ -32,10 +31,7 @@ export function useModifyFilters() {
 			remove(id);
 		}
 
-		// Add the column ID to the filtered columns
-		if (!filteredColumns.includes(id)) {
-			addFilteredColumn(id);
-		}
+		addFilteredColumn(id);
 
 		// Add the filter
 		addFilter({

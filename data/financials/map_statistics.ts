@@ -84,7 +84,7 @@ export const MAP_STATISTICS = [
 		format: 'none',
 		tooltip:
 			'The forward price-to-earnings (P/E) ratio is like the PE ratio, except that it uses the estimated earnings over the next year instead of historical earnings.',
-		formula: 'Forward PE = Stock Price / 1Y Forward EPS',
+		formula: 'Forward PE = Stock Price / Forward EPS (1Y)',
 	},
 	{
 		id: 'ps',
@@ -124,8 +124,8 @@ export const MAP_STATISTICS = [
 		title: 'EV/Earnings Ratio',
 		format: 'ratio',
 		tooltip:
-			"The enterprise value to earnings (EV/Sales) ratio measures valuation, but the price is adjusted for the company's levels of cash and debt.",
-		formula: 'EV/Earnings Ratio = Enterprise Value / Net Income (ttm)',
+			"The enterprise value to earnings (EV/Earnings) ratio measures valuation, but the price is adjusted for the company's levels of cash and debt.",
+		formula: 'EV/Earnings Ratio = Enterprise Value / Net Income',
 	},
 	{
 		id: 'evrevenue',
@@ -571,7 +571,7 @@ export const MAP_STATISTICS = [
 		tooltip:
 			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
 		formula:
-			'Dividend Yield = (Annual Dividends Per Share / (Market Cap / Shares Outstanding)) * 100%',
+			'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%',
 	},
 	{
 		id: 'earningsyield',

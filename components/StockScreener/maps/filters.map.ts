@@ -304,7 +304,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Price Change 1D',
+		name: 'Price Ch. (1D)',
 		id: 'c',
 		category: ['Popular'],
 		filterType: 'numeric',
@@ -425,7 +425,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Price Target Diff.',
+		name: 'Price Target (%)',
 		id: 'ptc',
 		category: ['Popular'],
 		filterType: 'numeric',
@@ -662,7 +662,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Net Income Growth',
+		name: 'Net Inc. Growth',
 		id: 'netIncomeGrowth',
 		category: ['Financials'],
 		filterType: 'numeric',
@@ -1102,7 +1102,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'EV/Ebitda',
+		name: 'EV/EBITDA',
 		id: 'evEbitda',
 		category: ['Valuation'],
 		filterType: 'numeric',
@@ -1116,7 +1116,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'EV/Ebit',
+		name: 'EV/EBIT',
 		id: 'evEbit',
 		category: ['Valuation'],
 		filterType: 'numeric',
@@ -1194,10 +1194,11 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Dividend Growth',
+		name: 'Div. Growth',
 		id: 'dg',
 		category: ['Dividends'],
 		filterType: 'numeric',
+		numberType: 'percentage',
 		options: [
 			{ name: 'Over 10%', value: 'over-10' },
 			{ name: 'Over 5%', value: 'over-5' },
@@ -1215,6 +1216,7 @@ export const FiltersMap: FilterProps[] = [
 		id: 'pr',
 		category: ['Dividends'],
 		filterType: 'numeric',
+		numberType: 'percentage',
 		options: [
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Under 100%', value: 'under-100' },
@@ -1234,6 +1236,7 @@ export const FiltersMap: FilterProps[] = [
 		id: 'buybackYield',
 		category: ['Dividends'],
 		filterType: 'numeric',
+		numberType: 'percentage',
 		options: [
 			{ name: 'Over 10%', value: 'over-10' },
 			{ name: 'Over 5%', value: 'over-5' },
@@ -1248,6 +1251,7 @@ export const FiltersMap: FilterProps[] = [
 		id: 'totalReturn',
 		category: ['Dividends'],
 		filterType: 'numeric',
+		numberType: 'percentage',
 		options: [
 			{ name: 'Over 10%', value: 'over-10' },
 			{ name: 'Over 5%', value: 'over-5' },
@@ -1600,7 +1604,7 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
-		name: 'Inventory Turnover',
+		name: 'Inv. Turnover',
 		id: 'inventoryTurnover',
 		category: ['Other'],
 		filterType: 'numeric',

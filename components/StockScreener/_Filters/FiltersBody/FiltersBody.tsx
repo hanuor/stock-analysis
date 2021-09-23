@@ -44,7 +44,10 @@ export function RenderFilters() {
 		return (
 			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
 				{FiltersMap.map((f) => {
-					if (f.name.toLowerCase().includes(filterSearch.toLowerCase())) {
+					if (
+						f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
+						f.id.toLowerCase().includes(filterSearch.toLowerCase())
+					) {
 						return <FilterWrap key={f.name} f={f} />;
 					}
 					return null;
