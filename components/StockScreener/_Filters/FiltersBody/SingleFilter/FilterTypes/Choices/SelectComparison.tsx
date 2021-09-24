@@ -11,7 +11,7 @@ function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(' ');
 }
 
-const options = ['over', 'under', 'between', 'exactly'];
+const options = ['over', 'under', 'between', 'exactly', 'notzero'];
 
 type Props = {
 	compare: ComparisonOption;
@@ -26,7 +26,9 @@ export function SelectComparison({ compare, setCompare }: Props) {
 					<div className="relative">
 						<Listbox.Button className="relative w-full pl-2 pr-7 py-2 text-left cursor-default focus:outline-none focus:ring-0 text-smaller font-semibold text-gray-800">
 							<span className="block truncate">
-								{capitalize(compare)}
+								{compare === 'notzero'
+									? 'Not Zero'
+									: capitalize(compare)}
 							</span>
 							<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 								<ChevronDownIcon
@@ -67,7 +69,9 @@ export function SelectComparison({ compare, setCompare }: Props) {
 														'block truncate'
 													)}
 												>
-													{capitalize(option)}
+													{option === 'notzero'
+														? 'Not Zero'
+														: capitalize(option)}
 												</span>
 											</>
 										)}

@@ -11,6 +11,7 @@ type Column = {
 		| 'changePcColor'
 		| 'percentage'
 		| 'date'
+		| 'marketcap'
 		| 'padleft';
 };
 
@@ -27,7 +28,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Market Cap',
 		accessor: 'm',
-		format: 'abbreviate',
+		format: 'marketcap',
 	},
 	{
 		Header: 'Sector',
@@ -63,7 +64,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'amount',
 	},
 	{
-		Header: 'Change',
+		Header: 'Change 1D',
 		accessor: 'c',
 		format: 'changePcColor',
 	},
@@ -107,12 +108,12 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format2dec',
 	},
 	{
-		Header: 'P/S Ratio',
+		Header: 'P/S',
 		accessor: 'ps',
 		format: 'format2dec',
 	},
 	{
-		Header: 'P/B Ratio',
+		Header: 'P/B',
 		accessor: 'pb',
 		format: 'format2dec',
 	},
@@ -152,7 +153,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage',
 	},
 	{
-		Header: 'Revenue Growth (1Y)',
+		Header: 'Rev. Growth (1Y)',
 		accessor: 'revenueGrowth',
 		format: 'percentage',
 	},
@@ -237,32 +238,32 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage',
 	},
 	{
-		Header: 'Gross Margin',
+		Header: 'Gross Mrg.',
 		accessor: 'grossMargin',
 		format: 'percentage',
 	},
 	{
-		Header: 'Operating Margin',
+		Header: 'Oper. Mrg.',
 		accessor: 'operatingMargin',
 		format: 'percentage',
 	},
 	{
-		Header: 'Profit Margin',
+		Header: 'Profit Mrg.',
 		accessor: 'profitMargin',
 		format: 'percentage',
 	},
 	{
-		Header: 'FCF Margin',
+		Header: 'FCF Mrg.',
 		accessor: 'fcfMargin',
 		format: 'percentage',
 	},
 	{
-		Header: 'EBITDA Margin',
+		Header: 'EBITDA Mrg.',
 		accessor: 'ebitdaMargin',
 		format: 'percentage',
 	},
 	{
-		Header: 'EBIT Margin',
+		Header: 'EBIT Mrg.',
 		accessor: 'ebitMargin',
 		format: 'percentage',
 	},
@@ -282,11 +283,12 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format2dec',
 	},
 	{
-		Header: 'EV/Ebitda',
+		Header: 'EV/EBITDA',
 		accessor: 'evEbitda',
+		format: 'format2dec',
 	},
 	{
-		Header: 'EV/Ebit',
+		Header: 'EV/EBIT',
 		accessor: 'evEbit',
 		format: 'format2dec',
 	},
@@ -296,7 +298,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format2dec',
 	},
 	{
-		Header: 'Earnings Yield',
+		Header: 'Earn. Yield',
 		accessor: 'earningsYield',
 		format: 'percentage',
 	},
@@ -316,27 +318,27 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage',
 	},
 	{
-		Header: 'Average Volume',
+		Header: 'Av. Volume',
 		accessor: 'averageVolume',
 		format: 'format0dec',
 	},
 	{
-		Header: 'Price Change 1Y',
+		Header: 'Change 1Y',
 		accessor: 'ch1y',
 		format: 'changePcColor',
 	},
 	{
-		Header: 'Short % Float',
+		Header: 'Short/Float',
 		accessor: 'shortFloat',
 		format: 'percentage',
 	},
 	{
-		Header: 'Short % Shares',
+		Header: 'Short/Shares',
 		accessor: 'shortShares',
 		format: 'percentage',
 	},
 	{
-		Header: 'Short Ratio',
+		Header: 'Sh. Ratio',
 		accessor: 'shortRatio',
 		format: 'format2dec',
 	},
@@ -378,17 +380,17 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Earnings Date',
 		accessor: 'earningsDate',
-		format: 'align',
+		format: 'date',
 	},
 	{
 		Header: 'Ex-Div Date',
 		accessor: 'exDivDate',
-		format: 'align',
+		format: 'date',
 	},
 	{
 		Header: 'Next Ex-Div',
 		accessor: 'nextDivDate',
-		format: 'align',
+		format: 'date',
 	},
 	{
 		Header: 'ROE',
@@ -416,12 +418,12 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format0dec',
 	},
 	{
-		Header: 'Asset Turnover',
+		Header: 'Asset Turn.',
 		accessor: 'assetTurnover',
 		format: 'format2dec',
 	},
 	{
-		Header: 'Inventory Turnover',
+		Header: 'Inv. Turn.',
 		accessor: 'inventoryTurnover',
 		format: 'format2dec',
 	},
@@ -451,7 +453,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format2dec',
 	},
 	{
-		Header: 'Eff. Tax Rate',
+		Header: 'Tax Rate',
 		accessor: 'taxRate',
 		format: 'percentage',
 	},

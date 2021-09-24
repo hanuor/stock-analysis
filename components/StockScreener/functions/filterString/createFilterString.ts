@@ -10,6 +10,10 @@ type Props = {
 };
 
 export function createFilterString({ compare, first, second }: Props) {
+	if (compare === 'notzero') {
+		return 'notzero';
+	}
+
 	let filterString = `${compare}-${first}`;
 	if (second) {
 		filterString += `-${second}`;

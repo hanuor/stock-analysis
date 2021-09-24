@@ -146,10 +146,23 @@ const columns = COLUMNS_MAP.map((column) => {
 				break;
 			}
 
-			case 'padleft': {
-				header = <div className="ml-4">{column.Header}</div>;
+			case 'marketcap': {
+				header = <div className="ml-auto mr-3">{column.Header}</div>;
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return <div className="ml-4">{value}</div>;
+					return (
+						<div className="text-right mr-3">
+							{abbreviate(value, format2dec)}
+						</div>
+					);
+				};
+
+				break;
+			}
+
+			case 'padleft': {
+				header = <div className="ml-1">{column.Header}</div>;
+				cell = function FormatCell({ cell: { value } }: CellNumber) {
+					return <div className="ml-1">{value}</div>;
 				};
 				break;
 			}

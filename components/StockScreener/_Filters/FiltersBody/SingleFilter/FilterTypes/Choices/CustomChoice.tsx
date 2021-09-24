@@ -32,8 +32,8 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 			const filterObject = getFilterFromString(active, false);
 
 			setCompare(filterObject.compare);
-			setFirst(filterObject.first.replace('X', '-'));
-			setSecond(filterObject.second.replace('X', '-'));
+			setFirst(filterObject.first?.replace('X', '-'));
+			setSecond(filterObject.second?.replace('X', '-'));
 
 			if (filterObject.compare !== 'between' && filterObject.second !== '') {
 				setSecond('');
@@ -51,7 +51,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 		}
 
 		// If the values are valid, create a new filter string and update the filter
-		else if (first || second) {
+		else if (first || second || compare === 'notzero') {
 			const filterString = createFilterString({ compare, first, second });
 
 			if (filterString !== active) {
@@ -71,14 +71,16 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 				<div>
 					<SelectComparison compare={compare} setCompare={setCompare} />
 				</div>
-				<input
-					type="text"
-					placeholder="Value"
-					value={first}
-					onChange={(e) => setFirst(e.target.value)}
-					tabIndex={0}
-					className="shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]"
-				/>
+				<div className={compare !== 'notzero' ? 'block' : 'hidden'}>
+					<input
+						type="text"
+						placeholder="Value"
+						value={first}
+						onChange={(e) => setFirst(e.target.value)}
+						tabIndex={0}
+						className="shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]"
+					/>
+				</div>
 				<div className={compare === 'between' ? 'block' : 'hidden'}>&</div>
 				<input
 					type="text"
