@@ -68,7 +68,10 @@ export type SingleStock = {
 };
 
 export type ScreenerData = {
-	stocks: SingleStock[];
+	stocks: {
+		count: number;
+		data: SingleStock[];
+	};
 };
 
 export type CellString = {

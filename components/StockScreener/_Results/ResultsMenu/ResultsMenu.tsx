@@ -1,3 +1,4 @@
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import 'regenerator-runtime/runtime';
 import { FilterValue } from 'react-table';
 import { Export } from 'components/Controls/Export';
@@ -15,18 +16,21 @@ interface Props {
 	append?: string;
 }
 
-export const ResultsControls = ({
+export function ResultsControls({
 	count,
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
 	tableId,
-}: Props) => {
+}: Props) {
+	const loaded = screenerDataState((state) => state.loaded);
+	const fullCount = screenerDataState((state) => state.fullCount);
+
 	return (
 		<div className="grid grid-cols-2 lg:flex items-center lg:space-x-4 bp:space-x-4 lg:py-2 lg:px-1 lg:overflow-visible border-t border-gray-300 mt-6">
 			<div>
 				<h2 className="text-xl bp:text-[1.3rem] font-semibold whitespace-nowrap text-gray-800">
-					{`${count} Stocks`}
+					{loaded ? `${count} Stocks` : `${fullCount} Stocks`}
 				</h2>
 			</div>
 			<div className="lg:order-5 py-2 lg:py-0 ml-auto lg:ml-0">
@@ -55,4 +59,4 @@ export const ResultsControls = ({
 			</div>
 		</div>
 	);
-};
+}

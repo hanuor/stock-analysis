@@ -1,4 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { FilterId, ColumnName } from 'components/StockScreener/screener.types';
 import { resultColumns } from 'components/StockScreener/maps/resultColumns.map';
 import { getData } from 'functions/API';
@@ -16,7 +17,7 @@ export function ResultsMenuItem({ name }: Props) {
 	const fetchedColumns = screenerState((state) => state.fetchedColumns);
 	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn);
-	const addDataColumn = screenerState((state) => state.addDataColumn);
+	const addDataColumn = screenerDataState((state) => state.addDataColumn);
 
 	let display = name.toString();
 	let dataTitle = name.toString();

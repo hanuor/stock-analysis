@@ -1,16 +1,7 @@
 import create from 'zustand';
-import {
-	SingleStock,
-	FilterId,
-	FilterValue,
-} from 'components/StockScreener/screener.types';
-import { mergeColumns } from 'components/StockScreener/functions/mergeColumns';
+import { FilterId, FilterValue } from 'components/StockScreener/screener.types';
 
 interface ScreenerState {
-	data: SingleStock[];
-	setData: (data: SingleStock[]) => void;
-	addDataColumn: (newColumn: SingleStock[], id: FilterId) => void;
-
 	// Filters
 	filters: FilterValue[];
 	addFilter: (newFilter: FilterValue) => void;
@@ -49,15 +40,6 @@ interface ScreenerState {
 }
 
 export const screenerState = create<ScreenerState>((set) => ({
-	// Data
-	data: [],
-	setData: (newData: SingleStock[]) =>
-		set((state) => ({ ...state, data: newData })),
-	addDataColumn: (newColumn: SingleStock[], id: FilterId) =>
-		set((state) => ({
-			data: mergeColumns(state.data, newColumn, id),
-		})),
-
 	// Filters
 	filters: [],
 	addFilter: (newFilter: FilterValue) =>

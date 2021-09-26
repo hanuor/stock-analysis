@@ -1,5 +1,6 @@
 import { FilterId } from '../screener.types';
 import { screenerState } from 'components/StockScreener/screener.state';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { getData } from 'functions/API';
 
 /**
@@ -11,7 +12,7 @@ export function useModifyColumns() {
 	const setShowColumns = screenerState((state) => state.setShowColumns);
 	const fetchedColumns = screenerState((state) => state.fetchedColumns);
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn);
-	const addDataColumn = screenerState((state) => state.addDataColumn);
+	const addDataColumn = screenerDataState((state) => state.addDataColumn);
 
 	// Fetch a new data column
 	async function fetchColumn(id: FilterId) {

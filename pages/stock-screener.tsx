@@ -1,6 +1,9 @@
-import { screenerState } from 'components/StockScreener/screener.state';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { GetStaticProps } from 'next';
-import { ScreenerData } from 'components/StockScreener/screener.types';
+import {
+	ScreenerData,
+	SingleStock,
+} from 'components/StockScreener/screener.types';
 import { getData } from 'functions/API';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { SEO } from 'components/SEO';
@@ -8,15 +11,29 @@ import { StockScreener } from 'components/StockScreener/_StockScreener';
 import React, { useEffect } from 'react';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 
+async function fetchFullData(
+	setData: (data: SingleStock[]) => void,
+	setLoaded: (loaded: boolean) => void
+) {
+	const data = await getData('screener?type=f');
+	setData(data.data);
+	setLoaded(true);
+}
+
 export default function StockScreenerPage({ stocks }: ScreenerData) {
-	const data = screenerState((state) => state.data);
-	const setData = screenerState((state) => state.setData);
+	const data = screenerDataState((state) => state.data);
+	const setData = screenerDataState((state) => state.setData);
+	const setLoaded = screenerDataState((state) => state.setLoaded);
+	const setFullCount = screenerDataState((state) => state.setFullCount);
 
 	useEffect(() => {
 		if (!data.length) {
-			setData(stocks);
+			console.log(stocks.count);
+			setFullCount(stocks.count);
+			setData(stocks.data);
+			fetchFullData(setData, setLoaded);
 		}
-	}, [data.length, setData, stocks]);
+	}, [data.length, setData, setFullCount, setLoaded, stocks]);
 
 	return (
 		<>

@@ -1,4 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { useMemo } from 'react';
 import {
 	useTable,
@@ -18,7 +19,7 @@ interface Props {
 }
 
 export function ResultsTable({ cols }: Props) {
-	const rows = screenerState((state) => state.data);
+	const rows = screenerDataState((state) => state.data);
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
