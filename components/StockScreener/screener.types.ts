@@ -1,50 +1,100 @@
 // All possible filters
 // The IDs are shortened to minimize data payload size
-export type FilterId = string;
-// | 's' // symbol
-// | 'n' // company name
-// | 'm' // market cap
-// | 'p' // stock price
-// | 'c' // stock price change (%)
-// | 'i' // industry
-// | 'v' // volume
-// | 'pe' // pe ratio
-// | 'se' // se
-// | 'exchange' // exchange
-// | 'country' // country
-// | 'employees' // employees
-// | 'founded' // founded year
-// | 'ipoDate' // ipo date
-// | 'ev' // enterprise value
-// | 'fpe' // forward PE
-// | 'ps' // price to sales ratio
-// | 'pb' // price to book ratio
-// | 'pfcf' // price to free cash flow ratio
-// | 'div' // dividend amount
-// | 'dy' // dividend yield
-// | 'pr' // payout ratio
-// | 'dg' // dividend growth
-// | 'ar' // analyst ratings
-// | 'ac' // analyst rating count
-// | 'pt' // price target
-// | 'ptc' // price target change (%)
-// | 'revenue'
-// | 'revenueGrowth'
-// | 'grossProfit'
-// | 'operatingIncome'
-// | 'netIncome'
-// | 'ebit'
-// | 'ebitda'
-// | 'eps'
-// | 'epsGrowth'
-// | 'ocf' // operating cash flow
-// | 'fcf' // free cash flow
-// | 'fcfGrowth' // free cash flow growth
-// | 'fcfps' // free cash flow per share
-// | 'cash'
-// | 'debt'
-// | 'netCash'
-// | 'netCashGrowth';
+export type FilterId =
+	| 's' // Symbol
+	| 'n' // Name
+	| 'm' // Market Cap
+	| 'ev' // Enterprise Value
+	| 'p' // Stock Price
+	| 'pe' // PE Ratio
+	| 'fpe' // Forward PE
+	| 'exchange' // Exchange
+	| 'dy' // Dividend Yield
+	| 'se' // Sector
+	| 'i' // Industry
+	| 'c' // Price Change 1D
+	| 'ch1y' // Price Change 1Y
+	| 'v' // Volume
+	| 'ar' // Analyst Rating
+	| 'ac' // Analyst Count
+	| 'pt' // Price Target
+	| 'ptc' // Price Target (%)
+	| 'country' // Country
+	| 'employees' // Employees
+	| 'founded' // Founded
+	| 'ipoDate' // IPO Date
+	| 'revenue' // Revenue
+	| 'revenueGrowth' // Revenue Growth
+	| 'grossProfit' // Gross Profit
+	| 'operatingIncome' // Op. Income
+	| 'netIncome' // Net Income
+	| 'netIncomeGrowth' // Net Inc. Growth
+	| 'eps' // EPS
+	| 'epsGrowth' // EPS Growth
+	| 'ebit' // EBIT
+	| 'ebitda' // EBITDA
+	| 'ocf' // Op. Cash Flow
+	| 'fcf' // Free Cash Flow
+	| 'fcfGrowth' // FCF Growth
+	| 'fcfps' // FCF / Share
+	| 'cash' // Total Cash
+	| 'debt' // Total Debt
+	| 'netCash' // Net Cash / Debt
+	| 'netCashGrowth' // Net Cash Growth
+	| 'grossMargin' // Gross Margin
+	| 'operatingMargin' // Operating Margin
+	| 'profitMargin' // Profit Margin
+	| 'fcfMargin' // FCF Margin
+	| 'ebitdaMargin' // EBITDA Margin
+	| 'ebitMargin' // EBIT Margin
+	| 'ps' // PS Ratio
+	| 'pb' // PB Ratio
+	| 'pfcf' // P/FCF Ratio
+	| 'peg' // PEG Ratio
+	| 'evSales' // EV/Sales
+	| 'evEarnings' // EV/Earnings
+	| 'evEbitda' // EV/EBITDA
+	| 'evEbit' // EV/EBIT
+	| 'evFcf' // EV/FCF
+	| 'earningsYield' // Earnings Yield
+	| 'fcfYield' // FCF Yield
+	| 'dps' // Dividend ($)
+	| 'dg' // Div. Growth
+	| 'pr' // Payout Ratio
+	| 'buybackYield' // Buyback Yield
+	| 'totalReturn' // Total Return
+	| 'averageVolume' // Average Volume
+	| 'beta' // Beta (1Y)
+	| 'shortFloat' // Short % Float
+	| 'shortShares' // Short % Shares
+	| 'shortRatio' // Short Ratio
+	| 'sharesOut' // Shares Out
+	| 'float' // Float
+	| 'sharesYoY' // Shares Ch. (YoY)
+	| 'sharesQoQ' // Shares Ch. (QoQ)
+	| 'sharesInsiders' // Shares Insiders
+	| 'sharesInstitutions' // Shares Institut.
+	| 'earningsDate' // Earnings Date
+	| 'exDivDate' // Ex-Div Date
+	| 'nextDivDate' // Next Ex-Div
+	| 'roe' // Return on Equity
+	| 'roa' // Return on Assets
+	| 'roic' // Return on Capital
+	| 'revPerEmployee' // Rev / Employee
+	| 'profitPerEmployee' // Prof. / Employee
+	| 'assetTurnover' // Asset Turnover
+	| 'inventoryTurnover' // Inv. Turnover
+	| 'currentRatio' // Current Ratio
+	| 'quickRatio' // Quick Ratio
+	| 'debtEquity' // Debt / Equity
+	| 'debtEbitda' // Debt / EBITDA
+	| 'debtFcf' // Debt / FCF
+	| 'taxRate' // Eff. Tax Rate
+	| 'taxByRevenue' // Tax / Revenue
+	| 'equity' // Shareh. Equity
+	| 'workingCapital' // Working Capital
+	| 'ls' // Last Stock Split
+	| 'splitDate'; // Last Split Date
 
 // Results columns
 export type ColumnName =
@@ -66,6 +116,8 @@ export type SingleStock = {
 	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string;
 };
+
+export type SingleDataPoint = string[];
 
 export type ScreenerData = {
 	stocks: {

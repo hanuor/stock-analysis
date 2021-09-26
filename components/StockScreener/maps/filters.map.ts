@@ -1800,7 +1800,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Last Stock Split',
-		id: 'lastSplit',
+		id: 'ls',
 		category: ['Other'],
 		filterType: 'stringmatch',
 		options: [

@@ -1,6 +1,8 @@
+import { FilterId } from '../screener.types';
+
 type Column = {
 	Header: string;
-	accessor: string;
+	accessor: FilterId;
 	format?:
 		| 'linkSymbol'
 		| 'amount'
@@ -474,7 +476,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Last Split',
-		accessor: 'lastSplit',
+		accessor: 'ls',
 		format: 'align',
 	},
 	{

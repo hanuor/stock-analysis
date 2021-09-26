@@ -26,9 +26,9 @@ interface ScreenerState {
 	fetchedColumns: FilterId[];
 	showColumns: FilterId[];
 	filteredColumns: FilterId[];
-	addFetchedColumn: (newColumn: string) => void;
-	addFilteredColumn: (newColumn: string) => void;
-	removeFilteredColumn: (columns: string) => void;
+	addFetchedColumn: (newColumn: FilterId) => void;
+	addFilteredColumn: (newColumn: FilterId) => void;
+	removeFilteredColumn: (columns: FilterId) => void;
 	setShowColumns: (newColumns: FilterId[]) => void;
 	columnDropdownOpen: boolean;
 	setColumnDropdownOpen: (open: boolean) => void;
