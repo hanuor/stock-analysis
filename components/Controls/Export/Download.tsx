@@ -4,28 +4,31 @@ import { navState } from 'state/navState';
 interface Props {
 	title: string;
 	type: 'csv' | 'xlsx';
-	tableId: string;
+	data: any;
+	fixValuef: (n: any) => any;
+	isTable: boolean;
 }
 
-export default function Download({ title, type, tableId }: Props) {
+export default function Download({
+	title,
+	type,
+	data,
+	isTable,
+	fixValuef,
+}: Props) {
 	const path = navState((state) => state.path);
 
 	const fileName = `${path.one}${path.two ? '-' + path.two : ''}${
 		path.three ? '-' + path.three : ''
 	}`;
 
-	function download(type: 'csv' | 'xlsx') {
-		return ExcellentExport.convert(
-			{
-				openAsDownload: true,
-				filename: fileName,
-				format: type,
-			},
-			[
+	const returnArray = isTable
+		? [
 				{
 					name: 'Export',
-					from: { table: tableId },
-					fixValue: (value) => {
+
+					from: { table: data },
+					fixValue: (value: any) => {
 						if (value.includes('href=') || value.includes('class=')) {
 							// Grab value between > and 2nd <
 							const start = value.indexOf('>') + 1;
@@ -41,7 +44,38 @@ export default function Download({ title, type, tableId }: Props) {
 						return value;
 					},
 				},
-			]
+		  ]
+		: [
+				{
+					name: 'Export',
+
+					from: { array: data },
+					fixValue: (value: any) => {
+						if (value.includes('href=') || value.includes('class=')) {
+							// Grab value between > and 2nd <
+							const start = value.indexOf('>') + 1;
+							const end = value.indexOf('<', 1);
+							return value.substring(start, end);
+						}
+						if (value.includes('title=')) {
+							// Grab value between double quotes
+							const start = value.indexOf('"') + 1;
+							const end = value.lastIndexOf('"');
+							return value.substring(start, end);
+						}
+						return value;
+					},
+				},
+		  ];
+
+	function download(type: 'csv' | 'xlsx') {
+		return ExcellentExport.convert(
+			{
+				openAsDownload: true,
+				filename: fileName,
+				format: type,
+			},
+			returnArray
 		);
 	}
 

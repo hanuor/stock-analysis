@@ -1,0 +1,14 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Debug React Run",
+			"url": "http://localhost:3001",
+			"webRoot": "${workspaceFolder}/",
+			"sourceMaps": true,
+			"breakOnLoad": true
+		}
+	]
+}
