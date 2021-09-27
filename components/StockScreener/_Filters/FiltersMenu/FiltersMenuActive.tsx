@@ -3,7 +3,6 @@ import { CloseCircleIcon } from 'components/Icons/CloseCircle';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 
-// TODO enable hiding functionality for dropdown icon
 export function FiltersMenuActive() {
 	const filters = screenerState((state) => state.filters);
 	const filterMenu = screenerState((state) => state.filterMenu);

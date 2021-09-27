@@ -65,8 +65,6 @@ export function ResultsTable({ cols }: Props) {
 		usePagination
 	);
 
-	console.log('ResultsTable');
-
 	return (
 		<>
 			<ResultsMenu
