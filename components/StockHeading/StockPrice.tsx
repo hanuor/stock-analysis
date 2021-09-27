@@ -1,33 +1,13 @@
 import { useState, useEffect } from 'react';
 import { MoonIcon } from 'components/Icons/Moon';
 import { SunIcon } from 'components/Icons/Sun';
-import { useQuery } from 'react-query';
 import { Info, IpoInfo } from 'types/Info';
 import { Quote } from 'types/Quote';
-import { isTradingHours } from 'functions/datetime/isTradingHours';
-import { getData } from 'functions/API';
-
-async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
-	const id = queryKey[1];
-	if (typeof id === 'undefined') {
-		return null;
-	}
-
-	return await getData(`q?i=${id}`);
-}
+import { useQuote } from 'hooks/useQuote';
 
 export default function StockPrice({ info }: { info: Info }) {
 	const [displayQuote, setDisplayQuote] = useState(info.quote);
-
-	const tradingHours = isTradingHours();
-
-	const { data } = useQuery(['q', info.id], queryQuote, {
-		refetchInterval: tradingHours ? 5000 : false,
-		refetchOnWindowFocus: tradingHours ? true : false,
-		initialData: info.quote,
-		initialDataUpdatedAt: Date.now() - 60000,
-		enabled: info.state !== 'upcomingipo' && !info.archived,
-	});
+	const data = useQuote(info);
 
 	useEffect(() => {
 		if (data) {

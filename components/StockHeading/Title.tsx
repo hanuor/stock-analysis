@@ -1,17 +1,6 @@
 import { Info } from 'types/Info';
-import { Quote } from 'types/Quote';
 import { InformationCircleIcon } from 'components/Icons/InformationCircle';
-import { isTradingHoursOpen } from 'functions/datetime/isTradingHours';
-
-const getQuoteSource = (quote: Quote) => {
-	if (
-		(isTradingHoursOpen() || quote.status === 'closed') &&
-		quote.exchange !== 'OTCMKTS'
-	) {
-		return 'IEX Real-Time Price';
-	}
-	return 'Delayed Price';
-};
+import { TitleByline } from './TitleByline';
 
 export const Title = ({ info }: { info: Info }) => {
 	if (typeof info.symbol === 'undefined') {
@@ -36,11 +25,7 @@ export const Title = ({ info }: { info: Info }) => {
 				{`${name} (${info.ticker})`}
 			</h1>
 			{info.quote && info.state !== 'upcomingipo' && !info.archived && (
-				<div className="text-tiny text-gray-600 mt-[1px]">
-					{`${info.quote.exchange || info.exchange}: ${
-						info.ticker
-					} · ${getQuoteSource(info.quote)} · USD`}
-				</div>
+				<TitleByline info={info} />
 			)}
 			{info.notice && (
 				<div className={noticeStyles}>

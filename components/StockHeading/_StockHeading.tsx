@@ -18,8 +18,8 @@ export default function StockHeading({
 	return (
 		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-2">
 			<Breadcrumbs url={url} />
-			<Title info={info} />
 			<QueryClientProvider client={queryClient}>
+				<Title info={info} />
 				<StockPrice info={info} />
 			</QueryClientProvider>
 			{info.type === 'stocks' ? (
