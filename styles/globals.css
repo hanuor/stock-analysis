@@ -6,6 +6,12 @@
 	body {
 		@apply text-gray-900 bg-white;
 	}
+	.touch-auto {
+		touch-action: auto;
+	}
+	.touch-none {
+		touch-action: none;
+	}
 
 	.skip-nav {
 		border: 0;

@@ -32,16 +32,16 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				description={`Interactive ${info.nameFull} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`/stocks/${info.symbol}/chart/`}
 			/>
-			<div className="px-2 sm:contain">
+			<div className="px-2.5 sm:contain">
 				<div className="py-2">
 					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
 						<SelectPeriod dispatcher={setPeriod} />
 						<SelectType dispatcher={setType} />
 					</div>
-					<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+					<div className="touch-none h-[400px] xs:h-[450px] bp:h-[500px] sm:h-[600px]">
 						{info.state !== 'upcomingipo' ? (
-							<div className="h-[400px] xs:h-[450px] bp:h-[550px] sm:h-[600px]">
+							<div className="touch-auto h-[400px] xs:h-[450px] bp:h-[500px] sm:h-[600px]">
 								{loading && <Loading />}
 
 								<StockChart

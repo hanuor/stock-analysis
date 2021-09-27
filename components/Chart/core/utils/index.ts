@@ -61,6 +61,7 @@ export const MOUSEMOVE = 'mousemove.pan';
 export const MOUSEUP = 'mouseup.pan';
 export const TOUCHMOVE = 'touchmove.pan';
 export const TOUCHEND = 'touchend.pan touchcancel.pan';
+export const POINTERDOWN = 'pointerdown';
 
 export function getTouchProps(touch: any) {
 	return {
