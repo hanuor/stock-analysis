@@ -1,6 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
-import { screenerDataState } from 'components/StockScreener/screenerdata.state';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
 	useTable,
 	useSortBy,
@@ -10,24 +9,36 @@ import {
 } from 'react-table';
 import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
-import { ResultsControls } from '../ResultsMenu/ResultsMenu';
+import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
+import { SingleStock } from 'components/StockScreener/screener.types';
+import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData';
 
 interface Props {
 	cols: any;
+	initial: SingleStock[];
+	fullCount: number;
 }
 
-export function ResultsTable({ cols }: Props) {
-	const rows = screenerDataState((state) => state.data);
+export function ResultsTable({ cols, initial, fullCount }: Props) {
+	const [useData, setUseData] = useState(initial);
+	const fetchFullData = useFetchFullData();
+
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
 
-	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
+	useEffect(() => {
+		fetchFullData(setUseData);
+	}, [fetchFullData]);
+
+	const data = useMemo(
+		() => filterItems(useData, filters),
+		[useData, filters]
+	);
 	const columns = useMemo(() => cols, [cols]);
-	const count = data.length;
 
 	const {
 		headerGroups,
@@ -58,10 +69,13 @@ export function ResultsTable({ cols }: Props) {
 		usePagination
 	);
 
+	console.log('ResultsTable');
+
 	return (
 		<>
-			<ResultsControls
-				count={count}
+			<ResultsMenu
+				fullCount={fullCount}
+				count={data.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={globalFilter}

@@ -12,6 +12,8 @@ interface ScreenerDataState {
 	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void;
 	loaded: boolean;
 	setLoaded: (loaded: boolean) => void;
+	fullyLoaded: boolean;
+	setFullyLoaded: (fullyLoaded: boolean) => void;
 	fullCount: number;
 	setFullCount: (fullCount: number) => void;
 }
@@ -27,6 +29,9 @@ export const screenerDataState = create<ScreenerDataState>((set) => ({
 		})),
 	loaded: false,
 	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
+	fullyLoaded: false,
+	setFullyLoaded: (newFullyLoaded: boolean) =>
+		set({ fullyLoaded: newFullyLoaded }),
 	fullCount: 0,
 	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount }),
 }));

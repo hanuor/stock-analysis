@@ -2,6 +2,7 @@ import { screenerState } from 'components/StockScreener/screener.state';
 import {
 	CellString,
 	CellNumber,
+	SingleStock,
 } from 'components/StockScreener/screener.types';
 import Link from 'next/link';
 import { abbreviate } from 'components/StockScreener/functions/abbreviate';
@@ -190,12 +191,23 @@ const columns = COLUMNS_MAP.map((column) => {
 	};
 });
 
-export function ResultsBody() {
+type Props = {
+	initial: SingleStock[];
+	fullCount: number;
+};
+
+export function ResultsBody({ initial, fullCount }: Props) {
 	const showColumns = screenerState((state) => state.showColumns);
 
 	const displayColumns = columns.filter((column: any) =>
 		showColumns.includes(column.accessor)
 	);
 
-	return <ResultsTable cols={displayColumns} />;
+	return (
+		<ResultsTable
+			cols={displayColumns}
+			initial={initial}
+			fullCount={fullCount}
+		/>
+	);
 }
