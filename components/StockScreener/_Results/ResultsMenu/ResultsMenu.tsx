@@ -7,7 +7,6 @@ import { ResultsNav } from './ResultsNav';
 import { ColumnDropdown } from 'components/StockScreener/_Results/ResultsMenu/ColumnSelection/ColumnDropdown';
 
 interface Props {
-	fullCount: number;
 	count: number;
 	title: string;
 	useAsyncDebounce: (value: any, wait: number) => any;
@@ -18,13 +17,13 @@ interface Props {
 }
 
 export function ResultsMenu({
-	fullCount,
 	count,
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
 	tableId,
 }: Props) {
+	const fullCount = screenerDataState((state) => state.fullCount);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 
 	return (

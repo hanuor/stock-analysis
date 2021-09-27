@@ -1,5 +1,6 @@
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { screenerState } from 'components/StockScreener/screener.state';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
 	useTable,
 	useSortBy,
@@ -12,17 +13,14 @@ import { SortDownIcon } from 'components/Icons/SortDown';
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
-import { SingleStock } from 'components/StockScreener/screener.types';
 import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData';
 
 interface Props {
 	cols: any;
-	initial: SingleStock[];
-	fullCount: number;
 }
 
-export function ResultsTable({ cols, initial, fullCount }: Props) {
-	const [useData, setUseData] = useState(initial);
+export function ResultsTable({ cols }: Props) {
+	const rows = screenerDataState((state) => state.data);
 	const fetchFullData = useFetchFullData();
 
 	const filters = screenerState((state) => state.filters);
@@ -31,13 +29,11 @@ export function ResultsTable({ cols, initial, fullCount }: Props) {
 	const showColumns = screenerState((state) => state.showColumns);
 
 	useEffect(() => {
-		fetchFullData(setUseData);
-	}, [fetchFullData]);
+		fetchFullData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-	const data = useMemo(
-		() => filterItems(useData, filters),
-		[useData, filters]
-	);
+	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
 	const columns = useMemo(() => cols, [cols]);
 
 	const {
@@ -74,7 +70,6 @@ export function ResultsTable({ cols, initial, fullCount }: Props) {
 	return (
 		<>
 			<ResultsMenu
-				fullCount={fullCount}
 				count={data.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
