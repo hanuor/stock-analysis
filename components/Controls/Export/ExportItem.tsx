@@ -10,7 +10,7 @@ interface ExportItemProps {
 	type: 'csv' | 'xlsx';
 	data: string;
 	isTable: boolean;
-	fixValuef: (n: any) => any;
+	fixValuef?: (n: any) => any;
 }
 
 export const ExportItem = ({
