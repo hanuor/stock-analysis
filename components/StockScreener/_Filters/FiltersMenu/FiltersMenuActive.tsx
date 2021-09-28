@@ -15,7 +15,8 @@ export function FiltersMenuActive() {
 
 	const count = filters.length;
 
-	let classes = 'text-lg font-semibold ml-0.5 lg:ml-1 cursor-pointer flex';
+	let classes =
+		'text-lg font-semibold ml-0.5 lg:ml-1 cursor-pointer flex focus:outline-none focus:font-bold';
 	if (filterMenu !== 'Active') {
 		classes += ' bll';
 	}
@@ -41,7 +42,12 @@ export function FiltersMenuActive() {
 					</div>
 				)}
 
-				<div className={classes} onClick={() => setFilterMenu('Active')}>
+				<div
+					className={classes}
+					onClick={() => setFilterMenu('Active')}
+					onKeyPress={(e) => e.key === 'Enter' && setFilterMenu('Active')}
+					tabIndex={0}
+				>
 					<span>Filters</span>
 					<div className="ml-1 dont-move" data-title="(2)">
 						({count})
@@ -57,6 +63,15 @@ export function FiltersMenuActive() {
 								setShowColumns(['s', 'n', 'm']);
 							}
 						}}
+						onKeyPress={(e) => {
+							if (e.key === 'Enter') {
+								clearFilters();
+								if (resultsMenu === 'Filtered') {
+									setShowColumns(['s', 'n', 'm']);
+								}
+							}
+						}}
+						tabIndex={0}
 					>
 						<CloseCircleIcon classes="w-4 h-4 ml-1 lg:ml-2 -mb-0.5" />
 						<div className="ml-[1.5px]">Clear</div>

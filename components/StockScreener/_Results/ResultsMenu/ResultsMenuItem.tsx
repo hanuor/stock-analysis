@@ -61,6 +61,7 @@ export function ResultsMenuItem({ name }: Props) {
 				<span
 					className="bg-gray-100 py-1 px-2 rounded-md font-medium"
 					data-title={dataTitle}
+					tabIndex={0}
 				>
 					{display}
 				</span>
@@ -74,7 +75,12 @@ export function ResultsMenuItem({ name }: Props) {
 				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
 				data-title={dataTitle}
 				onClick={() => handleFilter(name)}
+				onKeyPress={(e) => {
+					e.key === 'Enter' && handleFilter(name);
+				}}
 				onMouseOver={() => handleHover(name)}
+				onFocus={() => handleHover(name)}
+				tabIndex={0}
 			>
 				{display}
 			</span>

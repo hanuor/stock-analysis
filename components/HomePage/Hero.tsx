@@ -1,13 +1,21 @@
 import Link from 'next/link';
 import { SiteSearch } from 'components/Search/SiteSearch';
 
+// TODO: When removing stock screener link, add back 4 padding to top
 export const Hero = () => (
 	<>
-		<section className="bg-gray-100 py-12 md:py-28 lg:py-44 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
+		<section className="bg-gray-100 py-8 md:py-24 lg:py-40 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 			<div className="mx-auto max-w-[850px] text-center">
-				<div className="mx-auto my-4 text-xl font-semibold bll">
+				<div className="mx-auto my-4 text-xl font-semibold bll relative">
 					<Link href="/stock-screener" prefetch={false}>
-						<a>Stock Screener</a>
+						<a>
+							<div className="relative inline">
+								Stock Screener
+								<div className="absolute -right-3 -top-2 text-red-500 text-tiny font-bold transform -rotate-6">
+									NEW
+								</div>
+							</div>
+						</a>
 					</Link>
 				</div>
 				<h1 className="text-2xl xs:text-3xl md:text-4xl lg:text-[42px] font-bold mb-5 lg:mb-7">

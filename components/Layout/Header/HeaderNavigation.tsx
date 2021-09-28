@@ -25,6 +25,16 @@ export const HeaderNavigation = ({ device, setOpen }: Props) => {
 						</Link>
 					</li>
 					<li>
+						<Link href="/stock-screener/" prefetch={false}>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								Screener
+							</a>
+						</Link>
+					</li>
+					<li>
 						<Link href="/ipos/" prefetch={false}>
 							<a
 								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"

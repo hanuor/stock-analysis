@@ -26,11 +26,26 @@ export function PresetChoice({ option, filter, active }: Props) {
 		}
 	}
 
+	function handleKeyPress(e: React.KeyboardEvent) {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			handleSelection(option.name, option.value);
+		}
+		if (e.key === 'Escape') {
+			e.preventDefault();
+			setOpenFilter('');
+		}
+
+		console.log(e.key);
+	}
+
 	return (
 		<div className="border-b border-gray-100 last:border-0">
 			<div
-				className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-default"
+				className="block px-4 py-2 text-sm text-gray-700 focus:outline-none hover:bg-gray-100 focus:bg-blue-100 hover:text-gray-900 focus:text-gray-900 cursor-default"
 				onClick={() => handleSelection(option.name, option.value)}
+				onKeyDown={(e) => handleKeyPress(e)}
+				tabIndex={0}
 			>
 				{option.name}
 			</div>

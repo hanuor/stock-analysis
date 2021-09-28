@@ -146,9 +146,17 @@
 		@apply text-gray-900 bg-[#eee] font-semibold;
 	}
 
+	.navmenu.darkbg li span.active {
+		@apply bg-gray-200;
+	}
+
 	.navmenu li a.inactive,
 	.navmenu li span.inactive {
 		@apply bll hover:bg-gray-100 transition duration-100 cursor-pointer;
+	}
+
+	.navmenu.darkbg li span.inactive {
+		@apply hover:bg-gray-200;
 	}
 
 	@media (hover: none) {

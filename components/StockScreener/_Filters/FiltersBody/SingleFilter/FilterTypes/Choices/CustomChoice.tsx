@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { getFilterFromString } from 'components/StockScreener/functions/filterString/getFilterFromString';
 import { createFilterString } from 'components/StockScreener/functions/filterString/createFilterString';
 import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters';
+import { incrementFilter } from 'components/StockScreener/functions/filterString/incrementFilter';
+import { decrementFilter } from 'components/StockScreener/functions/filterString/decrementFilter';
 
 /**
  * Screener component that renders the custom filter where it is possible to select your own comparison. Over/Under/Between plus values.
@@ -22,6 +24,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	const [second, setSecond] = useState<string>('');
 	const [active, setActive] = useState<string | false>();
 	const filters = screenerState((state) => state.filters);
+	const setOpenFilter = screenerState((state) => state.setOpenFilter);
 	const { add, remove } = useModifyFilters();
 
 	// Extract the filter values in order to populate the custom choice inputs
@@ -68,6 +71,19 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	const firstValue = numberType === 'percentage' ? `${first}%` : first;
 	const secondValue = numberType === 'percentage' ? `${second}%` : second;
 
+	function handleKeyDown(e: React.KeyboardEvent, input: string) {
+		if (e.key === 'Enter') setOpenFilter('');
+		if (e.key === 'Escape') setOpenFilter('');
+		if (e.key === 'ArrowUp') {
+			if (input === 'first') setFirst(incrementFilter(first));
+			if (input === 'second') setSecond(incrementFilter(second));
+		}
+		if (e.key === 'ArrowDown') {
+			if (input === 'first') setFirst(decrementFilter(first));
+			if (input === 'second') setSecond(decrementFilter(second));
+		}
+	}
+
 	return (
 		<div className="p-1 pb-2 pr-2 text-sm space-y-1">
 			<div className="flex items-center justify-start space-x-1">
@@ -80,6 +96,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 						placeholder="Value"
 						value={first}
 						onChange={(e) => setFirst(e.target.value)}
+						onKeyDown={(e) => handleKeyDown(e, 'first')}
 						tabIndex={0}
 						className="shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]"
 					/>

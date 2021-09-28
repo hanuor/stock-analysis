@@ -18,12 +18,15 @@ function FilterWrap({ f }: { f: FilterProps }) {
 				<Tooltip
 					content={<TooltipContent id={f.id} />}
 					theme="light"
-					delay={150}
+					delay={400}
 				>
 					<div>{f.name}</div>
 				</Tooltip>
 			</div>
-			<div onMouseEnter={() => fetchColumn(f.id)}>
+			<div
+				onMouseEnter={() => fetchColumn(f.id)}
+				onFocus={() => fetchColumn(f.id)}
+			>
 				<FilterBody filter={f} />
 			</div>
 		</div>

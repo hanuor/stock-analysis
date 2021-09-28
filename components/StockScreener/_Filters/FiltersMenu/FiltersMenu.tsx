@@ -24,7 +24,7 @@ export function FiltersMenu() {
 					className={`col-span-2 lg:order-2 border-t border-gray-200 pt-2 lg:pt-0 lg:border-0${showHideFilters}`}
 				>
 					<nav>
-						<ul className="navmenu bg-gray-50 noshadow">
+						<ul className="navmenu darkbg bg-gray-50 noshadow">
 							<FiltersMenuItem name="Popular" />
 							<FiltersMenuItem name="Company" />
 							<FiltersMenuItem name="Financials" />

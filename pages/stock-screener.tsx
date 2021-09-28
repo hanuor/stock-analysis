@@ -16,9 +16,9 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 	return (
 		<>
 			<SEO
-				title="Stock Screener"
-				description="The best stock screener that exists on the internet."
-				canonical="stock-screener/"
+				title="Stock Screener: Filter and Analyze Stocks"
+				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
+				canonical="/stock-screener/"
 			/>
 			<LayoutFullWidth>
 				<div className="contain py-5 xs:py-6">
@@ -38,6 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			stocks,
 		},
-		revalidate: 6 * 60 * 60,
+		revalidate: 30 * 60,
 	};
 };

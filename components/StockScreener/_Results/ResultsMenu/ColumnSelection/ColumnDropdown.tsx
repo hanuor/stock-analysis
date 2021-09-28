@@ -34,11 +34,18 @@ export function ColumnDropdown() {
 		};
 	}, [open, setOpen]);
 
+	function handleKeyDown(event: React.KeyboardEvent) {
+		if (event.key === 'Enter') setOpen(true);
+		if (event.key === 'Escape') setOpen(false);
+	}
+
 	return (
 		<div ref={ref} className="relative inline-block text-left">
 			<div
 				className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer"
 				onClick={() => setOpen(!open)}
+				onKeyDown={handleKeyDown}
+				tabIndex={0}
 			>
 				Columns
 				<ChevronDownIcon

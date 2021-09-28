@@ -50,11 +50,11 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 			<div className="flex items-center">
 				{active && (
 					<div
-						className="mr-1.5 text-gray-500 hover:text-red-500 cursor-pointer"
+						className="mr-1.5 text-gray-500 hover:text-red-500 focus:text-red-500 focus:outline-none cursor-pointer"
 						title="Clear Filter"
-						onClick={() => {
-							remove(id);
-						}}
+						tabIndex={0}
+						onClick={() => remove(id)}
+						onKeyPress={(e) => e.key === 'Enter' && remove(id)}
 					>
 						<CloseCircleIcon classes="w-5 h-5" />
 					</div>

@@ -44,6 +44,8 @@ export function FilterButton({ active, id }: Props) {
 				active ? ' bg-yellow-100 px-2' : ''
 			}`}
 			onClick={handleClick}
+			onKeyPress={(e) => e.key === 'Enter' && handleClick()}
+			tabIndex={0}
 		>
 			<span className="overflow-hidden overflow-ellipsis">{buttonText}</span>
 
