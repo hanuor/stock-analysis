@@ -21,7 +21,6 @@ interface Props {
 
 export function Export({ title, buttons, data, setData }: Props) {
 	const isPro = authState((state) => state.isPro);
-	console.log(isPro);
 
 	useEffect(() => {
 		if (typeof data !== 'undefined' && !Array.isArray(data[0])) {
