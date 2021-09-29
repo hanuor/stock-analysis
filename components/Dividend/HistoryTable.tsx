@@ -1,8 +1,7 @@
 import { DividendType } from 'types/Dividend';
 import { useMemo } from 'react';
 import { Column, useTable } from 'react-table';
-import { Export } from './ExportDividendButton';
-import Link from 'next/link';
+import { Export } from 'components/Controls/Export';
 import styles from './HistoryTable.module.css';
 
 export const HistoryTable = ({ rawdata }: { rawdata: DividendType[] }) => {
@@ -39,20 +38,26 @@ export const HistoryTable = ({ rawdata }: { rawdata: DividendType[] }) => {
 		<div className="mt-4 bp:mt-7">
 			<div className="sm:flex flex-row justify-between px-1 items-end mb-2 sm:mb-1">
 				<h2 className="hh2 mb-0.5 sm:mb-2">Dividend History</h2>
-				<span>
-					<Export
-						title="Export"
-						buttons={[
-							{
-								title: 'Export to Excel',
-								type: 'xlsx',
-								restricted: true,
-							},
-							{ title: 'Export to CSV', type: 'csv', restricted: true },
-						]}
-						tableId={'dividend-table'}
-					/>
-				</span>
+				<div className="pb-1">
+					<span>
+						<Export
+							title="Export"
+							buttons={[
+								{
+									title: 'Export to Excel',
+									type: 'xlsx',
+									restricted: true,
+								},
+								{
+									title: 'Export to CSV',
+									type: 'csv',
+									restricted: true,
+								},
+							]}
+							tableId={'dividend-table'}
+						/>
+					</span>
+				</div>
 			</div>
 			<div className="overflow-x-auto">
 				<table
