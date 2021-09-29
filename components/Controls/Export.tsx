@@ -58,7 +58,6 @@ export function Export({ title, buttons, tableId }: Props) {
 										title={button.title}
 										type={button.type}
 										data={tableId}
-										isTable={true}
 										fixValuef={(value: any) => {
 											if (
 												value.includes('href=') ||

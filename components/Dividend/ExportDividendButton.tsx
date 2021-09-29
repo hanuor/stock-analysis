@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { ExportItem } from 'components/Controls/Export/ExportItem';
@@ -15,52 +15,19 @@ type Button = {
 interface Props {
 	title: string;
 	buttons: Button[];
-	data: any;
-	setData: any;
+	tableId: string;
 }
 
-export function Export({ title, buttons, data, setData }: Props) {
+export function Export({ title, buttons, tableId }: Props) {
 	const isPro = authState((state) => state.isPro);
-	console.log(isPro);
-
-	useEffect(() => {
-		if (typeof data !== 'undefined' && !Array.isArray(data[0])) {
-			const result = [
-				[
-					'Date',
-					'Open',
-					'Close',
-					'High',
-					'Low',
-					'Volume',
-					'Moving Average (50)',
-					'Moving Average (200)',
-				],
-			];
-			for (let i = 0; i < data.length; i++) {
-				const arr = [
-					data[i].date,
-					data[i].open,
-					data[i].close,
-					data[i].high,
-					data[i].low,
-					data[i].volume,
-					data[i].ma1,
-					data[i].ma2,
-				];
-				result.push(arr);
-			}
-			setData(result);
-		}
-	}, [data, setData]);
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
-				<Menu.Button className="inline-flex justify-centerblock pl-2 border-gray-300 pr-7 xs:pr-10 bp:pr-4 py-2 border-l text-sm bp:text-base">
+				<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
 					{title}
 					<ChevronDownIcon
-						className="-mr-3 ml-2 h-6 w-7 text-gray-500"
+						className="-mr-1 ml-2 h-5 w-5"
 						aria-hidden="true"
 					/>
 				</Menu.Button>
@@ -90,8 +57,25 @@ export function Export({ title, buttons, data, setData }: Props) {
 										key={index}
 										title={button.title}
 										type={button.type}
-										data={data}
-										fixValuef={undefined}
+										data={tableId}
+										fixValuef={(value: any) => {
+											if (
+												value.includes('href=') ||
+												value.includes('class=')
+											) {
+												// Grab value between > and 2nd <
+												const start = value.indexOf('>') + 1;
+												const end = value.indexOf('<', 1);
+												return value.substring(start, end);
+											}
+											if (value.includes('title=')) {
+												// Grab value between double quotes
+												const start = value.indexOf('"') + 1;
+												const end = value.lastIndexOf('"');
+												return value.substring(start, end);
+											}
+											return value;
+										}}
 									/>
 								)
 							)}

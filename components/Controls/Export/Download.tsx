@@ -6,38 +6,32 @@ interface Props {
 	type: 'csv' | 'xlsx';
 	data: any;
 	fixValuef?: (n: any) => any;
-	isTable: boolean;
 }
 
-export default function Download({
-	title,
-	type,
-	data,
-	isTable,
-	fixValuef,
-}: Props) {
+export default function Download({ title, type, data, fixValuef }: Props) {
 	const path = navState((state) => state.path);
 
 	const fileName = `${path.one}${path.two ? '-' + path.two : ''}${
 		path.three ? '-' + path.three : ''
 	}`;
 
-	const returnArray = isTable
-		? [
-				{
-					name: 'Export',
+	const returnArray =
+		typeof data === 'string'
+			? [
+					{
+						name: 'Export',
 
-					from: { table: data },
-					fixValue: fixValuef,
-				},
-		  ]
-		: [
-				{
-					name: 'Export',
+						from: { table: data },
+						fixValue: fixValuef,
+					},
+			  ]
+			: [
+					{
+						name: 'Export',
 
-					from: { array: data },
-				},
-		  ];
+						from: { array: data },
+					},
+			  ];
 
 	function download(type: 'csv' | 'xlsx') {
 		return ExcellentExport.convert(

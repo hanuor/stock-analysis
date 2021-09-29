@@ -40,6 +40,25 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 						<Buttons state={time} dispatch={setTime} />
 						<SelectPeriod dispatcher={setPeriod} />
 						<SelectType dispatcher={setType} />
+						<div className="relative z-10">
+							<Export
+								title="Export"
+								buttons={[
+									{
+										title: 'Export to Excel',
+										type: 'xlsx',
+										restricted: true,
+									},
+									{
+										title: 'Export to CSV',
+										type: 'csv',
+										restricted: true,
+									},
+								]}
+								data={data}
+								setData={setData}
+							/>
+						</div>
 					</div>
 					<div className="touch-none h-[400px] xs:h-[450px] bp:h-[500px] sm:h-[600px]">
 						{info.state !== 'upcomingipo' ? (
@@ -60,23 +79,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 							<Unavailable message="The chart is not available for this stock." />
 						)}
 					</div>
-					<Export
-						title="Export"
-						buttons={[
-							{
-								title: 'Export to Excel',
-								type: 'xlsx',
-								restricted: true,
-							},
-							{
-								title: 'Export to CSV',
-								type: 'csv',
-								restricted: true,
-							},
-						]}
-						data={data}
-						setData={setData}
-					/>
 				</div>
 			</div>
 		</Stock>

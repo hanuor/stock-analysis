@@ -9,7 +9,6 @@ interface ExportItemProps {
 	title: string;
 	type: 'csv' | 'xlsx';
 	data: string;
-	isTable: boolean;
 	fixValuef?: (n: any) => any;
 }
 
@@ -17,16 +16,9 @@ export const ExportItem = ({
 	title,
 	type,
 	data,
-	isTable,
 	fixValuef,
 }: ExportItemProps) => (
 	<Menu.Item>
-		<Download
-			title={title}
-			type={type}
-			data={data}
-			isTable={isTable}
-			fixValuef={fixValuef}
-		/>
+		<Download title={title} type={type} data={data} fixValuef={fixValuef} />
 	</Menu.Item>
 );

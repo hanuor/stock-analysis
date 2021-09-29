@@ -58,6 +58,9 @@ module.exports = {
 					sharp: 'rgba(1, 90, 210, 1)',
 					link: 'rgb(30, 115, 186, 1)',
 				},
+				grey: {
+					test: 'rgba(44, 98, 136)',
+				},
 			},
 		},
 	},
