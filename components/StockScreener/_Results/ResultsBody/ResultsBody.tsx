@@ -29,6 +29,7 @@ const columns = COLUMNS_MAP.map((column) => {
 	if (column.format) {
 		let header;
 		let cell;
+		let sortInverted;
 		switch (column.format) {
 			case 'linkSymbol': {
 				header = column.Header;
@@ -40,6 +41,16 @@ const columns = COLUMNS_MAP.map((column) => {
 						</Link>
 					);
 				};
+				sortInverted = false;
+				break;
+			}
+
+			case 'string': {
+				header = column.Header;
+				cell = function FormatCell({ cell: { value } }: any) {
+					return value;
+				};
+				sortInverted = false;
 				break;
 			}
 
@@ -164,6 +175,7 @@ const columns = COLUMNS_MAP.map((column) => {
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
 					return <div className="ml-1">{value}</div>;
 				};
+				sortInverted = false;
 				break;
 			}
 
@@ -180,6 +192,8 @@ const columns = COLUMNS_MAP.map((column) => {
 			accessor: column.accessor,
 			name: column.Header,
 			Cell: cell,
+			sortType: 'basic',
+			sortInverted: sortInverted ?? true,
 		};
 	}
 

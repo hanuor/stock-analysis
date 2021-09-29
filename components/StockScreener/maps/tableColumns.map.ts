@@ -4,6 +4,7 @@ type Column = {
 	Header: string;
 	accessor: FilterId;
 	format?:
+		| 'string'
 		| 'linkSymbol'
 		| 'amount'
 		| 'align'
@@ -15,6 +16,8 @@ type Column = {
 		| 'date'
 		| 'marketcap'
 		| 'padleft';
+	sortType?: any;
+	sortInverted?: boolean;
 };
 
 export const COLUMNS_MAP: Column[] = [
@@ -26,6 +29,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Company Name',
 		accessor: 'n',
+		format: 'string',
 	},
 	{
 		Header: 'Market Cap',

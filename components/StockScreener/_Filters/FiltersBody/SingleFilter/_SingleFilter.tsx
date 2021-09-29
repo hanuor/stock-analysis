@@ -56,7 +56,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 						onClick={() => remove(id)}
 						onKeyPress={(e) => e.key === 'Enter' && remove(id)}
 					>
-						<CloseCircleIcon classes="w-5 h-5" />
+						<CloseCircleIcon classes="w-[1.2rem] h-[1.2rem]" />
 					</div>
 				)}
 				<FilterButton active={active} id={id} />

@@ -598,10 +598,10 @@ export const TOOLTIP_MAP = [
 	},
 	{
 		id: 'totalReturn',
-		title: 'Total Shareholder Return',
+		title: 'Total Shareholder Yield',
 		tooltip:
-			'The total shareholder return is how much the company is returning to shareholders via dividends and share buybacks combined. It is calculated by adding up the dividend yield and buyback yield',
-		formula: 'Total Shareholder Return = Dividend Yield + Buyback Yield',
+			'The total shareholder yield is how much the company is returning to shareholders via dividends and share buybacks combined. It is calculated by adding up the dividend yield and buyback yield',
+		formula: 'Total Yield = Dividend Yield + Buyback Yield',
 	},
 	{
 		id: 'splitDate',
