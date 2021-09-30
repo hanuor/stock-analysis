@@ -46,7 +46,7 @@ interface WithOHLCDataProps {
 	readonly type: string;
 	readonly stockId: number;
 	readonly setLoading: (arg: boolean) => void;
-	readonly setData: any;
+	readonly setData: (arg: any) => void;
 }
 
 interface WithOHLCState {
