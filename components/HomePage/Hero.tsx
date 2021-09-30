@@ -11,7 +11,7 @@ export const Hero = () => (
 						<a>
 							<div className="relative inline">
 								Stock Screener
-								<div className="absolute -right-3 -top-2 text-red-500 text-tiny font-bold transform -rotate-6">
+								<div className="absolute -right-3 -top-2.5 text-red-500 text-tiny font-bold transform -rotate-6">
 									NEW
 								</div>
 							</div>

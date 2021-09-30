@@ -486,6 +486,6 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Split Date',
 		accessor: 'splitDate',
-		format: 'align',
+		format: 'date',
 	},
 ];
