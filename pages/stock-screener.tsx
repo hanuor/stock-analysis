@@ -8,10 +8,12 @@ import { StockScreener } from 'components/StockScreener/_StockScreener';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
-	const setData = screenerDataState((state) => state.setData);
+	const fullCount = screenerDataState((state) => state.fullCount);
 	const setFullCount = screenerDataState((state) => state.setFullCount);
-	setData(stocks.data);
-	setFullCount(stocks.count);
+
+	if (!fullCount) {
+		setFullCount(stocks.count);
+	}
 
 	return (
 		<>
@@ -38,6 +40,6 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			stocks,
 		},
-		revalidate: 30 * 60,
+		revalidate: 4 * 60 * 60,
 	};
 };
