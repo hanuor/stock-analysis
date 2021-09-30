@@ -64,7 +64,7 @@ export function RenderFilters() {
 
 		if (active.length === 0) {
 			return (
-				<div className="px-1 py-3 pb-2 text-sm lg:text-base">
+				<div className="px-2 py-3 pb-2 text-sm lg:text-base">
 					No active filters. Find a filter using the search box above or
 					choose a filter category from the menu.
 				</div>

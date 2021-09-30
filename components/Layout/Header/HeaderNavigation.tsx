@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const HeaderNavigation = ({ device, setOpen }: Props) => {
-	const menuDesktop = 'flex flex-row space-x-5 text-lg';
+	const menuDesktop = 'flex flex-row space-x-4 xl:space-x-5 text-lg';
 	const menuMobile =
 		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200 bg-white relative z-50';
 
