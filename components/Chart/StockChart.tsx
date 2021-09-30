@@ -34,7 +34,7 @@ interface StockChartProps {
 	readonly stockId: number;
 	readonly setLoading: (arg: boolean) => void;
 	readonly loading: boolean;
-	readonly setData: any;
+	readonly setData: (arg: boolean) => void;
 }
 
 interface TooltipOptions {
