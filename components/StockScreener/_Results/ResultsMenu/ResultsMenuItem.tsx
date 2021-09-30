@@ -59,7 +59,7 @@ export function ResultsMenuItem({ name }: Props) {
 		return (
 			<li>
 				<span
-					className="bg-gray-100 py-1 px-2 rounded-md font-medium"
+					className="bg-gray-100 py-1 px-2 rounded-md font-medium focus:outline-none"
 					data-title={dataTitle}
 					tabIndex={0}
 				>
@@ -72,7 +72,7 @@ export function ResultsMenuItem({ name }: Props) {
 	return (
 		<li>
 			<span
-				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer"
+				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer focus:outline-none"
 				data-title={dataTitle}
 				onClick={() => handleFilter(name)}
 				onKeyPress={(e) => {

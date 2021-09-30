@@ -44,7 +44,7 @@ export function TablePagination({
 	}
 
 	return (
-		<nav className="mt-2.5 py-1 px-0.5 flex flex-row items-center justify-between space-x-1.5 bp:space-x-2 text-sm sm:text-base overflow-x-auto hide-scroll">
+		<nav className="mt-2.5 py-1 px-0.5 flex flex-row items-center justify-between space-x-1.5 sm:space-x-2 text-sm sm:text-base overflow-x-auto hide-scroll">
 			<button
 				onClick={() => {
 					previousPage();
@@ -62,7 +62,7 @@ export function TablePagination({
 			</button>
 			<div className="flex flex-row items-center space-x-2 bp:space-x-4 font-medium text-gray-700">
 				<span className="whitespace-nowrap">
-					<span className="hidden bp:inline">Page </span>
+					<span className="hidden sm:inline">Page </span>
 					{`${pageIndex + 1} of ${pageOptions.length}`}
 				</span>
 				<DropdownSelect
