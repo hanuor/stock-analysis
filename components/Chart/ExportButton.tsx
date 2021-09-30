@@ -54,12 +54,16 @@ export function Export({ title, buttons, data, setData }: Props) {
 	}, [data, setData]);
 
 	return (
-		<Menu as="div" className="relative inline-block text-left">
+		<Menu
+			as="div"
+			className="relative xs:inline-block text-left hidden
+		"
+		>
 			<div>
-				<Menu.Button className="inline-flex justify-centerblock pl-2 border-gray-300 pr-7 xs:pr-10 bp:pr-4 py-2 border-l text-sm bp:text-base">
+				<Menu.Button className="inline-flex relative ml:border-r-0 border-r pl-4 border-gray-300 bp:pr-4 py-2 text-xs bpm:text-base pr-8">
 					{title}
 					<ChevronDownIcon
-						className="-mr-3 ml-2 h-6 w-7 text-gray-500"
+						className=" -mr-5 bpm:h-6 h-4  w-8 text-gray-400 bpm:text-gray-500"
 						aria-hidden="true"
 					/>
 				</Menu.Button>
