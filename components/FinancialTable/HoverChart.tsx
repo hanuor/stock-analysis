@@ -249,6 +249,7 @@ export const HoverChart = ({
 				},
 			]}
 			options={{
+				animation: false,
 				maintainAspectRatio: false,
 				layout: {
 					padding: {
