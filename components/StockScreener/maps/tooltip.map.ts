@@ -186,15 +186,15 @@ export const TOOLTIP_MAP = [
 		id: 'roe',
 		title: 'Return on Equity (ROE)',
 		tooltip:
-			'Return on equity (ROE) is a profitability metric that shows how efficient a company is at using its equity (or "net" assets) to generate profits.',
-		formula: "ROE = (Net Income / Shareholders' Equity) * 100%",
+			'Return on equity (ROE) is a profitability metric that shows how efficient a company is at using its equity (or "net" assets) to generate profits. It is calculated by dividing net income by the average shareholders\' equity over the past 12 months.',
+		formula: "ROE = (Net Income / Avg. Shareholders' Equity) * 100%",
 	},
 	{
 		id: 'roa',
 		title: 'Return on Assets (ROA)',
 		tooltip:
-			'Return on assets (ROA) is a metric that measures how much profit a company is able to generate using its assets.',
-		formula: 'ROA = (Net Income / Total Assets) * 100%',
+			'Return on assets (ROA) is a metric that measures how much profit a company is able to generate using its assets. It is calculated by dividing net income by the average total assets over the past 12 months.',
+		formula: 'ROA = (Net Income / Avg. Total Assets) * 100%',
 	},
 	{
 		id: 'roic',

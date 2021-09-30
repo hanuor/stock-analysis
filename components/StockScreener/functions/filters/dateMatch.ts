@@ -5,7 +5,7 @@ function changeDate(date: Date, abbr: string) {
 
 	if (abbr.includes('D')) {
 		str = str.replace('D', '');
-		date.setDate(date.getDate() - Number(str));
+		date.setTime(date.getTime() - Number(str) * 24 * 60 * 60 * 1000);
 	}
 
 	if (abbr.includes('M')) {
@@ -22,7 +22,7 @@ function changeDate(date: Date, abbr: string) {
 }
 
 export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
-	// Explode the filter value string to get the individiaul items
+	// Explode the filter value string to get the individual items
 	const filterBits = filter.split('-');
 	const compare = filterBits[0] ?? null;
 	const first = filterBits[1] ?? null;
@@ -87,6 +87,12 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 			return (
 				value.getTime() > now.getTime() &&
 				value.getTime() < changeDate(now, `-${first}`).getTime()
+			);
+
+		case 'past':
+			return (
+				value.getTime() < now.getTime() &&
+				value.getTime() > changeDate(now, `${first}`).getTime()
 			);
 	}
 	return false;
