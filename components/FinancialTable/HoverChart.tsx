@@ -249,7 +249,6 @@ export const HoverChart = ({
 				},
 			]}
 			options={{
-				animation: false,
 				maintainAspectRatio: false,
 				layout: {
 					padding: {
@@ -287,9 +286,7 @@ export const HoverChart = ({
 						},
 					},
 				},
-				animation: {
-					duration: 400,
-				},
+				animation: false,
 				plugins: {
 					legend: {
 						display: false,
