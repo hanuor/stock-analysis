@@ -26,6 +26,11 @@ export default function Download({ title, type, tableId }: Props) {
 					name: 'Export',
 					from: { table: tableId },
 					fixValue: (value) => {
+						// check if string contains value twice
+						if (value.split('class=').length === 3) {
+							return new DOMParser().parseFromString(value, 'text/html')
+								.documentElement.textContent;
+						}
 						if (value.includes('href=') || value.includes('class=')) {
 							// Grab value between > and 2nd <
 							const start = value.indexOf('>') + 1;
