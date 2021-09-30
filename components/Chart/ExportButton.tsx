@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 import { ExportItem } from 'components/Controls/Export/ExportItem';
 import { ExportItemRestricted } from 'components/Controls/Export/ExportItemRestricted';
 import { authState } from 'state/authState';
@@ -60,12 +59,23 @@ export function Export({ title, buttons, data, setData }: Props) {
 		"
 		>
 			<div>
-				<Menu.Button className="inline-flex relative ml:border-r-0 border-r pl-4 border-gray-300 bp:pr-4 py-2 text-xs bpm:text-base pr-8">
+				<Menu.Button className="inline-flex relative ml:border-r-0 border-r pl-4 border-gray-300 bp:pr-4 py-2 text-xs bpm:text-base pr-8 border-r focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 focus:outline-none">
 					{title}
-					<ChevronDownIcon
-						className=" -mr-5 bpm:h-6 h-4  w-8 text-gray-400 bpm:text-gray-500"
-						aria-hidden="true"
-					/>
+
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="bpm:h-6 h-4 w-8 text-gray-500"
+						fill="none"
+						viewBox="0 0 20 20"
+						stroke="currentColor"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth="1.5"
+							d="M6 8l4 4 4-4"
+						/>
+					</svg>
 				</Menu.Button>
 			</div>
 
@@ -78,7 +88,7 @@ export function Export({ title, buttons, data, setData }: Props) {
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95"
 			>
-				<Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+				<Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5  focus:outline-none ">
 					<div className="py-1">
 						{buttons &&
 							buttons.map((button, index) =>

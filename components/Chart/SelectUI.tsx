@@ -36,7 +36,7 @@ export const SelectType = (props: SelectProps) => {
 				onChange={(e) => props.dispatcher(e.target.value)}
 				id="type"
 				name="type"
-				className="block pl-2 tiny:pl-3  border-gray-300 pr-7 bpm:pr-8 bp:pr-10 py-2 sm:border-l  border-r  border-0 ocus:outline-none focus:ring-blue-500 focus:border-blue-500 text-xs bpm:text-base"
+				className="block pl-2 tiny:pl-3  border-gray-300 pr-7 bpm:pr-8 bp:pr-10 py-2 sm:border-l  border-r  border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-xs bpm:text-base"
 				defaultValue="Day"
 			>
 				<option value="candlestick">Candles</option>
