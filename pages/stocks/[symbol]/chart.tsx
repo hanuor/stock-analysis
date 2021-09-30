@@ -10,6 +10,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { useState } from 'react';
 import { Unavailable } from 'components/Unavailable';
 import { Export } from 'components/Chart/ExportButton';
+import { IOHLCData } from 'components/Chart/iOHLCData';
 import dynamic from 'next/dynamic';
 
 const StockChart = dynamic(() => import('components/Chart/StockChart'), {
@@ -25,7 +26,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [time, setTime] = useState<string>('1Y');
 	const [type, setType] = useState<string>('candlestick');
-	const [data, setData] = useState<any>();
+	const [data, setData] = useState<IOHLCData[]>();
 
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
