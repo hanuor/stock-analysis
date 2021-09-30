@@ -50,12 +50,12 @@ export const Header = () => {
 				<a href="#main" className="skip-nav">
 					Skip to main content
 				</a>
-				<div className="mx-auto px-2 tiny:px-3 xs:px-3.5 lg:px-4 flex items-center py-2 space-x-1.5 tiny:space-x-2.5 xs:space-x-3 sm:space-x-4 lg:space-x-8 xl:max-w-screen-xl">
+				<div className="mx-auto px-2 tiny:px-3 xs:px-3.5 lg:px-4 flex items-center py-2 space-x-1.5 tiny:space-x-2.5 xs:space-x-3 sm:space-x-4 lg:space-x-5 xl:space-x-8 xl:max-w-screen-xl">
 					<div>
 						<Link href="/" prefetch={false}>
 							<a className="flex" aria-label="Stock Analysis home page">
 								<HeaderLogo className="h-7 w-7 xs:h-8 xs:w-8 lg:hidden" />
-								<HeaderLogoFull className="hidden lg:flex lg:h-12 lg:w-32" />
+								<HeaderLogoFull className="hidden lg:flex lg:h-12 lg:w-28 xl:w-32" />
 							</a>
 						</Link>
 					</div>
