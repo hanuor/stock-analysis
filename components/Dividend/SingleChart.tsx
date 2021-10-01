@@ -205,6 +205,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 							},
 						},
 					},
+					animation: false,
 					plugins: {
 						legend: {
 							display: false,
