@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const HeaderNavigation = ({ device, setOpen }: Props) => {
-	const menuDesktop = 'flex flex-row space-x-5 text-lg';
+	const menuDesktop = 'flex flex-row space-x-4 xl:space-x-5 text-lg';
 	const menuMobile =
 		'flex flex-col text-xl divide-y divide-gray-200 border-t border-gray-200 bg-white relative z-50';
 
@@ -21,6 +21,16 @@ export const HeaderNavigation = ({ device, setOpen }: Props) => {
 								onClick={() => setOpen(false)}
 							>
 								Stocks
+							</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/stock-screener/" prefetch={false}>
+							<a
+								className="block lg:inline pl-5 pr-8 py-2 lg:p-0 hover:text-blue-700"
+								onClick={() => setOpen(false)}
+							>
+								Screener
 							</a>
 						</Link>
 					</li>

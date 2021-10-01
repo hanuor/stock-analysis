@@ -40,6 +40,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 		return <></>;
 	} else {
 		if (path.three) {
+			url = url.includes('.') ? url + '/' : url;
 			switch (path.three) {
 				case 'chart':
 					url = `${url}chart/`;

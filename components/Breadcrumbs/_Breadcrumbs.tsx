@@ -24,40 +24,35 @@ const formatPageTitle = (word: string) => {
 	}
 };
 
+function Li({ href, text }: { href: string; text: string }) {
+	return (
+		<li>
+			<Link href={href} prefetch={false}>
+				<a>{text}</a>
+			</Link>
+		</li>
+	);
+}
+
 const LevelOne = ({ path }: { path: PathObject }) => {
 	if (path.one) {
 		if (path.one === 'ipos') {
 			if (path.two) {
-				return (
-					<li>
-						<Link href="/ipos/" prefetch={false}>
-							<a>IPOs</a>
-						</Link>
-					</li>
-				);
+				return <Li href="/ipos/" text="IPOs" />;
 			}
 			return <li>{'IPOs'}</li>;
 		}
 		if (path.one === 'etf') {
 			if (path.two) {
-				return (
-					<li>
-						<Link href="/etf/" prefetch={false}>
-							<a>ETF</a>
-						</Link>
-					</li>
-				);
+				return <Li href="/etf/" text="ETF" />;
 			}
 			return <li>{'ETF'}</li>;
 		}
+		if (path.one === 'stock-screener') {
+			return <li>Stock Screener</li>;
+		}
 		if (path.two) {
-			return (
-				<li>
-					<Link href={`/${path.one}/`} prefetch={false}>
-						<a>{capitalize(path.one)}</a>
-					</Link>
-				</li>
-			);
+			return <Li href={`/${path.one}/`} text={capitalize(path.one)} />;
 		}
 		return <li>{capitalize(path.one)}</li>;
 	}
@@ -69,14 +64,10 @@ const LevelTwo = ({ path }: { path: PathObject }) => {
 		if (path.one === 'stocks') {
 			if (path.three) {
 				return (
-					<li>
-						<Link
-							href={`/stocks/${path.two.toLowerCase()}/`}
-							prefetch={false}
-						>
-							<a>{path.two.toUpperCase()}</a>
-						</Link>
-					</li>
+					<Li
+						href={`/stocks/${path.two.toLowerCase()}/`}
+						text={path.two.toUpperCase()}
+					/>
 				);
 			}
 			return <li>{path.two.toUpperCase()}</li>;
@@ -84,14 +75,10 @@ const LevelTwo = ({ path }: { path: PathObject }) => {
 		if (path.one === 'etf') {
 			if (path.three) {
 				return (
-					<li>
-						<Link
-							href={`/etf/${path.two.toLowerCase()}/`}
-							prefetch={false}
-						>
-							<a>{path.two.toUpperCase()}</a>
-						</Link>
-					</li>
+					<Li
+						href={`/etf/${path.two.toLowerCase()}/`}
+						text={path.two.toUpperCase()}
+					/>
 				);
 			}
 			return <li>{path.two.toUpperCase()}</li>;
@@ -99,14 +86,10 @@ const LevelTwo = ({ path }: { path: PathObject }) => {
 		if (path.one === 'actions') {
 			if (path.three) {
 				return (
-					<li>
-						<Link
-							href={`/actions/${path.two.toLowerCase()}/`}
-							prefetch={false}
-						>
-							<a>{formatPageTitle(path.two)}</a>
-						</Link>
-					</li>
+					<Li
+						href={`/actions/${path.two.toLowerCase()}/`}
+						text={formatPageTitle(path.two)}
+					/>
 				);
 			}
 		}
@@ -119,14 +102,10 @@ const LevelThree = ({ path }: { path: PathObject }) => {
 	if (path.three) {
 		if (path.four) {
 			return (
-				<li>
-					<Link
-						href={`/${path.one}/${path.two}/${path.three}`}
-						prefetch={false}
-					>
-						<a>{capitalize(path.three)}</a>
-					</Link>
-				</li>
+				<Li
+					href={`/${path.one}/${path.two}/${path.three}`}
+					text={capitalize(path.three)}
+				/>
 			);
 		}
 		return <li>{formatPageTitle(path.three)}</li>;

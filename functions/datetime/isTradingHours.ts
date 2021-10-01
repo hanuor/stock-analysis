@@ -41,3 +41,24 @@ export function isTradingHoursOpen() {
 
 	return true;
 }
+
+export function isTradingHoursClosed() {
+	const now = new Date().toLocaleString('en-US', {
+		timeZone: 'America/New_York',
+	});
+
+	const US = new Date(now);
+
+	const day = US.getDay();
+	const hour = US.getHours();
+
+	if (day === 0 || day === 6) {
+		return true;
+	}
+
+	if (hour < 4 || hour > 19) {
+		return true;
+	}
+
+	return false;
+}
