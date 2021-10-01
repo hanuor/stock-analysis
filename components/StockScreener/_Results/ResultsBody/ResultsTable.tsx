@@ -59,6 +59,7 @@ export function ResultsTable({ cols }: Props) {
 					.filter((col: any) => !showColumns.includes(col.accessor))
 					.map((col: any) => col.accessor),
 			},
+			autoResetSortBy: false,
 		},
 		useGlobalFilter,
 		useSortBy,
