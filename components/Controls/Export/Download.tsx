@@ -1,18 +1,35 @@
 import ExcellentExport from 'excellentexport';
 import { navState } from 'state/navState';
+import { extractTextFromHTML } from './extractText';
 
 interface Props {
 	title: string;
 	type: 'csv' | 'xlsx';
-	tableId: string;
+	data: any;
 }
 
-export default function Download({ title, type, tableId }: Props) {
+export default function Download({ title, type, data }: Props) {
 	const path = navState((state) => state.path);
 
 	const fileName = `${path.one}${path.two ? '-' + path.two : ''}${
 		path.three ? '-' + path.three : ''
 	}`;
+
+	const returnArray =
+		typeof data === 'string'
+			? [
+					{
+						name: 'Export',
+						from: { table: data },
+						fixValue: extractTextFromHTML,
+					},
+			  ]
+			: [
+					{
+						name: 'Export',
+						from: { array: data },
+					},
+			  ];
 
 	function download(type: 'csv' | 'xlsx') {
 		return ExcellentExport.convert(
@@ -21,32 +38,7 @@ export default function Download({ title, type, tableId }: Props) {
 				filename: fileName,
 				format: type,
 			},
-			[
-				{
-					name: 'Export',
-					from: { table: tableId },
-					fixValue: (value) => {
-						// check if string contains value twice
-						if (value.split('class=').length === 3) {
-							return new DOMParser().parseFromString(value, 'text/html')
-								.documentElement.textContent;
-						}
-						if (value.includes('href=') || value.includes('class=')) {
-							// Grab value between > and 2nd <
-							const start = value.indexOf('>') + 1;
-							const end = value.indexOf('<', 1);
-							return value.substring(start, end);
-						}
-						if (value.includes('title=')) {
-							// Grab value between double quotes
-							const start = value.indexOf('"') + 1;
-							const end = value.lastIndexOf('"');
-							return value.substring(start, end);
-						}
-						return value;
-					},
-				},
-			]
+			returnArray
 		);
 	}
 

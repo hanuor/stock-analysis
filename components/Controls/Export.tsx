@@ -57,7 +57,7 @@ export function Export({ title, buttons, tableId }: Props) {
 										key={index}
 										title={button.title}
 										type={button.type}
-										tableId={tableId}
+										data={tableId}
 									/>
 								)
 							)}

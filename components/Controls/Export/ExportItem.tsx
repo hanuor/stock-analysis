@@ -8,11 +8,11 @@ const Download = dynamic(() => import('./Download'), {
 interface ExportItemProps {
 	title: string;
 	type: 'csv' | 'xlsx';
-	tableId: string;
+	data: string;
 }
 
-export const ExportItem = ({ title, type, tableId }: ExportItemProps) => (
+export const ExportItem = ({ title, type, data }: ExportItemProps) => (
 	<Menu.Item>
-		<Download title={title} type={type} tableId={tableId} />
+		<Download title={title} type={type} data={data} />
 	</Menu.Item>
 );

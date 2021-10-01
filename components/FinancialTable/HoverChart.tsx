@@ -286,9 +286,7 @@ export const HoverChart = ({
 						},
 					},
 				},
-				animation: {
-					duration: 400,
-				},
+				animation: false,
 				plugins: {
 					legend: {
 						display: false,
