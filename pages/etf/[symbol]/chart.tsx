@@ -37,33 +37,26 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 			/>
 			<div className="px-2.5 sm:contain">
 				<div className="py-2">
-					<div className="ml:flex flex-row inline-flex items-center ml:justify-between justify-start border border-gray-200 mb-2 text-sm bpm:text-base">
-						<div className="flex">
-							<Buttons state={time} dispatch={setTime} />
-						</div>
-						<div className="flex">
-							<SelectPeriod dispatcher={setPeriod} />
-							<SelectType dispatcher={setType} />
-							<div className="z-10">
-								<Export
-									title="Export"
-									buttons={[
-										{
-											title: 'Export to Excel',
-											type: 'xlsx',
-											restricted: true,
-										},
-										{
-											title: 'Export to CSV',
-											type: 'csv',
-											restricted: true,
-										},
-									]}
-									data={data}
-									setData={setData}
-								/>
-							</div>
-						</div>
+					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
+						<Buttons state={time} dispatch={setTime} />
+						<SelectPeriod dispatcher={setPeriod} />
+						<SelectType dispatcher={setType} />
+						<Export
+							buttons={[
+								{
+									title: 'Export to Excel',
+									type: 'xlsx',
+									restricted: true,
+								},
+								{
+									title: 'Export to CSV',
+									type: 'csv',
+									restricted: true,
+								},
+							]}
+							data={data}
+							setData={setData}
+						/>
 					</div>
 					<div className="touch-none h-[400px] xs:h-[450px] bp:h-[500px] sm:h-[600px]">
 						{info.state !== 'upcomingipo' ? (

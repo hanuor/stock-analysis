@@ -1,14 +1,14 @@
 import ExcellentExport from 'excellentexport';
 import { navState } from 'state/navState';
+import { extractTextFromHTML } from './extractText';
 
 interface Props {
 	title: string;
 	type: 'csv' | 'xlsx';
 	data: any;
-	fixValuef?: (n: any) => any;
 }
 
-export default function Download({ title, type, data, fixValuef }: Props) {
+export default function Download({ title, type, data }: Props) {
 	const path = navState((state) => state.path);
 
 	const fileName = `${path.one}${path.two ? '-' + path.two : ''}${
@@ -20,15 +20,13 @@ export default function Download({ title, type, data, fixValuef }: Props) {
 			? [
 					{
 						name: 'Export',
-
 						from: { table: data },
-						fixValue: fixValuef,
+						fixValue: extractTextFromHTML,
 					},
 			  ]
 			: [
 					{
 						name: 'Export',
-
 						from: { array: data },
 					},
 			  ];
