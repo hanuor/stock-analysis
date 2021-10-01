@@ -6,6 +6,11 @@ interface Props {
 	data: DividendType[];
 }
 
+const formatter = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 3,
+	maximumFractionDigits: 5,
+});
+
 export const DividendWidget = ({ ticker, data }: Props) => {
 	if (data.length === 0) {
 		return null;
@@ -29,7 +34,7 @@ export const DividendWidget = ({ ticker, data }: Props) => {
 								{item.exDate}
 							</td>
 							<td className="text-left px-1.5 xs:px-2 py-2">
-								{item.amount}
+								{'$' + formatter.format(Number(item.amount))}
 							</td>
 							<td className="text-right px-1.5 xs:px-2 py-2">
 								{item.payDate}
