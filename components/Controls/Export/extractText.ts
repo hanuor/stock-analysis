@@ -1,6 +1,6 @@
 /**
  * This function extracts the text from table cell HTML when exporting. Either from the title tag or the inner text.
- * @param {string} value The value extracted from the table cell
+ * @param {string} value The values extracted from the table cells
  * @return {string | null}
  */
 export function extractTextFromHTML(value: string): string | null {
