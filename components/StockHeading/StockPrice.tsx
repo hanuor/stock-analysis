@@ -23,7 +23,7 @@ export default function StockPrice({ info }: { info: Info }) {
 		);
 	}
 
-	if (!data && !info.quote) {
+	if (!displayQuote || (!data && !info.quote)) {
 		return null;
 	}
 

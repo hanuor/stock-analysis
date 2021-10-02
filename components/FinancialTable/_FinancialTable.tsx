@@ -108,7 +108,10 @@ export const FinancialTable = ({
 	}
 
 	// If count is empty, show message
-	if (showcount === 0) {
+	if (
+		showcount === 0 ||
+		(statement === 'ratios' && info.exceptions.hideRatios)
+	) {
 		return (
 			<>
 				<div className="">
