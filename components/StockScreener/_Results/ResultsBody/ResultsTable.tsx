@@ -14,6 +14,7 @@ import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
 import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData';
+import { Loading } from 'components/Loading';
 
 interface Props {
 	cols: any;
@@ -21,6 +22,7 @@ interface Props {
 
 export function ResultsTable({ cols }: Props) {
 	const rows = screenerDataState((state) => state.data);
+	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 	const fetchFullData = useFetchFullData();
 
 	const filters = screenerState((state) => state.filters);
@@ -65,6 +67,14 @@ export function ResultsTable({ cols }: Props) {
 		useSortBy,
 		usePagination
 	);
+
+	if (!fullyLoaded) {
+		return (
+			<div className="h-[600px] mt-6">
+				<Loading />
+			</div>
+		);
+	}
 
 	return (
 		<>
