@@ -5,6 +5,11 @@ import { isTradingHoursClosed } from 'functions/datetime/isTradingHours';
 export function TitleByline({ info }: { info: Info }) {
 	const quote = useQuote(info);
 
+	// Got some JS errors in the log that quote was null on brand new IPOs
+	if (quote === null) {
+		return null;
+	}
+
 	const timing =
 		quote.exchange === 'OTCMKTS' || (quote.ext && !isTradingHoursClosed())
 			? 'Delayed Price'
