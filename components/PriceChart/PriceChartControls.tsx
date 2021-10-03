@@ -7,7 +7,7 @@ interface Props {
 
 export const Controls = ({ chartTime, setChartTime }: Props) => {
 	return (
-		<ul className="price-chart">
+		<ul className="tabs-small">
 			<li>
 				<button
 					className={chartTime === '1D' ? 'active' : 'inactive'}
