@@ -1,6 +1,6 @@
 import ExcellentExport from 'excellentexport';
 import { navState } from 'state/navState';
-import { extractTextFromHTML } from './extractText';
+import { extractTextFromHTML, removeNanValues } from './extractText';
 
 interface Props {
 	title: string;
@@ -28,6 +28,7 @@ export default function Download({ title, type, data }: Props) {
 					{
 						name: 'Export',
 						from: { array: data },
+						fixValue: removeNanValues,
 					},
 			  ];
 
