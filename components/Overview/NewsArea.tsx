@@ -6,6 +6,7 @@ import { Info } from 'types/Info';
 import { getData } from 'functions/API';
 import { NewsMenu } from 'components/News/NewsMenu/_NewsMenu';
 import { LoadMore } from 'components/News/LoadMore/_LoadMore';
+import { Warning } from 'components/Alerts/Warning';
 
 interface Props {
 	info: Info;
@@ -23,6 +24,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	const [end, setEnd] = useState(false); // If no more data to fetch
 	const [paywalled, setPaywalled] = useState(false); // If paywall has been triggered
 	const [dataPage, setDataPage] = useState(2);
+	const [error, setError] = useState('');
 
 	const updatedTime = new Date(timestamp * 1000);
 	const currentTime = new Date();
@@ -87,8 +89,11 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 					pageType={info.type}
 					id={info.id}
 					setData={setData}
+					news={news}
+					setError={setError}
 				/>
 			</div>
+			{error && <Warning message={error} />}
 			{show !== 'chat' ? (
 				<>
 					<NewsFeed
