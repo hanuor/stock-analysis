@@ -16,11 +16,9 @@ export function ButtonMore({ fn, loading, end }: Props) {
 		);
 	}
 
-	console.log(`tag-feat-news-load-${fn.name}`);
-
 	return (
 		<button
-			className="w-full inline-flex items-center justify-center mt-4 px-6 py-3 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+			className="mx-auto w-[90%] sm:w-full flex items-center justify-center mt-5 lg:mt-6 px-6 py-3 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 			onClick={fn}
 			disabled={loading}
 			id={`tag-feat-news-load-${fn.name}`}

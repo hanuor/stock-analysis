@@ -13,7 +13,7 @@ export const NewsFeed = ({ data, related, paywalled }: Props) => {
 
 	return (
 		<div
-			className={`bg-gray-200 sm:bg-white flex flex-col space-y-3 sm:space-y-0 sm:divide-y mb-2 sm:divide-gray-100 sm:border-b sm:border-gray-100 lg:border-0${
+			className={`bg-gray-200 sm:bg-white flex flex-col space-y-3 sm:space-y-0 sm:divide-y mb-2 sm:divide-gray-100 lg:border-0${
 				paywalled ? ' pw-shadow' : ''
 			}`}
 		>
