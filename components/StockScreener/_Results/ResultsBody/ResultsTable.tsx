@@ -13,25 +13,34 @@ import { SortDownIcon } from 'components/Icons/SortDown';
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
-import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData';
+import {
+	useFetchFullData,
+	useFetchFulIPOData,
+} from 'components/StockScreener/functions/useFetchFullData';
 import { Loading } from 'components/Loading';
 
 interface Props {
 	cols: any;
+	type: string;
 }
 
-export function ResultsTable({ cols }: Props) {
+export function ResultsTable({ cols, type }: Props) {
 	const rows = screenerDataState((state) => state.data);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 	const fetchFullData = useFetchFullData();
-
+	const fetchFullIPOData = useFetchFulIPOData();
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
 
 	useEffect(() => {
-		fetchFullData();
+		if (type == 'stock') {
+			fetchFullData();
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+		} else {
+			fetchFullIPOData();
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

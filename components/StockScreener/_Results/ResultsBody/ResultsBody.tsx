@@ -203,13 +203,15 @@ const columns = COLUMNS_MAP.map((column) => {
 		accessor: column.accessor,
 	};
 });
-
-export function ResultsBody() {
+interface Props {
+	type: string;
+}
+export function ResultsBody({ type }: Props) {
 	const showColumns = screenerState((state) => state.showColumns);
 
 	const displayColumns = columns.filter((column: any) =>
 		showColumns.includes(column.accessor)
 	);
 
-	return <ResultsTable cols={displayColumns} />;
+	return <ResultsTable type={type} cols={displayColumns} />;
 }

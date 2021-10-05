@@ -107,6 +107,16 @@ export type ColumnName =
 	| 'Analysts'
 	| 'Custom';
 
+export type FilterIpoId =
+	| 's' // Symbol
+	| 'n' // Name
+	| 'm' // Market Cap
+	| 'p' // Stock Price
+	| 'c' // Price Change
+	| 'v' // Volume
+	| 'se' // Sector
+	| 'pe'; // PE Ratio
+
 export type ColumnsMap = {
 	// eslint-disable-next-line no-unused-vars
 	[key in ColumnName]: FilterId[];
@@ -117,12 +127,24 @@ export type SingleStock = {
 	[key in FilterId]: string;
 };
 
+export type SingleIPO = {
+	// eslint-disable-next-line no-unused-vars
+	[key in FilterIpoId]: string;
+};
+
 export type SingleDataPoint = string[];
 
 export type ScreenerData = {
 	stocks: {
 		count: number;
-		data: SingleStock[];
+		data: SingleIPO[];
+	};
+};
+
+export type IPOScreenerData = {
+	ipos: {
+		count: number;
+		data: SingleIPO[];
 	};
 };
 
