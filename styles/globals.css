@@ -358,39 +358,31 @@
 		@apply inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll;
 	}
 
-	.tabs-small {
+	.price-chart {
 		@apply flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto hide-scroll;
 	}
 
-	.tabs-small.blue {
-		@apply space-x-3;
-	}
-
-	.tabs-small > li > button {
+	.price-chart > li > button {
 		@apply text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md;
 	}
 
-	.tabs-small > li > button {
+	.price-chart > li > button {
 		@apply sm:px-3;
 	}
 
-	.tabs-small > li > button.inactive {
+	.price-chart > li > button.inactive {
 		@apply text-gray-900 hover:text-gray-900 hover:text-shadow;
 	}
 
-	.tabs-small.blue > li > button.inactive {
-		@apply bll;
-	}
-
-	.tabs-small > li > button.active {
+	.price-chart > li > button.active {
 		@apply bp:bg-gray-100 text-gray-800 font-semibold;
 	}
 
-	.tabs-small > li > button > span:first-child {
+	.price-chart > li > button > span:first-child {
 		@apply block sm:hidden lg:block xl:hidden;
 	}
 
-	.tabs-small > li > button > span:last-child {
+	.price-chart > li > button > span:last-child {
 		@apply hidden sm:block lg:hidden xl:block;
 	}
 
@@ -761,4 +753,18 @@
 .yt-lite.lyt-activated > .lty-playbtn {
 	opacity: 0;
 	pointer-events: none;
+}
+
+/* PAYWALL */
+.pw-shadow > div:last-child {
+	position: relative;
+}
+.pw-shadow > div:last-child:after {
+	content: '';
+	height: 60%;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
 }

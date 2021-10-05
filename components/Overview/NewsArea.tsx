@@ -5,7 +5,7 @@ import { News } from 'types/News';
 import { Info } from 'types/Info';
 import { getData } from 'functions/API';
 import { NewsMenu } from 'components/News/NewsMenu/_NewsMenu';
-import { LoadRest } from 'components/News/LoadRest';
+import { LoadMore } from 'components/News/LoadMore/_LoadMore';
 
 interface Props {
 	info: Info;
@@ -18,7 +18,11 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	const [timestamp, setTimestamp] = useState(updated);
 	const [show, setShow] = useState('all');
 	const [firstRender, setFirstRender] = useState(true);
-	const [loadedMore, setLoadedMore] = useState(false);
+	const [loadedMore, setLoadedMore] = useState(false); // If already fetched items 25-50
+	const [loading, setLoading] = useState(false); // If fetching new data
+	const [end, setEnd] = useState(false); // If no more data to fetch
+	const [paywalled, setPaywalled] = useState(false); // If paywall has been triggered
+	const [dataPage, setDataPage] = useState(2);
 
 	const updatedTime = new Date(timestamp * 1000);
 	const currentTime = new Date();
@@ -56,6 +60,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 				loadStockTwits(info.ticker);
 			} else {
 				setLoadedMore(false);
+				setPaywalled(false);
 				fetchData();
 			}
 		}
@@ -86,14 +91,25 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 			</div>
 			{show !== 'chat' ? (
 				<>
-					<NewsFeed data={data} related="Other symbols" />
-					<LoadRest
+					<NewsFeed
+						data={data}
+						related="Other symbols"
+						paywalled={paywalled}
+					/>
+					<LoadMore
 						id={info.id}
 						show={show}
 						data={data}
 						setData={setData}
+						loading={loading}
+						setLoading={setLoading}
 						loaded={loadedMore}
 						setLoaded={setLoadedMore}
+						end={end}
+						setEnd={setEnd}
+						setPaywalled={setPaywalled}
+						dataPage={dataPage}
+						setDataPage={setDataPage}
 					/>
 				</>
 			) : (
