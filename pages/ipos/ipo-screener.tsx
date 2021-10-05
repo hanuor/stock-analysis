@@ -24,8 +24,8 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 			/>
 			<LayoutFullWidth>
 				<div className="contain py-5 xs:py-6">
-					<Breadcrumbs url="/stock-screener/" />
-					<h1 className="hh1">Stock Screener</h1>
+					<Breadcrumbs url="/ipo-screener/" />
+					<h1 className="hh1">IPO</h1>
 					<StockScreener type={'ipo'} />
 				</div>
 			</LayoutFullWidth>
