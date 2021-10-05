@@ -9,19 +9,35 @@ type Props = {
 	setData: (data: News[]) => void;
 	news: News[];
 	setError: (error: string) => void;
+	setLoaded: (loaded: boolean) => void;
+	query: string;
+	setQuery: (query: string) => void;
+	searched: boolean;
+	setSearched: (searched: boolean) => void;
+	setEnd: (end: boolean) => void;
 };
 
-export function NewsMenuSearch({ id, setData, news, setError }: Props) {
-	const [query, setQuery] = useState('');
-	const [searched, setSearched] = useState(false); // If a search has been performed
-	const [searching, setSearching] = useState(false); // If
+export function NewsMenuSearch({
+	id,
+	setData,
+	news,
+	setError,
+	setLoaded,
+	query,
+	setQuery,
+	searched,
+	setSearched,
+	setEnd,
+}: Props) {
+	const [searching, setSearching] = useState(false); // If a search is in progress
 
 	async function doSearch() {
 		setSearching(true);
 		const results = await getData(`news-search?i=${id}&q=${query}`);
 		setSearching(false);
 		setSearched(true);
-		console.log(results);
+		setLoaded(true);
+		setEnd(false);
 		if (results.status === 'success') {
 			setData(results.data);
 		} else if (results.status === 'notfound') {
@@ -36,10 +52,10 @@ export function NewsMenuSearch({ id, setData, news, setError }: Props) {
 			setData(news);
 			setSearched(false);
 		}
-	}, [query, news, setData, searched]);
+	}, [query, news, setData, searched, setSearched]);
 
 	return (
-		<div className="mb-1 relative">
+		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px]">
 			<input
 				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md pr-9"
 				type="text"

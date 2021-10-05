@@ -3,6 +3,7 @@ import { getData } from 'functions/API';
 import { ButtonMore } from './ButtonMore';
 import { NewsPaywall } from './NewsPaywall';
 import { News } from 'types/News';
+import { useEffect } from 'react';
 
 type Props = {
 	id: number;
@@ -18,6 +19,8 @@ type Props = {
 	setPaywalled: (paywalled: boolean) => void;
 	dataPage: number;
 	setDataPage: (dataPage: number) => void;
+	searched: boolean;
+	query: string;
 };
 
 export function LoadMore({
@@ -34,14 +37,21 @@ export function LoadMore({
 	setPaywalled,
 	dataPage,
 	setDataPage,
+	searched,
+	query,
 }: Props) {
 	const isPro = authState((state) => state.isPro);
+
+	useEffect(() => {
+		if (loaded && data.length === 50 && !isPro) {
+			setPaywalled(true);
+		}
+	}, [loaded, data, isPro, setPaywalled]);
 
 	async function fetchData() {
 		setLoading(true);
 		const fresh = await getData(`news?i=${id}&f=${show}&full=true`);
 		setLoading(false);
-		console.log(fresh);
 		setData(fresh);
 		setLoaded(true);
 		if (fresh.length < 25) {
@@ -52,12 +62,23 @@ export function LoadMore({
 	async function fetchInfiniteData() {
 		const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null;
 		setLoading(true);
-		const infinite = await getData(
-			`news-infinite?i=${id}&f=${show}&p=${dataPage}&t=${PRO_KEY}`
-		);
+
+		let infinite =
+			searched && query.length > 0
+				? await getData(
+						`news-search?i=${id}&q=${query}&p=${dataPage}&t=${PRO_KEY}`
+				  )
+				: await getData(
+						`news-infinite?i=${id}&f=${show}&p=${dataPage}&t=${PRO_KEY}`
+				  );
+
+		if (infinite.data) {
+			infinite = infinite.data;
+		}
+
 		setLoading(false);
 		setDataPage(dataPage + 1);
-		console.log(infinite);
+
 		setData(data.concat(infinite));
 		if (infinite.length < 25) {
 			setEnd(true);
@@ -69,7 +90,7 @@ export function LoadMore({
 	}
 
 	if (loaded && data.length === 50 && !isPro) {
-		setPaywalled(true);
+		// setPaywalled(true);
 		return <NewsPaywall />;
 	}
 

@@ -10,6 +10,12 @@ type Props = {
 	setData: (value: News[]) => void;
 	news: News[];
 	setError: (error: string) => void;
+	setLoaded: (loaded: boolean) => void;
+	query: string;
+	setQuery: (query: string) => void;
+	searched: boolean;
+	setSearched: (searched: boolean) => void;
+	setEnd: (end: boolean) => void;
 };
 
 export function NewsMenu({
@@ -20,6 +26,12 @@ export function NewsMenu({
 	setData,
 	news,
 	setError,
+	setLoaded,
+	query,
+	setQuery,
+	searched,
+	setSearched,
+	setEnd,
 }: Props) {
 	return (
 		<div className="flex flex-row justify-between items-center border-b">
@@ -29,6 +41,12 @@ export function NewsMenu({
 				setData={setData}
 				news={news}
 				setError={setError}
+				setLoaded={setLoaded}
+				searched={searched}
+				setSearched={setSearched}
+				query={query}
+				setQuery={setQuery}
+				setEnd={setEnd}
 			/>
 		</div>
 	);

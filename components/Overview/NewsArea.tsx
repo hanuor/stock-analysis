@@ -25,6 +25,8 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	const [paywalled, setPaywalled] = useState(false); // If paywall has been triggered
 	const [dataPage, setDataPage] = useState(2);
 	const [error, setError] = useState('');
+	const [searched, setSearched] = useState(false); // If a search has been performed
+	const [query, setQuery] = useState('');
 
 	const updatedTime = new Date(timestamp * 1000);
 	const currentTime = new Date();
@@ -61,6 +63,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 			if (show === 'chat') {
 				loadStockTwits(info.ticker);
 			} else {
+				setEnd(false);
 				setLoadedMore(false);
 				setPaywalled(false);
 				fetchData();
@@ -91,6 +94,12 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 					setData={setData}
 					news={news}
 					setError={setError}
+					setLoaded={setLoadedMore}
+					searched={searched}
+					setSearched={setSearched}
+					query={query}
+					setQuery={setQuery}
+					setEnd={setEnd}
 				/>
 			</div>
 			{error && <Warning message={error} />}
@@ -115,6 +124,8 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 						setPaywalled={setPaywalled}
 						dataPage={dataPage}
 						setDataPage={setDataPage}
+						searched={searched}
+						query={query}
 					/>
 				</>
 			) : (
