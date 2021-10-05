@@ -6,7 +6,7 @@ import { Info } from 'types/Info';
 import { getData } from 'functions/API';
 import { NewsMenu } from 'components/News/NewsMenu/_NewsMenu';
 import { LoadMore } from 'components/News/LoadMore/_LoadMore';
-import { Warning } from 'components/Alerts/Warning';
+import { Information } from 'components/Alerts/Information';
 
 interface Props {
 	info: Info;
@@ -102,7 +102,11 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 					setEnd={setEnd}
 				/>
 			</div>
-			{error && <Warning message={error} />}
+			{error && (
+				<div className="mt-4">
+					<Information message={error} />
+				</div>
+			)}
 			{show !== 'chat' ? (
 				<>
 					<NewsFeed
