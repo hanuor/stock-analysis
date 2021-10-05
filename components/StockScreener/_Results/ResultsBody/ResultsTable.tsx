@@ -13,6 +13,7 @@ import { SortDownIcon } from 'components/Icons/SortDown';
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
+import { FilterId } from 'components/StockScreener/screener.types';
 import {
 	useFetchFullData,
 	useFetchFulIPOData,
@@ -33,13 +34,26 @@ export function ResultsTable({ cols, type }: Props) {
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
+	const setShowColumns = screenerState((state) => state.setShowColumns);
 
 	useEffect(() => {
 		if (type == 'stock') {
 			fetchFullData();
+			setShowColumns([
+				's',
+				'n',
+				'm',
+				'p',
+				'c',
+				'se',
+				'v',
+				'pe',
+			] as FilterId[]);
+
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		} else {
 			fetchFullIPOData();
+			setShowColumns(['s', 'n', 'm', 'p', 'se', 'pe'] as FilterId[]);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -88,6 +102,7 @@ export function ResultsTable({ cols, type }: Props) {
 	return (
 		<>
 			<ResultsMenu
+				type={type}
 				count={data.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}

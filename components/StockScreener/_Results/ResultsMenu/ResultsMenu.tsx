@@ -14,6 +14,7 @@ interface Props {
 	setGlobalFilter: (filterValue: FilterValue) => void;
 	tableId: string;
 	append?: string;
+	type: string;
 }
 
 export function ResultsMenu({
@@ -22,6 +23,7 @@ export function ResultsMenu({
 	globalFilter,
 	setGlobalFilter,
 	tableId,
+	type,
 }: Props) {
 	const fullCount = screenerDataState((state) => state.fullCount);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
@@ -61,7 +63,7 @@ export function ResultsMenu({
 				</div>
 			</div>
 			<div className="col-span-2 overflow-x-auto hide-scroll lg:flex-grow lg:order-2 border-t lg:border-0 lg:pl-1 xl:pl-5">
-				<ResultsNav />
+				<ResultsNav type={type} />
 			</div>
 		</div>
 	);

@@ -6,14 +6,20 @@ import { getData } from 'functions/API';
 
 type Props = {
 	name: ColumnName;
+	type: string;
 };
 
-export function ResultsMenuItem({ name }: Props) {
+export function ResultsMenuItem({ name, type }: Props) {
+	let defaultColumns: FilterId[] = [];
+
+	type == 'stock'
+		? (defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'])
+		: (defaultColumns = ['s', 'n', 'm', 'p', 'se', 'pe']);
+
 	const filters = screenerState((state) => state.filters);
 	const resultsMenu = screenerState((state) => state.resultsMenu);
 	const setResultsMenu = screenerState((state) => state.setResultsMenu);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
-	const defaultColumns = screenerState((state) => state.defaultColumns);
 	const fetchedColumns = screenerState((state) => state.fetchedColumns);
 	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn);
