@@ -2,7 +2,15 @@ import { SearchIcon } from '@heroicons/react/solid';
 import { SpinnerIcon } from 'components/Icons/Spinner';
 import { getData } from 'functions/API';
 import { useEffect, useRef, useState } from 'react';
+import { navState } from 'state/navState';
 import { News } from 'types/News';
+
+declare global {
+	// eslint-disable-next-line no-unused-vars
+	interface Window {
+		dataLayer: any;
+	}
+}
 
 type Props = {
 	id: number;
@@ -31,8 +39,10 @@ export function NewsMenuSearch({
 }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [searching, setSearching] = useState(false); // If a search is in progress
+	const path = navState((state) => state.path);
 
 	async function doSearch() {
+		setSearched(false);
 		setSearching(true);
 		const keyref = inputRef.current ?? null;
 		if (keyref) keyref.blur();
@@ -56,6 +66,21 @@ export function NewsMenuSearch({
 			setSearched(false);
 		}
 	}, [query, news, setData, searched, setSearched]);
+
+	useEffect(() => {
+		if (query !== '' && searched) {
+			window?.dataLayer?.push({
+				event: 'tag-feat-news-search',
+				eventProps: {
+					category: 'Feature Used',
+					action: 'News Search',
+					label: path.two,
+					value: query,
+				},
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searched]);
 
 	return (
 		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px]">
