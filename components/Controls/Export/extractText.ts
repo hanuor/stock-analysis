@@ -22,3 +22,10 @@ export function extractTextFromHTML(value: string): string | null {
 	}
 	return value;
 }
+
+export function removeNanValues(value: string): string | null {
+	if (Number.isNaN(value)) {
+		return '';
+	}
+	return value;
+}
