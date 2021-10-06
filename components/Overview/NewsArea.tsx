@@ -4,6 +4,9 @@ import { loadStockTwits } from 'functions/loadStockTwits';
 import { News } from 'types/News';
 import { Info } from 'types/Info';
 import { getData } from 'functions/API';
+import { NewsMenu } from 'components/News/NewsMenu/_NewsMenu';
+import { LoadMore } from 'components/News/LoadMore/_LoadMore';
+import { Information } from 'components/Alerts/Information';
 
 interface Props {
 	info: Info;
@@ -13,10 +16,17 @@ interface Props {
 
 export const NewsArea = ({ info, news, updated }: Props) => {
 	const [data, setData] = useState(news);
-	const [original, setOriginal] = useState(news);
 	const [timestamp, setTimestamp] = useState(updated);
-	const [type, setType] = useState('all');
+	const [show, setShow] = useState('all');
 	const [firstRender, setFirstRender] = useState(true);
+	const [loadedMore, setLoadedMore] = useState(false); // If already fetched items 25-50
+	const [loading, setLoading] = useState(false); // If fetching new data
+	const [end, setEnd] = useState(false); // If no more data to fetch
+	const [paywalled, setPaywalled] = useState(false); // If paywall has been triggered
+	const [dataPage, setDataPage] = useState(2);
+	const [error, setError] = useState('');
+	const [searched, setSearched] = useState(false); // If a search has been performed
+	const [query, setQuery] = useState('');
 
 	const updatedTime = new Date(timestamp * 1000);
 	const currentTime = new Date();
@@ -30,7 +40,6 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 			const fresh = await getData(`news-fresh?i=${info.id}`);
 			if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
 				setData(fresh);
-				setOriginal(fresh);
 			}
 		}
 
@@ -44,24 +53,25 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	// Fetch data if a menu item has been clicked (videos, press releases, conversation)
 	useEffect(() => {
 		async function fetchData() {
-			const fresh = await getData(`news?i=${info.id}&f=${type}`);
+			const fresh = await getData(`news?i=${info.id}&f=${show}`);
 			setData(fresh);
 		}
 
 		if (firstRender) {
 			setFirstRender(false);
 		} else {
-			if (type === 'all') {
-				setData(original);
-			} else if (type === 'v' || type === 'pr') {
-				fetchData();
-			} else if (type === 'chat') {
+			if (show === 'chat') {
 				loadStockTwits(info.ticker);
+			} else {
+				setEnd(false);
+				setLoadedMore(false);
+				setPaywalled(false);
+				fetchData();
 			}
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [type]);
+	}, [show]);
 
 	if (!news || news.length === 0) {
 		return (
@@ -75,53 +85,53 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	return (
 		<>
 			<div className="px-4 md:px-0 mt-6 lg:mt-0">
-				<h2 className="hh2 mb-2">News</h2>
-				<div className="text-smaller xs:text-base mb-0.5">
-					<ul className="flex flex-row justify-between bp:justify-start bp:space-x-5 whitespace-nowrap">
-						<li>
-							<button
-								className={type === 'all' ? 'font-semibold' : 'bll'}
-								id="tag-feat-news-menu-all"
-								onClick={() => setType('all')}
-							>
-								All
-							</button>
-						</li>
-						<li>
-							<button
-								className={type === 'v' ? 'font-semibold' : 'bll'}
-								id="tag-feat-news-menu-videos"
-								onClick={() => setType('v')}
-							>
-								Videos
-							</button>
-						</li>
-						{info.type === 'stocks' && (
-							<li>
-								<button
-									className={type === 'pr' ? 'font-semibold' : 'bll'}
-									id="tag-feat-news-menu-press"
-									onClick={() => setType('pr')}
-								>
-									Press
-									<span className="hidden xs:inline"> Releases</span>
-								</button>
-							</li>
-						)}
-						<li>
-							<button
-								className={type === 'chat' ? 'font-semibold' : 'bll'}
-								id="tag-feat-news-menu-chat"
-								onClick={() => setType('chat')}
-							>
-								Conversation
-							</button>
-						</li>
-					</ul>
-				</div>
+				<h2 className="hh2 mb-0">News</h2>
+				<NewsMenu
+					show={show}
+					setShow={setShow}
+					pageType={info.type}
+					id={info.id}
+					setData={setData}
+					news={news}
+					setError={setError}
+					setLoaded={setLoadedMore}
+					searched={searched}
+					setSearched={setSearched}
+					query={query}
+					setQuery={setQuery}
+					setEnd={setEnd}
+				/>
 			</div>
-			{type !== 'chat' ? (
-				<NewsFeed data={data} related="Other symbols" />
+			{error && (
+				<div className="mt-4">
+					<Information message={error} />
+				</div>
+			)}
+			{show !== 'chat' ? (
+				<>
+					<NewsFeed
+						data={data}
+						related="Other symbols"
+						paywalled={paywalled}
+					/>
+					<LoadMore
+						id={info.id}
+						show={show}
+						data={data}
+						setData={setData}
+						loading={loading}
+						setLoading={setLoading}
+						loaded={loadedMore}
+						setLoaded={setLoadedMore}
+						end={end}
+						setEnd={setEnd}
+						setPaywalled={setPaywalled}
+						dataPage={dataPage}
+						setDataPage={setDataPage}
+						searched={searched}
+						query={query}
+					/>
+				</>
 			) : (
 				<div id="altwrap" className="pt-2 overflow-x-auto"></div>
 			)}

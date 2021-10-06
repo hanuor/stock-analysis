@@ -120,7 +120,7 @@ export const FinancialTable = ({
 						message={`No ${range} ${statement.replace(
 							/_/g,
 							' '
-						)} data found for this stock.`}
+						)} data available for this stock.`}
 						classes="min-h-[300px] lg:min-h-[500px]"
 					/>
 				</div>

@@ -298,7 +298,7 @@
 	}
 
 	.news-article {
-		@apply bg-white p-4 sm:px-0 sm:py-6 first:pt-5 last:pb-1 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5;
+		@apply bg-white p-4 md:px-0 sm:py-6 last:pb-1 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5 last:shadow-none;
 	}
 
 	.news-article > a {
@@ -331,11 +331,11 @@
 	}
 
 	.news-spns {
-		@apply bg-white p-4 sm:px-0 sm:py-6 lg:pt-6 lg:pb-4 shadow sm:shadow-none;
+		@apply bg-white p-4 md:px-0 sm:py-6 lg:pt-6 lg:pb-4 shadow sm:shadow-none;
 	}
 
 	.news-video {
-		@apply flex flex-col bg-white p-4 sm:px-0 sm:py-6 first:pt-3 last:pb-1 sm:first:pt-4 shadow sm:shadow-none;
+		@apply flex flex-col bg-white p-4 md:px-0 sm:py-6 last:pb-1 sm:first:pt-4 shadow sm:shadow-none last:shadow-none;
 	}
 
 	.news-video > h3 {
@@ -364,6 +364,10 @@
 
 	.price-chart > li > button {
 		@apply text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md;
+	}
+
+	.price-chart > li > button {
+		@apply sm:px-3;
 	}
 
 	.price-chart > li > button.inactive {
@@ -749,4 +753,18 @@
 .yt-lite.lyt-activated > .lty-playbtn {
 	opacity: 0;
 	pointer-events: none;
+}
+
+/* PAYWALL */
+.pw-shadow > div:last-child {
+	position: relative;
+}
+.pw-shadow > div:last-child:after {
+	content: '';
+	height: 60%;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
 }
