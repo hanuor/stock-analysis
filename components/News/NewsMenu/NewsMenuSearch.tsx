@@ -1,7 +1,7 @@
 import { SearchIcon } from '@heroicons/react/solid';
 import { SpinnerIcon } from 'components/Icons/Spinner';
 import { getData } from 'functions/API';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { News } from 'types/News';
 
 type Props = {
@@ -29,10 +29,13 @@ export function NewsMenuSearch({
 	setSearched,
 	setEnd,
 }: Props) {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const [searching, setSearching] = useState(false); // If a search is in progress
 
 	async function doSearch() {
 		setSearching(true);
+		const keyref = inputRef.current ?? null;
+		if (keyref) keyref.blur();
 		const results = await getData(`news-search?i=${id}&q=${query}`);
 		setSearching(false);
 		setSearched(true);
@@ -57,6 +60,7 @@ export function NewsMenuSearch({
 	return (
 		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px]">
 			<input
+				ref={inputRef}
 				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md pr-9"
 				type="text"
 				name="newssearch"
