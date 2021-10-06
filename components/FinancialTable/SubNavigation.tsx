@@ -70,24 +70,20 @@ function Statement({ info, statement }: Props) {
 						</a>
 					</Link>
 				</li>
-				{!info.exceptions.hideRatios && (
-					<li>
-						<Link
-							href={`/stocks/${info.symbol}/financials/ratios/`}
-							prefetch={false}
-							scroll={false}
+				<li>
+					<Link
+						href={`/stocks/${info.symbol}/financials/ratios/`}
+						prefetch={false}
+						scroll={false}
+					>
+						<a
+							className={statement == 'ratios' ? 'active' : 'inactive'}
+							data-title="Ratios"
 						>
-							<a
-								className={
-									statement == 'ratios' ? 'active' : 'inactive'
-								}
-								data-title="Ratios"
-							>
-								Ratios
-							</a>
-						</Link>
-					</li>
-				)}
+							Ratios
+						</a>
+					</Link>
+				</li>
 			</ul>
 		</nav>
 	);

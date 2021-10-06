@@ -30,7 +30,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 					</div>
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1 sm:py-2 lg:py-3">
+						<div className="py-1 sm:pt-0 sm:pb-3">
 							<NewsFeed data={data} related="Stocks" />
 						</div>
 						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
