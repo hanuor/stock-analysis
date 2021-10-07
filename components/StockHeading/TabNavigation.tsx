@@ -32,6 +32,7 @@ export const TabNavigation = ({
 				<Tab symbol={symbol} title="Overview" append="" />
 				<Tab symbol={symbol} title="Financials" append="financials" />
 				<Tab symbol={symbol} title="Statistics" append="statistics" />
+				<Tab symbol={symbol} title="Dividends" append="dividend" />
 				<Tab symbol={symbol} title="Profile" append="company" />
 				{!hideChart && <Tab symbol={symbol} title="Chart" append="chart" />}
 			</ul>
