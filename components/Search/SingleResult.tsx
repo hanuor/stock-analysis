@@ -89,9 +89,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 					break;
 
 				case 'dividend':
-					if (type === 'e') {
-						url = `${url}dividend/`;
-					}
+					url = `${url}dividend/`;
 					break;
 			}
 		}
