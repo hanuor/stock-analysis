@@ -52,9 +52,9 @@ export const NewsArticle = ({ index, item, related, count }: Props) => {
 					</div>
 				</div>
 			</div>
-			{(index === 2 || (count < 3 && count === index + 1)) && (
-				<NewsAds index={index} count={count} />
-			)}
+			{(index === 2 ||
+				(count < 3 && count === index + 1) ||
+				index === 7) && <NewsAds index={index} count={count} />}
 		</>
 	);
 };
