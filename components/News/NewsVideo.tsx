@@ -29,9 +29,9 @@ export const NewsVideo = ({ index, item, related, count }: Props) => {
 					<span> - {item.source}</span>
 				</div>
 			</div>
-			{(index === 2 || (count < 3 && count === index + 1)) && (
-				<NewsAds index={index} count={count} />
-			)}
+			{(index === 2 ||
+				(count < 3 && count === index + 1) ||
+				index === 7) && <NewsAds index={index} count={count} />}
 		</>
 	);
 };
