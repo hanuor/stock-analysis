@@ -9,7 +9,12 @@ const formatter = new Intl.NumberFormat('en-US', {
 	maximumFractionDigits: 5,
 });
 
-export const HistoryTable = ({ rawdata }: { rawdata: DividendType[] }) => {
+type Props = {
+	rawdata: DividendType[];
+	disclaimer?: boolean;
+};
+
+export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 	const columns: Column[] = useMemo(
 		() => [
 			{
@@ -108,6 +113,12 @@ export const HistoryTable = ({ rawdata }: { rawdata: DividendType[] }) => {
 						})}
 					</tbody>
 				</table>
+				{disclaimer && (
+					<div className="mt-1 text-sm text-gray-600">
+						* Dividend amounts are adjusted for stock splits when
+						applicable.
+					</div>
+				)}
 			</div>
 		</div>
 	);
