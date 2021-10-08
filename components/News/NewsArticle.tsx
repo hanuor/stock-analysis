@@ -2,6 +2,7 @@
 import { News } from 'types/News';
 import { Tickers } from './Tickers';
 import { NewsAds } from './NewsAds';
+import { useState } from 'react';
 
 interface Props {
 	index: number;
@@ -11,6 +12,9 @@ interface Props {
 }
 
 export const NewsArticle = ({ index, item, related, count }: Props) => {
+	const [imgSrc, setImgSrc] = useState<string | undefined>(item.image);
+	const onError = () => setImgSrc('/blank.png');
+
 	return (
 		<>
 			<div className="news-article">
@@ -23,10 +27,11 @@ export const NewsArticle = ({ index, item, related, count }: Props) => {
 				>
 					<img
 						loading="lazy"
-						src={item.image}
+						src={imgSrc}
 						width={640}
 						height={360}
 						alt=""
+						onError={onError}
 					/>
 				</a>
 				<div>

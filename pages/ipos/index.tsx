@@ -36,7 +36,7 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 							<SubNavigation />
 							<RecentTable rawdata={data} />
 						</div>
-						<aside className="flex flex-col space-y-10 py-6">
+						<aside className="flex flex-col space-y-10 pt-6">
 							<CalendarTableMin upcoming={upcoming} />
 							<NewsletterWidget />
 							<NewsWidget

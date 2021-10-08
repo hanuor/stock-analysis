@@ -25,6 +25,11 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 				Header: 'Cash Amount',
 				accessor: 'amount',
 				Cell: ({ cell: { value } }: any) => {
+					const split =
+						typeof value === 'string' ? value.split('-') : null;
+					if (split && split[1]) {
+						return formatter.format(Number(split[0])) + ' ' + split[1];
+					}
 					return '$' + formatter.format(value);
 				},
 			},

@@ -10,7 +10,7 @@ declare global {
 }
 
 // Dianomi ad in the footer
-export const FooterDianomi = () => {
+export default function FooterAd() {
 	const path = navState((state) => state.path);
 
 	useEffect(() => {
@@ -22,7 +22,7 @@ export const FooterDianomi = () => {
 	return (
 		<>
 			<div
-				className="dianomi_context max-w-[970px] min-h-[270] mx-auto my-9 px-3 xs:px-4 lg:px-0"
+				className="dianomi_context max-w-[970px] min-h-[310px] pb-4 mx-auto px-3 xs:px-4 lg:px-0"
 				data-dianomi-context-id="443"
 			></div>
 			<Script
@@ -32,5 +32,4 @@ export const FooterDianomi = () => {
 			/>
 		</>
 	);
-};
-export default FooterDianomi;
+}

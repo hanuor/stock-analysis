@@ -19,7 +19,7 @@ export function NewsAds({ index, count }: { index: number; count: number }) {
 		);
 	} else if (index === 7) {
 		return (
-			<LazyLoadAd offset={300}>
+			<LazyLoadAd offset={400}>
 				<div className="news-spns">
 					<NewsAd2 />
 				</div>

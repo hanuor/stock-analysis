@@ -112,7 +112,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								/>
 							</div>
 						</div>
-						<aside className="flex flex-col space-y-10 py-6">
+						<aside className="flex flex-col space-y-10 pt-6">
 							<RecentTableMin recent={recent} />
 							<NewsletterWidget />
 							<NewsWidget

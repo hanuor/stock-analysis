@@ -22,7 +22,7 @@ const StatisticsPage = ({ info, data }: Props) => {
 				description={`Detailed statistics for ${info.nameFull} (${info.ticker}) stock, including valuation metrics, financial numbers, share information and more.`}
 				canonical={`/stocks/${info.symbol}/statistics/`}
 			/>
-			<div className="contain pt-1 xs:pt-1.5 lg:pt-1 pb-10 space-y-5 xs:space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-10 mt-5">
+			<div className="contain pt-1 xs:pt-1.5 lg:pt-1 pb-0 space-y-5 xs:space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-10 mt-5">
 				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
 					<div>
 						<StatsWidget

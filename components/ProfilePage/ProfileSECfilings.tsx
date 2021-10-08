@@ -83,7 +83,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 		return (
 			<>
 				<h2 className="hh2">Latest SEC Filings</h2>
-				<table className="w-full mb-12 text-smaller bp:text-base">
+				<table className="w-full text-smaller bp:text-base">
 					<thead>
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
 							<th
