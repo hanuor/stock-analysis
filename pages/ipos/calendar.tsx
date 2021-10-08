@@ -60,7 +60,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 						</div>
 						<div className="flex flex-col lg:pt-4">
 							<CalendarStats data={data} />
-							<aside className="space-y-8 lg:space-y-10 pt-6 pb-6">
+							<aside className="space-y-8 lg:space-y-10 pt-6">
 								<RecentTableMin recent={recent} />
 								<NewsletterWidget />
 								<NewsWidget

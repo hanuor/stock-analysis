@@ -50,7 +50,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 							<InfoBox text={data.info} />
 							<RecentTable rawdata={data.data} />
 						</div>
-						<aside className="flex flex-col space-y-10 py-6">
+						<aside className="flex flex-col space-y-10 pt-6">
 							<CalendarTableMin upcoming={upcoming} />
 							<NewsletterWidget />
 							<NewsWidget

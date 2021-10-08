@@ -36,7 +36,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 						<div className="py-1">
 							<NewsFeed data={data} related="Stocks" />
 						</div>
-						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
+						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 pt-6">
 							<CalendarTableMin upcoming={upcoming} />
 							<NewsletterWidget />
 							<RecentTableMin recent={recent} />

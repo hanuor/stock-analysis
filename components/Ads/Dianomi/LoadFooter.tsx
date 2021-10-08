@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-const FooterDianomi = dynamic(() => import('components/Ads/Dianomi/FootHorz'), {
+const FooterAd = dynamic(() => import('components/Ads/Dianomi/FooterAd'), {
 	ssr: false,
 });
 import { navState } from 'state/navState';
@@ -7,5 +7,5 @@ import { navState } from 'state/navState';
 export function LoadFooter() {
 	const route = navState((state) => state.route);
 
-	return <FooterDianomi key={route} />;
+	return <FooterAd key={route} />;
 }
