@@ -1,5 +1,6 @@
 // All possible filters
 // The IDs are shortened to minimize data payload size
+
 export type FilterId =
 	| 's' // Symbol
 	| 'n' // Name
@@ -94,7 +95,13 @@ export type FilterId =
 	| 'equity' // Shareh. Equity
 	| 'workingCapital' // Working Capital
 	| 'ls' // Last Stock Split
-	| 'splitDate'; // Last Split Date
+	| 'splitDate' // Last Split Date
+	| 'liabilities'
+	| 'icf'
+	| 'cff'
+	| 'ncf'
+	| 'capex'
+	| 'ipoPriceRange';
 
 // Results columns
 export type ColumnName =
@@ -105,8 +112,24 @@ export type ColumnName =
 	| 'Valuation'
 	| 'Dividends'
 	| 'Analysts'
+	| 'Custom'
+	| 'Income'
+	| 'Balance Sheet'
+	| 'Cash Flow';
+
+/*
+export type IPOColumnName =
+	| 'Filtered'
+	| 'General'
+	| 'Company'
+	| 'Income'
+	| 'Balance Sheet'
+	| 'Cash Flow'
 	| 'Custom';
 
+*/
+
+/*
 export type FilterIpoId =
 	| 's' // Symbol
 	| 'n' // Name
@@ -115,13 +138,44 @@ export type FilterIpoId =
 	| 'c' // Price Change
 	| 'v' // Volume
 	| 'se' // Sector
-	| 'pe'; // PE Ratio
-
+	| 'ipoDate'
+	| 'pe' // PE Ratio
+	| 'revenue'
+	| 'grossProfit'
+	| 'operatingIncome'
+	| 'netIncome'
+	| 'eps'
+	| 'ebit'
+	| 'ebitda'
+	| 'i'
+	| 'country'
+	| 'exchange'
+	| 'employees'
+	| 'founded'
+	| 's'
+	| 'n'
+	| 'cash'
+	| 'liabilities'
+	| 'debt'
+	| 'equity'
+	| 'ocf'
+	| 'icf'
+	| 'cff'
+	| 'ncf'
+	| 'capex'
+	| 'fcf'
+	| 'fcfps';
+*/
 export type ColumnsMap = {
 	// eslint-disable-next-line no-unused-vars
 	[key in ColumnName]: FilterId[];
 };
-
+/*
+export type IPOColumnsMap = {
+	// eslint-disable-next-line no-unused-vars
+	[key in IPOColumnName]: FilterId[];
+};
+*/
 export type SingleStock = {
 	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string;
@@ -129,7 +183,7 @@ export type SingleStock = {
 
 export type SingleIPO = {
 	// eslint-disable-next-line no-unused-vars
-	[key in FilterIpoId]: string;
+	[key in FilterId]: string;
 };
 
 export type SingleDataPoint = string[];
@@ -137,7 +191,7 @@ export type SingleDataPoint = string[];
 export type ScreenerData = {
 	stocks: {
 		count: number;
-		data: SingleIPO[];
+		data: SingleStock[];
 	};
 };
 

@@ -6,9 +6,7 @@
 			"request": "launch",
 			"name": "Debug React Run",
 			"url": "http://localhost:3001",
-			"webRoot": "${workspaceFolder}/",
-			"sourceMaps": true,
-			"breakOnLoad": true
+			"webRoot": "${workspaceFolder}/"
 		}
 	]
 }

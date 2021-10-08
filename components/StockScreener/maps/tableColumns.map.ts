@@ -488,4 +488,34 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'splitDate',
 		format: 'date',
 	},
+	{
+		Header: 'Liabilities',
+		accessor: 'liabilities',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Inv. Cash Flow',
+		accessor: 'icf',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Fin. Cash Flow',
+		accessor: 'cff',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Net Cash Flow',
+		accessor: 'ncf',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Capital Exp.',
+		accessor: 'capex',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'IPO Price',
+		accessor: 'ipoPriceRange',
+		format: 'string',
+	},
 ];

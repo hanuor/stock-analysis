@@ -34,7 +34,7 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const stocks = await getData('screener?type=initial');
+	const stocks = await getData('iposcreener?type=initial');
 
 	return {
 		props: {

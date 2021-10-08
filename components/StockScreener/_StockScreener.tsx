@@ -7,6 +7,7 @@ interface Props {
 }
 
 export function StockScreener({ type }: Props) {
+	
 	return (
 		<>
 			<div className="border rounded p-2 bg-gray-50">

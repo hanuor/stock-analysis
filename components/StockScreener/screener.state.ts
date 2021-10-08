@@ -27,6 +27,8 @@ interface ScreenerState {
 	showColumns: FilterId[];
 	filteredColumns: FilterId[];
 	addFetchedColumn: (newColumn: FilterId) => void;
+	setFetchedColumns: (newArray: any[]) => void;
+
 	addFilteredColumn: (newColumn: FilterId) => void;
 	removeFilteredColumn: (columns: FilterId) => void;
 	setShowColumns: (newColumns: FilterId[]) => void;
@@ -88,6 +90,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn],
 		})),
+	setFetchedColumns: (newArray: any[]) => set({ fetchedColumns: newArray }),
 	addFilteredColumn: (newColumn: any) =>
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn],

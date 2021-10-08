@@ -35,7 +35,7 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const ipos = await getData('screener?type=ipos');
+	const ipos = await getData('screener?type=intitial');
 
 	return {
 		props: {

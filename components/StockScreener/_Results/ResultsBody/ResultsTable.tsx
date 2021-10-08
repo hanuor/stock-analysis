@@ -35,6 +35,7 @@ export function ResultsTable({ cols, type }: Props) {
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
+	const setFetchedColumns = screenerState((state) => state.setFetchedColumns);
 
 	useEffect(() => {
 		if (type == 'stock') {
@@ -49,11 +50,29 @@ export function ResultsTable({ cols, type }: Props) {
 				'v',
 				'pe',
 			] as FilterId[]);
+			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe']);
 
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		} else {
 			fetchFullIPOData();
-			setShowColumns(['s', 'n', 'm', 'p', 'se', 'pe'] as FilterId[]);
+			setShowColumns([
+				's',
+				'n',
+				'm',
+				'se',
+				'ipoPriceRange',
+				'ipoDate',
+				'revenue',
+			] as FilterId[]);
+			setFetchedColumns([
+				's',
+				'n',
+				'm',
+				'se',
+				'ipoPriceRange',
+				'ipoDate',
+				'revenue',
+			]);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

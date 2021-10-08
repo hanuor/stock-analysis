@@ -24,7 +24,7 @@ export function useFetchFulIPOData() {
 
 	async function fetchFullData() {
 		if (!data || data.length < 100) {
-			const data = await getData('screener?type=ipos');
+			const data = await getData('iposcreener?type=f');
 			setData(data.data);
 			setFullyLoaded(true);
 		}
