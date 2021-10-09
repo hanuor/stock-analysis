@@ -3,7 +3,11 @@ import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/F
 import { FiltersMenuActive } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuActive';
 import { FilterSearch } from './FilterSearch';
 
-export function FiltersMenu() {
+interface Props {
+	type: string;
+}
+
+export function FiltersMenu({ type }: Props) {
 	const filtersShown = screenerState((state) => state.filtersShown);
 
 	const showHideBorder = filtersShown ? ' border-b border-gray-300' : '';
@@ -25,13 +29,26 @@ export function FiltersMenu() {
 				>
 					<nav>
 						<ul className="navmenu darkbg bg-gray-50 noshadow">
-							<FiltersMenuItem name="Popular" />
-							<FiltersMenuItem name="Company" />
-							<FiltersMenuItem name="Financials" />
-							<FiltersMenuItem name="Valuation" />
-							<FiltersMenuItem name="Dividends" />
-							<FiltersMenuItem name="Other" />
-							<FiltersMenuItem name="All" />
+							{type == 'stock' ? (
+								<>
+									<FiltersMenuItem name="Popular" />
+									<FiltersMenuItem name="Company" />
+									<FiltersMenuItem name="Financials" />
+									<FiltersMenuItem name="Valuation" />
+									<FiltersMenuItem name="Dividends" />
+									<FiltersMenuItem name="Other" />
+									<FiltersMenuItem name="All" />
+								</>
+							) : (
+								<>
+									<FiltersMenuItem name="General" />
+									<FiltersMenuItem name="Company" />
+									<FiltersMenuItem name="Income" />
+									<FiltersMenuItem name="Balance Sheet" />
+									<FiltersMenuItem name="Cash Flow" />
+									<FiltersMenuItem name="Other" />
+								</>
+							)}
 						</ul>
 					</nav>
 				</div>

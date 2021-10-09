@@ -15,10 +15,10 @@ export function useModifyColumns() {
 	const addDataColumn = screenerDataState((state) => state.addDataColumn);
 
 	// Fetch a new data column
-	async function fetchColumn(id: FilterId) {
+	async function fetchColumn(id: FilterId, screenerType: string) {
 		if (!isFetched(id)) {
 			addFetchedColumn(id);
-			const fetched = await getData(`screener?type=${id}`);
+			const fetched = await getData(screenerType + `?type=${id}`);
 			addDataColumn(fetched, id);
 		}
 	}
@@ -29,12 +29,12 @@ export function useModifyColumns() {
 	}
 
 	// Toggle a column to either show or hide
-	function toggle(id: FilterId) {
+	function toggle(id: FilterId, screenerType: string) {
 		if (showColumns.includes(id)) {
 			setShowColumns(showColumns.filter((filter) => filter !== id));
 		} else {
 			if (!isFetched(id)) {
-				fetchColumn(id);
+				fetchColumn(id, screenerType);
 			}
 			setShowColumns([...showColumns, id]);
 		}

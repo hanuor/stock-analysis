@@ -1,13 +1,25 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { FilterProps } from 'components/StockScreener/screener.types';
-import { FiltersMap } from 'components/StockScreener/maps/filters.map';
+import {
+	FiltersMap,
+	IPOFiltersMap,
+} from 'components/StockScreener/maps/filters.map';
 import { FilterBody } from 'components/StockScreener/_Filters/FiltersBody/SingleFilter/_SingleFilter';
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns';
 import { Tooltip } from 'components/Tooltip';
 import { TooltipContent } from './TooltipContent';
 
-function FilterWrap({ f }: { f: FilterProps }) {
+interface FilterWrapProps {
+	f: FilterProps;
+	type: string;
+}
+
+function FilterWrap({ f, type }: FilterWrapProps) {
 	const { fetchColumn } = useModifyColumns();
+	let screenerType = '';
+	type == 'stock'
+		? (screenerType = 'screener')
+		: (screenerType = 'iposcreener');
 
 	return (
 		<div
@@ -24,8 +36,8 @@ function FilterWrap({ f }: { f: FilterProps }) {
 				</Tooltip>
 			</div>
 			<div
-				onMouseEnter={() => fetchColumn(f.id)}
-				onFocus={() => fetchColumn(f.id)}
+				onMouseEnter={() => fetchColumn(f.id, screenerType)}
+				onFocus={() => fetchColumn(f.id, screenerType)}
 			>
 				<FilterBody filter={f} />
 			</div>
@@ -33,7 +45,11 @@ function FilterWrap({ f }: { f: FilterProps }) {
 	);
 }
 
-export function RenderFilters() {
+interface Prop {
+	type: string;
+}
+
+export function RenderFilters({ type }: Prop) {
 	const filters = screenerState((state) => state.filters);
 	const filterMenu = screenerState((state) => state.filterMenu);
 	const filterSearch = screenerState((state) => state.filterSearch);
@@ -42,16 +58,19 @@ export function RenderFilters() {
 	if (!filtersShown) {
 		return null;
 	}
+	let filterMap = [];
+
+	type == 'stock' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap);
 
 	if (filterSearch.length > 0) {
 		return (
 			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
-				{FiltersMap.map((f) => {
+				{filterMap.map((f) => {
 					if (
 						f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
 						f.id.toLowerCase().includes(filterSearch.toLowerCase())
 					) {
-						return <FilterWrap key={f.name} f={f} />;
+						return <FilterWrap f={f} type={type} />;
 					}
 					return null;
 				})}
@@ -73,9 +92,9 @@ export function RenderFilters() {
 
 		return (
 			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
-				{FiltersMap.map((f) => {
+				{filterMap.map((f) => {
 					if (active.includes(f.id)) {
-						return <FilterWrap key={f.name} f={f} />;
+						return <FilterWrap type={type} f={f} />;
 					}
 					return null;
 				})}
@@ -88,9 +107,9 @@ export function RenderFilters() {
 			<div
 				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1`}
 			>
-				{FiltersMap.map((f) => {
+				{filterMap.map((f) => {
 					if (f.category.includes(filterMenu) || filterMenu === 'All') {
-						return <FilterWrap key={f.name} f={f} />;
+						return <FilterWrap type={type} f={f} />;
 					}
 					return null;
 				})}

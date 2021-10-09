@@ -59,7 +59,7 @@ export function ResultsMenu({
 					/>
 				</div>
 				<div className="ml-auto md:ml-0">
-					<ColumnDropdown />
+					<ColumnDropdown type={type} />
 				</div>
 			</div>
 			<div className="col-span-2 overflow-x-auto hide-scroll lg:flex-grow lg:order-2 border-t lg:border-0 lg:pl-1 xl:pl-5">

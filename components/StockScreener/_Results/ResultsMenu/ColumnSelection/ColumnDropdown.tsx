@@ -9,7 +9,12 @@ import { ColumnSearch } from './ColumnSearch';
  * @return {JSX.Element}
  * TODO needs to work on mobile (modal?)
  */
-export function ColumnDropdown() {
+
+type Props = {
+	type: string;
+};
+
+export function ColumnDropdown({ type }: Props) {
 	const ref = useRef<HTMLDivElement>(null);
 	const [search, setSearch] = useState('');
 
@@ -63,7 +68,7 @@ export function ColumnDropdown() {
 			>
 				<div className="py-1">
 					<ColumnSearch search={search} setSearch={setSearch} />
-					<ColumnItemWrap search={search} />
+					<ColumnItemWrap search={search} type={type} />
 				</div>
 			</div>
 		</div>
