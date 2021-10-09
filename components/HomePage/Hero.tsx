@@ -7,10 +7,10 @@ export const Hero = () => (
 		<section className="bg-gray-100 py-8 md:py-24 lg:py-40 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 			<div className="mx-auto max-w-[850px] text-center">
 				<div className="mx-auto my-4 text-xl font-semibold bll relative">
-					<Link href="/stock-screener" prefetch={false}>
+					<Link href="/portfolio" prefetch={false}>
 						<a>
 							<div className="relative inline">
-								Stock Screener
+								Portfolios
 								<div className="absolute -right-3 -top-2.5 text-red-500 text-tiny font-bold transform -rotate-6">
 									NEW
 								</div>
