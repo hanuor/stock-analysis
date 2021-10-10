@@ -1,14 +1,23 @@
+import { AddSymbol } from 'components/Portfolio/AddSymbol';
 import { PortfolioTable } from 'components/Portfolio/PortfolioTable';
+import { useFetchPortfolioList } from './useFetchPortfolioList';
+import Link from 'next/link';
 
-export function Portfolio() {
+export function Portfolio({ id }: { id: string }) {
+	const { data } = useFetchPortfolioList();
+	const title = data?.find((item: any) => item.id == id)?.name;
+
 	return (
-		<>
-			<h1 className="hh1">Portfolio</h1>
-			<input
-				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block max-w-[100px] text-sm border border-gray-300 rounded p-1 mb-1"
-				placeholder="Add symbol"
-			/>
-			<PortfolioTable />
-		</>
+		<div>
+			<h1 className="hh2">
+				<Link href="/portfolio">
+					<a className="bll">All Portfolios</a>
+				</Link>
+				{' > '}
+				{title || 'Portfolio'}
+			</h1>
+			<AddSymbol id={id} />
+			<PortfolioTable id={id} />
+		</div>
 	);
 }
