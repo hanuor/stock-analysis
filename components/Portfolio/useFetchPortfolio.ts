@@ -2,11 +2,13 @@ import { useQuery } from 'react-query';
 import { useUserInfo } from 'hooks/useUserInfo';
 import { getData } from 'functions/API';
 
-async function performFetch(
-	email: string | null,
-	token: string | null,
-	id: string | null
-) {
+type Props = {
+	email: string | null;
+	token: string | null;
+	id: string | null;
+};
+
+async function performFetch({ email, token, id }: Props) {
 	if (!email || !token || !id) {
 		return null;
 	}
@@ -20,7 +22,7 @@ export function useFetchPortfolio(id: string) {
 
 	const { status, data, error } = useQuery(
 		['portfolio', email, id],
-		() => performFetch(email, token, id),
+		() => performFetch({ email, token, id }),
 		{
 			refetchOnWindowFocus: true,
 		}

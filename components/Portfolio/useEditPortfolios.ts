@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useUserInfo } from 'hooks/useUserInfo';
 import { useMutation, useQueryClient } from 'react-query';
 
-export function useEditSymbols(pid: string) {
+export function useEditPortfolios() {
 	const { email, token } = useUserInfo();
 	const queryClient = useQueryClient();
 
@@ -13,17 +13,16 @@ export function useEditSymbols(pid: string) {
 			token,
 			action,
 			item,
-			pid,
 		});
 	}
 
 	function invalidate() {
-		queryClient.invalidateQueries('portfolio');
+		queryClient.invalidateQueries('portfolios');
 	}
 
 	const add = useMutation(
 		(name: string) => {
-			return post('add_symbol', name);
+			return post('add_portfolio', name);
 		},
 		{
 			onSuccess: invalidate,

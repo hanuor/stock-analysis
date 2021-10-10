@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useEditSymbols } from './useEditSymbols';
 
 export function AddSymbol({ id }: { id: string }) {
-	const { add } = useEditSymbols();
+	const { add } = useEditSymbols(id);
 	const [value, setValue] = useState('');
 
 	async function handleSubmit(value: string) {

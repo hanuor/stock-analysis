@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useEditSymbols } from './useEditSymbols';
+import { useEditPortfolios } from './useEditPortfolios';
 
 export function AddPortfolio() {
-	const { add } = useEditSymbols();
+	const { add } = useEditPortfolios();
 	const [value, setValue] = useState('');
 
 	async function handleSubmit(value: string) {
@@ -12,8 +12,8 @@ export function AddPortfolio() {
 
 	return (
 		<input
-			className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block max-w-[100px] text-sm border border-gray-300 rounded p-1 mb-1"
-			placeholder="Add symbol"
+			className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block max-w-[120px] text-sm border border-gray-300 rounded p-1 pl-2 mb-1"
+			placeholder="Add portfolio"
 			value={value}
 			onChange={(e) => setValue(e.target.value)}
 			onKeyDown={(e) => {

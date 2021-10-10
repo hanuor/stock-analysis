@@ -13,7 +13,7 @@ export function useFetchPortfolioList() {
 	const { email, token } = useUserInfo();
 
 	const { status, data, error } = useQuery(
-		['portfolio', email],
+		['portfolios', email],
 		() => performFetchList(email, token),
 		{
 			refetchOnWindowFocus: true,
