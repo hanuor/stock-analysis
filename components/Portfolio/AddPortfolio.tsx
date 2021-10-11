@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useEditPortfolios } from './useEditPortfolios';
+import { usePortfolioList } from './usePortfolioList';
 
 export function AddPortfolio() {
-	const { add } = useEditPortfolios();
+	const { add } = usePortfolioList();
 	const [value, setValue] = useState('');
 
 	async function handleSubmit(value: string) {

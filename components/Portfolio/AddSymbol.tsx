@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useEditSymbols } from './useEditSymbols';
+import { usePortfolio } from './usePortfolio';
 
 export function AddSymbol({ id }: { id: string }) {
-	const { add } = useEditSymbols(id);
+	const { add } = usePortfolio(id);
 	const [value, setValue] = useState('');
 
 	async function handleSubmit(value: string) {

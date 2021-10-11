@@ -22,16 +22,14 @@ export default function Login() {
 	const setStatus = authState((state) => state.setStatus);
 	const router = useRouter();
 
-	async function handleSubmit(
-		e: React.FormEvent<HTMLFormElement>
-	): Promise<void> {
+	async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
 		e.preventDefault();
 
 		try {
 			setLoggingIn(true);
 			setError('');
 			const res = await Axios.post(
-				'https://stockanalysis12aug.local/wp-json/authorize/v1/auth',
+				'https://stockanalysis.com/wp-json/authorize/v1/auth',
 				{
 					email: username,
 					password: password,
@@ -49,7 +47,7 @@ export default function Login() {
 
 			setStatus('loading');
 			const response = await fetch(
-				`https://stockanalysis12aug.local/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
+				`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
 			);
 
 			if (response.ok) {
@@ -155,10 +153,7 @@ export default function Login() {
 									Error: {error}
 								</div>
 							)}
-							<form
-								className="space-y-4 xs:space-y-6"
-								onSubmit={handleSubmit}
-							>
+							<form className="space-y-4 xs:space-y-6" onSubmit={handleSubmit}>
 								<div>
 									<label
 										htmlFor="email"

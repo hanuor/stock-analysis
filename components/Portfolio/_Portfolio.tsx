@@ -1,10 +1,10 @@
 import { AddSymbol } from 'components/Portfolio/AddSymbol';
 import { PortfolioTable } from 'components/Portfolio/PortfolioTable';
-import { useFetchPortfolioList } from './useFetchPortfolioList';
+import { usePortfolioList } from './usePortfolioList';
 import Link from 'next/link';
 
 export function Portfolio({ id }: { id: string }) {
-	const { data } = useFetchPortfolioList();
+	const { data } = usePortfolioList();
 	const title = data?.find((item: any) => item.id == id)?.name;
 
 	return (
