@@ -29,7 +29,7 @@ export default function Login() {
 			setLoggingIn(true);
 			setError('');
 			const res = await Axios.post(
-				'https://stockanalysis.com/wp-json/authorize/v1/auth',
+				'https://api.stockanalysis.com/wp-json/authorize/v1/auth',
 				{
 					email: username,
 					password: password,
@@ -47,7 +47,7 @@ export default function Login() {
 
 			setStatus('loading');
 			const response = await fetch(
-				`https://stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
+				`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
 			);
 
 			if (response.ok) {
