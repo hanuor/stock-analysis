@@ -219,7 +219,7 @@ export type FilterProps = {
 	id: FilterId;
 	category: string[];
 	options: FilterOption[];
-	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear' | 'numericRange';
 	numberType?: NumberType;
 };
 
@@ -243,7 +243,12 @@ export type FilterObject = {
 	second: string;
 };
 
-export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+export type FilterType =
+	| 'numeric'
+	| 'stringmatch'
+	| 'date'
+	| 'dateYear'
+	| 'numericRange';
 export type NumberType = 'percentage';
 export type ComparisonOption =
 	| 'over'

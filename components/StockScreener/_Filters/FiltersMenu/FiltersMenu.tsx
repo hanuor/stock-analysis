@@ -46,7 +46,7 @@ export function FiltersMenu({ type }: Props) {
 									<FiltersMenuItem name="Income" />
 									<FiltersMenuItem name="Balance Sheet" />
 									<FiltersMenuItem name="Cash Flow" />
-									<FiltersMenuItem name="Other" />
+									<FiltersMenuItem name="All" />
 								</>
 							)}
 						</ul>
