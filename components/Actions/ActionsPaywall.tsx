@@ -1,15 +1,15 @@
 // import { Button } from 'components/Button';
 // import { authState } from 'state/authState';
 
-export function ActionsPaywall() {
-	return null;
+interface Props {
+	count: number;
+	fullCount: number;
+	title: string;
 }
 
-// interface Props {
-// 	count: number;
-// 	fullCount: number;
-// 	title: string;
-// }
+export function ActionsPaywall({ count, fullCount, title }: Props) {
+	return null;
+}
 
 // export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 // 	const isPro = authState((state) => state.isPro);
