@@ -12,6 +12,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'data-disclaimer/',
 		'sitemap/',
 		'pro/',
+		'apis/',
 		'stocks/',
 		'stock-screener/',
 		'etf/',

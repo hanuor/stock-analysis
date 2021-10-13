@@ -4,6 +4,7 @@ const NO_ADS = [
 	'contact',
 	'privacy-policy',
 	'terms-of-use',
+	'apis',
 	'subscribe',
 ];
 
