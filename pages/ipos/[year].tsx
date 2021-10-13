@@ -11,7 +11,7 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { InfoBox } from 'components/InfoBox';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
 
 interface Props {
 	year: string;
@@ -52,7 +52,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<CalendarTableMin upcoming={upcoming} />
-							<NewsletterWidget />
+							<Sidebar1 />
 							<NewsWidget
 								title="IPO News"
 								news={news}
