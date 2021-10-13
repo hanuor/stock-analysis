@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
 	useTable,
 	useGlobalFilter,
@@ -9,7 +10,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Controls } from 'components/Controls/_Controls';
 import styles from './ActionsTable.module.css';
 import { authState } from 'state/authState';
-import { getActionsDataFull } from 'functions/callBackEnd';
+// import { getActionsDataFull } from 'functions/callBackEnd';
 import { actionsState } from 'state/actionsState';
 
 interface Props {
@@ -39,25 +40,23 @@ export const ActionsTable = ({
 
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
-		async function fetchFullActions() {
-			const res = await getActionsDataFull(type, year);
-
-			if (res.data && res.data.length > count) {
-				setDataRows(res.data);
-				if (filter) {
-					setParamFilter(filter);
-					setGlobalFilter(filter);
-				}
-			} else {
-				throw new Error(
-					'Unable to fetch full data, response was invalid or empty array'
-				);
-			}
-		}
-
-		if (isPro && fullCount > count) {
-			fetchFullActions();
-		}
+		// async function fetchFullActions() {
+		// 	const res = await getActionsDataFull(type, year);
+		// 	if (res.data && res.data.length > count) {
+		// 		setDataRows(res.data);
+		// 		if (filter) {
+		// 			setParamFilter(filter);
+		// 			setGlobalFilter(filter);
+		// 		}
+		// 	} else {
+		// 		throw new Error(
+		// 			'Unable to fetch full data, response was invalid or empty array'
+		// 		);
+		// 	}
+		// }
+		// if (isPro && fullCount > count) {
+		// 	fetchFullActions();
+		// }
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fullCount, isPro, count, year, type]);
 

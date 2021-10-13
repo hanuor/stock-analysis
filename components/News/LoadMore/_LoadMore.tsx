@@ -86,16 +86,29 @@ export function LoadMore({
 	}
 
 	if (data.length === 25 && !loaded) {
-		return <ButtonMore fn={fetchData} loading={loading} end={end} />;
+		return (
+			<ButtonMore
+				fn={fetchData}
+				tag="fetchData"
+				loading={loading}
+				end={end}
+			/>
+		);
 	}
 
 	if (loaded && data.length === 50 && !isPro) {
-		// setPaywalled(true);
 		return <NewsPaywall />;
 	}
 
 	if (loaded && data.length >= 50 && isPro) {
-		return <ButtonMore fn={fetchInfiniteData} loading={loading} end={end} />;
+		return (
+			<ButtonMore
+				fn={fetchInfiniteData}
+				tag="fetchDataPro"
+				loading={loading}
+				end={end}
+			/>
+		);
 	}
 
 	return null;

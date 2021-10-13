@@ -1,7 +1,7 @@
 import { SearchIcon } from '@heroicons/react/solid';
 import { SpinnerIcon } from 'components/Icons/Spinner';
 import { getData } from 'functions/API';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { navState } from 'state/navState';
 import { News } from 'types/News';
 
@@ -58,29 +58,16 @@ export function NewsMenuSearch({
 		} else if (results.status === 'error') {
 			setError(`There was an error.`);
 		}
+		window?.dataLayer?.push({
+			event: 'tag-feat-news-search',
+			eventProps: {
+				category: 'Feature Used',
+				action: 'News Search',
+				label: path.two,
+				value: query,
+			},
+		});
 	}
-
-	useEffect(() => {
-		if (query === '' && searched) {
-			setData(news);
-			setSearched(false);
-		}
-	}, [query, news, setData, searched, setSearched]);
-
-	useEffect(() => {
-		if (query !== '' && searched) {
-			window?.dataLayer?.push({
-				event: 'tag-feat-news-search',
-				eventProps: {
-					category: 'Feature Used',
-					action: 'News Search',
-					label: path.two,
-					value: query,
-				},
-			});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searched]);
 
 	return (
 		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px]">
