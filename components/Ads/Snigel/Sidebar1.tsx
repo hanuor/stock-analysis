@@ -9,7 +9,7 @@ export function Sidebar1() {
 	}
 
 	return (
-		<div className="min-h-[250px]">
+		<div className="min-h-[250px] hidden lg:block">
 			<div id="adngin-sidebar_1-0"></div>
 		</div>
 	);
