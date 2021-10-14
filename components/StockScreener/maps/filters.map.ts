@@ -497,12 +497,10 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'Indonesia', value: 'Indonesia' },
 			{ name: 'Philippines', value: 'Philippines' },
 			{ name: 'Bahamas', value: 'Bahamas' },
-			{ name: 'MINNESOTA', value: 'MINNESOTA' },
 			{ name: 'Finland', value: 'Finland' },
 			{ name: 'New Zealand', value: 'New Zealand' },
-			{ name: 'the Netherlands', value: 'the Netherlands' },
+			{ name: 'The Netherlands', value: 'The Netherlands' },
 			{ name: 'Malta', value: 'Malta' },
-			{ name: 'COLORADO', value: 'COLORADO' },
 			{ name: 'Gibraltar', value: 'Gibraltar' },
 			{ name: 'Thailand', value: 'Thailand' },
 			{ name: 'Austria', value: 'Austria' },
@@ -1879,7 +1877,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Financials', 'Income'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 100B', value: 'over-100B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2102,12 +2099,10 @@ export const IPOFiltersMap: FilterProps[] = [
 			{ name: 'Indonesia', value: 'Indonesia' },
 			{ name: 'Philippines', value: 'Philippines' },
 			{ name: 'Bahamas', value: 'Bahamas' },
-			{ name: 'MINNESOTA', value: 'MINNESOTA' },
 			{ name: 'Finland', value: 'Finland' },
 			{ name: 'New Zealand', value: 'New Zealand' },
-			{ name: 'the Netherlands', value: 'the Netherlands' },
+			{ name: 'The Netherlands', value: 'The Netherlands' },
 			{ name: 'Malta', value: 'Malta' },
-			{ name: 'COLORADO', value: 'COLORADO' },
 			{ name: 'Gibraltar', value: 'Gibraltar' },
 			{ name: 'Thailand', value: 'Thailand' },
 			{ name: 'Austria', value: 'Austria' },
@@ -2135,9 +2130,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 500K', value: 'over-500K' },
-			{ name: 'Over 300K', value: 'over-300K' },
-			{ name: 'Over 200K', value: 'over-200K' },
 			{ name: 'Over 100K', value: 'over-100K' },
 			{ name: 'Over 10K', value: 'over-10K' },
 			{ name: 'Over 1K', value: 'over-1K' },
@@ -2154,8 +2146,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Company'],
 		filterType: 'date',
 		options: [
-			{ name: 'Over 100 Years', value: 'over-100Y' },
-			{ name: 'Over 50 Years', value: 'over-50Y' },
 			{ name: 'Over 20 Years', value: 'over-20Y' },
 			{ name: 'Over 10 Years', value: 'over-10Y' },
 			{ name: 'Over 5 Years', value: 'over-5Y' },
@@ -2176,8 +2166,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Balance Sheet'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 200B', value: 'over-200B' },
-			{ name: 'Over 100B', value: 'over-100B' },
 			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
@@ -2193,8 +2181,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Balance Sheet'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 200B', value: 'over-200B' },
-			{ name: 'Over 100B', value: 'over-100B' },
 			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
@@ -2210,8 +2196,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Balance Sheet'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 200B', value: 'over-200B' },
-			{ name: 'Over 100B', value: 'over-100B' },
 			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
@@ -2227,8 +2211,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Balance Sheet'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 100B', value: 'over-100B' },
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2245,7 +2227,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Income'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2261,7 +2242,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Income'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2277,7 +2257,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Income'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2308,7 +2287,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Income'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2324,7 +2302,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Income'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2340,7 +2317,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2356,7 +2332,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2372,7 +2347,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2388,7 +2362,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2404,7 +2377,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
@@ -2420,7 +2392,6 @@ export const IPOFiltersMap: FilterProps[] = [
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 50B', value: 'over-50B' },
 			{ name: 'Over 10B', value: 'over-10B' },
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },

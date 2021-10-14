@@ -26,7 +26,7 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 				<div className="contain py-5 xs:py-6">
 					<Breadcrumbs url="/stock-screener/" />
 					<h1 className="hh1">Stock Screener</h1>
-					<StockScreener type={'stock'} />
+					<StockScreener type="stock" />
 				</div>
 			</LayoutFullWidth>
 		</>

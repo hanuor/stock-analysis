@@ -2,10 +2,10 @@ import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { GetStaticProps } from 'next';
 import { IPOScreenerData } from 'components/StockScreener/screener.types';
 import { getData } from 'functions/API';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { SEO } from 'components/SEO';
 import { StockScreener } from 'components/StockScreener/_StockScreener';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
+import { IPONavigation } from 'components/IPOs/IPONavigation';
 
 export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 	const fullCount = screenerDataState((state) => state.fullCount);
@@ -18,18 +18,20 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 	return (
 		<>
 			<SEO
-				title="Stock Screener: Filter and Analyze Stocks"
-				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
-				canonical="/ipo-screener/"
+				title="IPO Screener: Search and Filter Upcoming IPOs"
+				description="An IPO screening tool to search, filter and compare all upcoming IPOs on the US stock market."
+				canonical="/ipos/screener/"
 			/>
-			<LayoutFullWidth>
-				<div className="contain py-5 xs:py-6">
-					<Breadcrumbs url="/IPOs/IPO-Screener/" />
-					<h1 className="hh1">IPO</h1>
-					<StockScreener type={'ipo'} />
-				</div>
-			</LayoutFullWidth>
-			np
+			<div className="contain">
+				<main className="w-full pt-5 xs:pt-6">
+					<Breadcrumbs url="/ipos/screener/" />
+					<h1 className="hh1">IPO Calendar</h1>
+					<IPONavigation />
+					<div className="mt-4">
+						<StockScreener type="ipo" />
+					</div>
+				</main>
+			</div>
 		</>
 	);
 }

@@ -37,6 +37,18 @@ export const IPONavigation = () => {
 							</Link>
 						</li>
 						<li>
+							<Link href="/ipos/screener/" prefetch={false}>
+								<a
+									data-title="Screener"
+									className={
+										path.two === 'screener' ? 'active' : 'inactive'
+									}
+								>
+									Screener
+								</a>
+							</Link>
+						</li>
+						<li>
 							<Link href="/ipos/news/" prefetch={false}>
 								<a
 									data-title="News"
