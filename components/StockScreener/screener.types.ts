@@ -96,12 +96,13 @@ export type FilterId =
 	| 'workingCapital' // Working Capital
 	| 'ls' // Last Stock Split
 	| 'splitDate' // Last Split Date
-	| 'liabilities'
-	| 'icf'
-	| 'cff'
-	| 'ncf'
-	| 'capex'
-	| 'ipoPriceRange';
+	| 'liabilities' // Liabilities
+	| 'icf' // Investing Cash Flow
+	| 'cff' // Cash Flow From Financing
+	| 'ncf' // Net Cash Flow
+	| 'capex' // Capital expenditures
+	| 'ipoPriceRange' // IPO Price Range
+	| 'sharesOffered'; // Shares Offered
 
 // Results columns
 export type ColumnName =
