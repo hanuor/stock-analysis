@@ -6,7 +6,7 @@ export function Sidebar1() {
 
 	if (status !== 'completed' || (status === 'completed' && !isPro)) {
 		return (
-			<div className="min-h-[250px] hidden lg:block">
+			<div className="hidden lg:block lg:min-h-[280px] mx-auto">
 				<div id="adngin-sidebar_1-0"></div>
 			</div>
 		);

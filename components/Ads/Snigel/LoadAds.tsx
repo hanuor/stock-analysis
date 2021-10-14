@@ -13,8 +13,10 @@ declare global {
 function getPageAds(path: PathType) {
 	if (path.one === 'ipos') {
 		return ['sidebar_1', 'sidebar_2'];
+	} else if (path.one !== 'stocks' && path.one !== 'etf') {
+		return ['sidebar_1'];
 	}
-	return ['sidebar_1'];
+	return [];
 }
 
 export function LoadAds() {
@@ -25,18 +27,20 @@ export function LoadAds() {
 		const adsArray = getPageAds(path);
 
 		setAds(adsArray);
-		if (adsArray.length > 0 && window.adngin && window.adngin.adnginLoaderReady) {
+		if (
+			adsArray.length > 0 &&
+			window.adngin &&
+			window.adngin.adnginLoaderReady
+		) {
 			window.adngin.queue.push(function () {
 				window.adngin.cmd.startAuction(adsArray);
 			});
 		}
 	}, [path]);
-	
+
 	if (ads.length === 0) {
 		return null;
 	}
-
-	console.log(ads);
 
 	return (
 		<>
