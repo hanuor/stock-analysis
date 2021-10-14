@@ -12,6 +12,7 @@ import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
+import { priceSort, dateSort } from './Sort/sortFunctions';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
 import { FilterId } from 'components/StockScreener/screener.types';
 import {
@@ -74,12 +75,26 @@ export function ResultsTable({ cols, type }: Props) {
 				'revenue',
 			]);
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const priceSortMemo = useMemo(priceSort, []);
+	const dateSortMemo = useMemo(dateSort, []);
+
+	if (cols.length !== 0) {
+		cols.map((col: any) => {
+			if (col.Header === 'IPO Price') {
+				col.sortType = priceSortMemo;
+			} else if (col.name === 'IPO Date') {
+				col.sortType = dateSortMemo;
+			}
+		});
+	}
+
 	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
 	const columns = useMemo(() => cols, [cols]);
-
+	console.log(columns);
 	const {
 		headerGroups,
 		prepareRow,
