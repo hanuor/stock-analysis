@@ -70,7 +70,7 @@ export function RenderFilters({ type }: Prop) {
 						f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
 						f.id.toLowerCase().includes(filterSearch.toLowerCase())
 					) {
-						return <FilterWrap f={f} type={type} />;
+						return <FilterWrap f={f} type={type} key={f.id} />;
 					}
 					return null;
 				})}
@@ -94,7 +94,7 @@ export function RenderFilters({ type }: Prop) {
 			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
 				{filterMap.map((f) => {
 					if (active.includes(f.id)) {
-						return <FilterWrap type={type} f={f} />;
+						return <FilterWrap type={type} f={f} key={f.id} />;
 					}
 					return null;
 				})}
@@ -109,7 +109,7 @@ export function RenderFilters({ type }: Prop) {
 			>
 				{filterMap.map((f) => {
 					if (f.category.includes(filterMenu) || filterMenu === 'All') {
-						return <FilterWrap type={type} f={f} />;
+						return <FilterWrap type={type} f={f} key={f.id} />;
 					}
 					return null;
 				})}

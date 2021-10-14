@@ -2405,8 +2405,8 @@ export const IPOFiltersMap: FilterProps[] = [
 		options: [
 			{ name: 'Under $5', value: 'under-5' },
 			{ name: 'Under $10', value: 'under-10' },
-			{ name: '$10 - $15', value: '$10 - 15' },
-			{ name: '$15 - $20', value: '$15 - 20' },
+			{ name: '$10 - $15', value: 'between-10-15' },
+			{ name: '$15 - $20', value: 'between-15-20' },
 			{ name: 'Over $20', value: 'over-20' },
 		],
 	},
