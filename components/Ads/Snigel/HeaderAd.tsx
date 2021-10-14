@@ -11,7 +11,7 @@ export function HeaderAd() {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			return (
 				<div className="bg-gray-100 pt-1 pb-2">
-					<div className="hidden md:block md:min-h-[105px] mx-auto">
+					<div className="hidden md:block md:min-h-[111px] md:max-w-[728px] mx-auto">
 						<div id="adngin-top_leaderboard-0"></div>
 					</div>
 				</div>
