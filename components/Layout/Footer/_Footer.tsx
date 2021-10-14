@@ -253,6 +253,13 @@ export const Footer = () => {
 							Real-time quotes provided by IEX Cloud. Other market data
 							is delayed by at least 15 minutes.
 						</div>
+						<div
+							id="ccpa"
+							className="text-center text-gray-300 cursor-pointer"
+							style={{ display: 'none' }}
+						>
+							Do not share my personal information.
+						</div>
 					</div>
 				</footer>
 			</div>
