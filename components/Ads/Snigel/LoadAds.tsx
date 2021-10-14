@@ -13,13 +13,13 @@ declare global {
 function getPageAds(path: PathType) {
 	if (path.one === 'ipos') {
 		if (path.two === 'statistics') {
-			return ['sidebar_1'];
+			return ['sidebar_1', 'top_leaderboard'];
 		}
-		return ['sidebar_1', 'sidebar_2'];
+		return ['sidebar_1', 'sidebar_2', 'top_leaderboard'];
 	} else if (path.one !== 'stocks' && path.one !== 'etf') {
-		return ['sidebar_1'];
+		return ['sidebar_1', 'top_leaderboard'];
 	}
-	return [];
+	return ['top_leaderboard'];
 }
 
 export function LoadAds() {
