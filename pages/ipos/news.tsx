@@ -8,7 +8,8 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsFeed } from 'components/News/_NewsFeed';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	data: News[];
@@ -38,8 +39,9 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 						</div>
 						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 pt-6">
 							<CalendarTableMin upcoming={upcoming} />
-							<NewsletterWidget />
+							<Sidebar1 />
 							<RecentTableMin recent={recent} />
+							<Sidebar2 />
 						</aside>
 					</div>
 				</main>

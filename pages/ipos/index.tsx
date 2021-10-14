@@ -9,7 +9,8 @@ import { SubNavigation } from 'components/IPOs/SubNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	data: IpoRecent[];
@@ -38,7 +39,7 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<CalendarTableMin upcoming={upcoming} />
-							<NewsletterWidget />
+							<Sidebar1 />
 							<NewsWidget
 								title="IPO News"
 								news={news}
@@ -47,6 +48,7 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 									url: '/ipos/news/',
 								}}
 							/>
+							<Sidebar2 />
 						</aside>
 					</div>
 				</main>

@@ -12,6 +12,9 @@ declare global {
 
 function getPageAds(path: PathType) {
 	if (path.one === 'ipos') {
+		if (path.two === 'statistics') {
+			return ['sidebar_1'];
+		}
 		return ['sidebar_1', 'sidebar_2'];
 	} else if (path.one !== 'stocks' && path.one !== 'etf') {
 		return ['sidebar_1'];
