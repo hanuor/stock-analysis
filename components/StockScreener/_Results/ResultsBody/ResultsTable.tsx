@@ -12,7 +12,10 @@ import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
-import { priceSort, dateSort } from './Sort/sortFunctions';
+import {
+	priceSort,
+	dateSort,
+} from 'components/StockScreener/functions/sort/sortFunctions';
 import { filterItems } from 'components/StockScreener/functions/filterItems';
 import { FilterId } from 'components/StockScreener/screener.types';
 import {
@@ -94,7 +97,7 @@ export function ResultsTable({ cols, type }: Props) {
 
 	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
 	const columns = useMemo(() => cols, [cols]);
-	console.log(columns);
+
 	const {
 		headerGroups,
 		prepareRow,
