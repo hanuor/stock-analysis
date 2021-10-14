@@ -20,11 +20,11 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 			<SEO
 				title="Stock Screener: Filter and Analyze Stocks"
 				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
-				canonical="/stock-screener/"
+				canonical="/ipo-screener/"
 			/>
 			<LayoutFullWidth>
 				<div className="contain py-5 xs:py-6">
-					<Breadcrumbs url="/ipo-screener/" />
+					<Breadcrumbs url="/IPOs/IPO-Screener/" />
 					<h1 className="hh1">IPO</h1>
 					<StockScreener type={'ipo'} />
 				</div>

@@ -117,65 +117,11 @@ export type ColumnName =
 	| 'Balance Sheet'
 	| 'Cash Flow';
 
-/*
-export type IPOColumnName =
-	| 'Filtered'
-	| 'General'
-	| 'Company'
-	| 'Income'
-	| 'Balance Sheet'
-	| 'Cash Flow'
-	| 'Custom';
-
-*/
-
-/*
-export type FilterIpoId =
-	| 's' // Symbol
-	| 'n' // Name
-	| 'm' // Market Cap
-	| 'p' // Stock Price
-	| 'c' // Price Change
-	| 'v' // Volume
-	| 'se' // Sector
-	| 'ipoDate'
-	| 'pe' // PE Ratio
-	| 'revenue'
-	| 'grossProfit'
-	| 'operatingIncome'
-	| 'netIncome'
-	| 'eps'
-	| 'ebit'
-	| 'ebitda'
-	| 'i'
-	| 'country'
-	| 'exchange'
-	| 'employees'
-	| 'founded'
-	| 's'
-	| 'n'
-	| 'cash'
-	| 'liabilities'
-	| 'debt'
-	| 'equity'
-	| 'ocf'
-	| 'icf'
-	| 'cff'
-	| 'ncf'
-	| 'capex'
-	| 'fcf'
-	| 'fcfps';
-*/
 export type ColumnsMap = {
 	// eslint-disable-next-line no-unused-vars
 	[key in ColumnName]: FilterId[];
 };
-/*
-export type IPOColumnsMap = {
-	// eslint-disable-next-line no-unused-vars
-	[key in IPOColumnName]: FilterId[];
-};
-*/
+
 export type SingleStock = {
 	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string;

@@ -43,37 +43,6 @@ export const resultColumns: ColumnsMap = {
 	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps'],
 };
 
-/*
-export const resultIPOColumns: ColumnsMap = {
-	Filtered: [],
-	General: ['s', 'n', 'm', 'se', 'revenue'],
-	Company: [
-		's',
-		'n',
-		'se',
-		'i',
-		'country',
-		'exchange',
-		'employees',
-		'founded',
-	],
-	Income: [
-		's',
-		'n',
-		'revenue',
-		'grossProfit',
-		'operatingIncome',
-		'netIncome',
-		'eps',
-		'ebit',
-		'ebitda',
-	],
-	'Balance Sheet': ['s', 'n', 'cash', 'liabilities', 'debt', 'equity'],
-	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps'],
-	Custom: ['s', 'n', 'm'],
-};
-*/
-
 export function returnResultColumns(type: string) {
 	if (type == 'stock') {
 		return resultColumns;
