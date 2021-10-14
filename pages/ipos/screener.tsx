@@ -25,7 +25,7 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url="/ipos/screener/" />
-					<h1 className="hh1">IPO Calendar</h1>
+					<h1 className="hh1">IPO Screener</h1>
 					<IPONavigation />
 					<div className="mt-4">
 						<StockScreener type="ipo" />
