@@ -4,8 +4,8 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd';
 import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
-import Script from 'next/script';
 import { noAds } from 'components/Ads/noAds';
+import { LoadAds } from 'components/Ads/Snigel/LoadAds';
 
 const navigation = {
 	sections: [
@@ -33,10 +33,7 @@ export const Footer = () => {
 		<>
 			<div className={isLoggedIn ? 'mt-14' : 'mt-9'}>
 				{status === 'completed' && !isPro && !noAds(path.one) && (
-					<Script
-						id="snigel-script"
-						src="https://cdn.snigelweb.com/adengine/stockanalysis.com/loader.js"
-					/>
+					<LoadAds />
 				)}
 				<LazyLoadAd offset={400}>
 					<LoadFooter />

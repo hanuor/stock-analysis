@@ -12,6 +12,7 @@ import { InfoBox } from 'components/InfoBox';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	year: string;
@@ -61,6 +62,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 									url: '/ipos/news/',
 								}}
 							/>
+							<Sidebar2 />
 						</aside>
 					</div>
 				</main>
