@@ -95,8 +95,10 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 				value.getTime() < now.getTime() &&
 				value.getTime() > changeDate(now, `${first}`).getTime()
 			);
+
 		case 'Unscheduled':
 			return value.getFullYear() === 1970;
+
 		case 'This Week':
 			const sunday = new Date(now);
 			sunday.setDate(sunday.getDate() - day);
@@ -106,6 +108,7 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 				sunday.getTime() < value.getTime() &&
 				value.getTime() < saturday.getTime()
 			);
+
 		case 'Next Week':
 			const sundayNext = new Date(now);
 			sundayNext.setDate(sundayNext.getDate() + 7 - day);
@@ -115,6 +118,7 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 				sundayNext.getTime() < value.getTime() &&
 				value.getTime() < saturdayNext.getTime()
 			);
+
 		case 'Later':
 			const sundayLater = new Date(now);
 			sundayLater.setDate(sundayLater.getDate() + 7 - day);
@@ -122,5 +126,6 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 			saturdayLater.setDate(saturdayLater.getDate() + 6);
 			return value.getTime() > saturdayLater.getTime();
 	}
+
 	return false;
 }
