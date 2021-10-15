@@ -48,7 +48,7 @@ const columns = COLUMNS_MAP.map((column) => {
 			case 'string': {
 				header = column.Header;
 				cell = function FormatCell({ cell: { value } }: any) {
-					return value;
+					return value || null;
 				};
 				sortInverted = false;
 				break;
@@ -192,7 +192,7 @@ const columns = COLUMNS_MAP.map((column) => {
 			accessor: column.accessor,
 			name: column.Header,
 			Cell: cell,
-			sortType: 'basic',
+			sortType: column.sortType || 'basic',
 			sortInverted: sortInverted ?? true,
 		};
 	}

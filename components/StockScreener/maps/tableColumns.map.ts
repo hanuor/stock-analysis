@@ -1,4 +1,8 @@
 import { FilterId } from '../screener.types';
+import {
+	priceSort,
+	dateSort,
+} from 'components/StockScreener/functions/sort/sortFunctions';
 
 type Column = {
 	Header: string;
@@ -102,6 +106,7 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'IPO Date',
 		accessor: 'ipoDate',
 		format: 'date',
+		sortType: dateSort,
 	},
 	{
 		Header: 'Revenue',
@@ -487,5 +492,36 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'Split Date',
 		accessor: 'splitDate',
 		format: 'date',
+	},
+	{
+		Header: 'Liabilities',
+		accessor: 'liabilities',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Inv. Cash Flow',
+		accessor: 'icf',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Fin. Cash Flow',
+		accessor: 'cff',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Net Cash Flow',
+		accessor: 'ncf',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Capital Exp.',
+		accessor: 'capex',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'IPO Price',
+		accessor: 'ipoPriceRange',
+		format: 'string',
+		sortType: priceSort,
 	},
 ];

@@ -29,7 +29,7 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 
 	// Check if the date exists in the data
 	const raw = stock[id];
-	if (!raw) {
+	if (!raw && compare != 'Unscheduled') {
 		return false;
 	}
 
@@ -45,6 +45,7 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 	const now = new Date();
 	const year = new Date().getFullYear();
 	const month = new Date().getMonth();
+	const day = now.getDay();
 
 	// Four comparison types: this, last, over, under
 	switch (compare) {
@@ -94,6 +95,37 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 				value.getTime() < now.getTime() &&
 				value.getTime() > changeDate(now, `${first}`).getTime()
 			);
+
+		case 'Unscheduled':
+			return value.getFullYear() === 1970;
+
+		case 'This Week':
+			const sunday = new Date(now);
+			sunday.setDate(sunday.getDate() - day);
+			const saturday = new Date(sunday);
+			saturday.setDate(saturday.getDate() + 6);
+			return (
+				sunday.getTime() < value.getTime() &&
+				value.getTime() < saturday.getTime()
+			);
+
+		case 'Next Week':
+			const sundayNext = new Date(now);
+			sundayNext.setDate(sundayNext.getDate() + 7 - day);
+			const saturdayNext = new Date(sundayNext);
+			saturdayNext.setDate(saturdayNext.getDate() + 6);
+			return (
+				sundayNext.getTime() < value.getTime() &&
+				value.getTime() < saturdayNext.getTime()
+			);
+
+		case 'Later':
+			const sundayLater = new Date(now);
+			sundayLater.setDate(sundayLater.getDate() + 7 - day);
+			const saturdayLater = new Date(sundayLater);
+			saturdayLater.setDate(saturdayLater.getDate() + 6);
+			return value.getTime() > saturdayLater.getTime();
 	}
+
 	return false;
 }

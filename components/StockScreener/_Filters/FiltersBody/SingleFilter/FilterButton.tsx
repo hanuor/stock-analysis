@@ -19,7 +19,9 @@ export function FilterButton({ active, id }: Props) {
 
 		if (
 			value &&
-			(filter?.filterType === 'numeric' || filter?.filterType === 'date')
+			(filter?.filterType === 'numeric' ||
+				filter?.filterType === 'date' ||
+				filter?.filterType === 'numericRange')
 		) {
 			return createLabelFromString(value, filter);
 		} else if (value && filter?.filterType === 'stringmatch') {

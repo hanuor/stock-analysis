@@ -1,5 +1,6 @@
 // All possible filters
 // The IDs are shortened to minimize data payload size
+
 export type FilterId =
 	| 's' // Symbol
 	| 'n' // Name
@@ -94,7 +95,14 @@ export type FilterId =
 	| 'equity' // Shareh. Equity
 	| 'workingCapital' // Working Capital
 	| 'ls' // Last Stock Split
-	| 'splitDate'; // Last Split Date
+	| 'splitDate' // Last Split Date
+	| 'liabilities' // Liabilities
+	| 'icf' // Investing Cash Flow
+	| 'cff' // Cash Flow From Financing
+	| 'ncf' // Net Cash Flow
+	| 'capex' // Capital expenditures
+	| 'ipoPriceRange' // IPO Price Range
+	| 'sharesOffered'; // Shares Offered
 
 // Results columns
 export type ColumnName =
@@ -105,7 +113,10 @@ export type ColumnName =
 	| 'Valuation'
 	| 'Dividends'
 	| 'Analysts'
-	| 'Custom';
+	| 'Custom'
+	| 'Income'
+	| 'Balance Sheet'
+	| 'Cash Flow';
 
 export type ColumnsMap = {
 	// eslint-disable-next-line no-unused-vars
@@ -117,12 +128,24 @@ export type SingleStock = {
 	[key in FilterId]: string;
 };
 
+export type SingleIPO = {
+	// eslint-disable-next-line no-unused-vars
+	[key in FilterId]: string;
+};
+
 export type SingleDataPoint = string[];
 
 export type ScreenerData = {
 	stocks: {
 		count: number;
 		data: SingleStock[];
+	};
+};
+
+export type IPOScreenerData = {
+	ipos: {
+		count: number;
+		data: SingleIPO[];
 	};
 };
 
@@ -143,7 +166,7 @@ export type FilterProps = {
 	id: FilterId;
 	category: string[];
 	options: FilterOption[];
-	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear' | 'numericRange';
 	numberType?: NumberType;
 };
 
@@ -167,7 +190,12 @@ export type FilterObject = {
 	second: string;
 };
 
-export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear';
+export type FilterType =
+	| 'numeric'
+	| 'stringmatch'
+	| 'date'
+	| 'dateYear'
+	| 'numericRange';
 export type NumberType = 'percentage';
 export type ComparisonOption =
 	| 'over'
