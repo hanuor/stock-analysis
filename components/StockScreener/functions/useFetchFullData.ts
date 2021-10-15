@@ -7,7 +7,7 @@ export function useFetchFullData() {
 	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded);
 
 	async function fetchFullData() {
-		if (!data || data.length < 100) {
+		if (!data || data.length < 1000) {
 			const data = await getData('screener?type=f');
 			setData(data.data);
 			setFullyLoaded(true);
@@ -23,7 +23,7 @@ export function useFetchFulIPOData() {
 	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded);
 
 	async function fetchFullData() {
-		if (!data || data.length < 100) {
+		if (!data || data.length < 100 || data.length > 1000) {
 			const data = await getData('iposcreener?type=f');
 			setData(data.data);
 			setFullyLoaded(true);

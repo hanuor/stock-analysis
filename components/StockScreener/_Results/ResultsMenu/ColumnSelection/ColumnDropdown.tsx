@@ -7,7 +7,6 @@ import { ColumnSearch } from './ColumnSearch';
 /**
  * The custom columns dropdown. It contains a search filter and checkbox for each column.
  * @return {JSX.Element}
- * TODO needs to work on mobile (modal?)
  */
 
 type Props = {

@@ -48,7 +48,7 @@ const columns = COLUMNS_MAP.map((column) => {
 			case 'string': {
 				header = column.Header;
 				cell = function FormatCell({ cell: { value } }: any) {
-					return value;
+					return value || null;
 				};
 				sortInverted = false;
 				break;
@@ -192,7 +192,7 @@ const columns = COLUMNS_MAP.map((column) => {
 			accessor: column.accessor,
 			name: column.Header,
 			Cell: cell,
-			sortType: column.sortType,
+			sortType: column.sortType || 'basic',
 			sortInverted: sortInverted ?? true,
 		};
 	}
@@ -203,15 +203,13 @@ const columns = COLUMNS_MAP.map((column) => {
 		accessor: column.accessor,
 	};
 });
-interface Props {
-	type: string;
-}
-export function ResultsBody({ type }: Props) {
+
+export function ResultsBody() {
 	const showColumns = screenerState((state) => state.showColumns);
 
 	const displayColumns = columns.filter((column: any) =>
 		showColumns.includes(column.accessor)
 	);
 
-	return <ResultsTable type={type} cols={displayColumns} />;
+	return <ResultsTable cols={displayColumns} />;
 }

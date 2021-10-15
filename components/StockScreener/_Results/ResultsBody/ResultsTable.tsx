@@ -23,10 +23,10 @@ import { Loading } from 'components/Loading';
 
 interface Props {
 	cols: any;
-	type: string;
 }
 
-export function ResultsTable({ cols, type }: Props) {
+export function ResultsTable({ cols }: Props) {
+	const type = screenerDataState((state) => state.type);
 	const rows = screenerDataState((state) => state.data);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 	const fetchFullData = useFetchFullData();

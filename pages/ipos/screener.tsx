@@ -1,4 +1,5 @@
 import { screenerDataState } from 'components/StockScreener/screenerdata.state';
+import { screenerState } from 'components/StockScreener/screener.state';
 import { GetStaticProps } from 'next';
 import { IPOScreenerData } from 'components/StockScreener/screener.types';
 import { getData } from 'functions/API';
@@ -10,9 +11,20 @@ import { IPONavigation } from 'components/IPOs/IPONavigation';
 export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 	const fullCount = screenerDataState((state) => state.fullCount);
 	const setFullCount = screenerDataState((state) => state.setFullCount);
+	const type = screenerDataState((state) => state.type);
+	const setType = screenerDataState((state) => state.setType);
+	const clearFilters = screenerState((state) => state.clearFilters);
+	const setResultsMenu = screenerState((state) => state.setResultsMenu);
 
 	if (!fullCount) {
 		setFullCount(ipos.count);
+	}
+
+	if (type !== 'ipo') {
+		setFullCount(ipos.count);
+		clearFilters();
+		setResultsMenu('General');
+		setType('ipo');
 	}
 
 	return (
@@ -28,7 +40,7 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 					<h1 className="hh1">IPO Screener</h1>
 					<IPONavigation />
 					<div className="mt-4">
-						<StockScreener type="ipo" />
+						<StockScreener />
 					</div>
 				</main>
 			</div>
@@ -37,7 +49,7 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const ipos = await getData('screener?type=intitial');
+	const ipos = await getData('iposcreener?type=initial');
 
 	return {
 		props: {

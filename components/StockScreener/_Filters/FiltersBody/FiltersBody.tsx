@@ -1,3 +1,4 @@
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { screenerState } from 'components/StockScreener/screener.state';
 import { FilterProps } from 'components/StockScreener/screener.types';
 import {
@@ -11,11 +12,12 @@ import { TooltipContent } from './TooltipContent';
 
 interface FilterWrapProps {
 	f: FilterProps;
-	type: string;
 }
 
-function FilterWrap({ f, type }: FilterWrapProps) {
+function FilterWrap({ f }: FilterWrapProps) {
+	const type = screenerDataState((state) => state.type);
 	const { fetchColumn } = useModifyColumns();
+
 	let screenerType = '';
 	type == 'stock'
 		? (screenerType = 'screener')
@@ -45,11 +47,8 @@ function FilterWrap({ f, type }: FilterWrapProps) {
 	);
 }
 
-interface Prop {
-	type: string;
-}
-
-export function RenderFilters({ type }: Prop) {
+export function RenderFilters() {
+	const type = screenerDataState((state) => state.type);
 	const filters = screenerState((state) => state.filters);
 	const filterMenu = screenerState((state) => state.filterMenu);
 	const filterSearch = screenerState((state) => state.filterSearch);
@@ -70,7 +69,7 @@ export function RenderFilters({ type }: Prop) {
 						f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
 						f.id.toLowerCase().includes(filterSearch.toLowerCase())
 					) {
-						return <FilterWrap f={f} type={type} key={f.id} />;
+						return <FilterWrap f={f} key={f.id} />;
 					}
 					return null;
 				})}
@@ -94,7 +93,7 @@ export function RenderFilters({ type }: Prop) {
 			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
 				{filterMap.map((f) => {
 					if (active.includes(f.id)) {
-						return <FilterWrap type={type} f={f} key={f.id} />;
+						return <FilterWrap f={f} key={f.id} />;
 					}
 					return null;
 				})}
@@ -109,7 +108,7 @@ export function RenderFilters({ type }: Prop) {
 			>
 				{filterMap.map((f) => {
 					if (f.category.includes(filterMenu) || filterMenu === 'All') {
-						return <FilterWrap type={type} f={f} key={f.id} />;
+						return <FilterWrap f={f} key={f.id} />;
 					}
 					return null;
 				})}

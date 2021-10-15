@@ -22,7 +22,6 @@ interface ScreenerState {
 	setResultsMenu: (newMenu: string) => void;
 
 	// Columns
-
 	fetchedColumns: FilterId[];
 	showColumns: FilterId[];
 	filteredColumns: FilterId[];
@@ -58,6 +57,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			...state,
 			filters: [],
+			filterMenu: 'Active',
 			filteredColumns: ['s', 'n', 'm'],
 		})),
 	filtersShown: true,
