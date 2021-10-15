@@ -192,7 +192,7 @@ const columns = COLUMNS_MAP.map((column) => {
 			accessor: column.accessor,
 			name: column.Header,
 			Cell: cell,
-			sortType: 'basic',
+			sortType: column.sortType,
 			sortInverted: sortInverted ?? true,
 		};
 	}

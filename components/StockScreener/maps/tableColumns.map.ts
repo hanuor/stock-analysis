@@ -48,6 +48,7 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Industry',
 		accessor: 'i',
+		sortType: 'basic',
 	},
 	{
 		Header: 'Enterprise Value',
