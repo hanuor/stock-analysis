@@ -27,3 +27,13 @@ export function getFilterFromString(string: string, fill = false) {
 
 	return { compare, first, second };
 }
+
+export function getPriceRangeFilterFromString(string: string) {
+	const splitStr = string.split('-');
+	const first = splitStr[0];
+	const second = splitStr[1];
+
+	const compare = 'between';
+
+	return { compare, first, second };
+}

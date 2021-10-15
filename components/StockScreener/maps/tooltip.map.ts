@@ -39,6 +39,12 @@ export const TOOLTIP_MAP = [
 			"The total amount of outstanding common stock currently held by all of the company's shareholders.",
 	},
 	{
+		id: 'sharesOffered',
+		title: 'Shares Offered',
+		tooltip:
+			'The total amount of shares that are being offered for sale during the IPO.',
+	},
+	{
 		id: 'sharesYoY',
 		title: 'Shares Change (YoY)',
 		tooltip:
@@ -613,5 +619,11 @@ export const TOOLTIP_MAP = [
 		title: 'Split Type',
 		tooltip:
 			'There are two types of stock splits: Forward and Reverse. Forward means that the share count increases and the stock price goes down. Reverse means that the stock count decreases and the stock price goes up.',
+	},
+	{
+		id: 'ipoPriceRange',
+		title: 'IPO Price',
+		tooltip:
+			'The price of the shares during the IPO process. It usually starts as a range, but ends with a final number the day before or day of the IPO.',
 	},
 ];

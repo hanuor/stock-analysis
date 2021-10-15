@@ -12,8 +12,13 @@ import { SortUpIcon } from 'components/Icons/SortUp';
 import { SortDownIcon } from 'components/Icons/SortDown';
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
 import { TablePagination } from './TablePagination';
+
 import { filterItems } from 'components/StockScreener/functions/filterItems';
-import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData';
+import { FilterId } from 'components/StockScreener/screener.types';
+import {
+	useFetchFullData,
+	useFetchFulIPOData,
+} from 'components/StockScreener/functions/useFetchFullData';
 import { Loading } from 'components/Loading';
 
 interface Props {
@@ -21,17 +26,56 @@ interface Props {
 }
 
 export function ResultsTable({ cols }: Props) {
+	const type = screenerDataState((state) => state.type);
 	const rows = screenerDataState((state) => state.data);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 	const fetchFullData = useFetchFullData();
-
+	const fetchFullIPOData = useFetchFulIPOData();
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
+	const setShowColumns = screenerState((state) => state.setShowColumns);
+	const setFetchedColumns = screenerState((state) => state.setFetchedColumns);
 
 	useEffect(() => {
-		fetchFullData();
+		if (type == 'stock') {
+			fetchFullData();
+			setShowColumns([
+				's',
+				'n',
+				'm',
+				'p',
+				'c',
+				'se',
+				'v',
+				'pe',
+			] as FilterId[]);
+			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe']);
+
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+		} else {
+			fetchFullIPOData();
+			setShowColumns([
+				's',
+				'n',
+				'm',
+				'se',
+				'ipoPriceRange',
+				'ipoDate',
+				'revenue',
+			] as FilterId[]);
+			setFetchedColumns([
+				's',
+				'n',
+				'm',
+				'se',
+				'ipoPriceRange',
+				'ipoDate',
+				'revenue',
+			]);
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -79,6 +123,7 @@ export function ResultsTable({ cols }: Props) {
 	return (
 		<>
 			<ResultsMenu
+				type={type}
 				count={data.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
