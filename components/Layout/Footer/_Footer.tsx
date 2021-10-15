@@ -4,7 +4,7 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd';
 import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
-import { noAds } from 'components/Ads/noAds';
+import { noAdsRelaxed } from 'components/Ads/noAds';
 import { LoadAds } from 'components/Ads/Snigel/LoadAds';
 
 const navigation = {
@@ -32,7 +32,7 @@ export const Footer = () => {
 	return (
 		<>
 			<div className={isLoggedIn ? 'mt-14' : 'mt-9'}>
-				{status === 'completed' && !isPro && !noAds(path.one) && (
+				{status === 'completed' && !isPro && !noAdsRelaxed(path.one) && (
 					<LoadAds />
 				)}
 				<LazyLoadAd offset={400}>
