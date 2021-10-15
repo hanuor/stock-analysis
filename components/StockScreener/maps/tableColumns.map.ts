@@ -1,4 +1,8 @@
 import { FilterId } from '../screener.types';
+import {
+	priceSort,
+	dateSort,
+} from 'components/StockScreener/functions/sort/sortFunctions';
 
 type Column = {
 	Header: string;
@@ -102,6 +106,7 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'IPO Date',
 		accessor: 'ipoDate',
 		format: 'date',
+		sortType: dateSort,
 	},
 	{
 		Header: 'Revenue',
@@ -517,5 +522,6 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'IPO Price',
 		accessor: 'ipoPriceRange',
 		format: 'string',
+		sortType: priceSort,
 	},
 ];
