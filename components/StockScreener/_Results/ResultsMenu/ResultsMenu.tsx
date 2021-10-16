@@ -62,7 +62,7 @@ export function ResultsMenu({
 					<ColumnDropdown type={type} />
 				</div>
 			</div>
-			<div className="col-span-2 overflow-x-auto hide-scroll lg:flex-grow lg:order-2 border-t lg:border-0 lg:pl-1 xl:pl-5">
+			<div className="col-span-2 overflow-x-auto hide-scroll lg:flex-grow lg:order-2 border-t lg:border-0 lg:pl-1 xl:pl-3">
 				<ResultsNav type={type} />
 			</div>
 		</div>

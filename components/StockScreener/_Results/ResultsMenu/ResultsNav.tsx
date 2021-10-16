@@ -11,7 +11,7 @@ export function ResultsNav({ type }: Props) {
 					<>
 						<ResultsMenuItem type={type} name="General" />
 						<ResultsMenuItem type={type} name="Filtered" />
-						<ResultsMenuItem type={type} name="Company" />
+						<ResultsMenuItem type={type} name="Performance" />
 						<ResultsMenuItem type={type} name="Financials" />
 						<ResultsMenuItem type={type} name="Valuation" />
 						<ResultsMenuItem type={type} name="Dividends" />

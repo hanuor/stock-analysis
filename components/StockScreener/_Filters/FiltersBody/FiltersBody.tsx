@@ -25,7 +25,7 @@ function FilterWrap({ f }: FilterWrapProps) {
 
 	return (
 		<div
-			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900"
+			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900 cursor-help"
 			key={f.name}
 		>
 			<div>
@@ -107,7 +107,7 @@ export function RenderFilters() {
 				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1`}
 			>
 				{filterMap.map((f) => {
-					if (f.category.includes(filterMenu) || filterMenu === 'All') {
+					if (f.category?.includes(filterMenu) || filterMenu === 'All') {
 						return <FilterWrap f={f} key={f.id} />;
 					}
 					return null;
