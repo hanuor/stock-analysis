@@ -16,7 +16,7 @@ const ExampleJSON = {
 	country: 'United States',
 	exchange: 'NASDAQ',
 	sector: 'Technology',
-	industry: 'Software-Infrastructure',
+	industry: 'Software-Application',
 };
 
 const faqs = [
