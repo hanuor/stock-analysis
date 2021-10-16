@@ -7,7 +7,6 @@ const ExampleJSON = {
 	symbol: 'GTLB',
 	name: 'GitLab Inc.',
 	ipoDate: '2021-10-14',
-	ipoDateType: 'date',
 	ipoPriceLow: 66,
 	ipoPriceHigh: 69,
 	ipoPriceFinal: 77,
