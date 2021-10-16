@@ -11,6 +11,17 @@ interface Props {
 	ticker: string;
 }
 
+// Count how many data points are not zero, hide dividend growth chart if 0-1 data points
+function countNotZero(yData: Number[]) {
+	let count = 0;
+	yData.forEach((y) => {
+		if (y !== 0) {
+			count++;
+		}
+	});
+	return count;
+}
+
 export const DividendChart = ({ data, options, ticker }: Props) => {
 	const [active, setActive] = useState('all');
 	const [y1, setY1] = useState<number[]>([]);
@@ -77,16 +88,18 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 							: `${ticker} Dividends`
 					}
 				/>
-				<SingleChart
-					xdata={data.date}
-					ydata={y2}
-					type="percentage"
-					title={
-						active === 'trailing'
-							? `${ticker} Dividend Growth (TTM YoY)`
-							: `${ticker} Dividend Growth (YoY)`
-					}
-				/>
+				{countNotZero(y2) > 1 && (
+					<SingleChart
+						xdata={data.date}
+						ydata={y2}
+						type="percentage"
+						title={
+							active === 'trailing'
+								? `${ticker} Dividend Growth (TTM YoY)`
+								: `${ticker} Dividend Growth (YoY)`
+						}
+					/>
+				)}
 			</div>
 		</>
 	);

@@ -16,8 +16,14 @@ function getPageAds(path: PathType) {
 			return ['sidebar_1', 'top_leaderboard'];
 		}
 		return ['sidebar_1', 'sidebar_2', 'top_leaderboard'];
-	} else if (path.one !== 'stocks' && path.one !== 'etf') {
+	}
+	if (path.one === 'news' || path.one === 'actions') {
 		return ['sidebar_1', 'top_leaderboard'];
+	} else if (path.one === 'stocks' || path.one === 'etf') {
+		if (!path.two) {
+			return ['sidebar_1', 'top_leaderboard'];
+		}
+		return ['top_leaderboard'];
 	}
 	return ['top_leaderboard'];
 }
