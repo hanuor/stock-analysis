@@ -14,7 +14,12 @@ export type FilterId =
 	| 'se' // Sector
 	| 'i' // Industry
 	| 'c' // Price Change 1D
+	| 'ch1m' // Price Change 1M
+	| 'ch6m' // Price Change 6M
+	| 'chYTD' // Price Change YTD
 	| 'ch1y' // Price Change 1Y
+	| 'ch3y' // Price Change 3Y
+	| 'ch5y' // Price Change 5Y
 	| 'v' // Volume
 	| 'ar' // Analyst Rating
 	| 'ac' // Analyst Count
@@ -109,6 +114,7 @@ export type ColumnName =
 	| 'Filtered'
 	| 'General'
 	| 'Company'
+	| 'Performance'
 	| 'Financials'
 	| 'Valuation'
 	| 'Dividends'

@@ -70,6 +70,9 @@ const columns = COLUMNS_MAP.map((column) => {
 			case 'changePcColor': {
 				header = formatHeader(column.Header);
 				cell = function FormatCell({ cell: { value } }: CellNumber) {
+					if (!value) {
+						return <div className="text-right">-</div>;
+					}
 					const formatted = formatNum(value, format2dec) + '%';
 					if (value > 0) {
 						return (
