@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
-import { Features } from './Sidebar/Features';
+import { Sidebar } from './Sidebar/_Sidebar';
 import { Byline } from './Article/Byline';
 
 interface Meta {
@@ -38,9 +36,7 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 					</article>
 				</main>
 				<aside className="space-y-8 lg:pt-4">
-					<Sidebar1 />
-					<Features />
-					<Sidebar2 />
+					<Sidebar />
 				</aside>
 			</div>
 		</>

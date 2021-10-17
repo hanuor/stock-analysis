@@ -27,12 +27,12 @@ function getPageAds(path: PathType) {
 	
 	// News and Actions pages
 	if (path.one === 'news' || path.one === 'actions') {
-		return ['top_leaderboard', 'sidebar_1'];
+		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 	}
 	
 	// Stocks and ETF index pages
 	if ((path.one === 'stocks' || path.one === 'etf') && !path.two) {
-		return ['top_leaderboard', 'sidebar_1'];
+		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 	}
 
 	// Mostly article pages

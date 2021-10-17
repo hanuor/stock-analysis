@@ -7,6 +7,7 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsFeed } from 'components/News/_NewsFeed';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	data: News[];
@@ -43,6 +44,7 @@ export const MarketNews = ({ data, other }: Props) => {
 									url: '/news/all-stocks/',
 								}}
 							/>
+							<Sidebar2 />
 						</aside>
 					</div>
 				</main>
