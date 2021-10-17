@@ -1,3 +1,4 @@
+import { authState } from 'state/authState';
 import { ArrowCTAIcon } from 'components/Icons/ArrowCTA';
 import Link from 'next/link';
 
@@ -33,30 +34,39 @@ const FeaturesMap = [
 ];
 
 export function Features() {
+	const isPro = authState((state) => state.isPro);
+
 	return (
 		<div className="space-y-3">
-			{FeaturesMap.map((feature) => (
-				<div
-					className="bg-white overflow-hidden shadow rounded-lg border relative group"
-					key={feature.title}
-					id={feature.tagId}
-				>
-					<Link href={feature.url} prefetch={false}>
-						<a>
-							<div className="px-4 py-5 sm:p-6">
-								<h4 className="hh3">{feature.title}</h4>
-								<div className="text-gray-800">{feature.description}</div>
-								<span
-									className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-blue-400"
-									aria-hidden="true"
-								>
-									<ArrowCTAIcon classes="h-6 w-6" />
-								</span>
-							</div>
-						</a>
-					</Link>
-				</div>
-			))}
+			{FeaturesMap.map((feature) => {
+				if (isPro && feature.tagId === 'tag-upgr-nav-widget') {
+					return null;
+				}
+				return (
+					<div
+						className="bg-white overflow-hidden shadow rounded-lg border relative group"
+						key={feature.title}
+						id={feature.tagId}
+					>
+						<Link href={feature.url} prefetch={false}>
+							<a>
+								<div className="px-4 py-5 sm:p-6">
+									<h4 className="hh3">{feature.title}</h4>
+									<div className="text-gray-800">
+										{feature.description}
+									</div>
+									<span
+										className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-blue-400"
+										aria-hidden="true"
+									>
+										<ArrowCTAIcon classes="h-6 w-6" />
+									</span>
+								</div>
+							</a>
+						</Link>
+					</div>
+				);
+			})}
 		</div>
 	);
 }
