@@ -2,8 +2,7 @@ import { ReactNode } from 'react';
 import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
 import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar } from 'components/Layout/Sidebar/_Sidebar';
 
 interface Props {
 	title: string;
@@ -26,8 +25,7 @@ export const ActionsLayout = ({ title, children, url }: Props) => {
 							{children}
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
-							<Sidebar1 />
-							<NewsletterWidget />
+							<Sidebar />
 						</aside>
 					</div>
 				</main>
