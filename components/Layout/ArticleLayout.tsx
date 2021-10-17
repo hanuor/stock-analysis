@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
-import { Sidebar } from './Sidebar/_Sidebar';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { Features } from './Sidebar/Features';
 import { Byline } from './Article/Byline';
 
 interface Meta {
@@ -15,6 +17,13 @@ interface Props {
 	children: ReactNode;
 }
 
+/**
+ * The content/sidebar layout for articles and financial terms
+ * @param {Meta} meta - The meta data for the page
+ * @param {ReactNode} children - The content to be displayed
+ * @return Component
+ */
+
 export const ArticleLayout = ({ meta, children }: Props) => {
 	return (
 		<>
@@ -28,7 +37,11 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 						{children}
 					</article>
 				</main>
-				<Sidebar />
+				<aside className="space-y-8 lg:pt-4">
+					<Sidebar1 />
+					<Features />
+					<Sidebar2 />
+				</aside>
 			</div>
 		</>
 	);

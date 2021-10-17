@@ -11,20 +11,36 @@ declare global {
 }
 
 function getPageAds(path: PathType) {
-	if (path.one === 'ipos') {
-		if (path.two === 'statistics') {
-			return ['sidebar_1', 'top_leaderboard'];
-		}
-		return ['sidebar_1', 'sidebar_2', 'top_leaderboard'];
-	}
-	if (path.one === 'news' || path.one === 'actions') {
-		return ['sidebar_1', 'top_leaderboard'];
-	} else if (path.one === 'stocks' || path.one === 'etf') {
-		if (!path.two) {
-			return ['sidebar_1', 'top_leaderboard'];
-		}
+	
+	// Front page
+	if (!path.one) {
 		return ['top_leaderboard'];
 	}
+
+	// IPO pages
+	if (path.one === 'ipos') {
+		if (path.two === 'statistics') {
+			return ['top_leaderboard', 'sidebar_1'];
+		}
+		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
+	}
+	
+	// News and Actions pages
+	if (path.one === 'news' || path.one === 'actions') {
+		return ['top_leaderboard', 'sidebar_1'];
+	}
+	
+	// Stocks and ETF index pages
+	if ((path.one === 'stocks' || path.one === 'etf') && !path.two) {
+		return ['top_leaderboard', 'sidebar_1'];
+	}
+
+	// Mostly article pages
+	if (path.one !== 'stocks' && path.one !== 'etf') {
+		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
+	}
+
+	// Default
 	return ['top_leaderboard'];
 }
 
