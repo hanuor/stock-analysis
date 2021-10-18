@@ -11,7 +11,6 @@ declare global {
 }
 
 function getPageAds(path: PathType) {
-	
 	// Front page
 	if (!path.one) {
 		return ['top_leaderboard'];
@@ -24,12 +23,12 @@ function getPageAds(path: PathType) {
 		}
 		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 	}
-	
+
 	// News and Actions pages
 	if (path.one === 'news' || path.one === 'actions') {
 		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 	}
-	
+
 	// Stocks and ETF index pages
 	if ((path.one === 'stocks' || path.one === 'etf') && !path.two) {
 		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
@@ -62,6 +61,13 @@ export function LoadAds() {
 			});
 		}
 	}, [path]);
+
+	if (
+		typeof window === 'undefined' ||
+		process.env.NODE_ENV === 'development'
+	) {
+		return null;
+	}
 
 	if (ads.length === 0) {
 		return null;
