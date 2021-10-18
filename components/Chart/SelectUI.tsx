@@ -60,6 +60,8 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				className="block md:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="1Y"
 			>
+				<option value="1D">1 Day</option>
+				<option value="5D">5 Day</option>
 				<option value="1M">1 Month</option>
 				<option value="6M">6 Months</option>
 				<option value="YTD">YTD</option>
@@ -70,6 +72,29 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 			</select>
 
 			<ul className="hidden md:flex flex-row whitespace-nowrap overflow-x-auto pl-1 hide-scroll md:mr-auto">
+				<li>
+					<button
+						onClick={() => {
+							dispatch('1D');
+						}}
+						type="button"
+						className={state === '1D' ? active : inactive}
+					>
+						1 Day
+					</button>
+				</li>
+				<li>
+					<button
+						onClick={() => {
+							dispatch('5D');
+						}}
+						type="button"
+						className={state === '5D' ? active : inactive}
+					>
+						5 Day
+					</button>
+				</li>
+
 				<li>
 					<button
 						onClick={() => {
