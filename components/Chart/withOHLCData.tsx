@@ -174,7 +174,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					(newState.time == '1D' && time != '1D') ||
 					(newState.time == '5D' && time != '5D')
 				) {
-					newState.stockId;
+					this.props.setLoading(true);
 					const newData = fetchChartData(newState.stockId, newState.time);
 					newData.then((data) => {
 						const forDateParse = data.map(fixDataHeaders1D5D);
@@ -182,12 +182,14 @@ export function withOHLCData(dataSet = 'DAILY') {
 						this.setState({ data });
 						time = newState.time;
 						this.setState({ time });
+						this.props.setLoading(false);
 					});
 				} else if (
 					(time == '5D' || time == '1D') &&
 					newState.time != '1D' &&
 					newState.time != '5D'
 				) {
+					this.props.setLoading(true);
 					Axios.get(
 						`https://api.stockanalysis.com/wp-json/sa/cch?i=${this.props.stockId}&p=${this.props.period}&r=MAX`
 					)
@@ -195,6 +197,8 @@ export function withOHLCData(dataSet = 'DAILY') {
 							const forDateParse = res.data.map(fixDataHeaders);
 							const data = forDateParse.map(parseData());
 							this.setState({ data });
+							time = newState.time;
+							this.setState({ time });
 							this.props.setLoading(false);
 							this.props.setData(data);
 						})
