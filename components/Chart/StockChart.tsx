@@ -177,7 +177,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 
 		const priceOrCandleStickColor = (data: IOHLCData) => {
 			if (time == '1D' || time == '5D') {
-				return '#26a69a';
+				return ma1color;
 			}
 			return type == 'line' ? '#000000' : openCloseColor(data);
 		};
@@ -208,7 +208,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 
 		const tooltipColor = (time: string) => {
 			if (time == '1D' || '5D') {
-				return '#26a69a';
+				return ma1color;
 			}
 			return '#000000';
 		};
@@ -392,7 +392,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								<>
 									<LineSeries
 										yAccessor={(d) => d.close}
-										strokeStyle={'#26a69a'}
+										strokeStyle={ma1color}
 									/>
 									<CurrentCoordinate
 										yAccessor={(d) => d.close}
