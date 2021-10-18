@@ -70,7 +70,6 @@ function fixDataHeaders(obj: any) {
 function fixDataHeaders1D5D(obj: any) {
 	const newObj = {
 		date: obj.t,
-		open: obj.o,
 		close: obj.c,
 	};
 	return newObj;
