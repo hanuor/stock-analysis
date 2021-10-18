@@ -11,7 +11,8 @@ import { InfoTable } from 'components/Dividend/InfoTable';
 import { HistoryTable } from 'components/Dividend/HistoryTable';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { DividendChart } from 'components/Dividend/DividendChart';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	info: Info;
@@ -47,7 +48,7 @@ export default function Dividend({ info, data, news }: Props) {
 						/>
 					</div>
 					<aside className="mt-7 lg:mt-0 space-y-8">
-						<NewsletterWidget />
+						{data.history.length > 0 && <Sidebar1 />}
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}
@@ -56,6 +57,7 @@ export default function Dividend({ info, data, news }: Props) {
 								url: `/stocks/${info.symbol}/`,
 							}}
 						/>
+						{data.history.length > 15 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>

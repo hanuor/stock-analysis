@@ -30,8 +30,13 @@ function getPageAds(path: PathType) {
 	}
 
 	// Stocks and ETF index pages
-	if ((path.one === 'stocks' || path.one === 'etf') && !path.two) {
-		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
+	if ((path.one === 'stocks' || path.one === 'etf')) {
+		if (!path.two) {
+			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
+		}
+		if (path.three === 'holdings' || path.three === 'dividend' || path.three === 'statistics' || path.three === 'company') {
+			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
+		}
 	}
 
 	// Mostly article pages
