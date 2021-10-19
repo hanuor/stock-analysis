@@ -46,13 +46,14 @@ export function Features() {
 					<div
 						className="bg-white overflow-hidden shadow rounded-lg border relative group"
 						key={feature.title}
-						id={feature.tagId}
 					>
 						<Link href={feature.url} prefetch={false}>
-							<a>
-								<div className="px-4 py-5 sm:p-6">
-									<h4 className="hh3">{feature.title}</h4>
-									<div className="text-gray-800">
+							<a id={feature.tagId}>
+								<div className="px-4 py-5 sm:p-6 pointer-events-none">
+									<h4 className="hh3 pointer-events-none">
+										{feature.title}
+									</h4>
+									<div className="text-gray-800 pointer-events-none">
 										{feature.description}
 									</div>
 									<span

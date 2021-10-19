@@ -4,15 +4,15 @@ const people = [
 		name: 'Kris Gunnars',
 		role: 'Founder / CEO',
 		imageUrl: '/img/kris-gunnars.jpg',
-		bio: "Kris is a full-time investor and internet entrepreneur. He founded Stock Analysis in 2019 and also owns the investment company Skuggi Capital ehf. He has a Bachelor's degree in medicine from the University of Iceland. Kris Gunnars is a pen name, his full name is Kristján Már Gunnarsson.",
+		bio: "Kris is a full-time investor and internet entrepreneur. He founded Stock Analysis in 2019 and also owns the investment company Skuggi Capital ehf. He has a Bachelor's degree in medicine from the University of Iceland. Kris Gunnars is a pen name, his full name is Kristjan Mar Gunnarsson.",
 		twitterUrl: 'https://twitter.com/krisgunnars',
 		linkedinUrl: 'https://www.linkedin.com/in/kris-gunnars/',
 	},
 	{
-		name: 'Örn Orri Ólafsson',
+		name: 'Orn Orri Olafsson',
 		role: 'Developer / Part-Owner',
 		imageUrl: '/img/orn-orri.jpg',
-		bio: 'Örn is a professional programmer. He has a degree in computer science from the University of Reykjavik.',
+		bio: 'Orn is a professional programmer. He has a degree in computer science from the University of Reykjavik.',
 	},
 	{
 		name: 'Kendal March',

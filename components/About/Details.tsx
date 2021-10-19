@@ -23,9 +23,9 @@ export function AboutDetails() {
 					<p className="mt-4 text-lg text-gray-600">
 						Vefir ehf.
 						<br />
-						Austurkór 102,
+						Austurkor 102,
 						<br />
-						203, Kópavogur,
+						203, Kopavogur,
 						<br />
 						Iceland
 					</p>
