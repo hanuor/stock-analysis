@@ -12,7 +12,7 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			if (news.length > 5) {
 				return (
-					<div className="mx-auto text-center">
+					<div className="mx-auto text-center overflow-x-auto">
 						<div
 							id="adngin-sidebar_1-0"
 							className="hidden lg:block lg:min-h-[301px] mx-auto"
@@ -26,7 +26,7 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 			}
 			else {
 				return (
-					<div className="mx-auto text-center">
+					<div className="mx-auto text-center overflow-x-auto">
 						<div
 							id="adngin-in-content_1_mobile-0"
 							className="block min-h-[266px] mt-6 xs:mt-8 sm:hidden"
