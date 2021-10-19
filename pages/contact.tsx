@@ -28,9 +28,13 @@ export default function Contact() {
 				}}
 			>
 				<p>
-					We do not provide personalized investment advice. Please contact
-					a qualified financial advisor if you have questions about
-					specific investments.
+					We would love to hear from you. Please submit a message using the
+					contact form below and we will get back to you as soon as
+					possible. You can also send an email directly to{' '}
+					<a href="mailto:contact@stockanalysis.com">
+						contact@stockanalysis.com
+					</a>
+					.
 				</p>
 				<ContactForm />
 				<h2 className="mt-16">Mailing Address</h2>
@@ -43,8 +47,6 @@ export default function Contact() {
 					<br />
 					Iceland
 				</p>
-				<h2>Phone Number</h2>
-				<p>Phone number: (+354) 693-9246</p>
 			</ArticleLayout>
 		</>
 	);

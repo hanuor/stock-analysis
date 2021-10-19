@@ -11,20 +11,24 @@ const nasdaqLink = (
 	</a>
 );
 
-function secLink(cik: string | undefined) {
+function secLink(cik: string | undefined, text: string, type?: string) {
 	if (cik) {
 		return (
 			<a
-				href={`https://www.sec.gov/cgi-bin/browse-edgar?CIK=${cik}&type=S-1`}
+				href={
+					type
+						? `https://www.sec.gov/cgi-bin/browse-edgar?CIK=${cik}&type=S-1`
+						: `https://www.sec.gov/cgi-bin/browse-edgar?CIK=${cik}`
+				}
 				target="_blank"
 				rel="noopener noreferrer"
 				className="bll"
 			>
-				S-1 and S-1/A filings
+				{text}
 			</a>
 		);
 	}
-	return 'S-1 and S-1/A filings';
+	return text;
 }
 
 function returnLink(type: string, cik: string | undefined) {
@@ -55,8 +59,20 @@ export function FinancialSource({ info }: { info: Info }) {
 		return (
 			<div className="text-tiny text-gray-700 mt-2">
 				{/* prettier-ignore */}
-				Source: IPO financials are sourced from {secLink(info.cik)}{' '}
-				submitted to the Securities and Exchange Commission (SEC).
+				Source: IPO financials are sourced from{' '}
+				{secLink(info.cik, 'S-1 and S-1/A filings', 'S-1')} submitted to the
+				Securities and Exchange Commission (SEC).
+			</div>
+		);
+	}
+
+	if (info.currency !== 'USD') {
+		return (
+			<div className="text-[0.85rem] text-gray-600 mt-2">
+				{/* prettier-ignore */}
+				Source: Financials are provided by {nasdaqLink} and sourced from
+				audited reports submitted to the{' '}
+				{secLink(info.cik, 'Securities and Exchange Commission')} (SEC).
 			</div>
 		);
 	}
