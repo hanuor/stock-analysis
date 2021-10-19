@@ -6,13 +6,21 @@ interface ButtonUIProps {
 }
 
 interface SelectProps {
+	time: string;
 	dispatcher: Dispatch<SetStateAction<string>>;
 }
 
 export const SelectPeriod = (props: SelectProps) => {
+	let dayDisabled: boolean;
+	if (props.time == '1D' || props.time == '5D') {
+		dayDisabled = true;
+	} else {
+		dayDisabled = false;
+	}
 	return (
 		<div>
 			<select
+				disabled={dayDisabled}
 				onChange={(e) => {
 					props.dispatcher(e.target.value);
 				}}
