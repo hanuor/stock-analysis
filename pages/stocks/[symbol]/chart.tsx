@@ -56,6 +56,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 							]}
 							data={data}
 							setData={setData}
+							time={time}
 						/>
 					</div>
 					<div className="touch-none h-[400px] xs:h-[450px] bp:h-[500px] sm:h-[600px]">

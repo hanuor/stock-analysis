@@ -176,9 +176,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		};
 
 		const priceOrCandleStickColor = (data: IOHLCData) => {
-			if (time == '1D' || time == '5D') {
-				return ma1color;
-			}
 			return type == 'line' ? '#000000' : openCloseColor(data);
 		};
 
@@ -206,11 +203,12 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			return data.volume;
 		};
 
-		const tooltipColor = (time: string) => {
-			if (time == '1D' || '5D') {
-				return ma1color;
+		const toolTipPosition = () => {
+			if (time == '1D' || time == '5D') {
+				return [8, 24];
+			} else {
+				return [8, 24];
 			}
-			return '#000000';
 		};
 
 		const ma1color = '#2c6288';
@@ -256,19 +254,13 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			xScaleProvider(calculatedData);
 
 		if (type == 'line' || time == '1D' || time == '5D') {
-			movingAverageTooltipOptions.push({
-				yAccessor: (d) => d.close,
-				type: 'Price',
-				stroke: tooltipColor(time),
-				windowSize: null,
-			});
 			if (time == '1D' || time == '5D') {
 				movingAverageTooltipOptions.splice(0, 2);
 			}
 		}
 
 		let max = xAccessor(data[data.length - 1]);
-		let min;
+		let min = 0;
 		let days = 0;
 
 		const date: any = new Date(data[data.length - 1].date);
@@ -314,8 +306,9 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					min = xAccessor(data[i]);
 				}
 			}
-		} else if (time == '1D' || '5D') {
+			/* } else if (time == '1D' || '5D') {
 			min = xAccessor(data[Math.max(0, data.length - 100)]);
+		*/
 		} else {
 			max = max + 6;
 			min = 0;
@@ -392,16 +385,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 									/>
 								</>
 							) : (
-								<>
-									<LineSeries
-										yAccessor={(d) => d.close}
-										strokeStyle={ma1color}
-									/>
-									<CurrentCoordinate
-										yAccessor={(d) => d.close}
-										fillStyle={priceOrCandleStickColor}
-									/>{' '}
-								</>
+								<></>
 							)}
 							{isBrowser == true ? (
 								<MouseCoordinateY
@@ -453,12 +437,12 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								yAccessor={yEdgeIndicator}
 								fontSize={13}
 							/>
-							<OHLCTooltipCustom time={time} origin={[5, 15]} />
+							<OHLCTooltipCustom origin={[5, 15]} />
 							<MovingAverageTooltipCustom
-								origin={[8, 24]}
+								origin={toolTipPosition()}
 								options={movingAverageTooltipOptions}
 							/>
-							{isBrowser == true && time != '1D' && time != '5D' ? (
+							{isBrowser == true ? (
 								<HoverTooltipCustom
 									yAccessor={sma50.accessor()}
 									tooltip={{

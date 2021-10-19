@@ -6,7 +6,7 @@ import { Unavailable } from 'components/Unavailable';
 import { getData } from 'functions/API';
 
 const parseDate = timeParse('%Y-%m-%d');
-const parseDate1D5D = timeParse('%b %d, %Y %H:%M');
+const parseDate1D5D = timeParse('%Y-%m-%d %H:%M');
 
 const parseData = () => {
 	return (d: any) => {
@@ -27,9 +27,10 @@ const parseData = () => {
 	};
 };
 
-const parseData1D5D = () => {
+const parseData1D5D = (time: string) => {
 	return (d: any) => {
 		const date = parseDate1D5D(d.date);
+
 		if (date === null) {
 			d.date = new Date(Number(d.date));
 		} else {
@@ -68,11 +69,14 @@ function fixDataHeaders(obj: any) {
 }
 
 function fixDataHeaders1D5D(obj: any) {
-	const newObj = {
-		date: obj.t,
-		close: obj.c,
+	return {
+		date: obj.date + ' ' + obj.minute,
+		close: obj.close,
+		high: obj.high,
+		low: obj.low,
+		open: obj.open,
+		volume: obj.volume,
 	};
-	return newObj;
 }
 
 interface WithOHLCDataProps {
@@ -173,15 +177,23 @@ export function withOHLCData(dataSet = 'DAILY') {
 					(newState.time == '1D' && time != '1D') ||
 					(newState.time == '5D' && time != '5D')
 				) {
+					let time = newState.time;
+					if (time == '5D') {
+						time = '5DM';
+					}
 					this.props.setLoading(true);
-					const newData = fetchChartData(newState.stockId, newState.time);
-					newData.then((data) => {
-						const forDateParse = data.map(fixDataHeaders1D5D);
-						data = forDateParse.map(parseData1D5D());
+					Axios.get(
+						`https://cloud.iexapis.com/stable/stock/AAPL/chart/${time}?token=pk_a2bbeb38d4b64d61a218344f505362bb`
+					).then((res) => {
+						const forDateParse = res.data.map(fixDataHeaders1D5D);
+						data = forDateParse.map(parseData1D5D(this.props.time));
 						this.setState({ data });
 						time = newState.time;
 						this.setState({ time });
 						this.props.setLoading(false);
+						if (typeof data != 'undefined') {
+							this.props.setData(data);
+						}
 					});
 				} else if (
 					(time == '5D' || time == '1D') &&
@@ -199,7 +211,10 @@ export function withOHLCData(dataSet = 'DAILY') {
 							time = newState.time;
 							this.setState({ time });
 							this.props.setLoading(false);
-							this.props.setData(data);
+
+							if (typeof data != 'undefined') {
+								this.props.setData(data);
+							}
 						})
 						.catch((error) => {
 							console.error(

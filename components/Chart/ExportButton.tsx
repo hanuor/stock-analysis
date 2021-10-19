@@ -3,6 +3,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { ExportItem } from 'components/Controls/Export/ExportItem';
 import { ExportItemRestricted } from 'components/Controls/Export/ExportItemRestricted';
 import { authState } from 'state/authState';
+import { useState } from 'react';
 
 type Button = {
 	title: string;
@@ -15,32 +16,77 @@ interface Props {
 	buttons: Button[];
 	data: any;
 	setData: any;
+	time: string;
 }
 
-export function Export({ buttons, data, setData }: Props) {
+export function Export({ buttons, data, time }: Props) {
 	const isPro = authState((state) => state.isPro);
+	const [expData, setExpData] = useState<any[]>([
+		'Date',
+		'Open',
+		'Close',
+		'High',
+		'Low',
+		'Volume',
+	]);
 
 	useEffect(() => {
+		const result: any[] = [];
 		if (typeof data !== 'undefined' && !Array.isArray(data[0])) {
-			const result = [
-				['Date', 'Open', 'Close', 'High', 'Low', 'Volume', 'MA1', 'MA2'],
-			];
+			if (time == '1D' || time == '5D') {
+				result.push(['Date', 'Open', 'Close', 'High', 'Low', 'Volume']);
+			} else {
+				result.push([
+					'Date',
+					'Open',
+					'Close',
+					'High',
+					'Low',
+					'Volume',
+					'MA1',
+					'MA2',
+				]);
+			}
+
 			for (let i = 0; i < data.length; i++) {
-				const arr = [
-					data[i].date,
-					data[i].open,
-					data[i].close,
-					data[i].high,
-					data[i].low,
-					data[i].volume,
-					data[i].ma1,
-					data[i].ma2,
-				];
+				let arr = [];
+				if (time == '1D' || time == '5D') {
+					const dateString =
+						data[i].date.getMonth() +
+						1 +
+						'/' +
+						data[i].date.getDate() +
+						'/' +
+						data[i].date.getFullYear().toString().substr(-2) +
+						' ' +
+						data[i].date.getHours() +
+						':' +
+						data[i].date.getMinutes();
+					arr = [
+						dateString,
+						data[i].open,
+						data[i].close,
+						data[i].high,
+						data[i].low,
+						data[i].volume,
+					];
+				} else {
+					arr = [
+						data[i].date,
+						data[i].open,
+						data[i].close,
+						data[i].high,
+						data[i].low,
+						data[i].volume,
+						data[i].ma1,
+						data[i].ma2,
+					];
+				}
 				result.push(arr);
 			}
-			setData(result);
+			setExpData(result);
 		}
-	}, [data, setData]);
+	}, [data, setExpData, time]);
 
 	return (
 		<Menu as="div" className="relative text-left hidden sm:inline-block z-10">
@@ -88,7 +134,7 @@ export function Export({ buttons, data, setData }: Props) {
 										key={index}
 										title={button.title}
 										type={button.type}
-										data={data}
+										data={expData}
 									/>
 								)
 							)}
