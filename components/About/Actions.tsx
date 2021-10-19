@@ -7,15 +7,15 @@ export function AboutActions() {
 			<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 				<div className="lg:grid lg:grid-cols-3 lg:gap-8">
 					<div>
-						<h2 className="text-3xl font-extrabold text-gray-900">
-							Frequently asked questions
+						<h2 className="text-3xl font-bold text-gray-900">
+							What to do next
 						</h2>
 						<p className="mt-4 text-lg text-gray-600">
 							Reach out to our{' '}
 							<Link href="/contact/" prefetch={false}>
 								<a className="font-medium bll">customer support</a>
 							</Link>{' '}
-							if you can't find the answer you are looking for.
+							if you can't find the answers you are looking for.
 						</p>
 					</div>
 					<div className="mt-12 lg:mt-0 lg:col-span-2">
@@ -50,7 +50,9 @@ export function AboutActions() {
 									</a>{' '}
 									or check out our{' '}
 									<Link href="/apis/" prefetch={false}>
-										<a className="font-medium bll">API offerings</a>
+										<a className="font-medium bll">
+											API and data offerings
+										</a>
 									</Link>
 									.
 								</div>

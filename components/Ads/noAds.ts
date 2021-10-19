@@ -1,4 +1,5 @@
 const NO_ADS = [
+	'about',
 	'login',
 	'pro',
 	'contact',

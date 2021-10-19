@@ -9,7 +9,7 @@ const features = [
 	{
 		name: 'Data accuracy',
 		description:
-			'We are committed to the highest standards of data accuracy using both automated and manual reviews of the data.',
+			'We are committed to the highest standards of data accuracy. We use both automated scans and manual reviews of the data to ensure this.',
 		icon: DatabaseIcon,
 	},
 	{
@@ -34,20 +34,20 @@ const features = [
 
 export function AboutFeatures() {
 	return (
-		<section className="pt-12 pb-16 bg-white">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<section className="pt-14 pb-20 bg-white">
+			<div className="max-w-7xl mx-auto px-6 lg:px-8">
 				<div className="lg:text-center">
-					<h2 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+					<h2 className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl">
 						What sets us apart
 					</h2>
-					<p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-						We want to make investing easy and accessible and provide
-						accurate, professional-grade data for everyday investors.
+					<p className="mt-4 max-w-lg text-xl text-gray-500 lg:mx-auto">
+						We want to make investing easy and accessible with data that
+						is up-to-date and highly accurate.
 					</p>
 				</div>
 
 				<div className="mt-10">
-					<dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+					<dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-12">
 						{features.map((feature) => (
 							<div key={feature.name} className="relative">
 								<dt>
