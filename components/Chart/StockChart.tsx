@@ -268,7 +268,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		}
 
 		let max = xAccessor(data[data.length - 1]);
-		let min = 0;
+		let min;
 		let days = 0;
 
 		const date: any = new Date(data[data.length - 1].date);
@@ -300,6 +300,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			max = max + 8;
 			days = 1825;
 		}
+
 		if (this.props.time != 'MAX') {
 			date.setDate(date.getDate() - days);
 
@@ -313,6 +314,8 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					min = xAccessor(data[i]);
 				}
 			}
+		} else if (time == '1D' || '5D') {
+			min = xAccessor(data[Math.max(0, data.length - 100)]);
 		} else {
 			max = max + 6;
 			min = 0;
