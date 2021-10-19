@@ -28,6 +28,7 @@ import { Tooltip } from './Tooltip';
 import { TooltipChart } from './TooltipChart';
 import { Unavailable } from 'components/Unavailable';
 import { getStockFinancialsFull } from 'functions/callBackEnd';
+import { FinancialSource } from './FinancialSource';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
@@ -382,6 +383,7 @@ export const FinancialTable = ({
 					/>
 				)}
 			</div>
+			<FinancialSource info={info} />
 		</div>
 	);
 };

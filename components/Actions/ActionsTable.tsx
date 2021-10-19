@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
 	useTable,
 	useGlobalFilter,
@@ -41,7 +42,6 @@ export const ActionsTable = ({
 	useEffect(() => {
 		async function fetchFullActions() {
 			const res = await getActionsDataFull(type, year);
-
 			if (res.data && res.data.length > count) {
 				setDataRows(res.data);
 				if (filter) {
@@ -54,7 +54,6 @@ export const ActionsTable = ({
 				);
 			}
 		}
-
 		if (isPro && fullCount > count) {
 			fetchFullActions();
 		}

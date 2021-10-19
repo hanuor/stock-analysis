@@ -1,19 +1,33 @@
 import { screenerState } from 'components/StockScreener/screener.state';
 import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { FilterId, ColumnName } from 'components/StockScreener/screener.types';
-import { resultColumns } from 'components/StockScreener/maps/resultColumns.map';
+import { returnResultColumns } from 'components/StockScreener/maps/resultColumns.map';
 import { getData } from 'functions/API';
 
 type Props = {
 	name: ColumnName;
+	type: string;
 };
 
-export function ResultsMenuItem({ name }: Props) {
+export function ResultsMenuItem({ name, type }: Props) {
+	let defaultColumns: FilterId[] = [];
+
+	type == 'stock'
+		? (defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'])
+		: (defaultColumns = [
+				's',
+				'n',
+				'm',
+				'se',
+				'ipoPriceRange',
+				'ipoDate',
+				'revenue',
+		  ]);
+
 	const filters = screenerState((state) => state.filters);
 	const resultsMenu = screenerState((state) => state.resultsMenu);
 	const setResultsMenu = screenerState((state) => state.setResultsMenu);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
-	const defaultColumns = screenerState((state) => state.defaultColumns);
 	const fetchedColumns = screenerState((state) => state.fetchedColumns);
 	const filteredColumns = screenerState((state) => state.filteredColumns);
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn);
@@ -26,11 +40,11 @@ export function ResultsMenuItem({ name }: Props) {
 		dataTitle = `${name} (5)`;
 	}
 
-	function fetchManyColumns(columns: FilterId[]) {
+	function fetchManyColumns(columns: FilterId[], screenerType: string) {
 		columns.forEach(async (id) => {
 			if (!fetchedColumns.includes(id)) {
 				addFetchedColumn(id);
-				const fetched = await getData(`screener?type=${id}`);
+				const fetched = await getData(screenerType + `?type=${id}`);
 				addDataColumn(fetched, id);
 			}
 		});
@@ -39,7 +53,13 @@ export function ResultsMenuItem({ name }: Props) {
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
-			fetchManyColumns(resultColumns[name]);
+			let screenerType: string;
+			if (type == 'stock') {
+				screenerType = 'screener';
+			} else {
+				screenerType = 'iposcreener';
+			}
+			fetchManyColumns(returnResultColumns(type)[name], screenerType);
 		}
 	}
 
@@ -51,7 +71,7 @@ export function ResultsMenuItem({ name }: Props) {
 		} else if (name === 'General') {
 			setShowColumns(defaultColumns);
 		} else {
-			setShowColumns(resultColumns[name]);
+			setShowColumns(returnResultColumns(type)[name]);
 		}
 	}
 

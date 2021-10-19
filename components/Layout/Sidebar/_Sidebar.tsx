@@ -1,9 +1,13 @@
-import { NewsletterWidget } from './Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { Features } from './Features';
 
-export const Sidebar = () => {
+export function Sidebar () {
 	return (
-		<aside className="space-y-8 pt-4">
-			<NewsletterWidget />
-		</aside>
+		<>
+			<Sidebar1 />
+			<Features />
+			<Sidebar2 />
+		</>
 	);
 };

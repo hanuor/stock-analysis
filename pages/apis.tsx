@@ -7,17 +7,16 @@ const ExampleJSON = {
 	symbol: 'GTLB',
 	name: 'GitLab Inc.',
 	ipoDate: '2021-10-14',
-	ipoDateType: 'date',
-	ipoPriceLow: 55,
-	ipoPriceHigh: 60,
-	ipoPriceFinal: null,
+	ipoPriceLow: 66,
+	ipoPriceHigh: 69,
+	ipoPriceFinal: 77,
 	sharesOffered: 10400000,
 	sharesOutstanding: 143014821,
-	marketCap: 8223352207,
+	marketCap: 11012141217,
 	country: 'United States',
 	exchange: 'NASDAQ',
 	sector: 'Technology',
-	industry: 'Software-Infrastructure',
+	industry: 'Software-Application',
 };
 
 const faqs = [
@@ -44,11 +43,11 @@ export default function ApisPage() {
 		<>
 			<SEO
 				title="APIs & Data"
-				description="Stock Analysis offers powerful data APIs that you can use to enhance your trading or power your website or app."
+				description="We have partnered with Rapid API to offer our comprehensive upcoming IPO calendar as an API. There are both free and paid plans available."
 				canonical="/apis/"
 			/>
 			<LayoutFullWidth>
-				<div className="bg-gray-100">
+				<div className="bg-gray-100 border-b border-gray-200 shadow-sm">
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
 						<div className="text-center">
 							<h1 className="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
@@ -56,8 +55,8 @@ export default function ApisPage() {
 							</h1>
 							<p className="max-w-xl mt-6 mx-auto text-xl text-gray-600">
 								We have partnered with Rapid API to offer our
-								comprehensive IPO calendar as an API. There are both
-								free and paid plans available.
+								comprehensive upcoming IPO calendar as an API. There are
+								both free and paid plans available.
 							</p>
 							<a
 								href="https://rapidapi.com/stock-analysis-stock-analysis-default/api/upcoming-ipo-calendar"
@@ -77,13 +76,17 @@ export default function ApisPage() {
 							<h2 className="text-left mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-4xl">
 								Example JSON response
 							</h2>
-							<p className="text-left mt-5 mx-auto text-xl text-gray-600">
+							<div className="text-left text-xl text-gray-600 mt-4">
+								This shows what an individual IPO data point looks like
+								in the API response.
+							</div>
+							<div className="text-left mt-5 mx-auto text-xl text-gray-600 overflow-x-auto">
 								<pre>{JSON.stringify(ExampleJSON, null, 2)}</pre>
-							</p>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div className="bg-gray-100">
+				<div className="bg-gray-100 border-t border-b border-gray-200 shadow-sm">
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 						<div className="lg:grid lg:grid-cols-3 lg:gap-8">
 							<div>
@@ -123,7 +126,7 @@ export default function ApisPage() {
 							<h1 className="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
 								How to get started
 							</h1>
-							<div className="text-left max-w-xl mt-6 mx-auto text-xl text-gray-700 space-y-3">
+							<div className="text-left max-w-xl mt-6 mx-auto text-lg bp:text-xl text-gray-700 space-y-3">
 								<div>
 									1. Go to the{' '}
 									<a

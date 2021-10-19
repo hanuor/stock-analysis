@@ -15,6 +15,13 @@ interface Props {
 	children: ReactNode;
 }
 
+/**
+ * The content/sidebar layout for articles and financial terms
+ * @param {Meta} meta - The meta data for the page
+ * @param {ReactNode} children - The content to be displayed
+ * @return Component
+ */
+
 export const ArticleLayout = ({ meta, children }: Props) => {
 	return (
 		<>
@@ -28,7 +35,9 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 						{children}
 					</article>
 				</main>
-				<Sidebar />
+				<aside className="space-y-8 lg:pt-4">
+					<Sidebar />
+				</aside>
 			</div>
 		</>
 	);

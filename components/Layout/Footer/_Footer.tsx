@@ -4,6 +4,8 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd';
 import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
+import { noAdsRelaxed } from 'components/Ads/noAds';
+import { LoadAds } from 'components/Ads/Snigel/LoadAds';
 
 const navigation = {
 	sections: [
@@ -14,6 +16,7 @@ const navigation = {
 	company: [
 		{ name: 'About', href: '/about/' },
 		{ name: 'Sitemap', href: '/sitemap/' },
+		{ name: 'APIs & Data', href: '/apis/' },
 	],
 	legal: [
 		{ name: 'Privacy Policy', href: '/privacy-policy/' },
@@ -23,12 +26,15 @@ const navigation = {
 };
 
 export const Footer = () => {
-	const { isLoggedIn } = useUserInfo();
-	const { route } = useNavState();
+	const { isLoggedIn, status, isPro } = useUserInfo();
+	const { path } = useNavState();
 
 	return (
 		<>
 			<div className={isLoggedIn ? 'mt-14' : 'mt-9'}>
+				{status === 'completed' && !isPro && !noAdsRelaxed(path.one) && (
+					<LoadAds />
+				)}
 				<LazyLoadAd offset={400}>
 					<LoadFooter />
 				</LazyLoadAd>
@@ -246,6 +252,13 @@ export const Footer = () => {
 						<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
 							Real-time quotes provided by IEX Cloud. Other market data
 							is delayed by at least 15 minutes.
+						</div>
+						<div
+							id="ccpa"
+							className="text-center text-gray-300 cursor-pointer"
+							style={{ display: 'none' }}
+						>
+							Do not share my personal information.
 						</div>
 					</div>
 				</footer>

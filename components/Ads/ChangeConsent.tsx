@@ -1,11 +1,6 @@
 import { authState } from 'state/authState';
 
-declare global {
-	// eslint-disable-next-line no-unused-vars
-	interface Window {
-		__tcfapi: any;
-	}
-}
+declare const adconsent: any;
 
 export const ChangeConsent = () => {
 	const status = authState((state) => state.status);
@@ -23,7 +18,7 @@ export const ChangeConsent = () => {
 	}
 
 	function modifyConsent() {
-		window.__tcfapi('displayConsentUi', 2, function () {});
+		adconsent('showGUI');
 	}
 
 	return (

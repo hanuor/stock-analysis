@@ -22,11 +22,12 @@ interface ScreenerState {
 	setResultsMenu: (newMenu: string) => void;
 
 	// Columns
-	defaultColumns: FilterId[];
 	fetchedColumns: FilterId[];
 	showColumns: FilterId[];
 	filteredColumns: FilterId[];
 	addFetchedColumn: (newColumn: FilterId) => void;
+	setFetchedColumns: (newArray: any[]) => void;
+
 	addFilteredColumn: (newColumn: FilterId) => void;
 	removeFilteredColumn: (columns: FilterId) => void;
 	setShowColumns: (newColumns: FilterId[]) => void;
@@ -56,6 +57,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			...state,
 			filters: [],
+			filterMenu: 'Active',
 			filteredColumns: ['s', 'n', 'm'],
 		})),
 	filtersShown: true,
@@ -81,14 +83,14 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
-	defaultColumns: ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'], // Loaded by default, shown under "General"
 	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'], // All data columns that have been fetched
-	showColumns: ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'], // Columns that are currently showing
+	showColumns: [], // Columns that are currently showing
 	filteredColumns: ['s', 'n', 'm'], // All data columns that are being filtered
 	addFetchedColumn: (newColumn: any) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn],
 		})),
+	setFetchedColumns: (newArray: any[]) => set({ fetchedColumns: newArray }),
 	addFilteredColumn: (newColumn: any) =>
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn],

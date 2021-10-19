@@ -55,7 +55,7 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 		<div className="mt-4 bp:mt-7">
 			<div className="sm:flex flex-row justify-between px-1 items-end mb-2 sm:mb-1">
 				<h2 className="hh2 mb-0.5 sm:mb-2">Dividend History</h2>
-				<div className="pb-0.5">
+				<div className="hidden sm:block pb-0.5">
 					<Export
 						title="Export"
 						buttons={[

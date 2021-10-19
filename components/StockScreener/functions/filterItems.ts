@@ -4,6 +4,7 @@ import {
 } from 'components/StockScreener/screener.types';
 import { numericMatch } from './filters/numericMatch';
 import { dateMatch } from './filters/dateMatch';
+import { numericRangeMatch } from './filters/numericRangeMatch';
 
 // Execute the filtering of the items in the filters array
 export function filterItems(data: SingleStock[], filters: FilterValue[]) {
@@ -41,6 +42,11 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 			// Date
 			else if (filter.filterType === 'date') {
 				matched = dateMatch(stock, filter.id, filter.value);
+			}
+
+			// Numeric Range
+			else if (filter.filterType === 'numericRange') {
+				matched = numericRangeMatch(stock, filter.id, filter.value);
 			}
 
 			return matched;

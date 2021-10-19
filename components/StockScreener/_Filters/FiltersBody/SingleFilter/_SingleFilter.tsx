@@ -43,7 +43,13 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 		};
 	}, [id, openFilter, ref, setOpenFilter]);
 
-	const Filter = filterType === 'numeric' ? NumericFilter : StringFilter;
+	let Filter;
+
+	if (filterType === 'numeric' || filterType === 'numericRange') {
+		Filter = NumericFilter;
+	} else {
+		Filter = StringFilter;
+	}
 
 	return (
 		<div ref={ref} className="relative inline-block text-left">

@@ -1,4 +1,4 @@
-import { DropdownSelect } from 'components/DropdownSelect';
+import { DropdownSelect } from 'components/StockScreener/_Results/ResultsBody/DropdownSelect';
 import { screenerState } from 'components/StockScreener/screener.state';
 import { ChevronLeftIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
@@ -14,7 +14,6 @@ interface Props {
 	canNextPage: boolean;
 }
 
-// TODO make 200 rows and "show all" available for pro members later
 export function TablePagination({
 	previousPage,
 	canPreviousPage,
@@ -33,8 +32,7 @@ export function TablePagination({
 		{ value: 20, name: '20 Rows' },
 		{ value: 50, name: '50 Rows' },
 		{ value: 100, name: '100 Rows' },
-		// { value: 200, name: '200 Rows' },
-		// { value: 9999, name: 'Show All' },
+		{ value: 200, name: '200 Rows' },
 	];
 
 	function setSelected(value: number) {
