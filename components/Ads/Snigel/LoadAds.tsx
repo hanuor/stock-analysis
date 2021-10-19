@@ -37,7 +37,7 @@ function getPageAds(path: PathType) {
 		}
 		// Overview pages
 		if (!path.three) {
-			return ['top_leaderboard', 'sidebar_1'];
+			return ['top_leaderboard', 'sidebar_1', 'in-content_1_mobile'];
 		}
 		// Holdings, Dividend, Statistics and Company pages
 		if (path.three === 'holdings' || path.three === 'dividend' || path.three === 'statistics' || path.three === 'company') {
