@@ -6,7 +6,6 @@ import { getData } from 'functions/API';
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
 import { SEO } from 'components/SEO';
 import { StockScreener } from 'components/StockScreener/_StockScreener';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
 	const fullCount = screenerDataState((state) => state.fullCount);
@@ -36,8 +35,6 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 			/>
 			<LayoutFullWidth>
 				<div className="contain pt-5 xs:pt-6">
-					<Breadcrumbs url="/stock-screener/" />
-					<h1 className="hh1">Stock Screener</h1>
 					<StockScreener />
 				</div>
 			</LayoutFullWidth>
