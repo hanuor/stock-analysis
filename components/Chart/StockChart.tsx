@@ -272,7 +272,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			days = 1;
 			max = max + 1;
 		} else if (this.props.time == '5D') {
-			days = 5;
+			days = 7;
 			max = max + 1;
 		} else if (this.props.time == '1M') {
 			days = 31;
