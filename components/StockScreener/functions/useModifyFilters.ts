@@ -66,5 +66,12 @@ export function useModifyFilters() {
 		}
 	}
 
-	return { add, remove };
+	// Clear all filters
+	function clear() {
+		filters.map((filter) => {
+			remove(filter.id);
+		});
+	}
+
+	return { add, remove, clear };
 }

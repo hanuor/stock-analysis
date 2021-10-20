@@ -18,11 +18,6 @@ function FilterWrap({ f }: FilterWrapProps) {
 	const type = screenerDataState((state) => state.type);
 	const { fetchColumn } = useModifyColumns();
 
-	let screenerType = '';
-	type == 'stock'
-		? (screenerType = 'screener')
-		: (screenerType = 'iposcreener');
-
 	return (
 		<div
 			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900 cursor-help"
@@ -38,8 +33,8 @@ function FilterWrap({ f }: FilterWrapProps) {
 				</Tooltip>
 			</div>
 			<div
-				onMouseEnter={() => fetchColumn(f.id, screenerType)}
-				onFocus={() => fetchColumn(f.id, screenerType)}
+				onMouseEnter={() => fetchColumn(f.id, type)}
+				onFocus={() => fetchColumn(f.id, type)}
 			>
 				<FilterBody filter={f} />
 			</div>

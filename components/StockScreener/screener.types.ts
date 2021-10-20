@@ -107,6 +107,7 @@ export type FilterId =
 	| 'ncf' // Net Cash Flow
 	| 'capex' // Capital expenditures
 	| 'ipoPriceRange' // IPO Price Range
+	| 'spac' // Is SPAC
 	| 'sharesOffered'; // Shares Offered
 
 // Results columns
@@ -172,7 +173,7 @@ export type FilterProps = {
 	id: FilterId;
 	category: string[];
 	options: FilterOption[];
-	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear' | 'numericRange';
+	filterType: FilterType;
 	numberType?: NumberType;
 };
 
@@ -201,7 +202,9 @@ export type FilterType =
 	| 'stringmatch'
 	| 'date'
 	| 'dateYear'
-	| 'numericRange';
+	| 'numericRange'
+	| 'spac';
+
 export type NumberType = 'percentage';
 export type ComparisonOption =
 	| 'over'
