@@ -37,7 +37,8 @@ export function PresetFilters() {
 								filter.id,
 								mapItem.name,
 								filter.value,
-								mapItem.filterType
+								mapItem.filterType,
+								mapItem.numberType
 							);
 							fetchColumn(filter.id, type);
 						}

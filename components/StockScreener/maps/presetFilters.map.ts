@@ -15,8 +15,8 @@ export const PresetFiltersStocks: PresetFilter[] = [
 		name: 'Dividend Growth',
 		filters: [
 			{ id: 'm', value: 'over-1B' },
-			{ id: 'dy', value: 'over-1' },
-			{ id: 'dg', value: 'over-0.5' },
+			{ id: 'dy', value: 'over-0.5' },
+			{ id: 'dg', value: 'over-5' },
 			{ id: 'pr', value: 'under-60' },
 			{ id: 'revenueGrowth', value: 'over-3' },
 		],
