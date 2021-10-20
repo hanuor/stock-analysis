@@ -130,6 +130,7 @@ export const FiltersMap: FilterProps[] = [
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		options: [
+			{ name: 'Blank Check / SPAC', value: 'Blank Check / SPAC' },
 			{ name: 'Communication Services', value: 'Communication Services' },
 			{ name: 'Consumer Discretionary', value: 'Consumer Discretionary' },
 			{ name: 'Consumer Staples', value: 'Consumer Staples' },
@@ -157,6 +158,7 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'Banks', value: 'Banks' },
 			{ name: 'Beverages', value: 'Beverages' },
 			{ name: 'Biotechnology', value: 'Biotechnology' },
+			{ name: 'Blank Check / SPAC', value: 'Blank Check / SPAC' },
 			{ name: 'Building Products', value: 'Building Products' },
 			{ name: 'Capital Markets', value: 'Capital Markets' },
 			{ name: 'Chemicals', value: 'Chemicals' },
@@ -1604,6 +1606,16 @@ export const FiltersMap: FilterProps[] = [
 		],
 	},
 	{
+		name: 'Is SPAC',
+		id: 'spac',
+		category: ['Company'],
+		filterType: 'stringmatch',
+		options: [
+			{ name: 'Exclude SPACs', value: 'No' },
+			{ name: 'Show Only SPACs', value: 'Yes' },
+		],
+	},
+	{
 		name: 'Ex-Div Date',
 		id: 'exDivDate',
 		category: ['Dividends'],
@@ -1966,7 +1978,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Sector',
 		id: 'se',
-		category: ['General', 'Company'],
+		category: ['General'],
 		filterType: 'stringmatch',
 		options: [
 			{ name: 'Communication Services', value: 'Communication Services' },
@@ -2013,7 +2025,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Industry',
 		id: 'i',
-		category: ['Company'],
+		category: ['General'],
 		filterType: 'stringmatch',
 		options: [
 			{ name: 'Aerospace & Defense', value: 'Aerospace & Defense' },
@@ -2174,7 +2186,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Country',
 		id: 'country',
-		category: ['Company'],
+		category: ['General'],
 		filterType: 'stringmatch',
 		options: [
 			{ name: 'United States', value: 'United States' },
@@ -2240,7 +2252,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Exchange',
 		id: 'exchange',
-		category: ['Company'],
+		category: ['General'],
 		filterType: 'stringmatch',
 		options: [
 			{ name: 'NASDAQ', value: 'NASDAQ' },
@@ -2251,7 +2263,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Employees',
 		id: 'employees',
-		category: ['Company'],
+		category: ['General'],
 		filterType: 'numeric',
 		options: [
 			{ name: 'Over 100K', value: 'over-100K' },
@@ -2267,7 +2279,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Founded',
 		id: 'founded',
-		category: ['Company'],
+		category: ['General'],
 		filterType: 'date',
 		options: [
 			{ name: 'Over 20 Years', value: 'over-20Y' },
@@ -2282,6 +2294,16 @@ export const IPOFiltersMap: FilterProps[] = [
 			{ name: 'Within 20 Years', value: 'under-20Y' },
 			{ name: 'Within 50 Years', value: 'under-50Y' },
 			{ name: 'Within 100 Years', value: 'under-100Y' },
+		],
+	},
+	{
+		name: 'Is SPAC',
+		id: 'spac',
+		category: ['General'],
+		filterType: 'stringmatch',
+		options: [
+			{ name: 'Exclude SPACs', value: 'No' },
+			{ name: 'Show Only SPACs', value: 'Yes' },
 		],
 	},
 	{

@@ -249,7 +249,7 @@ export const Footer = () => {
 								&copy; 2021 Stock Analysis. All rights reserved.
 							</p>
 						</div>
-						<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-sm text-gray-400">
+						<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
 							Real-time quotes provided by{' '}
 							<a
 								href="https://iexcloud.io/"
@@ -260,12 +260,6 @@ export const Footer = () => {
 								IEX Cloud
 							</a>
 							. Other market data may be delayed by 15 minutes or more.
-						</div>
-						<div className="pb-6 text-sm text-gray-400">
-							Stock Analysis does not provide financial or investment
-							advice. We do not issue recommendations to buy or sell any
-							securities. Information is provided &quot;as-is&quot; and
-							is for informational purposes only.
 						</div>
 						<div
 							id="ccpa"

@@ -626,4 +626,10 @@ export const TOOLTIP_MAP = [
 		tooltip:
 			'The price of the shares during the IPO process. It usually starts as a range, but ends with a final number the day before or day of the IPO.',
 	},
+	{
+		id: 'spac',
+		title: 'Is SPAC / Blank Check',
+		tooltip:
+			'Whether the stock is a Special Purpose Acquisition Company (SPAC), also known as a blank check company. This means that the business has no operations but plans to merge with a private company to take it public.',
+	},
 ];

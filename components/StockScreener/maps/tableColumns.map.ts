@@ -549,4 +549,9 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'string',
 		sortType: priceSort,
 	},
+	{
+		Header: 'Is SPAC',
+		accessor: 'spac',
+		format: 'string',
+	},
 ];
