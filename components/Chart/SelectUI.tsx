@@ -65,7 +65,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				onChange={(e) => dispatch(e.target.value)}
 				id="range"
 				name="range"
-				className="block md:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block lg:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
 				defaultValue="1Y"
 			>
 				<option value="1D">1 Day</option>
@@ -79,7 +79,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<option value="MAX">MAX</option>
 			</select>
 
-			<ul className="hidden md:flex flex-row whitespace-nowrap overflow-x-auto pl-1 hide-scroll md:mr-auto">
+			<ul className="hidden lg:flex flex-row whitespace-nowrap overflow-x-auto pl-1 hide-scroll md:mr-auto">
 				<li>
 					<button
 						onClick={() => {
