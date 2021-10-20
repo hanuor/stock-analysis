@@ -40,7 +40,6 @@ export function FiltersMenu() {
 							) : (
 								<>
 									<FiltersMenuItem name="General" />
-									<FiltersMenuItem name="Company" />
 									<FiltersMenuItem name="Income" />
 									<FiltersMenuItem name="Balance Sheet" />
 									<FiltersMenuItem name="Cash Flow" />
