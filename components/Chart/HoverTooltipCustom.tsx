@@ -170,7 +170,7 @@ const defaultOrigin = (
 	bgSize: any,
 	pointWidth: any
 ) => {
-	return [6, 60];
+	return props.coord;
 };
 
 export interface HoverTooltipProps {
@@ -209,6 +209,7 @@ export interface HoverTooltipProps {
 		ctx: CanvasRenderingContext2D
 	) => void;
 	readonly yAccessor: (data: any) => number;
+	readonly coord: any[];
 }
 
 export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {

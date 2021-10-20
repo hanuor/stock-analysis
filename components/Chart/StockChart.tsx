@@ -205,9 +205,9 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 
 		const toolTipPosition = () => {
 			if (time == '1D' || time == '5D') {
-				return [8, 24];
+				return [6, 35];
 			} else {
-				return [8, 24];
+				return [6, 60];
 			}
 		};
 
@@ -439,12 +439,13 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							/>
 							<OHLCTooltipCustom origin={[5, 15]} />
 							<MovingAverageTooltipCustom
-								origin={toolTipPosition()}
+								origin={[8, 24]}
 								options={movingAverageTooltipOptions}
 							/>
 							{isBrowser == true ? (
 								<HoverTooltipCustom
 									yAccessor={sma50.accessor()}
+									coord={toolTipPosition()}
 									tooltip={{
 										content: ({ currentItem, xAccessor }) => ({
 											x: this.dateFormat(xAccessor(currentItem)),

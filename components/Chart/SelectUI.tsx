@@ -6,7 +6,7 @@ interface ButtonUIProps {
 }
 
 interface SelectProps {
-	time: string;
+	time?: string;
 	dispatcher: Dispatch<SetStateAction<string>>;
 }
 
