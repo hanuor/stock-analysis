@@ -1,35 +1,36 @@
 import { screenerDataState } from '../../screenerdata.state';
 import { FiltersMap } from 'components/StockScreener/maps/filters.map';
-import {
-	PresetFilter,
-	PresetFiltersStocks,
-	PresetFiltersIpos,
-} from '../../maps/presetFilters.map';
+// import { PresetFiltersStocks } from '../../maps/presetFilters.map';
 import { useModifyFilters } from '../../functions/useModifyFilters';
 import { useModifyColumns } from '../../functions/useModifyColumns';
 import { screenerState } from '../../screener.state';
-import { useEffect, useState } from 'react';
 import { SaveFiltersButton } from './SaveButton';
+import { useSavedScreens } from './useSavedScreens';
+import { FilterId } from 'components/StockScreener/screener.types';
+
+type SavedFilter = {
+	id: FilterId;
+	name: string;
+	value: string;
+};
+
+type Screen = {
+	name: string;
+	id: number;
+	filters: SavedFilter[];
+};
 
 export function SavedFilters() {
-	const [usePreset, setUsePreset] = useState<PresetFilter[]>();
+	const { data } = useSavedScreens();
 	const type = screenerDataState((state) => state.type);
 	const setFilterMenu = screenerState((state) => state.setFilterMenu);
 	const { add, clear } = useModifyFilters();
 	const { fetchColumn } = useModifyColumns();
 
-	useEffect(() => {
-		if (type === 'stock') {
-			setUsePreset(PresetFiltersStocks);
-		} else if (type === 'ipo') {
-			setUsePreset(PresetFiltersIpos);
-		}
-	}, [type]);
-
 	function renderPresetFilters(value: string) {
 		clear();
 		setFilterMenu('Active');
-		usePreset?.map((item) => {
+		data.map((item: Screen) => {
 			if (item.name === value) {
 				item.filters.map((filter) => {
 					FiltersMap.map((mapItem) => {
@@ -66,7 +67,7 @@ export function SavedFilters() {
 					onChange={(e) => renderPresetFilters(e.target.value)}
 				>
 					<option value="Select screen">Select saved</option>
-					{usePreset?.map((item) => (
+					{data?.map((item: Screen) => (
 						<option key={item.name} value={item.name}>
 							{item.name}
 						</option>

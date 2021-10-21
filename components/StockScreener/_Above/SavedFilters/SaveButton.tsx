@@ -1,8 +1,17 @@
 import { SaveIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
+import { useSavedScreens } from './useSavedScreens';
 
 export function SaveFiltersButton() {
 	const [open, setOpen] = useState(false);
+	const [name, setName] = useState('');
+	const { add } = useSavedScreens();
+
+	async function handleSubmit(name: string) {
+		add.mutate(name);
+		setName('');
+		setOpen(false);
+	}
 
 	return (
 		<>
@@ -29,8 +38,13 @@ export function SaveFiltersButton() {
 							type="text"
 							placeholder="Enter screen name"
 							className="border-gray-200 focus:ring-0 focus:border-blue-300 text-gray-700 text-smaller rounded-l"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
 						/>
-						<button className="px-3 bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-smaller font-medium rounded-r flex-grow">
+						<button
+							className="px-3 bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-smaller font-medium rounded-r flex-grow"
+							onClick={() => handleSubmit(name)}
+						>
 							Save
 						</button>
 					</div>
