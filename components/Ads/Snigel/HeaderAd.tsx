@@ -10,10 +10,11 @@ export function HeaderAd() {
 	if (!noAds(path.one)) {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			return (
-				<div className="hidden md:block bg-gray-100 pt-1 pb-2">
-					<div className="md:min-h-[111px] md:max-w-[728px] mx-auto">
-						<div id="adngin-top_leaderboard-0"></div>
-					</div>
+				<div className="hidden md:block bg-gray-100 pt-1 pb-2 mx-auto text-center">
+					<div
+						className="md:min-h-[111px] mx-auto text-center"
+						id="adngin-top_leaderboard-0"
+					></div>
 				</div>
 			);
 		}
