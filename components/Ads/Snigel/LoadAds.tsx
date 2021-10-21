@@ -30,17 +30,21 @@ function getPageAds(path: PathType) {
 	}
 
 	// Stocks and ETF pages
-	if ((path.one === 'stocks' || path.one === 'etf')) {
+	if (path.one === 'stocks' || path.one === 'etf') {
 		// Index pages
 		if (!path.two) {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 		}
-		// Overview pages
-		if (!path.three) {
+		// Overview and statistics pages
+		if (!path.three || path.three === 'statistics') {
 			return ['top_leaderboard', 'sidebar_1', 'in-content_1_mobile'];
 		}
 		// Holdings, Dividend, Statistics and Company pages
-		if (path.three === 'holdings' || path.three === 'dividend' || path.three === 'statistics' || path.three === 'company') {
+		if (
+			path.three === 'holdings' ||
+			path.three === 'dividend' ||
+			path.three === 'company'
+		) {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 		}
 	}

@@ -19,17 +19,16 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 						></div>
 						<div
 							id="adngin-in-content_1_mobile-0"
-							className="block min-h-[266px] mt-6 xs:mt-8 sm:hidden"
+							className="block mt-1 sm:hidden"
 						></div>
 					</div>
 				);
-			}
-			else {
+			} else {
 				return (
 					<div className="mx-auto text-center overflow-x-auto">
 						<div
 							id="adngin-in-content_1_mobile-0"
-							className="block min-h-[266px] mt-6 xs:mt-8 sm:hidden"
+							className="block mt-1 sm:hidden"
 						></div>
 					</div>
 				);
