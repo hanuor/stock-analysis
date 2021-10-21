@@ -2,7 +2,13 @@ import Link from 'next/link';
 import { SiteSearch } from 'components/Search/SiteSearch';
 import { authState } from 'state/authState';
 
-export const Hero = () => {
+type Trending = {
+	s: string;
+	n: string;
+	t: string;
+};
+
+export function Hero({ trending }: { trending: Trending[] }) {
 	const isPro = authState((state) => state.isPro);
 
 	return (
@@ -27,25 +33,35 @@ export const Hero = () => {
 						</div>
 					</form>
 					<p className="text-sm xs:text-base md:text-lg lg:text-[19px]">
-						Example searches:{' '}
-						<Link href="/stocks/aapl/" prefetch={false}>
-							<a className="bll">Apple</a>
-						</Link>
-						,{' '}
-						<Link href="/stocks/tsla/" prefetch={false}>
-							<a className="bll">Tesla</a>
-						</Link>
-						,{' '}
-						<Link href="/stocks/msft/" prefetch={false}>
-							<a className="bll">MSFT</a>
-						</Link>
-						,{' '}
-						<Link href="/stocks/amzn/" prefetch={false}>
-							<a className="bll">AMZN</a>
-						</Link>
+						{`Trending: `}
+						{trending.map((t, index) => {
+							if (index > 0) {
+								return (
+									<span key={t.s}>
+										,{' '}
+										<Link
+											href={`/stocks/${t.s.toLowerCase()}/`}
+											prefetch={false}
+										>
+											<a className="bll">{t.s}</a>
+										</Link>
+									</span>
+								);
+							}
+							return (
+								<span key={t.s}>
+									<Link
+										href={`/stocks/${t.s.toLowerCase()}/`}
+										prefetch={false}
+									>
+										<a className="bll">{t.s}</a>
+									</Link>
+								</span>
+							);
+						})}
 					</p>
 				</div>
 			</section>
 		</>
 	);
-};
+}

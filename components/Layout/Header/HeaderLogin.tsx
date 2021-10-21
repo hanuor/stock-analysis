@@ -1,6 +1,5 @@
 import { authState } from 'state/authState';
 import Link from 'next/link';
-import { Logout } from 'components/Logout';
 
 interface Props {
 	setOpen: (open: boolean) => void;
@@ -8,6 +7,32 @@ interface Props {
 
 export const HeaderLogin = ({ setOpen }: Props) => {
 	const isLoggedIn = authState((state) => state.isLoggedIn);
+	const setIsLoggedIn = authState((state) => state.setIsLoggedIn);
+	const setIsPro = authState((state) => state.setIsPro);
+	const setEmail = authState((state) => state.setEmail);
+	const setAvatar = authState((state) => state.setAvatar);
+
+	async function handleLogout() {
+		const token = localStorage.getItem('auth');
+		localStorage.removeItem('email');
+		localStorage.removeItem('auth');
+		localStorage.removeItem('avatar');
+		setIsLoggedIn(false);
+		setIsPro(false);
+		setEmail(null);
+		setAvatar(null);
+
+		setOpen && setOpen(false);
+
+		try {
+			await fetch(
+				`https://api.stockanalysis.com/wp-json/authorize/v1/auth/revoke?JWT=${token}`,
+				{ method: 'POST' }
+			);
+		} catch (err) {
+			console.log({ err });
+		}
+	}
 
 	const LogInOut = () => {
 		if (!isLoggedIn) {
@@ -22,7 +47,16 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 				</Link>
 			);
 		} else {
-			return <Logout setOpen={setOpen} />;
+			return (
+				<span
+					className="block lg:inline py-2 px-3 flex-1 text-white bg-gray-500 lg:flex-none lg:bg-white lg:text-black lg:font-normal hover:text-blue-700 cursor-pointer"
+					onClick={() => {
+						handleLogout();
+					}}
+				>
+					Log Out
+				</span>
+			);
 		}
 	};
 

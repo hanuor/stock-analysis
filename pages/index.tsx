@@ -7,6 +7,12 @@ import { LatestNews } from 'components/HomePage/LatestNews';
 import { IPOwidgets } from 'components/HomePage/IPOwidgets';
 import { getHomePageData } from 'functions/callBackEnd';
 
+type Trending = {
+	s: string;
+	n: string;
+	t: string;
+};
+
 type IposMin = {
 	d: string;
 	s: string;
@@ -36,6 +42,7 @@ interface FrontPageProps {
 		ipoCalendar: IposMin[];
 		recentIpos: IposMin[];
 		news: NewsMin[];
+		trending: Trending[];
 	};
 }
 
@@ -60,7 +67,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 				}}
 			/>
 			<LayoutFullWidth>
-				<Hero />
+				<Hero trending={data.trending} />
 				<Movers
 					date={data.date}
 					marketStatus={data.marketStatus}
