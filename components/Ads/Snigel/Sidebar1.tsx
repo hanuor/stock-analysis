@@ -10,8 +10,11 @@ export function Sidebar1() {
 	if (!noAds(path.one)) {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			return (
-				<div className="hidden lg:block lg:min-h-[301px] mx-auto">
-					<div id="adngin-sidebar_1-0"></div>
+				<div className="mx-auto text-center">
+					<div
+						id="adngin-sidebar_1-0"
+						className="hidden lg:block lg:min-h-[301px] mx-auto"
+					></div>
 				</div>
 			);
 		}

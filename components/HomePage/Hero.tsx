@@ -14,7 +14,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 	return (
 		<>
 			<section
-				className={`bg-gray-100 py-8 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0 ${
+				className={`bg-gray-100 py-12 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0 ${
 					isPro ? 'md:py-24 lg:py-40' : 'md:py-10 lg:py-24'
 				}`}
 			>

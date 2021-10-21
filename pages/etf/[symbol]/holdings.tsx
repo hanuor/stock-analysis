@@ -9,7 +9,8 @@ import { getPageData } from 'functions/callBackEnd';
 import { HoldingsTable } from 'components/Holdings/_HoldingsTable';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	info: Info;
@@ -55,7 +56,7 @@ const Holdings = ({ info, data, news }: Props) => {
 						)}
 					</div>
 					<aside className="mt-7 lg:mt-0 space-y-8">
-						<NewsletterWidget />
+						{data && data.count > 15 && <Sidebar1 />}
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}
@@ -64,6 +65,7 @@ const Holdings = ({ info, data, news }: Props) => {
 								url: `/etf/${info.symbol}/`,
 							}}
 						/>
+						{data && data.count > 35 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>
