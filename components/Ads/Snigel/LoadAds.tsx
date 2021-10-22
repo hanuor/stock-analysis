@@ -43,15 +43,18 @@ function getPageAds(path: PathType) {
 		if (!path.two) {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 		}
-		// Overview and statistics pages
-		if (!path.three || path.three === 'statistics') {
+		// Overview, statistics, company, dividend pages
+		if (
+			!path.three ||
+			path.three === 'statistics' ||
+			path.three === 'company' ||
+			path.three === 'dividend'
+		) {
 			return ['top_leaderboard', 'sidebar_1', 'in-content_1_mobile'];
 		}
-		// Holdings, Dividend, Statistics and Company pages
+		// Holdings pages
 		if (
-			path.three === 'holdings' ||
-			path.three === 'dividend' ||
-			path.three === 'company'
+			path.three === 'holdings'
 		) {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 		}

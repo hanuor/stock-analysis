@@ -13,6 +13,7 @@ import { NewsWidget } from 'components/News/NewsWidget';
 import { DividendChart } from 'components/Dividend/DividendChart';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
 
 interface Props {
 	info: Info;
@@ -41,6 +42,9 @@ export default function Dividend({ info, data, news }: Props) {
 						{data.history.length > 0 && (
 							<HistoryTable rawdata={data.history} disclaimer={true} />
 						)}
+						<div className="mt-4 bp:mt-7 sm:mt-0 sm:hidden">
+							<Mobile1 />
+						</div>
 						<DividendChart
 							data={data.chartData}
 							options={data.chartOptions}
