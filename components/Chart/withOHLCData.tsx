@@ -47,13 +47,6 @@ const parseData1D5D = (time: string) => {
 	};
 };
 
-const fetchChartData = async (stockId: any, time: any) => {
-	const params = `i=${stockId}&r=${time}&m=1`;
-	const url = `c?${params}`;
-	const data = await getData(url);
-	return data;
-};
-
 function fixDataHeaders(obj: any) {
 	const newObj = {
 		open: obj.o,
