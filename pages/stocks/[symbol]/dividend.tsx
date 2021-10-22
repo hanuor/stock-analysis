@@ -42,9 +42,11 @@ export default function Dividend({ info, data, news }: Props) {
 						{data.history.length > 0 && (
 							<HistoryTable rawdata={data.history} disclaimer={true} />
 						)}
-						<div className="mt-4 bp:mt-7 sm:mt-0 sm:hidden">
-							<Mobile1 />
-						</div>
+						{news.length > 5 && data.history.length > 2 && (
+							<div className="mt-4 bp:mt-7 sm:mt-0 sm:hidden">
+								<Mobile1 />
+							</div>
+						)}
 						<DividendChart
 							data={data.chartData}
 							options={data.chartOptions}
