@@ -3,7 +3,6 @@ import * as React from 'react';
 import { IOHLCData } from './iOHLCData';
 import Axios from 'axios';
 import { Unavailable } from 'components/Unavailable';
-import { getData } from 'functions/API';
 
 const parseDate = timeParse('%Y-%m-%d');
 const parseDate1D5D = timeParse('%Y-%m-%d %H:%M');
