@@ -1,54 +1,33 @@
-import { screenerDataState } from '../../screenerdata.state';
-import { FiltersMap } from 'components/StockScreener/maps/filters.map';
-// import { PresetFiltersStocks } from '../../maps/presetFilters.map';
-import { useModifyFilters } from '../../functions/useModifyFilters';
-import { useModifyColumns } from '../../functions/useModifyColumns';
-import { screenerState } from '../../screener.state';
-import { SaveFiltersButton } from './SaveButton';
-import { useSavedScreens } from './useSavedScreens';
-import { FilterId } from 'components/StockScreener/screener.types';
-
-type SavedFilter = {
-	id: FilterId;
-	name: string;
-	value: string;
-};
-
-type Screen = {
-	name: string;
-	id: number;
-	filters: SavedFilter[];
-};
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import { useState, useRef, useEffect } from 'react';
+import { SavedDropdown } from './SavedDropdown';
 
 export function SavedFilters() {
-	const { data } = useSavedScreens();
-	const type = screenerDataState((state) => state.type);
-	const setFilterMenu = screenerState((state) => state.setFilterMenu);
-	const { add, clear } = useModifyFilters();
-	const { fetchColumn } = useModifyColumns();
+	const [open, setOpen] = useState(false);
+	const ref = useRef<HTMLDivElement>(null);
 
-	function renderPresetFilters(value: string) {
-		clear();
-		setFilterMenu('Active');
-		data.map((item: Screen) => {
-			if (item.name === value) {
-				item.filters.map((filter) => {
-					FiltersMap.map((mapItem) => {
-						if (mapItem.id === filter.id) {
-							add(
-								filter.id,
-								mapItem.name,
-								filter.value,
-								mapItem.filterType,
-								mapItem.numberType
-							);
-							fetchColumn(filter.id, type);
-						}
-					});
-				});
-			}
-		});
+	function handleKeyDown(event: React.KeyboardEvent) {
+		if (event.key === 'Enter') setOpen(true);
+		if (event.key === 'Escape') setOpen(false);
 	}
+
+	// Close dropdown if clicked outside of it
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (ref.current && !ref.current.contains(event.target as Node)) {
+				setOpen(false);
+				document.removeEventListener('mousedown', handleClickOutside);
+			}
+		};
+
+		if (open) {
+			document.addEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [open, setOpen]);
 
 	return (
 		<div>
@@ -58,22 +37,30 @@ export function SavedFilters() {
 			>
 				Saved Screens
 			</label>
-			<div className="flex space-x-1">
-				<select
-					id="location"
-					name="location"
-					className="block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:ring-0 focus:ring-blue-500 focus:border-blue-500 rounded-md"
-					defaultValue="Select saved"
-					onChange={(e) => renderPresetFilters(e.target.value)}
+			<div className="relative">
+				<div
+					className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer whitespace-nowrap"
+					onClick={() => setOpen(!open)}
+					onKeyDown={handleKeyDown}
+					tabIndex={0}
 				>
-					<option value="Select screen">Select saved</option>
-					{data?.map((item: Screen) => (
-						<option key={item.name} value={item.name}>
-							{item.name}
-						</option>
-					))}
-				</select>
-				<SaveFiltersButton />
+					Select saved
+					<ChevronDownIcon
+						className="-mr-1 ml-2 h-5 w-5"
+						aria-hidden="true"
+					/>
+				</div>
+
+				<div
+					className={`transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px]${
+						open
+							? ' visible opacity-100 transform translate-y-0'
+							: ' invisible opacity-0 transform -translate-y-2'
+					}`}
+					ref={ref}
+				>
+					<SavedDropdown />
+				</div>
 			</div>
 		</div>
 	);

@@ -22,12 +22,12 @@ type SavedFilter = {
 export function useSavedScreens() {
 	const filters = screenerState((state) => state.filters);
 	const [save, setSave] = useState<SavedFilter[]>([]);
+	const [msg, setMsg] = useState('');
+	const [err, setErr] = useState('');
 	const { email, token } = useUserInfo();
 	const queryClient = useQueryClient();
 
-	const api = axios.create({
-		baseURL: process.env.NEXT_PUBLIC_API_URL,
-	});
+	const api = process.env.NEXT_PUBLIC_API_URL;
 
 	useEffect(() => {
 		const newF = filters.map((filter) => {
@@ -37,14 +37,32 @@ export function useSavedScreens() {
 		setSave(newF);
 	}, [filters]);
 
+	function clearMessages() {
+		setMsg('');
+		setErr('');
+	}
+
 	async function post(action: string, name: string) {
-		return await api.post('/screener-settings', {
-			email,
-			token,
-			action,
-			name,
-			filters: save,
-		});
+		clearMessages();
+
+		try {
+			const res = await axios.post(api + '/screener-settings', {
+				email,
+				token,
+				action,
+				name,
+				filters: save,
+			});
+
+			if (res.status === 200) {
+				setMsg('Success: ' + res?.data?.message);
+				setTimeout(() => {
+					setMsg('');
+				}, 5000);
+			}
+		} catch (error: any) {
+			setErr('Error: ' + error?.response?.data?.message);
+		}
 	}
 
 	const { status, data, error } = useQuery(
@@ -61,5 +79,22 @@ export function useSavedScreens() {
 		},
 	});
 
-	return { status, data, error, add };
+	const del = useMutation((name: string) => post('remove', name), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('screener');
+		},
+	});
+
+	return {
+		status,
+		data,
+		error,
+		add,
+		del,
+		msg,
+		setMsg,
+		err,
+		setErr,
+		clearMessages,
+	};
 }
