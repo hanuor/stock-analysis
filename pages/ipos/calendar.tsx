@@ -11,6 +11,7 @@ import { RecentTableMin } from 'components/IPOs/RecentTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
 
 interface Props {
 	data: CalendarData;
@@ -48,6 +49,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								data={data.later}
 								tableId="later"
 							/>
+							<Mobile1 />
 							<CalendarTable
 								title="Upcoming High-Profile IPOs"
 								data={data.highprofile}

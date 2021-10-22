@@ -372,6 +372,11 @@ improvedigital.com, 1581, RESELLER,
 lijit.com, 356096-eb, RESELLER, fafdf38b16bf6b2b
 google.com, pub-5717092533913515, RESELLER, f08c47fec0942fa0
 
+# Dianomi
+
+dianomi.com, 1692, DIRECT, 61e7d0a6019f7cfc
+themediagrid.com, DXW9CT, DIRECT, 35d5010d7789b49d
+
 # Other
 
 google.com, pub-7702053427535735, DIRECT, f08c47fec0942fa0
