@@ -189,7 +189,7 @@ export const FinancialTable = ({
 		const id = row.id;
 		const dataid = row.data || row.id;
 		const format = row.format || 'standard';
-		let offset = range === 'quarterly' ? 4 : 1;
+		let offset = range === 'quarterly' || range === 'trailing' ? 4 : 1;
 		let total = 0;
 
 		const rowdata = data[dataid as keyof FinancialReport];

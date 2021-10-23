@@ -13,9 +13,9 @@ export const MAP_STATISTICS = [
 		title: 'Enterprise Value',
 		format: 'reduce_precision',
 		tooltip:
-			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and cash levels.",
+			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and levels of cash and short-term investments.",
 		formula:
-			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents',
+			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments',
 	},
 	{
 		id: 'earningsdate',
