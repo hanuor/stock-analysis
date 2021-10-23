@@ -67,11 +67,10 @@ export const Footer = () => {
 											<li>
 												<Link href="/contact/" prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
-														Contact
+														Contact Us
 													</a>
 												</Link>
 											</li>
-
 											<li>
 												<Link href="/login/" prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">

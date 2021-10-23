@@ -8,7 +8,7 @@ export function AboutDetails() {
 					</h2>
 					<p className="mt-4 text-lg text-gray-600">
 						Stock Analysis is owned by a company called Vefir ehf. Kris
-						Gunnars owns 90% of the company while Örn Orri owns 10%.
+						Gunnars owns 90% of the company while Orn Orri owns 10%.
 					</p>
 					<p className="mt-4 text-lg text-gray-600">
 						Vefir ehf. is registered in Iceland but also has operations in
