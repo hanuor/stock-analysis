@@ -25,12 +25,16 @@ export const PriceChart = ({ info }: { info: Info }) => {
 	const [chartTime, setChartTime] = useState('');
 
 	useEffect(() => {
-		const brandNew = (info.quote && info.quote.brandNew) ?? null;
-		const daysFrom = (info.quote && info.quote.daysFrom) ?? null;
+		if (info.ticker === 'AAPL' || info.ticker === 'TSLA') {
+			setChartTime('1D');
+		} else {
+			const brandNew = (info.quote && info.quote.brandNew) ?? null;
+			const daysFrom = (info.quote && info.quote.daysFrom) ?? null;
 
-		const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
-		setChartTime(show);
-	}, [info.quote]);
+			const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
+			setChartTime(show);
+		}
+	}, [info.quote, info.ticker]);
 
 	useEffect(() => {
 		if (info.state === 'upcomingipo') {
