@@ -16,6 +16,7 @@ import {
 } from 'functions/formatDates';
 import { Unavailable } from 'components/Unavailable';
 import { ReactChart } from 'components/ReactChart';
+import { Info } from 'types/Info';
 
 type ChartDataType = {
 	t: string;
@@ -26,7 +27,7 @@ type ChartDataType = {
 interface Props {
 	chartData: ChartDataType[];
 	chartTime: string;
-	id: number;
+	info: Info;
 }
 
 ReactChart.register(
@@ -41,7 +42,7 @@ ReactChart.register(
 ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
-export const Chart = ({ chartData, chartTime, id }: Props) => {
+export const Chart = ({ chartData, chartTime, info }: Props) => {
 	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
@@ -66,9 +67,20 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 		return item.c;
 	});
 
+	let lineColor = '#2c6288';
+	let lineWidth = 3;
+	if (chartTime === '1D') {
+		lineWidth = 2.5;
+		if (info?.quote?.change < 0) {
+			lineColor = 'rgba(220, 38, 38, 1)';
+		} else {
+			lineColor = 'rgba(4, 120, 87, 1)';
+		}
+	}
+
 	return (
 		<ReactChart
-			id={id.toString()}
+			id={info.id.toString()}
 			type="line"
 			data={{
 				labels: timeAxis,
@@ -76,11 +88,11 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 					{
 						label: 'Stock Price',
 						data: priceAxis,
-						borderColor: '#2c6288',
+						borderColor: lineColor,
 						pointHitRadius: 5,
 						pointRadius: 0,
 						tension: 0.01,
-						borderWidth: 3,
+						borderWidth: lineWidth,
 						spanGaps: true,
 					},
 				],
@@ -118,8 +130,8 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 
 							ctx.save();
 
-							ctx.strokeStyle = '#2c6288';
-							ctx.fillStyle = '#2c6288';
+							ctx.strokeStyle = lineColor;
+							ctx.fillStyle = lineColor;
 							ctx.lineWidth = '3.5';
 							ctx.lineJoin = 'round';
 

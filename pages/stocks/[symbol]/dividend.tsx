@@ -32,7 +32,7 @@ export default function Dividend({ info, data, news }: Props) {
 			/>
 			<div className="contain mt-3 sm:mt-4">
 				<div className="lg:grid grid-cols-sidebar_wide py-1 gap-8">
-					<div className="max-w-full">
+					<div>
 						<h2 className="text-xl bp:text-2xl font-bold">
 							{title} Dividend Information
 						</h2>
