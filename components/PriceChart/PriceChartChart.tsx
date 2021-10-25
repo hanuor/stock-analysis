@@ -5,7 +5,9 @@ import {
 	Tooltip,
 	LinearScale,
 	CategoryScale,
+	Filler,
 } from 'chart.js';
+
 import {
 	formatDateTimestamp,
 	formatDateClean,
@@ -36,7 +38,8 @@ ReactChart.register(
 	LineElement,
 	Tooltip,
 	LinearScale,
-	CategoryScale
+	CategoryScale,
+	Filler
 );
 
 ReactChart.defaults.font.family =
@@ -71,7 +74,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 	let lineWidth = 3;
 	if (chartTime === '1D') {
 		lineWidth = 2.5;
-		if (info?.quote?.change < 0) {
+		if (info?.quote?.change > 0) {
 			lineColor = 'rgba(220, 38, 38, 1)';
 		} else {
 			lineColor = 'rgba(4, 120, 87, 1)';
@@ -94,6 +97,20 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 						tension: 0.01,
 						borderWidth: lineWidth,
 						spanGaps: true,
+						fill: true,
+						backgroundColor: (dataset: any) => {
+							const ctx = dataset.chart.ctx;
+							const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+							if (info?.quote?.change > 0) {
+								gradient.addColorStop(0, 'rgba(220, 38, 38, 1)');
+								gradient.addColorStop(1, 'rgba(255,255,255,0)');
+							} else {
+								gradient.addColorStop(0, 'rgba(4, 120, 87, 1)');
+								gradient.addColorStop(1, 'rgba(255,255,255,0)');
+							}
+
+							return gradient;
+						},
 					},
 				],
 			}}
