@@ -6,6 +6,11 @@ class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
+					<link
+						rel="preconnect"
+						href="https://api.stockanalysis.com"
+						crossOrigin=""
+					/>
 					{process.env.NEXT_PUBLIC_GTM_ID && (
 						<script
 							dangerouslySetInnerHTML={{
