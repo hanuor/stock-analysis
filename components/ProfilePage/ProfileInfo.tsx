@@ -15,7 +15,7 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 			{logo.src && (
 				<div className="mb-2">
 					<img
-						src={logo.src}
+						src={`https://api.stockanalysis.com/cdn-cgi/image/quality=90,format=auto/${logo.src}`}
 						width={logo.width}
 						height={logo.height}
 						alt={logo.alt}
