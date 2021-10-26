@@ -12,9 +12,7 @@ interface Props {
 }
 
 export const NewsArticle = ({ index, item, related, count }: Props) => {
-	const [imgSrc, setImgSrc] = useState<string | undefined>(
-		`https://api.stockanalysis.com/cdn-cgi/image/width=640,quality=90,format=auto/${item.image}`
-	);
+	const [imgSrc, setImgSrc] = useState<string | undefined>(item.image);
 	const onError = () => setImgSrc('/blank.png');
 
 	return (
