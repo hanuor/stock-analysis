@@ -92,7 +92,7 @@ export const QuoteTable = ({
 					<td>{data.target}</td>
 				</tr>
 				<tr>
-					<td>Est. Earnings Date</td>
+					<td>Earnings Date</td>
 					<td>{data.earningsDate}</td>
 				</tr>
 			</tbody>

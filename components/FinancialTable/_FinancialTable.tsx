@@ -186,10 +186,27 @@ export const FinancialTable = ({
 	});
 
 	const BodyRow = ({ row }: { row: FinancialsMapType }) => {
+		// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
+		let offs = 4;
+		if (
+			row.format === 'growth' &&
+			(range === 'quarterly' || range === 'trailing') &&
+			showcount === 6
+		) {
+			if (data?.datekey?.length === 6) {
+				const firstDate = data.datekey[0];
+				const compareDate = data.datekey[3];
+
+				if (firstDate.split('-')[1] === compareDate.split('-')[1]) {
+					offs = 3;
+				}
+			}
+		}
+
 		const id = row.id;
 		const dataid = row.data || row.id;
 		const format = row.format || 'standard';
-		let offset = range === 'quarterly' || range === 'trailing' ? 4 : 1;
+		let offset = range === 'quarterly' || range === 'trailing' ? offs : 1;
 		let total = 0;
 
 		const rowdata = data[dataid as keyof FinancialReport];
