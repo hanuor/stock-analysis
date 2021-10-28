@@ -22,6 +22,8 @@ export default function Login() {
 	const setStatus = authState((state) => state.setStatus);
 	const router = useRouter();
 
+	const api = process.env.NEXT_PUBLIC_BASE_API_URL;
+
 	async function handleSubmit(
 		e: React.FormEvent<HTMLFormElement>
 	): Promise<void> {
@@ -30,13 +32,10 @@ export default function Login() {
 		try {
 			setLoggingIn(true);
 			setError('');
-			const res = await Axios.post(
-				'https://api.stockanalysis.com/wp-json/authorize/v1/auth',
-				{
-					email: username,
-					password: password,
-				}
-			);
+			const res = await Axios.post(api + '/authorize/v1/auth', {
+				email: username,
+				password: password,
+			});
 
 			setIsLoggedIn(true);
 
@@ -49,7 +48,7 @@ export default function Login() {
 
 			setStatus('loading');
 			const response = await fetch(
-				`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${username}`
+				`${api}/authorize/v1/autologin?JWT=${token}&e=${username}`
 			);
 
 			if (response.ok) {
