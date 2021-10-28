@@ -35,8 +35,6 @@ export function PresetChoice({ option, filter, active }: Props) {
 			e.preventDefault();
 			setOpenFilter('');
 		}
-
-		console.log(e.key);
 	}
 
 	return (

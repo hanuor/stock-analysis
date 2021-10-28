@@ -4,19 +4,27 @@ import { SEO } from 'components/SEO';
 import Link from 'next/link';
 
 const ExampleJSON = {
-	symbol: 'GTLB',
-	name: 'GitLab Inc.',
-	ipoDate: '2021-10-14',
-	ipoPriceLow: 66,
-	ipoPriceHigh: 69,
-	ipoPriceFinal: 77,
-	sharesOffered: 10400000,
-	sharesOutstanding: 143014821,
-	marketCap: 11012141217,
-	country: 'United States',
+	symbol: 'GFS',
+	name: 'GlobalFoundries Inc.',
 	exchange: 'NASDAQ',
-	sector: 'Technology',
-	industry: 'Software-Application',
+	ipoDate: '2021-10-28',
+	ipoPriceLow: 42,
+	ipoPriceHigh: 47,
+	ipoPriceFinal: 47,
+	sharesOffered: 55000000,
+	sharesOutstanding: 534685393,
+	marketCap: 25130213471,
+	country: 'United States',
+	sector: 'Information Technology',
+	industry: 'Semiconductors & Semiconductor Equipment',
+	employees: 15000,
+	description:
+		'GlobalFoundries is one of the world’s leading semiconductor foundries. We manufacture complex, feature-rich integrated circuits [....more text in API]',
+	revenueTTM: 5191208000,
+	netIncomeTTM: -1114729000,
+	epsTTM: -2.085,
+	peRatio: null,
+	psRatio: 4.841,
 };
 
 const faqs = [
@@ -81,7 +89,9 @@ export default function ApisPage() {
 								in the API response.
 							</div>
 							<div className="text-left mt-5 mx-auto text-xl text-gray-600 overflow-x-auto">
-								<pre>{JSON.stringify(ExampleJSON, null, 2)}</pre>
+								<pre className="whitespace-pre-wrap">
+									{JSON.stringify(ExampleJSON, null, 2)}
+								</pre>
 							</div>
 						</div>
 					</div>
