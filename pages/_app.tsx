@@ -5,7 +5,6 @@ import NProgress from 'nprogress';
 import { Header } from 'components/Layout/Header/_Header';
 import { Footer } from 'components/Layout/Footer/_Footer';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 
 const queryClient = new QueryClient();
 
@@ -25,7 +24,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Header />
 			<Component {...pageProps} />
 			<Footer />
-			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);
 }

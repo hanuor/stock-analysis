@@ -7,10 +7,14 @@ import { useEffect, useState } from 'react';
 import { FilterId } from 'components/StockScreener/screener.types';
 
 // Fetch saved screens
-async function fs(email: string | null, token: string | null) {
+async function fs(
+	email: string | null,
+	token: string | null,
+	type: 'stocks' | 'ipo'
+) {
 	if (!email || !token) return null;
 	return await getData(
-		`screener-settings?uid=${email}&t=${token}&action=list`
+		`screener-settings?uid=${email}&t=${token}&type=${type}&action=list`
 	);
 }
 
@@ -19,7 +23,7 @@ type SavedFilter = {
 	value: string;
 };
 
-export function useSavedScreens() {
+export function useSavedScreens(type: 'stocks' | 'ipo') {
 	const filters = screenerState((state) => state.filters);
 	const [save, setSave] = useState<SavedFilter[]>([]);
 	const [msg, setMsg] = useState('');
@@ -49,6 +53,7 @@ export function useSavedScreens() {
 			const res = await axios.post(api + '/screener-settings', {
 				email,
 				token,
+				type,
 				action,
 				name,
 				filters: save,
@@ -57,7 +62,7 @@ export function useSavedScreens() {
 			if (res.status === 200) {
 				setMsg('Success: ' + res?.data?.message);
 				setTimeout(() => {
-					setMsg('');
+					clearMessages();
 				}, 5000);
 			}
 		} catch (error: any) {
@@ -66,8 +71,8 @@ export function useSavedScreens() {
 	}
 
 	const { status, data, error } = useQuery(
-		['screener', email],
-		() => fs(email, token),
+		['screener', email, type],
+		() => fs(email, token, type),
 		{
 			refetchOnWindowFocus: true,
 		}

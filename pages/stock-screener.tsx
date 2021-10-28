@@ -19,11 +19,11 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 		setFullCount(stocks.count);
 	}
 
-	if (type !== 'stock') {
+	if (type !== 'stocks') {
 		setFullCount(stocks.count);
 		clearFilters();
 		setResultsMenu('General');
-		setType('stock');
+		setType('stocks');
 	}
 
 	return (

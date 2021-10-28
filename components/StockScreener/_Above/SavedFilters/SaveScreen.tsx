@@ -1,14 +1,16 @@
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { screenerState } from 'components/StockScreener/screener.state';
 import { useUserInfo } from 'hooks/useUserInfo';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSavedScreens } from './useSavedScreens';
 
-export function SaveScreen() {
+export function SaveScreen({ type }: { type: 'stocks' | 'ipo' }) {
 	const { status, isPro } = useUserInfo();
-	const { add, msg, err, setErr, clearMessages } = useSavedScreens();
+	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type);
 	const router = useRouter();
 	const [name, setName] = useState('');
+	const filters = screenerState((state) => state.filters);
 
 	async function handleSubmit(name: string) {
 		clearMessages();
@@ -17,7 +19,8 @@ export function SaveScreen() {
 		} else {
 			if (!name) {
 				setErr('Please enter a name');
-				console.log('no name');
+			} else if (!filters || !filters.length) {
+				setErr('No filters have been set');
 			} else {
 				add.mutate(name);
 				setName('');
@@ -36,6 +39,11 @@ export function SaveScreen() {
 					onChange={(e) => {
 						setName(e.target.value);
 						clearMessages();
+					}}
+					onKeyPress={(e) => {
+						if (e.key === 'Enter') {
+							handleSubmit(name);
+						}
 					}}
 				/>
 				<button

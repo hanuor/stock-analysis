@@ -1,8 +1,10 @@
+import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useState, useRef, useEffect } from 'react';
 import { SavedDropdown } from './SavedDropdown';
 
 export function SavedFilters() {
+	const type = screenerDataState((state) => state.type);
 	const [open, setOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -20,26 +22,35 @@ export function SavedFilters() {
 			}
 		};
 
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				setOpen(false);
+				document.removeEventListener('keydown', handleEscape);
+			}
+		};
+
 		if (open) {
 			document.addEventListener('mousedown', handleClickOutside);
+			document.addEventListener('keydown', handleEscape);
 		}
 
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('keydown', handleEscape);
 		};
 	}, [open, setOpen]);
 
 	return (
-		<div>
+		<div className="flex-grow">
 			<label
 				htmlFor="location"
 				className="hidden md:block text-sm font-medium text-gray-700"
 			>
 				Saved Screens
 			</label>
-			<div className="relative">
+			<div ref={ref} className="relative">
 				<div
-					className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer whitespace-nowrap"
+					className="inline-flex justify-between md:justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer whitespace-nowrap"
 					onClick={() => setOpen(!open)}
 					onKeyDown={handleKeyDown}
 					tabIndex={0}
@@ -57,9 +68,8 @@ export function SavedFilters() {
 							? ' visible opacity-100 transform translate-y-0'
 							: ' invisible opacity-0 transform -translate-y-2'
 					}`}
-					ref={ref}
 				>
-					<SavedDropdown />
+					<SavedDropdown type={type} />
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { authState } from 'state/authState';
 
+const api = process.env.NEXT_PUBLIC_BASE_API_URL;
+
 export function useUserInfo() {
 	const email = authState((state) => state.email);
 	const setEmail = authState((state) => state.setEmail);
@@ -18,7 +20,7 @@ export function useUserInfo() {
 			try {
 				setStatus('loading');
 				const response = await fetch(
-					`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}`
+					`${api}/authorize/v1/autologin?JWT=${token}&e=${email}`
 				);
 
 				if (response.ok) {

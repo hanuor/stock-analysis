@@ -17,7 +17,7 @@ import { filterItems } from 'components/StockScreener/functions/filterItems';
 import { FilterId } from 'components/StockScreener/screener.types';
 import {
 	useFetchFullData,
-	useFetchFulIPOData,
+	useFetchFullIPOData,
 } from 'components/StockScreener/functions/useFetchFullData';
 import { Loading } from 'components/Loading';
 
@@ -30,7 +30,7 @@ export function ResultsTable({ cols }: Props) {
 	const rows = screenerDataState((state) => state.data);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 	const fetchFullData = useFetchFullData();
-	const fetchFullIPOData = useFetchFulIPOData();
+	const fetchFullIPOData = useFetchFullIPOData();
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
@@ -39,7 +39,7 @@ export function ResultsTable({ cols }: Props) {
 	const setFetchedColumns = screenerState((state) => state.setFetchedColumns);
 
 	useEffect(() => {
-		if (type == 'stock') {
+		if (type == 'stocks') {
 			fetchFullData();
 			setShowColumns([
 				's',

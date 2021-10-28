@@ -42,7 +42,7 @@ export function FilterButton({ active, id }: Props) {
 
 	return (
 		<div
-			className={`inline-flex justify-between w-[140px] sm:w-[120px] rounded border border-gray-200 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer${
+			className={`inline-flex justify-between w-[125px] xs:w-[140px] sm:w-[125px] rounded border border-gray-200 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer${
 				active ? ' bg-yellow-100 px-2' : ''
 			}`}
 			onClick={handleClick}

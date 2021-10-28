@@ -2,7 +2,6 @@ import { screenerDataState } from '../screenerdata.state';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { PresetFilters } from './PresetFilters';
 import { SavedFilters } from './SavedFilters/_SavedFilters';
-// import { SaveFiltersButton } from './SavedFilters/SaveButton';
 
 export function AboveScreener() {
 	const type = screenerDataState((state) => state.type);
@@ -10,8 +9,11 @@ export function AboveScreener() {
 	if (type === 'ipo') {
 		return (
 			<div className="mb-3 md:mb-0 relative">
-				<div className="md:absolute md:right-0 md:-top-20">
-					<PresetFilters />
+				<div className="md:absolute md:right-0 md:top-[-5.1rem]">
+					<div className="flex space-x-2 items-center">
+						<PresetFilters />
+						<SavedFilters />
+					</div>
 				</div>
 			</div>
 		);
@@ -27,7 +29,6 @@ export function AboveScreener() {
 				<div className="flex space-x-2 items-center">
 					<PresetFilters />
 					<SavedFilters />
-					{/* <SaveFiltersButton /> */}
 				</div>
 			</div>
 		</>

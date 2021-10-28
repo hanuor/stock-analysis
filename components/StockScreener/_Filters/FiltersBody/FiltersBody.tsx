@@ -54,7 +54,7 @@ export function RenderFilters() {
 	}
 	let filterMap = [];
 
-	type == 'stock' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap);
+	type == 'stocks' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap);
 
 	if (filterSearch.length > 0) {
 		return (
