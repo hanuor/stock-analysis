@@ -11,24 +11,24 @@ export const loadStockTwits = (symbol) => {
 	if (wrapWidth < 500) {
 		wrapHeight = 3500;
 	} else {
-		wrapHeight = 2800;
+		wrapHeight = 2500;
 	}
 
 	const STWT = window.STWT || {};
 	(function () {
 		class e {
 			constructor() {
-				const e = [];
+				const ea = [];
 				this.add = function (t, n) {
-					e.push({ name: t, value: n });
+					ea.push({ name: t, value: n });
 				};
 				this.toString = function () {
 					const t = [];
-					for (let n = 0; n < e.length; n++) {
+					for (let n = 0; n < ea.length; n++) {
 						t[n] =
-							encodeURIComponent(e[n].name) +
+							encodeURIComponent(ea[n].name) +
 							'=' +
-							encodeURIComponent(e[n].value);
+							encodeURIComponent(ea[n].value);
 					}
 					return t.join('&');
 				};
