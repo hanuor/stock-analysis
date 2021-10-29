@@ -10,7 +10,7 @@ const getChartUrl = (id: number, time: string, override: boolean) => {
 
 	let apiurl;
 	if (time === '1D' || time === '5D' || override) {
-		apiurl = `c?${params}`;
+		apiurl = `chart?i=${id}&r=${time}`;
 	} else if (time === '5Y' || time === 'MAX') {
 		apiurl = `cch?${params}&p=w`;
 	} else {
@@ -71,8 +71,8 @@ export const PriceChart = ({ info }: { info: Info }) => {
 				chartMsg =
 					'Data will show when the stock starts trading next week.';
 			else if (ipoDate !== 'unknown') {
-				const datetime = new Date(ipoDate);
-				const date = datetime.toLocaleString('en-US', {
+				const date = new Date(ipoDate).toLocaleString('en-US', {
+					timeZone: 'America/New_York',
 					day: 'numeric',
 					year: 'numeric',
 					month: 'short',

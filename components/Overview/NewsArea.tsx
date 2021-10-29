@@ -54,7 +54,15 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	useEffect(() => {
 		async function fetchData() {
 			const fresh = await getData(`news?i=${info.id}&f=${show}`);
-			setData(fresh);
+			if (fresh.length) {
+				setData(fresh);
+			} else {
+				if (show === 'v') {
+					setError('No videos found for this stock.');
+				} else if (show === 'pr') {
+					setError('No additional press releases found for this stock.');
+				}
+			}
 		}
 
 		if (firstRender) {
