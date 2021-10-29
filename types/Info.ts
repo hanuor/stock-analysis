@@ -26,6 +26,7 @@ export interface Info {
 
 export interface IpoInfo {
 	ipoDate: string;
+	ipoDateFormatted: string;
 	ipoPrice: string;
 	ipoPriceLow: string;
 	ipoPriceHigh: string;

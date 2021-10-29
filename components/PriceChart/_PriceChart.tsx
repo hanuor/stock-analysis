@@ -70,15 +70,8 @@ export const PriceChart = ({ info }: { info: Info }) => {
 			else if (ipoDate === 'nextweek')
 				chartMsg =
 					'Data will show when the stock starts trading next week.';
-			else if (ipoDate !== 'unknown') {
-				const date = new Date(ipoDate).toLocaleString('en-US', {
-					timeZone: 'America/New_York',
-					day: 'numeric',
-					year: 'numeric',
-					month: 'short',
-				});
-				chartMsg = `Data will show when the stock starts trading on ${date}.`;
-			}
+			else if (ipoDate !== 'unknown' && info?.ipoInfo?.ipoDateFormatted)
+				chartMsg = `Data will show when the stock starts trading on ${info.ipoInfo.ipoDateFormatted}.`;
 		}
 
 		return (
