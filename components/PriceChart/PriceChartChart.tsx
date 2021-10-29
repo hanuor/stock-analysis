@@ -70,15 +70,13 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		return item.c;
 	});
 
-	let lineColor = '#2c6288';
-	let lineWidth = 3;
-	if (chartTime === '1D') {
-		lineWidth = 2.5;
-		if (info?.quote?.change < 0) {
-			lineColor = 'rgba(220, 38, 38, 1)';
-		} else {
-			lineColor = 'rgba(4, 120, 87, 1)';
-		}
+	const last = priceAxis[priceAxis.length - 1];
+	const first = chartData[0].o ?? priceAxis[0];
+	const change = last - first;
+
+	let lineColor = 'rgba(4, 120, 87, 1)';
+	if (change < 0) {
+		lineColor = 'rgba(220, 38, 38, 1)';
 	}
 
 	return (
@@ -95,15 +93,15 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 						pointHitRadius: 5,
 						pointRadius: 0,
 						tension: 0.01,
-						borderWidth: lineWidth,
+						borderWidth: 2.5,
 						spanGaps: true,
 						fill: true,
 						backgroundColor: (dataset: any) => {
 							const ctx = dataset.chart.ctx;
 							const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-							if (info?.quote?.change < 0) {
-								gradient.addColorStop(0, 'rgba(220, 38, 38, 1)');
-								gradient.addColorStop(1, 'rgba(255,255,255,0)');
+							if (change < 0) {
+								gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)');
+								gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 							} else {
 								gradient.addColorStop(0, 'rgba(4, 120, 87, 1)');
 								gradient.addColorStop(1, 'rgba(255,255,255,0)');
@@ -135,7 +133,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
-							const x = meta.data[last].x + 32;
+							const x = meta.data[last].x + 32.5;
 							const y = meta.data[last].y - 10;
 
 							// retrieve the stock price, data.
@@ -199,6 +197,10 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 								) {
 									return formatDateMonth(timeAxis[index]);
 								} else if (chartTime === '1D') {
+									const lbl = formatDateMinute(timeAxis[index]);
+									if (lbl.split(':')[0] === '09') {
+										return null;
+									}
 									return formatDateMinute(timeAxis[index]);
 								} else if (chartTime === '5D') {
 									return formatDateDay(timeAxis[index]);
@@ -231,10 +233,15 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 								size: 12.5,
 							},
 						},
+						grid: {
+							drawBorder: false,
+							color: '#efefef',
+						},
 					},
 				},
 				layout: {
 					padding: {
+						left: 5,
 						right: 17,
 					},
 				},
