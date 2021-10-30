@@ -34,12 +34,12 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		// 	const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
 		// 	setChartTime(show);
 		// }
-		if (info.ticker === 'BRK.A') {
+		if (info.exchange === 'OTCMKTS' || info.ticker === 'BRK.A') {
 			setChartTime('1Y');
 		} else {
 			setChartTime('1D');
 		}
-	}, [info.quote, info.ticker]);
+	}, [info.exchange, info.quote, info.ticker]);
 
 	useEffect(() => {
 		if (info.state === 'upcomingipo') {
