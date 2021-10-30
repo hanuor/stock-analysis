@@ -34,7 +34,11 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		// 	const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
 		// 	setChartTime(show);
 		// }
-		setChartTime('1D');
+		if (info.ticker === 'BRK.A') {
+			setChartTime('1Y');
+		} else {
+			setChartTime('1D');
+		}
 	}, [info.quote, info.ticker]);
 
 	useEffect(() => {

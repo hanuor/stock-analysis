@@ -19,6 +19,7 @@ import {
 import { Unavailable } from 'components/Unavailable';
 import { ReactChart } from 'components/ReactChart';
 import { Info } from 'types/Info';
+import { useQuote } from 'hooks/useQuote';
 
 type ChartDataType = {
 	t: string;
@@ -46,6 +47,8 @@ ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
 export const Chart = ({ chartData, chartTime, info }: Props) => {
+	const quote = useQuote(info);
+
 	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
@@ -70,9 +73,15 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		return item.c;
 	});
 
-	const last = priceAxis[priceAxis.length - 1];
-	const first = chartData[0].o ?? priceAxis[0];
-	const change = last - first;
+	let change: Number;
+	const count = priceAxis.length;
+	if (chartTime === '1D') {
+		change = quote.change;
+	} else {
+		const first = chartData[0].o || priceAxis[0];
+		const last = priceAxis[count - 1];
+		change = last - first;
+	}
 
 	let lineColor = 'rgba(4, 120, 87, 1)';
 	if (change < 0) {
@@ -119,7 +128,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 						const chartInstance = chart;
 						const ctx = chartInstance.ctx;
 						ctx.font =
-							'13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+							'12px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 						const fontSize = 12;
 						ctx.textAlign = 'start';
 						ctx.textBaseline = 'bottom';
@@ -151,10 +160,10 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							ctx.lineJoin = 'round';
 
 							// calculate the width of the box and height is based on fontsize.
-							const width = ctx.measureText(str).width + 1.2;
-							const xPos = x - 23.5;
+							const width = ctx.measureText(str).width + 0.4;
+							const xPos = x - 23;
 							const height = fontSize + 2.8;
-							const yPos = y + 1;
+							const yPos = y + 1.5;
 
 							// draw triangle to form a pointer.
 							ctx.beginPath();
@@ -170,7 +179,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 
 							// draw the text
 							ctx.fillStyle = '#ffffff';
-							ctx.fillText(str, x - 22, meta.data[last].y + 7.5);
+							ctx.fillText(str, x - 22, meta.data[last].y + 7.4);
 							ctx.restore();
 						});
 					},
@@ -198,7 +207,9 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									return formatDateMonth(timeAxis[index]);
 								} else if (chartTime === '1D') {
 									const lbl = formatDateMinute(timeAxis[index]);
-									if (lbl.split(':')[0] === '09') {
+									// Remove leftmost ticks to prevent chart being pushed to the left
+									// But only after 3+ hours of trading
+									if (count > 180 && lbl.split(':')[0] === '09') {
 										return null;
 									}
 									return formatDateMinute(timeAxis[index]);
@@ -232,6 +243,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							font: {
 								size: 12.5,
 							},
+							padding: 5,
 						},
 						grid: {
 							drawBorder: false,
@@ -242,7 +254,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				layout: {
 					padding: {
 						left: 5,
-						right: 17,
+						right: 11,
 					},
 				},
 				plugins: {
