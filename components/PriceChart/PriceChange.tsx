@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Quote } from 'types/Quote';
+import { useQuote } from 'hooks/useQuote';
+import { Info } from 'types/Info';
 
 type ChartDataType = {
 	t: string;
@@ -10,11 +10,12 @@ type ChartDataType = {
 interface Props {
 	chartData: ChartDataType[];
 	chartTime: string;
-	quote: Quote;
-	type: string;
+	info: Info;
 }
 
-export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
+export const PriceChange = ({ chartData, chartTime, info }: Props) => {
+	const quote = useQuote(info);
+
 	let raw: number | null;
 	let formatted: string;
 	let dec = 2;
@@ -38,15 +39,6 @@ export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
 				: raw.toFixed(dec) + '%'
 			: 'n/a';
 	}
-
-	useEffect(() => {
-		if (type === 'etf') {
-			const price1y: Element | null = document.querySelector('#price1y');
-			if (price1y) {
-				price1y.innerHTML = formatted;
-			}
-		}
-	}, [formatted, type]);
 
 	const css = raw
 		? raw > 0

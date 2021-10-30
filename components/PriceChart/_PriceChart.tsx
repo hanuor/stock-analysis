@@ -108,8 +108,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 					<PriceChange
 						chartData={chartData}
 						chartTime={chartTime}
-						quote={info.quote}
-						type={info.type}
+						info={info}
 					/>
 				)}
 			</div>

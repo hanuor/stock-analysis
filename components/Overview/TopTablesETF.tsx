@@ -46,9 +46,7 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>1-Year Return</td>
-					<td className={cssCellRight}>
-						<div id="price1y">-</div>
-					</td>
+					<td className={cssCellRight}>{data.change1y}</td>
 				</tr>
 			</tbody>
 		</table>
