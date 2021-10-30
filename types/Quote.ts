@@ -9,6 +9,7 @@ export interface Quote {
 	extCP: string;
 	extCol: string;
 	extP: string;
+	extPR?: number;
 	extS: string;
 	extT: string;
 	extTF: string;

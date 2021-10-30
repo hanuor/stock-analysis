@@ -29,7 +29,7 @@ export const PriceChange = ({ chartData, chartTime, info }: Props) => {
 		formatted = quote.change > 0 ? '+' + quote.changePc : quote.changePc;
 	} else {
 		const first = chartData[0].o;
-		const last = chartData[chartData.length - 1].c;
+		const last = quote.extPR || quote.price;
 
 		raw = first ? (last / first - 1) * 100 : null;
 
