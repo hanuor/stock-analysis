@@ -25,14 +25,19 @@ export const PriceChart = ({ info }: { info: Info }) => {
 	const [chartTime, setChartTime] = useState('');
 
 	useEffect(() => {
-		if (info.ticker === 'AAPL' || info.ticker === 'TSLA') {
-			setChartTime('1D');
-		} else {
-			const brandNew = (info.quote && info.quote.brandNew) ?? null;
-			const daysFrom = (info.quote && info.quote.daysFrom) ?? null;
+		// if (info.ticker === 'AAPL' || info.ticker === 'TSLA') {
+		// 	setChartTime('1D');
+		// } else {
+		// 	const brandNew = (info.quote && info.quote.brandNew) ?? null;
+		// 	const daysFrom = (info.quote && info.quote.daysFrom) ?? null;
 
-			const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
-			setChartTime(show);
+		// 	const show = brandNew || (daysFrom && daysFrom < 5) ? '1D' : '1Y';
+		// 	setChartTime(show);
+		// }
+		if (info.ticker === 'BRK.A') {
+			setChartTime('1Y');
+		} else {
+			setChartTime('1D');
 		}
 	}, [info.quote, info.ticker]);
 
@@ -96,8 +101,8 @@ export const PriceChart = ({ info }: { info: Info }) => {
 	}
 
 	return (
-		<div className="border border-gray-200 rounded-sm lg:border-0 p-0.5 xs:p-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0">
-			<div className="flex flex-row justify-between space-x-1 items-center py-1 sm:pt-0.5 px-1.5 sm:px-0">
+		<div className="border-t border-b border-gray-200 lg:border-0 py-0.5 xs:py-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0">
+			<div className="flex flex-row justify-between space-x-1 items-center py-1 sm:pt-0.5">
 				<Controls chartTime={chartTime} setChartTime={setChartTime} />
 				{chartData && chartData.length > 0 && (
 					<PriceChange

@@ -57,7 +57,7 @@ export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
 		: 'text-gray-600';
 
 	return (
-		<div className="flex flex-row space-x-1 text-smaller sm:text-base">
+		<div className="flex flex-row space-x-1 text-smaller sm:text-base pr-1">
 			<span className={css}>{formatted}</span>
 			<span className="text-gray-700 hidden sm:block">({chartTime})</span>
 		</div>
