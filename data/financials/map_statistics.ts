@@ -36,7 +36,7 @@ export const MAP_STATISTICS = [
 		title: 'Shares Outstanding',
 		format: 'none',
 		tooltip:
-			"The total amount of outstanding common stock currently held by all of the company's shareholders.",
+			"The total amount of outstanding common stock currently held by all of the company's shareholders. This number assumes that all other share classes are converted into the current share class, if applicable.",
 	},
 	{
 		id: 'sharesgrowthyoy',
