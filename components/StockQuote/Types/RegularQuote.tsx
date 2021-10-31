@@ -12,7 +12,7 @@ export function RegularQuote({ quote }: { quote: Quote }) {
 				{`${quote.change} (${quote.changePc})`}
 			</span>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
-				{`${quote.timestampF} - ${market}`}
+				{`${quote.timestamp} - ${market}`}
 			</div>
 		</div>
 	);
