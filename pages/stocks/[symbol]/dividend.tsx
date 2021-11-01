@@ -37,7 +37,11 @@ export default function Dividend({ info, data, news }: Props) {
 						<h2 className="text-xl bp:text-2xl font-bold">
 							{title} Dividend Information
 						</h2>
-						{data.infoBox && <InfoBox text={data.infoBox} />}
+						{data.infoBox && (
+							<div className="mt-4 mb-2 lg:mb-3">
+								<InfoBox text={data.infoBox} />
+							</div>
+						)}
 						<InfoTable data={data.infoTable} />
 						{data.history.length > 0 && (
 							<HistoryTable rawdata={data.history} disclaimer={true} />

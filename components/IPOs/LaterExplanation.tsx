@@ -1,4 +1,4 @@
-import { Information } from 'components/Alerts/Information';
+import { InfoBox } from 'components/InfoBox';
 
 export function LaterExplanation() {
 	return (
@@ -6,9 +6,9 @@ export function LaterExplanation() {
 			<h2 className="hh2 text-[1.4rem] text-gray-800 mb-4">
 				After Next Week
 			</h2>
-			<Information
-				message="No IPO dates have been set after next week. The reason is that IPO dates are rarely scheduled more than 7-10 days in advance."
-				classes="text-base sm:text-[1.05rem] text-blue-800 mb-1"
+			<InfoBox
+				text="No IPOs have been scheduled after next week. The reason is that IPO
+				dates are rarely set more than 7-10 days in advance."
 			/>
 		</div>
 	);
