@@ -7,7 +7,7 @@ export function ResultsNav({ type }: Props) {
 	return (
 		<nav className="flex-grow py-3 lg:py-1">
 			<ul className="flex flex-row items-center whitespace-nowrap space-x-1 text-base">
-				{type == 'stock' ? (
+				{type == 'stocks' ? (
 					<>
 						<ResultsMenuItem type={type} name="General" />
 						<ResultsMenuItem type={type} name="Filtered" />

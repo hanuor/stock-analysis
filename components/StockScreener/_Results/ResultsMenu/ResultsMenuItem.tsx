@@ -12,7 +12,7 @@ type Props = {
 export function ResultsMenuItem({ name, type }: Props) {
 	let defaultColumns: FilterId[] = [];
 
-	type == 'stock'
+	type == 'stocks'
 		? (defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'])
 		: (defaultColumns = [
 				's',
@@ -54,7 +54,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
 			let screenerType: string;
-			if (type == 'stock') {
+			if (type == 'stocks') {
 				screenerType = 'screener';
 			} else {
 				screenerType = 'iposcreener';
