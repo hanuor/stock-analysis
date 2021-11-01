@@ -81,7 +81,7 @@ const columns: Column[] = [
 
 const NoIpos = ({ title }: { title: string }) => {
 	switch (title) {
-		case 'IPOs This Week': {
+		case 'This Week': {
 			return (
 				<div>
 					<h2 className="hh2 mb-2">{title} (0)</h2>
@@ -128,9 +128,6 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 		state: { globalFilter },
 	} = tableInstance;
 
-	const thisWeek = title === 'IPOs This Week' ? true : false;
-	const nextWeek = title === 'Next Week' ? true : false;
-
 	const count = data.length;
 
 	if (count === 0) {
@@ -161,7 +158,7 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 						tableId={tableId}
 					/>
 				</div>
-				{title === 'More Upcoming IPOs' && (
+				{title === 'Unscheduled' && (
 					<div className="hidden md:block">
 						<Filter
 							useAsyncDebounce={useAsyncDebounce}
@@ -216,11 +213,6 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			{(thisWeek || nextWeek) && (
-				<span className="text-sm text-gray-600 mt-1 ml-1">
-					Upcoming IPO dates are estimated and may change.
-				</span>
-			)}
 		</div>
 	);
 };

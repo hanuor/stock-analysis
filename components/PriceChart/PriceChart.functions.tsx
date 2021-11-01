@@ -5,14 +5,10 @@ export function getChartUrl(id: number, time: string, override: boolean) {
 	const params = `i=${id}&r=${time}&m=1`;
 
 	let apiurl;
-	if (time === '1D' || time === '5D') {
-		apiurl = `chart?i=${id}&r=${time}`;
-	} else if (override) {
-		apiurl = `c?${params}`;
-	} else if (time === '5Y' || time === 'MAX') {
-		apiurl = `cch?${params}&p=w`;
+	if (time === '5Y' || time === 'MAX') {
+		apiurl = `chart?${params}&p=w`;
 	} else {
-		apiurl = `cch?${params}&p=d`;
+		apiurl = `chart?${params}`;
 	}
 
 	return apiurl;
