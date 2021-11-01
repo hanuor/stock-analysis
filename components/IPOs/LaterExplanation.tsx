@@ -3,7 +3,7 @@ import { Information } from 'components/Alerts/Information';
 export function LaterExplanation() {
 	return (
 		<div className="pb-1 lg:pb-0">
-			<h2 className="hh2 text-[1.4rem] leading-none text-gray-800 mb-4">
+			<h2 className="hh2 text-[1.4rem] text-gray-800 mb-4">
 				After Next Week
 			</h2>
 			<Information

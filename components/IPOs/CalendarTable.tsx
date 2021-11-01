@@ -168,7 +168,6 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 					</div>
 				)}
 			</div>
-
 			<div className="overflow-x-auto">
 				<table className="ipotable" id={tableId}>
 					<thead>
