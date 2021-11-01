@@ -135,22 +135,94 @@ export function withOHLCData(dataSet = 'DAILY') {
 				const newState: WithOHLCState = this.props;
 
 				if (period != newState.period || stockId != newState.stockId) {
+					this.props.setLoading(true);
+					if (time == '1D' || time == '5D') {
+						Axios.get(
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${newState.stockId}&r=${time}&f=candles`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders1D5D);
+								data = forDateParse.map(parseData1D5D(time));
+
+								if (period != newState.period) {
+									period = newState.period;
+									this.setState({ period });
+									this.setState({ data });
+									saveData = [];
+									this.setState({ saveData });
+								} else {
+									stockId = newState.stockId;
+									this.setState({ stockId });
+									this.setState({ data });
+									saveData = [];
+									this.setState({ saveData });
+								}
+								this.props.setLoading(false);
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								);
+								this.props.setLoading(false);
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								);
+							});
+					} else {
+						Axios.get(
+							`https://api.stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders);
+								data = forDateParse.map(parseData());
+
+								if (period != newState.period) {
+									period = newState.period;
+									this.setState({ period });
+									this.setState({ data });
+								} else {
+									stockId = newState.stockId;
+									this.setState({ stockId });
+									this.setState({ data });
+								}
+								this.props.setLoading(false);
+								if (typeof data != 'undefined') {
+									this.props.setData(data);
+								}
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								);
+								this.props.setLoading(false);
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								);
+							});
+					}
+					// Case where someone is clicking '1D' or '5D'
+				} else if (
+					(newState.time == '1D' && time != '1D') ||
+					(newState.time == '5D' && time != '5D')
+				) {
+					this.props.setLoading(true);
+					// Save Max Data
+					if (!saveData) {
+						saveData = data;
+						this.setState({ saveData });
+					}
+
 					Axios.get(
-						`https://api.stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
+						`https://api.stockanalysis.com/wp-json/sa/chart?i=${this.props.stockId}&r=${newState.time}&f=candles`
 					)
 						.then((res) => {
-							const forDateParse = res.data.map(fixDataHeaders);
-							data = forDateParse.map(parseData());
-
-							if (period != newState.period) {
-								period = newState.period;
-								this.setState({ period });
-								this.setState({ data });
-							} else {
-								stockId = newState.stockId;
-								this.setState({ stockId });
-								this.setState({ data });
-							}
+							const forDateParse = res.data.map(fixDataHeaders1D5D);
+							data = forDateParse.map(parseData1D5D(this.props.time));
+							this.setState({ data });
+							const time = newState.time;
+							this.setState({ time });
 							this.props.setLoading(false);
 							if (typeof data != 'undefined') {
 								this.props.setData(data);
@@ -166,43 +238,47 @@ export function withOHLCData(dataSet = 'DAILY') {
 								<Unavailable message="Unable to load the data for this chart." />
 							);
 						});
-					// Case where someone is clicking '1D' or '5D'
-				} else if (
-					(newState.time == '1D' && time != '1D') ||
-					(newState.time == '5D' && time != '5D')
-				) {
-					this.props.setLoading(true);
-					// Save Max Data
-					if (!saveData) {
-						saveData = data;
-						this.setState({ saveData });
-					}
-
-					Axios.get(
-						`https://api.stockanalysis.com/wp-json/sa/chart?i=${this.props.stockId}&r=${newState.time}&f=candles`
-					).then((res) => {
-						const forDateParse = res.data.map(fixDataHeaders1D5D);
-						data = forDateParse.map(parseData1D5D(this.props.time));
-						this.setState({ data });
-						const time = newState.time;
-						this.setState({ time });
-						this.props.setLoading(false);
-						if (typeof data != 'undefined') {
-							this.props.setData(data);
-						}
-					});
 					// Case where someone is already at '1D' or '5D' and is now clicking the other values.
 				} else if (
 					(time == '5D' || time == '1D') &&
 					newState.time != '1D' &&
 					newState.time != '5D'
 				) {
-					const data = saveData;
-					time = newState.time;
-					this.setState({ time });
-					this.setState({ data });
-					if (typeof data != 'undefined') {
-						this.props.setData(data);
+					if (typeof saveData != 'undefined' && saveData.length > 0) {
+						data = saveData;
+						time = newState.time;
+						this.setState({ time });
+						this.setState({ data });
+						if (typeof data != 'undefined') {
+							this.props.setData(data);
+						}
+					} else {
+						this.props.setLoading(true);
+						Axios.get(
+							`https://api.stockanalysis.com/wp-json/sa/cch?i=${stockId}&p=${period}&r=MAX`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders);
+								data = forDateParse.map(parseData());
+								this.props.setLoading(false);
+								if (typeof data != 'undefined') {
+									this.props.setData(data);
+								}
+								time = newState.time;
+								this.setState({ time });
+								saveData = data;
+								this.setState({ saveData });
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								);
+								this.props.setLoading(false);
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								);
+							});
 					}
 				}
 

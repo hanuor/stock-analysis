@@ -437,7 +437,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								yAccessor={yEdgeIndicator}
 								fontSize={13}
 							/>
-							<OHLCTooltipCustom origin={[5, 15]} />
+							<OHLCTooltipCustom origin={[5, 15]} time={time} />
 							<MovingAverageTooltipCustom
 								origin={[8, 24]}
 								options={movingAverageTooltipOptions}
