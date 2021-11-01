@@ -7,7 +7,7 @@ export function LaterExplanation() {
 				After Next Week
 			</h2>
 			<Information
-				message="No IPO dates have been set later than next week. The reason is that IPO dates are rarely scheduled more than 1-2 weeks in advance. Below is a list of all the companies that have filed papers to go public but do not have a set IPO date yet."
+				message="No IPO dates have been set later than next week. The reason is that IPO dates are rarely scheduled more than 7-10 days in advance. Below is a list of all the companies that have filed papers to go public but do not have a set IPO date yet."
 				classes="text-base sm:text-[1.05rem] text-blue-800 mb-1"
 			/>
 		</div>
