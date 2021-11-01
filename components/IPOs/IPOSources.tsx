@@ -1,6 +1,6 @@
 export function IPOSources() {
 	return (
-		<div className="text-sm text-gray-70 pt-2 sm:pt-0">
+		<div className="text-sm text-gray-700 pt-2 sm:pt-0">
 			<span className="font-medium">Sources:</span> Most data is sourced from
 			the S-1 and S-1/A filings that companies submit to the U.S. Securities
 			and Exchange Commission (

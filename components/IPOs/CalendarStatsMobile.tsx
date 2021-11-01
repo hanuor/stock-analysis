@@ -14,7 +14,7 @@ export function CalendarStatsMobile({ data }: { data: CalendarData }) {
 			<h2 className="text-[1.4rem] font-bold mb-1.5 text-gray-800">
 				Calendar Statistics
 			</h2>
-			<div className="border-t border-b pt-1 pb-2 text-xs sm:text-sm font-medium text-gray-600 px-1.5">
+			<div className="border-t border-b pt-2 pb-3 text-xs sm:text-sm font-medium text-gray-600 px-1.5">
 				<div className="flex flex-row justify-between text-center">
 					<div className="flex flex-col">
 						<div className="order-2">This Week</div>
