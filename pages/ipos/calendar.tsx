@@ -4,7 +4,10 @@ import { CalendarData, IpoRecent } from 'types/Ipos';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { CalendarStats } from 'components/IPOs/CalendarStats';
+import { CalendarStatsMobile } from 'components/IPOs/CalendarStatsMobile';
 import { CalendarTable } from 'components/IPOs/CalendarTable';
+import { LaterExplanation } from 'components/IPOs/LaterExplanation';
+import { IPOSources } from 'components/IPOs/IPOSources';
 import { IPONavigation } from 'components/IPOs/IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
@@ -33,9 +36,10 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="flex flex-col space-y-5 sm:space-y-7 py-4">
+						<CalendarStatsMobile data={data} />
+						<div className="flex flex-col space-y-4 sm:space-y-7 py-2 lg:py-4">
 							<CalendarTable
-								title="IPOs This Week"
+								title="This Week"
 								data={data.thisweek}
 								tableId="this-week"
 							/>
@@ -44,11 +48,16 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								data={data.nextweek}
 								tableId="next-week"
 							/>
-							<CalendarTable
-								title="Scheduled for Later"
-								data={data.later}
-								tableId="later"
-							/>
+							{data.later.length ? (
+								<CalendarTable
+									title="Scheduled for Later"
+									data={data.later}
+									tableId="later"
+								/>
+							) : (
+								<LaterExplanation />
+							)}
+							<IPOSources />
 							<Mobile1 />
 							<CalendarTable
 								title="Upcoming High-Profile IPOs"
@@ -56,7 +65,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 								tableId="high-profile"
 							/>
 							<CalendarTable
-								title="More Upcoming IPOs"
+								title="Unscheduled"
 								data={data.unknown}
 								tableId="more-upcoming"
 							/>
