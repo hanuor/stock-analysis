@@ -50,7 +50,7 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 							/>
 							{data.later.length ? (
 								<CalendarTable
-									title="Scheduled for Later"
+									title="After Next Week"
 									data={data.later}
 									tableId="later"
 								/>

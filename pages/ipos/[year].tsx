@@ -48,7 +48,9 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
 							<SubNavigation />
-							<InfoBox text={data.info} />
+							<div className="mt-4 mb-2 lg:mb-3">
+								<InfoBox text={data.info} />
+							</div>
 							<RecentTable rawdata={data.data} />
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
