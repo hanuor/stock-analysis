@@ -12,7 +12,7 @@ export function HeaderAd() {
 			return (
 				<div className="hidden md:block bg-gray-100 pt-1 pb-2 mx-auto text-center">
 					<div
-						className="md:min-h-[111px] md:max-w-[728px] lg:max-w-[970px] mx-auto text-center"
+						className="md:min-h-[111px] md:max-w-[728px] lg:max-w-[970px] mx-auto text-center center-children"
 						id="adngin-top_leaderboard-0"
 					></div>
 				</div>
