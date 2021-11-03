@@ -76,7 +76,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 	let change: Number;
 	const count = priceAxis.length;
 	if (chartTime === '1D') {
-		change = quote.change;
+		change = Number(quote.c);
 	} else {
 		const first = chartData[0].o || priceAxis[0];
 		const last = priceAxis[count - 1];

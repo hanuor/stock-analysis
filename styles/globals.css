@@ -406,7 +406,7 @@
 		@apply text-green-700;
 	}
 
-	.green-quote.reg::before {
+	.green-quote::before {
 		content: '+';
 	}
 

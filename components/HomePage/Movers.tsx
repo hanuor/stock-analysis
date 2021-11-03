@@ -47,11 +47,16 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 							{item.n}
 						</td>
 
-						<td className={cellStyles + ' text-right border-r hidden tiny:table-cell'}>
+						<td
+							className={
+								cellStyles +
+								' text-right border-r hidden tiny:table-cell'
+							}
+						>
 							${item.p}
 						</td>
 						<td className={cellStyles + ' text-right ' + redOrGreen}>
-							{item.c}
+							{item.c}%
 						</td>
 					</tr>
 				))}
@@ -82,7 +87,12 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 							<th className={cellStyles + ' text-left border-r'}>
 								Name
 							</th>
-							<th className={cellStyles + ' text-right border-r hidden tiny:table-cell'}>
+							<th
+								className={
+									cellStyles +
+									' text-right border-r hidden tiny:table-cell'
+								}
+							>
 								Price
 							</th>
 							<th className={cellStyles + ' text-right'}>Change</th>
