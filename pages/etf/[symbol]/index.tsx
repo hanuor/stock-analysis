@@ -34,7 +34,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
 					<InfoTable data={data} />
-					<QuoteTable data={data} quote={info.quote} />
+					<QuoteTable data={data} info={info} />
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">

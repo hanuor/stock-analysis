@@ -10,7 +10,7 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 		return null;
 	}
 
-	return await getData(`q?i=${id}`);
+	return await getData(`p?i=${id}`);
 }
 
 export function useQuote(info: Info) {
