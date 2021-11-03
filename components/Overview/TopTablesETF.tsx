@@ -62,29 +62,29 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Volume</td>
-					<td className={cssCellRight}>{q.v || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.v || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Open</td>
-					<td className={cssCellRight}>{q.o || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.o || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Previous Close</td>
-					<td className={cssCellRight}>{q.cl || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.cl || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Day&apos;s Range</td>
 					<td className={cssCellRight}>
-						{q.l && q.h ? q.l + ' - ' + q.h : 'n/a'}
+						{q?.l && q?.h ? q.l + ' - ' + q.h : 'n/a'}
 					</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week Low</td>
-					<td className={cssCellRight}>{q.l52 || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.l52 || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week High</td>
-					<td className={cssCellRight}>{q.l52 || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.l52 || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Beta</td>

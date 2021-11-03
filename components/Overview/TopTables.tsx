@@ -58,23 +58,23 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 			<tbody>
 				<tr>
 					<td>Volume</td>
-					<td>{q.v || 'n/a'}</td>
+					<td>{q?.v || 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Open</td>
-					<td>{q.o || 'n/a'}</td>
+					<td>{q?.o || 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>{previous}</td>
-					<td>{q.cl || 'n/a'}</td>
+					<td>{q?.cl || 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Day&apos;s Range</td>
-					<td>{q.l && q.h ? q.l + ' - ' + q.h : 'n/a'}</td>
+					<td>{q?.l && q?.h ? q.l + ' - ' + q.h : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>52-Week Range</td>
-					<td>{q.l52 && q.h52 ? q.l52 + ' - ' + q.h52 : 'n/a'}</td>
+					<td>{q?.l52 && q?.h52 ? q.l52 + ' - ' + q.h52 : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Beta</td>
