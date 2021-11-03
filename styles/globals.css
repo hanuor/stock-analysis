@@ -637,6 +637,10 @@
 			max-width: 155px;
 		}
 	}
+
+	.center-children div iframe {
+		@apply mx-auto text-center;
+	}
 }
 
 /* .lbl::before {
