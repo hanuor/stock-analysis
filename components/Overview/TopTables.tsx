@@ -1,5 +1,6 @@
+import { useQuote } from 'hooks/useQuote';
+import { Info } from 'types/Info';
 import { Overview } from 'types/Overview';
-import { Quote } from 'types/Quote';
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
@@ -46,38 +47,34 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 	);
 };
 
-export const QuoteTable = ({
-	data,
-	quote,
-}: {
-	data: Overview;
-	quote: Quote;
-}) => {
-	const volume = quote ? quote.volume : data.volume;
-	const previous = !quote || !quote.brandNew ? 'Previous Close' : 'IPO Price';
+export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
+	const q = useQuote(info);
+
+	let previous = 'Previous Close';
+	if (info.ipoDate && q.td === info.ipoDate) previous = 'IPO Price';
 
 	return (
 		<table className="top-table">
 			<tbody>
 				<tr>
 					<td>Volume</td>
-					<td>{volume}</td>
+					<td>{q.v || 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Open</td>
-					<td>{data.open}</td>
+					<td>{q.o || 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>{previous}</td>
-					<td>{data.close}</td>
+					<td>{q.cl || 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Day&apos;s Range</td>
-					<td>{data.rangeDay}</td>
+					<td>{q.l && q.h ? q.l + ' - ' + q.h : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>52-Week Range</td>
-					<td>{data.range52w}</td>
+					<td>{q.l52 && q.h52 ? q.l52 + ' - ' + q.h52 : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Beta</td>

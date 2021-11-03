@@ -7,18 +7,18 @@ import { ExtendedQuote } from './Types/ExtendedQuote';
 export function LiveQuote({ info }: { info: Info }) {
 	const quote = useQuote(info);
 
-	if (quote.ext) {
+	if (quote.e) {
 		return (
 			<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
-				<RegularExtended quote={quote} />
-				<ExtendedQuote quote={quote} />
+				<RegularExtended info={info} />
+				<ExtendedQuote info={info} />
 			</section>
 		);
 	}
 
 	return (
 		<section className="mb-5">
-			<RegularQuote quote={quote} />
+			<RegularQuote info={info} />
 		</section>
 	);
 }
