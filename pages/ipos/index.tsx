@@ -22,8 +22,8 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 	return (
 		<>
 			<SEO
-				title="All Recent IPOs"
-				description="Detailed information on all the recent IPOs (initial public offerings) on the stock market. Includes IPO prices, dates, total returns and more."
+				title="Last 200 IPOs"
+				description="Detailed information the last 200 IPOs (initial public offerings) on the stock market. Includes IPO prices, dates, total returns and more."
 				canonical="/ipos/"
 			/>
 			<div className="contain">

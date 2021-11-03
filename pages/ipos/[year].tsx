@@ -26,7 +26,9 @@ interface Props {
 
 export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 	const title =
-		year === '2021' ? 'All 2021 IPOs (so far)' : `All ${year} IPOs`;
+		year === '2021'
+			? 'All 2021 IPOs (so far)'
+			: `All ${year} IPOs - A Complete List`;
 
 	const description =
 		year === '2021'
