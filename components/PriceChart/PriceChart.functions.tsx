@@ -43,6 +43,8 @@ export function UnavailableIpo({ info }: { info: Info }) {
 			chartMsg = 'Data will show when the stock starts trading this week.';
 		else if (ipoDate === 'nextweek')
 			chartMsg = 'Data will show when the stock starts trading next week.';
+		else if (ipoDate === 'postponed' || ipoDate === 'withdrawn')
+			chartMsg = '';
 		else if (ipoDate !== 'unknown' && info?.ipoInfo?.ipoDateFormatted)
 			chartMsg = `Data will show when the stock starts trading on ${info.ipoInfo.ipoDateFormatted}.`;
 	}
@@ -53,9 +55,11 @@ export function UnavailableIpo({ info }: { info: Info }) {
 				<div className="text-xl xs:text-2xl lg:text-3xl font-medium">
 					Chart not available yet
 				</div>
-				<div className="text-base xs:text-lg leading-6 xs:leading-7 text-center mt-4">
-					{chartMsg}
-				</div>
+				{chartMsg && (
+					<div className="text-base xs:text-lg leading-6 xs:leading-7 text-center mt-4">
+						{chartMsg}
+					</div>
+				)}
 			</div>
 		</div>
 	);
