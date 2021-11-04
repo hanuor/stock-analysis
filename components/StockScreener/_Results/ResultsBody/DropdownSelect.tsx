@@ -72,7 +72,7 @@ export function DropdownSelect({
 										</span>
 
 										{selected ? (
-											<span className="text-blue-600 absolute inset-y-0 right-0 flex items-center pr-4">
+											<span className="text-blue-600 absolute inset-y-0 right-0 flex items-center pr-3">
 												<CheckIcon
 													className="h-5 w-5"
 													aria-hidden="true"

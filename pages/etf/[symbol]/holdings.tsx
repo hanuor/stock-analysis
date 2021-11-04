@@ -65,7 +65,7 @@ const Holdings = ({ info, data, news }: Props) => {
 								url: `/etf/${info.symbol}/`,
 							}}
 						/>
-						{data && data.count > 35 && <Sidebar2 />}
+						{data && data.count > 35 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>

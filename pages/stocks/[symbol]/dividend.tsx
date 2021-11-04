@@ -67,7 +67,7 @@ export default function Dividend({ info, data, news }: Props) {
 								url: `/stocks/${info.symbol}/`,
 							}}
 						/>
-						{data.history.length > 15 && <Sidebar2 />}
+						{data.history.length > 15 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>
