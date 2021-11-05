@@ -15,6 +15,7 @@ export function HeaderAd() {
 	const [staticc, setStaticc] = useState(false);
 
 	const onScroll = useCallback(() => {
+		console.log(window.scrollY);
 		if (window.scrollY > 200) {
 			window.removeEventListener('scroll', onScroll);
 			setTimeout(() => {

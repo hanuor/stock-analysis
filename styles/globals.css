@@ -774,7 +774,7 @@
 }
 
 .sticky-head {
-	@apply sticky top-16 opacity-100;
+	@apply sticky top-16 opacity-100 z-10;
 }
 
 .fade-out {
