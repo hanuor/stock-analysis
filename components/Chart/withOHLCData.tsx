@@ -109,7 +109,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					data: undefined,
 				};
 				Axios.get(
-					`https://api.stockanalysis.com/wp-json/sa/cch?i=${props.stockId}&p=${props.period}&r=MAX`
+					`https://api.stockanalysis.com/wp-json/sa/chart?i=${props.stockId}&p=${props.period}&r=MAX`
 				)
 					.then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
@@ -138,7 +138,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					this.props.setLoading(true);
 					if (time == '1D' || time == '5D') {
 						Axios.get(
-							`https://api.stockanalysis.com/wp-json/sa/chart?i=${newState.stockId}&r=${time}&f=candles`
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${newState.stockId}&r=${time}`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D);
@@ -171,7 +171,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 							});
 					} else {
 						Axios.get(
-							`https://api.stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${newState.stockId}&p=${newState.period}&r=MAX`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders);
@@ -255,7 +255,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					} else {
 						this.props.setLoading(true);
 						Axios.get(
-							`https://api.stockanalysis.com/wp-json/sa/cch?i=${stockId}&p=${period}&r=MAX`
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${stockId}&p=${period}&r=MAX`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders);

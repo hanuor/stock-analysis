@@ -11,16 +11,10 @@ interface SelectProps {
 }
 
 export const SelectPeriod = (props: SelectProps) => {
-	let dayDisabled: boolean;
-	if (props.time == '1D' || props.time == '5D') {
-		dayDisabled = true;
-	} else {
-		dayDisabled = false;
-	}
 	return (
 		<div>
 			<select
-				disabled={dayDisabled}
+				disabled={props.time === '1D' || props.time === '5D' ? true : false}
 				onChange={(e) => {
 					props.dispatcher(e.target.value);
 				}}
@@ -79,7 +73,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<option value="MAX">MAX</option>
 			</select>
 
-			<ul className="hidden lg:flex flex-row whitespace-nowrap overflow-x-auto pl-1 hide-scroll md:mr-auto">
+			<ul className="hidden lg:flex flex-row whitespace-nowrap overflow-x-auto pl-1 hide-scroll lg:mr-auto">
 				<li>
 					<button
 						onClick={() => {

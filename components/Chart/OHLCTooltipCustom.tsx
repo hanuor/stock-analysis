@@ -106,7 +106,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 		const { origin: originProp } = this.props;
 		const [x, y] = functor(originProp)(width, height);
 		const valueFill = functor(textFill)(currentItem);
-		console.log(date);
+
 		return (
 			<g
 				className={className}
