@@ -50,7 +50,34 @@ export function HeaderAd() {
 							id="adngin-top_leaderboard-0"
 						>
 							<div className="text-xxs pt-1">ADVERTISEMENT</div>
-							<a
+							<div
+								dangerouslySetInnerHTML={{
+									__html: `
+<a href="https://stockanalysis.com/pro/">
+<div style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; background: #2c6288; border: 1px solid #ddd; border-radius: 2px; height: 90px; width: 728px; margin: 0 auto; position: relative; text-align: left;">
+    <div style="padding: 8px 20px 10px 20px;">
+        <h4 style="margin: 0 0 5px 0; font-size: 1.5rem; color: white; font-weight: 700;">Stock Analysis Pro</h4>
+        <div style="font-size: 1.1rem; font-weight: 400; color: #eee;">
+            Unlimited access to all our financial data with up to 30 years of
+            history.
+        </div>
+        <div style="position: absolute; top: 32px; right: 20px;">
+            <svg
+                style="height: 30px; width: 30px;"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#FFF"
+                viewBox="0 0 24 24"
+            >
+                <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+            </svg>
+        </div>
+    </div>
+</div>
+</a>
+`,
+								}}
+							/>
+							{/* <a
 								href="https://www.tradingview.com/?offer_id=10&aff_id=23485&file_id=932"
 								target="_blank"
 								className="mx-auto text-center"
@@ -69,7 +96,7 @@ export function HeaderAd() {
 								height="0"
 								// style="position:absolute;visibility:hidden;"
 								// border="0"
-							/>
+							/> */}
 							{/* <div className="w-[728px] h-[90px] border border-gray-300 bg-blue-100 mx-auto"></div> */}
 						</div>
 					</div>
