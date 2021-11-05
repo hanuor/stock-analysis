@@ -2,7 +2,7 @@ import { authState } from 'state/authState';
 import { noAds } from 'components/Ads/noAds';
 import { useNavState } from 'hooks/useNavState';
 import { useCallback, useEffect, useState } from 'react';
-import Script from 'next/script';
+// import Script from 'next/script';
 
 export function HeaderAd() {
 	const status = authState((state) => state.status);
@@ -47,15 +47,7 @@ export function HeaderAd() {
 							id="adngin-top_leaderboard-0"
 						>
 							<div className="text-xxs pt-1">ADVERTISEMENT</div>
-							<div
-								className="dianomi_context"
-								data-dianomi-context-id="789"
-							></div>
-							<Script
-								strategy="lazyOnload"
-								src="https://www.dianomi.com/js/contextfeed.js"
-								id="dianomi_context_script"
-							/>
+							<div className="w-[728px] h-[90px] border border-gray-300 bg-blue-100 mx-auto"></div>
 						</div>
 					</div>
 				</div>
