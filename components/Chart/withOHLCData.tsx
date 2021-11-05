@@ -207,22 +207,21 @@ export function withOHLCData(dataSet = 'DAILY') {
 					(newState.time == '1D' && time != '1D') ||
 					(newState.time == '5D' && time != '5D')
 				) {
+					const time = newState.time;
+					this.setState({ time });
 					this.props.setLoading(true);
-					// Save Max Data
-					if (!saveData) {
-						saveData = data;
-						this.setState({ saveData });
-					}
-
 					Axios.get(
 						`https://api.stockanalysis.com/wp-json/sa/chart?i=${this.props.stockId}&r=${newState.time}&f=candles`
 					)
 						.then((res) => {
+							this.props.setLoading(true);
 							const forDateParse = res.data.map(fixDataHeaders1D5D);
-							data = forDateParse.map(parseData1D5D(this.props.time));
+							if (!saveData) {
+								saveData = data;
+								this.setState({ saveData });
+							}
+							data = forDateParse.map(parseData1D5D(newState.time));
 							this.setState({ data });
-							const time = newState.time;
-							this.setState({ time });
 							this.props.setLoading(false);
 							if (typeof data != 'undefined') {
 								this.props.setData(data);
@@ -254,6 +253,8 @@ export function withOHLCData(dataSet = 'DAILY') {
 						}
 					} else {
 						this.props.setLoading(true);
+						time = newState.time;
+						this.setState({ time });
 						Axios.get(
 							`https://api.stockanalysis.com/wp-json/sa/chart?i=${stockId}&p=${period}&r=MAX`
 						)
@@ -261,11 +262,10 @@ export function withOHLCData(dataSet = 'DAILY') {
 								const forDateParse = res.data.map(fixDataHeaders);
 								data = forDateParse.map(parseData());
 								this.props.setLoading(false);
+								this.setState({ data });
 								if (typeof data != 'undefined') {
 									this.props.setData(data);
 								}
-								time = newState.time;
-								this.setState({ time });
 								saveData = data;
 								this.setState({ saveData });
 							})
