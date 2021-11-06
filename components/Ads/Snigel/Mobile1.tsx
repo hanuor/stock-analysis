@@ -12,7 +12,7 @@ export function Mobile1() {
 			return (
 				<div className="mx-auto text-center overflow-x-auto sm:hidden">
 					<div
-						id="adngin-in-content_1_mobile-0"
+						id="adngin-in-content_1_mobile-0 center-children"
 						className="block sm:hidden"
 					></div>
 				</div>
