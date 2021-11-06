@@ -19,7 +19,7 @@ export const LayoutSidebar = ({ heading, children, url }: Props) => {
 
 				<div className="lg:grid lg:grid-cols-sidebar gap-10 mt-3 sm:mt-4 lg:mt-5">
 					<div className="">{children}</div>
-					<aside className="py-8 lg:py-0 space-y-8">
+					<aside className="py-0 space-y-8">
 						<Sidebar />
 					</aside>
 				</div>

@@ -13,7 +13,7 @@ export function Sidebar2() {
 				<div className="mx-auto text-center hidden lg:block">
 					<div
 						id="adngin-sidebar_2-0"
-						className="hidden lg:block mx-auto"
+						className="hidden lg:block mx-auto center-children"
 					></div>
 				</div>
 			);

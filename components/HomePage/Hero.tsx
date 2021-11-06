@@ -32,7 +32,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 							<SiteSearch nav={false} />
 						</div>
 					</form>
-					<p className="text-sm xs:text-base md:text-lg lg:text-[19px]">
+					<div className="text-sm xs:text-base md:text-lg lg:text-[19px]">
 						{`Trending: `}
 						{trending.map((t, index) => {
 							if (index > 0) {
@@ -59,7 +59,11 @@ export function Hero({ trending }: { trending: Trending[] }) {
 								</span>
 							);
 						})}
-					</p>
+						{` -- `}
+						<Link href="/trending/">
+							<a className="bll">View All</a>
+						</Link>
+					</div>
 				</div>
 			</section>
 		</>
