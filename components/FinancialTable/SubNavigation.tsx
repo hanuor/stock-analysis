@@ -24,6 +24,7 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/`}
 						prefetch={false}
+						scroll={false}
 					>
 						<a
 							className={
@@ -39,6 +40,7 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/balance-sheet`}
 						prefetch={false}
+						scroll={false}
 					>
 						<a
 							className={
@@ -54,6 +56,7 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
 						prefetch={false}
+						scroll={false}
 					>
 						<a
 							className={
@@ -71,6 +74,7 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/ratios/`}
 						prefetch={false}
+						scroll={false}
 					>
 						<a
 							className={statement == 'ratios' ? 'active' : 'inactive'}

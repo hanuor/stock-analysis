@@ -22,7 +22,11 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/etf/${symbol}/holdings/`} prefetch={false}>
+					<Link
+						href={`/etf/${symbol}/holdings/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={
 								path.three == 'holdings' ? 'active' : 'inactive'
@@ -34,7 +38,11 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/etf/${symbol}/dividend/`} prefetch={false}>
+					<Link
+						href={`/etf/${symbol}/dividend/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={
 								path.three == 'dividend' ? 'active' : 'inactive'
@@ -46,7 +54,11 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/etf/${symbol}/chart/`} prefetch={false}>
+					<Link
+						href={`/etf/${symbol}/chart/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={path.three == 'chart' ? 'active' : 'inactive'}
 							data-title="Chart"

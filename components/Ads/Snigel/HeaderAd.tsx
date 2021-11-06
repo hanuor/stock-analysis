@@ -11,8 +11,11 @@ export function HeaderAd() {
 	const [stat, setStat] = useState(false);
 
 	useEffect(() => {
-		setShow(true); // Show ad each time the path is changed
-		setStat(false);
+		if (window.scrollY === 0) {
+			// Show ad each time the path is changed if at the top of the page
+			setShow(true);
+			setStat(false);
+		}
 
 		setTimeout(() => {
 			// Ad is sticky for 2 seconds
