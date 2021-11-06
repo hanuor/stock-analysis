@@ -11,15 +11,15 @@ export function HeaderAd() {
 	const [stat, setStat] = useState(false);
 
 	useEffect(() => {
-		if (window.scrollY === 0) {
+		if (window.pageYOffset === 0) {
 			// Show ad each time the path is changed if at the top of the page
 			setShow(true);
 			setStat(false);
 		}
 
-		setTimeout(() => {
+		const stickyTime = setTimeout(() => {
 			// Ad is sticky for 3 seconds
-			if (window.scrollY > 0) {
+			if (window.pageYOffset > 0 || !document.hasFocus()) {
 				// Only fade out if user has scrolled
 				setShow(false);
 				setTimeout(() => {
@@ -30,6 +30,10 @@ export function HeaderAd() {
 				setStat(true);
 			}
 		}, 3000);
+
+		return () => {
+			clearTimeout(stickyTime);
+		};
 	}, [path]);
 
 	if (!noAds(path.one)) {
