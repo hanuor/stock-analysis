@@ -1,11 +1,7 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/jsx-no-target-blank */
-/* eslint-disable @next/next/no-img-element */
 import { authState } from 'state/authState';
 import { noAds } from 'components/Ads/noAds';
 import { useNavState } from 'hooks/useNavState';
 import { useEffect, useState } from 'react';
-// import Script from 'next/script';
 
 export function HeaderAd() {
 	const status = authState((state) => state.status);
