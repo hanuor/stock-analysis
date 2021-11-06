@@ -28,6 +28,7 @@ export function HeaderAd() {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			return (
 				<div
+					id="ad-banner"
 					className={
 						show ? 'sticky-head' : stat ? '' : 'sticky-head fade-out'
 					}
