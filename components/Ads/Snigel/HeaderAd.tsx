@@ -15,7 +15,7 @@ export function HeaderAd() {
 		setStat(false);
 
 		setTimeout(() => {
-			// Ad is sticky for 1 second
+			// Ad is sticky for 2 seconds
 			if (window.scrollY > 0) {
 				// Only fade out if user has scrolled
 				setShow(false);
@@ -23,8 +23,10 @@ export function HeaderAd() {
 					// Put ad back in original place after 500ms
 					setStat(true);
 				}, 500);
+			} else {
+				setStat(true);
 			}
-		}, 1500);
+		}, 2000);
 	}, [path]);
 
 	if (!noAds(path.one)) {
