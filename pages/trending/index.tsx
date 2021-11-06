@@ -1,13 +1,15 @@
 import { GetStaticProps } from 'next';
 import { TrendingAll } from 'types/Trending';
 import { SEO } from 'components/SEO';
-import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
 import { SymbolTableSimple } from 'components/Tables/SymbolTableSimple';
 import { getData } from 'functions/API';
 import { Column } from 'react-table';
 import { StockLink } from 'components/Links';
 import { abbreviate } from 'components/StockScreener/functions/abbreviate';
 import { useRouter } from 'next/router';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Features } from 'components/Layout/Sidebar/Features';
 
 interface Props {
 	timestamp: string;
@@ -154,24 +156,40 @@ export default function Trending({ timestamp, data }: Props) {
 
 	return (
 		<>
-			<LayoutSidebar heading="Trending Today" url="/trending/">
-				<SEO
-					title="Today's Top Trending Stocks"
-					description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
-					canonical="/trending/"
-				/>
-				<SymbolTableSimple
-					title="Stocks"
-					columndata={columns}
-					rowdata={data}
-					append="Top"
-				/>
-				<div className="text-sm text-gray-600 mt-1.5">
-					Updated: {timestamp}. Stocks are sorted by pageviews according to
-					Google Analytics. For upcoming IPOs, the price shown is either
-					the estimated price or the midpoint of the price range.
-				</div>
-			</LayoutSidebar>
+			<SEO
+				title="Today's Top Trending Stocks"
+				description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
+				canonical="/trending/"
+			/>
+			<div className="contain">
+				<main id="main" className="w-full py-5 xs:py-6">
+					<Breadcrumbs url="/trending/" />
+					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">
+						Trending Today
+					</h1>
+
+					<div className="lg:grid lg:grid-cols-sidebar gap-10 mt-3 sm:mt-4 lg:mt-5">
+						<div className="">
+							<SymbolTableSimple
+								title="Stocks"
+								columndata={columns}
+								rowdata={data}
+								append="Top"
+							/>
+							<div className="text-sm text-gray-600 mt-1.5">
+								Updated: {timestamp}. Stocks are sorted by pageviews
+								according to Google Analytics. For upcoming IPOs, the
+								price shown is either the estimated price or the
+								midpoint of the price range.
+							</div>
+						</div>
+						<aside className="py-0 space-y-8">
+							<Sidebar1 />
+							<Features />
+						</aside>
+					</div>
+				</main>
+			</div>
 		</>
 	);
 }

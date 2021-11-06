@@ -59,7 +59,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 								</span>
 							);
 						})}
-						{` ... `}
+						{` -- `}
 						<Link href="/trending/">
 							<a className="bll">View All</a>
 						</Link>
