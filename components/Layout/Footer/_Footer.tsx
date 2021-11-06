@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd';
 import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
 import { noAdsRelaxed } from 'components/Ads/noAds';
-// import { LoadAds } from 'components/Ads/Snigel/LoadAds';
+import { LoadAds } from 'components/Ads/Snigel/LoadAds';
 
 const navigation = {
 	sections: [
@@ -33,7 +33,7 @@ export const Footer = () => {
 		<>
 			<div className={isLoggedIn ? 'mt-14' : 'mt-9'}>
 				{status === 'completed' && !isPro && !noAdsRelaxed(path.one) && (
-					<div>boo</div> // <LoadAds />
+					<LoadAds />
 				)}
 				<LazyLoadAd offset={400}>
 					<LoadFooter />
