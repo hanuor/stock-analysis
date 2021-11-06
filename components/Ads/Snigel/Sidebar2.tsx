@@ -10,7 +10,7 @@ export function Sidebar2() {
 	if (!noAds(path.one)) {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			return (
-				<div className="mx-auto text-center hidden lg:block">
+				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
 					<div
 						id="adngin-sidebar_2-0"
 						className="hidden lg:block mx-auto"
