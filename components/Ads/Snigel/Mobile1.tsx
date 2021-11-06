@@ -10,7 +10,10 @@ export function Mobile1() {
 	if (!noAds(path.one)) {
 		if (status !== 'completed' || (status === 'completed' && !isPro)) {
 			return (
-				<div className="mx-auto text-center overflow-x-auto sm:hidden">
+				<div
+					id="ad-banner"
+					className="mx-auto text-center overflow-x-auto sm:hidden"
+				>
 					<div
 						id="adngin-in-content_1_mobile-0 center-children"
 						className="block sm:hidden"

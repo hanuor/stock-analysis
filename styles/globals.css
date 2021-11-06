@@ -758,4 +758,12 @@
 	table.n3-right tr > *:nth-child(n + 4) {
 		text-align: right;
 	}
+
+	.sticky-head {
+		@apply md:sticky md:top-16 md:opacity-100 md:z-10;
+	}
+
+	.fade-out {
+		@apply md:opacity-0 md:-translate-y-full md:transition-all md:duration-500;
+	}
 }

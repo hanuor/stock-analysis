@@ -53,9 +53,7 @@ function getPageAds(path: PathType) {
 			return ['top_leaderboard', 'sidebar_1', 'in-content_1_mobile'];
 		}
 		// Holdings pages
-		if (
-			path.three === 'holdings'
-		) {
+		if (path.three === 'holdings') {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 		}
 	}
