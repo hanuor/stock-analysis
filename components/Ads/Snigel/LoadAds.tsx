@@ -68,10 +68,13 @@ function getPageAds(path: PathType) {
 }
 
 export function LoadAds() {
+	console.log('inside LoadAds');
 	const [ads, setAds] = useState<string[]>([]);
 	const path = navState((state) => state.path);
 
 	useEffect(() => {
+		console.log('inside useeffect');
+
 		const adsArray = getPageAds(path);
 
 		setAds(adsArray);
@@ -81,6 +84,7 @@ export function LoadAds() {
 			window.adngin.adnginLoaderReady
 		) {
 			window.adngin.queue.push(function () {
+				console.log('pushing auction');
 				window.adngin.cmd.startAuction(adsArray);
 			});
 		}

@@ -24,7 +24,7 @@ export function HeaderAd() {
 					setStat(true);
 				}, 500);
 			}
-		}, 1000);
+		}, 1500);
 	}, [path]);
 
 	if (!noAds(path.one)) {
