@@ -2,6 +2,7 @@ import { DropdownSelect } from 'components/StockScreener/_Results/ResultsBody/Dr
 import { screenerState } from 'components/StockScreener/screener.state';
 import { ChevronLeftIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
+import { useUserInfo } from 'hooks/useUserInfo';
 
 interface Props {
 	previousPage: () => void;
@@ -24,6 +25,7 @@ export function TablePagination({
 	nextPage,
 	canNextPage,
 }: Props) {
+	const { isPro } = useUserInfo();
 	const tablePage = screenerState((state) => state.tablePage);
 	const setTablePage = screenerState((state) => state.setTablePage);
 	const setTableSize = screenerState((state) => state.setTableSize);
@@ -34,6 +36,10 @@ export function TablePagination({
 		{ value: 100, name: '100 Rows' },
 		{ value: 200, name: '200 Rows' },
 	];
+
+	if (isPro) {
+		selectOptions.push({ value: 10000, name: 'Show All' });
+	}
 
 	function setSelected(value: number) {
 		setPageSize(value);

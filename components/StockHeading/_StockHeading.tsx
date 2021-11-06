@@ -1,6 +1,6 @@
 import { Info } from 'types/Info';
 import { Title } from 'components/StockHeading/Title';
-import StockPrice from 'components/StockHeading/StockPrice';
+import { StockQuote } from 'components/StockQuote/_StockQuote';
 import { TabNavigation } from 'components/StockHeading/TabNavigation';
 import { TabNavigationETF } from 'components/StockHeading/TabNavigationETF';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
@@ -16,7 +16,7 @@ export default function StockHeading({
 		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-2">
 			<Breadcrumbs url={url} />
 			<Title info={info} />
-			<StockPrice info={info} />
+			<StockQuote info={info} />
 			{info.type === 'stocks' ? (
 				<TabNavigation
 					symbol={info.symbol}

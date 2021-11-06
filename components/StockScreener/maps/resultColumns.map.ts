@@ -47,7 +47,7 @@ export const resultColumns: ColumnsMap = {
 };
 
 export function returnResultColumns(type: string) {
-	if (type == 'stock') {
+	if (type == 'stocks') {
 		return resultColumns;
 	} else {
 		// Change to IPO columns

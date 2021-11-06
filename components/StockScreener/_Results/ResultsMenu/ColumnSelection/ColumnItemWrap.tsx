@@ -34,7 +34,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 	const inactiveArray: ColumnProperties[] = [];
 
 	let filters = [];
-	type == 'stock' ? (filters = FiltersMap) : (filters = IPOFiltersMap);
+	type == 'stocks' ? (filters = FiltersMap) : (filters = IPOFiltersMap);
 
 	filters.forEach((filter) => {
 		if (isShowing(filter.id)) {

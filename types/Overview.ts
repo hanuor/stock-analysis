@@ -46,4 +46,5 @@ export interface Overview {
 	high52?: string;
 	holdingsTable?: HoldingsType;
 	dividendTable?: DividendType[];
+	change1y?: string;
 }

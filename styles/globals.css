@@ -359,7 +359,7 @@
 	}
 
 	.price-chart {
-		@apply flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto hide-scroll;
+		@apply flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto hide-scroll pl-0.5;
 	}
 
 	.price-chart > li > button {
@@ -406,7 +406,7 @@
 		@apply text-green-700;
 	}
 
-	.green-quote.reg::before {
+	.green-quote::before {
 		content: '+';
 	}
 
@@ -636,6 +636,10 @@
 		.ipotable tr > *:nth-child(3) {
 			max-width: 155px;
 		}
+	}
+
+	.center-children div iframe {
+		@apply mx-auto text-center;
 	}
 
 	/* NPROGRESS */

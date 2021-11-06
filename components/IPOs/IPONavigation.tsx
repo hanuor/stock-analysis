@@ -37,6 +37,18 @@ export const IPONavigation = () => {
 							</Link>
 						</li>
 						<li>
+							<Link href="/ipos/statistics/" prefetch={false}>
+								<a
+									data-title="Statistics"
+									className={
+										path.two === 'statistics' ? 'active' : 'inactive'
+									}
+								>
+									Statistics
+								</a>
+							</Link>
+						</li>
+						<li>
 							<Link href="/ipos/screener/" prefetch={false}>
 								<a
 									data-title="Screener"
@@ -57,18 +69,6 @@ export const IPONavigation = () => {
 									}
 								>
 									News
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href="/ipos/statistics/" prefetch={false}>
-								<a
-									data-title="Statistics"
-									className={
-										path.two === 'statistics' ? 'active' : 'inactive'
-									}
-								>
-									Statistics
 								</a>
 							</Link>
 						</li>

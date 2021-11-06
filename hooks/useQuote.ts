@@ -10,7 +10,7 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 		return null;
 	}
 
-	return await getData(`q?i=${id}`);
+	return await getData(`p?i=${id}`);
 }
 
 export function useQuote(info: Info) {
@@ -22,6 +22,7 @@ export function useQuote(info: Info) {
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
+		cacheTime: 0,
 	});
 
 	return data as Quote;
