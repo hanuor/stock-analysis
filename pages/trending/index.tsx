@@ -2,14 +2,15 @@ import { GetStaticProps } from 'next';
 import { TrendingAll } from 'types/Trending';
 import { SEO } from 'components/SEO';
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
-import { SymbolTable } from 'components/Tables/SymbolTable';
+import { SymbolTableSimple } from 'components/Tables/SymbolTableSimple';
 import { getData } from 'functions/API';
 import { Column } from 'react-table';
 import { StockLink } from 'components/Links';
 import { abbreviate } from 'components/StockScreener/functions/abbreviate';
 
 interface Props {
-	trendingData: TrendingAll[];
+	timestamp: string;
+	data: TrendingAll[];
 }
 
 interface CellString {
@@ -20,13 +21,22 @@ interface CellNumber {
 	cell: { value: number };
 }
 
-export const Trending = ({ trendingData }: Props) => {
+export default function Trending({ timestamp, data }: Props) {
+	const format0dec = new Intl.NumberFormat('en-US', {
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 0,
+	});
+
 	const format2dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 2,
 		maximumFractionDigits: 2,
 	});
 
 	const columns: Column[] = [
+		{
+			Header: 'No.',
+			accessor: 'no',
+		},
 		{
 			Header: 'Symbol',
 			accessor: 'symbol',
@@ -74,6 +84,14 @@ export const Trending = ({ trendingData }: Props) => {
 			sortInverted: true,
 		},
 		{
+			Header: 'Views',
+			accessor: 'pageviews',
+			Cell: function FormatCell({ cell: { value } }: CellNumber) {
+				return format0dec.format(value);
+			},
+			sortInverted: true,
+		},
+		{
 			Header: 'Market Cap',
 			accessor: 'marketCap',
 			Cell: function FormatCell({ cell: { value } }: CellNumber) {
@@ -85,13 +103,7 @@ export const Trending = ({ trendingData }: Props) => {
 			sortInverted: true,
 		},
 		{
-			Header: 'Pageviews',
-			accessor: 'pageviews',
-			sortInverted: true,
-		},
-
-		{
-			Header: 'Stock Price',
+			Header: 'Price',
 			accessor: 'price',
 			Cell: ({ cell: { value } }: CellNumber) => {
 				if (!value) {
@@ -101,9 +113,8 @@ export const Trending = ({ trendingData }: Props) => {
 			},
 			sortInverted: true,
 		},
-
 		{
-			Header: 'Stock Change',
+			Header: 'Change',
 			accessor: 'change',
 			sortType: 'alphanumeric',
 			Cell: function FormatCell({ cell: { value } }: CellNumber) {
@@ -119,38 +130,51 @@ export const Trending = ({ trendingData }: Props) => {
 			},
 			sortInverted: true,
 		},
+		{
+			Header: 'Volume',
+			accessor: 'volume',
+			Cell: function FormatCell({ cell: { value } }: CellNumber) {
+				return format0dec.format(value);
+			},
+			sortInverted: true,
+		},
 	];
 
 	return (
 		<>
-			<LayoutSidebar heading="Trending Symbols" url="/Trending/">
+			<LayoutSidebar heading="Trending Today" url="/trending/">
 				<SEO
-					title="List of All Stock Ticker Symbols"
+					title="Today's Top Trending Stocks"
 					description="An overview of all the stock ticker symbols listed. Explore the stock pages to learn about the company’s price history, financials, key stats, and more."
 					canonical="/trending/"
 				/>
-				<SymbolTable
-					title="Symbols"
+				<SymbolTableSimple
+					title="Stocks"
 					columndata={columns}
-					rowdata={trendingData}
+					rowdata={data}
 				/>
+				<div className="text-sm text-gray-700 mt-1.5">
+					Updated: {timestamp}. Stocks are sorted by pageviews according to
+					Google Analytics.
+				</div>
 			</LayoutSidebar>
 		</>
 	);
-};
-
-export default Trending;
+}
 
 export const getStaticProps: GetStaticProps = async () => {
-	const trendingData = await getData('trending?q=trendingAll');
+	const raw = await getData('trending?q=trendingAll');
 
-	if (trendingData.length > 19) {
-		trendingData.splice(20, trendingData.length - 20);
+	const { timestamp, data } = raw;
+
+	if (data.length > 19) {
+		data.splice(20, data.length - 20);
 	}
 	return {
 		props: {
-			trendingData,
+			timestamp,
+			data,
 		},
-		revalidate: 10 * 60,
+		revalidate: 30 * 60,
 	};
 };

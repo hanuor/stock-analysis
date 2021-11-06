@@ -12,9 +12,9 @@ const SplitsFilter = dynamic(() => import('components/Controls/SplitsFilter'), {
 interface Props {
 	count: number;
 	title: string;
-	useAsyncDebounce: (value: any, wait: number) => any;
-	globalFilter: any;
-	setGlobalFilter: (filterValue: FilterValue) => void;
+	useAsyncDebounce?: (value: any, wait: number) => any;
+	globalFilter?: any;
+	setGlobalFilter?: (filterValue: FilterValue) => void;
 	tableId: string;
 	append?: string;
 	setColumnFilter?: (columId: string, updater: any) => void;
@@ -52,13 +52,15 @@ export const Controls = ({
 					tableId={tableId}
 				/>
 			</div>
-			<div>
-				<Filter
-					useAsyncDebounce={useAsyncDebounce}
-					globalFilter={globalFilter}
-					setGlobalFilter={setGlobalFilter}
-				/>
-			</div>
+			{useAsyncDebounce && setGlobalFilter && (
+				<div>
+					<Filter
+						useAsyncDebounce={useAsyncDebounce}
+						globalFilter={globalFilter}
+						setGlobalFilter={setGlobalFilter}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -22,26 +22,13 @@ interface StockType {
 	mcap?: number;
 }
 
-interface TrendingStockType {
-	price: number;
-	name: string;
-	pageviews: number;
-	marketcap: number;
-	change: number;
-}
-
 interface Props {
 	title: string;
 	columndata: Column[];
-	rowdata: StockType[] | TrendingStockType[];
+	rowdata: StockType[];
 }
 
 export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
-	function isTrendingStockTypeCheck(object: any): object is TrendingStockType {
-		return 'pageviews' in object;
-	}
-	const isTrendingStockType: boolean = isTrendingStockTypeCheck(rowdata[0]);
-
 	const tablePage = tableState((state) => state.tablePage);
 	const setTablePage = tableState((state) => state.setTablePage);
 	const tableSize = tableState((state) => state.tableSize);
@@ -130,62 +117,56 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			{!isTrendingStockType && (
-				<>
-					<nav className="mt-2.5 px-1 flex flex-row justify-between space-x-2 text-sm sm:text-base">
-						<button
-							onClick={() => {
-								previousPage();
-								setTablePage(tablePage - 2);
-							}}
-							disabled={!canPreviousPage}
-							className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-						>
-							{`< Previous`}
-						</button>
-						<div className="flex flex-row items-center space-x-3 xs:space-x-4">
-							<span className="whitespace-nowrap">
-								<span className="hidden xs:inline">Page </span>
-								{`${pageIndex + 1} of ${pageOptions.length}`}
-							</span>
-							<select
-								value={pageSize}
-								onChange={(e) => {
-									setPageSize(Number(e.target.value));
-									setTableSize(Number(e.target.value));
-									setTablePage(0);
-								}}
-								name="perpage"
-								className="block w-full pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 py-1.5 xs:py-2 border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md text-sm sm:text-base"
-							>
-								<option value="500">500</option>
-								<option value="1000">1000</option>
-								<option value="10000">10000</option>
-							</select>
-						</div>
-						<button
-							onClick={() => {
-								nextPage();
-								setTablePage(tablePage + 1);
-							}}
-							disabled={!canNextPage}
-							className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-						>
-							{`Next >`}
-						</button>
-					</nav>
-					<div className="text-center mt-6">
-						<button
-							className="bll text-lg"
-							onClick={() =>
-								window.scrollTo({ top: 0, behavior: 'smooth' })
-							}
-						>
-							Back to Top &#8593;
-						</button>
-					</div>
-				</>
-			)}
+			<nav className="mt-2.5 px-1 flex flex-row justify-between space-x-2 text-sm sm:text-base">
+				<button
+					onClick={() => {
+						previousPage();
+						setTablePage(tablePage - 2);
+					}}
+					disabled={!canPreviousPage}
+					className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+				>
+					{`< Previous`}
+				</button>
+				<div className="flex flex-row items-center space-x-3 xs:space-x-4">
+					<span className="whitespace-nowrap">
+						<span className="hidden xs:inline">Page </span>
+						{`${pageIndex + 1} of ${pageOptions.length}`}
+					</span>
+					<select
+						value={pageSize}
+						onChange={(e) => {
+							setPageSize(Number(e.target.value));
+							setTableSize(Number(e.target.value));
+							setTablePage(0);
+						}}
+						name="perpage"
+						className="block w-full pl-2 xs:pl-2.5 sm:pl-3 pr-8 xs:pr-9 sm:pr-10 py-1.5 xs:py-2 border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md text-sm sm:text-base"
+					>
+						<option value="500">500</option>
+						<option value="1000">1000</option>
+						<option value="10000">10000</option>
+					</select>
+				</div>
+				<button
+					onClick={() => {
+						nextPage();
+						setTablePage(tablePage + 1);
+					}}
+					disabled={!canNextPage}
+					className="relative inline-flex items-center px-1 xs:px-1.5 sm:px-4 py-1.5 xs:py-2 whitespace-nowrap border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+				>
+					{`Next >`}
+				</button>
+			</nav>
+			<div className="text-center mt-6">
+				<button
+					className="bll text-lg"
+					onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+				>
+					Back to Top &#8593;
+				</button>
+			</div>
 		</>
 	);
 };
