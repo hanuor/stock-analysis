@@ -15,7 +15,6 @@ export function Tab({ symbol, title, append }: TabI) {
 			<Link
 				href={`/stocks/${symbol}/${append ? append + '/' : ''}`}
 				prefetch={false}
-				scroll={false}
 			>
 				<a
 					className={
