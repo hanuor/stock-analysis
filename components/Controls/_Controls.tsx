@@ -34,7 +34,7 @@ export const Controls = ({
 		<div className="flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1">
 			<div className="mr-auto">
 				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
-					{`${append}${count} ${title}`}
+					{`${append && append + ' '}${count} ${title}`}
 				</h2>
 			</div>
 			{setColumnFilter && (

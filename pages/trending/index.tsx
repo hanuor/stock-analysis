@@ -7,19 +7,25 @@ import { getData } from 'functions/API';
 import { Column } from 'react-table';
 import { StockLink } from 'components/Links';
 import { abbreviate } from 'components/StockScreener/functions/abbreviate';
+import { useRouter } from 'next/router';
 
 interface Props {
 	timestamp: string;
 	data: TrendingAll[];
 }
 
-interface CellString {
-	cell: { value: string };
-}
-
-interface CellNumber {
-	cell: { value: number };
-}
+const IPO = () => {
+	const router = useRouter();
+	return (
+		<div
+			className="bll cursor-pointer"
+			onClick={() => router.push('/ipos/calendar/')}
+			title="This is an upcoming IPO. Click to see the calendar."
+		>
+			IPO
+		</div>
+	);
+};
 
 export default function Trending({ timestamp, data }: Props) {
 	const format0dec = new Intl.NumberFormat('en-US', {
@@ -40,7 +46,7 @@ export default function Trending({ timestamp, data }: Props) {
 		{
 			Header: 'Symbol',
 			accessor: 'symbol',
-			Cell: function DateCell({ cell: { value } }: CellString) {
+			Cell: function DateCell({ cell: { value } }: any) {
 				if (value.startsWith('=')) {
 					return value.slice(1);
 				}
@@ -86,7 +92,7 @@ export default function Trending({ timestamp, data }: Props) {
 		{
 			Header: 'Views',
 			accessor: 'pageviews',
-			Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			Cell: function FormatCell({ cell: { value } }: any) {
 				return format0dec.format(value);
 			},
 			sortInverted: true,
@@ -94,7 +100,7 @@ export default function Trending({ timestamp, data }: Props) {
 		{
 			Header: 'Market Cap',
 			accessor: 'marketCap',
-			Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			Cell: function FormatCell({ cell: { value } }: any) {
 				if (!value) {
 					return 'n/a';
 				}
@@ -105,11 +111,11 @@ export default function Trending({ timestamp, data }: Props) {
 		{
 			Header: 'Price',
 			accessor: 'price',
-			Cell: ({ cell: { value } }: CellNumber) => {
+			Cell: ({ cell: { value } }: any) => {
 				if (!value) {
 					return 'n/a';
 				}
-				return '$' + value.toFixed(2);
+				return '$' + Number(value).toFixed(2);
 			},
 			sortInverted: true,
 		},
@@ -117,7 +123,10 @@ export default function Trending({ timestamp, data }: Props) {
 			Header: 'Change',
 			accessor: 'change',
 			sortType: 'alphanumeric',
-			Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			Cell: function FormatCell({ cell: { value } }: any) {
+				if (value === 'IPO') {
+					return <IPO />;
+				}
 				const fixed = value ? value + '%' : 'n/a';
 
 				if (value > 0) {
@@ -133,7 +142,10 @@ export default function Trending({ timestamp, data }: Props) {
 		{
 			Header: 'Volume',
 			accessor: 'volume',
-			Cell: function FormatCell({ cell: { value } }: CellNumber) {
+			Cell: function FormatCell({ cell: { value } }: any) {
+				if (value === 'IPO') {
+					return <IPO />;
+				}
 				return format0dec.format(value);
 			},
 			sortInverted: true,
@@ -145,17 +157,19 @@ export default function Trending({ timestamp, data }: Props) {
 			<LayoutSidebar heading="Trending Today" url="/trending/">
 				<SEO
 					title="Today's Top Trending Stocks"
-					description="An overview of all the stock ticker symbols listed. Explore the stock pages to learn about the company’s price history, financials, key stats, and more."
+					description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
 					canonical="/trending/"
 				/>
 				<SymbolTableSimple
 					title="Stocks"
 					columndata={columns}
 					rowdata={data}
+					append="Top"
 				/>
-				<div className="text-sm text-gray-700 mt-1.5">
+				<div className="text-sm text-gray-600 mt-1.5">
 					Updated: {timestamp}. Stocks are sorted by pageviews according to
-					Google Analytics.
+					Google Analytics. For upcoming IPOs, the price shown is either
+					the estimated price or the midpoint of the price range.
 				</div>
 			</LayoutSidebar>
 		</>

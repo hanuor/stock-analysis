@@ -17,6 +17,7 @@ type Props = {
 	title: string;
 	columndata: Column[];
 	rowdata: TrendingType[];
+	append?: string;
 };
 
 /**
@@ -26,7 +27,12 @@ type Props = {
  * @param {TrendingType[]} rowdata  The data to display
  * @return {JSX.Element}
  */
-export function SymbolTableSimple({ title, columndata, rowdata }: Props) {
+export function SymbolTableSimple({
+	title,
+	columndata,
+	rowdata,
+	append,
+}: Props) {
 	const columns = useMemo(() => columndata, [columndata]);
 	const data = useMemo(() => rowdata, [rowdata]);
 
@@ -44,6 +50,7 @@ export function SymbolTableSimple({ title, columndata, rowdata }: Props) {
 				count={rows.length}
 				title={title}
 				tableId="symbol-table-simple"
+				append={append}
 			/>
 			<div className="overflow-x-auto">
 				<table className="symbol-table n3-right" id="symbol-table-simple">
