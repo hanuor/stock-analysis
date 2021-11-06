@@ -15,11 +15,11 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 					<div className="mx-auto text-center overflow-x-auto">
 						<div
 							id="adngin-sidebar_1-0"
-							className="hidden lg:block lg:min-h-[301px] mx-auto"
+							className="hidden lg:block lg:min-h-[301px] mx-auto center-children"
 						></div>
 						<div
 							id="adngin-in-content_1_mobile-0"
-							className="block mt-1 sm:hidden"
+							className="block mt-1 sm:hidden center-children"
 						></div>
 					</div>
 				);
@@ -28,7 +28,7 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 					<div className="mx-auto text-center overflow-x-auto">
 						<div
 							id="adngin-in-content_1_mobile-0"
-							className="block mt-1 sm:hidden"
+							className="block mt-1 sm:hidden center-children"
 						></div>
 					</div>
 				);
