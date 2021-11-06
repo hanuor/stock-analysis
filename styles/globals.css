@@ -760,7 +760,7 @@
 	}
 
 	.sticky-head {
-		@apply md:sticky md:top-16 md:opacity-100 md:z-10;
+		@apply md:sticky md:top-16 md:opacity-100 md:z-30;
 	}
 
 	.fade-out {

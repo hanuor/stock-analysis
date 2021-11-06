@@ -308,7 +308,7 @@ export const FinancialTable = ({
 						<TooltipChart
 							render={(attrs) => (
 								<div
-									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-20"
 									tabIndex={-1}
 									{...attrs}
 								>

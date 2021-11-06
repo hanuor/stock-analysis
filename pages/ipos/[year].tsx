@@ -45,7 +45,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url={`/ipos/${year}/`} />
-					<h1 className="hh1">{year} IPOs</h1>
+					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
