@@ -11,15 +11,18 @@ export function HeaderAd() {
 	const [stat, setStat] = useState(false);
 
 	useEffect(() => {
+		setShow(true); // Show ad each time the path is changed
+		setStat(false);
+
 		setTimeout(() => {
 			// Ad is sticky for 1 second
 			if (window.scrollY > 0) {
 				// Only fade out if user has scrolled
 				setShow(false);
 				setTimeout(() => {
-					// Put ad back in original place after 400ms
+					// Put ad back in original place after 500ms
 					setStat(true);
-				}, 400);
+				}, 500);
 			}
 		}, 1000);
 	}, [path]);
