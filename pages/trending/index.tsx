@@ -6,7 +6,7 @@ import { getData } from 'functions/API';
 import { Column } from 'react-table';
 import { StockLink } from 'components/Links';
 import { abbreviate } from 'components/StockScreener/functions/abbreviate';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
 import { Features } from 'components/Layout/Sidebar/Features';
@@ -17,16 +17,17 @@ interface Props {
 }
 
 const IPO = () => {
-	const router = useRouter();
-	return (
-		<div
-			className="bll cursor-pointer"
-			onClick={() => router.push('/ipos/calendar/')}
-			title="This is an upcoming IPO. Click to see the calendar."
-		>
-			IPO
-		</div>
-	);
+	return <span title="Upcoming IPO">IPO</span>;
+	// const router = useRouter();
+	// return (
+	// 	<div
+	// 		className="cursor-pointer"
+	// 		onClick={() => router.push('/ipos/calendar/')}
+	// 		title="This is an upcoming IPO. Click to see the calendar."
+	// 	>
+	// 		IPO
+	// 	</div>
+	// );
 };
 
 export default function Trending({ timestamp, data }: Props) {
