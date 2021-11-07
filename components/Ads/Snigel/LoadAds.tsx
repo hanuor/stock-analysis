@@ -105,7 +105,6 @@ export function LoadAds() {
 						);
 					}
 				}
-				console.log(adsArray);
 				window.adngin.cmd.startAuction(adsArray);
 			});
 		}
