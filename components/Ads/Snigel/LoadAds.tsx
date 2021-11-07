@@ -29,6 +29,9 @@ function getPageAds(path: PathType) {
 		if (path.two === 'statistics') {
 			return ['top_leaderboard', 'sidebar_1'];
 		}
+		if (path.two === 'screener') {
+			return ['top_leaderboard'];
+		}
 		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
 	}
 
@@ -58,6 +61,16 @@ function getPageAds(path: PathType) {
 		}
 	}
 
+	// Screener page
+	if (path.one === 'screener') {
+		return ['top_leaderboard'];
+	}
+
+	// Trending page
+	if (path.one === 'trending') {
+		return ['top_leaderboard', 'sidebar_1'];
+	}
+
 	// Mostly article pages
 	if (path.one !== 'stocks' && path.one !== 'etf') {
 		return ['top_leaderboard', 'sidebar_1', 'sidebar_2'];
@@ -72,7 +85,7 @@ export function LoadAds() {
 	const path = navState((state) => state.path);
 
 	useEffect(() => {
-		const adsArray = getPageAds(path);
+		let adsArray = getPageAds(path);
 
 		setAds(adsArray);
 		if (
@@ -81,6 +94,9 @@ export function LoadAds() {
 			window.adngin.adnginLoaderReady
 		) {
 			window.adngin.queue.push(function () {
+				if (window.innerWidth && window.innerWidth > 768) {
+					adsArray = adsArray.filter((ad) => ad !== 'in-content_1_mobile');
+				}
 				console.log(adsArray);
 				window.adngin.cmd.startAuction(adsArray);
 			});
