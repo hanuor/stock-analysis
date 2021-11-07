@@ -15,8 +15,8 @@ export function Mobile1() {
 					className="mx-auto text-center overflow-x-auto sm:hidden"
 				>
 					<div
-						id="adngin-in-content_1_mobile-0 center-children"
-						className="block sm:hidden"
+						id="adngin-in-content_1_mobile-0"
+						className="block sm:hidden center-children"
 					></div>
 				</div>
 			);
