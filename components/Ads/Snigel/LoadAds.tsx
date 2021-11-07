@@ -62,7 +62,7 @@ function getPageAds(path: PathType) {
 	}
 
 	// Screener page
-	if (path.one === 'screener') {
+	if (path.one === 'stock-screener') {
 		return ['top_leaderboard'];
 	}
 
@@ -94,8 +94,16 @@ export function LoadAds() {
 			window.adngin.adnginLoaderReady
 		) {
 			window.adngin.queue.push(function () {
-				if (window.innerWidth && window.innerWidth > 768) {
-					adsArray = adsArray.filter((ad) => ad !== 'in-content_1_mobile');
+				if (window.innerWidth) {
+					if (window.innerWidth >= 768) {
+						adsArray = adsArray.filter(
+							(ad) => ad !== 'in-content_1_mobile'
+						);
+					} else if (window.innerWidth < 768) {
+						adsArray = adsArray.filter(
+							(ad) => ad === 'in-content_1_mobile'
+						);
+					}
 				}
 				console.log(adsArray);
 				window.adngin.cmd.startAuction(adsArray);
