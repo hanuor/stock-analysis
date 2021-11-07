@@ -7,6 +7,7 @@ declare global {
 	// eslint-disable-next-line no-unused-vars
 	interface Window {
 		adngin: any;
+		snigelPubConf: any;
 	}
 }
 
@@ -81,10 +82,11 @@ export function LoadAds() {
 			window.adngin.adnginLoaderReady
 		) {
 			window.adngin.queue.push(function () {
+				window.snigelPubConf = { adengine: { activeAdUnits: ads } };
 				window.adngin.cmd.startAuction(adsArray);
 			});
 		}
-	}, [path]);
+	}, [ads, path]);
 
 	if (
 		typeof window === 'undefined' ||

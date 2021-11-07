@@ -62,7 +62,7 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 				<tr>
 					<td>Open</td>
-					<td>{q?.o && q.o !== '0.00' ? q.v : 'n/a'}</td>
+					<td>{q?.o && q.o !== '0.00' ? q.o : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>{previous}</td>
