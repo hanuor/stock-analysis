@@ -81,6 +81,7 @@ export function LoadAds() {
 			window.adngin.adnginLoaderReady
 		) {
 			window.adngin.queue.push(function () {
+				console.log(adsArray);
 				window.adngin.cmd.startAuction(adsArray);
 			});
 		}
