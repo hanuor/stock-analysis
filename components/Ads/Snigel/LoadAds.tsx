@@ -102,7 +102,8 @@ export function LoadAds() {
 						);
 					} else if (window.innerWidth < 768) {
 						adsArray = adsArray.filter(
-							(ad) => ad === 'in-content_1_mobile'
+							(ad) =>
+								ad === 'in-content_1_mobile' || ad === 'top_leaderboard'
 						);
 					}
 				}
