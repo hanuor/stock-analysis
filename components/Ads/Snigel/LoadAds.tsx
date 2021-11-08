@@ -110,7 +110,7 @@ export function LoadAds() {
 				window.adngin.cmd.startAuction(adsArray);
 			});
 		}
-	}, [ads, path]);
+	}, [path]);
 
 	if (
 		typeof window === 'undefined' ||
