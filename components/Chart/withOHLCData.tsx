@@ -130,7 +130,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					});
 			}
 
-			public render() {
+			public componentDidUpdate() {
 				let { data, period, stockId, time, saveData } = this.state;
 				const newState: WithOHLCState = this.props;
 
@@ -281,6 +281,10 @@ export function withOHLCData(dataSet = 'DAILY') {
 							});
 					}
 				}
+			}
+
+			public render() {
+				const { data } = this.state;
 
 				if (data === undefined) {
 					return <div></div>;
