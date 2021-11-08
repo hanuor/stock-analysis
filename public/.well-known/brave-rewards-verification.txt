@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: stockanalysis.com
+Token: f8999818a7666fc3a461a4b6b7cbdc7aebb438e26359e94cf17d80424d65e9a6
