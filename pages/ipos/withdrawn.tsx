@@ -30,13 +30,13 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 			/>
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
-					<Breadcrumbs url="/ipos/calendar/" />
+					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>
 					<IPONavigation path="calendar" />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
 							<CalendarNavigation path="withdrawn" />
-							<div className="flex flex-col space-y-4 sm:space-y-7 py-2 lg:py-4">
+							<div className="py-2 lg:py-4">
 								<CalendarTable
 									title={`${count} IPOs`}
 									data={data}
