@@ -1,9 +1,6 @@
 import Link from 'next/link';
-import { navState } from 'state/navState';
 
-export const IPONavigation = () => {
-	const path = navState((state) => state.path);
-
+export function IPONavigation({ path }: { path: string }) {
 	return (
 		<div className="mb-1">
 			<div>
@@ -13,14 +10,9 @@ export const IPONavigation = () => {
 							<Link href="/ipos/" prefetch={false}>
 								<a
 									data-title="IPOs"
-									className={
-										!path.two ||
-										['#', '2021', '2020', '2019'].includes(path.two)
-											? 'active'
-											: 'inactive'
-									}
+									className={!path ? 'active' : 'inactive'}
 								>
-									IPOs
+									Recent
 								</a>
 							</Link>
 						</li>
@@ -29,7 +21,7 @@ export const IPONavigation = () => {
 								<a
 									data-title="Calendar"
 									className={
-										path.two === 'calendar' ? 'active' : 'inactive'
+										path === 'calendar' ? 'active' : 'inactive'
 									}
 								>
 									Calendar
@@ -41,7 +33,7 @@ export const IPONavigation = () => {
 								<a
 									data-title="Statistics"
 									className={
-										path.two === 'statistics' ? 'active' : 'inactive'
+										path === 'statistics' ? 'active' : 'inactive'
 									}
 								>
 									Statistics
@@ -53,7 +45,7 @@ export const IPONavigation = () => {
 								<a
 									data-title="Screener"
 									className={
-										path.two === 'screener' ? 'active' : 'inactive'
+										path === 'screener' ? 'active' : 'inactive'
 									}
 								>
 									Screener
@@ -64,9 +56,7 @@ export const IPONavigation = () => {
 							<Link href="/ipos/news/" prefetch={false}>
 								<a
 									data-title="News"
-									className={
-										path.two === 'news' ? 'active' : 'inactive'
-									}
+									className={path === 'news' ? 'active' : 'inactive'}
 								>
 									News
 								</a>
@@ -77,4 +67,4 @@ export const IPONavigation = () => {
 			</div>
 		</div>
 	);
-};
+}

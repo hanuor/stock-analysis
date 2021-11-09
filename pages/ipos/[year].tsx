@@ -5,8 +5,8 @@ import { News } from 'types/News';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { RecentTable } from 'components/IPOs/RecentTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
-import { SubNavigation } from 'components/IPOs/SubNavigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
+import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { InfoBox } from 'components/InfoBox';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
@@ -46,10 +46,10 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
-					<IPONavigation />
+					<IPONavigation path="" />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
-							<SubNavigation />
+							<RecentNavigation path={year} />
 							<div className="mt-4 mb-2 lg:mb-3">
 								<InfoBox text={data.info} />
 							</div>

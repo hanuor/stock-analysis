@@ -22,7 +22,6 @@ export function useQuote(info: Info) {
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
-		cacheTime: 0,
 	});
 
 	return data as Quote;

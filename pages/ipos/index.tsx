@@ -4,8 +4,8 @@ import { News } from 'types/News';
 import { getIpoData } from 'functions/callBackEnd';
 import { SEO } from 'components/SEO';
 import { RecentTable } from 'components/IPOs/RecentTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
-import { SubNavigation } from 'components/IPOs/SubNavigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
+import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
@@ -22,7 +22,7 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 	return (
 		<>
 			<SEO
-				title="Last 200 IPOs"
+				title="200 Most Recent IPOs"
 				description="Detailed information the last 200 IPOs (initial public offerings) on the stock market. Includes IPO prices, dates, total returns and more."
 				canonical="/ipos/"
 			/>
@@ -30,11 +30,11 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url="/ipos/" />
 					<h1 className="hh1">Recent IPOs</h1>
-					<IPONavigation />
+					<IPONavigation path="" />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
-							<SubNavigation />
+							<RecentNavigation path="" />
 							<RecentTable rawdata={data} />
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">

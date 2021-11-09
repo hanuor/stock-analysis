@@ -66,6 +66,8 @@ export function FinancialSource({ info }: { info: Info }) {
 		);
 	}
 
+	if (info.exchange === 'OTCMKTS') return null;
+
 	if (info.currency !== 'USD') {
 		return (
 			<div className="text-[0.85rem] text-gray-600 mt-2">
