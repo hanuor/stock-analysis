@@ -151,7 +151,7 @@ export const CalendarTable = ({
 					border ? ' pt-1.5 border-t' : ''
 				}`}
 			>
-				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0.5 mr-auto">
+				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
 					{title}
 				</h2>
 				<div className="hidden sm:block">

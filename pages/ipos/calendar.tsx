@@ -36,7 +36,7 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
 							<CalendarNavigation path="calendar" />
-							<div className="flex flex-col space-y-4 sm:space-y-7 py-2 lg:py-4">
+							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7 py-2 lg:py-4">
 								<CalendarTable
 									title="IPOs This Week"
 									data={data.thisweek}
