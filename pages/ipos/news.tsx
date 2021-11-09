@@ -3,7 +3,7 @@ import { News } from 'types/News';
 import { IpoUpcoming, IpoRecent } from 'types/Ipos';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { NewsFeed } from 'components/News/_NewsFeed';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
@@ -30,7 +30,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 					<div className="contain">
 						<Breadcrumbs url="/ipos/news/" />
 						<h1 className="hh1">IPO News</h1>
-						<IPONavigation />
+						<IPONavigation path="news" />
 					</div>
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">

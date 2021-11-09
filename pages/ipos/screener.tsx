@@ -6,7 +6,7 @@ import { getData } from 'functions/API';
 import { SEO } from 'components/SEO';
 import { StockScreener } from 'components/StockScreener/_StockScreener';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
 
 export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 	const fullCount = screenerDataState((state) => state.fullCount);
@@ -38,7 +38,7 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url="/ipos/screener/" />
 					<h1 className="hh1">IPO Screener</h1>
-					<IPONavigation />
+					<IPONavigation path="screener" />
 					<div className="mt-4">
 						<StockScreener />
 					</div>

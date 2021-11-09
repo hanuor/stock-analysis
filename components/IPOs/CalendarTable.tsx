@@ -81,7 +81,7 @@ const columns: Column[] = [
 
 const NoIpos = ({ title }: { title: string }) => {
 	switch (title) {
-		case 'This Week': {
+		case 'IPOs This Week': {
 			return (
 				<div>
 					<h2 className="hh2 mb-2">{title} (0)</h2>
@@ -112,11 +112,21 @@ interface Props {
 	title: string;
 	data: IpoUpcoming[];
 	tableId: string;
+	border?: boolean;
+	filter?: boolean;
 }
 
-export const CalendarTable = ({ title, data, tableId }: Props) => {
+export const CalendarTable = ({
+	title,
+	data,
+	tableId,
+	border,
+	filter,
+}: Props) => {
+	const initialState = !data[0].date ? { hiddenColumns: ['date'] } : {};
+
 	const tableInstance = useTable(
-		{ columns, data },
+		{ columns, data, initialState },
 		useGlobalFilter,
 		useSortBy
 	);
@@ -136,9 +146,13 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 
 	return (
 		<div>
-			<div className="flex items-end space-x-6 mb-1.5">
+			<div
+				className={`flex items-end space-x-6 mb-1.5${
+					border ? ' pt-1.5 border-t' : ''
+				}`}
+			>
 				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0.5 mr-auto">
-					{title} ({count})
+					{title}
 				</h2>
 				<div className="hidden sm:block">
 					<Export
@@ -158,7 +172,7 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 						tableId={tableId}
 					/>
 				</div>
-				{title === 'Unscheduled' && (
+				{filter && (
 					<div className="hidden md:block">
 						<Filter
 							useAsyncDebounce={useAsyncDebounce}

@@ -3,7 +3,7 @@ import { IpoRecent } from 'types/Ipos';
 import { News } from 'types/News';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { StatsChartAnnual } from 'components/IPOs/StatsChartAnnual';
 import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly';
@@ -11,7 +11,6 @@ import Link from 'next/link';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-
 
 interface Props {
 	data: {
@@ -37,7 +36,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url="/ipos/statistics/" />
 					<h1 className="hh1">IPO Statistics</h1>
-					<IPONavigation />
+					<IPONavigation path="statistics" />
 
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="flex flex-col space-y-3 py-3 sm:py-4">
