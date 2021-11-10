@@ -23,9 +23,9 @@ export const MAP_RATIOS = [
 		title: 'Enterprise Value',
 		format: 'reduce_precision',
 		tooltip:
-			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and cash levels.",
+			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and levels of cash and short-term investments.",
 		formula:
-			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents',
+			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments',
 	},
 	{
 		id: 'pe',
@@ -208,9 +208,9 @@ export const MAP_RATIOS = [
 		title: 'Buyback Yield / Dilution',
 		format: 'percentage',
 		tooltip:
-			'The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.',
+			'The buyback yield measures whether the company is returning cash to shareholders via share buybacks or diluting shareholder ownership by issuing shares. A positive number indicates net buybacks. A negative number implies net share issuance and shareholder dilution.',
 		formula:
-			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%',
+			'Buyback Yield = (Shares Before - Shares Now) / Shares Before * 100%',
 	},
 	{
 		id: 'totalreturn',

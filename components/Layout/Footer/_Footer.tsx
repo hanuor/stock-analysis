@@ -4,8 +4,8 @@ import { useUserInfo } from 'hooks/useUserInfo';
 import Link from 'next/link';
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd';
 import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
-import Script from 'next/script';
-import { noAds } from 'components/Ads/noAds';
+import { noAdsRelaxed } from 'components/Ads/noAds';
+import { LoadAds } from 'components/Ads/Snigel/LoadAds';
 
 const navigation = {
 	sections: [
@@ -32,11 +32,8 @@ export const Footer = () => {
 	return (
 		<>
 			<div className={isLoggedIn ? 'mt-14' : 'mt-9'}>
-				{status === 'completed' && !isPro && !noAds(path.one) && (
-					<Script
-						id="snigel-script"
-						src="https://cdn.snigelweb.com/adengine/stockanalysis.com/loader.js"
-					/>
+				{status === 'completed' && !isPro && !noAdsRelaxed(path.one) && (
+					<LoadAds />
 				)}
 				<LazyLoadAd offset={400}>
 					<LoadFooter />
@@ -70,11 +67,10 @@ export const Footer = () => {
 											<li>
 												<Link href="/contact/" prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
-														Contact
+														Contact Us
 													</a>
 												</Link>
 											</li>
-
 											<li>
 												<Link href="/login/" prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
@@ -253,8 +249,23 @@ export const Footer = () => {
 							</p>
 						</div>
 						<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
-							Real-time quotes provided by IEX Cloud. Other market data
-							is delayed by at least 15 minutes.
+							Real-time quotes provided by{' '}
+							<a
+								href="https://iexcloud.io/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-gray-300 hover:text-white"
+							>
+								IEX Cloud
+							</a>
+							. Other market data may be delayed by 15 minutes or more.
+						</div>
+						<div
+							id="ccpa"
+							className="text-center text-gray-300 cursor-pointer"
+							style={{ display: 'none' }}
+						>
+							Do not share my personal information.
 						</div>
 					</div>
 				</footer>

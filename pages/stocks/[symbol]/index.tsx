@@ -12,6 +12,7 @@ import { Profile } from 'components/Overview/ProfileWidget';
 import { NewsArea } from 'components/Overview/NewsArea';
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget';
 import { AnalystWidget } from 'components/Overview/AnalystWidget';
+import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview';
 
 interface Props {
 	info: Info;
@@ -42,11 +43,12 @@ const StockOverview = ({ info, data, news }: Props) => {
 				</div>
 				<div className="order-1 flex flex-row gap-4">
 					<InfoTable data={data} />
-					<QuoteTable data={data} quote={info.quote} />
+					<QuoteTable data={data} info={info} />
 				</div>
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
 				<div className="px-4 lg:pt-1 md:px-0 lg:order-2 space-y-6">
+					<Sidebar1Overview news={news.data} />
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
@@ -73,7 +75,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams;
-	return await getPageData('overview', symbol, 600);
+	return await getPageData('overview', symbol, 300);
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

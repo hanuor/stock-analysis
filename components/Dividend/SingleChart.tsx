@@ -124,7 +124,6 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 									} else if (Number(str) < 1) {
 										str = format('.3~f')(str);
 									}
-									str = '$' + str;
 								}
 
 								// const str = dataset.data[last];
@@ -195,7 +194,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 											value = parseFloat(value);
 										}
 										const newvalue = value.toFixed(2);
-										return '$' + newvalue;
+										return newvalue;
 									}
 									return value + '%';
 								},
@@ -251,7 +250,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 								label: function (context: { parsed: { y: number } }) {
 									if (type === 'amount') {
 										const newvalue = context.parsed.y.toFixed(3);
-										return '$' + newvalue;
+										return newvalue;
 									}
 									const newvalue = context.parsed.y.toFixed(2);
 									return newvalue + '%';

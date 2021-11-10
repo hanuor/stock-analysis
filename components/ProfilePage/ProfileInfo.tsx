@@ -65,7 +65,7 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 							</td>
 						</tr>
 					)}
-					{info.sector && (
+					{info.sector && info.sector !== 'Blank Check / SPAC' && (
 						<tr>
 							<td className="py-1.5 lg:py-2 px-1 font-semibold">
 								Sector

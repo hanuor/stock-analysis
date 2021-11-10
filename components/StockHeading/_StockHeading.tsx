@@ -1,12 +1,9 @@
 import { Info } from 'types/Info';
 import { Title } from 'components/StockHeading/Title';
-import StockPrice from 'components/StockHeading/StockPrice';
+import { StockQuote } from 'components/StockQuote/_StockQuote';
 import { TabNavigation } from 'components/StockHeading/TabNavigation';
 import { TabNavigationETF } from 'components/StockHeading/TabNavigationETF';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { QueryClient, QueryClientProvider } from 'react-query';
-
-const queryClient = new QueryClient();
 
 export default function StockHeading({
 	info,
@@ -18,10 +15,8 @@ export default function StockHeading({
 	return (
 		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-2">
 			<Breadcrumbs url={url} />
-			<QueryClientProvider client={queryClient}>
-				<Title info={info} />
-				<StockPrice info={info} />
-			</QueryClientProvider>
+			<Title info={info} />
+			<StockQuote info={info} />
 			{info.type === 'stocks' ? (
 				<TabNavigation
 					symbol={info.symbol}

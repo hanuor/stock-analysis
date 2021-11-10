@@ -18,6 +18,7 @@ export default function NewsAd1() {
 	return (
 		<>
 			<div
+				id="ad-banner"
 				className="dianomi_context min-h-[150px]"
 				data-dianomi-context-id="410"
 			></div>

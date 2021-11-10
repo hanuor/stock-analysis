@@ -28,6 +28,7 @@ import { Tooltip } from './Tooltip';
 import { TooltipChart } from './TooltipChart';
 import { Unavailable } from 'components/Unavailable';
 import { getStockFinancialsFull } from 'functions/callBackEnd';
+import { FinancialSource } from './FinancialSource';
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
 
@@ -185,10 +186,27 @@ export const FinancialTable = ({
 	});
 
 	const BodyRow = ({ row }: { row: FinancialsMapType }) => {
+		// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
+		let offs = 4;
+		if (
+			row.format === 'growth' &&
+			(range === 'quarterly' || range === 'trailing') &&
+			showcount === 6
+		) {
+			if (data?.datekey?.length === 6) {
+				const firstDate = data.datekey[0];
+				const compareDate = data.datekey[3];
+
+				if (firstDate.split('-')[1] === compareDate.split('-')[1]) {
+					offs = 3;
+				}
+			}
+		}
+
 		const id = row.id;
 		const dataid = row.data || row.id;
 		const format = row.format || 'standard';
-		let offset = range === 'quarterly' ? 4 : 1;
+		let offset = range === 'quarterly' || range === 'trailing' ? offs : 1;
 		let total = 0;
 
 		const rowdata = data[dataid as keyof FinancialReport];
@@ -290,7 +308,7 @@ export const FinancialTable = ({
 						<TooltipChart
 							render={(attrs) => (
 								<div
-									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-40"
+									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-20"
 									tabIndex={-1}
 									{...attrs}
 								>
@@ -382,6 +400,7 @@ export const FinancialTable = ({
 					/>
 				)}
 			</div>
+			<FinancialSource info={info} />
 		</div>
 	);
 };

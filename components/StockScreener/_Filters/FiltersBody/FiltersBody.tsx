@@ -18,14 +18,9 @@ function FilterWrap({ f }: FilterWrapProps) {
 	const type = screenerDataState((state) => state.type);
 	const { fetchColumn } = useModifyColumns();
 
-	let screenerType = '';
-	type == 'stock'
-		? (screenerType = 'screener')
-		: (screenerType = 'iposcreener');
-
 	return (
 		<div
-			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900"
+			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900 cursor-help"
 			key={f.name}
 		>
 			<div>
@@ -38,8 +33,8 @@ function FilterWrap({ f }: FilterWrapProps) {
 				</Tooltip>
 			</div>
 			<div
-				onMouseEnter={() => fetchColumn(f.id, screenerType)}
-				onFocus={() => fetchColumn(f.id, screenerType)}
+				onMouseEnter={() => fetchColumn(f.id, type)}
+				onFocus={() => fetchColumn(f.id, type)}
 			>
 				<FilterBody filter={f} />
 			</div>
@@ -59,11 +54,11 @@ export function RenderFilters() {
 	}
 	let filterMap = [];
 
-	type == 'stock' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap);
+	type == 'stocks' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap);
 
 	if (filterSearch.length > 0) {
 		return (
-			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
+			<div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2.5 pt-1">
 				{filterMap.map((f) => {
 					if (
 						f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
@@ -90,7 +85,7 @@ export function RenderFilters() {
 		}
 
 		return (
-			<div className="lg:grid lg:grid-cols-4 gap-x-2.5 text-smaller pt-1">
+			<div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2.5 pt-1">
 				{filterMap.map((f) => {
 					if (active.includes(f.id)) {
 						return <FilterWrap f={f} key={f.id} />;
@@ -104,10 +99,10 @@ export function RenderFilters() {
 	return (
 		<>
 			<div
-				className={`lg:grid lg:grid-cols-4 lg:gap-x-2.5 lg:text-smaller pt-1`}
+				className={`sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-x-2.5 pt-1`}
 			>
 				{filterMap.map((f) => {
-					if (f.category.includes(filterMenu) || filterMenu === 'All') {
+					if (f.category?.includes(filterMenu) || filterMenu === 'All') {
 						return <FilterWrap f={f} key={f.id} />;
 					}
 					return null;

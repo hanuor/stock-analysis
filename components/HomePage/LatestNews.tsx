@@ -35,10 +35,26 @@ export const LatestNews = ({ news }: { news: NewsMin[] }) => (
 						</tr>
 					);
 				})}
-				<tr className="border-b border-gray-200 hover:bg-gray-50">
-					<td colSpan={2} className="pl-2 py-2 text-lg font-semibold">
+				<tr className="border-b border-gray-200">
+					<td
+						colSpan={2}
+						className="pl-0.5 bp:pl-1 sm:pl-2 pt-3 pb-2 text-base sm:text-lg font-semibold"
+					>
+						<span className="hidden xs:inline">More News:</span>
 						<Link href="/news/">
-							<a className="bll">More stock market news</a>
+							<a className="inline-flex items-center px-1.5 bp:px-2 py-1 ml-2 sm:ml-2 mb-1 rounded-md text-sm sm:text-base font-medium bg-gray-100 hover:bg-gray-200 bll">
+								Markets
+							</a>
+						</Link>
+						<Link href="/news/all-stocks/">
+							<a className="inline-flex items-center px-1.5 bp:px-2 py-1 ml-2 sm:ml-3 mb-1 rounded-md text-sm sm:text-base font-medium bg-gray-100 hover:bg-gray-200 bll">
+								All Stocks
+							</a>
+						</Link>
+						<Link href="/ipos/news/">
+							<a className="inline-flex items-center px-1.5 bp:px-2 py-1 ml-2 sm:ml-3 mb-1 rounded-md text-sm sm:text-base font-medium bg-gray-100 hover:bg-gray-200 bll">
+								IPO News
+							</a>
 						</Link>
 					</td>
 				</tr>

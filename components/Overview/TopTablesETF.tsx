@@ -1,5 +1,6 @@
+import { useQuote } from 'hooks/useQuote';
+import { Info } from 'types/Info';
 import { Overview } from 'types/Overview';
-import { Quote } from 'types/Quote';
 
 const cssRows =
 	'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0';
@@ -46,50 +47,44 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>1-Year Return</td>
-					<td className={cssCellRight}>
-						<div id="price1y">-</div>
-					</td>
+					<td className={cssCellRight}>{data.change1y}</td>
 				</tr>
 			</tbody>
 		</table>
 	);
 };
 
-export const QuoteTable = ({
-	data,
-	quote,
-}: {
-	data: Overview;
-	quote: Quote;
-}) => {
-	const quoteUsed = quote ? quote.volume : data.volume;
+export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
+	const q = useQuote(info);
 
 	return (
 		<table className="text-small w-[48%] lg:w-auto text-gray-900">
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Volume</td>
-					<td className={cssCellRight}>{quoteUsed}</td>
+					<td className={cssCellRight}>{q?.v || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Open</td>
-					<td className={cssCellRight}>{data.open}</td>
+					<td className={cssCellRight}>{q?.o || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Previous Close</td>
-					<td className={cssCellRight}>{data.close}</td>
+					<td className={cssCellRight}>{q?.cl || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Day&apos;s Range</td>
-					<td className={cssCellRight}>{data.rangeDay}</td>
+					<td className={cssCellRight}>
+						{q?.l && q?.h ? q.l + ' - ' + q.h : 'n/a'}
+					</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week Low</td>
-					<td className={cssCellRight}>{data.low52}</td>
+					<td className={cssCellRight}>{q?.l52 || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week High</td>
-					<td className={cssCellRight}>{data.high52}</td>
+					<td className={cssCellRight}>{q?.l52 || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Beta</td>

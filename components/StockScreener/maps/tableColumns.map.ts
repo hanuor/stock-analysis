@@ -334,8 +334,33 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format0dec',
 	},
 	{
-		Header: 'Change 1Y',
+		Header: 'Chg. 1M',
+		accessor: 'ch1m',
+		format: 'changePcColor',
+	},
+	{
+		Header: 'Chg. 6M',
+		accessor: 'ch6m',
+		format: 'changePcColor',
+	},
+	{
+		Header: 'Chg. YTD',
+		accessor: 'chYTD',
+		format: 'changePcColor',
+	},
+	{
+		Header: 'Chg. 1Y',
 		accessor: 'ch1y',
+		format: 'changePcColor',
+	},
+	{
+		Header: 'Chg. 3Y',
+		accessor: 'ch3y',
+		format: 'changePcColor',
+	},
+	{
+		Header: 'Chg. 5Y',
+		accessor: 'ch5y',
 		format: 'changePcColor',
 	},
 	{
@@ -523,5 +548,10 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'ipoPriceRange',
 		format: 'string',
 		sortType: priceSort,
+	},
+	{
+		Header: 'Is SPAC',
+		accessor: 'spac',
+		format: 'string',
 	},
 ];

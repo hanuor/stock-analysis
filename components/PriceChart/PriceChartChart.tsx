@@ -5,7 +5,9 @@ import {
 	Tooltip,
 	LinearScale,
 	CategoryScale,
+	Filler,
 } from 'chart.js';
+
 import {
 	formatDateTimestamp,
 	formatDateClean,
@@ -16,6 +18,8 @@ import {
 } from 'functions/formatDates';
 import { Unavailable } from 'components/Unavailable';
 import { ReactChart } from 'components/ReactChart';
+import { Info } from 'types/Info';
+import { useQuote } from 'hooks/useQuote';
 
 type ChartDataType = {
 	t: string;
@@ -26,7 +30,7 @@ type ChartDataType = {
 interface Props {
 	chartData: ChartDataType[];
 	chartTime: string;
-	id: number;
+	info: Info;
 }
 
 ReactChart.register(
@@ -35,13 +39,16 @@ ReactChart.register(
 	LineElement,
 	Tooltip,
 	LinearScale,
-	CategoryScale
+	CategoryScale,
+	Filler
 );
 
 ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
 
-export const Chart = ({ chartData, chartTime, id }: Props) => {
+export const Chart = ({ chartData, chartTime, info }: Props) => {
+	const quote = useQuote(info);
+
 	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
@@ -66,9 +73,24 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 		return item.c;
 	});
 
+	let change: Number;
+	const count = priceAxis.length;
+	if (chartTime === '1D') {
+		change = Number(quote.c);
+	} else {
+		const first = chartData[0].o || priceAxis[0];
+		const last = priceAxis[count - 1];
+		change = last - first;
+	}
+
+	let lineColor = 'rgba(4, 120, 87, 1)';
+	if (change < 0) {
+		lineColor = 'rgba(220, 38, 38, 1)';
+	}
+
 	return (
 		<ReactChart
-			id={id.toString()}
+			id={info.id.toString()}
 			type="line"
 			data={{
 				labels: timeAxis,
@@ -76,12 +98,26 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 					{
 						label: 'Stock Price',
 						data: priceAxis,
-						borderColor: '#2c6288',
+						borderColor: lineColor,
 						pointHitRadius: 5,
 						pointRadius: 0,
 						tension: 0.01,
-						borderWidth: 3,
+						borderWidth: 2.5,
 						spanGaps: true,
+						fill: true,
+						backgroundColor: (dataset: any) => {
+							const ctx = dataset.chart.ctx;
+							const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+							if (change < 0) {
+								gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)');
+								gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+							} else {
+								gradient.addColorStop(0, 'rgba(4, 120, 87, 1)');
+								gradient.addColorStop(1, 'rgba(255,255,255,0)');
+							}
+
+							return gradient;
+						},
 					},
 				],
 			}}
@@ -92,7 +128,7 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 						const chartInstance = chart;
 						const ctx = chartInstance.ctx;
 						ctx.font =
-							'13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
+							'12px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
 						const fontSize = 12;
 						ctx.textAlign = 'start';
 						ctx.textBaseline = 'bottom';
@@ -106,7 +142,7 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
-							const x = meta.data[last].x + 32;
+							const x = meta.data[last].x + 32.5;
 							const y = meta.data[last].y - 10;
 
 							// retrieve the stock price, data.
@@ -118,16 +154,16 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 
 							ctx.save();
 
-							ctx.strokeStyle = '#2c6288';
-							ctx.fillStyle = '#2c6288';
+							ctx.strokeStyle = lineColor;
+							ctx.fillStyle = lineColor;
 							ctx.lineWidth = '3.5';
 							ctx.lineJoin = 'round';
 
 							// calculate the width of the box and height is based on fontsize.
-							const width = ctx.measureText(str).width + 1.2;
-							const xPos = x - 23.5;
+							const width = ctx.measureText(str).width + 0.4;
+							const xPos = x - 23;
 							const height = fontSize + 2.8;
-							const yPos = y + 1;
+							const yPos = y + 1.5;
 
 							// draw triangle to form a pointer.
 							ctx.beginPath();
@@ -143,7 +179,7 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 
 							// draw the text
 							ctx.fillStyle = '#ffffff';
-							ctx.fillText(str, x - 22, meta.data[last].y + 7.5);
+							ctx.fillText(str, x - 22, meta.data[last].y + 7.4);
 							ctx.restore();
 						});
 					},
@@ -170,6 +206,12 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 								) {
 									return formatDateMonth(timeAxis[index]);
 								} else if (chartTime === '1D') {
+									const lbl = formatDateMinute(timeAxis[index]);
+									// Remove leftmost ticks to prevent chart being pushed to the left
+									// But only after 3+ hours of trading
+									if (count > 180 && lbl.split(':')[0] === '09') {
+										return null;
+									}
 									return formatDateMinute(timeAxis[index]);
 								} else if (chartTime === '5D') {
 									return formatDateDay(timeAxis[index]);
@@ -201,12 +243,18 @@ export const Chart = ({ chartData, chartTime, id }: Props) => {
 							font: {
 								size: 12.5,
 							},
+							padding: 5,
+						},
+						grid: {
+							drawBorder: false,
+							color: '#efefef',
 						},
 					},
 				},
 				layout: {
 					padding: {
-						right: 17,
+						left: 5,
+						right: 11,
 					},
 				},
 				plugins: {

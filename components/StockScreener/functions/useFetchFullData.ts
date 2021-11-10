@@ -17,7 +17,7 @@ export function useFetchFullData() {
 	return fetchFullData;
 }
 
-export function useFetchFulIPOData() {
+export function useFetchFullIPOData() {
 	const data = screenerDataState((state) => state.data);
 	const setData = screenerDataState((state) => state.setData);
 	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded);

@@ -3,6 +3,11 @@ import { screenerState } from 'components/StockScreener/screener.state';
 import { screenerDataState } from 'components/StockScreener/screenerdata.state';
 import { getData } from 'functions/API';
 
+function getScreenerUrl(type: string) {
+	if (type === 'ipo') return 'iposcreener';
+	return 'screener';
+}
+
 /**
  * A custom hook with functions to manipulate the columns in the stock screener results table
  * @return {functions}
@@ -15,10 +20,10 @@ export function useModifyColumns() {
 	const addDataColumn = screenerDataState((state) => state.addDataColumn);
 
 	// Fetch a new data column
-	async function fetchColumn(id: FilterId, screenerType: string) {
+	async function fetchColumn(id: FilterId, type: string) {
 		if (!isFetched(id)) {
 			addFetchedColumn(id);
-			const fetched = await getData(screenerType + `?type=${id}`);
+			const fetched = await getData(getScreenerUrl(type) + `?type=${id}`);
 			addDataColumn(fetched, id);
 		}
 	}
@@ -29,12 +34,12 @@ export function useModifyColumns() {
 	}
 
 	// Toggle a column to either show or hide
-	function toggle(id: FilterId, screenerType: string) {
+	function toggle(id: FilterId, type: string) {
 		if (showColumns.includes(id)) {
 			setShowColumns(showColumns.filter((filter) => filter !== id));
 		} else {
 			if (!isFetched(id)) {
-				fetchColumn(id, screenerType);
+				fetchColumn(id, type);
 			}
 			setShowColumns([...showColumns, id]);
 		}

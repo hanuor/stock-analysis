@@ -13,9 +13,9 @@ export const MAP_STATISTICS = [
 		title: 'Enterprise Value',
 		format: 'reduce_precision',
 		tooltip:
-			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and cash levels.",
+			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and levels of cash and short-term investments.",
 		formula:
-			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents',
+			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments',
 	},
 	{
 		id: 'earningsdate',
@@ -36,7 +36,7 @@ export const MAP_STATISTICS = [
 		title: 'Shares Outstanding',
 		format: 'none',
 		tooltip:
-			"The total amount of outstanding common stock currently held by all of the company's shareholders.",
+			"The total amount of outstanding common stock currently held by all of the company's shareholders. This number assumes that all other share classes are converted into the current share class, if applicable.",
 	},
 	{
 		id: 'sharesgrowthyoy',

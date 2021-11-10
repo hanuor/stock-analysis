@@ -12,7 +12,7 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 		<nav className="border-b-2 border-blue-brand_sharp w-full">
 			<ul className="w-full navmenu">
 				<li>
-					<Link href={`/etf/${symbol}/`} prefetch={false} scroll={false}>
+					<Link href={`/etf/${symbol}/`} prefetch={false}>
 						<a
 							className={!path.three ? 'active' : 'inactive'}
 							data-title="Overview"

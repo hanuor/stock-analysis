@@ -7,12 +7,18 @@ export interface IpoUpcoming {
 	shares: string;
 }
 
+export type IpoCounts = {
+	thisweek: number;
+	nextweek: number;
+	later: number;
+	unscheduled: number;
+};
+
 export type CalendarData = {
+	counts: IpoCounts;
 	thisweek: IpoUpcoming[];
 	nextweek: IpoUpcoming[];
 	later: IpoUpcoming[];
-	highprofile: IpoUpcoming[];
-	unknown: IpoUpcoming[];
 };
 
 export interface IpoRecent {
@@ -20,3 +26,8 @@ export interface IpoRecent {
 	symbol: string;
 	name: string;
 }
+
+export type FilingMin = {
+	symbol: string;
+	name: string;
+};

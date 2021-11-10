@@ -1,23 +1,26 @@
 import { GetStaticProps } from 'next';
-import { News } from 'types/News';
-import { CalendarData, IpoRecent } from 'types/Ipos';
+import { CalendarData, IpoRecent, FilingMin } from 'types/Ipos';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { CalendarStats } from 'components/IPOs/CalendarStats';
 import { CalendarTable } from 'components/IPOs/CalendarTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
+import { LaterExplanation } from 'components/IPOs/LaterExplanation';
+import { IPOSources } from 'components/IPOs/IPOSources';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { RecentTableMin } from 'components/IPOs/RecentTableMin';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
+import { FilingTableMin } from 'components/IPOs/FilingTableMin';
+import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation';
 
 interface Props {
 	data: CalendarData;
-	news: News[];
 	recent: IpoRecent[];
+	filings: FilingMin[];
 }
 
-export const IpoCalendar = ({ data, news, recent }: Props) => {
+export const IpoCalendar = ({ data, recent, filings }: Props) => {
 	return (
 		<>
 			<SEO
@@ -29,47 +32,43 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url="/ipos/calendar/" />
 					<h1 className="hh1">IPO Calendar</h1>
-					<IPONavigation />
+					<IPONavigation path="calendar" />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="flex flex-col space-y-5 sm:space-y-7 py-4">
-							<CalendarTable
-								title="IPOs This Week"
-								data={data.thisweek}
-								tableId="this-week"
-							/>
-							<CalendarTable
-								title="Next Week"
-								data={data.nextweek}
-								tableId="next-week"
-							/>
-							<CalendarTable
-								title="Scheduled for Later"
-								data={data.later}
-								tableId="later"
-							/>
-							<CalendarTable
-								title="Upcoming High-Profile IPOs"
-								data={data.highprofile}
-								tableId="high-profile"
-							/>
-							<CalendarTable
-								title="More Upcoming IPOs"
-								data={data.unknown}
-								tableId="more-upcoming"
-							/>
+						<div>
+							<CalendarNavigation path="calendar" />
+							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7 py-2 lg:py-4">
+								<CalendarTable
+									title="IPOs This Week"
+									data={data.thisweek}
+									tableId="this-week"
+									border={true}
+								/>
+								<Mobile1 />
+								<CalendarTable
+									title="Next Week"
+									data={data.nextweek}
+									tableId="next-week"
+								/>
+								{data.later.length ? (
+									<CalendarTable
+										title="After Next Week"
+										data={data.later}
+										tableId="later"
+									/>
+								) : (
+									<LaterExplanation />
+								)}
+								<IPOSources />
+							</div>
 						</div>
-						<div className="flex flex-col lg:pt-4">
-							<CalendarStats data={data} />
-							<aside className="space-y-8 lg:space-y-10 pt-6">
+						<div className="flex flex-col pt-3 lg:pt-4">
+							<aside className="space-y-8 lg:space-y-10">
+								<CalendarStats counts={data.counts} />
 								<RecentTableMin recent={recent} />
-								<NewsletterWidget />
-								<NewsWidget
-									title="IPO News"
-									news={news}
-									button={{
-										text: 'More IPO News',
-										url: '/ipos/news/',
-									}}
+								<Sidebar1 />
+								<FilingTableMin
+									filings={filings}
+									count={data.counts.unscheduled}
 								/>
 							</aside>
 						</div>
@@ -83,13 +82,13 @@ export const IpoCalendar = ({ data, news, recent }: Props) => {
 export default IpoCalendar;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const { data, news, recent } = await getIpoData('calendar');
+	const { data, recent, filings } = await getIpoData('calendar');
 
 	return {
 		props: {
 			data,
-			news,
 			recent,
+			filings,
 		},
 		revalidate: 5 * 60,
 	};

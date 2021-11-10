@@ -11,7 +11,8 @@ import { InfoTable } from 'components/Dividend/InfoTable';
 import { HistoryTable } from 'components/Dividend/HistoryTable';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { DividendChart } from 'components/Dividend/DividendChart';
-import { NewsletterWidget } from 'components/Layout/Sidebar/Newsletter';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	info: Info;
@@ -33,7 +34,11 @@ const Dividend = ({ info, data, news }: Props) => {
 						<h2 className="text-xl bp:text-2xl font-bold">
 							{info.ticker} Dividend Information
 						</h2>
-						{data.infoBox && <InfoBox text={data.infoBox} />}
+						{data.infoBox && (
+							<div className="mt-4 mb-2 lg:mb-3">
+								<InfoBox text={data.infoBox} />
+							</div>
+						)}
 						<InfoTable data={data.infoTable} />
 						{data.history.length > 0 && (
 							<HistoryTable rawdata={data.history} />
@@ -45,7 +50,7 @@ const Dividend = ({ info, data, news }: Props) => {
 						/>
 					</div>
 					<aside className="mt-7 lg:mt-0 space-y-8">
-						<NewsletterWidget />
+						{data.history.length > 0 && <Sidebar1 />}
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}
@@ -54,6 +59,7 @@ const Dividend = ({ info, data, news }: Props) => {
 								url: `/etf/${info.symbol}/`,
 							}}
 						/>
+						{data.history.length > 15 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>

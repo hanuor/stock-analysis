@@ -112,11 +112,21 @@ interface Props {
 	title: string;
 	data: IpoUpcoming[];
 	tableId: string;
+	border?: boolean;
+	filter?: boolean;
 }
 
-export const CalendarTable = ({ title, data, tableId }: Props) => {
+export const CalendarTable = ({
+	title,
+	data,
+	tableId,
+	border,
+	filter,
+}: Props) => {
+	const initialState = !data[0].date ? { hiddenColumns: ['date'] } : {};
+
 	const tableInstance = useTable(
-		{ columns, data },
+		{ columns, data, initialState },
 		useGlobalFilter,
 		useSortBy
 	);
@@ -128,9 +138,6 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 		state: { globalFilter },
 	} = tableInstance;
 
-	const thisWeek = title === 'IPOs This Week' ? true : false;
-	const nextWeek = title === 'Next Week' ? true : false;
-
 	const count = data.length;
 
 	if (count === 0) {
@@ -139,9 +146,13 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 
 	return (
 		<div>
-			<div className="flex items-end space-x-6 mb-1.5">
-				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0.5 mr-auto">
-					{title} ({count})
+			<div
+				className={`flex items-end space-x-6 mb-1.5${
+					border ? ' pt-1.5 border-t' : ''
+				}`}
+			>
+				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
+					{title}
 				</h2>
 				<div className="hidden sm:block">
 					<Export
@@ -161,7 +172,7 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 						tableId={tableId}
 					/>
 				</div>
-				{title === 'More Upcoming IPOs' && (
+				{filter && (
 					<div className="hidden md:block">
 						<Filter
 							useAsyncDebounce={useAsyncDebounce}
@@ -171,7 +182,6 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 					</div>
 				)}
 			</div>
-
 			<div className="overflow-x-auto">
 				<table className="ipotable" id={tableId}>
 					<thead>
@@ -216,11 +226,6 @@ export const CalendarTable = ({ title, data, tableId }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			{(thisWeek || nextWeek) && (
-				<span className="text-sm text-gray-600 mt-1 ml-1">
-					Upcoming IPO dates are estimated and may change.
-				</span>
-			)}
 		</div>
 	);
 };

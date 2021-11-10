@@ -3,16 +3,19 @@ import { ColumnsMap } from 'components/StockScreener/screener.types';
 export const resultColumns: ColumnsMap = {
 	Filtered: [],
 	General: ['s', 'n', 'm', 'se', 'p', 'c', 'v', 'pe'],
-	Company: [
+	Company: [],
+	Performance: [
 		's',
 		'n',
-		'se',
-		'i',
-		'country',
-		'exchange',
-		'employees',
-		'founded',
-		'ipoDate',
+		'm',
+		'p',
+		'c',
+		'ch1m',
+		'ch6m',
+		'chYTD',
+		'ch1y',
+		'ch3y',
+		'ch5y',
 	],
 	Financials: [
 		's',
@@ -44,7 +47,7 @@ export const resultColumns: ColumnsMap = {
 };
 
 export function returnResultColumns(type: string) {
-	if (type == 'stock') {
+	if (type == 'stocks') {
 		return resultColumns;
 	} else {
 		// Change to IPO columns

@@ -14,7 +14,12 @@ export type FilterId =
 	| 'se' // Sector
 	| 'i' // Industry
 	| 'c' // Price Change 1D
+	| 'ch1m' // Price Change 1M
+	| 'ch6m' // Price Change 6M
+	| 'chYTD' // Price Change YTD
 	| 'ch1y' // Price Change 1Y
+	| 'ch3y' // Price Change 3Y
+	| 'ch5y' // Price Change 5Y
 	| 'v' // Volume
 	| 'ar' // Analyst Rating
 	| 'ac' // Analyst Count
@@ -102,6 +107,7 @@ export type FilterId =
 	| 'ncf' // Net Cash Flow
 	| 'capex' // Capital expenditures
 	| 'ipoPriceRange' // IPO Price Range
+	| 'spac' // Is SPAC
 	| 'sharesOffered'; // Shares Offered
 
 // Results columns
@@ -109,6 +115,7 @@ export type ColumnName =
 	| 'Filtered'
 	| 'General'
 	| 'Company'
+	| 'Performance'
 	| 'Financials'
 	| 'Valuation'
 	| 'Dividends'
@@ -166,7 +173,7 @@ export type FilterProps = {
 	id: FilterId;
 	category: string[];
 	options: FilterOption[];
-	filterType: 'numeric' | 'stringmatch' | 'date' | 'dateYear' | 'numericRange';
+	filterType: FilterType;
 	numberType?: NumberType;
 };
 
@@ -195,7 +202,9 @@ export type FilterType =
 	| 'stringmatch'
 	| 'date'
 	| 'dateYear'
-	| 'numericRange';
+	| 'numericRange'
+	| 'spac';
+
 export type NumberType = 'percentage';
 export type ComparisonOption =
 	| 'over'

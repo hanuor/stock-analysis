@@ -15,7 +15,9 @@ export interface Info {
 	daysSince?: number;
 	archived: boolean;
 	ipoInfo?: IpoInfo | null;
+	ipoDate: string | null;
 	notice?: string;
+	cik?: string;
 	exceptions: {
 		hideRatios: boolean;
 		hideChart: boolean;
@@ -25,6 +27,7 @@ export interface Info {
 
 export interface IpoInfo {
 	ipoDate: string;
+	ipoDateFormatted: string;
 	ipoPrice: string;
 	ipoPriceLow: string;
 	ipoPriceHigh: string;

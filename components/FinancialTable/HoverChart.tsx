@@ -79,8 +79,25 @@ export const HoverChart = ({
 	const rowdata = data[dataid as keyof FinancialReport];
 	const type = row.format;
 
+	// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
+	let offs = 4;
+	if (
+		row.format === 'growth' &&
+		(range === 'quarterly' || range === 'trailing') &&
+		count === 6
+	) {
+		if (data?.datekey?.length === 6) {
+			const firstDate = data.datekey[0];
+			const compareDate = data.datekey[3];
+
+			if (firstDate.split('-')[1] === compareDate.split('-')[1]) {
+				offs = 3;
+			}
+		}
+	}
+
 	const y = rowdata.map((curr, index) => {
-		const offset = range === 'quarterly' ? 4 : 1;
+		const offset = range === 'quarterly' || range === 'trailing' ? offs : 1;
 		const previous = row.format === 'growth' ? rowdata[index + offset] : null;
 		const revenue = row.format === 'margin' ? data.revenue[index] : null;
 		const current = curr as number;

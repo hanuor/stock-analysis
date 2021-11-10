@@ -8,6 +8,8 @@ import { getPageData } from 'functions/callBackEnd';
 import { StatsWidget } from 'components/StatsWidget/_StatsWidget';
 import { Button } from 'components/Button';
 import { MAP_STATISTICS } from 'data/financials/map_statistics';
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
 
 interface Props {
 	info: Info;
@@ -47,6 +49,8 @@ const StatisticsPage = ({ info, data }: Props) => {
 							map={MAP_STATISTICS}
 						/>
 					</div>
+
+					<Mobile1 />
 
 					<div>
 						<StatsWidget
@@ -176,6 +180,7 @@ const StatisticsPage = ({ info, data }: Props) => {
 							map={MAP_STATISTICS}
 						/>
 					</div>
+					<Sidebar1 />
 				</div>
 			</div>
 		</Stock>

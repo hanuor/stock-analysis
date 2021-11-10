@@ -27,7 +27,7 @@ export function FiltersMenu() {
 				>
 					<nav>
 						<ul className="navmenu darkbg bg-gray-50 noshadow">
-							{type == 'stock' ? (
+							{type == 'stocks' ? (
 								<>
 									<FiltersMenuItem name="Popular" />
 									<FiltersMenuItem name="Company" />
@@ -40,7 +40,6 @@ export function FiltersMenu() {
 							) : (
 								<>
 									<FiltersMenuItem name="General" />
-									<FiltersMenuItem name="Company" />
 									<FiltersMenuItem name="Income" />
 									<FiltersMenuItem name="Balance Sheet" />
 									<FiltersMenuItem name="Cash Flow" />

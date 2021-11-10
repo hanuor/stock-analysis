@@ -15,7 +15,7 @@ export const CalendarTableMin = ({ upcoming }: Props) => {
 					<thead>
 						<tr className="border-b border-gray-200">
 							<th className="text-left py-2 px-2 pl-2 border-r border-gray-200">
-								Date*
+								Date
 							</th>
 							<th className="text-left py-2 px-2 border-r border-gray-200">
 								Symbol
@@ -43,9 +43,6 @@ export const CalendarTableMin = ({ upcoming }: Props) => {
 					</tbody>
 				</table>
 			</div>
-			<span className="text-sm text-gray-700">
-				* Upcoming IPO dates are estimated.
-			</span>
 			<Button text="Full IPO Calendar" url="/ipos/calendar/" />
 		</div>
 	);

@@ -12,7 +12,7 @@ export function NewsAds({ index, count }: { index: number; count: number }) {
 	if (index === 2 || (count < 3 && count === index + 1)) {
 		return (
 			<LazyLoadAd offset={300}>
-				<div className="news-spns">
+				<div className="news-spns" id="ad-banner">
 					<NewsAd1 />
 				</div>
 			</LazyLoadAd>
@@ -20,7 +20,7 @@ export function NewsAds({ index, count }: { index: number; count: number }) {
 	} else if (index === 7) {
 		return (
 			<LazyLoadAd offset={400}>
-				<div className="news-spns">
+				<div className="news-spns" id="ad-banner">
 					<NewsAd2 />
 				</div>
 			</LazyLoadAd>

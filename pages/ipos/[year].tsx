@@ -5,13 +5,14 @@ import { News } from 'types/News';
 import { SEO } from 'components/SEO';
 import { getIpoData } from 'functions/callBackEnd';
 import { RecentTable } from 'components/IPOs/RecentTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation';
-import { SubNavigation } from 'components/IPOs/SubNavigation';
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
+import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
 import { InfoBox } from 'components/InfoBox';
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
 import { NewsWidget } from 'components/News/NewsWidget';
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
 
 interface Props {
 	year: string;
@@ -25,7 +26,9 @@ interface Props {
 
 export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 	const title =
-		year === '2021' ? 'All 2021 IPOs (so far)' : `All ${year} IPOs`;
+		year === '2021'
+			? 'All 2021 IPOs (so far)'
+			: `All ${year} IPOs - A Complete List`;
 
 	const description =
 		year === '2021'
@@ -42,12 +45,14 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 			<div className="contain">
 				<main className="w-full pt-5 xs:pt-6">
 					<Breadcrumbs url={`/ipos/${year}/`} />
-					<h1 className="hh1">{year} IPOs</h1>
-					<IPONavigation />
+					<h1 className="hh1">All {year} IPOs</h1>
+					<IPONavigation path="" />
 					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div>
-							<SubNavigation />
-							<InfoBox text={data.info} />
+							<RecentNavigation path={year} />
+							<div className="mt-4 mb-2 lg:mb-3">
+								<InfoBox text={data.info} />
+							</div>
 							<RecentTable rawdata={data.data} />
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
@@ -61,6 +66,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 									url: '/ipos/news/',
 								}}
 							/>
+							<Sidebar2 />
 						</aside>
 					</div>
 				</main>

@@ -1,19 +1,14 @@
-import { CalendarData } from 'types/Ipos';
+import { IpoCounts } from 'types/Ipos';
 
-export function CalendarStats({ data }: { data: CalendarData }) {
+export function CalendarStats({ counts }: { counts: IpoCounts }) {
 	const total =
-		data.thisweek.length +
-		data.nextweek.length +
-		data.later.length +
-		data.unknown.length;
+		counts.thisweek + counts.nextweek + counts.later + counts.unscheduled;
 
-	const hasLater = data.later && data.later?.length > 0;
+	const hasLater = counts.later > 0;
 
 	return (
-		<div>
-			<h2 className="hh2 text-[1.4rem] text-gray-800">
-				Calendar Statistics
-			</h2>
+		<div className="">
+			<h3 className="hh3">Calendar Statistics</h3>
 			<div
 				className={`border py-4 rounded text-sm font-medium text-gray-600${
 					hasLater ? ' px-6' : ' px-2'
@@ -29,31 +24,31 @@ export function CalendarStats({ data }: { data: CalendarData }) {
 					<div className="flex flex-col">
 						<div className="order-2">This Week</div>
 						<div className="order-1 font-semibold text-4xl text-gray-800">
-							{data.thisweek.length}
+							{counts.thisweek}
 						</div>
 					</div>
 					<div className="flex flex-col">
 						<div className="order-2">Next Week</div>
 						<div className="order-1 font-semibold text-4xl text-gray-800">
-							{data.nextweek.length}
+							{counts.nextweek}
 						</div>
 					</div>
 					{hasLater && (
 						<div className="flex flex-col">
 							<div className="order-2">Later</div>
 							<div className="order-1 font-semibold text-4xl text-gray-800">
-								{data.later.length}
+								{counts.later}
 							</div>
 						</div>
 					)}
 					<div className="flex flex-col">
 						<div className="order-2">Unscheduled</div>
 						<div className="order-1 font-semibold text-4xl text-gray-800">
-							{data.unknown.length}
+							{counts.unscheduled}
 						</div>
 					</div>
 					<div className="flex flex-col">
-						<div className="order-2">Total Upcoming</div>
+						<div className="order-2">Total</div>
 						<div className="order-1 font-semibold text-4xl text-gray-800">
 							{total}
 						</div>

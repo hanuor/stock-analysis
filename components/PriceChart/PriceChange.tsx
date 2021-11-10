@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Quote } from 'types/Quote';
+import { useQuote } from 'hooks/useQuote';
+import { Info } from 'types/Info';
 
 type ChartDataType = {
 	t: string;
@@ -10,11 +10,12 @@ type ChartDataType = {
 interface Props {
 	chartData: ChartDataType[];
 	chartTime: string;
-	quote: Quote;
-	type: string;
+	info: Info;
 }
 
-export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
+export const PriceChange = ({ chartData, chartTime, info }: Props) => {
+	const quote = useQuote(info);
+
 	let raw: number | null;
 	let formatted: string;
 	let dec = 2;
@@ -24,11 +25,11 @@ export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
 	}
 
 	if (chartTime === '1D') {
-		raw = quote.change;
-		formatted = quote.change > 0 ? '+' + quote.changePc : quote.changePc;
+		raw = Number(quote.c);
+		formatted = raw > 0 ? '+' + quote.cp + '%' : quote.cp + '%';
 	} else {
 		const first = chartData[0].o;
-		const last = chartData[chartData.length - 1].c;
+		const last = quote.ep || quote.p;
 
 		raw = first ? (last / first - 1) * 100 : null;
 
@@ -39,15 +40,6 @@ export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
 			: 'n/a';
 	}
 
-	useEffect(() => {
-		if (type === 'etf') {
-			const price1y: Element | null = document.querySelector('#price1y');
-			if (price1y) {
-				price1y.innerHTML = formatted;
-			}
-		}
-	}, [formatted, type]);
-
 	const css = raw
 		? raw > 0
 			? 'green'
@@ -57,7 +49,7 @@ export const PriceChange = ({ chartData, chartTime, quote, type }: Props) => {
 		: 'text-gray-600';
 
 	return (
-		<div className="flex flex-row space-x-1 text-smaller sm:text-base">
+		<div className="flex flex-row space-x-1 text-smaller sm:text-base pr-1">
 			<span className={css}>{formatted}</span>
 			<span className="text-gray-700 hidden sm:block">({chartTime})</span>
 		</div>
