@@ -39,6 +39,9 @@ export function ResultsTable({ cols }: Props) {
 	const showColumns = screenerState((state) => state.showColumns);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
 	const setFetchedColumns = screenerState((state) => state.setFetchedColumns);
+	const removeFilteredColumn = screenerState(
+		(state) => state.removeFilteredColumn
+	);
 
 	useEffect(() => {
 		if (type == 'stocks') {
@@ -88,8 +91,8 @@ export function ResultsTable({ cols }: Props) {
 				'v',
 			] as FilterId[]);
 			setFetchedColumns(['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v']);
+			removeFilteredColumn('m');
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

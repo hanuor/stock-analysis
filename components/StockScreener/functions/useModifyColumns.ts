@@ -5,6 +5,7 @@ import { getData } from 'functions/API';
 
 function getScreenerUrl(type: string) {
 	if (type === 'ipo') return 'iposcreener';
+	if (type === 'etfs') return 'etfscreener';
 	return 'screener';
 }
 

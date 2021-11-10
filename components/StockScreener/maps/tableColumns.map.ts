@@ -605,11 +605,6 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'date',
 	},
 	{
-		Header: 'Ex Div. Date',
-		accessor: 'etfExDividendDate',
-		format: 'date',
-	},
-	{
 		Header: 'Inception Date',
 		accessor: 'etfInceptionDate',
 		format: 'date',

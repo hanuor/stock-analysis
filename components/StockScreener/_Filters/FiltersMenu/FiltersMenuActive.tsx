@@ -1,4 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state';
+import { screenerDataState } from 'components/StockScreener//screenerdata.state';
 import { CloseCircleIcon } from 'components/Icons/CloseCircle';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
@@ -20,6 +21,7 @@ export function FiltersMenuActive() {
 	if (filterMenu !== 'Active') {
 		classes += ' bll';
 	}
+	const type = screenerDataState((state) => state.type);
 
 	return (
 		<>
@@ -59,15 +61,19 @@ export function FiltersMenuActive() {
 						title="Clear All Filters"
 						onClick={() => {
 							clearFilters();
-							if (resultsMenu === 'Filtered') {
+							if (resultsMenu === 'Filtered' && type != 'etfs') {
 								setShowColumns(['s', 'n', 'm']);
+							} else {
+								setShowColumns(['s', 'n']);
 							}
 						}}
 						onKeyPress={(e) => {
 							if (e.key === 'Enter') {
 								clearFilters();
-								if (resultsMenu === 'Filtered') {
+								if (resultsMenu === 'Filtered' && type != 'etfs') {
 									setShowColumns(['s', 'n', 'm']);
+								} else {
+									setShowColumns(['s', 'n']);
 								}
 							}
 						}}

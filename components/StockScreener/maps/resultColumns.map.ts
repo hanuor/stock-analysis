@@ -97,12 +97,9 @@ export function returnResultColumns(type: string) {
 		resultColumns['Dividends'] = [
 			's',
 			'n',
-			'p',
-			'c',
-			'v',
-			'etfSector',
-			'etfPeRatio',
-			'etfExpenseRatio',
+			'etfHoldings',
+			'etfExDividendDate',
+			'etfDividendYield',
 		];
 		return resultColumns;
 	}
