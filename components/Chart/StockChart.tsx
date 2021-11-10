@@ -109,7 +109,14 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		};
 
 		const isBrowser: boolean = this.state.screenWidth >= 768;
-		const { data: initialData, height, ratio, width, type } = this.props;
+		const {
+			data: initialData,
+			height,
+			ratio,
+			width,
+			type,
+			time,
+		} = this.props;
 
 		const maxValueCallback = (data: number) => {
 			if (this.state.maxValue != data && this.state.counter == 0) {
@@ -173,7 +180,11 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		};
 
 		const candleChartExtents = (data: IOHLCData) => {
-			return [data.high, data.low, data.ma1, data.ma2];
+			if (time == '1D' || '5D') {
+				return [data.close];
+			} else {
+				return [data.high, data.low, data.ma1, data.ma2];
+			}
 		};
 
 		const volChartExtents = (data: IOHLCData) => {
@@ -190,6 +201,14 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		};
 		const volumeSeries = (data: IOHLCData) => {
 			return data.volume;
+		};
+
+		const toolTipPosition = () => {
+			if (time == '1D' || time == '5D') {
+				return [6, 35];
+			} else {
+				return [6, 60];
+			}
 		};
 
 		const ma1color = '#2c6288';
@@ -234,13 +253,10 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		const { data, xScale, xAccessor, displayXAccessor } =
 			xScaleProvider(calculatedData);
 
-		if (type == 'line') {
-			movingAverageTooltipOptions.push({
-				yAccessor: (d) => d.close,
-				type: 'Price',
-				stroke: '#000000',
-				windowSize: null,
-			});
+		if (type == 'line' || time == '1D' || time == '5D') {
+			if (time == '1D' || time == '5D') {
+				movingAverageTooltipOptions.splice(0, 2);
+			}
 		}
 
 		let max = xAccessor(data[data.length - 1]);
@@ -252,6 +268,12 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		if (this.props.time == '1Y') {
 			max = max + 2;
 			days = 365;
+		} else if (this.props.time == '1D') {
+			days = 1;
+			max = max + 1;
+		} else if (this.props.time == '5D') {
+			days = 7;
+			max = max + 1;
 		} else if (this.props.time == '1M') {
 			days = 31;
 			max = max + 1;
@@ -270,6 +292,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			max = max + 8;
 			days = 1825;
 		}
+
 		if (this.props.time != 'MAX') {
 			date.setDate(date.getDate() - days);
 
@@ -283,6 +306,9 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					min = xAccessor(data[i]);
 				}
 			}
+			/* } else if (time == '1D' || '5D') {
+			min = xAccessor(data[Math.max(0, data.length - 100)]);
+		*/
 		} else {
 			max = max + 6;
 			min = 0;
@@ -339,23 +365,28 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 									/>
 								</>
 							)}
-
-							<LineSeries
-								yAccessor={(d) => d.ma1}
-								strokeStyle={ma1color}
-							/>
-							<CurrentCoordinate
-								yAccessor={(d) => d.ma1}
-								fillStyle={ma1color}
-							/>
-							<LineSeries
-								yAccessor={(d) => d.ma2}
-								strokeStyle={ma2color}
-							/>
-							<CurrentCoordinate
-								yAccessor={(d) => d.ma2}
-								fillStyle={ma2color}
-							/>
+							{time != '1D' && time != '5D' ? (
+								<>
+									<LineSeries
+										yAccessor={(d) => d.ma1}
+										strokeStyle={ma1color}
+									/>
+									<CurrentCoordinate
+										yAccessor={(d) => d.ma1}
+										fillStyle={ma1color}
+									/>
+									<LineSeries
+										yAccessor={(d) => d.ma2}
+										strokeStyle={ma2color}
+									/>
+									<CurrentCoordinate
+										yAccessor={(d) => d.ma2}
+										fillStyle={ma2color}
+									/>
+								</>
+							) : (
+								<></>
+							)}
 							{isBrowser == true ? (
 								<MouseCoordinateY
 									rectWidth={margin.right / 1.01225}
@@ -365,31 +396,38 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								<> </>
 							)}
 
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right / 1.05}
-								rectHeight={15}
-								fill={ma2color}
-								orient="right"
-								edgeAt="right"
-								fontSize={11}
-								lineStroke={ma2color}
-								displayFormat={priceFormatDecider}
-								yAccessor={sma200.accessor()}
-							/>
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right / 1.05}
-								rectHeight={15}
-								hideLine={true}
-								fill={ma1color}
-								orient="right"
-								edgeAt="right"
-								fontSize={11}
-								lineStroke={ma1color}
-								displayFormat={priceFormatDecider}
-								yAccessor={sma50.accessor()}
-							/>
+							{time != '1D' && time != '5D' ? (
+								<>
+									<EdgeIndicator
+										itemType="last"
+										rectWidth={margin.right / 1.05}
+										rectHeight={15}
+										fill={ma2color}
+										orient="right"
+										edgeAt="right"
+										fontSize={11}
+										lineStroke={ma2color}
+										displayFormat={priceFormatDecider}
+										yAccessor={sma200.accessor()}
+									/>
+									<EdgeIndicator
+										itemType="last"
+										rectWidth={margin.right / 1.05}
+										rectHeight={15}
+										hideLine={true}
+										fill={ma1color}
+										orient="right"
+										edgeAt="right"
+										fontSize={11}
+										lineStroke={ma1color}
+										displayFormat={priceFormatDecider}
+										yAccessor={sma50.accessor()}
+									/>
+								</>
+							) : (
+								<></>
+							)}
+
 							<EdgeIndicator
 								itemType="last"
 								rectWidth={margin.right / 1.01225}
@@ -399,7 +437,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								yAccessor={yEdgeIndicator}
 								fontSize={13}
 							/>
-							<OHLCTooltipCustom origin={[5, 15]} />
+							<OHLCTooltipCustom origin={[5, 15]} time={time} />
 							<MovingAverageTooltipCustom
 								origin={[8, 24]}
 								options={movingAverageTooltipOptions}
@@ -407,6 +445,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							{isBrowser == true ? (
 								<HoverTooltipCustom
 									yAccessor={sma50.accessor()}
+									coord={toolTipPosition()}
 									tooltip={{
 										content: ({ currentItem, xAccessor }) => ({
 											x: this.dateFormat(xAccessor(currentItem)),

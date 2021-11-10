@@ -5,10 +5,31 @@ import Axios from 'axios';
 import { Unavailable } from 'components/Unavailable';
 
 const parseDate = timeParse('%Y-%m-%d');
+const parseDate1D5D = timeParse('%b %d, %Y %H:%M');
 
 const parseData = () => {
 	return (d: any) => {
 		const date = parseDate(d.date);
+		if (date === null) {
+			d.date = new Date(Number(d.date));
+		} else {
+			d.date = new Date(date);
+		}
+
+		for (const key in d) {
+			if (key !== 'date' && Object.prototype.hasOwnProperty.call(d, key)) {
+				d[key] = +d[key];
+			}
+		}
+
+		return d as IOHLCData;
+	};
+};
+
+const parseData1D5D = (time: string) => {
+	return (d: any) => {
+		const date = parseDate1D5D(d.date);
+
 		if (date === null) {
 			d.date = new Date(Number(d.date));
 		} else {
@@ -39,6 +60,17 @@ function fixDataHeaders(obj: any) {
 	return newObj;
 }
 
+function fixDataHeaders1D5D(obj: any) {
+	return {
+		date: obj.t,
+		close: obj.c,
+		high: obj.h,
+		low: obj.l,
+		open: obj.o,
+		volume: obj.v,
+	};
+}
+
 interface WithOHLCDataProps {
 	readonly data: IOHLCData[];
 	readonly period: string;
@@ -56,6 +88,7 @@ interface WithOHLCState {
 	time: string;
 	type: string;
 	stockId: number;
+	saveData?: IOHLCData[];
 }
 
 export function withOHLCData(dataSet = 'DAILY') {
@@ -76,7 +109,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					data: undefined,
 				};
 				Axios.get(
-					`https://api.stockanalysis.com/wp-json/sa/cch?i=${props.stockId}&p=${props.period}&r=MAX`
+					`https://api.stockanalysis.com/wp-json/sa/chart?i=${props.stockId}&p=${props.period}&r=MAX`
 				)
 					.then((res) => {
 						const forDateParse = res.data.map(fixDataHeaders);
@@ -97,27 +130,98 @@ export function withOHLCData(dataSet = 'DAILY') {
 					});
 			}
 
-			public render() {
-				let { data, period, stockId } = this.state;
+			public componentDidUpdate() {
+				let { data, period, stockId, time, saveData } = this.state;
 				const newState: WithOHLCState = this.props;
 
 				if (period != newState.period || stockId != newState.stockId) {
+					this.props.setLoading(true);
+					if (time == '1D' || time == '5D') {
+						Axios.get(
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${newState.stockId}&r=${time}`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders1D5D);
+								data = forDateParse.map(parseData1D5D(time));
+
+								if (period != newState.period) {
+									period = newState.period;
+									this.setState({ period });
+									this.setState({ data });
+									saveData = [];
+									this.setState({ saveData });
+								} else {
+									stockId = newState.stockId;
+									this.setState({ stockId });
+									this.setState({ data });
+									saveData = [];
+									this.setState({ saveData });
+								}
+								this.props.setLoading(false);
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								);
+								this.props.setLoading(false);
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								);
+							});
+					} else {
+						Axios.get(
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${newState.stockId}&p=${newState.period}&r=MAX`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders);
+								data = forDateParse.map(parseData());
+
+								if (period != newState.period) {
+									period = newState.period;
+									this.setState({ period });
+									this.setState({ data });
+								} else {
+									stockId = newState.stockId;
+									this.setState({ stockId });
+									this.setState({ data });
+								}
+								this.props.setLoading(false);
+								if (typeof data != 'undefined') {
+									this.props.setData(data);
+								}
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								);
+								this.props.setLoading(false);
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								);
+							});
+					}
+					// Case where someone is clicking '1D' or '5D'
+				} else if (
+					(newState.time == '1D' && time != '1D') ||
+					(newState.time == '5D' && time != '5D')
+				) {
+					const time = newState.time;
+					this.setState({ time });
+					this.props.setLoading(true);
 					Axios.get(
-						`https://api.stockanalysis.com/wp-json/sa/cch?i=${newState.stockId}&p=${newState.period}&r=MAX`
+						`https://api.stockanalysis.com/wp-json/sa/chart?i=${this.props.stockId}&r=${newState.time}&f=candles`
 					)
 						.then((res) => {
-							const forDateParse = res.data.map(fixDataHeaders);
-							data = forDateParse.map(parseData());
-
-							if (period != newState.period) {
-								period = newState.period;
-								this.setState({ period });
-								this.setState({ data });
-							} else {
-								stockId = newState.stockId;
-								this.setState({ stockId });
-								this.setState({ data });
+							this.props.setLoading(true);
+							const forDateParse = res.data.map(fixDataHeaders1D5D);
+							if (!saveData) {
+								saveData = data;
+								this.setState({ saveData });
 							}
+							data = forDateParse.map(parseData1D5D(newState.time));
+							this.setState({ data });
 							this.props.setLoading(false);
 							if (typeof data != 'undefined') {
 								this.props.setData(data);
@@ -133,7 +237,54 @@ export function withOHLCData(dataSet = 'DAILY') {
 								<Unavailable message="Unable to load the data for this chart." />
 							);
 						});
+					// Case where someone is already at '1D' or '5D' and is now clicking the other values.
+				} else if (
+					(time == '5D' || time == '1D') &&
+					newState.time != '1D' &&
+					newState.time != '5D'
+				) {
+					if (typeof saveData != 'undefined' && saveData.length > 0) {
+						data = saveData;
+						time = newState.time;
+						this.setState({ time });
+						this.setState({ data });
+						if (typeof data != 'undefined') {
+							this.props.setData(data);
+						}
+					} else {
+						this.props.setLoading(true);
+						time = newState.time;
+						this.setState({ time });
+						Axios.get(
+							`https://api.stockanalysis.com/wp-json/sa/chart?i=${stockId}&p=${period}&r=MAX`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders);
+								data = forDateParse.map(parseData());
+								this.props.setLoading(false);
+								this.setState({ data });
+								if (typeof data != 'undefined') {
+									this.props.setData(data);
+								}
+								saveData = data;
+								this.setState({ saveData });
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								);
+								this.props.setLoading(false);
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								);
+							});
+					}
 				}
+			}
+
+			public render() {
+				const { data } = this.state;
 
 				if (data === undefined) {
 					return <div></div>;

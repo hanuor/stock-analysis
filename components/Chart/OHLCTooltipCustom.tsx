@@ -39,6 +39,7 @@ export interface OHLCTooltipProps {
 		| ((width: number, height: number) => [number, number]);
 	readonly percentFormat?: (n: number | { valueOf(): number }) => string;
 	readonly textFill?: string | ((item: any) => string);
+	readonly time?: string;
 }
 
 export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
@@ -78,6 +79,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			onClick,
 			percentFormat = OHLCTooltipCustom.defaultProps.percentFormat,
 			textFill,
+			time,
 		} = this.props;
 
 		const {
@@ -118,9 +120,17 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 					fontSize={fontSize}
 					fontWeight={fontWeight}
 				>
-					<tspan key="value_Change" fill={valueFill}>
-						{`${timeFormat('%Y-%m-%d')(date)}` + '  ' + `${change}`}
-					</tspan>
+					{time == '1D' || time == '5D' ? (
+						<tspan key="value_Change" fill={valueFill}>
+							{`${timeFormat('%Y-%m-%d %H:%M')(date)}` +
+								'  ' +
+								`${change}`}
+						</tspan>
+					) : (
+						<tspan key="value_Change" fill={valueFill}>
+							{`${timeFormat('%Y-%m-%d')(date)}` + '  ' + `${change}`}
+						</tspan>
+					)}
 				</ToolTipText>
 			</g>
 		);
