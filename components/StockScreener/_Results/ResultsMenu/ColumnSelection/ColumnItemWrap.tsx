@@ -4,6 +4,7 @@ import { useModifyColumns } from 'components/StockScreener/functions/useModifyCo
 import {
 	FiltersMap,
 	IPOFiltersMap,
+	ETFFiltersMap,
 } from 'components/StockScreener/maps/filters.map';
 import { FilterId } from 'components/StockScreener/screener.types';
 import { ColumnItem } from './ColumnItem';
@@ -34,7 +35,14 @@ export function ColumnItemWrap({ search, type }: Props) {
 	const inactiveArray: ColumnProperties[] = [];
 
 	let filters = [];
-	type == 'stocks' ? (filters = FiltersMap) : (filters = IPOFiltersMap);
+
+	if (type == 'stocks') {
+		filters = FiltersMap;
+	} else if (type == 'ipo') {
+		filters = IPOFiltersMap;
+	} else {
+		filters = ETFFiltersMap;
+	}
 
 	filters.forEach((filter) => {
 		if (isShowing(filter.id)) {

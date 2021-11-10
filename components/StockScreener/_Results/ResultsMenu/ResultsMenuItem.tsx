@@ -12,17 +12,21 @@ type Props = {
 export function ResultsMenuItem({ name, type }: Props) {
 	let defaultColumns: FilterId[] = [];
 
-	type == 'stocks'
-		? (defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'])
-		: (defaultColumns = [
-				's',
-				'n',
-				'm',
-				'se',
-				'ipoPriceRange',
-				'ipoDate',
-				'revenue',
-		  ]);
+	if (type == 'stocks') {
+		defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'];
+	} else if (type == 'ipo') {
+		defaultColumns = [
+			's',
+			'n',
+			'm',
+			'se',
+			'ipoPriceRange',
+			'ipoDate',
+			'revenue',
+		];
+	} else {
+		defaultColumns = ['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v'];
+	}
 
 	const filters = screenerState((state) => state.filters);
 	const resultsMenu = screenerState((state) => state.resultsMenu);
@@ -56,9 +60,12 @@ export function ResultsMenuItem({ name, type }: Props) {
 			let screenerType: string;
 			if (type == 'stocks') {
 				screenerType = 'screener';
-			} else {
+			} else if (type == 'ipo') {
 				screenerType = 'iposcreener';
+			} else {
+				screenerType = 'etfscreener';
 			}
+
 			fetchManyColumns(returnResultColumns(type)[name], screenerType);
 		}
 	}

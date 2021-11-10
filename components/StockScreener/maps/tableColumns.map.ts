@@ -554,4 +554,74 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'spac',
 		format: 'string',
 	},
+	{
+		Header: 'Exchange',
+		accessor: 'etfExchange',
+		format: 'string',
+	},
+	{
+		Header: 'Shares Out',
+		accessor: 'etfSharesOut',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Assets',
+		accessor: 'assets',
+		format: 'abbreviate',
+	},
+	{
+		Header: 'Asset Class',
+		accessor: 'assetClass',
+		format: 'string',
+	},
+	{
+		Header: 'Expense Ratio',
+		accessor: 'etfExpenseRatio',
+		format: 'format2dec',
+	},
+	{
+		Header: 'PE Ratio',
+		accessor: 'etfPeRatio',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Holdings',
+		accessor: 'etfHoldings',
+		format: 'format0dec',
+	},
+	{
+		Header: 'Yield (%)',
+		accessor: 'etfDividendYield',
+		format: 'percentage',
+	},
+	{
+		Header: 'Beta',
+		accessor: 'etfBeta',
+		format: 'format2dec',
+	},
+	{
+		Header: 'Ex Div. Date',
+		accessor: 'etfExDividendDate',
+		format: 'date',
+	},
+	{
+		Header: 'Ex Div. Date',
+		accessor: 'etfExDividendDate',
+		format: 'date',
+	},
+	{
+		Header: 'Inception Date',
+		accessor: 'etfInceptionDate',
+		format: 'date',
+	},
+	{
+		Header: 'Sector',
+		accessor: 'etfSector',
+		format: 'padleft',
+	},
+	{
+		Header: 'Region',
+		accessor: 'etfRegion',
+		format: 'string',
+	},
 ];

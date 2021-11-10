@@ -27,7 +27,7 @@ export function FiltersMenu() {
 				>
 					<nav>
 						<ul className="navmenu darkbg bg-gray-50 noshadow">
-							{type == 'stocks' ? (
+							{(type == 'stocks' && (
 								<>
 									<FiltersMenuItem name="Popular" />
 									<FiltersMenuItem name="Company" />
@@ -37,15 +37,24 @@ export function FiltersMenu() {
 									<FiltersMenuItem name="Other" />
 									<FiltersMenuItem name="All" />
 								</>
-							) : (
-								<>
-									<FiltersMenuItem name="General" />
-									<FiltersMenuItem name="Income" />
-									<FiltersMenuItem name="Balance Sheet" />
-									<FiltersMenuItem name="Cash Flow" />
-									<FiltersMenuItem name="All" />
-								</>
-							)}
+							)) ||
+								(type == 'ipo' && (
+									<>
+										<FiltersMenuItem name="General" />
+										<FiltersMenuItem name="Income" />
+										<FiltersMenuItem name="Balance Sheet" />
+										<FiltersMenuItem name="Cash Flow" />
+										<FiltersMenuItem name="All" />
+									</>
+								)) ||
+								(type == 'etfs' && (
+									<>
+										<FiltersMenuItem name="Popular" />
+										<FiltersMenuItem name="Dividends" />
+										<FiltersMenuItem name="Performance" />
+										<FiltersMenuItem name="All" />
+									</>
+								))}
 						</ul>
 					</nav>
 				</div>

@@ -49,7 +49,7 @@ export const resultColumns: ColumnsMap = {
 export function returnResultColumns(type: string) {
 	if (type == 'stocks') {
 		return resultColumns;
-	} else {
+	} else if (type == 'ipo') {
 		// Change to IPO columns
 		resultColumns['General'] = [
 			's',
@@ -69,6 +69,40 @@ export function returnResultColumns(type: string) {
 			'exchange',
 			'employees',
 			'founded',
+		];
+		return resultColumns;
+	} else {
+		// Change to ETF columns
+		resultColumns['General'] = [
+			's',
+			'n',
+			'assetClass',
+			'assets',
+			'p',
+			'c',
+			'v',
+		];
+		resultColumns['Performance'] = [
+			's',
+			'n',
+			'p',
+			'c',
+			'ch1m',
+			'ch6m',
+			'chYTD',
+			'ch1y',
+			'ch3y',
+			'ch5y',
+		];
+		resultColumns['Dividends'] = [
+			's',
+			'n',
+			'p',
+			'c',
+			'v',
+			'etfSector',
+			'etfPeRatio',
+			'etfExpenseRatio',
 		];
 		return resultColumns;
 	}

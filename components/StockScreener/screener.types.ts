@@ -108,7 +108,20 @@ export type FilterId =
 	| 'capex' // Capital expenditures
 	| 'ipoPriceRange' // IPO Price Range
 	| 'spac' // Is SPAC
-	| 'sharesOffered'; // Shares Offered
+	| 'sharesOffered' // Shares Offered
+	| 'assets' // ETF assets
+	| 'etfPeRatio' // ETF PEO Ratio
+	| 'assetClass'
+	| 'etfExpenseRatio'
+	| 'etfSharesOut'
+	| 'etfDividendYield'
+	| 'etfBeta'
+	| 'etfHoldings'
+	| 'etfInceptionDate'
+	| 'etfExDividendDate'
+	| 'etfSector'
+	| 'etfRegion'
+	| 'etfExchange';
 
 // Results columns
 export type ColumnName =
@@ -140,6 +153,11 @@ export type SingleIPO = {
 	[key in FilterId]: string;
 };
 
+export type SingleETF = {
+	// eslint-disable-next-line no-unused-vars
+	[key in FilterId]: string;
+};
+
 export type SingleDataPoint = string[];
 
 export type ScreenerData = {
@@ -153,6 +171,13 @@ export type IPOScreenerData = {
 	ipos: {
 		count: number;
 		data: SingleIPO[];
+	};
+};
+
+export type ETFScreenerData = {
+	etfs: {
+		count: number;
+		data: SingleETF[];
 	};
 };
 
