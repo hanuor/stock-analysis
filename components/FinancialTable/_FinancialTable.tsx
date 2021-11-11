@@ -333,7 +333,7 @@ export const FinancialTable = ({
 							popperOptions={{
 								modifiers: [{ name: 'flip', enabled: false }],
 							}}
-							trigger="mouseenter focus"
+							trigger="mouseenter focus click"
 							zIndex={30}
 						>
 							<ChartIcon />
