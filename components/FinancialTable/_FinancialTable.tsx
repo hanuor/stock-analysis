@@ -181,7 +181,7 @@ export const FinancialTable = ({
 
 	const ChartIcon = forwardRef<HTMLDivElement>((props, ref) => {
 		return (
-			<div ref={ref} className={styles.iconcelldiv} tabIndex={0}>
+			<div ref={ref} className={styles.iconcelldiv}>
 				<HoverChartIcon />
 			</div>
 		);
@@ -333,7 +333,7 @@ export const FinancialTable = ({
 							popperOptions={{
 								modifiers: [{ name: 'flip', enabled: false }],
 							}}
-							trigger="mouseenter focus click"
+							trigger="mouseenter focus"
 							zIndex={30}
 						>
 							<ChartIcon />

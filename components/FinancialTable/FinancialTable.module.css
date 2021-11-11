@@ -55,8 +55,10 @@
 	margin: 0 5px;
 }
 
-.table_financial tr:hover td {
-	background-color: #f2f9ff !important;
+@media screen and (min-width: 1025px) {
+	.table_financial tr:hover td {
+		background-color: #f2f9ff;
+	}
 }
 
 .bigTooltipText {
@@ -78,8 +80,7 @@
 	position: relative;
 }
 
-.iconcelldiv:hover,
-.iconcelldiv:focus {
+.iconcelldiv:hover {
 	background-color: white;
 	border-color: rgba(229, 231, 235, 1);
 	z-index: 9999;
