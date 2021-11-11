@@ -2604,7 +2604,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 1000', value: 'over-1000' },
 			{ name: 'Over 500', value: 'over-500' },
 			{ name: 'Over 100', value: 'over-100' },
 			{ name: 'Over 10', value: 'over-10' },
@@ -2872,7 +2871,9 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'stringmatch',
 		options: [
+			{ name: 'Alternative', value: 'Alternative' },
 			{ name: 'Commodity', value: 'Commodity' },
+			{ name: 'Currency', value: 'Currency' },
 			{ name: 'Equity', value: 'Equity' },
 			{ name: 'Fixed Income', value: 'Fixed Income' },
 			{ name: 'Portfolio-Multi Asset', value: 'Portfolio-Multi Asset' },
@@ -2907,13 +2908,10 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 10%', value: 'over-10' },
-			{ name: 'Over 5%', value: 'over-5' },
-			{ name: 'Over 3%', value: 'over-3' },
 			{ name: 'Over 2%', value: 'over-2' },
 			{ name: 'Over 1%', value: 'over-1' },
-			{ name: '3-5%', value: 'between-3-5' },
-			{ name: '1-3%', value: 'between-1-3' },
+			{ name: '2-3%', value: 'between-2-3' },
+			{ name: '1-2%', value: 'between-1-2' },
 			{ name: '0-1%', value: 'between-0-1' },
 			{ name: 'Over Zero', value: 'over-0' },
 		],
@@ -2924,9 +2922,9 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Performance'],
 		filterType: 'numeric',
 		options: [
+			{ name: 'Over 4', value: 'over-4' },
+			{ name: 'Over 3', value: 'over-3' },
 			{ name: 'Over 2', value: 'over-2' },
-			{ name: 'Over 1.5', value: 'over-1.5' },
-			{ name: 'Over 1.2', value: 'over-1.2' },
 			{ name: 'Over 1', value: 'over-1' },
 			{ name: 'Under 1', value: 'under-1' },
 			{ name: 'Under 0.8', value: 'under-0.8' },
@@ -2937,6 +2935,9 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Under -0.5', value: 'under-X0.5' },
 			{ name: 'Under -0.8', value: 'under-X0.8' },
 			{ name: 'Under -1', value: 'under-X1' },
+			{ name: 'Under -1.5', value: 'under-X1.5' },
+			{ name: 'Under -2', value: 'under-X2' },
+			{ name: 'Under -3', value: 'under-X3' },
 		],
 	},
 	{
@@ -2945,6 +2946,7 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Dividends'],
 		filterType: 'numeric',
 		options: [
+			{ name: 'Over 5000', value: 'over-5000' },
 			{ name: 'Over 1000', value: 'over-1000' },
 			{ name: 'Over 500', value: 'over-500' },
 			{ name: 'Over 100', value: 'over-100' },
@@ -2964,13 +2966,12 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Inception Date',
-		id: 'founded',
+		id: 'etfInceptionDate',
 		category: ['Popular'],
 		filterType: 'date',
 		options: [
-			{ name: 'Over 100 Years', value: 'over-100Y' },
-			{ name: 'Over 50 Years', value: 'over-50Y' },
 			{ name: 'Over 20 Years', value: 'over-20Y' },
+			{ name: 'Over 15 Years', value: 'over-15Y' },
 			{ name: 'Over 10 Years', value: 'over-10Y' },
 			{ name: 'Over 5 Years', value: 'over-5Y' },
 			{ name: 'Over 3 Years', value: 'over-3Y', div: true },
@@ -2979,9 +2980,8 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Within 3 Years', value: 'under-3Y' },
 			{ name: 'Within 5 Years', value: 'under-5Y' },
 			{ name: 'Within 10 Years', value: 'under-10Y' },
+			{ name: 'Within 15 Years', value: 'under-15Y' },
 			{ name: 'Within 20 Years', value: 'under-20Y' },
-			{ name: 'Within 50 Years', value: 'under-50Y' },
-			{ name: 'Within 100 Years', value: 'under-100Y' },
 		],
 	},
 	{
@@ -3072,7 +3072,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Performance'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Under 20', value: 'under-20' },
 			{ name: 'Under 10', value: 'under-10' },
 			{ name: 'Under 5', value: 'under-5' },
 			{ name: 'Under 3', value: 'under-3' },

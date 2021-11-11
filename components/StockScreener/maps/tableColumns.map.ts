@@ -588,6 +588,7 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'Holdings',
 		accessor: 'etfHoldings',
 		format: 'format0dec',
+		sortInverted: true,
 	},
 	{
 		Header: 'Yield (%)',
