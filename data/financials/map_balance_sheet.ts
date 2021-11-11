@@ -24,6 +24,7 @@ export const MAP_BALANCE_SHEET = [
 		id: 'cashgrowth',
 		data: 'totalcash',
 		title: 'Cash Growth',
+		tooltipTitle: 'Cash Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			"Cash growth is how much a company's cash and cash equivalents have increased compared to a previous time period, expressed as a percentage.",
@@ -167,6 +168,7 @@ export const MAP_BALANCE_SHEET = [
 		id: 'debtgrowth',
 		data: 'debt',
 		title: 'Debt Growth',
+		tooltipTitle: 'Debt Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'Debt growth is the change in total debt compared to a previous period.',
@@ -218,6 +220,7 @@ export const MAP_BALANCE_SHEET = [
 		id: 'netcashgrowth',
 		data: 'netcash',
 		title: 'Net Cash / Debt Growth',
+		tooltipTitle: 'Net Cash / Debt Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'The change in the net cash / debt position compared to a previous time period.',

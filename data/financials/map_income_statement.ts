@@ -10,6 +10,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'revenuegrowth',
 		data: 'revenue',
 		title: 'Revenue Growth',
+		tooltipTitle: 'Revenue Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			"Revenue growth is how much a company's revenue has increased compared to a previous time period, expressed as a percentage.",
@@ -125,6 +126,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'netincgrowth',
 		data: 'netinccmn',
 		title: 'Net Income Growth',
+		tooltipTitle: 'Net Income Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'Net income growth is the change in the net income available to common shareholders, compared to a previous period.',
@@ -149,6 +151,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'shareschange',
 		data: 'shareswadil',
 		title: 'Shares Change',
+		tooltipTitle: 'Shares Change (YoY)',
 		format: 'growth',
 		tooltip:
 			'The shares change calculates whether the amount of diluted outstanding shares is increasing or decreasing. It can increase due to new shares being issued, such as for stock-based compensation. A decrease implies stock buybacks and that the company is buying back more shares than it issues.',
@@ -174,6 +177,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'epsgrowth',
 		data: 'epsdil',
 		title: 'EPS Growth',
+		tooltipTitle: 'EPS Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'Earnings per share growth is the change in the earnings per share compared to a previous period. It is not possible to calculate it for negative numbers, in that case it will show as "n/a"',
@@ -198,6 +202,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'dpsgrowth',
 		data: 'dps',
 		title: 'Dividend Growth',
+		tooltipTitle: 'Dividend Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'The change in dividend payments per share, compared to the previous period.',

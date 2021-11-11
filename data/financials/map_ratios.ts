@@ -12,6 +12,7 @@ export const MAP_RATIOS = [
 		id: 'marketcapgrowth',
 		data: 'marketcap',
 		title: 'Market Cap Growth',
+		tooltipTitle: 'Market Cap Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			"Market cap growth is how much a company's market cap has increased compared to a previous point in time.",

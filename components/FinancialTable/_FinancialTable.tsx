@@ -166,7 +166,9 @@ export const FinancialTable = ({
 	const IndicatorTooltip = ({ row }: { row: FinancialsMapType }) => {
 		return (
 			<div>
-				<h4 className="text-xl font-semibold mb-2">{row.title}</h4>
+				<h4 className="text-xl font-semibold mb-2">
+					{row.tooltipTitle || row.title}
+				</h4>
 				<div className="border-t border-gray-300 pt-2">{row.tooltip}</div>
 				{row.formula && (
 					<div className="text-sm border-t border-gray-300 mt-3 pt-2">

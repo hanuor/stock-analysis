@@ -38,6 +38,7 @@ export const MAP_CASH_FLOW_STATEMENT = [
 		id: 'ocfgrowth',
 		data: 'ncfo',
 		title: 'Operating Cash Flow Growth',
+		tooltipTitle: 'Operating Cash Flow Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'Operating cash flow growth is the percentage change in cash flow from operations compared to a previous period.',
@@ -134,6 +135,7 @@ export const MAP_CASH_FLOW_STATEMENT = [
 		id: 'fcfgrowth',
 		data: 'fcf',
 		title: 'Free Cash Flow Growth',
+		tooltipTitle: 'Free Cash Flow Growth (YoY)',
 		format: 'growth',
 		tooltip:
 			'Free cash flow growth is the percentage change in free cash flow compared to a previous period.',

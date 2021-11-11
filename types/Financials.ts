@@ -17,6 +17,7 @@ export type Statement =
 export interface FinancialsMapType {
 	id: string;
 	title: string;
+	tooltipTitle?: string;
 	tooltip?: string;
 	bold?: boolean;
 	extrabold?: boolean;
