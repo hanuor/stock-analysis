@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSavedScreens } from './useSavedScreens';
 
-export function SaveScreen({ type }: { type: 'stocks' | 'ipo' }) {
+export function SaveScreen({ type }: { type: 'stocks' | 'ipo' | 'etfs' }) {
 	const { status, isPro } = useUserInfo();
 	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type);
 	const router = useRouter();
