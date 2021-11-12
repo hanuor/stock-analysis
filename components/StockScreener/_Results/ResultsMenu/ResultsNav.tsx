@@ -7,7 +7,7 @@ export function ResultsNav({ type }: Props) {
 	return (
 		<nav className="flex-grow py-3 lg:py-1">
 			<ul className="flex flex-row items-center whitespace-nowrap space-x-1 text-base">
-				{type == 'stocks' ? (
+				{(type == 'stocks' && (
 					<>
 						<ResultsMenuItem type={type} name="General" />
 						<ResultsMenuItem type={type} name="Filtered" />
@@ -17,16 +17,25 @@ export function ResultsNav({ type }: Props) {
 						<ResultsMenuItem type={type} name="Dividends" />
 						<ResultsMenuItem type={type} name="Analysts" />
 					</>
-				) : (
-					<>
-						<ResultsMenuItem type={type} name="General" />
-						<ResultsMenuItem type={type} name="Filtered" />
-						<ResultsMenuItem type={type} name="Company" />
-						<ResultsMenuItem type={type} name="Income" />
-						<ResultsMenuItem type={type} name="Balance Sheet" />
-						<ResultsMenuItem type={type} name="Cash Flow" />
-					</>
-				)}
+				)) ||
+					(type == 'ipo' && (
+						<>
+							<ResultsMenuItem type={type} name="General" />
+							<ResultsMenuItem type={type} name="Filtered" />
+							<ResultsMenuItem type={type} name="Company" />
+							<ResultsMenuItem type={type} name="Income" />
+							<ResultsMenuItem type={type} name="Balance Sheet" />
+							<ResultsMenuItem type={type} name="Cash Flow" />
+						</>
+					)) ||
+					(type == 'etfs' && (
+						<>
+							<ResultsMenuItem type={type} name="General" />
+							<ResultsMenuItem type={type} name="Filtered" />
+							<ResultsMenuItem type={type} name="Dividends" />
+							<ResultsMenuItem type={type} name="Performance" />
+						</>
+					))}
 			</ul>
 		</nav>
 	);

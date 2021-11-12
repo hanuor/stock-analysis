@@ -16,7 +16,7 @@ type Screen = {
 };
 
 type Props = {
-	type: 'stocks' | 'ipo';
+	type: 'stocks' | 'ipo' | 'etfs';
 };
 
 export function SavedDropdown({ type }: Props) {

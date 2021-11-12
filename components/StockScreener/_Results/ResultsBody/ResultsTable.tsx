@@ -18,6 +18,7 @@ import { FilterId } from 'components/StockScreener/screener.types';
 import {
 	useFetchFullData,
 	useFetchFullIPOData,
+	useFetchFullETFData,
 } from 'components/StockScreener/functions/useFetchFullData';
 import { Loading } from 'components/Loading';
 
@@ -31,12 +32,16 @@ export function ResultsTable({ cols }: Props) {
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
 	const fetchFullData = useFetchFullData();
 	const fetchFullIPOData = useFetchFullIPOData();
+	const fetchFullETFData = useFetchFullETFData();
 	const filters = screenerState((state) => state.filters);
 	const tablePage = screenerState((state) => state.tablePage);
 	const tableSize = screenerState((state) => state.tableSize);
 	const showColumns = screenerState((state) => state.showColumns);
 	const setShowColumns = screenerState((state) => state.setShowColumns);
 	const setFetchedColumns = screenerState((state) => state.setFetchedColumns);
+	const removeFilteredColumn = screenerState(
+		(state) => state.removeFilteredColumn
+	);
 
 	useEffect(() => {
 		if (type == 'stocks') {
@@ -54,7 +59,7 @@ export function ResultsTable({ cols }: Props) {
 			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe']);
 
 			// eslint-disable-next-line react-hooks/exhaustive-deps
-		} else {
+		} else if (type == 'ipo') {
 			fetchFullIPOData();
 			setShowColumns([
 				's',
@@ -74,8 +79,20 @@ export function ResultsTable({ cols }: Props) {
 				'ipoDate',
 				'revenue',
 			]);
+		} else if (type == 'etfs') {
+			fetchFullETFData();
+			setShowColumns([
+				's',
+				'n',
+				'assetClass',
+				'assets',
+				'p',
+				'c',
+				'v',
+			] as FilterId[]);
+			setFetchedColumns(['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v']);
+			removeFilteredColumn('m');
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

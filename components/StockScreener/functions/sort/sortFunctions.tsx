@@ -37,11 +37,65 @@ export const priceSort = (a: Row, b: Row, columnId: string, desc: boolean) => {
 };
 
 export const dateSort = (a: Row, b: Row, columnId: string, desc: boolean) => {
-	const aDate = new Date(a.values.ipoDate);
-	const bDate = new Date(b.values.ipoDate);
+	const aDate = new Date(a.values[columnId]);
+	const bDate = new Date(b.values[columnId]);
 	if (aDate < bDate) {
 		return -1;
 	} else if (aDate > bDate) {
+		return 1;
+	}
+	return 0;
+};
+
+export const stringNullFix = (
+	a: Row,
+	b: Row,
+	columnId: string,
+	desc: boolean
+) => {
+	const aVal = a.values[columnId];
+	const bVal = b.values[columnId];
+	if (!aVal && !bVal) {
+		return 0;
+	}
+	if (!bVal || aVal < bVal) {
+		return -1;
+	} else if (!aVal || aVal > bVal) {
+		return 1;
+	}
+	return 0;
+};
+
+export const numberNullFix = (
+	a: Row,
+	b: Row,
+	columnId: string,
+	desc: boolean
+) => {
+	let aVal;
+	let bVal;
+
+	if (!a.values[columnId] && !b.values[columnId]) {
+		aVal = NaN;
+		bVal = NaN;
+	} else if (!a.values[columnId]) {
+		aVal = NaN;
+		bVal = Number(b.values[columnId]);
+	} else if (!b.values[columnId]) {
+		aVal = Number(a.values[columnId]);
+		bVal = NaN;
+	} else {
+		aVal = Number(a.values[columnId]);
+		bVal = Number(b.values[columnId]);
+	}
+
+	if (isNaN(aVal) && isNaN(bVal)) {
+		return 0;
+	}
+
+	if (isNaN(aVal) || aVal < bVal) {
+		return -1;
+	} else if (isNaN(bVal) || aVal > bVal) {
 		return 1;
 	}
 	return 0;

@@ -10,7 +10,7 @@ import { FilterId } from 'components/StockScreener/screener.types';
 async function fs(
 	email: string | null,
 	token: string | null,
-	type: 'stocks' | 'ipo'
+	type: 'stocks' | 'ipo' | 'etfs'
 ) {
 	if (!email || !token) return null;
 	return await getData(
@@ -23,7 +23,7 @@ type SavedFilter = {
 	value: string;
 };
 
-export function useSavedScreens(type: 'stocks' | 'ipo') {
+export function useSavedScreens(type: 'stocks' | 'ipo' | 'etfs') {
 	const filters = screenerState((state) => state.filters);
 	const [save, setSave] = useState<SavedFilter[]>([]);
 	const [msg, setMsg] = useState('');

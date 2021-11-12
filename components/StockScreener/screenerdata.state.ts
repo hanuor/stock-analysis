@@ -8,8 +8,8 @@ import { mergeColumns } from 'components/StockScreener/functions/mergeColumns';
 
 interface ScreenerDataState {
 	// Type
-	type: 'stocks' | 'ipo';
-	setType: (type: 'stocks' | 'ipo') => void;
+	type: 'stocks' | 'ipo' | 'etfs';
+	setType: (type: 'stocks' | 'ipo' | 'etfs') => void;
 
 	data: SingleStock[];
 	setData: (data: SingleStock[]) => void;
@@ -25,7 +25,7 @@ interface ScreenerDataState {
 export const screenerDataState = create<ScreenerDataState>((set) => ({
 	// Type
 	type: 'stocks',
-	setType: (newType: 'stocks' | 'ipo') =>
+	setType: (newType: 'stocks' | 'ipo' | 'etfs') =>
 		set((state) => ({ ...state, type: newType })),
 
 	// Data

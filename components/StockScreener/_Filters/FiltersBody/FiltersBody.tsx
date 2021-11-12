@@ -4,6 +4,7 @@ import { FilterProps } from 'components/StockScreener/screener.types';
 import {
 	FiltersMap,
 	IPOFiltersMap,
+	ETFFiltersMap,
 } from 'components/StockScreener/maps/filters.map';
 import { FilterBody } from 'components/StockScreener/_Filters/FiltersBody/SingleFilter/_SingleFilter';
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns';
@@ -54,7 +55,13 @@ export function RenderFilters() {
 	}
 	let filterMap = [];
 
-	type == 'stocks' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap);
+	if (type == 'stocks') {
+		filterMap = FiltersMap;
+	} else if (type == 'ipo') {
+		filterMap = IPOFiltersMap;
+	} else {
+		filterMap = ETFFiltersMap;
+	}
 
 	if (filterSearch.length > 0) {
 		return (

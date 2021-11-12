@@ -20,7 +20,7 @@ type Screen = {
 
 type Props = {
 	name: string;
-	type: 'stocks' | 'ipo';
+	type: 'stocks' | 'ipo' | 'etfs';
 };
 
 export function SavedItem({ name, type }: Props) {
