@@ -61,8 +61,7 @@ function ContactForm() {
 	const [loading, setLoading] = useState(false);
 	const [warning, setWarning] = useState<string | null>(null);
 
-	const url =
-		'https://api.stockanalysis.com/wp-json/contact-form-7/v1/contact-forms/61220/feedback';
+	const url = '/api/contact/';
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -83,24 +82,16 @@ function ContactForm() {
 		setLoading(true);
 		try {
 			const messageData: MessageData = {
-				'your-name': name || 'No Name',
-				'your-email': email,
-				'your-subject': subject || 'No Subject',
-				'your-message': message,
+				name,
+				email,
+				subject,
+				message,
 			};
 
-			const form = new FormData();
-
-			for (const field in messageData) {
-				if (messageData.hasOwnProperty(field)) {
-					form.append(field, messageData[field]);
-				}
-			}
-
-			const res = await Axios.post(url, form);
+			const res = await Axios.post(url, messageData);
 			const data = res.data;
 
-			if (data.status === 'mail_sent') {
+			if (data.status === 'email_sent') {
 				setResponseType('success');
 				setName('');
 				setEmail('');
@@ -229,7 +220,7 @@ function ContactForm() {
 						{responseType === 'success' ? (
 							<Success message="Your message was sent successfully. We will get back to you soon." />
 						) : (
-							<Error message="There was an error sending your message. Please try again, or send an email directly to support@stockanalysis.com." />
+							<Error message="There was an error sending your message. Please send an email directly to contact@stockanalysis.com instead." />
 						)}
 					</div>
 				)}
