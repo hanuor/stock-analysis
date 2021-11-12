@@ -2,6 +2,8 @@ import { FilterId } from '../screener.types';
 import {
 	priceSort,
 	dateSort,
+	stringNullFix,
+	numberNullFix,
 } from 'components/StockScreener/functions/sort/sortFunctions';
 
 type Column = {
@@ -13,6 +15,7 @@ type Column = {
 		| 'amount'
 		| 'align'
 		| 'abbreviate'
+		| 'abbrevSignificant'
 		| 'format0dec'
 		| 'format2dec'
 		| 'changePcColor'
@@ -554,16 +557,7 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'spac',
 		format: 'string',
 	},
-	{
-		Header: 'Exchange',
-		accessor: 'etfExchange',
-		format: 'string',
-	},
-	{
-		Header: 'Shares Out',
-		accessor: 'etfSharesOut',
-		format: 'abbreviate',
-	},
+
 	{
 		Header: 'Assets',
 		accessor: 'assets',
@@ -573,27 +567,7 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'Asset Class',
 		accessor: 'assetClass',
 		format: 'string',
-	},
-	{
-		Header: 'Expense Ratio',
-		accessor: 'etfExpenseRatio',
-		format: 'format2dec',
-	},
-	{
-		Header: 'PE Ratio',
-		accessor: 'etfPeRatio',
-		format: 'format2dec',
-	},
-	{
-		Header: 'Holdings',
-		accessor: 'etfHoldings',
-		format: 'format0dec',
-		sortInverted: true,
-	},
-	{
-		Header: 'Yield (%)',
-		accessor: 'etfDividendYield',
-		format: 'percentage',
+		sortType: stringNullFix,
 	},
 	{
 		Header: 'Beta',
@@ -601,23 +575,67 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'format2dec',
 	},
 	{
+		Header: 'Exchange',
+		accessor: 'etfExchange',
+		format: 'string',
+	},
+
+	{
 		Header: 'Ex Div. Date',
 		accessor: 'etfExDividendDate',
 		format: 'date',
+		sortType: dateSort,
 	},
+
+	{
+		Header: 'Expense Ratio',
+		accessor: 'etfExpenseRatio',
+		format: 'format2dec',
+	},
+
+	{
+		Header: 'Holdings',
+		accessor: 'etfHoldings',
+		format: 'format0dec',
+		sortInverted: true,
+	},
+
 	{
 		Header: 'Inception Date',
 		accessor: 'etfInceptionDate',
 		format: 'date',
 	},
+
 	{
-		Header: 'Sector',
-		accessor: 'etfSector',
-		format: 'padleft',
+		Header: 'PE Ratio',
+		accessor: 'etfPeRatio',
+		format: 'format2dec',
+		sortType: numberNullFix,
 	},
+
 	{
 		Header: 'Region',
 		accessor: 'etfRegion',
 		format: 'string',
+		sortType: stringNullFix,
+	},
+
+	{
+		Header: 'Sector',
+		accessor: 'etfSector',
+		format: 'padleft',
+		sortType: stringNullFix,
+	},
+
+	{
+		Header: 'Shares Out',
+		accessor: 'etfSharesOut',
+		format: 'abbreviate',
+	},
+
+	{
+		Header: 'Dividend Yield (%)',
+		accessor: 'etfDividendYield',
+		format: 'percentage',
 	},
 ];
