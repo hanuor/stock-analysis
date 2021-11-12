@@ -27,12 +27,20 @@ export function ResultsMenu({
 }: Props) {
 	const fullCount = screenerDataState((state) => state.fullCount);
 	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
+	let stocksOrEtfs;
+	if (type == 'etfs') {
+		stocksOrEtfs = 'ETFs';
+	} else {
+		stocksOrEtfs = 'Stocks';
+	}
 
 	return (
 		<div className="grid grid-cols-2 lg:flex items-center lg:space-x-3 xl:space-x-4 lg:py-2 lg:px-1 lg:overflow-visible border-t border-gray-300 mt-6">
 			<div>
 				<h2 className="text-xl bp:text-[1.3rem] font-semibold whitespace-nowrap text-gray-800">
-					{!fullyLoaded ? `${fullCount} Stocks` : `${count} Stocks`}
+					{!fullyLoaded
+						? `${fullCount} ${stocksOrEtfs}`
+						: `${count} ${stocksOrEtfs}`}
 				</h2>
 			</div>
 			<div className="lg:order-3 py-2 lg:py-0 flex flex-row justify-end md:space-x-4 lg:space-x-3 xl:space-x-4">

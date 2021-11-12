@@ -6,7 +6,7 @@ import { SavedFilters } from './SavedFilters/_SavedFilters';
 export function AboveScreener() {
 	const type = screenerDataState((state) => state.type);
 
-	if (type === 'ipo') {
+	if (type === 'ipo' || type === 'etfs') {
 		return (
 			<div className="mb-3 md:mb-0 relative">
 				<div className="md:absolute md:right-0 md:top-[-5.1rem]">
