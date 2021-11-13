@@ -84,9 +84,9 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'IPOs This Week': {
 			return (
 				<div>
-					<h2 className="hh2 mb-2">{title} (0)</h2>
+					<h2 className="hh2 mb-2">{title}</h2>
 					<p className="text-lg text-gray-900">
-						There are no upcoming IPOs remaining for this week.
+						There are no upcoming IPOs remaining for the current week.
 					</p>
 				</div>
 			);
@@ -95,7 +95,7 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'Next Week': {
 			return (
 				<div>
-					<h2 className="hh2">{title} (0)</h2>
+					<h2 className="hh2">{title}</h2>
 					<p className="text-lg text-gray-900">
 						There are no upcoming IPOs scheduled for next week.
 					</p>
@@ -123,7 +123,7 @@ export const CalendarTable = ({
 	border,
 	filter,
 }: Props) => {
-	const initialState = !data[0].date ? { hiddenColumns: ['date'] } : {};
+	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {};
 
 	const tableInstance = useTable(
 		{ columns, data, initialState },
